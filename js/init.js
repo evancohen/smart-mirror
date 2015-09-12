@@ -1,5 +1,12 @@
 "use strict";
 
+
+var smartMirror = angular.module('smartMirror', []);
+
+smartMirror.controller("smartMirrorCtrl", function($scope) {
+  $scope.someting = "Hello World";
+});
+
 // first we make sure annyang started succesfully
 if (annyang) {
 
