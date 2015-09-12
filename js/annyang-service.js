@@ -23,10 +23,13 @@
             console.debug('added command "' + phrase + '"', service.commands);
         };
 
-        service.start = function() {
+        service.start = function(listening) {
             annyang.addCommands(service.commands);
             annyang.debug(true);
             annyang.start();
+            if (typeof(listening) == "function") {
+                annyang.addCallback('start', function(){$rootScope.$apply(listening(true));});
+            };
         };
         
         return service;
