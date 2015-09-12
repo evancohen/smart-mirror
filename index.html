@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Mirror</title>
+  <script>
+    var annyangScript = document.createElement('script');
+    if (/localhost/.exec(window.location)) {
+      annyangScript.src = "/res/annyang.js"
+    } else {
+      annyangScript.src = "//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"
+    }
+    document.write(annyangScript.outerHTML)
+  </script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/res/init.js"></script>
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <h1>Smart Mirror</h1>
+</body>
+</html>
