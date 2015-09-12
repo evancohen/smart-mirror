@@ -1,54 +1,81 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, $scope) {
+    function MirrorCtrl(AnnyangService, $scope, $timeout) {
         var _this = this;
         $scope.listening = false;
+        $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
 
+        //Update the time
+        var tick = function() {
+            $scope.date = new Date();
+            $timeout(tick, 1000 * 60);
+        };
+
         _this.init = function() {
             _this.clearResults();
+            tick();
 
+            var defaultView = function() {
+                console.debug("Ok, going to default view...");
+                $scope.focus = "default";
+            }
+
+            // List commands
             AnnyangService.addCommand('What can I say', function() {
                 console.debug("Here is a list of commands...");
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
 
-            AnnyangService.addCommand('Go home', function() {
-                console.debug("Ok, going home...");
-                $scope.focus = "default";
+            // Go back to default view
+            AnnyangService.addCommand('Go home', defaultView);
+
+            // Hide everything and "sleep"
+            AnnyangService.addCommand('Go to sleep', function() {
+                console.debug("Ok, going to sleep...");
+                $scope.focus = "sleep";
             });
 
+            // Go back to default view
+            AnnyangService.addCommand('Wake up', defaultView);
+
+            // Search images
             AnnyangService.addCommand('Show me *term', function(term) {
                 console.debug("Showing", term);
             });
 
-            AnnyangService.addCommand('My name is *term', function(name) {
+            // Change name
+            AnnyangService.addCommand('My name is *name', function(name) {
                 console.debug("Hi", name, "nice to meet you");
                 $scope.user.name = name;
             });
 
-
+            // Set a reminder
             AnnyangService.addCommand('Remind me to *task', function(task) {
                 console.debug("I'll remind you to", task);
             });
 
+            // Clear reminders
             AnnyangService.addCommand('Clear reminders', function() {
                 console.debug("Clearing reminders");
             });
 
+            // Clear log of commands
             AnnyangService.addCommand('Clear results', function(task) {
                  console.debug("Clearing results");
                  _this.clearResults()
             });
 
+            // Check the time
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
                  _this.clearResults()
             });
 
+            // Fallback for all commands
             AnnyangService.addCommand('*allSpeach', function(allSpeech) {
                 console.debug(allSpeech);
                 _this.addResult(allSpeech);
@@ -88,8 +115,12 @@
     'stop listening':       stopListening,
 
 
+
     Commands:
         "What Can I Say?": give the user a list of availalbe commands
+
+TODO:
+- Set a timer for X
 
 Both the init() and addCommands() methods receive a commands object.
 

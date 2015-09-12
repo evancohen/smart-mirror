@@ -1,10 +1,80 @@
 body {
 	background-color: black;
-	color: white;
+	color: #fff;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
+	position: relative;
 }
 
 h1, h2, h3, h4, h5 {
 	font-weight: 300;
+}
+
+/* Colors */
+.light-grey {
+	color: #ccc;
+}
+
+.grey {
+	color: #999;
+}
+
+/* Displays */
+.sleep-cover {
+	background-color: black;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.container {
+	clear: both;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.top-left{
+	float: left;
+}
+
+.date {
+   font-size: 35px;
+}
+
+.time {
+	font-size: 85px;
+}
+
+.top-right {
+	float: right;
+}
+
+.middle-center{
+	align-self: flex-start;
+}
+
+.bottom-center{
+	align-self: flex-end;
+}
+
+/* Animations */
+.fade.ng-hide {
+  opacity: 0;
+}
+
+.fade.ng-hide-remove,
+.fade.ng-hide-add {
+  display: block !important;
+}
+
+.fade.ng-hide-remove {
+  transition: all ease 1500ms;
+}
+
+.fade.ng-hide-add {
+  transition: all ease 500ms;
 }
