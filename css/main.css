@@ -10,6 +10,14 @@ h1, h2, h3, h4, h5 {
 	font-weight: 300;
 }
 
+h1 {
+    font-size: 100px;
+}
+
+dt {
+	font-weight: 600;
+}
+
 /* Colors */
 .light-grey {
 	color: #ccc;
@@ -30,8 +38,14 @@ h1, h2, h3, h4, h5 {
 }
 
 .container {
-	clear: both;
+	z-index: -1; /* so things are still selectable */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	height: 100%;
@@ -54,11 +68,24 @@ h1, h2, h3, h4, h5 {
 }
 
 .middle-center{
+	display: flex;
+    flex: 1;
+	align-items: stretch;
 	align-self: flex-start;
+	flex-direction: column;
+	width: 100%;
+    text-align: center;
+    justify-content: center;
 }
 
 .bottom-center{
-	align-self: flex-end;
+    width: 100%;
+    text-align: center;
+}
+
+.commands {
+	width: 500px;
+	text-align: left;
 }
 
 /* Animations */
@@ -77,4 +104,21 @@ h1, h2, h3, h4, h5 {
 
 .fade.ng-hide-add {
   transition: all ease 500ms;
+}
+
+
+.animate-grow {
+  max-height: 750px !important;
+}
+
+.animate-grow.ng-hide-add {
+  transition: all linear 500ms;
+}
+
+.animate-grow.ng-hide-remove {
+	transition: all linear 500ms;
+}
+
+.animate-grow.ng-hide {
+  max-height:0  !important;
 }

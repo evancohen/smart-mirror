@@ -56,7 +56,7 @@
       </ul>
     </div>
     <!-- Command list -->
-    <div ng-show="focus == 'commands'">
+    <div class="commands animate-grow" ng-show="focus == 'commands'">
       <h2>Availalble Commands</h2>
       <dl>
         <dt>What can I say?</dt>
@@ -73,6 +73,7 @@
     </div>
   </div>
 </div>
+<button ng-click="focus = (focus == 'commands')?'default':'commands'">Click</button>
 <!-- Sleep cover -->
 <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
 </body>
