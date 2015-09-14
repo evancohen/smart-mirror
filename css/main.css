@@ -88,6 +88,10 @@ dt {
 	text-align: left;
 }
 
+#map {
+	height: 750px;
+}
+
 /* Animations */
 .fade.ng-hide {
   opacity: 0;

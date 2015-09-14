@@ -8,6 +8,9 @@
         $scope.focus = "default";
         $scope.user = {};
 
+        $scope.resizeMap = function(){
+            google.maps.event.trigger(map, "resize");
+        }
         //Update the time
         var tick = function() {
             $scope.date = new Date();
@@ -80,8 +83,6 @@
                 console.debug(allSpeech);
                 _this.addResult(allSpeech);
             });
-
-            
             
             //Track when the Annyang is listening to us
             AnnyangService.start(function(listening){

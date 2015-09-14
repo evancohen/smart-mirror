@@ -32,8 +32,9 @@
 <div class="container">
   <div class="middle-center">
     <h1>{{complement}}</h1>
-    <h3>{{user.name}}</h3>
+    <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
     <div ng-show="listening">Ready: {{focus}}</div>
+    <div id="map" class="map animate-grow" ng-show="focus == 'map'"></div>
   </div>
 
   <div class="bottom-center">
@@ -73,8 +74,12 @@
     </div>
   </div>
 </div>
-<button ng-click="focus = (focus == 'commands')?'default':'commands'">Click</button>
+<button ng-click="focus = (focus == 'map')?'default':'map'">Click</button>
+<button ng-click="resizeMap()">Resize</button>
 <!-- Sleep cover -->
 <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
+
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmo563HaHPE2SDZqWEMyDnIkqw9zORkDs&callback=initMap"
+        async defer></script>
 </body>
 </html>
