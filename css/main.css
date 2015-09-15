@@ -85,8 +85,10 @@ dt {
 }
 
 .commands {
-	width: 500px;
+	width: 450px;
 	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #map {

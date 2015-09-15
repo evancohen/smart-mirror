@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, $scope, $timeout) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, $scope, $timeout) {
         var _this = this;
         $scope.listening = false;
         $scope.complement = "Hi, sexy!"
@@ -19,6 +19,12 @@
 
         _this.init = function() {
             _this.clearResults();
+            GeolocationService.getLocation().then(function(geoposition){
+                console.log("Geoposition", geoposition);
+                WeatherService.init(geoposition).then(function(forcast){
+                    console.log("Forcast", forcast);
+                });
+            })
             tick();
 
             var defaultView = function() {
