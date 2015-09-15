@@ -55,23 +55,8 @@
   </div>
 
   <div class="bottom-center">
-    <!-- No results -->
-    <div ng-hide="commands.results.length > 0">
+    <div ng-show="focus != 'commands'">
         Say "What can I say?" to see a list of commands...
-    </div>
-
-    <!-- Has results -->
-    <div ng-show="commands.results.length > 0">
-      <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
-
-      <hr/>
-
-      <ul class="list-group">
-          <li class="list-group-item" ng-repeat="result in commands.results">
-              <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
-              {{ result.content }}
-          </li>
-      </ul>
     </div>
     <!-- Command list -->
     <div class="commands animate-grow" ng-show="focus == 'commands'">
@@ -97,10 +82,23 @@
 <!-- Debug Buttons -->
 <div class="debug-info" ng-show="debug == true">
   <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
-  <button ng-click="resizeMap()">Resize</button>
+  <button ng-click="resizeMap()">Fix Map :(</button>
   <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
   <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
   <button ng-click="debug = false">Close Debug</button>
+  <!-- Has results -->
+  <div ng-show="commands.results.length > 0">
+    <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
+
+    <hr/>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="result in commands.results">
+            <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
+            {{ result.content }}
+        </li>
+    </ul>
+  </div>
 </div>
 <!-- Sleep cover -->
 <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
