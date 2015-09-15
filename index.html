@@ -34,7 +34,9 @@
     <h1>{{complement}}</h1>
     <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
     <div ng-show="listening">Ready: {{focus}}</div>
-    <div id="map" class="map animate-grow" ng-show="focus == 'map'"></div>
+    <div class="map-container animate-grow" ng-show="focus == 'map'">
+      <div id="map" class="map"></div>
+    </div>
   </div>
 
   <div class="bottom-center">
