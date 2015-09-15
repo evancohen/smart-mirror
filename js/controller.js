@@ -4,9 +4,12 @@
     function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, $scope, $timeout) {
         var _this = this;
         $scope.listening = false;
+        $scope.debug = false;
         $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
+
+        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
         $scope.resizeMap = function(){
             google.maps.event.trigger(map, "resize");
@@ -90,6 +93,12 @@
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
                  _this.clearResults()
+            });
+
+            // Hide everything and "sleep"
+            AnnyangService.addCommand('Show debug information', function() {
+                console.debug("Boop Boop. Showing debug info...");
+                $scope.debug = true;
             });
 
             // Fallback for all commands

@@ -90,12 +90,18 @@
       </dl>
     </div>
   </div>
+  <div class="colors animate-grow" ng-show="focus == 'colors'">
+    <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
+  </div>
 </div>
 <!-- Debug Buttons -->
-<!--
-<button ng-click="focus = (focus == 'map')?'default':'map'">Click</button>
-<button ng-click="resizeMap()">Resize</button>
--->
+<div class="debug-info" ng-show="debug == true">
+  <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
+  <button ng-click="resizeMap()">Resize</button>
+  <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
+  <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
+  <button ng-click="debug = false">Close Debug</button>
+</div>
 <!-- Sleep cover -->
 <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
 
