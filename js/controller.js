@@ -8,12 +8,10 @@
         $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
+        $scope.map = "http://maps.googleapis.com/maps/api/staticmap?center=47.615479,-122.323451&zoom=13&format=png&sensor=false&scale=2&size="+window.innerWidth+"x1200&maptype=roadmap&style=visibility:on|weight:1|invert_lightness:true|saturation:-100|lightness:1";
 
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
-        $scope.resizeMap = function(){
-            google.maps.event.trigger(map, "resize");
-        }
         //Update the time
         var tick = function() {
             $scope.date = new Date();

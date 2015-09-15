@@ -49,9 +49,9 @@
   <div class="middle-center">
     <h1>{{complement}}</h1>
     <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
-    <div ng-show="listening">Ready: {{focus}}</div>
+    <div class="listening" ng-show="listening">Ready: {{focus}}</div>
     <div class="map-container animate-grow" ng-show="focus == 'map'">
-      <div id="map" class="map"></div>
+      <img class="map animate-grow" ng-src="{{map}}"/>
     </div>
   </div>
 
@@ -80,6 +80,7 @@
     <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
   </div>
 </div>
+<button ng-click="debug = true">Open Debug</button>
 <!-- Debug Buttons -->
 <div class="debug-info" ng-show="debug == true">
   <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
@@ -103,8 +104,5 @@
 </div>
 <!-- Sleep cover -->
 <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
-
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmo563HaHPE2SDZqWEMyDnIkqw9zORkDs&callback=initMap"
-        async defer></script>
 </body>
 </html>
