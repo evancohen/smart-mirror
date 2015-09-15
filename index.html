@@ -29,7 +29,19 @@
       <div class="time">{{date | date : 'hh:mm a'}}</div>
     </div>
   <div class="top-right">
-    <div class="Weather">Some content</div>
+    <div class="weather">
+      <div class="weather-today">
+        <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+      </div>
+      <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
+      <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+        <div class="weather-week-day">
+          <span class="day light-grey">{{forcast.day}}</span>
+          <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
+          <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="container">
@@ -79,8 +91,11 @@
     </div>
   </div>
 </div>
+<!-- Debug Buttons -->
+<!--
 <button ng-click="focus = (focus == 'map')?'default':'map'">Click</button>
 <button ng-click="resizeMap()">Resize</button>
+-->
 <!-- Sleep cover -->
 <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
 
