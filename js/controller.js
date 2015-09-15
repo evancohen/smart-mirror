@@ -1,12 +1,15 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, $scope, $timeout) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, $scope, $timeout) {
         var _this = this;
         $scope.listening = false;
+        $scope.debug = false;
         $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
+
+        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
         $scope.resizeMap = function(){
             google.maps.event.trigger(map, "resize");
@@ -20,6 +23,20 @@
         _this.init = function() {
             _this.clearResults();
             tick();
+
+            //Get our location and then get the weather for our location
+            GeolocationService.getLocation().then(function(geoposition){
+                console.log("Geoposition", geoposition);
+                WeatherService.init(geoposition).then(function(){
+                    $scope.currentForcast = WeatherService.currentForcast();
+                    $scope.weeklyForcast = WeatherService.weeklyForcast();
+                    console.log("Current", $scope.currentForcast);
+                    console.log("Weekly", $scope.weeklyForcast);
+                    //refresh the weather every hour
+                    //this doesn't acutually updat the UI yet
+                    //$timeout(WeatherService.refreshWeather, 3600000);
+                });
+            })
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
@@ -76,6 +93,12 @@
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
                  _this.clearResults()
+            });
+
+            // Hide everything and "sleep"
+            AnnyangService.addCommand('Show debug information', function() {
+                console.debug("Boop Boop. Showing debug info...");
+                $scope.debug = true;
             });
 
             // Fallback for all commands

@@ -11,8 +11,11 @@
 
   <!-- App -->
   <!--<script src="/js/init.js"></script>-->
+  <script src="js/config.js"></script>
   <script src="js/app.js"></script>
   <script src="js/annyang-service.js"></script>
+  <script src="js/weather-service.js"></script>
+  <script src="js/geolocation-service.js"></script>
   <script src="js/controller.js"></script>
 
   <!-- Styles and Resources -->
@@ -27,7 +30,19 @@
       <div class="time">{{date | date : 'hh:mm a'}}</div>
     </div>
   <div class="top-right">
-    <div class="Weather">Some content</div>
+    <div class="weather">
+      <div class="weather-today">
+        <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+      </div>
+      <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
+      <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+        <div class="weather-week-day">
+          <span class="day light-grey">{{forcast.day}}</span>
+          <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
+          <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="container">
@@ -35,27 +50,14 @@
     <h1>{{complement}}</h1>
     <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
     <div ng-show="listening">Ready: {{focus}}</div>
-    <div id="map" class="map animate-grow" ng-show="focus == 'map'"></div>
+    <div class="map-container animate-grow" ng-show="focus == 'map'">
+      <div id="map" class="map"></div>
+    </div>
   </div>
 
   <div class="bottom-center">
-    <!-- No results -->
-    <div ng-hide="commands.results.length > 0">
+    <div ng-show="focus != 'commands'">
         Say "What can I say?" to see a list of commands...
-    </div>
-
-    <!-- Has results -->
-    <div ng-show="commands.results.length > 0">
-      <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
-
-      <hr/>
-
-      <ul class="list-group">
-          <li class="list-group-item" ng-repeat="result in commands.results">
-              <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
-              {{ result.content }}
-          </li>
-      </ul>
     </div>
     <!-- Command list -->
     <div class="commands animate-grow" ng-show="focus == 'commands'">
@@ -74,9 +76,31 @@
       </dl>
     </div>
   </div>
+  <div class="colors animate-grow" ng-show="focus == 'colors'">
+    <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
+  </div>
 </div>
-<button ng-click="focus = (focus == 'map')?'default':'map'">Click</button>
-<button ng-click="resizeMap()">Resize</button>
+<!-- Debug Buttons -->
+<div class="debug-info" ng-show="debug == true">
+  <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
+  <button ng-click="resizeMap()">Fix Map :(</button>
+  <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
+  <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
+  <button ng-click="debug = false">Close Debug</button>
+  <!-- Has results -->
+  <div ng-show="commands.results.length > 0">
+    <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
+
+    <hr/>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="result in commands.results">
+            <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
+            {{ result.content }}
+        </li>
+    </ul>
+  </div>
+</div>
 <!-- Sleep cover -->
 <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
 
