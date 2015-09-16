@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-    font-size: 100px;
+    font-size: 120px;
 }
 
 dt {
@@ -66,11 +66,11 @@ dt {
 }
 
 .date {
-   font-size: 35px;
+   font-size: 42px;
 }
 
 .time {
-	font-size: 85px;
+	font-size: 110px;
 }
 
 .top-right {
@@ -113,24 +113,27 @@ dt {
 }
 
 .weather-week-descriptor {
+	font-family: 'Open Sans', sans-serif;
 	font-size: 12px;
-	max-width: 50%;
+	max-width: 55%;
 	margin-left: auto;
 	margin-bottom: 10px;
+    text-align: justify;
 }
 .weather-week {
 	margin-right: 10px;
+	font-size: 22px;
 }
 
 .weather-week .day {
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 10px;
 	width: 50px;
 }
 
 .weather-week .tempreture {
 	display: inline-block;
-	width: 50px;
+	width: 60px;
 }
 
 .map {

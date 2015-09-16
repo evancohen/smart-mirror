@@ -8,7 +8,6 @@
         $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
-        $scope.map = "http://maps.googleapis.com/maps/api/staticmap?center=47.615479,-122.323451&zoom=13&format=png&sensor=false&scale=2&size="+window.innerWidth+"x1200&maptype=roadmap&style=visibility:on|weight:1|invert_lightness:true|saturation:-100|lightness:1";
 
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
@@ -18,7 +17,16 @@
             $timeout(tick, 1000 * 60);
         };
 
+        //where center is lat,long or an address
+        var generateMap = function(center, zoom){
+            if (zoom === undefined) {
+                var zoom = 13;
+            };
+            return "https://maps.googleapis.com/maps/api/staticmap?center="+center+"&zoom="+zoom+"&format=png&sensor=false&scale=2&size="+window.innerWidth+"x1200&maptype=roadmap&style=visibility:on|weight:1|invert_lightness:true|saturation:-100|lightness:1"
+        }
+
         _this.init = function() {
+            $scope.map = generateMap("Seattle,WA");
             _this.clearResults();
             tick();
 
@@ -60,6 +68,25 @@
             // Go back to default view
             AnnyangService.addCommand('Wake up', defaultView);
 
+            // Hide everything and "sleep"
+            AnnyangService.addCommand('Show debug information', function() {
+                console.debug("Boop Boop. Showing debug info...");
+                $scope.debug = true;
+            });
+
+            // Hide everything and "sleep"
+            AnnyangService.addCommand('Show map', function() {
+                console.debug("Going on an adventure?");
+                $scope.focus = "map";
+            });
+
+            // Hide everything and "sleep"
+            AnnyangService.addCommand('Show map of *location', function(location) {
+                console.debug("Getting map of", location);
+                $scope.map = generateMap(location);
+                $scope.focus = "map";
+            });
+
             // Search images
             AnnyangService.addCommand('Show me *term', function(term) {
                 console.debug("Showing", term);
@@ -91,12 +118,6 @@
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
                  _this.clearResults()
-            });
-
-            // Hide everything and "sleep"
-            AnnyangService.addCommand('Show debug information', function() {
-                console.debug("Boop Boop. Showing debug info...");
-                $scope.debug = true;
             });
 
             // Fallback for all commands
