@@ -137,12 +137,12 @@ dt {
 }
 
 .map {
-	height: 1200px;
+	height: 1080px;
+	max-width: 100%
 }
 
 .map-container {
-	background-color: #fff;
-	height: 1200px;
+	height: 1080px;
 	text-align: center;
 	width: 100%;
 	position: relative;

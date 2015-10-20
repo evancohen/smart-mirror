@@ -11,8 +11,8 @@
             var command = {};
             
             // Wrap annyang command in scope apply
-            command[phrase] = function(args) {
-                $rootScope.$apply(callback(args));
+            command[phrase] = function(arg1, arg2) {
+                $rootScope.$apply(callback(arg1, arg2));
             };
 
             // Extend our commands list
@@ -29,6 +29,7 @@
             annyang.start();
             if (typeof(listening) == "function") {
                 annyang.addCallback('start', function(){$rootScope.$apply(listening(true));});
+                annyang.addCallback('end', function(data){console.log("End", data)});
             };
         };
         
