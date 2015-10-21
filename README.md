@@ -7,10 +7,11 @@ This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirro
 Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of insperation from other projects I really wanted this to be my own!
 
 ##### Hardware Components
-- Rasberry Pi (running Chromium)
+- Raspberry Pi (running Chromium)
 - USB Microphone
 - Monitor (with the bezel removed)
 - Mirror Pane (aka Observation Glass)
+- Philips Hue
 
 ##### Take it for a spin:
 Check it out: [https://evancohen.github.io/smart-mirror/](https://evancohen.github.io/smart-mirror/).
