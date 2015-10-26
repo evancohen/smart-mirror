@@ -4,7 +4,7 @@ This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirro
 ### [See it in action (Video)](https://www.youtube.com/watch?v=PDIbhV8Nvq8)
 
 ##### Why start from scratch?
-Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of insperation from other projects I really wanted this to be my own!
+Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of inspiration from other projects I really wanted this to be my own!
 
 ##### Hardware Components
 - Raspberry Pi (running Chromium)
@@ -15,7 +15,7 @@ Starting from scratch was less about other projects not being good enough and mo
 
 ##### Take it for a spin:
 Check it out: [https://evancohen.github.io/smart-mirror/](https://evancohen.github.io/smart-mirror/).
-The version running on this link has limeted functionality: No Hue or Weather since config.js is not included in the source of this project and contains service keys, which I will not be posting.
+The version running on this link has limited functionality: No Hue or Weather since config.js is not included in the source of this project and contains service keys, which I will not be posting.
 
 ##### License:
 ######MIT
