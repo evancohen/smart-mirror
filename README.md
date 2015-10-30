@@ -19,7 +19,7 @@ The version running on this link has limited functionality: No Hue or Weather si
 - Philips Hue
 
 #### Installation
-In order to get started I suggest a clean install of Raspbian. You can get snag a fresh copy of Jessie (recommended, it's the future) or Wheezy from the [Raspbian Download Page](https://www.raspberrypi.org/downloads/raspbian/).
+In order to get started I suggest a clean install of Raspbian. You can snag a fresh copy of Jessie (recommended, it's the future) or Wheezy from the [Raspbian Download Page](https://www.raspberrypi.org/downloads/raspbian/).
 
 ##### Getting Chromium
 Once you get that up and running you'll need to download the latest version of Chromium. Unfortunately armhf binaries for Chromium are a little tricky to find, but Ubuntu has you covered. Thank you [Conor O'Neill](http://conoroneill.net/running-the-latest-chromium-45-on-debian-jessie-on-your-raspberry-pi-2/) for figuring this out! If you are running Wheezy you'll also need to update libc6 (Thank you [Robert Shenton](https://github.com/miltage/) for sharing this with me), instructions for that can be found here: (http://stackoverflow.com/questions/10863613/how-to-upgrade-glibc-from-version-2-13-to-2-15-on-debian)[http://stackoverflow.com/questions/10863613/how-to-upgrade-glibc-from-version-2-13-to-2-15-on-debian]
