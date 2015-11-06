@@ -107,7 +107,7 @@
             });
 
             // Change name
-            AnnyangService.addCommand('My name is *name', function(name) {
+            AnnyangService.addCommand('My (name is)(name\'s) *name', function(name) {
                 console.debug("Hi", name, "nice to meet you");
                 $scope.user.name = name;
             });
