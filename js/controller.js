@@ -140,7 +140,7 @@
             });
 
             // Fallback for all commands
-            AnnyangService.addCommand('*allSpeach', function(allSpeech) {
+            AnnyangService.addCommand('*allSpeech', function(allSpeech) {
                 console.debug(allSpeech);
                 _this.addResult(allSpeech);
             });
