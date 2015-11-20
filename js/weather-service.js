@@ -8,7 +8,7 @@
 
         service.init = function(geoposition) {
             geoloc = geoposition;
-            return $http.get('https://api.forecast.io/forecast/'+FORCAST_API_KEY+'/'+geoposition.coords.latitude+','+geoposition.coords.longitude).
+            return $http.jsonp('https://api.forecast.io/forecast/'+FORCAST_API_KEY+'/'+geoposition.coords.latitude+','+geoposition.coords.longitude+'?callback=JSON_CALLBACK').
                 then(function(response) {
                     return service.forcast = response;
                 });
