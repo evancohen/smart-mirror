@@ -76,7 +76,7 @@ You can now view the smart mirror at `https://localhost:4443`. Chrome will warn 
 ##### Caveats
 The HUE won't work over HTTPS. It's lame, I know, I'm looking for a work-around. 
 
-The weather service breaks CORS, so you'll need to either install the [Allow-Control-Allow-Origin: *](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?utm_source=chrome-app-launcher-info-dialog) Chrome extension (recommended) or set up a [Proxy](https://github.com/iantearle/forecast.io-javascript-api).
+~~The weather service breaks CORS, so you'll need to either install the [Allow-Control-Allow-Origin: *](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?utm_source=chrome-app-launcher-info-dialog) Chrome extension (recommended) or set up a [Proxy](https://github.com/iantearle/forecast.io-javascript-api).~~ Fixed with JSONP
 
 
 ### License:
