@@ -3,11 +3,13 @@
 
     function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout) {
         var _this = this;
+        var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
         $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
+        $scope.interimResult = DEFAULT_COMMAND_TEXT;
 
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
@@ -17,10 +19,16 @@
             $timeout(tick, 1000 * 60);
         };
 
+        // Reset the command text
+        var restCommand = function(){
+          $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        }
+
         _this.init = function() {
             $scope.map = MapService.generateMap("Seattle,WA");
             _this.clearResults();
             tick();
+            restCommand();
 
             //Get our location and then get the weather for our location
             GeolocationService.getLocation().then(function(geoposition){
@@ -83,17 +91,22 @@
             });
 
             // Zoom in map
-            AnnyangService.addCommand('zoom in', function() {
+            AnnyangService.addCommand('(map) zoom in', function() {
                 console.debug("Zoooooooom!!!");
                 $scope.map = MapService.zoomIn();
             });
 
-            AnnyangService.addCommand('zoom out', function() {
+            AnnyangService.addCommand('(map) zoom out', function() {
                 console.debug("Moooooooooz!!!");
                 $scope.map = MapService.zoomOut();
             });
 
-            AnnyangService.addCommand('reset zoom', function() {
+            AnnyangService.addCommand('(map) zoom (to) *value', function(value) {
+                console.debug("Moooop!!!", value);
+                $scope.map = MapService.zoomTo(value);
+            });
+
+            AnnyangService.addCommand('(map) reset zoom', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
                 $scope.focus = "map";
@@ -143,9 +156,18 @@
                 _this.addResult(allSpeech);
             });
 
+            var resetCommandTimeout;
             //Track when the Annyang is listening to us
             AnnyangService.start(function(listening){
                 $scope.listening = listening;
+            }, function(interimResult){
+                $scope.interimResult = interimResult;
+                $timeout.cancel(resetCommandTimeout);
+            }, function(result){
+                console.log("Got result", result);
+                $scope.interimResult = result[0];
+                resetCommandTimeout = $timeout(restCommand, 5000);
+                console.log(resetCommandTimeout);
             });
         };
 

@@ -36,7 +36,7 @@
 
   var commandsList = [];
   var recognition;
-  var callbacks = { start: [], error: [], end: [], result: [], resultMatch: [], resultNoMatch: [], errorNetwork: [], errorPermissionBlocked: [], errorPermissionDenied: [] };
+  var callbacks = { start: [], error: [], end: [], result: [], resultMatch: [], resultNoMatch: [], interimResult: [], errorNetwork: [], errorPermissionBlocked: [], errorPermissionDenied: [] };
   var autoRestart;
   var lastStartedAt = 0;
   var debugState = false;
@@ -185,16 +185,21 @@
         // Map the results to an array
         var SpeechRecognitionResult = event.results[event.resultIndex];
         var results = [];
+        var fianlResults = false
         for (var k = 0; k<SpeechRecognitionResult.length; k++) {
           if(SpeechRecognitionResult.isFinal){
+            fianlResults = true;
             results[k] = SpeechRecognitionResult[k].transcript;
           }
-          else{
-            root.console.log('Partial %c' + SpeechRecognitionResult[k].transcript, 'color:green');
+          else if(k == 0){
+            //root.console.log('Interim: %c' + SpeechRecognitionResult[k].transcript, debugStyle);
+            invokeCallbacks(callbacks.interimResult, SpeechRecognitionResult[k].transcript, null);
           }
         }
 
-        invokeCallbacks(callbacks.result, results);
+        if(fianlResults){
+          invokeCallbacks(callbacks.result, results);
+        }
         var commandText;
         // go over each of the 5 results and alternative results received (we've set maxAlternatives to 5 above)
         for (var i = 0; i<results.length; i++) {

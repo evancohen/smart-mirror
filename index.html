@@ -49,15 +49,12 @@
       <div class="middle-center">
         <h1>{{complement}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
-        <div class="listening" ng-show="listening">Ready: {{focus}}</div>
+        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
         <div class="map-container animate-grow" ng-show="focus == 'map'">
           <img class="map animate-grow" ng-src="{{map}}"/>
         </div>
       </div>
       <div class="bottom-center">
-        <div ng-show="focus != 'commands'">
-          Say "What can I say?" to see a list of commands...
-        </div>
         <!-- Command list -->
         <div class="commands animate-grow" ng-show="focus == 'commands'">
           <h2>Availalble Commands</h2>
@@ -83,6 +80,8 @@
             and Electron <script>document.write(process.versions.electron)</script>.
           </small>
         </div>
+
+        <div class="interim-result" ng-bind="interimResult"></div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
