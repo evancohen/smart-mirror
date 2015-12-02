@@ -83,19 +83,17 @@
             });
 
             // Zoom in map
-            AnnyangService.addCommand('Map zoom in', function() {
+            AnnyangService.addCommand('zoom in', function() {
                 console.debug("Zoooooooom!!!");
                 $scope.map = MapService.zoomIn();
-                $scope.focus = "map";
             });
 
-            AnnyangService.addCommand('Map zoom out', function() {
+            AnnyangService.addCommand('zoom out', function() {
                 console.debug("Moooooooooz!!!");
                 $scope.map = MapService.zoomOut();
-                $scope.focus = "map";
             });
 
-            AnnyangService.addCommand('Map reset zoom', function() {
+            AnnyangService.addCommand('reset zoom', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
                 $scope.focus = "map";
