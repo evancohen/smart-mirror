@@ -186,7 +186,12 @@
         var SpeechRecognitionResult = event.results[event.resultIndex];
         var results = [];
         for (var k = 0; k<SpeechRecognitionResult.length; k++) {
-          results[k] = SpeechRecognitionResult[k].transcript;
+          if(SpeechRecognitionResult.isFinal){
+            results[k] = SpeechRecognitionResult[k].transcript;
+          }
+          else{
+            root.console.log('Partial %c' + SpeechRecognitionResult[k].transcript, 'color:green');
+          }
         }
 
         invokeCallbacks(callbacks.result, results);
