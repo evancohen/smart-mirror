@@ -14,7 +14,7 @@
       }
 
       // Create and return a HassRequest object ($http primise)
-      function HassRequest = function(domain, method, data) {
+      var HassRequest = function(domain, method, data) {
         if(!method.match(/(turn_on|turn_off)/)){
           return null;
         }
