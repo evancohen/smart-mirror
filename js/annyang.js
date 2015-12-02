@@ -185,10 +185,10 @@
         // Map the results to an array
         var SpeechRecognitionResult = event.results[event.resultIndex];
         var results = [];
-        var fianlResults = false
+        var finalResults = false
         for (var k = 0; k<SpeechRecognitionResult.length; k++) {
           if(SpeechRecognitionResult.isFinal){
-            fianlResults = true;
+            finalResults = true;
             results[k] = SpeechRecognitionResult[k].transcript;
           }
           else if(k == 0){
@@ -197,7 +197,7 @@
           }
         }
 
-        if(fianlResults){
+        if(finalResults){
           invokeCallbacks(callbacks.result, results);
         }
         var commandText;
