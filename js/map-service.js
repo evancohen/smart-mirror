@@ -29,9 +29,9 @@
         };
 
         service.zoomTo = function(value) {
-            if(value < 0){
+            if(0 + value < 0 || value == "zero"){
               value = 0
-            } else if(value > 18){
+            } else if(0 + value > 18){
               value = 18
             }
             service.zoom = value;
