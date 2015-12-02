@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, HomeAssistantService, $scope, $timeout) {
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
@@ -137,6 +137,16 @@
             // Turn lights off
             AnnyangService.addCommand('(turn) (the) :state (the) light(s) *action', function(state, action) {
                 HueService.performUpdate(state + " " + action);
+            });
+
+            // Initiate movie mode
+            AnnyangService.addCommand('netflix and chill', function(state, action) {
+                //turn projector on
+                HomeAssistantService.projectorOn();
+                //lower screen
+                HomeAssistantService.screenDown();
+                //turn the lights down
+                HueService.performUpdate('gentle');
             });
 
             // Fallback for all commands
