@@ -164,10 +164,8 @@
                 $scope.interimResult = interimResult;
                 $timeout.cancel(resetCommandTimeout);
             }, function(result){
-                console.log("Got result", result);
                 $scope.interimResult = result[0];
                 resetCommandTimeout = $timeout(restCommand, 5000);
-                console.log(resetCommandTimeout);
             });
         };
 
