@@ -197,9 +197,11 @@
           }
         }
 
+        // When there is a final result invoke the result callback
         if(finalResults){
           invokeCallbacks(callbacks.result, results);
         }
+
         var commandText;
         // go over each of the 5 results and alternative results received (we've set maxAlternatives to 5 above)
         for (var i = 0; i<results.length; i++) {
