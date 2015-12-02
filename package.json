@@ -1,0 +1,28 @@
+{
+  "name": "smart-mirror",
+  "version": "0.0.1",
+  "description": "The fairest of them all",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evancohen/smart-mirror.git"
+  },
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial"
+  ],
+  "author": "Evan Cohen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evancohen/smart-mirror/issues"
+  },
+  "homepage": "https://github.com/evancohen/smart-mirror",
+  "devDependencies": {
+    "electron-prebuilt": "^0.35.0"
+  }
+}

@@ -3,11 +3,11 @@
   <head>
     <title>Smart Mirror</title>
     <!-- Libraries -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js"></script>
+    <script src="js/annyang.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
     <!-- App -->
     <!--<script src="/js/init.js"></script>-->
     <script src="js/config.js"></script>
@@ -50,15 +50,12 @@
       <div class="middle-center">
         <h1>{{complement}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
-        <div class="listening" ng-show="listening">Ready: {{focus}}</div>
+        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
         <div class="map-container animate-grow" ng-show="focus == 'map'">
           <img class="map animate-grow" ng-src="{{map}}"/>
         </div>
       </div>
       <div class="bottom-center">
-        <div ng-show="focus != 'commands'">
-          Say "What can I say?" to see a list of commands...
-        </div>
         <!-- Command list -->
         <div class="commands animate-grow" ng-show="focus == 'commands'">
           <h2>Availalble Commands</h2>
@@ -78,7 +75,14 @@
             <dt>Show map of ________</dt>
             <dd>Shows a map of the given location.</dd>
           </dl>
+          <small>
+            We are using node <script>document.write(process.versions.node)</script>,
+            Chrome <script>document.write(process.versions.chrome)</script>,
+            and Electron <script>document.write(process.versions.electron)</script>.
+          </small>
         </div>
+
+        <div class="interim-result" ng-bind="interimResult"></div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>

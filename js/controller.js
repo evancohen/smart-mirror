@@ -3,11 +3,13 @@
 
     function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, HomeAssistantService, $scope, $timeout) {
         var _this = this;
+        var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
         $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
+        $scope.interimResult = DEFAULT_COMMAND_TEXT;
 
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
@@ -17,10 +19,16 @@
             $timeout(tick, 1000 * 60);
         };
 
+        // Reset the command text
+        var restCommand = function(){
+          $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        }
+
         _this.init = function() {
             $scope.map = MapService.generateMap("Seattle,WA");
             _this.clearResults();
             tick();
+            restCommand();
 
             //Get our location and then get the weather for our location
             GeolocationService.getLocation().then(function(geoposition){
@@ -83,19 +91,22 @@
             });
 
             // Zoom in map
-            AnnyangService.addCommand('Map zoom in', function() {
+            AnnyangService.addCommand('(map) zoom in', function() {
                 console.debug("Zoooooooom!!!");
                 $scope.map = MapService.zoomIn();
-                $scope.focus = "map";
             });
 
-            AnnyangService.addCommand('Map zoom out', function() {
+            AnnyangService.addCommand('(map) zoom out', function() {
                 console.debug("Moooooooooz!!!");
                 $scope.map = MapService.zoomOut();
-                $scope.focus = "map";
             });
 
-            AnnyangService.addCommand('Map reset zoom', function() {
+            AnnyangService.addCommand('(map) zoom (to) *value', function(value) {
+                console.debug("Moooop!!!", value);
+                $scope.map = MapService.zoomTo(value);
+            });
+
+            AnnyangService.addCommand('(map) reset zoom', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
                 $scope.focus = "map";
@@ -107,7 +118,7 @@
             });
 
             // Change name
-            AnnyangService.addCommand('My name is *name', function(name) {
+            AnnyangService.addCommand('My (name is)(name\'s) *name', function(name) {
                 console.debug("Hi", name, "nice to meet you");
                 $scope.user.name = name;
             });
@@ -150,24 +161,31 @@
             });
 
             // Fallback for all commands
-            AnnyangService.addCommand('*allSpeach', function(allSpeech) {
+            AnnyangService.addCommand('*allSpeech', function(allSpeech) {
                 console.debug(allSpeech);
                 _this.addResult(allSpeech);
             });
-            
+
+            var resetCommandTimeout;
             //Track when the Annyang is listening to us
             AnnyangService.start(function(listening){
                 $scope.listening = listening;
+            }, function(interimResult){
+                $scope.interimResult = interimResult;
+                $timeout.cancel(resetCommandTimeout);
+            }, function(result){
+                $scope.interimResult = result[0];
+                resetCommandTimeout = $timeout(restCommand, 5000);
             });
         };
-        
+
         _this.addResult = function(result) {
             _this.results.push({
                 content: result,
                 date: new Date()
             });
         };
-        
+
         _this.clearResults = function() {
             _this.results = [];
         };
@@ -179,56 +197,3 @@
         .controller('MirrorCtrl', MirrorCtrl);
 
 }(window.angular));
-
-
-/*
-'(show me) help':       help,
-    'hello (there)':        hello,
-    'stop listening':       stopListening,
-
-
-
-    Commands:
-        "What Can I Say?": give the user a list of availalbe commands
-
-TODO:
-- Set a timer for X
-
-Both the init() and addCommands() methods receive a commands object.
-
-annyang understands commands with named variables, splats, and optional words.
-
-Use named variables for one word arguments in your command.
-Use splats to capture multi-word text at the end of your command (greedy).
-Use optional words or phrases to define a part of the command as optional.
-Examples:
-
-<script>
-var commands = {
-  // annyang will capture anything after a splat (*) and pass it to the function.
-  // e.g. saying "Show me Batman and Robin" will call showFlickr('Batman and Robin');
-  'show me *term': showFlickr,
-
-  // A named variable is a one word variable, that can fit anywhere in your command.
-  // e.g. saying "calculate October stats" will call calculateStats('October');
-  'calculate :month stats': calculateStats,
-
-  // By defining a part of the following command as optional, annyang will respond
-  // to both: "say hello to my little friend" as well as "say hello friend"
-  'say hello (to my little) friend': greeting
-};
-
-var showFlickr = function(term) {
-  var url = 'http://api.flickr.com/services/rest/?tags='+tag;
-  $.getJSON(url);
-}
-
-var calculateStats = function(month) {
-  $('#stats').text('Statistics for '+month);
-}
-
-var greeting = function() {
-  $('#greeting').text('Hello!');
-}
-</script>
-*/ 

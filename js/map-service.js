@@ -28,6 +28,16 @@
             return service.generateMap(service.center);
         };
 
+        service.zoomTo = function(value) {
+            if(0 + value < 0 || value == "zero"){
+              value = 0
+            } else if(0 + value > 18){
+              value = 18
+            }
+            service.zoom = value;
+            return service.generateMap(service.center);
+        };
+
         service.zoomOut = function() {
             service.zoom = service.zoom - 1;
             return service.generateMap(service.center);
@@ -37,7 +47,7 @@
             service.zoom = 13;
             return service.generateMap(service.center);
         };
-        
+
         return service;
     }
 
