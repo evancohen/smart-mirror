@@ -151,11 +151,9 @@
             });
 
             // Initiate movie mode
-            AnnyangService.addCommand('netflix and chill', function(state, action) {
-                //turn projector on
-                HomeAssistantService.projectorOn();
-                //lower screen
-                HomeAssistantService.screenDown();
+            AnnyangService.addCommand('netflix and chill', function() {
+                // Turn on movie mode
+                HomeAssistantService.MovieModeOn();
                 //turn the lights down
                 HueService.performUpdate('gentle');
             });
