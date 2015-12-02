@@ -3,13 +3,13 @@
 
     function AnnyangService($rootScope) {
         var service = {};
-        
+
         // COMMANDS
         service.commands = {};
 
         service.addCommand = function(phrase, callback) {
             var command = {};
-            
+
             // Wrap annyang command in scope apply
             command[phrase] = function(arg1, arg2) {
                 $rootScope.$apply(callback(arg1, arg2));
@@ -17,7 +17,7 @@
 
             // Extend our commands list
             angular.extend(service.commands, command);
-            
+
             // Add the commands to annyang
             annyang.addCommands(service.commands);
             console.debug('added command "' + phrase + '"', service.commands);
@@ -32,7 +32,7 @@
                 annyang.addCallback('end', function(data){console.log("End", data)});
             };
         };
-        
+
         return service;
     }
 
