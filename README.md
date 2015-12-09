@@ -32,7 +32,8 @@ git clone git@github.com:evancohen/smart-mirror.git
 ##### Setting up the configuration
 Done? Excellent, let's continue.
 
-Time to update the config file (apologies to those who tried to use this repository before I had the chance to add it). You'll need to fill in two things:
+Time to update the config file... You'll need to fill in two things into `js/config.js`:
+
 1. A [Forecast API key](https://developer.forecast.io/) (don't worry, it's free)
 2. Philips Hue Bridge IP address with a configured user. Details about how to set this up in the [Philips Hue Developer Documentation](http://www.developers.meethue.com/documentation/getting-started)
 
