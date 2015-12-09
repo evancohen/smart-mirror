@@ -61,7 +61,7 @@ dt {
     height: 100%;
 }
 
-.listening {
+.listening, .interim-result {
     font-family: 'Open Sans', sans-serif;
 }
 
