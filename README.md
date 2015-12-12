@@ -39,7 +39,6 @@ Time to update the config file... You'll need to fill in two things into `js/con
 
 ##### Install dependencies and run
 Before we can run the thing we've got to install the projects dependencies. From the root of the `smart-mirror` directory run:
-Now, before we start going crazy and installing certificates let's check that everything loads in correctly. You can run a lightweight Python server in the smart-mirror directory to test things out:
 ```
 npm install
 ```
