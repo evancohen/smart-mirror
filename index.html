@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="SmartMirror">
+<html >
   <head>
     <title>Smart Mirror</title>
     <!-- Libraries -->
@@ -18,17 +18,44 @@
     <script src="js/hue-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/controller.js"></script>
+
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body ng-controller="MirrorCtrl as commands">
+<section id="SmartMirrorSection" ng-controller="MirrorCtrl as commands">
+  <body>
     <div class="top">
       <div class="top-left">
         <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
         <div class="time">{{date | date : 'hh:mm a'}}</div>
-      </div>
+
+<!--todo div -->
+<div >
+<section>
+  <h2 class="date grey" >To Do's</h1>
+  <div class="formToDo">
+    <form ng-submit="addTodo()">
+      <input type="hidden" ng-model="newTodo">
+      <button class="btn" style="display: none;">Add</button>
+    </form>
+  </div>
+</section>
+<section id="taskContent">
+  <ul>
+    <li ng-repeat="todo in todos">
+      <label ng-class="{ completed:todo.completed }">
+        <input type="checkbox" ng-model="todo.completed" style="display: none;"/> {{ todo.name }}
+        <span id="todo" ng-click="deleteTodo($index)">&times;</span>
+      </label>
+    </li>
+  </ul>
+</section>
+</div>
+<!-- todo div ends -->
+
+  </div>
       <div class="top-right">
         <div class="weather">
           <div class="weather-today">
@@ -45,19 +72,26 @@
         </div>
       </div>
     </div>
+    <!-- main div -->
     <div class="container">
+      <!-- central div -->
       <div class="middle-center">
-        <h1>{{complement}}</h1>
-        <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
-        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+        <!--  Greeting-compliment centre -->
+        <!-- <h1>{{complement}}</h1>-->
+        <h1 ng-show="!(user.name === undefined)">Hi, {{user.name}}!</h1>
+        <h2 ng-show="!(user.name === undefined)">How can I help you today?</h2>
+        <!--<div class="listening" ng-show="listening">Ready: {{focus}}</div>-->
+
+        <!--  Map DIV -->
         <div class="map-container animate-grow" ng-show="focus == 'map'">
           <img class="map animate-grow" ng-src="{{map}}"/>
         </div>
       </div>
+      <!--central bottom div-->
       <div class="bottom-center">
         <!-- Command list -->
         <div class="commands animate-grow" ng-show="focus == 'commands'">
-          <h2>Availalble Commands</h2>
+          <h2>Available Commands</h2>
           <dl>
             <dt>What can I say?</dt>
             <dd>Shows a list of voice commands available to you.</dd>
@@ -74,11 +108,11 @@
             <dt>Show map of ________</dt>
             <dd>Shows a map of the given location.</dd>
           </dl>
-          <small>
+          <!-- <small>
             We are using node <script>document.write(process.versions.node)</script>,
             Chrome <script>document.write(process.versions.chrome)</script>,
             and Electron <script>document.write(process.versions.electron)</script>.
-          </small>
+          </small> -->
         </div>
 
         <div class="interim-result" ng-bind="interimResult"></div>
@@ -108,7 +142,14 @@
         </ul>
       </div>
     </div>
+
+
     <!-- Sleep cover -->
     <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
+</section>
+<script type="text/javascript">
+        angular.bootstrap(document.getElementById('SmartMirrorSection'), ['SmartMirror']);
+
+</script>
   </body>
 </html>
