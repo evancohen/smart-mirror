@@ -250,3 +250,9 @@ span#todo{
 	cursor: pointer;
 	display: none;
 }
+div.hidden {
+    display: none;
+}
+div.weather {
+  display: none;
+}
