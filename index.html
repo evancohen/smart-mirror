@@ -23,7 +23,18 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
+<!-- fadein -->
+    <script>
+    $(document).ready(function () {
+        $('div.hidden').fadeIn(1000).removeClass('hidden');
+        $('div.weather').delay(5000);       
+        $('div.weather').fadeIn(1000).removeClass('hidden');
+
+    });
+    </script>
+
   </head>
+<div class="hidden">
 <section id="SmartMirrorSection" ng-controller="MirrorCtrl as commands">
   <body>
     <div class="top">
@@ -31,48 +42,60 @@
         <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
         <div class="time">{{date | date : 'hh:mm a'}}</div>
 
-<!--todo div -->
-<div >
-<section>
-  <h2 class="date grey" >To Do's</h1>
-  <div class="formToDo">
-    <form ng-submit="addTodo()">
-      <input type="hidden" ng-model="newTodo">
-      <button class="btn" style="display: none;">Add</button>
-    </form>
-  </div>
-</section>
-<section id="taskContent">
-  <ul>
-    <li ng-repeat="todo in todos">
-      <label ng-class="{ completed:todo.completed }">
-        <input type="checkbox" ng-model="todo.completed" style="display: none;"/> {{ todo.name }}
-        <span id="todo" ng-click="deleteTodo($index)">&times;</span>
-      </label>
-    </li>
-  </ul>
-</section>
-</div>
-<!-- todo div ends -->
+          <!--todo div -->
+          <div >
 
-  </div>
-      <div class="top-right">
+            <section>
+              <h2 class="date grey" >Don't forget to...</h2>
+                <div class="formToDo">
+                  <form ng-submit="addTodo()">
+                    <input type="hidden" ng-model="newTodo">
+                    <button class="btn" style="display: none;">Add</button>
+                  </form>
+                </div>
+            </section>
+
+            <section id="taskContent">
+              <ul>
+                <li ng-repeat="todo in todos">
+                  <label ng-class="{ completed:todo.completed }">
+                    <input type="checkbox" ng-model="todo.completed" style="display: none;"/> {{ todo.name }}
+                    <span id="todo" ng-click="deleteTodo($index)">&times;</span>
+                  </label>
+                </li>
+              </ul>
+            </section>
+
+          </div>
+          <!-- todo div ends -->
+
+    </div>
+<!-- top left div ends -->
+<!-- top right div starts -->
+
+      <div class="top-right" >
+        <!-- weather begins-->
         <div class="weather">
           <div class="weather-today">
             <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
           </div>
-          <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
-          <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
-            <div class="weather-week-day">
-              <span class="day light-grey">{{forcast.day}}</span>
-              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
-              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+            <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
+            <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+              <div class="weather-week-day">
+                <span class="day light-grey">{{forcast.day}}</span>
+                <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
+                <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+              </div>
             </div>
-          </div>
         </div>
+        <!-- weather ends-->
       </div>
+      <!-- top right div ends-->
+
     </div>
-    <!-- main div -->
+    <!-- top div ends-->
+
+    <!-- centre div begins  -->
     <div class="container">
       <!-- central div -->
       <div class="middle-center">
@@ -121,6 +144,7 @@
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
       </div>
     </div>
+    <!-- centre div ends -->
     <!-- Debug Buttons -->
     <div class="debug-info">
       <!--<button ng-click="debug = true">Open Debug</button>-->
@@ -143,10 +167,10 @@
       </div>
     </div>
 
-
     <!-- Sleep cover -->
     <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
 </section>
+</div>
 <script type="text/javascript">
         angular.bootstrap(document.getElementById('SmartMirrorSection'), ['SmartMirror']);
 
