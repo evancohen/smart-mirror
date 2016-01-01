@@ -256,3 +256,6 @@ div.hidden {
 div.weather {
   display: none;
 }
+div.todohidden {
+  display: none;
+}
