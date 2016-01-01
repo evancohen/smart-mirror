@@ -1,17 +1,72 @@
 (function(angular) {
     'use strict';
-
+    //Mirror Controller
     function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout) {
         var _this = this;
-        var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
+        var DEFAULT_COMMAND_TEXT = 'Dont know what to say? Just ask...';
         $scope.listening = false;
         $scope.debug = false;
-        $scope.complement = "Hi, sexy!"
+        $scope.complement = "Hi..."
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+//todostuff
+        $scope.addTodo = function(){
+          $scope.todos.push({
+            name      : $scope.newTodo,
+            completed : false
+          });
+        }
+        var todos = [
+            {
+                name      : '',
+                completed : false
+              }
+              ];
 
+        $scope.todos = todos;
+
+              		function wordsToNumber(words){
+              			switch(words)
+              			{
+              				case "one" :
+              					return 1;
+              					break;
+              				case "two" :
+              					return 2;
+              					break;
+              				case "three" :
+              					return 3;
+              					break;
+              				case "four" :
+              					return 4;
+              					break;
+              				case "five" :
+              					return 5;
+              					break;
+              				case "six" :
+              					return 6;
+              					break;
+              			}
+              		}
+
+              		$scope.deleteTodo = function(index){
+              			$scope.todos.splice(index, 0);
+              		}
+
+              		$scope.checkTodo = function(number){
+              				$scope.todos[number-0].completed = true;
+
+              		}
+
+              		$scope.clearCompleted = function(){
+              			$scope.todos = $scope.todos.filter(function(item){
+              				return !item.completed
+              			})
+              		}
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
+        //ToDoController
+
 
         //Update the time
         var tick = function() {
@@ -25,7 +80,7 @@
         }
 
         _this.init = function() {
-            $scope.map = MapService.generateMap("Seattle,WA");
+            $scope.map = MapService.generateMap("Parrell+St,+Seaford+Meadows+SA+5169");
             _this.clearResults();
             tick();
             restCommand();
@@ -58,32 +113,54 @@
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
-
+            //Add new reminder
+            AnnyangService.addCommand('Remind me to *val', function(val) {
+                console.debug("Set a reminder..");
+                console.log(AnnyangService.commands);
+                $scope.newTodo   = val;
+                $scope.completed = false;
+                $scope.addTodo();
+                $scope.$apply();
+            });
+            //Check list item
+            AnnyangService.addCommand('Item *val is done', function(val) {
+                console.debug("Marked item *val as complete, well done!");
+                console.log(AnnyangService.commands);
+                $scope.checkTodo(val);
+          			$scope.$apply();
+            });
+            //Tidy Up Completed Items
+            AnnyangService.addCommand('clear completed items', function(val) {
+                console.debug("Clearing completed items from to do list");
+                console.log(AnnyangService.commands);
+                $scope.clearCompleted();
+        				$scope.$apply();
+            });
             // Go back to default view
             AnnyangService.addCommand('Go home', defaultView);
 
             // Hide everything and "sleep"
-            AnnyangService.addCommand('Go to sleep', function() {
+            AnnyangService.addCommand('Bye', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
             });
 
-            // Go back to default view
-            AnnyangService.addCommand('Wake up', defaultView);
+            // Wakes up mirror
+            AnnyangService.addCommand('Hi', defaultView);
 
-            // Hide everything and "sleep"
+            // Shows debug button
             AnnyangService.addCommand('Show debug information', function() {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
             });
 
-            // Hide everything and "sleep"
+            // Shows map of set home
             AnnyangService.addCommand('Show map', function() {
                 console.debug("Going on an adventure?");
                 $scope.focus = "map";
             });
 
-            // Hide everything and "sleep"
+            // Shows map of selected area
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
                 console.debug("Getting map of", location);
                 $scope.map = MapService.generateMap(location);
@@ -95,17 +172,17 @@
                 console.debug("Zoooooooom!!!");
                 $scope.map = MapService.zoomIn();
             });
-
+            // Zoom out map
             AnnyangService.addCommand('(map) zoom out', function() {
                 console.debug("Moooooooooz!!!");
                 $scope.map = MapService.zoomOut();
             });
-
+            // Zoom map to percentage value
             AnnyangService.addCommand('(map) zoom (to) *value', function(value) {
                 console.debug("Moooop!!!", value);
                 $scope.map = MapService.zoomTo(value);
             });
-
+            // Reset maps zoom
             AnnyangService.addCommand('(map) reset zoom', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
@@ -151,10 +228,10 @@
             });
 
             // Fallback for all commands
-            AnnyangService.addCommand('*allSpeech', function(allSpeech) {
-                console.debug(allSpeech);
-                _this.addResult(allSpeech);
-            });
+            //AnnyangService.addCommand('*allSpeech', function(allSpeech) {
+            //    console.debug(allSpeech);
+            //    _this.addResult(allSpeech);
+            //});
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
@@ -182,6 +259,7 @@
 
         _this.init();
     }
+
 
     angular.module('SmartMirror')
         .controller('MirrorCtrl', MirrorCtrl);
