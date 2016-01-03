@@ -11,7 +11,7 @@ This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirro
 
 #### Installation
 
-I have set this up so that it can run of of any web server, so as long as you have a webserver running somewhere, that you can host this from, you should be fine.
+I have set this up so that it can run of of any web server, so as long as you have a webserver running somewhere, that you can host this from, you should be fine. (keeping in mind that you MUST use Chrome to display it)
 
 ##### Setting up the configuration
 Done? Excellent, let's continue.
