@@ -1,5 +1,5 @@
 # Smart Mirror
-This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirror) and Michael Teeuw's [Magic Mirror](http://michaelteeuw.nl/tagged/magicmirror) and evancohens [SmartMirror](https://github.com/evancohen/smart-mirror) . It uses [annyang](https://github.com/TalAter/annyang) for voice interactivity, [electron](http://electron.atom.io/) to make it cross platform, and integrates with Philips Hue. It is my own take on what a "smart mirror" can be.
+This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirror) and Michael Teeuw's [Magic Mirror](http://michaelteeuw.nl/tagged/magicmirror) and evancohens [SmartMirror](https://github.com/evancohen/smart-mirror) . It uses [annyang](https://github.com/TalAter/annyang) for voice interactivity, [electron](http://electron.atom.io/) to make it cross platform, and integrates with Philips Hue and can also display RSS feeds.
 
 ### Getting Started
 #### Hardware Components
@@ -21,7 +21,8 @@ Time to update the config file... You'll need to fill in two things into `js/con
 1. A [Forecast API key](https://developer.forecast.io/) (don't worry, it's free)
 2. Philips Hue Bridge IP address with a configured user. Details about how to set this up in the [Philips Hue Developer Documentation](http://www.developers.meethue.com/documentation/getting-started)
 3. Set default map home in map-service.js (line 6)
-
+4. Set RSS feed location in config.js
+5. 
 ### License:
 MIT
 
