@@ -1,6 +1,8 @@
 # Smart Mirror
 This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirror) and Michael Teeuw's [Magic Mirror](http://michaelteeuw.nl/tagged/magicmirror) and evancohens [SmartMirror](https://github.com/evancohen/smart-mirror) . It uses [annyang](https://github.com/TalAter/annyang) for voice interactivity, [electron](http://electron.atom.io/) to make it cross platform, and integrates with Philips Hue and can also display RSS feeds and iCal for your convenience.
 
+There is a gitpage here also - http://blackshroud.github.io/smart-mirror/(http://blackshroud.github.io/smart-mirror/)
+
 ### Getting Started
 #### Hardware Components
 - Raspberry Pi 2
