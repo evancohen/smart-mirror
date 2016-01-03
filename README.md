@@ -22,6 +22,7 @@ Time to update the config file... You'll need to fill in two things into `js/con
 2. Philips Hue Bridge IP address with a configured user. Details about how to set this up in the [Philips Hue Developer Documentation](http://www.developers.meethue.com/documentation/getting-started)
 3. Set default map home in map-service.js (line 6)
 4. Set RSS feed location in config.js
+5. Add iCal URL to config.js
 
 ### License:
 MIT
