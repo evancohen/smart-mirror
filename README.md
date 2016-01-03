@@ -18,7 +18,7 @@ I have set this up so that it can run of of any web server, so as long as you ha
 ##### Setting up the configuration
 Done? Excellent, let's continue.
 
-Time to update the config file... You'll need to fill in two things into `js/config.js`:
+Time to update the config file... You'll need to fill things in `js/config.js`:
 
 1. A [Forecast API key](https://developer.forecast.io/) (don't worry, it's free)
 2. Philips Hue Bridge IP address with a configured user. Details about how to set this up in the [Philips Hue Developer Documentation](http://www.developers.meethue.com/documentation/getting-started)
