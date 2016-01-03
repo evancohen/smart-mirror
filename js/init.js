@@ -42,6 +42,8 @@ if (annyang) {
   // Start listening. You can call this here, or attach this call to an event, button, etc.
   annyang.start();
 
+  //news.init
+
   //Let us know when we are ready to go
   annyang.addCallback('start', function(){
     console.log("Ready to listen...");
@@ -66,3 +68,24 @@ if (annyang) {
 } else {
   alert('unsupported');
 }
+
+jQuery.fn.updateWithText = function(text, speed)
+{
+	var dummy = $('<div/>').html(text);
+
+	if ($(this).html() != dummy.html())
+	{
+		$(this).fadeOut(speed/2, function() {
+			$(this).html(text);
+			$(this).fadeIn(speed/2, function() {
+				//done
+			});
+		});
+	}
+}
+
+jQuery(document).ready(function($) {
+
+	news.init();
+
+});

@@ -5,7 +5,7 @@
         var service = {};
         service.forcast = null;
         var geoloc = null;
-        
+
         service.init = function(geoposition) {
             geoloc = geoposition;
             return $http.jsonp('https://api.forecast.io/forecast/'+FORCAST_API_KEY+'/'+geoposition.coords.latitude+','+geoposition.coords.longitude+'?callback=JSON_CALLBACK&units=auto').
@@ -14,7 +14,7 @@
                 });
         };
 
-        //Returns the current forcast along with high and low tempratures for the current day 
+        //Returns the current forcast along with high and low tempratures for the current day
         service.currentForcast = function() {
             if(service.forcast === null){
                 return null;
@@ -37,7 +37,7 @@
         service.refreshWeather = function(){
             return service.init(geoloc);
         }
-        
+
         return service;
     }
 

@@ -3,7 +3,7 @@
     //Mirror Controller
     function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout) {
         var _this = this;
-        var DEFAULT_COMMAND_TEXT = 'Dont know what to say? Just ask...';
+        var DEFAULT_COMMAND_TEXT = 'Dont know what to say? Just ask!';
         $scope.listening = false;
         $scope.debug = false;
         $scope.complement = "Hi..."
