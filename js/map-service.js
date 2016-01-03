@@ -3,7 +3,7 @@
 
     function MapService() {
         var service = {};
-        service.center = "Parrell+St,+Seaford+Meadows+SA+5169"; //default map locaiton
+        service.center = "Seattle, WA"; //default map locaiton
         service.zoom = 13; //default zoom is 13
         // COMMANDS
         service.commands = {};
