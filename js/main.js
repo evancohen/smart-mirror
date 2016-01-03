@@ -14,7 +14,7 @@ jQuery.fn.updateWithText = function(text, speed)
 }
 
 jQuery(document).ready(function($) {
-
+	calendar.init();
 	news.init();
 
 });
