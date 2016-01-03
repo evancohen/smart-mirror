@@ -5,6 +5,6 @@ var config = {
     },
     calendar: {
     maximumEntries: 10,
-    url: "https://calendar.google.com/calendar/ical/blackshroud%40gmail.com/private-7c3a2969465ba7b5c71b630cb5b4a8e8/basic.ics"
+    url: "add iCal URL here"
     }
 }
