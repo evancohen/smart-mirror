@@ -114,7 +114,7 @@
                 $scope.focus = "commands";
             });
             //Add new reminder
-            AnnyangService.addCommand('Remind me to *val', function(val) {
+            AnnyangService.addCommand('don\'t forget *val', function(val) {
                 console.debug("Set a reminder..");
                 console.log(AnnyangService.commands);
                 $scope.newTodo   = val;
@@ -201,7 +201,7 @@
             });
 
             // Set a reminder
-            AnnyangService.addCommand('Remind me to *task', function(task) {
+            AnnyangService.addCommand('dont forget *task', function(task) {
                 console.debug("I'll remind you to", task);
             });
 
