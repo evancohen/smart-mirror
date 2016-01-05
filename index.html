@@ -15,7 +15,7 @@
     <script src="js/annyang-service.js"></script>
     <script src="js/weather-service.js"></script>
     <script src="js/map-service.js"></script>
-    <script src="js/hue-service.js"></script>
+    <!--<script src="js/hue-service.js"></script>-->
     <script src="js/geolocation-service.js"></script>
     <script src="js/controller.js"></script>
     <!-- Styles and Resources -->
@@ -26,20 +26,20 @@
   <body ng-controller="MirrorCtrl as commands">
     <div class="top">
       <div class="top-left">
-        <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
-        <div class="time">{{date | date : 'hh:mm a'}}</div>
+        <div class="date grey">{{date | date : 'EEEE d MMMM yyyy'}}</div>
+        <div class="time">{{date | date : 'HH:mm'}}</div>
       </div>
       <div class="top-right">
         <div class="weather">
           <div class="weather-today">
-            <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+            <span class="tempreture">{{currentForcast.temperature | number: 1}}&deg;</span>
           </div>
           <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
           <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
             <div class="weather-week-day">
               <span class="day light-grey">{{forcast.day}}</span>
-              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
-              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+              <span class="tempreture tempreture-min">{{forcast.temperatureMin | number : 1}}</span>
+              <span class="tempreture tempreture-max">{{forcast.temperatureMax | number : 1}}</span>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
       <div class="bottom-center">
         <!-- Command list -->
         <div class="commands animate-grow" ng-show="focus == 'commands'">
-          <h2>Availalble Commands</h2>
+          <h2>Available Commands</h2>
           <dl>
             <dt>What can I say?</dt>
             <dd>Shows a list of voice commands available to you.</dd>
