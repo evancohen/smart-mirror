@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, /*HueService,*/ $scope, $timeout) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, $scope, $timeout) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -18,6 +18,12 @@
             $scope.date = new Date();
             $timeout(tick, 1000 * 60);
         };
+
+        var setWeather = function() {
+          WeatherService.refreshWeather();
+          $scope.currentForcast = WeatherService.currentForcast();
+          $scope.weeklyForcast = WeatherService.weeklyForcast();
+        }
 
         // Reset the command text
         var restCommand = function(){
@@ -40,7 +46,7 @@
                     console.log("Weekly", $scope.weeklyForcast);
                     //refresh the weather every hour
                     //this doesn't acutually updat the UI yet
-                    //$timeout(WeatherService.refreshWeather, 3600000);
+                    $timeout(setWeather(), 3600000);
                 });
             })
 
@@ -75,6 +81,12 @@
             AnnyangService.addCommand('Show debug information', function() {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
+            });
+
+            AnnyangService.addCommand('Show traffic', function() {
+                console.debug("Going on an adventure?");
+                $scope.map = TrafficService.generateMap();
+                $scope.focus = "map";
             });
 
             // Hide everything and "sleep"
