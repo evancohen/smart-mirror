@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -14,10 +14,10 @@
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
         //Update the time
-        var tick = function() {
+        function updateTime(){
             $scope.date = new Date();
-            $timeout(tick, 1000 * 60);
-        };
+        }
+            
 
         // Reset the command text
         var restCommand = function(){
@@ -25,9 +25,10 @@
         }
 
         _this.init = function() {
+            var tick = $interval(updateTime, 1000);
+            updateTime();
             $scope.map = MapService.generateMap("Seattle,WA");
             _this.clearResults();
-            tick();
             restCommand();
 
             //Get our location and then get the weather for our location
