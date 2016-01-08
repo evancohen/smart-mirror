@@ -1,137 +1,127 @@
-var calendar = {
-	eventList: [],
-	calendarLocation: '.calendar',
-	updateInterval: 1000,
-	updateDataInterval: 60000,
-	fadeInterval: 1000,
-	intervalId: null,
-	dataIntervalId: null,
-	maximumEntries: config.calendar.maximumEntries || 10
+var fs = require('fs');
+var readline = require('readline');
+var google = require('googleapis');
+var googleAuth = require('google-auth-library');
+
+var SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+var TOKEN_DIR = (process.env.HOME || process.env.HOMEPATH ||
+    process.env.USERPROFILE) + '/.credentials/';
+var TOKEN_PATH = TOKEN_DIR + 'calendar-nodejs-quickstart.json';
+
+// Load client secrets from a local file.
+fs.readFile('client_secret.json', function processClientSecrets(err, content) {
+  if (err) {
+    console.log('Error loading client secret file: ' + err);
+    return;
+  }
+  // Authorize a client with the loaded credentials, then call the
+  // Google Calendar API.
+  authorize(JSON.parse(content), listEvents);
+});
+
+/**
+ * Create an OAuth2 client with the given credentials, and then execute the
+ * given callback function.
+ *
+ * @param {Object} credentials The authorization client credentials.
+ * @param {function} callback The callback to call with the authorized client.
+ */
+function authorize(credentials, callback) {
+  var clientSecret = credentials.installed.client_secret;
+  var clientId = credentials.installed.client_id;
+  var redirectUrl = credentials.installed.redirect_uris[0];
+  var auth = new googleAuth();
+  var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, function(err, token) {
+    if (err) {
+      getNewToken(oauth2Client, callback);
+    } else {
+      oauth2Client.credentials = JSON.parse(token);
+      callback(oauth2Client);
+    }
+  });
 }
 
-calendar.updateData = function (callback) {
-
-	new ical_parser("calendar.php" + "?url="+encodeURIComponent(config.calendar.url), function(cal) {
-		var events = cal.getEvents();
-		this.eventList = [];
-
-		for (var i in events) {
-
-			var e = events[i];
-			for (var key in e) {
-				var value = e[key];
-				var seperator = key.search(';');
-				if (seperator >= 0) {
-					var mainKey = key.substring(0,seperator);
-					var subKey = key.substring(seperator+1);
-
-					var dt;
-					if (subKey == 'VALUE=DATE') {
-						//date
-						dt = new Date(value.substring(0,4), value.substring(4,6) - 1, value.substring(6,8));
-					} else {
-						//time
-						dt = new Date(value.substring(0,4), value.substring(4,6) - 1, value.substring(6,8), value.substring(9,11), value.substring(11,13), value.substring(13,15));
-					}
-
-					if (mainKey == 'DTSTART') e.startDate = dt;
-					if (mainKey == 'DTEND') e.endDate = dt;
-				}
-			}
-
-			if (e.startDate == undefined){
-				//some old events in Gmail Calendar is "start_date"
-				//FIXME: problems with Gmail's TimeZone
-				var days = moment(e.DTSTART).diff(moment(), 'days');
-				var seconds = moment(e.DTSTART).diff(moment(), 'seconds');
-				var startDate = moment(e.DTSTART);
-			} else {
-				var days = moment(e.startDate).diff(moment(), 'days');
-				var seconds = moment(e.startDate).diff(moment(), 'seconds');
-				var startDate = moment(e.startDate);
-			}
-
-			//only add fututre events, days doesn't work, we need to check seconds
-			if (seconds >= 0) {
-				if (seconds <= 60*60*5 || seconds >= 60*60*24*2) {
-					var time_string = moment(startDate).fromNow();
-				}else {
-					var time_string = moment(startDate).calendar()
-				}
-				if (!e.RRULE) {
-					this.eventList.push({'description':e.SUMMARY,'seconds':seconds,'days':time_string});
-				}
-				e.seconds = seconds;
-			}
-
-			// Special handling for rrule events
-			if (e.RRULE) {
-				var options = new RRule.parseString(e.RRULE);
-				options.dtstart = e.startDate;
-				var rule = new RRule(options);
-
-				// TODO: don't use fixed end date here, use something like now() + 1 year
-				var dates = rule.between(new Date(), new Date(2016,11,31), true, function (date, i){return i < 10});
-				for (date in dates) {
-					var dt = new Date(dates[date]);
-					var days = moment(dt).diff(moment(), 'days');
-					var seconds = moment(dt).diff(moment(), 'seconds');
-					var startDate = moment(dt);
-					if (seconds >= 0) {
-						if (seconds <= 60*60*5 || seconds >= 60*60*24*2) {
-							var time_string = moment(dt).fromNow();
-						} else {
-							var time_string = moment(dt).calendar()
-						}
-						this.eventList.push({'description':e.SUMMARY,'seconds':seconds,'days':time_string});
-					}
-				}
-			}
-		};
-
-		this.eventList = this.eventList.sort(function(a,b){return a.seconds-b.seconds});
-
-		// Limit the number of entries.
-		this.eventList = this.eventList.slice(0, calendar.maximumEntries);
-
-		if (callback !== undefined && Object.prototype.toString.call(callback) === '[object Function]') {
-			callback(this.eventList);
-		}
-
-	}.bind(this));
-
+/**
+ * Get and store new token after prompting for user authorization, and then
+ * execute the given callback with the authorized OAuth2 client.
+ *
+ * @param {google.auth.OAuth2} oauth2Client The OAuth2 client to get token for.
+ * @param {getEventsCallback} callback The callback to call with the authorized
+ *     client.
+ */
+function getNewToken(oauth2Client, callback) {
+  var authUrl = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: SCOPES
+  });
+  console.log('Authorize this app by visiting this url: ', authUrl);
+  var rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  rl.question('Enter the code from that page here: ', function(code) {
+    rl.close();
+    oauth2Client.getToken(code, function(err, token) {
+      if (err) {
+        console.log('Error while trying to retrieve access token', err);
+        return;
+      }
+      oauth2Client.credentials = token;
+      storeToken(token);
+      callback(oauth2Client);
+    });
+  });
 }
 
-calendar.updateCalendar = function (eventList) {
-
-	table = $('<table/>').addClass('xsmall').addClass('calendar-table');
-	opacity = 1;
-
-	for (var i in eventList) {
-		var e = eventList[i];
-
-		var row = $('<tr/>').css('opacity',opacity);
-		row.append($('<td/>').html(e.description).addClass('description'));
-		row.append($('<td/>').html(e.days).addClass('days dimmed'));
-		table.append(row);
-
-		opacity -= 1 / eventList.length;
-	}
-
-	$(this.calendarLocation).updateWithText(table, this.fadeInterval);
-
+/**
+ * Store token to disk be used in later program executions.
+ *
+ * @param {Object} token The token to store to disk.
+ */
+function storeToken(token) {
+  try {
+    fs.mkdirSync(TOKEN_DIR);
+  } catch (err) {
+    if (err.code != 'EEXIST') {
+      throw err;
+    }
+  }
+  fs.writeFile(TOKEN_PATH, JSON.stringify(token));
+  console.log('Token stored to ' + TOKEN_PATH);
 }
 
-calendar.init = function () {
-
-	this.updateData(this.updateCalendar.bind(this));
-
-	this.intervalId = setInterval(function () {
-		this.updateCalendar(this.eventList)
-	}.bind(this), this.updateInterval);
-
-	this.dataIntervalId = setInterval(function () {
-		this.updateData(this.updateCalendar.bind(this));
-	}.bind(this), this.updateDataInterval);
-
+/**
+ * Lists the next 10 events on the user's primary calendar.
+ *
+ * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ */
+function listEvents(auth) {
+  var calendar = google.calendar('v3');
+  calendar.events.list({
+    auth: auth,
+    calendarId: 'primary',
+    timeMin: (new Date()).toISOString(),
+    maxResults: 10,
+    singleEvents: true,
+    orderBy: 'startTime'
+  }, function(err, response) {
+    if (err) {
+      console.log('The API returned an error: ' + err);
+      return;
+    }
+    var events = response.items;
+    if (events.length == 0) {
+      console.log('No upcoming events found.');
+    } else {
+      console.log('Upcoming 10 events:');
+      for (var i = 0; i < events.length; i++) {
+        var event = events[i];
+        var start = event.start.dateTime || event.start.date;
+        console.log('%s - %s', start, event.summary);
+      }
+    }
+  });
 }

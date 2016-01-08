@@ -25,7 +25,6 @@ Time to update the config file... You'll need to fill things in `js/config.js`:
 4. Set RSS feed location in config.js
 5. Add iCal URL to config.js
 
-<<<<<<< HEAD
 The format of your config should look something like this:
 ```
 var FORCAST_API_KEY = "a6s5dg39j78qj38sjs91je9djadfa1e";
