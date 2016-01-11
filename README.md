@@ -26,7 +26,7 @@ You'll also need to install Node and npm to make things work.
 ##### Getting the code
 Next up you'll want to clone this repository onto your Pi if you haven't already yet
 ```
-git clone git@github.com:evancohen/smart-mirror.git
+git clone https://github.com/evancohen/smart-mirror.git
 ```
 
 ##### Setting up the configuration
