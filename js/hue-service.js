@@ -24,7 +24,8 @@
             })
         };
 
-        //Returns the current forcast along with high and low tempratures for the current day 
+        //Updates a group of Hue lights (Assumes that one group is configured)
+        //You can change the group to 0 to perform the updates to all lights
         service.performUpdate = function(spokenWords) {
             //deturmine the updates that we need to perform to the lights
             var update = deturmineUpdates(spokenWords.toLowerCase().split(" "));
