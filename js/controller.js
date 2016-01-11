@@ -164,7 +164,9 @@
 
             AnnyangService.addCommand('Show traffic', function() {
                 console.debug("Going on an adventure?");
-                $scope.map = TrafficService.generateMap();
+                GeolocationService.getLocation().then(function(geoposition){
+                  $scope.map = TrafficService.generateMap(geoposition);
+                });
                 $scope.focus = "map";
             });
 

@@ -3,8 +3,8 @@
 
     function TrafficService() {
       var service = {};
-      service.generateMap = function() {
-        return "http://mapviewer.be-mobile.biz/#/map?@=51.153293543769834,4.369468688964844,11&map=BE_20140901_2&lang=nl_BE";
+      service.generateMap = function(geoposition) {
+        return "http://mapviewer.be-mobile.biz/#/map?@="+geoposition.coords.latitude+","+geoposition.coords.longitude+"&map=BE_20140901_2&lang=nl_BE";
       }
 
       return service;
