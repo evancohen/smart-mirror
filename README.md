@@ -21,7 +21,7 @@ The version running on this link has limited functionality and it quite out of d
 #### Installation
 In order to get started I suggest a clean install of Raspbian. You can snag a fresh copy of Jessie (recommended, it's the future) or Wheezy from the [Raspbian Download Page](https://www.raspberrypi.org/downloads/raspbian/).
 
-You'll also need to install Node and npm to make things work.
+You'll also need to install Node (v4.0.0+) which now comes bundled with npm.
 
 ##### Getting the code
 Next up you'll want to clone this repository onto your Pi if you haven't already yet
