@@ -7,7 +7,7 @@ This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirro
 [See it in action (Video)](https://www.youtube.com/watch?v=PDIbhV8Nvq8)
 
 #### Why start from scratch?
-Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of inspiration from other projects I really wanted this to be my own!
+Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of inspiration from other projects I really wanted to see how much further I could take things.
 
 #### Gitter:
 A live chat to get help and discuss mirror related issues: https://gitter.im/evancohen/smart-mirror. Currently I'm the only one monitoring this, so don't expect an instantanious response. If I'm not online you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
