@@ -62,6 +62,9 @@ If you don't want the debug console to open up every time you launch the mirror 
 mainWindow.webContents.openDevTools();
 ```
 
+#### Troubleshooting
+If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)
+
 ### License:
 MIT
 
