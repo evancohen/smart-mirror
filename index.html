@@ -24,7 +24,7 @@
               Things to do in the near future:
               <ul>
                 <li ng-repeat="todo in appointments">
-                  {{todo.SUMMARY}} ({{todo.LOCATION}})
+                  {{todo.DTSTART  | date : 'EEEE d/MM/yyyy HH:mm'}}: {{todo.SUMMARY}}
                 </li>
               </ul>
             </section>
