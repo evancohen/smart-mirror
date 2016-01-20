@@ -107,7 +107,14 @@
                 });
             });
 
-            $scope.appointments = CalendarService.renderAppointments();
+            var promise = CalendarService.renderAppointments();
+            promise.then(function(response) {
+              var events = CalendarService.parseICAL(response.data);
+              $scope.appointments = CalendarService.getFutureEvents(events);
+              console.log($scope.appointments);
+            }, function(errorMsg) {
+              console.log(errorMsg);
+            });
 
             //Initiate Hue communication
             //HueService.init();
