@@ -7,19 +7,6 @@
     <link rel="shortcut icon" href="favicon.ico?v=2" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
-<!-- fadein -->
-    <!--
-    <script>
-    $(document).ready(function () {
-        $('div.hidden').fadeIn(1000).removeClass('hidden');
-        $('div.weather').delay(6000);
-        $('div.weather').fadeIn(1000).removeClass('hidden');
-        $('div.todohidden').delay(1000);
-        $('div.todohidden').fadeIn(1000).removeClass('hidden');
-
-    });
-    </script>-->
-
   </head>
 <div class="hidden">
 <section id="SmartMirrorSection" ng-controller="MirrorCtrl as commands">
@@ -190,6 +177,8 @@
 <script src="js/traffic-service.js" type="text/javascript"></script>
 <script src="js/geolocation-service.js" type="text/javascript"></script>
 <script src="js/controller.js" type="text/javascript"></script>
+<script src="js/ical_parser.js" type="text/javascript"></script>
+<script src="js/calendar-service.js"></script>
 <!-- news js
 <script src="js/jquery.feedToJSON.js" type="text/javascript"></script>
 <script src="js/news.js" type="text/javascript"></script>

@@ -1,4 +1,4 @@
-/** 
+/**
  * Javascript ical Parser
  * Proof of concept method of reading icalendar (.ics) files with javascript.
  *
@@ -11,7 +11,7 @@ function ical_parser(feed_url, callback){
 	this.raw_data = null;
 	//Store of proccessed data.
 	this.events = [];
-	
+
 	/**
 	 * loadFile
 	 * Using AJAX to load the requested .ics file, passing it to the callback when completed.
@@ -31,11 +31,11 @@ function ical_parser(feed_url, callback){
 		xmlhttp.open("GET", url, true);
 		xmlhttp.send(null);
 	}
-	
+
 	/**
 	 * makeDate
 	 * Convert the dateformat used by ICalendar in to one more suitable for javascript.
-	 * @param String ical_date 
+	 * @param String ical_date
 	 * @return dt object, includes javascript Date + day name, hour/minutes/day/month/year etc.
 	 */
 	this.makeDate = function(ical_date){
@@ -51,7 +51,7 @@ function ical_parser(feed_url, callback){
                 var utcdatems = Date.UTC(dtutc.year, (dtutc.month-1), dtutc.day, dtutc.hour, dtutc.minute);
                 var dt = {};
                 dt.date = new Date(utcdatems);
-                
+
                 dt.year = dt.date.getFullYear();
                 dt.month = ('0' + (dt.date.getMonth()+1)).slice(-2);
                 dt.day = ('0' + dt.date.getDate()).slice(-2);
@@ -61,10 +61,10 @@ function ical_parser(feed_url, callback){
 		//Get the full name of the given day
 		dt.dayname =["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][dt.date.getDay()];
                 dt.monthname = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ][dt.date.getMonth()] ;
-		
+
 		return dt;
 	}
-	
+
 	/**
 	 * parseICAL
 	 * Convert the ICAL format in to a number of javascript objects (Each representing a date)
@@ -74,10 +74,10 @@ function ical_parser(feed_url, callback){
 	this.parseICAL = function(data){
 		//Ensure cal is empty
 		this.events = [];
-		
+
 		//Clean string and split the file so we can handle it (line by line)
 		cal_array = data.replace(new RegExp( "\\r", "g" ), "").replace(/\n /g,"").split("\n");
-		
+
 		//Keep track of when we are activly parsing an event
 		var in_event = false;
 		//Use as a holder for the current event being proccessed.
@@ -107,7 +107,7 @@ function ical_parser(feed_url, callback){
 				//Apply trimming to values to reduce risks of badly formatted ical files.
 				type = ln.substr(0,idx).replace(/^\s\s*/, '').replace(/\s\s*$/, '');//Trim
 				val = ln.substr(idx+1).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-				
+
 				//If the type is a start date, proccess it and store details
 				if(type =='DTSTART'){
 					dt = this.makeDate(val);
@@ -128,7 +128,7 @@ function ical_parser(feed_url, callback){
 					cur_event.day = dt.dayname;
 				}
 				//Convert timestamp
-                                else if(type =='DTSTAMP'){ 
+                                else if(type =='DTSTAMP'){
                                         val = this.makeDate(val).date;
                                 }
                                 else {
@@ -166,7 +166,7 @@ function ical_parser(feed_url, callback){
 	this.getEvents = function(){
 		return this.events;
 	}
-	
+
 	/**
 	 * getFutureEvents
 	 * return all events sheduled to take place after the current date.
@@ -175,14 +175,15 @@ function ical_parser(feed_url, callback){
 	 */
 	this.getFutureEvents = function(){
 		var future_events = [], current_date = new Date();
-		
+
+		console.log(this.events.length);
 		this.events.forEach(function(itm){
 			//If the event ends after the current time, add it to the array to return.
 			if(itm.DTEND > current_date) future_events.push(itm);
 		});
 		return future_events;
 	}
-	
+
 	/**
 	 * getPastEvents
 	 * return all events sheduled to take place before the current date.
@@ -191,14 +192,14 @@ function ical_parser(feed_url, callback){
 	 */
 	this.getPastEvents = function(){
 		var past_events = [], current_date = new Date();
-		
+
 		this.events.forEach(function(itm){
 			//If the event ended before the current time, add it to the array to return.
 			if(itm.DTEND <= current_date) past_events.push(itm);
 		});
 		return past_events.reverse();
 	}
-	
+
 	/**
 	 * load
 	 * load a new ICAL file.
@@ -214,7 +215,7 @@ function ical_parser(feed_url, callback){
 			tmp_this.parseICAL(data);
 		});
 	}
-	
+
 	//Store this so we can use it in the callback from the load function.
 	var tmp_this = this;
 	//Store the feed url

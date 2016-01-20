@@ -1,7 +1,7 @@
 "use strict";
 
 
-var smartMirror = angular.module('smartMirror', []);
+var smartMirror = angular.module('smartMirror', ['ngIcal']);
 
 smartMirror.controller("smartMirrorCtrl", function($scope) {
   $scope.someting = "Hello World";

@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, CalendarService, $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Dont know what to say? Just ask!';
         $scope.listening = false;
@@ -105,7 +105,9 @@
                     //this doesn't acutually updat the UI yet
                     $timeout(setWeather(), 3600000);
                 });
-            })
+            });
+
+            $scope.appointments = CalendarService.renderAppointments();
 
             //Initiate Hue communication
             //HueService.init();
