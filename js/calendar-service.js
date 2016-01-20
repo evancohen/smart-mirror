@@ -5,10 +5,13 @@
       var service = {};
 
       service.renderAppointments = function() {
+        var events = {};
         ical_parser(PERSONAL_CALENDAR, function(data) {
-          //console.log(data.getEvents());
-          return data.getFutureEvents();
+          events = data.getFutureEvents();
+          console.log(events);
         });
+        console.log(events);
+        return events;
       }
 
       return service;

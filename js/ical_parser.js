@@ -176,7 +176,6 @@ function ical_parser(feed_url, callback){
 	this.getFutureEvents = function(){
 		var future_events = [], current_date = new Date();
 
-		console.log(this.events.length);
 		this.events.forEach(function(itm){
 			//If the event ends after the current time, add it to the array to return.
 			if(itm.DTEND > current_date) future_events.push(itm);

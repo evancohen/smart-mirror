@@ -20,23 +20,10 @@
           <!--todo div -->
           <div class="todohidden">
 
-            <section>
-              <h2 class="date grey" >Don't forget...</h2>
-                <div class="formToDo">
-                  <form ng-submit="addTodo()">
-                    <input type="hidden" ng-model="newTodo">
-                    <button class="btn" style="display: none;">Add</button>
-                  </form>
-                </div>
-            </section>
-
             <section id="taskContent">
               <ul>
-                <li ng-repeat="todo in todos">
-                  <label ng-class="{ completed:todo.completed }">
-                    <input type="checkbox" ng-model="todo.completed" style="display: none;"/> {{ todo.name }}
-                    <span id="todo" ng-click="deleteTodo($index)">&times;</span>
-                  </label>
+                <li ng-repeat="todo in appointments">
+                  {{todo.summary}}
                 </li>
               </ul>
             </section>
