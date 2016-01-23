@@ -3,7 +3,6 @@
 
     function HueService($http) {
         var service = {};
-        var geoloc = null;
 
         service.init = function() {
             //Blink lamp once to indicate readyness
@@ -38,21 +37,6 @@
             })
         }
 
-        service.weeklyForcast = function(){
-            if(service.forcast === null){
-                return null;
-            }
-            // Add human readable info to info
-            for (var i = 0; i < service.forcast.data.daily.data.length; i++) {
-                service.forcast.data.daily.data[i].day = moment.unix(service.forcast.data.daily.data[i].time).format('ddd');
-            };
-            return service.forcast.data.daily;
-        }
-
-        service.refreshWeather = function(){
-            return service.init(geoloc);
-        }
-
         //Detect any kind of target color
         function deturmineUpdates(spokenWords){
             console.log("Spoken Words:", spokenWords)
@@ -78,7 +62,7 @@
                     update["hue"] = 12750;
                 } else if(spokenWords[i] == 'pink'){
                     update["hue"] = 56100;
-                } else if(spokenWords[i] == 'Purple'){
+                } else if(spokenWords[i] == 'purple'){
                     update["hue"] = 43000;
                 } else if(spokenWords[i] == 'white' || spokenWords[i] == 'wight' || spokenWords[i] == 'wight'){
                     update["sat"] = 0;
