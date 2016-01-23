@@ -24,7 +24,7 @@
               Things to do in the near future:
               <ul>
                 <li ng-repeat="todo in appointments">
-                  {{todo.DTSTART  | date : 'EEEE d/MM/yyyy HH:mm'}}: {{todo.SUMMARY}}
+                  {{todo.DTSTART  | date : 'EEEE d/MM/yyyy HH:mm'}}{{todo['DTSTART;VALUE=DATE'] | DateFormatFilter}}: {{todo.SUMMARY}}
                 </li>
               </ul>
             </section>
@@ -166,7 +166,8 @@
 <script src="js/geolocation-service.js" type="text/javascript"></script>
 <script src="js/controller.js" type="text/javascript"></script>
 <script src="js/ical_parser.js" type="text/javascript"></script>
-<script src="js/calendar-service.js"></script>
+<script src="js/calendar-service.js" type="text/javascript"></script>
+<script src="js/dateFormatFilter.js" type="text/javascript"></script>
 <script type="text/javascript">
         angular.bootstrap(document.getElementById('SmartMirrorSection'), ['SmartMirror']);
 

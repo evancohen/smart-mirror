@@ -143,7 +143,7 @@
 
     		service.events.forEach(function(itm){
     			//If the event ends after the current time, add it to the array to return.
-    			if(itm.DTEND > current_date) future_events.push(itm);
+    			if(isDayInFuture(itm)) future_events.push(itm);
     		});
     		return future_events.slice(0, 9);
     	}
@@ -157,6 +157,26 @@
     		});
     		return past_events.reverse();
     	}
+
+      var isDayInFuture = function(itm, format) {
+        var value = null;
+        var momentDate = null;
+        if (itm.hasOwnProperty('DTEND')) {
+          value = itm['DTEND'];
+          var momentDate = moment(value);
+        } else if (itm.hasOwnProperty('DTEND;VALUE=DATE')) {
+          value = itm['DTEND;VALUE=DATE'];
+          var format = 'YYYYMMDD';
+          var momentDate = moment(value, format);
+        }
+        var today = moment();
+        if (momentDate !== null) {
+          return momentDate.isAfter(today);
+        } else {
+          return false;
+        }
+
+      }
 
       var load = function(ical_file){
     		var tmp_this = this;
