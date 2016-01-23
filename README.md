@@ -1,14 +1,16 @@
 # Smart Mirror
+
+[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://badges.gitter.im/evancohen/smart-mirror.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirror) and Michael Teeuw's [Magic Mirror](http://michaelteeuw.nl/tagged/magicmirror). It uses [annyang](https://github.com/TalAter/annyang) for voice interactivity, [electron](http://electron.atom.io/) to make it cross platform, and integrates with Philips Hue. It is my own take on what a "smart mirror" can be.
 
-### [See it in action (Video)](https://www.youtube.com/watch?v=PDIbhV8Nvq8)
+[See it in action (Video)](https://www.youtube.com/watch?v=PDIbhV8Nvq8)
 
-### Why start from scratch?
-Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of inspiration from other projects I really wanted this to be my own!
+#### Why start from scratch?
+Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of inspiration from other projects I really wanted to see how much further I could take things.
 
-### Take it for a spin:
-Check it out: [https://evancohen.github.io/smart-mirror/](https://evancohen.github.io/smart-mirror/).
-The version running on this link has limited functionality and it quite out of date. It's just to give you an idea of what it's like.
+#### Gitter:
+A live chat to get help and discuss mirror related issues: https://gitter.im/evancohen/smart-mirror. Currently I'm the only one monitoring this, so don't expect an instantanious response. If I'm not online you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
 
 ### Getting Started
 #### Hardware Components
@@ -21,7 +23,7 @@ The version running on this link has limited functionality and it quite out of d
 #### Installation
 In order to get started I suggest a clean install of Raspbian. You can snag a fresh copy of Jessie (recommended, it's the future) or Wheezy from the [Raspbian Download Page](https://www.raspberrypi.org/downloads/raspbian/).
 
-You'll also need to install Node and npm to make things work.
+You'll also need to install Node (v4.0.0+) which now comes bundled with npm.
 
 ##### Getting the code
 Next up you'll want to clone this repository onto your Pi if you haven't already yet
@@ -49,16 +51,20 @@ Before we can run the thing we've got to install the projects dependencies. From
 npm install
 ```
 
-This will take a minute, it has to download [electron-prebuild](https://github.com/mafintosh/electron-prebuilt). Once that is done you can launch the mirror with
+This will take a minute, it has to download [electron-prebuilt](https://github.com/mafintosh/electron-prebuilt). Once that is done you can launch the mirror with
 ```
 npm start
 ```
 
-#### Disabling the debug console
-If you don't want the debug console to open up every time you launch the mirror you'll want to comment this line out from `main.js`:
-``` javascript
-mainWindow.webContents.openDevTools();
+#### Development
+To launch the mirror with a debug window attached use the following command:
 ```
+npm start dev
+```
+More info coming soon(ish). In the meantime head over to the [gitter chat](https://gitter.im/evancohen/smart-mirror) for help. 
+
+#### Troubleshooting
+If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)
 
 ### License:
 MIT
