@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, CalendarService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, CalendarService, HueService, $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Dont know what to say? Just ask!';
         $scope.listening = false;
@@ -115,7 +115,7 @@
             });
 
             //Initiate Hue communication
-            //HueService.init();
+            HueService.init();
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");

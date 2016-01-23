@@ -145,7 +145,7 @@
     			//If the event ends after the current time, add it to the array to return.
     			if(itm.DTEND > current_date) future_events.push(itm);
     		});
-    		return future_events;
+    		return future_events.slice(0, 9);
     	}
 
       service.getPastEvents = function(events){
