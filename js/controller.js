@@ -109,8 +109,7 @@
 
             var promise = CalendarService.renderAppointments();
             promise.then(function(response) {
-              var events = CalendarService.parseICAL(response.data);
-              $scope.appointments = CalendarService.getFutureEvents(events);
+              $scope.appointments = CalendarService.getFutureEvents();
               console.log($scope.appointments);
             }, function(errorMsg) {
               console.log(errorMsg);

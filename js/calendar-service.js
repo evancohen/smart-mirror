@@ -18,7 +18,7 @@
           url : url
         });
         return request.success(function(data) {
-          return service.events = data;
+          return service.events = service.parseICAL(data);
         }).error(function(data) {
           return deferred.reject(data.message);
         });
@@ -124,7 +124,7 @@
     		}
     		//Run this to finish proccessing our Events.
     		complete(events);
-        return events;
+        return service.events = events;
     	}
 
       var complete = function(events){
@@ -135,13 +135,13 @@
     	}
 
       service.getEvents = function(events){
-    		return events;
+    		return service.events;
     	}
 
-      service.getFutureEvents = function(events){
+      service.getFutureEvents = function(){
     		var future_events = [], current_date = new Date();
 
-    		events.forEach(function(itm){
+    		service.events.forEach(function(itm){
     			//If the event ends after the current time, add it to the array to return.
     			if(itm.DTEND > current_date) future_events.push(itm);
     		});
@@ -151,7 +151,7 @@
       service.getPastEvents = function(events){
     		var past_events = [], current_date = new Date();
 
-    		events.forEach(function(itm){
+    		service.events.forEach(function(itm){
     			//If the event ended before the current time, add it to the array to return.
     			if(itm.DTEND <= current_date) past_events.push(itm);
     		});
