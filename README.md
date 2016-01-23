@@ -56,11 +56,12 @@ This will take a minute, it has to download [electron-prebuilt](https://github.c
 npm start
 ```
 
-#### Disabling the debug console
-If you don't want the debug console to open up every time you launch the mirror you'll want to comment this line out from `main.js`:
-``` javascript
-mainWindow.webContents.openDevTools();
+#### Development
+To launch the mirror with a debug window attached use the following command:
 ```
+npm start dev
+```
+More info coming soon(ish). In the meantime head over to the [gitter chat](https://gitter.im/evancohen/smart-mirror) for help. 
 
 #### Troubleshooting
 If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)

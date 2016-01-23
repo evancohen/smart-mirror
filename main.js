@@ -1,3 +1,5 @@
+/* global __dirname */
+/* global process */
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
@@ -8,6 +10,7 @@ require('crash-reporter').start();
 const powerSaveBlocker = require('electron').powerSaveBlocker;
 var id = powerSaveBlocker.start('prevent-display-sleep');
 console.log(powerSaveBlocker.isStarted(id));
+const util = require('util');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -50,8 +53,10 @@ app.on('ready', function() {
   // and load the index.html of the app.
   mainWindow.loadUrl('file://' + __dirname + '/index.html');
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // Open the DevTools if run with "npm start dev"
+  if(process.argv[2] == "dev"){  
+    mainWindow.webContents.openDevTools();
+  }
 
 
   // Emitted when the window is closed.
@@ -59,6 +64,7 @@ app.on('ready', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
+    console.log(util.inspect(process.memoryUsage()));
     mainWindow = null;
   });
 });
