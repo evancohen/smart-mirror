@@ -18,7 +18,7 @@
           url : url
         });
         return request.success(function(data) {
-          return service.events = service.parseICAL(data);
+          return parseICAL(data);
         }).error(function(data) {
           return deferred.reject(data.message);
         });
@@ -51,7 +51,7 @@
     		return dt;
     	}
 
-      service.parseICAL = function(data){
+      var parseICAL = function(data){
     		//Ensure cal is empty
     		var events = [];
 

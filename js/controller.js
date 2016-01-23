@@ -110,7 +110,6 @@
             var promise = CalendarService.renderAppointments();
             promise.then(function(response) {
               $scope.appointments = CalendarService.getFutureEvents();
-              console.log($scope.appointments);
             }, function(errorMsg) {
               console.log(errorMsg);
             });
