@@ -63,22 +63,23 @@
 
             for(var i = 0; i <= spokenWords.length; i++){
                 console.log("Checking word:", spokenWords[i]);
+                
+                //Set a default saturation
+                update["sat"] = 254;
+                
                 //Check for color updates
                 if(spokenWords[i] == 'red' || spokenWords[i] == 'reed' || spokenWords[i] == 'read'){
                     update["hue"] = 65535;
-                    update["sat"] = 254;
                 } else if(spokenWords[i] == 'green'){
                     update["hue"] = 25500;
-                    update["sat"] = 254;
                 } else if(spokenWords[i] == 'blue'){
                     update["hue"] = 46920;
-                    update["sat"] = 254;
                 } else if(spokenWords[i] == 'yellow'){
                     update["hue"] = 12750;
-                    update["sat"] = 254;
                 } else if(spokenWords[i] == 'pink'){
                     update["hue"] = 56100;
-                    update["sat"] = 254;
+                } else if(spokenWords[i] == 'Purple'){
+                    update["hue"] = 43000;
                 } else if(spokenWords[i] == 'white' || spokenWords[i] == 'wight' || spokenWords[i] == 'wight'){
                     update["sat"] = 0;
                 }
