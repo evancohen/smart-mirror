@@ -145,8 +145,24 @@
     			//If the event ends after the current time, add it to the array to return.
     			if(isDayInFuture(itm)) future_events.push(itm);
     		});
+        future_events = sortAscending(future_events);
     		return future_events.slice(0, 9);
     	}
+
+      var sortAscending = function(events) {
+        return events.sort(function (a, b) {
+            var key1 = getEndValue(a);
+            var key2 = getEndValue(b);
+
+            if (key1.isBefore(key2)) {
+                return -1;
+            } else if (key1.isSame(key2)) {
+                return 0;
+            } else {
+                return 1;
+            }
+        });
+      }
 
       service.getPastEvents = function(events){
     		var past_events = [], current_date = new Date();
@@ -158,24 +174,27 @@
     		return past_events.reverse();
     	}
 
-      var isDayInFuture = function(itm, format) {
-        var value = null;
-        var momentDate = null;
-        if (itm.hasOwnProperty('DTEND')) {
-          value = itm['DTEND'];
-          var momentDate = moment(value);
-        } else if (itm.hasOwnProperty('DTEND;VALUE=DATE')) {
-          value = itm['DTEND;VALUE=DATE'];
-          var format = 'YYYYMMDD';
-          var momentDate = moment(value, format);
-        }
+      var isDayInFuture = function(itm) {
+        var momentDate = getEndValue(itm);
         var today = moment();
         if (momentDate !== null) {
           return momentDate.isAfter(today);
         } else {
           return false;
         }
+      }
 
+      var getEndValue = function(itm) {
+        var momentDate = null;
+        if (itm.hasOwnProperty('DTEND')) {
+          var value = itm['DTEND'];
+          var momentDate = moment(value);
+        } else if (itm.hasOwnProperty('DTEND;VALUE=DATE')) {
+          var value = itm['DTEND;VALUE=DATE'];
+          var format = 'YYYYMMDD';
+          var momentDate = moment(value, format);
+        }
+        return momentDate;
       }
 
       var load = function(ical_file){

@@ -13,8 +13,8 @@
   <body>
     <div class="top">
       <div class="top-left">
-        <div class="date grey">{{date | date : DATE_FORMAT}}</div>
-        <div class="time">{{date | date : TIME_FORMAT}}</div>
+        <div class="date grey">{{date | date : 'EEEE d MMMM yyyy'}}</div>
+        <div class="time">{{date | date : 'HH:mm'}}</div>
 
           <!--todo div -->
           <div class="todohidden">
@@ -23,7 +23,7 @@
               Things to do in the near future:
               <ul>
                 <li ng-repeat="todo in appointments">
-                  {{todo.DTSTART  | date : DATETIME_FORMAT}}{{todo['DTSTART;VALUE=DATE'] | DateFormatFilter}}: {{todo.SUMMARY}}
+                  {{todo.DTSTART  | date : 'EEEE d/MM/yyyy HH:mm'}}{{todo['DTSTART;VALUE=DATE'] | DateFormatFilter: 'EEEE d/MM/yyyy HH:mm'}}: {{todo.SUMMARY}}
                 </li>
               </ul>
             </section>
