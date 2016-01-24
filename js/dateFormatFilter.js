@@ -9,7 +9,7 @@
               var month = input.substring(5, 6);
               var day = input.substring(6, 8);
               var date = new Date(year, month - 1, day);
-              return $filter('date')(date, 'EEEE d/MM/yyyy HH:mm');
+              return $filter('date')(date, DATETIME_FORMAT);
             }
             return "";
           };
