@@ -178,10 +178,10 @@
             });
 
             // Fallback for all commands
-            //AnnyangService.addCommand('*allSpeech', function(allSpeech) {
-            //    console.debug(allSpeech);
-            //    _this.addResult(allSpeech);
-            //});
+            AnnyangService.addCommand('*allSpeech', function(allSpeech) {
+               console.debug(allSpeech);
+               _this.addResult(allSpeech);
+            });
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
