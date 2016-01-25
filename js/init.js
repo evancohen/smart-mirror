@@ -1,7 +1,7 @@
 "use strict";
 
 
-var smartMirror = angular.module('smartMirror', []);
+var smartMirror = angular.module('smartMirror', ['ngIcal']);
 
 smartMirror.controller("smartMirrorCtrl", function($scope) {
   $scope.someting = "Hello World";
@@ -41,6 +41,8 @@ if (annyang) {
 
   // Start listening. You can call this here, or attach this call to an event, button, etc.
   annyang.start();
+
+  //news.init
 
   //Let us know when we are ready to go
   annyang.addCallback('start', function(){

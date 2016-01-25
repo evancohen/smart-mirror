@@ -1,23 +1,84 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, CalendarService, HueService, $scope, $timeout, $interval) {
         var _this = this;
-        var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
+        var DEFAULT_COMMAND_TEXT = 'Dont know what to say? Just ask!';
         $scope.listening = false;
         $scope.debug = false;
-        $scope.complement = "Hi, sexy!"
+        $scope.complement = "Hi..."
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+//todostuff
+        $scope.addTodo = function(){
+          $scope.todos.push({
+            name      : $scope.newTodo,
+            completed : false
+          });
+        }
+        var todos = [
+            {
+                name      : '',
+                completed : false
+              }
+              ];
 
+        $scope.todos = todos;
+
+              		function wordsToNumber(words){
+              			switch(words)
+              			{
+              				case "one" :
+              					return 1;
+              					break;
+              				case "two" :
+              					return 2;
+              					break;
+              				case "three" :
+              					return 3;
+              					break;
+              				case "four" :
+              					return 4;
+              					break;
+              				case "five" :
+              					return 5;
+              					break;
+              				case "six" :
+              					return 6;
+              					break;
+              			}
+              		}
+
+              		$scope.deleteTodo = function(index){
+              			$scope.todos.splice(index, 0);
+              		}
+
+              		$scope.checkTodo = function(number){
+              				$scope.todos[number-0].completed = true;
+
+              		}
+
+              		$scope.clearCompleted = function(){
+              			$scope.todos = $scope.todos.filter(function(item){
+              				return !item.completed
+              			})
+              		}
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
+        //ToDoController
+
 
         //Update the time
         function updateTime(){
             $scope.date = new Date();
         }
-            
+
+
+        var setWeather = function() {
+          WeatherService.refreshWeather();
+          $scope.currentForcast = WeatherService.currentForcast();
+          $scope.weeklyForcast = WeatherService.weeklyForcast();
+        }
 
         // Reset the command text
         var restCommand = function(){
@@ -28,6 +89,7 @@
             var tick = $interval(updateTime, 1000);
             updateTime();
             $scope.map = MapService.generateMap("Seattle,WA");
+
             _this.clearResults();
             restCommand();
 
@@ -41,9 +103,21 @@
                     console.log("Weekly", $scope.weeklyForcast);
                     //refresh the weather every hour
                     //this doesn't acutually updat the UI yet
-                    //$timeout(WeatherService.refreshWeather, 3600000);
+                    $timeout(setWeather(), 3600000);
                 });
-            })
+            });
+
+            var refreshAppointments = function() {
+              var promise = CalendarService.renderAppointments();
+              promise.then(function(response) {
+                $scope.appointments = CalendarService.getFutureEvents();
+              }, function(errorMsg) {
+                console.log(errorMsg);
+              });
+            }
+
+            refreshAppointments();
+            $timeout(refreshAppointments(), 3600000);
 
             //Initiate Hue communication
             HueService.init();
@@ -59,32 +133,62 @@
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
-
+            //Add new reminder
+            AnnyangService.addCommand('don\'t forget *val', function(val) {
+                console.debug("Set a reminder..");
+                console.log(AnnyangService.commands);
+                $scope.newTodo   = val;
+                $scope.completed = false;
+                $scope.addTodo();
+                $scope.$apply();
+            });
+            //Check list item
+            AnnyangService.addCommand('Item *val is done', function(val) {
+                console.debug("Marked item *val as complete, well done!");
+                console.log(AnnyangService.commands);
+                $scope.checkTodo(val);
+          			$scope.$apply();
+            });
+            //Tidy Up Completed Items
+            AnnyangService.addCommand('clear completed items', function(val) {
+                console.debug("Clearing completed items from to do list");
+                console.log(AnnyangService.commands);
+                $scope.clearCompleted();
+        				$scope.$apply();
+            });
             // Go back to default view
             AnnyangService.addCommand('Go home', defaultView);
 
             // Hide everything and "sleep"
-            AnnyangService.addCommand('Go to sleep', function() {
+            AnnyangService.addCommand('Bye', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
             });
 
-            // Go back to default view
-            AnnyangService.addCommand('Wake up', defaultView);
+            // Wakes up mirror
+            AnnyangService.addCommand('Hi', defaultView);
 
-            // Hide everything and "sleep"
+            // Shows debug button
             AnnyangService.addCommand('Show debug information', function() {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
             });
 
-            // Hide everything and "sleep"
+            AnnyangService.addCommand('Show traffic', function() {
+                console.debug("Going on an adventure?");
+                GeolocationService.getLocation().then(function(geoposition){
+                  $scope.map = TrafficService.generateMap(geoposition);
+                });
+                $scope.focus = "map";
+            });
+
+            // Shows map of set home
             AnnyangService.addCommand('Show map', function() {
                 console.debug("Going on an adventure?");
                 $scope.focus = "map";
             });
 
-            // Hide everything and "sleep"
+            // Shows map of selected area
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
                 console.debug("Getting map of", location);
                 $scope.map = MapService.generateMap(location);
@@ -96,17 +200,17 @@
                 console.debug("Zoooooooom!!!");
                 $scope.map = MapService.zoomIn();
             });
-
+            // Zoom out map
             AnnyangService.addCommand('(map) zoom out', function() {
                 console.debug("Moooooooooz!!!");
                 $scope.map = MapService.zoomOut();
             });
-
+            // Zoom map to percentage value
             AnnyangService.addCommand('(map) zoom (to) *value', function(value) {
                 console.debug("Moooop!!!", value);
                 $scope.map = MapService.zoomTo(value);
             });
-
+            // Reset maps zoom
             AnnyangService.addCommand('(map) reset zoom', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
@@ -125,7 +229,7 @@
             });
 
             // Set a reminder
-            AnnyangService.addCommand('Remind me to *task', function(task) {
+            AnnyangService.addCommand('dont forget *task', function(task) {
                 console.debug("I'll remind you to", task);
             });
 
@@ -152,10 +256,10 @@
             });
 
             // Fallback for all commands
-            AnnyangService.addCommand('*allSpeech', function(allSpeech) {
-                console.debug(allSpeech);
-                _this.addResult(allSpeech);
-            });
+            //AnnyangService.addCommand('*allSpeech', function(allSpeech) {
+            //    console.debug(allSpeech);
+            //    _this.addResult(allSpeech);
+            //});
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
@@ -183,6 +287,7 @@
 
         _this.init();
     }
+
 
     angular.module('SmartMirror')
         .controller('MirrorCtrl', MirrorCtrl);
