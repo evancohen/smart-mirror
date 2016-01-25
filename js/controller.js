@@ -116,7 +116,6 @@
               });
             }
 
-            refreshAppointments();
             $timeout(refreshAppointments(), 3600000);
 
             //Initiate Hue communication

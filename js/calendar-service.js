@@ -4,23 +4,31 @@
     function CalendarService($window, $http, $q) {
       var service = {};
 
-      service.events = null;
+      service.events = [];
 
       service.renderAppointments = function() {
         return loadFile(PERSONAL_CALENDAR);
       }
 
-      var loadFile = function(url){
+      var loadFile = function(urls){
+        var promises =  [];
         var deferred = $q.defer();
 
-        var request = $http({
-          method : 'get',
-          url : url
+        var promises = [];
+        angular.forEach(urls , function(url) {
+
+            var promise = $http({
+                url   : url,
+                method: 'get'
+            });
+
+            promises.push(promise);
         });
-        return request.success(function(data) {
-          return parseICAL(data);
-        }).error(function(data) {
-          return deferred.reject(data.message);
+
+        return $q.all(promises).then(function(data) {
+          for (var i = 0; i < promises.length; i++) {
+            parseICAL(data[i].data);
+          }
         });
     	}
 
@@ -124,7 +132,7 @@
     		}
     		//Run this to finish proccessing our Events.
     		complete(events);
-        return service.events = events;
+        return service.events = service.events.concat(events);
     	}
 
       var complete = function(events){
