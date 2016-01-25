@@ -10,6 +10,9 @@
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        $scope.date_format = DATE_FORMAT;
+        $scope.time_format = TIME_FORMAT;
+        $scope.datetime_format = DATETIME_FORMAT;
 //todostuff
         $scope.addTodo = function(){
           $scope.todos.push({
