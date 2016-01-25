@@ -107,12 +107,17 @@
                 });
             });
 
-            var promise = CalendarService.renderAppointments();
-            promise.then(function(response) {
-              $scope.appointments = CalendarService.getFutureEvents();
-            }, function(errorMsg) {
-              console.log(errorMsg);
-            });
+            var refreshAppointments = function() {
+              var promise = CalendarService.renderAppointments();
+              promise.then(function(response) {
+                $scope.appointments = CalendarService.getFutureEvents();
+              }, function(errorMsg) {
+                console.log(errorMsg);
+              });
+            }
+
+            refreshAppointments();
+            $timeout(refreshAppointments(), 3600000);
 
             //Initiate Hue communication
             HueService.init();
