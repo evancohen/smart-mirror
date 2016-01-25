@@ -16,7 +16,6 @@
         <div class="date grey">{{date | date : date_format}}</div>
         <div class="time">{{date | date : time_format}}</div>
 
-          <!--todo div -->
           <div class="todohidden">
 
             <section id="taskContent">
@@ -29,22 +28,8 @@
             </section>
 
           </div>
-          <!-- todo div ends -->
-
-
-
-
-          <!-- ical/googlecalendar starts-->
-
-          <div class="calendar"></div>
-
-          <!-- ical/googlecalendar ends -->
     </div>
-<!-- top left div ends -->
-<!-- top right div starts -->
-
       <div class="top-right" >
-        <!-- weather begins-->
         <div class="weather">
           <div class="weather-today">
             <span class="tempreture">{{currentForcast.temperature | number: 1}}&deg;</span>
@@ -59,22 +44,17 @@
 
 
         </div>
-        <!-- weather ends-->
       </div>
-      <!-- top right div ends-->
 
     </div>
-    <!-- top div ends-->
 
-    <!-- centre div begins  -->
     <div class="container">
-      <!-- central div -->
       <div class="middle-center">
         <!--  Greeting-compliment centre -->
-        <!-- <h1>{{complement}}</h1>-->
-        <!--<h1 ng-show="!(user.name === undefined)">Hi, {{user.name}}!</h1>
-        <h2 ng-show="!(user.name === undefined)">How can I help you today?</h2>
-        <!--<div class="listening" ng-show="listening">Ready: {{focus}}</div>-->
+        <h1>{{complement}}</h1>
+        <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
+
+        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
 
         <!--  Map DIV -->
         <div class="map-container animate-grow" ng-show="focus == 'map'">
@@ -84,10 +64,6 @@
       <!--central bottom div-->
       <div class="bottom-center">
 
-        <!-- RSS begins-->
-        <div class="news"></div>
-        <br>
-        <br>
         <!-- rss ends -->
 
         <!-- Command list -->
@@ -100,11 +76,7 @@
             <dd>Takes you back to the home screen</dd>
             <dt>Don't forget ________</dt>
             <dd>Add something to the reminders list.</dd>
-            <dt>Item _____ is done </dt>
-            <dd>Mark item in todo list as complete based on it's position.
-            <dt>Clear completed items</dt>
-            <dd>Clears out your completed reminders list items.</dd>
-            <dt>Show map</dt>
+			<dt>Show map</dt>
             <dd>Shows a map of your current city.</dd>
             <dt>Show map of ________</dt>
             <dd>Shows a map of the given location.</dd>
@@ -168,7 +140,6 @@
 <script src="js/traffic-service.js" type="text/javascript"></script>
 <script src="js/geolocation-service.js" type="text/javascript"></script>
 <script src="js/controller.js" type="text/javascript"></script>
-<script src="js/ical_parser.js" type="text/javascript"></script>
 <script src="js/calendar-service.js" type="text/javascript"></script>
 <script src="js/dateFormatFilter.js" type="text/javascript"></script>
 <script type="text/javascript">
