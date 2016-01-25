@@ -3,73 +3,16 @@
 
     function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, CalendarService, HueService, $scope, $timeout, $interval) {
         var _this = this;
-        var DEFAULT_COMMAND_TEXT = 'Dont know what to say? Just ask!';
+        var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
-        $scope.complement = "Hi..."
+        $scope.complement = "Hi, sexy!";
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
         $scope.date_format = DATE_FORMAT;
         $scope.time_format = TIME_FORMAT;
         $scope.datetime_format = DATETIME_FORMAT;
-//todostuff
-        $scope.addTodo = function(){
-          $scope.todos.push({
-            name      : $scope.newTodo,
-            completed : false
-          });
-        }
-        var todos = [
-            {
-                name      : '',
-                completed : false
-              }
-              ];
-
-        $scope.todos = todos;
-
-              		function wordsToNumber(words){
-              			switch(words)
-              			{
-              				case "one" :
-              					return 1;
-              					break;
-              				case "two" :
-              					return 2;
-              					break;
-              				case "three" :
-              					return 3;
-              					break;
-              				case "four" :
-              					return 4;
-              					break;
-              				case "five" :
-              					return 5;
-              					break;
-              				case "six" :
-              					return 6;
-              					break;
-              			}
-              		}
-
-              		$scope.deleteTodo = function(index){
-              			$scope.todos.splice(index, 0);
-              		}
-
-              		$scope.checkTodo = function(number){
-              				$scope.todos[number-0].completed = true;
-
-              		}
-
-              		$scope.clearCompleted = function(){
-              			$scope.todos = $scope.todos.filter(function(item){
-              				return !item.completed
-              			})
-              		}
-        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
-        //ToDoController
-
 
         //Update the time
         function updateTime(){
@@ -135,29 +78,6 @@
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
-            //Add new reminder
-            AnnyangService.addCommand('don\'t forget *val', function(val) {
-                console.debug("Set a reminder..");
-                console.log(AnnyangService.commands);
-                $scope.newTodo   = val;
-                $scope.completed = false;
-                $scope.addTodo();
-                $scope.$apply();
-            });
-            //Check list item
-            AnnyangService.addCommand('Item *val is done', function(val) {
-                console.debug("Marked item *val as complete, well done!");
-                console.log(AnnyangService.commands);
-                $scope.checkTodo(val);
-          			$scope.$apply();
-            });
-            //Tidy Up Completed Items
-            AnnyangService.addCommand('clear completed items', function(val) {
-                console.debug("Clearing completed items from to do list");
-                console.log(AnnyangService.commands);
-                $scope.clearCompleted();
-        				$scope.$apply();
-            });
             // Go back to default view
             AnnyangService.addCommand('Go home', defaultView);
 
@@ -168,7 +88,7 @@
             });
 
             // Wakes up mirror
-            AnnyangService.addCommand('Hi', defaultView);
+            AnnyangService.addCommand('Wake up', defaultView);
 
             // Shows debug button
             AnnyangService.addCommand('Show debug information', function() {
@@ -231,7 +151,7 @@
             });
 
             // Set a reminder
-            AnnyangService.addCommand('dont forget *task', function(task) {
+            AnnyangService.addCommand('Remind me to *task', function(task) {
                 console.debug("I'll remind you to", task);
             });
 
