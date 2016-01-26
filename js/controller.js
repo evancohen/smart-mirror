@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, CalendarService, $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -17,7 +17,7 @@
         function updateTime(){
             $scope.date = new Date();
         }
-            
+
 
         // Reset the command text
         var restCommand = function(){
@@ -43,7 +43,18 @@
                     //this doesn't acutually updat the UI yet
                     //$timeout(WeatherService.refreshWeather, 3600000);
                 });
-            })
+            });
+
+            var refreshAppointments = function() {
+              var promise = CalendarService.renderAppointments();
+              promise.then(function(response) {
+                $scope.appointments = CalendarService.getFutureEvents();
+              }, function(errorMsg) {
+                console.log(errorMsg);
+              });
+            };
+
+            $timeout(refreshAppointments(), 3600000);
 
             //Initiate Hue communication
             HueService.init();
