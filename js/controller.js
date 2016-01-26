@@ -10,6 +10,9 @@
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        $scope.date_format = DATE_FORMAT;
+        $scope.time_format = TIME_FORMAT;
+        $scope.datetime_format = DATETIME_FORMAT;        
 
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 

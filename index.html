@@ -28,32 +28,33 @@
   <body ng-controller="MirrorCtrl as commands">
     <div class="top">
       <div class="top-left">
-        <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
-        <div class="time">{{date | date : 'hh:mm a'}}</div>
-        <div class="todohidden">
+        <div class="date grey">{{date | date : date_format}}</div>
+        <div class="time">{{date | date : time_format}}</div>
 
-          <section id="taskContent">
-            Things to do in the near future:
-            <ul>
-              <li ng-repeat="todo in appointments">
-                {{todo.DTSTART  | date : 'EEEE MM d MM yyyy HH:mm'}}{{todo['DTSTART;VALUE=DATE'] | DateFormatFilter: 'EEEE MM d yyyy HH:mm'}}: {{todo.SUMMARY}}
-              </li>
-            </ul>
-          </section>
+          <div class="todohidden">
 
-        </div>
+            <section id="taskContent">
+              Things to do in the near future:
+              <ul>
+                <li ng-repeat="todo in appointments">
+                  {{todo.DTSTART  | date : datetime_format}}{{todo['DTSTART;VALUE=DATE'] | DateFormatFilter: datetime_format}}: {{todo.SUMMARY}}
+                </li>
+              </ul>
+            </section>
+
+          </div>
       </div>
       <div class="top-right">
         <div class="weather">
           <div class="weather-today">
-            <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+            <span class="tempreture">{{currentForcast.temperature | number: 1}}&deg;</span>
           </div>
           <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
           <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
             <div class="weather-week-day">
               <span class="day light-grey">{{forcast.day}}</span>
-              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
-              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+              <span class="tempreture tempreture-min">{{forcast.temperatureMin | number: 1}}</span>
+              <span class="tempreture tempreture-max">{{forcast.temperatureMax | number: 1}}</span>
             </div>
           </div>
         </div>
@@ -116,7 +117,7 @@
         <hr/>
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="result in commands.results">
-            <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
+            <span class="badge">{{ result.date | date : datetime_format }}</span>
             {{ result.content }}
           </li>
         </ul>
