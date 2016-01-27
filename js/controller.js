@@ -12,7 +12,7 @@
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
         $scope.date_format = DATE_FORMAT;
         $scope.time_format = TIME_FORMAT;
-        $scope.datetime_format = DATETIME_FORMAT;        
+        $scope.datetime_format = DATETIME_FORMAT;
 
         $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
@@ -30,7 +30,7 @@
         _this.init = function() {
             var tick = $interval(updateTime, 1000);
             updateTime();
-            $scope.map = MapService.generateMap("Seattle,WA");
+            $scope.map = MapService.generateMap(DEFAULT_LOCATION);
             _this.clearResults();
             restCommand();
 

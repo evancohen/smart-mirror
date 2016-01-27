@@ -4,3 +4,4 @@ var PERSONAL_CALENDAR = [];
 var DATE_FORMAT = "EEEE d MMMM yyyy";
 var TIME_FORMAT = "HH:mm";
 var DATETIME_FORMAT = "EEEE d/MM/yyyy HH:mm";
+var DEFAULT_LOCATION = "Seattle,WA";
