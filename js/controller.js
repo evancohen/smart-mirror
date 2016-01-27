@@ -31,30 +31,27 @@
             _this.clearResults();
             restCommand();
 
-            //Get our location and then get the weather for our location
-            GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
-                console.log("Geoposition", geoposition);
-                WeatherService.init(geoposition).then(function(){
-                    $scope.currentForcast = WeatherService.currentForcast();
-                    $scope.weeklyForcast = WeatherService.weeklyForcast();
-                    console.log("Current", $scope.currentForcast);
-                    console.log("Weekly", $scope.weeklyForcast);
-                    //refresh the weather every hour
-                    //this doesn't acutually updat the UI yet
-                    //$timeout(WeatherService.refreshWeather, 3600000);
+            var refreshMirrorData = function() {
+                //Get our location and then get the weather for our location
+                GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
+                    console.log("Geoposition", geoposition);
+                    WeatherService.init(geoposition).then(function(){
+                        $scope.currentForcast = WeatherService.currentForcast();
+                        $scope.weeklyForcast = WeatherService.weeklyForcast();
+                        console.log("Current", $scope.currentForcast);
+                        console.log("Weekly", $scope.weeklyForcast);
+                    });
                 });
-            });
 
-            var refreshAppointments = function() {
-              var promise = CalendarService.renderAppointments();
-              promise.then(function(response) {
-                $scope.appointments = CalendarService.getFutureEvents();
-              }, function(errorMsg) {
-                console.log(errorMsg);
-              });
+                var promise = CalendarService.renderAppointments();
+                promise.then(function(response) {
+                    $scope.calendar = CalendarService.getFutureEvents();
+                }, function(error) {
+                    console.log(error);
+                });
             };
 
-            $timeout(refreshAppointments(), 3600000);
+            $timeout(refreshMirrorData(), 3600000);
 
             //Initiate Hue communication
             HueService.init();

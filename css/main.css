@@ -106,6 +106,28 @@ dt {
     margin-right: auto;
 }
 
+ul.calendar {
+    list-style: none;
+    font-size: 22px;
+    margin-left: 10px;
+    padding:0;
+}
+
+.calendar .event{
+    margin-bottom: 10px;
+}
+
+.calendar span.day {
+    font-weight: bold;
+    display: inline-block;
+    width: 120px;
+}
+
+.calendar .event-details .details{
+    font-size: 12px;
+    padding-left: 120px;
+}
+
 .weather {
     margin-left: auto;
     display: inline-block;

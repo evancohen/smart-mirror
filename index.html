@@ -30,18 +30,15 @@
       <div class="top-left">
         <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
         <div class="time">{{date | date : 'hh:mm a'}}</div>
-        <div class="todohidden">
-
-          <section id="taskContent">
-            Things to do in the near future:
-            <ul>
-              <li ng-repeat="todo in appointments">
-                {{todo.DTSTART  | date : 'EEEE MM d MM yyyy HH:mm'}}{{todo['DTSTART;VALUE=DATE'] | DateFormatFilter: 'EEEE MM d yyyy HH:mm'}}: {{todo.SUMMARY}}
-              </li>
-            </ul>
-          </section>
-
-        </div>
+        <ul class="calendar">
+            <li class="event" ng-repeat="event in calendar">
+                <div class="event-details">
+                    <span class="day">{{event.start.format('dddd') | uppercase}}</span>
+                    <span class="summary">{{event.SUMMARY}}</span>
+                    <div class="details">{{event.start.format('MMMM Do YYYY, h:mm:ss a')}}</div>
+                    </li>
+                </div>
+        </ul>
       </div>
       <div class="top-right">
         <div class="weather">
