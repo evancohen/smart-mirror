@@ -32,7 +32,7 @@
             restCommand();
 
             //Get our location and then get the weather for our location
-            GeolocationService.getLocation().then(function(geoposition){
+            GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
                 console.log("Geoposition", geoposition);
                 WeatherService.init(geoposition).then(function(){
                     $scope.currentForcast = WeatherService.currentForcast();
