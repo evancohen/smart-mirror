@@ -1,23 +1,30 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, CalendarService, HueService, $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
-        $scope.complement = "Hi, sexy!"
+        $scope.complement = "Hi, sexy!";
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
-
-        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
+        $scope.date_format = DATE_FORMAT;
+        $scope.time_format = TIME_FORMAT;
+        $scope.datetime_format = DATETIME_FORMAT;
 
         //Update the time
         function updateTime(){
             $scope.date = new Date();
         }
-            
+
+
+        var setWeather = function() {
+          WeatherService.refreshWeather();
+          $scope.currentForcast = WeatherService.currentForcast();
+          $scope.weeklyForcast = WeatherService.weeklyForcast();
+        }
 
         // Reset the command text
         var restCommand = function(){
@@ -28,6 +35,7 @@
             var tick = $interval(updateTime, 1000);
             updateTime();
             $scope.map = MapService.generateMap("Seattle,WA");
+
             _this.clearResults();
             restCommand();
 
@@ -41,9 +49,20 @@
                     console.log("Weekly", $scope.weeklyForcast);
                     //refresh the weather every hour
                     //this doesn't acutually updat the UI yet
-                    //$timeout(WeatherService.refreshWeather, 3600000);
+                    $timeout(setWeather(), 3600000);
                 });
-            })
+            });
+
+            var refreshAppointments = function() {
+              var promise = CalendarService.renderAppointments();
+              promise.then(function(response) {
+                $scope.appointments = CalendarService.getFutureEvents();
+              }, function(errorMsg) {
+                console.log(errorMsg);
+              });
+            }
+
+            $timeout(refreshAppointments(), 3600000);
 
             //Initiate Hue communication
             HueService.init();
@@ -59,32 +78,39 @@
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
-
             // Go back to default view
             AnnyangService.addCommand('Go home', defaultView);
 
             // Hide everything and "sleep"
-            AnnyangService.addCommand('Go to sleep', function() {
+            AnnyangService.addCommand('Bye', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
             });
 
-            // Go back to default view
+            // Wakes up mirror
             AnnyangService.addCommand('Wake up', defaultView);
 
-            // Hide everything and "sleep"
+            // Shows debug button
             AnnyangService.addCommand('Show debug information', function() {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
             });
 
-            // Hide everything and "sleep"
+            AnnyangService.addCommand('Show traffic', function() {
+                console.debug("Going on an adventure?");
+                GeolocationService.getLocation().then(function(geoposition){
+                  $scope.map = TrafficService.generateMap(geoposition);
+                });
+                $scope.focus = "map";
+            });
+
+            // Shows map of set home
             AnnyangService.addCommand('Show map', function() {
                 console.debug("Going on an adventure?");
                 $scope.focus = "map";
             });
 
-            // Hide everything and "sleep"
+            // Shows map of selected area
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
                 console.debug("Getting map of", location);
                 $scope.map = MapService.generateMap(location);
@@ -96,17 +122,17 @@
                 console.debug("Zoooooooom!!!");
                 $scope.map = MapService.zoomIn();
             });
-
+            // Zoom out map
             AnnyangService.addCommand('(map) zoom out', function() {
                 console.debug("Moooooooooz!!!");
                 $scope.map = MapService.zoomOut();
             });
-
+            // Zoom map to percentage value
             AnnyangService.addCommand('(map) zoom (to) *value', function(value) {
                 console.debug("Moooop!!!", value);
                 $scope.map = MapService.zoomTo(value);
             });
-
+            // Reset maps zoom
             AnnyangService.addCommand('(map) reset zoom', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
@@ -153,8 +179,8 @@
 
             // Fallback for all commands
             AnnyangService.addCommand('*allSpeech', function(allSpeech) {
-                console.debug(allSpeech);
-                _this.addResult(allSpeech);
+               console.debug(allSpeech);
+               _this.addResult(allSpeech);
             });
 
             var resetCommandTimeout;
@@ -183,6 +209,7 @@
 
         _this.init();
     }
+
 
     angular.module('SmartMirror')
         .controller('MirrorCtrl', MirrorCtrl);

@@ -42,6 +42,8 @@ if (annyang) {
   // Start listening. You can call this here, or attach this call to an event, button, etc.
   annyang.start();
 
+  //news.init
+
   //Let us know when we are ready to go
   annyang.addCallback('start', function(){
     console.log("Ready to listen...");
