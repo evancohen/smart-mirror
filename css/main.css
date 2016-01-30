@@ -117,15 +117,25 @@ ul.calendar {
     margin-bottom: 10px;
 }
 
+.calendar span {
+    display: inline-block;
+}
+
 .calendar span.day {
     font-weight: bold;
-    display: inline-block;
     width: 120px;
+    vertical-align: top;
+}
+
+.calendar span.summary{
+    max-width: 400px;
 }
 
 .calendar .event-details .details{
     font-size: 12px;
-    padding-left: 120px;
+    padding-left: 135px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
 }
 
 .weather {

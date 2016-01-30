@@ -30,7 +30,7 @@
       <div class="top-left">
         <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
         <div class="time">{{date | date : 'hh:mm a'}}</div>
-        <ul class="calendar">
+        <ul class="calendar fade" ng-show="focus == 'default'">
             <li class="event" ng-repeat="event in calendar">
                 <div class="event-details">
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
