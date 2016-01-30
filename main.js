@@ -10,7 +10,6 @@ require('crash-reporter').start();
 const powerSaveBlocker = require('electron').powerSaveBlocker;
 var id = powerSaveBlocker.start('prevent-display-sleep');
 console.log(powerSaveBlocker.isStarted(id));
-const util = require('util');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -64,7 +63,6 @@ app.on('ready', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    console.log(util.inspect(process.memoryUsage()));
     mainWindow = null;
   });
 });

@@ -17,6 +17,8 @@
     <script src="js/map-service.js"></script>
     <script src="js/hue-service.js"></script>
     <script src="js/geolocation-service.js"></script>
+    <script src="js/calendar-service.js"></script>
+    <script src="js/dateFormatFilter.js"></script>
     <script src="js/controller.js"></script>
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -28,6 +30,15 @@
       <div class="top-left">
         <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
         <div class="time">{{date | date : 'hh:mm a'}}</div>
+        <ul class="calendar fade" ng-show="focus == 'default'">
+            <li class="event" ng-repeat="event in calendar">
+                <div class="event-details">
+                    <span class="day">{{event.start.format('dddd') | uppercase}}</span>
+                    <span class="summary">{{event.SUMMARY}}</span>
+                    <div class="details">{{event.start.format('MMMM Do YYYY, h:mm:ss a')}}</div>
+                    </li>
+                </div>
+        </ul>
       </div>
       <div class="top-right">
         <div class="weather">

@@ -106,10 +106,43 @@ dt {
     margin-right: auto;
 }
 
+ul.calendar {
+    list-style: none;
+    font-size: 22px;
+    margin-left: 10px;
+    padding:0;
+}
+
+.calendar .event{
+    margin-bottom: 10px;
+}
+
+.calendar span {
+    display: inline-block;
+}
+
+.calendar span.day {
+    font-weight: bold;
+    width: 120px;
+    vertical-align: top;
+}
+
+.calendar span.summary{
+    max-width: 400px;
+}
+
+.calendar .event-details .details{
+    font-size: 12px;
+    padding-left: 135px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+}
+
 .weather {
     margin-left: auto;
     display: inline-block;
     text-align: right;
+    width: 230px;
 }
 
 .weather-today .tempreture {
@@ -119,7 +152,6 @@ dt {
 .weather-week-descriptor {
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
-    max-width: 55%;
     margin-left: auto;
     margin-bottom: 10px;
     text-align: justify;

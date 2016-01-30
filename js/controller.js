@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, CalendarService, $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -17,7 +17,7 @@
         function updateTime(){
             $scope.date = new Date();
         }
-            
+
 
         // Reset the command text
         var restCommand = function(){
@@ -31,19 +31,27 @@
             _this.clearResults();
             restCommand();
 
-            //Get our location and then get the weather for our location
-            GeolocationService.getLocation().then(function(geoposition){
-                console.log("Geoposition", geoposition);
-                WeatherService.init(geoposition).then(function(){
-                    $scope.currentForcast = WeatherService.currentForcast();
-                    $scope.weeklyForcast = WeatherService.weeklyForcast();
-                    console.log("Current", $scope.currentForcast);
-                    console.log("Weekly", $scope.weeklyForcast);
-                    //refresh the weather every hour
-                    //this doesn't acutually updat the UI yet
-                    //$timeout(WeatherService.refreshWeather, 3600000);
+            var refreshMirrorData = function() {
+                //Get our location and then get the weather for our location
+                GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
+                    console.log("Geoposition", geoposition);
+                    WeatherService.init(geoposition).then(function(){
+                        $scope.currentForcast = WeatherService.currentForcast();
+                        $scope.weeklyForcast = WeatherService.weeklyForcast();
+                        console.log("Current", $scope.currentForcast);
+                        console.log("Weekly", $scope.weeklyForcast);
+                    });
                 });
-            })
+
+                var promise = CalendarService.renderAppointments();
+                promise.then(function(response) {
+                    $scope.calendar = CalendarService.getFutureEvents();
+                }, function(error) {
+                    console.log(error);
+                });
+            };
+
+            $timeout(refreshMirrorData(), 3600000);
 
             //Initiate Hue communication
             HueService.init();
