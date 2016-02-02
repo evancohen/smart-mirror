@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/evancohen/smart-mirror](https://badges.gitter.im/evancohen/smart-mirror.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirror) and Michael Teeuw's [Magic Mirror](http://michaelteeuw.nl/tagged/magicmirror). It uses [annyang](https://github.com/TalAter/annyang) for voice interactivity, [electron](http://electron.atom.io/) to make it cross platform, and integrates with Philips Hue. It is my own take on what a "smart mirror" can be.
+This project was inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirror) and Michael Teeuw's [Magic Mirror](http://michaelteeuw.nl/tagged/magicmirror). It uses [annyang](https://github.com/TalAter/annyang) for voice interactivity, [electron](http://electron.atom.io/) to make it cross platform, and integrates with Philips Hue. It is my own take on what a "smart mirror" can be.
 
 [See it in action (Video)](https://www.youtube.com/watch?v=PDIbhV8Nvq8)
 
@@ -10,7 +10,7 @@ This project is inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirro
 Starting from scratch was less about other projects not being good enough and more about my own learning experience. While I did get a lot of inspiration from other projects I really wanted to see how much further I could take things.
 
 #### Gitter:
-A live chat to get help and discuss mirror related issues: https://gitter.im/evancohen/smart-mirror. Currently I'm the only one monitoring this, so don't expect an instantanious response. If I'm not online you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
+A live chat to get help and discuss mirror related issues: https://gitter.im/evancohen/smart-mirror. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
 
 ### Getting Started
 #### Hardware Components
@@ -87,10 +87,13 @@ More info coming soon(ish). In the meantime head over to the [gitter chat](https
 #### Troubleshooting
 If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)
 
-### License:
+### License
 MIT
 
-### More info:
+### Author
+[Evan Cohen](http://evanbtcohen.com/)
+
+### More info
 Favicon from [In the Wake of the King](http://walkingmind.evilhat.com/2014/03/17/in-the-wake-of-the-king/), a head nod to **The Watcher** – "A byblow of the king and a queen of the sea, she has remained apart from the workings of her family, more home beneath the waves, watching all through water and mirror. Her ambitions lie outside the Eternal Kingdom, but her secrets are valuable everywhere."
 
 Awesome.
