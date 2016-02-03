@@ -14,11 +14,13 @@ A live chat to get help and discuss mirror related issues: https://gitter.im/eva
 
 ### Getting Started
 #### Hardware Components
-- Raspberry Pi 2
+- Raspberry Pi 2**
 - USB Microphone (Or Webcam w/ microphone)
 - Monitor (with the bezel removed)
 - Mirror Pane (aka Observation Glass)
 - Philips Hue
+
+** Also compatible with other Linux, Windows, and OSX devices. See the `cordova` branch for Android and iOS compatibility.
 
 #### Installation
 In order to get started I suggest a clean install of Raspbian. You can snag a fresh copy of Jessie (recommended, it's the future) or Wheezy from the [Raspbian Download Page](https://www.raspberrypi.org/downloads/raspbian/).
@@ -46,13 +48,16 @@ You'll need to fill in two things into `js/config.js`:
 
 1. A [Forecast API key](https://developer.forecast.io/) (don't worry it's free)
 2. Philips Hue Bridge IP address with a configured user. Details about how to set this up in the [Philips Hue Developer Documentation](http://www.developers.meethue.com/documentation/getting-started)
+3. [Optional] An array of iCal addresses (from your Google or Outlook calendar for example)
 
 The format of your config should look something like this:
 ```
 var FORCAST_API_KEY = "a6s5dg39j78qj38sjs91je9djadfa1e";
 var HUE_BASE = "http://192.168.1.99/api/as9234ho0dfhoq01f2as3yh4m0/";
+var PERSONAL_CALENDAR = ["https://calendar.google.com/calendar/ical/SOMESTUFF/basic.ics",
+"https://outlook.office365.com/owa/calendar/SOMESTUFF/reachcalendar.ics"];
 ```
-##### Configuring the pi
+##### Configuring the Pi
 In order to rotate your monitor you'll need to add the following line to `/boot/config.txt`
 ```
 display_rotate=1
