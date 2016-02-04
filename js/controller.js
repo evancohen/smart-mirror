@@ -1,7 +1,17 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, CalendarService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, 
+            GeolocationService, 
+            WeatherService, 
+            MapService, 
+            HueService, 
+            CalendarService, 
+            SearchService,
+            $scope, 
+            $timeout, 
+            $interval) {
+                
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -10,8 +20,6 @@
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
-
-        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
         //Update the time
         function updateTime(){
@@ -41,6 +49,8 @@
                         console.log("Current", $scope.currentForcast);
                         console.log("Weekly", $scope.weeklyForcast);
                     });
+                }, function(error){
+                    console.log("There was a problem:", error);
                 });
 
                 var promise = CalendarService.renderAppointments();
