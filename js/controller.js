@@ -53,8 +53,7 @@
                     console.log("There was a problem:", error);
                 });
 
-                var promise = CalendarService.renderAppointments();
-                promise.then(function(response) {
+                CalendarService.renderAppointments().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
                     console.log(error);
