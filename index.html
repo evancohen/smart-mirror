@@ -63,7 +63,10 @@
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
         <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
         <div class="map-container animate-grow" ng-show="focus == 'map'">
-          <img class="map animate-grow" ng-src="{{map}}"/>
+          <img class="map" ng-src="{{map}}"/>
+        </div>
+        <div class="video-container animate-grow" ng-show="focus == 'video'">
+          <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
       </div>
       <div class="bottom-center">

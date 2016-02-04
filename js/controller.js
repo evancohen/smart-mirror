@@ -1,7 +1,8 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, 
+    function MirrorCtrl(
+            AnnyangService, 
             GeolocationService, 
             WeatherService, 
             MapService, 
@@ -39,6 +40,9 @@
             _this.clearResults();
             restCommand();
 
+            //Initiate Hue communication
+            HueService.init();
+
             var refreshMirrorData = function() {
                 //Get our location and then get the weather for our location
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -61,20 +65,27 @@
             };
 
             $timeout(refreshMirrorData(), 3600000);
-
-            //Initiate Hue communication
-            HueService.init();
+            
+            //Set the mirror's focus (and reset any vars)
+            var setFocus = function(target){
+                $scope.focus = target;
+                //Stop any videos from playing
+                if(target != 'video'){
+                    $scope.video = 'http://www.youtube.com/embed/';
+                }
+                console.log("Video URL:", $scope.video);
+            }
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
-                $scope.focus = "default";
+                setFocus("default");
             }
 
             // List commands
             AnnyangService.addCommand('What can I say', function() {
                 console.debug("Here is a list of commands...");
                 console.log(AnnyangService.commands);
-                $scope.focus = "commands";
+                setFocus("commands");
             });
 
             // Go back to default view
@@ -83,7 +94,7 @@
             // Hide everything and "sleep"
             AnnyangService.addCommand('Go to sleep', function() {
                 console.debug("Ok, going to sleep...");
-                $scope.focus = "sleep";
+                setFocus("sleep");
             });
 
             // Go back to default view
@@ -96,16 +107,16 @@
             });
 
             // Hide everything and "sleep"
-            AnnyangService.addCommand('Show map', function() {
+            AnnyangService.addCommand('Show (me a) map', function() {
                 console.debug("Going on an adventure?");
-                $scope.focus = "map";
+                setFocus("map");
             });
 
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
                 console.debug("Getting map of", location);
                 $scope.map = MapService.generateMap(location);
-                $scope.focus = "map";
+                setFocus("map");
             });
 
             // Zoom in map
@@ -127,12 +138,17 @@
             AnnyangService.addCommand('(map) reset zoom', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
-                $scope.focus = "map";
+                setFocus("map");
             });
-
-            // Search images
-            AnnyangService.addCommand('Show me *term', function(term) {
-                console.debug("Showing", term);
+            
+            //Search for a video
+            AnnyangService.addCommand('show me (a video)(of)(about) *query', function(query){
+                SearchService.searchYouTube(query).then(function(results){
+                    console.log('YT Embed', results.data.items[0].id.videoId);
+                    //Set cc_load_policy=1 to force captions
+                    $scope.video = 'http://www.youtube.com/embed/'+results.data.items[0].id.videoId+'?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
+                    setFocus("video");
+                });
             });
 
             // Change name
