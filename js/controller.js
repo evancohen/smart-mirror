@@ -144,7 +144,6 @@
             //Search for a video
             AnnyangService.addCommand('show me (a video)(of)(about) *query', function(query){
                 SearchService.searchYouTube(query).then(function(results){
-                    console.log('YT Embed', results.data.items[0].id.videoId);
                     //Set cc_load_policy=1 to force captions
                     $scope.video = 'http://www.youtube.com/embed/'+results.data.items[0].id.videoId+'?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
                     setFocus("video");
