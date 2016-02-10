@@ -1,18 +1,17 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, TrafficService, CalendarService, HueService, $scope, $timeout, $interval) {
+    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, CalendarService, $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
-        $scope.complement = "Hi, sexy!";
+        $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
-        $scope.date_format = DATE_FORMAT;
-        $scope.time_format = TIME_FORMAT;
-        $scope.datetime_format = DATETIME_FORMAT;
+
+        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
 
         //Update the time
         function updateTime(){

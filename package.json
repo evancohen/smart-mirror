@@ -23,10 +23,6 @@
   },
   "homepage": "https://github.com/evancohen/smart-mirror",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.3",
-    "jquery": "^2.1.4",
-    "angular": "^1.4.8",
-    "angular-animate": "^1.4.8",
-    "moment": "^2.11.0"
+    "electron-prebuilt": "^0.36.5"
   }
 }

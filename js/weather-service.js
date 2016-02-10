@@ -14,7 +14,7 @@
                 });
         };
 
-        //Returns the current forcast along with high and low tempratures for the current day
+        //Returns the current forcast along with high and low tempratures for the current day 
         service.currentForcast = function() {
             if(service.forcast === null){
                 return null;
