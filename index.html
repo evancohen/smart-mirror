@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="SmartMirror">
   <head>
+    <meta charset="utf-8">
     <title>Smart Mirror</title>
     <!-- Libraries -->
     <script src="js/annyang.js"></script>
@@ -98,7 +99,6 @@
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
       </div>
     </div>
-    <!-- centre div ends -->
     <!-- Debug Buttons -->
     <div class="debug-info">
       <!--<button ng-click="debug = true">Open Debug</button>-->
@@ -120,37 +120,7 @@
         </ul>
       </div>
     </div>
-
     <!-- Sleep cover -->
     <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
-</section>
-</div>
-<script src="node_modules/moment/min/moment.min.js" type="text/javascript"></script>
-<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
-<script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
-<script src="node_modules/angular-animate/angular-animate.min.js" type="text/javascript"></script>
-
-<!-- Libraries -->
-<script src="js/annyang.js" type="text/javascript"></script>
-<!-- App -->
-
-<script src="js/init.js" type="text/javascript"></script>
-<script src="js/config.js" type="text/javascript"></script>
-<script src="js/app.js" type="text/javascript"></script>
-<script src="js/annyang-service.js" type="text/javascript"></script>
-<script src="js/weather-service.js" type="text/javascript"></script>
-<script src="js/map-service.js" type="text/javascript"></script>
-<script src="js/hue-service.js"></script>
-<script src="js/traffic-service.js" type="text/javascript"></script>
-<script src="js/geolocation-service.js" type="text/javascript"></script>
-<script src="js/controller.js" type="text/javascript"></script>
-<script src="js/calendar-service.js" type="text/javascript"></script>
-<script src="js/dateFormatFilter.js" type="text/javascript"></script>
-<script type="text/javascript">
-        angular.bootstrap(document.getElementById('SmartMirrorSection'), ['SmartMirror']);
-
-</script>
-
   </body>
-
 </html>

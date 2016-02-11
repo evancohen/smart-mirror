@@ -37,7 +37,7 @@
         service.refreshWeather = function(){
             return service.init(geoloc);
         }
-
+        
         return service;
     }
 
