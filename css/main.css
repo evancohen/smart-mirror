@@ -199,6 +199,16 @@ ul.calendar {
     overflow: hidden;
 }
 
+.video {
+    width: 100%;
+    height: 680px;
+    border: none;
+    /* If you want to make the video black and white
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    */
+}
+
 .color-block {
     height: 200px;
     width: 200px;
