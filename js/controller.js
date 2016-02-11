@@ -51,7 +51,8 @@
                 });
             };
 
-            $timeout(refreshMirrorData(), 3600000);
+            refreshMirrorData();
+            $interval(refreshMirrorData, 3600000);
 
             //Initiate Hue communication
             HueService.init();
