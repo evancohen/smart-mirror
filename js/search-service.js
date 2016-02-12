@@ -14,6 +14,7 @@
                     'order': 'relevance',
                     'q' : query,
                     'type':'video',
+                    'videoEmbeddable': true,
                     //Sharing this key in the hopes that it wont be abused 
                     'key':'AIzaSyCEIm9MHMWrTj_wv90QfYf5AIf3iVxuvEg'
                 }
