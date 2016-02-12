@@ -17,6 +17,7 @@
     <script src="js/weather-service.js"></script>
     <script src="js/map-service.js"></script>
     <script src="js/hue-service.js"></script>
+    <script src="js/giphy-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
     <script src="js/dateFormatFilter.js"></script>
@@ -65,6 +66,9 @@
         <div class="map-container animate-grow" ng-show="focus == 'map'">
           <img class="map animate-grow" ng-src="{{map}}"/>
         </div>
+        <div class="map-container animate-grow" ng-show="focus == 'gif'">
+          <img class="map animate-grow" ng-src="{{gifimg}}"/>
+        </div>
       </div>
       <div class="bottom-center">
         <!-- Command list -->
@@ -107,6 +111,7 @@
       <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
       <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
       <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
+      <button ng-click="focus = (focus == 'gif')?'default':'gif'">Map</button>
       <button ng-click="debug = false">Close Debug</button>
       <!-- Has results -->
       <div ng-show="commands.results.length > 0">
