@@ -49,10 +49,10 @@
             <span class="icon dimmed wi {{currentForcast.wi}}"></span> 
             <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
           </div>
- 	  <div class="weather-week-descriptor">
-	    <span>{{hourlyForcast.summary}}</span>
-	    <span>{{weeklyForcast.summary}}</span>
-	  </div>
+          <div class="weather-week-descriptor">
+            <span>{{hourlyForcast.summary}}</span>
+            <span>{{weeklyForcast.summary}}</span>
+          </div>
           <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
             <div class="weather-week-day">
               <span class="day light-grey">{{forcast.day}}</span>
