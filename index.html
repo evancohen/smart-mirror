@@ -25,6 +25,8 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/weather-icons.css">
+
   </head>
   <body ng-controller="MirrorCtrl as commands">
     <div class="top">
@@ -44,14 +46,19 @@
       <div class="top-right">
         <div class="weather">
           <div class="weather-today">
+            <span class="icon dimmed wi {{currentForcast.wi}}"></span> 
             <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
           </div>
-          <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
+ 		  <div class="weather-week-descriptor">
+			<span>{{hourlyForcast.summary}}</span>
+			<span>{{weeklyForcast.summary}}</span>
+		  </div>
           <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
             <div class="weather-week-day">
               <span class="day light-grey">{{forcast.day}}</span>
-              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
-              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+              <span class="icon-small dimmed wi {{forcast.wi}}"></span>
+              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}&deg;</span>
+              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}&deg;</span>
             </div>
           </div>
         </div>
