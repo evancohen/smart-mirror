@@ -92,8 +92,12 @@
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show map', function() {
                 console.debug("Going on an adventure?");
-                $scope.focus = "map";
-            });
+                GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
+                    console.log("Geoposition", geoposition);
+                    $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
+                    $scope.focus = "map";
+                });
+             });
 
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
