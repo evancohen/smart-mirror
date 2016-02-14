@@ -38,8 +38,10 @@
                     WeatherService.init(geoposition).then(function(){
                         $scope.currentForcast = WeatherService.currentForcast();
                         $scope.weeklyForcast = WeatherService.weeklyForcast();
+                        $scope.hourlyForcast = WeatherService.hourlyForcast();
                         console.log("Current", $scope.currentForcast);
                         console.log("Weekly", $scope.weeklyForcast);
+                        console.log("Hourly", $scope.hourlyForcast);
                     });
                 });
 
