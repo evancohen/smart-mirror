@@ -64,8 +64,6 @@
             // List commands
             AnnyangService.addCommand('What can I say', function() {
                 console.debug("Here is a list of commands...");
-                var msg = new SpeechSynthesisUtterance('Here is a list of commands...');
-                window.speechSynthesis.speak(msg);
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
