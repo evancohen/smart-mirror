@@ -1,4 +1,4 @@
-(function(annyang) {
+(function() {
     'use strict';
 
     function GiphyService($http) {
@@ -7,12 +7,16 @@
 
         service.init = function(img){
 
-          return $http.get("http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag="+img).
+          return $http.get("http://api.giphy.com/v1/gifs/random?api_key="+GIPHY_API_KEY+"&tag="+img).
               then(function(response) {
                   return service.gif = response.data;
               });
         };
+        
         service.giphyImg = function() {
+          if(service.gif === null){
+              return null;
+          }
           return service.gif.data.image_url;
         };
 
