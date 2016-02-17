@@ -71,6 +71,26 @@ In order to disable the screensaver you'll want to comment out (with a '#') the 
 @xset s noblank
 ```
 
+In order to hide the mouse in kiosk mode you can install Chromium's unclutter package;
+````
+apt-get install chromium x11-xserver-utils unclutter 
+````
+Then add `unclutter -idle 0.1 -root` to /etc/xdg/lxsession/LXDE/autostart via
+`nano /etc/xdg/lxsession/LXDE/autostart`.
+Or into a bash script, like shown below.
+
+In order to start the smart mirror at boot you can;
+
+1. Edit crontab
+   `crontab -e` and add the following `@reboot sudo /home/pi/smart-mirror/startatboot.sh &` (Make sure the file path lines up with the directory you are running the smart-mirror from).
+2. Create the bash file that you referanced in the crontab `nano /home/pi/smart-mirror/startatboot.sh` and add the following lines of code;
+```
+#!/bin/bash
+export DISPLAY=:0
+export XAUTHORITY=/home/pi/.Xauthority
+cd /home/pi/smart-mirror/startatboot.sh && npm start && unclutter -idle 0.1 -root &
+```
+
 ##### Install dependencies and run
 Before we can run the thing we've got to install the projects dependencies. From the root of the `smart-mirror` directory run:
 ```
