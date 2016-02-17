@@ -160,7 +160,7 @@
             });
 
             //Get gif image
-            AnnyangService.addCommand('show *img', function(img) {
+            AnnyangService.addCommand('giphy *img', function(img) {
                 GiphyService.init(img).then(function(){
                     $scope.gifimg = GiphyService.giphyImg();
                     $scope.focus = "gif";
