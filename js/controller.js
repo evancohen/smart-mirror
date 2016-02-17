@@ -65,9 +65,6 @@
             refreshMirrorData();
             $interval(refreshMirrorData, 3600000);
 
-            //Initiate Hue communication
-            HueService.init();
-
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
