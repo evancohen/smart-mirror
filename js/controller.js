@@ -1,7 +1,15 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, CalendarService, XKCDService, $scope, $timeout, $interval) {
+    function MirrorCtrl(
+            AnnyangService, 
+            GeolocationService, 
+            WeatherService, 
+            MapService, 
+            HueService, 
+            CalendarService, 
+            XKCDService, 
+            $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
