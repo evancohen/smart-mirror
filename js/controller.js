@@ -6,7 +6,6 @@
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
-        $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
@@ -51,6 +50,8 @@
                 }, function(error) {
                     console.log(error);
                 });
+
+                $scope.complement = COMPLIMENTS[Math.floor(Math.random() * COMPLIMENTS.length)];
             };
 
             refreshMirrorData();
