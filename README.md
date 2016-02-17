@@ -49,6 +49,7 @@ You'll need to fill in two things into `js/config.js`:
 1. A [Forecast API key](https://developer.forecast.io/) (don't worry it's free)
 2. Philips Hue Bridge IP address with a configured user. Details about how to set this up in the [Philips Hue Developer Documentation](http://www.developers.meethue.com/documentation/getting-started)
 3. [Optional] An array of iCal addresses (from your Google or Outlook calendar for example)
+4. [Optional] An array of greetings to be displayed on the mirror (selected at random)
 
 The format of your config should look something like this:
 ```
@@ -56,6 +57,7 @@ var FORCAST_API_KEY = "a6s5dg39j78qj38sjs91je9djadfa1e";
 var HUE_BASE = "http://192.168.1.99/api/as9234ho0dfhoq01f2as3yh4m0/";
 var PERSONAL_CALENDAR = ["https://calendar.google.com/calendar/ical/SOMESTUFF/basic.ics",
 "https://outlook.office365.com/owa/calendar/SOMESTUFF/reachcalendar.ics"];
+var COMPLIMENTS = ["Hi, sexy!", "Hey There!", "Looking Awesome!"]
 ```
 ##### Configuring the Pi
 In order to rotate your monitor you'll need to add the following line to `/boot/config.txt`

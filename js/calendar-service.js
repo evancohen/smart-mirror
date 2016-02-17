@@ -62,7 +62,9 @@
         //If we encounter end event, complete the object and add it to our events array then clear it for reuse.
         if (in_event && ln == 'END:VEVENT') {
           in_event = false;
-          events.push(cur_event);
+          if(!contains(events, cur_event)) {
+            events.push(cur_event);
+          }
           cur_event = null;
         }
         //If we are in an event
@@ -82,7 +84,7 @@
           if (type.startsWith('DTSTART')) {
             cur_event.start = makeDate(type, val);
           }
-          
+
           //If the type is an end date, do the same as above
           else if (type.startsWith('DTEND')) {
             cur_event.end = makeDate(type, val);
@@ -99,11 +101,53 @@
 
           //Add the value to our event object.
           cur_event[type] = val;
+          if (cur_event['SUMMARY'] !== undefined && cur_event['RRULE'] !== undefined) {
+            var options = new RRule.parseString(cur_event['RRULE']);
+      			options.dtstart = cur_event.start.toDate();
+      			var rule = new RRule(options);
+            var oneYear = new Date();
+      			oneYear.setFullYear(oneYear.getFullYear() + 1);
+      			var dates = rule.between(new Date(), oneYear, true, function (date, i){return i < 10});
+      			for (var date in dates) {
+              var recuring_event = {};
+              recuring_event.SUMMARY = cur_event.SUMMARY;
+      				var dt = new Date(dates[date]);
+      				var startDate = moment(dt);
+              recuring_event.start = startDate;
+              recuring_event.end = startDate;
+              if(!contains(events, recuring_event)) {
+                events.push(recuring_event);
+              }
+      			}
+          }
         }
       }
       //Run this to finish proccessing our Events.
       complete(events);
-      return service.events = service.events.concat(events);
+      return service.events = events;
+    }
+
+    var contains = function(input, obj) {
+      var i = input.length;
+      while (i--) {
+        var current = input[i];
+        if (obj.start.isValid()) {
+          if (current.start.isSame(obj.start.toDate()) && current.SUMMARY === obj.SUMMARY) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    Array.prototype.contains = function(obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i] === obj) {
+                return true;
+            }
+        }
+        return false;
     }
 
     var complete = function(events) {
@@ -125,7 +169,7 @@
         //If the event ends after the current time or if there is no end time and the event starts today add it.
         if ((itm.end != undefined && itm.end.isAfter(current_date)) || itm.start.diff(current_date, 'days') == 0){
             future_events.push(itm);
-        } 
+        }
       });
       future_events = sortAscending(future_events);
       return future_events.slice(0, 9);
@@ -154,7 +198,7 @@
         //If the event ended before the current time, add it to the array to return.
         if (itm.end != undefined && itm.end.isBefore(current_date)){
             past_events.push(itm);
-        } 
+        }
       });
       return past_events.reverse();
     }

@@ -1,12 +1,20 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, CalendarService, GiphyService, $scope, $timeout, $interval) {
+    function MirrorCtrl(
+            AnnyangService,
+            GeolocationService,
+            WeatherService,
+            MapService,
+            HueService,
+            CalendarService,
+            XKCDService,
+            GiphyService,
+            $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
-        $scope.complement = "Hi, sexy!"
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
@@ -27,8 +35,10 @@
         _this.init = function() {
             var tick = $interval(updateTime, 1000);
             updateTime();
-            $scope.map = MapService.generateMap("Seattle,WA");
-            _this.clearResults();
+            GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
+                console.log("Geoposition", geoposition);
+                $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
+            });
             restCommand();
 
             var refreshMirrorData = function() {
@@ -38,8 +48,10 @@
                     WeatherService.init(geoposition).then(function(){
                         $scope.currentForcast = WeatherService.currentForcast();
                         $scope.weeklyForcast = WeatherService.weeklyForcast();
+                        $scope.hourlyForcast = WeatherService.hourlyForcast();
                         console.log("Current", $scope.currentForcast);
                         console.log("Weekly", $scope.weeklyForcast);
+                        console.log("Hourly", $scope.hourlyForcast);
                     });
                 });
 
@@ -49,9 +61,12 @@
                 }, function(error) {
                     console.log(error);
                 });
+
+                $scope.complement = COMPLIMENTS[Math.floor(Math.random() * COMPLIMENTS.length)];
             };
 
-            $timeout(refreshMirrorData(), 3600000);
+            refreshMirrorData();
+            $interval(refreshMirrorData, 3600000);
 
             //Initiate Hue communication
             HueService.init();
@@ -89,8 +104,12 @@
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show map', function() {
                 console.debug("Going on an adventure?");
-                $scope.focus = "map";
-            });
+                GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
+                    console.log("Geoposition", geoposition);
+                    $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
+                    $scope.focus = "map";
+                });
+             });
 
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
@@ -142,16 +161,9 @@
                 console.debug("Clearing reminders");
             });
 
-            // Clear log of commands
-            AnnyangService.addCommand('Clear results', function(task) {
-                 console.debug("Clearing results");
-                 _this.clearResults()
-            });
-
             // Check the time
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
-                 _this.clearResults();
             });
 
             // Turn lights off
@@ -159,7 +171,7 @@
                 HueService.performUpdate(state + " " + action);
             });
 
-            //Get gif image
+            //Show giphy image
             AnnyangService.addCommand('giphy *img', function(img) {
                 GiphyService.init(img).then(function(){
                     $scope.gifimg = GiphyService.giphyImg();
@@ -167,10 +179,13 @@
                 });
             });
 
-            // Fallback for all commands
-            AnnyangService.addCommand('*allSpeech', function(allSpeech) {
-                console.debug(allSpeech);
-                _this.addResult(allSpeech);
+            // Show xkcd comic
+            AnnyangService.addCommand('Show xkcd', function(state, action) {
+                console.debug("Fetching a comic for you.");
+                XKCDService.getXKCD().then(function(data){
+                    $scope.xkcd = data.img;
+                    $scope.focus = "xkcd";
+                });
             });
 
             var resetCommandTimeout;
@@ -184,17 +199,6 @@
                 $scope.interimResult = result[0];
                 resetCommandTimeout = $timeout(restCommand, 5000);
             });
-        };
-
-        _this.addResult = function(result) {
-            _this.results.push({
-                content: result,
-                date: new Date()
-            });
-        };
-
-        _this.clearResults = function() {
-            _this.results = [];
         };
 
         _this.init();
