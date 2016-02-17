@@ -124,7 +124,7 @@
       }
       //Run this to finish proccessing our Events.
       complete(events);
-      return service.events = service.events.concat(events);
+      return service.events = events;
     }
 
     var contains = function(input, obj) {
