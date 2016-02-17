@@ -4,21 +4,6 @@
     function HueService($http) {
         var service = {};
 
-        service.init = function() {
-            $http.put(HUE_BASE + 'groups/0/action', {
-                "on": true,
-                "hue": 4000,
-                "sat": 0,
-                "bri": 250,
-                "transitiontime": 10,
-                "alert":"select",
-               // "effect":"colorloop"
-            })
-            .success(function (data, status, headers) {
-                console.log(data);
-            })
-        };
-
         //Updates a group of Hue lights (Assumes that one group is configured)
         //You can change the group to 0 to perform the updates to all lights
         service.performUpdate = function(spokenWords) {
@@ -27,7 +12,7 @@
             //Parse the update string and see what actions we need to perform
             console.log(update);
 
-            $http.put(HUE_BASE + 'groups/0/action', update)
+            $http.put('http://' + config.hue.ip + '/api/' + config.hue.uername + '/groups/' + config.hue.group + '/action', update)
             .success(function (data, status, headers) {
                 console.log(data);
             })
