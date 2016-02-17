@@ -7,7 +7,7 @@
     service.events = [];
 
     service.renderAppointments = function() {
-      return loadFile(PERSONAL_CALENDAR);
+      return loadFile(config.icals);
     }
 
     var loadFile = function(urls) {
