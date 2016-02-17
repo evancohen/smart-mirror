@@ -38,7 +38,6 @@
                 console.log("Geoposition", geoposition);
                 $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
             });
-            _this.clearResults();
             restCommand();
 
             var refreshMirrorData = function() {
@@ -161,16 +160,9 @@
                 console.debug("Clearing reminders");
             });
 
-            // Clear log of commands
-            AnnyangService.addCommand('Clear results', function(task) {
-                 console.debug("Clearing results");
-                 _this.clearResults()
-            });
-
             // Check the time
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
-                 _this.clearResults();
             });
 
             // Turn lights off
