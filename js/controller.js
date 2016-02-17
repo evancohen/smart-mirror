@@ -26,7 +26,10 @@
         _this.init = function() {
             var tick = $interval(updateTime, 1000);
             updateTime();
-            $scope.map = MapService.generateMap("Seattle,WA");
+            GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
+                console.log("Geoposition", geoposition);
+                $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
+            });
             _this.clearResults();
             restCommand();
 
