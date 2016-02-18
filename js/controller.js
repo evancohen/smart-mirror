@@ -63,9 +63,14 @@
             //Initiate Hue communication
             HueService.init();
 
-            TrafficService.getTravelDuration().then(function() {
-                $scope.trafficInformation = TrafficService.getCurrentTime();
-            });
+            var refreshTrafficData = function() {
+              TrafficService.getTravelDuration().then(function() {
+                  $scope.trafficInformation = TrafficService.getCurrentTime();
+              });
+            }
+
+            refreshTrafficData();
+            $interval(refreshTrafficData, TRIP_REFRESH_INTERVAL * 60000);
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
