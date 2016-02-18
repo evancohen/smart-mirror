@@ -63,7 +63,9 @@
             //Initiate Hue communication
             HueService.init();
 
-            $scope.trafficInformation = TrafficService.getTravelDuration();
+            TrafficService.getTravelDuration().then(function() {
+                $scope.trafficInformation = TrafficService.getCurrentTime();
+            });
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");

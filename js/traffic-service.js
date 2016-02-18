@@ -4,6 +4,8 @@
     function TrafficService($http) {
         var service = {};
 
+        service.time = "";
+
         service.getTravelDuration = function(){
             return $http.get("http://dev.virtualearth.net/REST/V1/Routes/Driving?wp.0="+START_TRIP+"&wp.1="+END_TRIP+"&avoid=minimizeTolls&key="+BING_MAPS_API_KEY).
                 then(function(response){
@@ -28,9 +30,13 @@
                     time += minsTraffic - mins + "mins";
                   }
                   time += " extra)";
-                  return time;
+                  return service.time = time;
                 });
         };
+
+        service.getCurrentTime = function() {
+          return service.time;
+        }
 
         return service;
     }
