@@ -19,13 +19,10 @@
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
 
-        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
-
         //Update the time
         function updateTime(){
             $scope.date = new Date();
         }
-
 
         // Reset the command text
         var restCommand = function(){
@@ -62,14 +59,11 @@
                     console.log(error);
                 });
 
-                $scope.complement = COMPLIMENTS[Math.floor(Math.random() * COMPLIMENTS.length)];
+                $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
 
             refreshMirrorData();
             $interval(refreshMirrorData, 3600000);
-
-            //Initiate Hue communication
-            HueService.init();
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");

@@ -10,9 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
     <!-- App -->
-    <!--<script src="/js/init.js"></script>-->
+    <script src="config.js"></script>
     <script src="js/rrule.js"></script>
-    <script src="js/config.js"></script>
     <script src="js/app.js"></script>
     <script src="js/annyang-service.js"></script>
     <script src="js/weather-service.js"></script>
@@ -22,7 +21,6 @@
     <script src="js/giphy-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
-    <script src="js/dateFormatFilter.js"></script>
     <script src="js/controller.js"></script>
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -69,7 +67,7 @@
     </div>
     <div class="container">
       <div class="middle-center">
-        <h1>{{complement}}</h1>
+        <h1>{{greeting}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
         <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
         <div class="contents-box map animate-grow" ng-show="focus == 'map'">
