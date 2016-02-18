@@ -6,7 +6,7 @@ var config = {
     forcast : {
         key : "", // Your forcast.io api key
         units : "auto" // See forcast.io documentation if you are getting the wrong units
-    }, 
+    },
     // Philips Hue
     hue : {
         ip : "", // The IP address of your hue base
@@ -14,5 +14,9 @@ var config = {
         group : "0", // The group you'd like the mirror to control (0 is all hue lights connected to your hub)
     },
     // Calendar (An array of iCals)
-    icals : []
+    calendar: {
+      icals : [],
+      maxResults: 9, // Number of calender events to display (Defaults is 9)
+      maxDays: 365 // Number of days to display (Default is one year)
+    }
 }
