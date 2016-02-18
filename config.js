@@ -18,5 +18,9 @@ var config = {
       icals : [],
       maxResults: 9, // Number of calender events to display (Defaults is 9)
       maxDays: 365 // Number of days to display (Default is one year)
+    },
+    // Giphy
+    giphy: {
+      key : "{YOUR_GIPHY_API_KEY}"
     }
 }

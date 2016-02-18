@@ -2,13 +2,14 @@
     'use strict';
 
     function MirrorCtrl(
-            AnnyangService, 
-            GeolocationService, 
-            WeatherService, 
-            MapService, 
-            HueService, 
-            CalendarService, 
-            XKCDService, 
+            AnnyangService,
+            GeolocationService,
+            WeatherService,
+            MapService,
+            HueService,
+            CalendarService,
+            XKCDService,
+            GiphyService,
             $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
@@ -162,6 +163,14 @@
             // Turn lights off
             AnnyangService.addCommand('(turn) (the) :state (the) light(s) *action', function(state, action) {
                 HueService.performUpdate(state + " " + action);
+            });
+
+            //Show giphy image
+            AnnyangService.addCommand('giphy *img', function(img) {
+                GiphyService.init(img).then(function(){
+                    $scope.gifimg = GiphyService.giphyImg();
+                    $scope.focus = "gif";
+                });
             });
 
             // Show xkcd comic

@@ -173,20 +173,26 @@ ul.calendar {
     width: 60px;
 }
 
-.map {
-    height: 1080px;
-    max-width: 100%;
+.contents{
+  max-width: 100%;
 }
 
-.map-container {
+.gif {
+    height: 100%;
+}
+
+.map {
     height: 1080px;
+}
+
+.contents-box {
     text-align: center;
     width: 100%;
     position: relative;
     overflow: hidden;
 }
 
-.map-container:after {
+.contents-box:after {
     content: '';
     position: absolute;
     top: 0;
