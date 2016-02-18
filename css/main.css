@@ -123,7 +123,7 @@ ul.calendar {
 
 .calendar span.day {
     font-weight: bold;
-    width: 120px;
+    width: 128px;
     vertical-align: top;
 }
 
@@ -295,6 +295,6 @@ ul.calendar {
 }
 
 .xkcd {
-  -webkit-filter:invert(100%);  
+  -webkit-filter:invert(100%);
   max-width: 100%;
 }
