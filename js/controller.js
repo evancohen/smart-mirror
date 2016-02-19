@@ -67,12 +67,17 @@
             $interval(refreshMirrorData, 3600000);
 
             var refreshTrafficData = function() {
-              TrafficService.getTravelDuration().then(function(durationTraffic) {
-                $scope.traffic = durationTraffic;
-              }, function(error){
-                $scope.traffic = error;
-              });
-            }
+                TrafficService.getTravelDuration().then(function(durationTraffic) {
+                    console.log("Traffic", durationTraffic);
+                    $scope.traffic = {
+                        destination:config.traffic.name,
+                        hours : durationTraffic.hours(),
+                        minutes : durationTraffic.minutes()
+                    };
+                }, function(error){
+                    $scope.traffic = {error: error};
+                });
+            };
 
             refreshTrafficData();
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);

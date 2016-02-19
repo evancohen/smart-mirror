@@ -10,7 +10,8 @@
           $http.get("http://dev.virtualearth.net/REST/V1/Routes/"+
                 config.traffic.mode+"?wp.0="+config.traffic.origin+
                 "&wp.1="+config.traffic.destination+"&avoid=minimizeTolls&key="+
-                config.traffic.bing_maps_api_key).then(function(response){
+                config.traffic.key)
+          .then(function(response){
             var durationTraffic = moment.duration(response.data.resourceSets[0].resources[0].travelDurationTraffic, 'seconds');
             deferred.resolve(durationTraffic);
           }, function(error) {
@@ -22,8 +23,8 @@
               deferred.reject('Unknown error');
             }
             duration = deferred.promise;
-            return deferred.promise;
           });
+          return deferred.promise;
         };
 
         return service;

@@ -24,10 +24,10 @@ var config = {
       key : "" // Your gliphy api key
     },
     traffic: {
-      key : "AjszKBAt0bFGdU5UBXp-eJwth96KBMj1ao958ileqPuYlhSFEyqAgMZ6mjcaJsqI", // Bing Maps API Key
+      key : "", // Bing Maps API Key
       mode : "Driving", // Possibilities: Driving / Transit / Walking
-      origin : "128 24th Ave E, Seattle.",
-      destination : "Microsoft Linclon Square",
+      origin : "", // Start of your trip. Human readable address.
+      destination : "", // Destination of your trip. Human readable address.
       name : "work", // Name of your destination ex: "work"
       reload_interval : 5 // Number of minutes the information is refreshed
     }

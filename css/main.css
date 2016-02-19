@@ -173,6 +173,10 @@ ul.calendar {
     width: 60px;
 }
 
+.time-to {
+    font-weight: bold;
+}
+
 .contents{
   max-width: 100%;
 }
