@@ -10,7 +10,7 @@
                     return response.data;
                 });
         };
-        
+
         return service;
     }
 

@@ -53,7 +53,7 @@
         geoloc = deferred.promise;
         return deferred.promise;
       }
-        
+
         return service;
     }
 
