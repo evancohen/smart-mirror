@@ -67,31 +67,10 @@
             $interval(refreshMirrorData, 3600000);
 
             var refreshTrafficData = function() {
-              TrafficService.getTravelDuration().then(function() {
-                var information = TrafficService.getCurrentTime();
-                if (information.hasOwnProperty("error")) {
-                  $scope.trafficInformation = information.error;
-                } else {
-                  var time = "";
-                  if (information.hoursTraffic > 0) {
-                    time += information.hoursTraffic + "h ";
-                  }
-                  if (information.minsTraffic > 0) {
-                    time += information.minsTraffic + "mins ";
-                  }
-                  if (information.hoursTraffic > information.hours || information.minsTraffic > information.mins) {
-                    time += "(";
-                    if (information.hours > 0 && information.hoursTraffic > 0 && information.hoursTraffic > information.hours) {
-                      time += information.hoursTraffic - information.hours + "h ";
-                    }
-                    if (information.mins > 0 && information.minsTraffic > 0 && information.minsTraffic > information.mins) {
-                      time += information.minsTraffic - information.mins + "mins";
-                    }
-                    time += " extra)";
-                  }
-                  $scope.trafficInformation = time;
-                }
-
+              TrafficService.getTravelDuration().then(function(durationTraffic) {
+                $scope.traffic = durationTraffic;
+              }, function(error){
+                $scope.traffic = error;
               });
             }
 
