@@ -96,7 +96,7 @@
             }
 
             refreshTrafficData();
-            $interval(refreshTrafficData, TRIP_REFRESH_INTERVAL * 60000);
+            $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");

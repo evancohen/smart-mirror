@@ -8,11 +8,11 @@
 
         service.getTravelDuration = function(){
           var promise = null;
-          if (TRIP_WAY_OF_TRANSPORT === 'Driving') {
+          if (config.traffic.way_of_transport === 'Driving') {
             promise = driving();
-          } else if (TRIP_WAY_OF_TRANSPORT === 'Transit') {
+          } else if (config.traffic.way_of_transport === 'Transit') {
             promise = transit();
-          } else if (TRIP_WAY_OF_TRANSPORT === 'Walking') {
+          } else if (config.traffic.way_of_transport === 'Walking') {
             promise = walking();
           }
           return promise.then(function(response){
@@ -44,16 +44,16 @@
         };
 
         var driving = function() {
-          return $http.get("http://dev.virtualearth.net/REST/V1/Routes/Driving?wp.0="+START_TRIP+"&wp.1="+END_TRIP+"&avoid=minimizeTolls&key="+BING_MAPS_API_KEY);
+          return $http.get("http://dev.virtualearth.net/REST/V1/Routes/Driving?wp.0="+config.traffic.start_trip+"&wp.1="+config.traffic.end_trip+"&avoid=minimizeTolls&key="+config.traffic.bing_maps_api_key);
         }
 
         var transit = function() {
           var current_time = moment().format('h:mm:ssa').toUpperCase();
-          return $http.get("http://dev.virtualearth.net/REST/V1/Routes/Transit?wp.0="+START_TRIP+"&wp.1="+END_TRIP+"&timeType=Departure&dateTime="+current_time+"&output=json&key="+BING_MAPS_API_KEY);
+          return $http.get("http://dev.virtualearth.net/REST/V1/Routes/Transit?wp.0="+config.traffic.start_trip+"&wp.1="+config.traffic.end_trip+"&timeType=Departure&dateTime="+current_time+"&output=json&key="+config.traffic.bing_maps_api_key);
         }
 
         var walking = function() {
-          return $http.get("http://dev.virtualearth.net/REST/V1/Routes/Walking?wp.0="+START_TRIP+"&wp.1="+END_TRIP+"&optmz=distance&output=json&key="+BING_MAPS_API_KEY);
+          return $http.get("http://dev.virtualearth.net/REST/V1/Routes/Walking?wp.0="+config.traffic.start_trip+"&wp.1="+config.traffic.end_trip+"&optmz=distance&output=json&key="+config.traffic.bing_maps_api_key);
         }
 
         service.getCurrentTime = function() {
