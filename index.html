@@ -21,6 +21,7 @@
     <script src="js/giphy-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
+    <script src="js/traffic-service.js"></script>
     <script src="js/controller.js"></script>
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -61,6 +62,11 @@
               <span class="tempreture tempreture-min">{{forcast.temperatureMin}}&deg;</span>
               <span class="tempreture tempreture-max">{{forcast.temperatureMax}}&deg;</span>
             </div>
+          </div>
+        </div>
+        <div class="traffic">
+          <div class="traffic-information">
+            Current traffic: {{trafficInformation}}
           </div>
         </div>
       </div>
