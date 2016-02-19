@@ -21,7 +21,7 @@ var config = {
     },
     // Giphy
     giphy: {
-      key : "" // Your gliphy api key
+      key : "" // Your Gliphy API key
     },
     traffic: {
       key : "", // Bing Maps API Key
