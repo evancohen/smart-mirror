@@ -1,9 +1,0 @@
-var FORCAST_API_KEY = "{YOUR_KEY_HERE}";
-var HUE_BASE = "http://{IP_ADDRESS_OF_BRIDGE}/api/{Username}/";
-var PERSONAL_CALENDAR = [];
-var COMPLIMENTS = ["Hi, sexy!"];
-var BING_MAPS_API_KEY = "{YOUR_KEY_HERE}";
-var START_TRIP = "";
-var END_TRIP = "";
-var TRIP_REFRESH_INTERVAL = 5;
-var TRIP_WAY_OF_TRANSPORT="Walking"; // Possibilities: Driving / Transit / Walking
