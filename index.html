@@ -65,8 +65,10 @@
           </div>
         </div>
         <div class="traffic">
-          <div class="traffic-information">
-            Current traffic: {{trafficInformation}}
+          <div ng-show="!traffic.error" class="traffic-information">
+            <span class="time-to">Time to {{traffic.destination}}:</span>
+            <span ng-show="traffic.hours > 0">{{traffic.hours}} hours and</span>
+            <span>{{traffic.minutes}} minutes</span>
           </div>
         </div>
       </div>

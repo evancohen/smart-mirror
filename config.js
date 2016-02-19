@@ -21,13 +21,14 @@ var config = {
     },
     // Giphy
     giphy: {
-      key : "" // Your Giphy API key
+      key : "" // Your Gliphy API key
     },
     traffic: {
-      way_of_transport : "Driving", // Possibilities: Driving / Transit / Walking
-      bing_maps_api_key : "",
-      start_trip : "",
-      end_trip : "",
+      key : "", // Bing Maps API Key
+      mode : "Driving", // Possibilities: Driving / Transit / Walking
+      origin : "", // Start of your trip. Human readable address.
+      destination : "", // Destination of your trip. Human readable address.
+      name : "work", // Name of your destination ex: "work"
       reload_interval : 5 // Number of minutes the information is refreshed
     }
 }
