@@ -1,7 +1,17 @@
 (function(angular) {
     'use strict';
 
-    function MirrorCtrl(AnnyangService, GeolocationService, WeatherService, MapService, HueService, CalendarService, XKCDService, TrafficService, $scope, $timeout, $interval) {
+    function MirrorCtrl(
+            AnnyangService,
+            GeolocationService,
+            WeatherService,
+            MapService,
+            HueService,
+            CalendarService,
+            XKCDService,
+            GiphyService,
+            TrafficService,
+            $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -10,13 +20,10 @@
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
 
-        $scope.colors=["#6ed3cf", "#9068be", "#e1e8f0", "#e62739"];
-
         //Update the time
         function updateTime(){
             $scope.date = new Date();
         }
-
 
         // Reset the command text
         var restCommand = function(){
@@ -30,7 +37,6 @@
                 console.log("Geoposition", geoposition);
                 $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
             });
-            _this.clearResults();
             restCommand();
 
             var refreshMirrorData = function() {
@@ -54,14 +60,11 @@
                     console.log(error);
                 });
 
-                $scope.complement = COMPLIMENTS[Math.floor(Math.random() * COMPLIMENTS.length)];
+                $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
 
             refreshMirrorData();
             $interval(refreshMirrorData, 3600000);
-
-            //Initiate Hue communication
-            HueService.init();
 
             var refreshTrafficData = function() {
               TrafficService.getTravelDuration().then(function() {
@@ -185,21 +188,22 @@
                 console.debug("Clearing reminders");
             });
 
-            // Clear log of commands
-            AnnyangService.addCommand('Clear results', function(task) {
-                 console.debug("Clearing results");
-                 _this.clearResults()
-            });
-
             // Check the time
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
-                 _this.clearResults();
             });
 
             // Turn lights off
             AnnyangService.addCommand('(turn) (the) :state (the) light(s) *action', function(state, action) {
                 HueService.performUpdate(state + " " + action);
+            });
+
+            //Show giphy image
+            AnnyangService.addCommand('giphy *img', function(img) {
+                GiphyService.init(img).then(function(){
+                    $scope.gifimg = GiphyService.giphyImg();
+                    $scope.focus = "gif";
+                });
             });
 
             // Show xkcd comic
@@ -209,12 +213,6 @@
                     $scope.xkcd = data.img;
                     $scope.focus = "xkcd";
                 });
-            });
-
-            // Fallback for all commands
-            AnnyangService.addCommand('*allSpeech', function(allSpeech) {
-                console.debug(allSpeech);
-                _this.addResult(allSpeech);
             });
 
             var resetCommandTimeout;
@@ -228,17 +226,6 @@
                 $scope.interimResult = result[0];
                 resetCommandTimeout = $timeout(restCommand, 5000);
             });
-        };
-
-        _this.addResult = function(result) {
-            _this.results.push({
-                content: result,
-                date: new Date()
-            });
-        };
-
-        _this.clearResults = function() {
-            _this.results = [];
         };
 
         _this.init();
