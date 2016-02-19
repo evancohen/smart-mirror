@@ -8,15 +8,30 @@
 
         service.getTravelDuration = function(){
           var deferred = $q.defer();
-          
+
           // Request traffic info for the configured mode of transport
           $http.get(getEndpoint(config.traffic.mode))
           .then(function(response){
             // Walking and Transit are "not effected" by traffic so we don't use their traffic duration
             if(config.traffic.mode == "Transit" || config.traffic.mode == "Walking"){
-                deferred.resolve(moment.duration(response.data.resourceSets[0].resources[0].travelDuration, 'seconds'));
+              var duration = moment.duration(response.data.resourceSets[0].resources[0].travelDuration, 'seconds');
+              var response = {
+                hours: duration.hours(),
+                minutes: duration.minutes(),
+                trafficHours : 0,
+                trafficMinutes: 0
+              };
+                deferred.resolve(response);
             } else {
-                deferred.resolve(moment.duration(response.data.resourceSets[0].resources[0].travelDurationTraffic, 'seconds'));
+              var normalDuration = moment.duration(response.data.resourceSets[0].resources[0].travelDuration, 'seconds');
+              var duration = moment.duration(response.data.resourceSets[0].resources[0].travelDurationTraffic, 'seconds');
+              var response = {
+                hours: duration.hours(),
+                minutes: duration.minutes(),
+                trafficHours : duration.hours() - normalDuration.hours(),
+                trafficMinutes: duration.minutes() - normalDuration.minutes()
+              };
+              deferred.resolve(response);
             }
           }, function(error) {
             // Most of the time this is because an address can't be found
@@ -31,7 +46,7 @@
           });
           return deferred.promise;
         };
-        
+
         // Depending on the mode of transport different paramaters are required.
         function getEndpoint(mode){
             var endpoint = BING_MAPS + mode + "?wp.0=" + config.traffic.origin + "&wp.1="+config.traffic.destination;
@@ -43,7 +58,7 @@
                 endpoint += "&optmz=distance";
             }
             endpoint += "&key=" + config.traffic.key;
-            
+
             return endpoint;
         }
 
