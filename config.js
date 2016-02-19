@@ -22,12 +22,5 @@ var config = {
     // Giphy
     giphy: {
       key : "{YOUR_GIPHY_API_KEY}"
-    },
-    traffic: {
-      way_of_transport = 'Driving', // Possibilities: Driving / Transit / Walking
-      bing_maps_api_key = '',
-      start_trip = '',
-      end_trip = '',
-      reload_interval = 5 // Number of minutes the information is refreshed
     }
 }
