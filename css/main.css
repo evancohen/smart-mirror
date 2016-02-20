@@ -173,6 +173,12 @@ ul.calendar {
     width: 60px;
 }
 
+.traffic-information {
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
 .time-to {
     font-weight: bold;
 }

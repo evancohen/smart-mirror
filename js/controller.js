@@ -51,10 +51,11 @@
                         console.log("Weekly", $scope.weeklyForcast);
                         console.log("Hourly", $scope.hourlyForcast);
                     });
+                }, function(error){
+                    console.log(error);
                 });
 
-                var promise = CalendarService.renderAppointments();
-                promise.then(function(response) {
+                CalendarService.getCalendarEvents().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
                     console.log(error);
