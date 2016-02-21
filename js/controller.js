@@ -72,8 +72,10 @@
                     console.log("Traffic", durationTraffic);
                     $scope.traffic = {
                         destination:config.traffic.name,
-                        hours : durationTraffic.hours(),
-                        minutes : durationTraffic.minutes()
+                        hours : durationTraffic.hours,
+                        minutes : durationTraffic.minutes,
+                        trafficMinutes: durationTraffic.trafficMinutes,
+                        trafficHours: durationTraffic.trafficHours
                     };
                 }, function(error){
                     $scope.traffic = {error: error};

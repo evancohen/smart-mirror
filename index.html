@@ -69,6 +69,12 @@
             <span class="time-to">Time to {{traffic.destination}}:</span>
             <span ng-show="traffic.hours > 0">{{traffic.hours}} hours and</span>
             <span>{{traffic.minutes}} minutes</span>
+            <span ng-show="traffic.trafficMinutes > 0 || traffic.trafficHours > 0">
+              (+
+                <span ng-show="traffic.trafficHours > 0">{{traffic.trafficHours}} hours and</span>
+                <span>{{traffic.trafficMinutes}} minutes</span>
+               )
+            </span>
           </div>
         </div>
       </div>
