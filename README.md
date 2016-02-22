@@ -1,6 +1,6 @@
 # Smart Mirror
 
-[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://badges.gitter.im/evancohen/smart-mirror.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/evancohen/smart-mirror.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge) [![Built with Electron](https://img.shields.io/badge/built%20with-electron-blue.svg)](http://electron.atom.io/) ![Runs on all major desktop platforms](https://img.shields.io/badge/runs%20on-everything-red.svg)
 
 This project was inspired by [HomeMirror](https://github.com/HannahMitt/HomeMirror) and Michael Teeuw's [Magic Mirror](http://michaelteeuw.nl/tagged/magicmirror). It uses [annyang](https://github.com/TalAter/annyang) for voice interactivity, [electron](http://electron.atom.io/) to make it cross platform, and integrates with Philips Hue. It is my own take on what a "smart mirror" can be.
 
