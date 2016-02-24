@@ -11,9 +11,10 @@
             XKCDService,
             GiphyService,
             TrafficService,
+            TodoService,
             $scope, $timeout, $interval) {
         var _this = this;
-        var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
+        var DEFAULT_COMMAND_TEXT = 'Zeg "help", voor een lijst met alle commands...';
         $scope.listening = false;
         $scope.debug = false;
         $scope.focus = "default";
@@ -59,6 +60,13 @@
                 }, function(error) {
                     console.log(error);
                 });
+                
+                var todo = TodoService.renderTasks();
+                todo.then(function(response) {
+                    $scope.todo = response.data;
+                }, function(error) {
+                    console.log(error);
+                });
 
                 $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
@@ -88,17 +96,22 @@
             }
 
             // List commands
-            AnnyangService.addCommand('What can I say', function() {
+            AnnyangService.addCommand('Help', function() {
                 console.debug("Here is a list of commands...");
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
 
             // Go back to default view
-            AnnyangService.addCommand('Go home', defaultView);
+            AnnyangService.addCommand('Start', defaultView);
+            
+            AnnyangService.addCommand('Alice', function() {
+                $scope.focus = "defaultView";
+                responsiveVoice.speak("Hallo Jeffrey, wat kan ik voor je doen?", "Dutch Female", {rate: 0.85});
+            });
 
             // Hide everything and "sleep"
-            AnnyangService.addCommand('Go to sleep', function() {
+            AnnyangService.addCommand('Slaap', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
             });
@@ -152,19 +165,22 @@
             });
 
             // Search images
-            AnnyangService.addCommand('Show me *term', function(term) {
+            AnnyangService.addCommand('Zoek *term', function(term) {
                 console.debug("Showing", term);
             });
 
             // Change name
-            AnnyangService.addCommand('My (name is)(name\'s) *name', function(name) {
+            AnnyangService.addCommand('Mijn naam is *name', function(name) {
                 console.debug("Hi", name, "nice to meet you");
                 $scope.user.name = name;
             });
 
             // Set a reminder
-            AnnyangService.addCommand('Remind me to *task', function(task) {
+            AnnyangService.addCommand('(Toevoegen) (aan) taken *task', function(task) {
                 console.debug("I'll remind you to", task);
+                TodoService.addTask(task);
+                responsiveVoice.speak("Toegevoegd aan taken", "Dutch Female", {rate: 0.80});
+                refreshMirrorData();
             });
 
             // Clear reminders
