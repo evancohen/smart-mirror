@@ -6,7 +6,8 @@
 
     service.events = [];
 
-    service.renderAppointments = function() {
+    service.getCalendarEvents = function() {
+      service.events = [];
       return loadFile(config.calendar.icals);
     }
 
@@ -14,12 +15,7 @@
       var promises = [];
 
       angular.forEach(urls, function(url) {
-        var promise = $http({
-          url: url,
-          method: 'get'
-        });
-
-        promises.push(promise);
+        promises.push($http.get(url));
       });
 
       return $q.all(promises).then(function(data) {
@@ -122,9 +118,8 @@
           }
         }
       }
-      //Run this to finish proccessing our Events.
-      complete(events);
-      return service.events = events;
+      //Add all of the extracted events to the CalendarService
+      service.events.push.apply(service.events, events);
     }
 
     var contains = function(input, obj) {
@@ -148,13 +143,6 @@
             }
         }
         return false;
-    }
-
-    var complete = function(events) {
-      //Sort the data so its in date order.
-      events.sort(function(a, b) {
-        return a.start - b.start;
-      });
     }
 
     service.getEvents = function(events) {
