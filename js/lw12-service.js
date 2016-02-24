@@ -12,7 +12,7 @@
             //Parse the update string and see what actions we need to perform
             console.log("Passing parameters to shell script: " + update);
             if (typeof update !== 'undefined'){ //If update exists...
-                PythonService.runScript('C:\\python27\\python.exe C:\\Users\\peer\\Documents\\GitHub\\smart-mirror\\telnet-sender.py "' + update + '"'); //run the update
+                PythonService.runScript('python /home/pi/smart-mirror/telnet-sender.py "' + update + '"'); //run the update
             }
         }
 
