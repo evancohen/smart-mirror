@@ -7,10 +7,12 @@
             WeatherService,
             MapService,
             HueService,
+            LW12Service,
             CalendarService,
             XKCDService,
             GiphyService,
             TrafficService,
+            PythonService,
             $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
@@ -180,7 +182,7 @@
 
             // Turn lights off
             AnnyangService.addCommand('(turn) (the) :state (the) light(s) *action', function(state, action) {
-                HueService.performUpdate(state + " " + action);
+                LW12Service.performUpdate(state + " " + action);
             });
 
             //Show giphy image
