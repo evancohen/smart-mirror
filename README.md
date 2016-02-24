@@ -44,7 +44,7 @@ git clone https://github.com/evancohen/smart-mirror.git
 ```
 
 ##### Configuring the mirror
-You'll need to fill in a few things into `js/config.js`, which should end up looking something like this:
+You'll need to fill in a few things into `config.js`, which should end up looking something like this:
 ``` javascript
 var config = {
     lenguage : "en",

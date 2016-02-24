@@ -106,34 +106,40 @@ dt {
     margin-right: auto;
 }
 
-ul.calendar {
+ul.calendar, ul.todo {
     list-style: none;
     font-size: 22px;
     margin-left: 10px;
     padding:0;
 }
 
-.calendar .event{
+.calendar .event, .todo .task{
     margin-bottom: 10px;
 }
 
-.calendar span {
+.calendar span, .todo span {
     display: inline-block;
 }
 
-.calendar span.day {
+.calendar span.day, .todo span.day {
     font-weight: bold;
     width: 128px;
     vertical-align: top;
 }
 
-.calendar span.summary{
+.calendar span.summary, .todo span.content {
     max-width: 400px;
 }
 
 .calendar .event-details .details{
     font-size: 12px;
     padding-left: 135px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+}
+
+.todo .task-details .date {
+    font-size: 12px;
     font-family: 'Open Sans', sans-serif;
     font-weight: lighter;
 }
@@ -269,8 +275,8 @@ ul.calendar {
 .xxsmall,
 .xsmall,
 .small {
-	font-family: "HelveticaNeue-Medium", sans-serif;
-	letter-spacing: 0;
+    font-family: "HelveticaNeue-Medium", sans-serif;
+    letter-spacing: 0;
 }
 
 .xxsmall {
