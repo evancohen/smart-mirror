@@ -4,7 +4,6 @@ var config = {
     greeting : ["Hallo, Jeffrey!"], // An array of greetings to randomly choose from
     // forcast.io
     forcast : {
-        key : "", // Your forcast.io api key
         units : "si" // See forcast.io documentation if you are getting the wrong units
     },
     // Philips Hue
@@ -15,7 +14,6 @@ var config = {
     },
     // Calendar (An array of iCals)
     calendar: {
-      icals : [""],
       maxResults: 6, // Number of calender events to display (Defaults is 9)
       maxDays: 60 // Number of days to display (Default is one year)
     },
@@ -32,7 +30,8 @@ var config = {
       reload_interval : 5 // Number of minutes the information is refreshed
     },
     todo: {
-      key : "", //Todoist API_KEY (Get it from the website under account)
-      project : "" //Todoist PROJECT_ID (https://todoist.com/API/getProjects?token=API_KEY to get a list of projects, pick id of project with your tasks)
+      list : "", //https://todoist.com/API/getUncompletedItems?project_id=PROJECT_ID_HERE&token=API_KEY_HERE
+      key : "", //Todoist API_KEY
+      project : "" //Todoist PROJECT_ID
     }
 }
