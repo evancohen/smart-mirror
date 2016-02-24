@@ -62,8 +62,7 @@
                     console.log(error);
                 });
                 
-                var todo = TodoService.renderTasks();
-                todo.then(function(response) {
+                TodoService.renderTasks().then(function(response) {
                     $scope.todo = response.data;
                 }, function(error) {
                     console.log(error);
@@ -106,6 +105,7 @@
             // Go back to default view
             AnnyangService.addCommand('Start', defaultView);
             
+            // Go back to default view + voice response
             AnnyangService.addCommand('Alice', function() {
                 $scope.focus = "defaultView";
                 responsiveVoice.speak("Hallo Jeffrey, wat kan ik voor je doen?", "Dutch Female", {rate: 0.85});
@@ -120,13 +120,13 @@
             // Go back to default view
             AnnyangService.addCommand('Wake up', defaultView);
 
-            // Hide everything and "sleep"
+            // Debug information
             AnnyangService.addCommand('Show debug information', function() {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
             });
 
-            // Hide everything and "sleep"
+            // Show map
             AnnyangService.addCommand('Show map', function() {
                 console.debug("Going on an adventure?");
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -136,7 +136,7 @@
                 });
              });
 
-            // Hide everything and "sleep"
+            // Show map of location
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
                 console.debug("Getting map of", location);
                 $scope.map = MapService.generateMap(location);
@@ -176,7 +176,7 @@
                 $scope.user.name = name;
             });
 
-            // Set a reminder
+            // Add task to Todoist
             AnnyangService.addCommand('(Toevoegen) (aan) taken *task', function(task) {
                 console.debug("I'll remind you to", task);
                 TodoService.addTask(task);
@@ -184,9 +184,12 @@
                 refreshMirrorData();
             });
 
-            // Clear reminders
-            AnnyangService.addCommand('Clear reminders', function() {
-                console.debug("Clearing reminders");
+            //Remove task from Todoist
+            AnnyangService.addCommand('Taak klaar *taskDone', function(taskDone) {
+                console.debug("Task completed", taskDone);
+                TodoService.removeTask(taskDone);
+                responsiveVoice.speak("Taak uitgevoerd!", "Dutch Female", {rate: 0.80});
+                refreshMirrorData();
             });
 
             // Check the time
