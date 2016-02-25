@@ -1,0 +1,24 @@
+{
+  "name": "smart-mirror",
+  "description": "The fairest of them all",
+  "main": "main.js",
+  "authors": [
+    "Evan Cohen"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial"
+  ],
+  "homepage": "https://github.com/evancohen/smart-mirror",
+  "moduleType": [],
+  "private": true,
+  "dependencies": {
+    "annyang": "^2.2.1",
+    "moment": "^2.11.2",
+    "jquery": "^2.2.1",
+    "angular": "angularjs#^1.5.0"
+  }
+}
