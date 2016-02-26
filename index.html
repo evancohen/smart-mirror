@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Smart Mirror</title>
-    <!-- Libraries -->
     <script src="js/annyang.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+    <!-- bower:js -->
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <!-- endbower -->
     <!-- App -->
     <script src="config.js"></script>
     <script src="js/rrule.js"></script>
@@ -28,7 +29,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
 	<link rel="stylesheet" href="css/weather-icons.css">
-
+    <!-- bower:css -->
+    <!-- endbower -->
   </head>
   <body ng-controller="MirrorCtrl as commands">
     <div class="top">
