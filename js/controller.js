@@ -9,6 +9,7 @@
             HueService, 
             CalendarService, 
             SearchService,
+			SoundCloudService,
             $scope, 
             $timeout, 
             $interval) {
@@ -43,6 +44,10 @@
             //Initiate Hue communication
             HueService.init();
 
+			//Initialize SoundCloud
+			var playing = false, sound;
+			SoundCloudService.init();
+			
             var refreshMirrorData = function() {
                 //Get our location and then get the weather for our location
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -140,7 +145,39 @@
                 $scope.map = MapService.reset();
                 setFocus("map");
             });
-            
+			
+			//SoundCloud search and play
+			AnnyangService.addCommand('SoundCloud play *query', function(query) {
+				SoundCloudService.searchSoundCloud(query).then(function(response){					
+					$scope.video = SC.oEmbed(response[0].permalink_url, {
+						auto_play: true,
+						element: document.getElementById('sc-widget')
+					});
+					setFocus("sc-widget");
+					/* SC.stream('/tracks/' + response[0].id).then(function(player){
+						player.play();
+						sound = player;
+						playing = true; 
+					}); */
+				});
+            });
+			//SoundCloud stop
+			AnnyangService.addCommand('SoundCloud (pause) (stop)(stock)', function() {
+				//stream
+				/* if(playing) 
+					sound.pause(); */
+				//widget
+            });
+			//SoundCloud replay
+			AnnyangService.addCommand('SoundCloud replay', function() {
+				//stream
+				/* if(playing) {
+					sound.seek(0);
+					sound.play();
+				} */
+				//widget
+            });
+			
             //Search for a video
             AnnyangService.addCommand('show me (a video)(of)(about) *query', function(query){
                 SearchService.searchYouTube(query).then(function(results){
