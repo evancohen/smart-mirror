@@ -22,7 +22,9 @@
 
         $scope.layoutName = 'main';
 
-        tmhDynamicLocale.set('de-de');
+        //set lang
+        tmhDynamicLocale.set(config.language);
+        moment.locale(config.language);
 
 
         $scope.dateFormat = config.dateFormat;
@@ -74,20 +76,20 @@
             refreshMirrorData();
             $interval(refreshMirrorData, 1500000);
 
-            var greetingUpdater = function (){
-                if(moment().hour() > 4 && moment().hour() < 11) {
-                    $scope.greeting = "Guten Morgen!";
-                }else if(moment().hour() > 18 && moment().hour() < 23) {
-                    $scope.greeting = "Guten Abend!";
-                }else if(moment().hour() >= 23 || moment().hour() < 4) {
-                    $scope.greeting = "Zeit fürs Bett!";
-                }else{
-                    $scope.greeting = "Schönen Tag!";
-                }
-            };
-
-            greetingUpdater();
-            $interval(greetingUpdater, 1000);
+            //var greetingUpdater = function (){
+            //    if(moment().hour() > 4 && moment().hour() < 11) {
+            //        $scope.greeting = "Guten Morgen!";
+            //    }else if(moment().hour() > 18 && moment().hour() < 23) {
+            //        $scope.greeting = "Guten Abend!";
+            //    }else if(moment().hour() >= 23 || moment().hour() < 4) {
+            //        $scope.greeting = "Zeit fürs Bett!";
+            //    }else{
+            //        $scope.greeting = "Schönen Tag!";
+            //    }
+            //};
+            //
+            //greetingUpdater();
+            //$interval(greetingUpdater, 1000);
 
             var refreshTrafficData = function() {
                 TrafficService.getTravelDuration().then(function(durationTraffic) {
@@ -102,7 +104,7 @@
                 });
             };
 
-            //moment.locale('de');
+
 
             refreshTrafficData();
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
