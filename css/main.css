@@ -165,7 +165,7 @@ ul.calendar {
 .weather-week .day {
     display: inline-block;
     margin-right: 10px;
-    width: 50px;
+    width: 40px;
 }
 
 .weather-week .tempreture {
