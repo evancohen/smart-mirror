@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Smart Mirror</title>
-    <!-- Libraries -->
     <script src="js/annyang.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+    <!-- bower:js -->
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <!-- endbower -->
     <!-- App -->
     <script src="config.js"></script>
     <script src="js/rrule.js"></script>
@@ -21,13 +22,15 @@
     <script src="js/giphy-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
+    <script src="js/traffic-service.js"></script>
     <script src="js/controller.js"></script>
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
 	<link rel="stylesheet" href="css/weather-icons.css">
-
+    <!-- bower:css -->
+    <!-- endbower -->
   </head>
   <body ng-controller="MirrorCtrl as commands">
     <div class="top">
@@ -61,6 +64,13 @@
               <span class="tempreture tempreture-min">{{forcast.temperatureMin}}&deg;</span>
               <span class="tempreture tempreture-max">{{forcast.temperatureMax}}&deg;</span>
             </div>
+          </div>
+        </div>
+        <div class="traffic">
+          <div ng-show="!traffic.error" class="traffic-information">
+            <span class="time-to">Time to {{traffic.destination}}:</span>
+            <span ng-show="traffic.hours > 0">{{traffic.hours}} hours and</span>
+            <span>{{traffic.minutes}} minutes</span>
           </div>
         </div>
       </div>

@@ -21,6 +21,15 @@ var config = {
     },
     // Giphy
     giphy: {
-      key : "dc6zaTOxFJmzC"
+      key : "" // Your Gliphy API key
+    },
+
+    traffic: {
+      key : "", // Bing Maps API Key
+      mode : "Driving", // Possibilities: Driving / Transit / Walking
+      origin : "", // Start of your trip. Human readable address.
+      destination : "", // Destination of your trip. Human readable address.
+      name : "work", // Name of your destination ex: "work"
+      reload_interval : 5 // Number of minutes the information is refreshed
     }
 }

@@ -10,6 +10,7 @@
             CalendarService,
             XKCDService,
             GiphyService,
+            TrafficService,
             $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
@@ -50,10 +51,11 @@
                         console.log("Weekly", $scope.weeklyForcast);
                         console.log("Hourly", $scope.hourlyForcast);
                     });
+                }, function(error){
+                    console.log(error);
                 });
 
-                var promise = CalendarService.renderAppointments();
-                promise.then(function(response) {
+                CalendarService.getCalendarEvents().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
                     console.log(error);
@@ -64,6 +66,22 @@
 
             refreshMirrorData();
             $interval(refreshMirrorData, 3600000);
+
+            var refreshTrafficData = function() {
+                TrafficService.getTravelDuration().then(function(durationTraffic) {
+                    console.log("Traffic", durationTraffic);
+                    $scope.traffic = {
+                        destination:config.traffic.name,
+                        hours : durationTraffic.hours(),
+                        minutes : durationTraffic.minutes()
+                    };
+                }, function(error){
+                    $scope.traffic = {error: error};
+                });
+            };
+
+            refreshTrafficData();
+            $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
