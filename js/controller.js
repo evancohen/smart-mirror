@@ -83,6 +83,18 @@
             refreshTrafficData();
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
+            var refreshComic = function () {
+            	console.log("Refreshing comic");
+            	XKCDService.initDilbert().then(function(data) {
+            		console.log("Dilbert comic initialized");
+            	}, function(error) {
+            		console.log(error);
+            	});
+            };
+            
+            refreshComic();
+            $interval(refreshComic, 12*60*60000); // 12 hours
+
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
@@ -198,6 +210,15 @@
                     $scope.xkcd = data.img;
                     $scope.focus = "xkcd";
                 });
+            });
+            
+            // Show Dilbert comic
+            AnnyangService.addCommand('Show Dilbert (comic)', function(state, action) {
+                console.debug("Fetching a Dilbert comic for you.");
+                var dilbert = XKCDService.getDilbert("today");  // call it with "random" for random comic
+                $scope.dilbert = dilbert.content;
+                $scope.comicTitle = dilbert.title;
+                $scope.focus = "dilbert";
             });
 
             var resetCommandTimeout;
