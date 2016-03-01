@@ -12,6 +12,10 @@ var config = {
         midday: ["Hey!", "Hello"],
         evening: ["Good evening"]
     }, // An array of greetings to randomly choose from
+    sleep_timer: {
+            start: 23,
+            end: 06,
+    },//automatic "good night" mod
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key

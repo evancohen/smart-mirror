@@ -108,8 +108,6 @@
                 });
             };
 
-
-
             refreshTrafficData();
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
@@ -117,6 +115,22 @@
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
             }
+
+            //sleep timer
+            //var sleepTimer = function (){
+            //    if(typeof config.sleep_timer != 'undefined'
+            //    && typeof config.sleep_timer.start != 'undefined'
+            //    && typeof config.sleep_timer.end != 'undefined'){
+            //        console.log(moment().hour() <= config.sleep_timer.start);
+            //        console.log('END: ')
+            //        console.log(moment().hour() > config.sleep_timer.end);
+            //        if(moment().hour() <= config.sleep_timer.start || moment().hour() > config.sleep_timer.end){
+            //            $scope.focus = "sleep";
+            //        }
+            //    }
+            //};
+            //$interval(sleepTimer, 6000);
+
 
             //AnnyangService.setLanguage('de-DE');
 
@@ -137,7 +151,12 @@
             });
 
             // Go back to default view
-            AnnyangService.addCommand('wake up', defaultView);
+            AnnyangService.addCommand('wake up', function(){
+                defaultView();
+                //$interval.cancel(sleepTimer);
+                //$interval(sleepTimer, 120000);
+                //sleepTimer = undefined;
+            });
 
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show debug information', function() {
