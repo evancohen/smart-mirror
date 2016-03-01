@@ -93,7 +93,7 @@
             };
             
             refreshComic();
-            $interval(refreshTodoList, 12*60*60000); // 12 hours
+            $interval(refreshComic, 12*60*60000); // 12 hours
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
