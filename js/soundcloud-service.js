@@ -16,7 +16,7 @@
             return $http.get('https://api.soundcloud.com/tracks.json?client_id=' + SOUNDCLOUD_KEY + '&q=' + query + '&limit=1').
                 then(function(response) {
                     service.scResponse = response.data;
-					console.debug("link: ", service.scResponse[0].permalink_url);
+					console.debug("SoundCloud link: ", service.scResponse[0].permalink_url);
 					return service.scResponse;
                 });
         };       

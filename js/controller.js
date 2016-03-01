@@ -28,7 +28,6 @@
             $scope.date = new Date();
         }
 
-
         // Reset the command text
         var restCommand = function(){
           $scope.interimResult = DEFAULT_COMMAND_TEXT;
@@ -167,20 +166,16 @@
             });
 			//SoundCloud stop
 			AnnyangService.addCommand('SoundCloud (pause)(post)(stop)(stock)', function() {
-				if(playing) 
-					sound.pause();
+				sound.pause();
             });
 			//SoundCloud resume
-			AnnyangService.addCommand('SoundCloud resume', function() {
-				if(playing) 
-					sound.play();
+			AnnyangService.addCommand('SoundCloud (play)(resume)', function() {
+				sound.play();
             });
 			//SoundCloud replay
 			AnnyangService.addCommand('SoundCloud replay', function() {
-				if(playing) {
-					sound.seek(0);
-					sound.play();
-				}
+				sound.seek(0);
+				sound.play();
             });
 			
             //Search for a video

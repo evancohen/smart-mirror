@@ -210,7 +210,6 @@ ul.calendar {
 }
 
 .sc-container {
-	width: 500px;
 	margin:auto;
 	-webkit-filter: grayscale(70%);
 	filter: grayscale(70%);
@@ -219,7 +218,6 @@ ul.calendar {
 .scWaveform {
 	background-color: #000000;
 	width: 500px;
-	margin:auto;
 	-webkit-filter: invert(100%);
 	filter: invert(100%);
 }
