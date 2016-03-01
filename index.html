@@ -46,7 +46,7 @@
                 <div class="event-details">
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
                     <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format(config.dateFormat.date)}} {{event.start.format(config.dateFormat.time)}}</div>
+                    <div class="details">{{event.start.format(calcDateFormat)}}</div>
                     </li>
                 </div>
         </ul>

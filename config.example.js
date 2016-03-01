@@ -10,7 +10,8 @@ var config = {
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
-        units : "auto" // See forcast.io documentation if you are getting the wrong units
+        units : "auto", // See forcast.io documentation if you are getting the wrong units
+        language: "en",// see https://developer.forecast.io/docs/v2 "lang="
     },
     // Philips Hue
     hue : {
@@ -22,7 +23,8 @@ var config = {
     calendar: {
       icals : [],
       maxResults: 9, // Number of calender events to display (Defaults is 9)
-      maxDays: 365 // Number of days to display (Default is one year)
+      maxDays: 365, // Number of days to display (Default is one year)
+      dateFormat: "MMMM Do YYYY, h:mm:ss a",
     },
     // Giphy
     giphy: {

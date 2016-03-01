@@ -28,6 +28,7 @@
 
 
         $scope.dateFormat = config.dateFormat;
+        $scope.calcDateFormat = config.calendar.dateFormat;
         //Update the time
         function updateTime(){
             $scope.date = new Date();
