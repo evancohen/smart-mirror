@@ -209,6 +209,21 @@ ul.calendar {
     */
 }
 
+.sc-container {
+	width: 500px;
+	margin:auto;
+	-webkit-filter: grayscale(70%);
+	filter: grayscale(70%);
+	font-family: bold;
+}
+.scWaveform {
+	background-color: #000000;
+	width: 500px;
+	margin:auto;
+	-webkit-filter: invert(100%);
+	filter: invert(100%);
+}
+
 .color-block {
     height: 200px;
     width: 200px;

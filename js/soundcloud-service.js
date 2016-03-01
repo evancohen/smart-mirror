@@ -3,7 +3,7 @@
 
     function SoundCloudService($http) {
         var service = {};
-		service.song = null;
+		service.scResponse = null;
 		
 		service.init = function() {
 			SC.initialize({
@@ -15,9 +15,9 @@
         service.searchSoundCloud = function(query) {
             return $http.get('https://api.soundcloud.com/tracks.json?client_id=' + SOUNDCLOUD_KEY + '&q=' + query + '&limit=1').
                 then(function(response) {
-                    service.song = response.data;
-					console.debug("link: ", service.song[0].permalink_url);
-					return service.song;
+                    service.scResponse = response.data;
+					console.debug("link: ", service.scResponse[0].permalink_url);
+					return service.scResponse;
                 });
         };       
         return service;

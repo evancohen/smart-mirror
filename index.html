@@ -72,10 +72,12 @@
         <div class="video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
-		<div class="sc-widget-container animate-grow" id="sc-widget" ng-show="focus == 'sc-widget'"></div>
-		<!-- <div class="sc-widget animate-grow" ng-show="focus == 'sc-widget'">
-          <iframe class="sc-widget animate-grow" ng-src="{{sc-widget}}"/></iframe>
-        </div> -->
+		<!-- <div class="sc-widget-container animate-grow" id="sc-widget" ng-show="focus == 'sc-widget'"></div> -->
+		<div class="sc-container animate-grow" ng-show="focus == 'sc'">
+          <img class="sc" ng-src="{{scThumb}}"/>
+		  <img class="scWaveform" ng-src="{{scWaveform}}"/>
+		  <h2 class="sc">{{scTrack}}</h2>
+        </div>
       </div>
       <div class="bottom-center">
         <!-- Command list -->
@@ -96,6 +98,8 @@
             <dd>Shows a map of your current city.</dd>
             <dt>Show map of ________</dt>
             <dd>Shows a map of the given location.</dd>
+			<dt>SoundCloud play/pause/stop/repeat</dt>
+            <dd>SoundCloud player controls.</dd>
           </dl>
           <small>
             We are using node <script>document.write(process.versions.node)</script>,
