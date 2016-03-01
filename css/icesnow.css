@@ -41,10 +41,12 @@
 .top-right {
     float: left;
     text-align: left;
+    width: 250px;
 }
 
 .top-right .weather {
     text-align: left;
+    width: 100%;
 }
 
 /*
@@ -53,6 +55,10 @@ Weather
 
 */
 
+.weather-today .tempreture {
+    font-size: 80px;
+}
+
 .weather-week-descriptor span.ng-binding:first-child {
     font-size: 21px;
 }
@@ -60,6 +66,20 @@ Weather
 .weather-week-descriptor span.ng-binding {
     text-align: left;
     word-spacing: normal;
+    display: inline-block;
+}
+
+.weather-week-day {
+    margin-bottom: 5px;
+}
+
+.weather .weather-today .icon,
+.weather .weather-week-day .icon-small {
+    display: none;
+}
+
+.weather .weather-today canvas,
+.weather .weather-week-day canvas {
     display: inline-block;
 }
 

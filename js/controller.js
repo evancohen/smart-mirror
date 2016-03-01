@@ -59,7 +59,21 @@
                         console.log("Current", $scope.currentForcast);
                         console.log("Weekly", $scope.weeklyForcast);
                         console.log("Hourly", $scope.hourlyForcast);
+
+                        var skycons = new Skycons({"color": "#aaa"});
+                        skycons.add("icon_weather_current", $scope.currentForcast.iconAnimation);
+
+                        skycons.play();
+
+                        $scope.iconLoad = function (elementId, iconAnimation){
+                            console.log(iconAnimation);
+                            skycons.add(document.getElementById(elementId), iconAnimation);
+                            skycons.play();
+                        };
+
                     });
+
+
                 }, function(error){
                     console.log(error);
                 });

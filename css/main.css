@@ -173,6 +173,11 @@ ul.calendar {
     width: 60px;
 }
 
+.weather .weather-today canvas,
+.weather .weather-week-day canvas {
+    display: none;
+}
+
 .traffic-information {
     text-align: right;
     margin-top: 10px;
