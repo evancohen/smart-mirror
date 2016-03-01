@@ -149,18 +149,17 @@
 			//SoundCloud search and play
 			AnnyangService.addCommand('SoundCloud play *query', function(query) {
 				SoundCloudService.searchSoundCloud(query).then(function(response){					
-					/* $scope.video = SC.oEmbed(response[0].permalink_url, {
-						auto_play: true,
-						element: document.getElementById('sc-widget')
-					});
-					setFocus("sc-widget"); */
 					SC.stream('/tracks/' + response[0].id).then(function(player){
 						player.play();
 						sound = player;
 						playing = true; 
 					});
-					var artwork = response[0].artwork_url;
-					$scope.scThumb = artwork.replace("-large.", "-t500x500."); 
+
+					if (response[0].artwork_url){
+						$scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500."); 
+					} else {
+						$scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+					}
 					$scope.scWaveform = response[0].waveform_url; 
 					$scope.scTrack = response[0].title;
 					$scope.focus = "sc";
@@ -170,6 +169,11 @@
 			AnnyangService.addCommand('SoundCloud (pause)(post)(stop)(stock)', function() {
 				if(playing) 
 					sound.pause();
+            });
+			//SoundCloud resume
+			AnnyangService.addCommand('SoundCloud resume', function() {
+				if(playing) 
+					sound.play();
             });
 			//SoundCloud replay
 			AnnyangService.addCommand('SoundCloud replay', function() {
