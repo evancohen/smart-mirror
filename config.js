@@ -21,6 +21,6 @@ var config = {
     },
     // Giphy
     giphy: {
-      key : "{YOUR_GIPHY_API_KEY}"
+      key : "dc6zaTOxFJmzC"
     }
 }
