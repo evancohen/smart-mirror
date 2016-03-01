@@ -1,4 +1,4 @@
 var FORCAST_API_KEY = "{YOUR_KEY_HERE}";
 var HUE_BASE = "http://{IP_ADDRESS_OF_BRIDGE}/api/{Username}/";
 var PERSONAL_CALENDAR = [];
-var SOUNDCLOUD_KEY = "4fc2891a3f64541fdf452bb8758c4f2d";
+var SOUNDCLOUD_KEY = "";
