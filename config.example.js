@@ -6,7 +6,12 @@ var config = {
         time: "hh:mm a",
         date: "EEEE, MMMM d yyyy",
     },
-    greeting : [], // An array of greetings to randomly choose from
+    greeting : {
+        night: ["Bed?", "zZzzZz", "Time to sleep"],
+        morning: ["Good Morning"],
+        midday: ["Hey!", "Hello"],
+        evening: ["Good evening"]
+    }, // An array of greetings to randomly choose from
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
