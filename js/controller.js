@@ -215,9 +215,7 @@
             // Show Dilbert comic
             AnnyangService.addCommand('Show Dilbert (comic)', function(state, action) {
                 console.debug("Fetching a Dilbert comic for you.");
-                var dilbert = ComicService.getDilbert("today");  // call it with "random" for random comic
-                $scope.dilbert = dilbert.content;
-                $scope.comicTitle = dilbert.title;
+                $scope.dilbert = ComicService.getDilbert("today");  // call it with "random" for random comic
                 $scope.focus = "dilbert";
             });
 
