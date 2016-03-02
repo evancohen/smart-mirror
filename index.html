@@ -27,7 +27,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css" />
-	<link rel="stylesheet" href="css/weather-icons.css">
+    <link rel="stylesheet" href="css/weather-icons.css">
 
   </head>
   <body ng-controller="MirrorCtrl as commands">
@@ -88,8 +88,8 @@
           <img class="xkcd animate-grow" ng-src="{{xkcd}}"/>
         </div>
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
-          <img class="dilbert animate-grow" ng-src="{{dilbert}}"/>
-          <div class="comic-title">{{comicTitle}}</div>
+          <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
+          <div class="comic-title">{{dilbert.title}}</div>
         </div>
       </div>
       <div class="bottom-center">
