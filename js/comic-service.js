@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    function XKCDService($http) {
+    function ComicService($http) {
         var service = {};
 
         service.getXKCD = function(){
@@ -36,6 +36,6 @@
     }
 
     angular.module('SmartMirror')
-        .factory('XKCDService', XKCDService);
+        .factory('ComicService', ComicService);
 
 }());
