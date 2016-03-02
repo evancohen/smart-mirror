@@ -8,7 +8,7 @@
             MapService,
             HueService,
             CalendarService,
-            XKCDService,
+            ComicService,
             GiphyService,
             TrafficService,
             $scope, $timeout, $interval) {
@@ -85,7 +85,7 @@
 
             var refreshComic = function () {
             	console.log("Refreshing comic");
-            	XKCDService.initDilbert().then(function(data) {
+            	ComicService.initDilbert().then(function(data) {
             		console.log("Dilbert comic initialized");
             	}, function(error) {
             		console.log(error);
@@ -206,7 +206,7 @@
             // Show xkcd comic
             AnnyangService.addCommand('Show xkcd', function(state, action) {
                 console.debug("Fetching a comic for you.");
-                XKCDService.getXKCD().then(function(data){
+                ComicService.getXKCD().then(function(data){
                     $scope.xkcd = data.img;
                     $scope.focus = "xkcd";
                 });
@@ -215,9 +215,7 @@
             // Show Dilbert comic
             AnnyangService.addCommand('Show Dilbert (comic)', function(state, action) {
                 console.debug("Fetching a Dilbert comic for you.");
-                var dilbert = XKCDService.getDilbert("today");  // call it with "random" for random comic
-                $scope.dilbert = dilbert.content;
-                $scope.comicTitle = dilbert.title;
+                $scope.dilbert = ComicService.getDilbert("today");  // call it with "random" for random comic
                 $scope.focus = "dilbert";
             });
 
