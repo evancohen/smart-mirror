@@ -240,7 +240,7 @@
 
             // Check the time
             AnnyangService.addCommand('what time is it', function(task) {
-                 console.debug("It is", moment().locale('de').format('h:mm:ss a'));
+                 console.debug("It is", moment().format('h:mm:ss a'));
             });
 
             // Turn lights off
