@@ -16,9 +16,11 @@
   "moduleType": [],
   "private": true,
   "dependencies": {
+    "annyang": "2.2.*",
     "moment": "^2.11.2",
     "jquery": "^2.2.1",
     "angular": "angularjs#^1.5.0",
-    "angular-animate": "1.5.0"
+    "angular-animate": "1.5.0",
+    "angular-dynamic-locale": "0.1.*"
   }
 }
