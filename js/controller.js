@@ -22,8 +22,6 @@
 
         $scope.layoutName = 'main';
 
-        $scope.focus = "weather-hourly";
-
         //set lang
         tmhDynamicLocale.set(config.language);
         moment.locale(config.language);
