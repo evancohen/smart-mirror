@@ -9,6 +9,7 @@
             HueService, 
             CalendarService, 
             SearchService,
+			SoundCloudService,
             $scope, 
             $timeout, 
             $interval) {
@@ -27,7 +28,6 @@
             $scope.date = new Date();
         }
 
-
         // Reset the command text
         var restCommand = function(){
           $scope.interimResult = DEFAULT_COMMAND_TEXT;
@@ -43,6 +43,10 @@
             //Initiate Hue communication
             HueService.init();
 
+			//Initialize SoundCloud
+			var playing = false, sound;
+			SoundCloudService.init();
+			
             var refreshMirrorData = function() {
                 //Get our location and then get the weather for our location
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -140,7 +144,40 @@
                 $scope.map = MapService.reset();
                 setFocus("map");
             });
-            
+			
+			//SoundCloud search and play
+			AnnyangService.addCommand('SoundCloud play *query', function(query) {
+				SoundCloudService.searchSoundCloud(query).then(function(response){					
+					SC.stream('/tracks/' + response[0].id).then(function(player){
+						player.play();
+						sound = player;
+						playing = true; 
+					});
+
+					if (response[0].artwork_url){
+						$scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500."); 
+					} else {
+						$scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+					}
+					$scope.scWaveform = response[0].waveform_url; 
+					$scope.scTrack = response[0].title;
+					$scope.focus = "sc";
+				});
+            });
+			//SoundCloud stop
+			AnnyangService.addCommand('SoundCloud (pause)(post)(stop)(stock)', function() {
+				sound.pause();
+            });
+			//SoundCloud resume
+			AnnyangService.addCommand('SoundCloud (play)(resume)', function() {
+				sound.play();
+            });
+			//SoundCloud replay
+			AnnyangService.addCommand('SoundCloud replay', function() {
+				sound.seek(0);
+				sound.play();
+            });
+			
             //Search for a video
             AnnyangService.addCommand('show me (a video)(of)(about) *query', function(query){
                 SearchService.searchYouTube(query).then(function(results){
