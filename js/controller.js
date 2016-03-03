@@ -133,7 +133,7 @@
             		console.log(error);
             	});
             };
-            
+
             refreshComic();
             $interval(refreshComic, 12*60*60000); // 12 hours
 
@@ -148,6 +148,10 @@
             // List commands
             AnnyangService.addCommand('What can I say', function() {
                 console.debug("Here is a list of commands...");
+                //text to speech
+                if(responsiveVoice.voiceSupport()) {
+                  responsiveVoice.speak("Here is a list of commands...","US English Male");
+                }
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
@@ -258,7 +262,7 @@
                     $scope.focus = "xkcd";
                 });
             });
-            
+
             // Show Dilbert comic
             AnnyangService.addCommand('Show Dilbert (comic)', function(state, action) {
                 console.debug("Fetching a Dilbert comic for you.");

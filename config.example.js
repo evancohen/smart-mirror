@@ -43,6 +43,7 @@ var config = {
     giphy: {
       key : "" // Your Gliphy API key
     },
+
     traffic: {
       key : "", // Bing Maps API Key
       mode : "Driving", // Possibilities: Driving / Transit / Walking
