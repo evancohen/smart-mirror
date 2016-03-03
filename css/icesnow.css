@@ -83,6 +83,17 @@ Weather
     display: inline-block;
 }
 
+.weather .weather-week-descriptor span {
+    padding-bottom: 7px;
+    margin-bottom: 7px;
+    display: block;
+    border-bottom: 2px solid #aaa;
+}
+
+.weather .weather-week-descriptor span:last-child {
+    border-bottom: 0;
+}
+
 /*
 Calc
 */
