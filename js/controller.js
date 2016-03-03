@@ -12,12 +12,16 @@
             ComicService,
             GiphyService,
             TrafficService,
+<<<<<<< HEAD
             TimerService,
             ReminderService,
             SearchService,
             SoundCloudService,
             RssService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
+=======
+            $scope, $timeout, $interval, $filter) {
+>>>>>>> auto-wake/auto-sleep functionality
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
@@ -40,9 +44,38 @@
         moment.locale((typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
         console.log('moment local', moment.locale());
 
+        var autoSleepTimer;
+
+        $scope.startAutoSleepTimer = function() {
+            $scope.stopAutoSleepTimer();
+            autoSleepTimer = $interval($scope.sleepInterval, config.autoTimer.autosleep);
+            console.debug('Starting autosleep timer', config.autoTimer.autosleep);
+        }
+
+        $scope.sleepInterval = function() {
+            console.debug('Auto-sleep.')
+            $scope.focus = "sleep";
+        }
+
+        $scope.stopAutoSleepTimer = function() {
+            console.debug('Stopping autosleep timer');
+            $interval.cancel(autoSleepTimer);
+        }
+
         //Update the time
         function updateTime(){
+<<<<<<< HEAD
             $scope.date = new moment();
+=======
+            $scope.date = new Date();
+
+            if (config.autoTimer.enabled === true && config.autoTimer.autowake == $filter('date')($scope.date, 'HH:mm:ss'))
+            {
+                console.debug('Auto-wake', config.autoTimer.autowake)
+                $scope.focus = "default";
+                $scope.startAutoSleepTimer();
+            }
+>>>>>>> auto-wake/auto-sleep functionality
         }
 
         // Reset the command text
@@ -53,6 +86,11 @@
         };
 
         _this.init = function() {
+            if (config.autoTimer.enabled)
+            {
+                $scope.startAutoSleepTimer();
+            }
+
             var tick = $interval(updateTime, 1000);
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
