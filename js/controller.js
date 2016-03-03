@@ -11,7 +11,7 @@
             XKCDService,
             GiphyService,
             TrafficService,
-            $scope, $timeout, $interval) {
+            $scope, $timeout, $interval, tmhDynamicLocale) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -20,6 +20,15 @@
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
 
+        $scope.layoutName = 'main';
+
+        //set lang
+        tmhDynamicLocale.set(config.language);
+        moment.locale(config.language);
+
+
+        $scope.dateFormat = config.dateFormat;
+        $scope.calcDateFormat = config.calendar.dateFormat;
         //Update the time
         function updateTime(){
             $scope.date = new Date();
@@ -50,7 +59,21 @@
                         console.log("Current", $scope.currentForcast);
                         console.log("Weekly", $scope.weeklyForcast);
                         console.log("Hourly", $scope.hourlyForcast);
+
+                        var skycons = new Skycons({"color": "#aaa"});
+                        skycons.add("icon_weather_current", $scope.currentForcast.iconAnimation);
+
+                        skycons.play();
+
+                        $scope.iconLoad = function (elementId, iconAnimation){
+                            console.log(iconAnimation);
+                            skycons.add(document.getElementById(elementId), iconAnimation);
+                            skycons.play();
+                        };
+
                     });
+
+
                 }, function(error){
                     console.log(error);
                 });
@@ -61,11 +84,30 @@
                     console.log(error);
                 });
 
-                $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
 
             refreshMirrorData();
-            $interval(refreshMirrorData, 3600000);
+            $interval(refreshMirrorData, 1500000);
+
+            var greetingUpdater = function () {
+                if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                    var geetingTime = "midday";
+
+                    if (moment().hour() > 4 && moment().hour() < 11) {
+                        geetingTime = "morning";
+                    } else if (moment().hour() > 18 && moment().hour() < 23) {
+                        geetingTime = "evening";
+                    } else if (moment().hour() >= 23 || moment().hour() < 4) {
+                        geetingTime = "night";
+                    }
+
+                    $scope.greeting = config.greeting[geetingTime][Math.floor(Math.random() * config.greeting.morning.length)];
+                }else if(Array.isArray(config.greeting)){
+                    $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
+                }
+            };
+            greetingUpdater();
+            $interval(greetingUpdater, 120000);
 
             var refreshTrafficData = function() {
                 TrafficService.getTravelDuration().then(function(durationTraffic) {
@@ -88,6 +130,24 @@
                 $scope.focus = "default";
             }
 
+            //sleep timer
+            //var sleepTimer = function (){
+            //    if(typeof config.sleep_timer != 'undefined'
+            //    && typeof config.sleep_timer.start != 'undefined'
+            //    && typeof config.sleep_timer.end != 'undefined'){
+            //        console.log(moment().hour() <= config.sleep_timer.start);
+            //        console.log('END: ')
+            //        console.log(moment().hour() > config.sleep_timer.end);
+            //        if(moment().hour() <= config.sleep_timer.start || moment().hour() > config.sleep_timer.end){
+            //            $scope.focus = "sleep";
+            //        }
+            //    }
+            //};
+            //$interval(sleepTimer, 6000);
+
+
+            //AnnyangService.setLanguage('de-DE');
+
             // List commands
             AnnyangService.addCommand('What can I say', function() {
                 console.debug("Here is a list of commands...");
@@ -105,7 +165,12 @@
             });
 
             // Go back to default view
-            AnnyangService.addCommand('Wake up', defaultView);
+            AnnyangService.addCommand('wake up', function(){
+                defaultView();
+                //$interval.cancel(sleepTimer);
+                //$interval(sleepTimer, 120000);
+                //sleepTimer = undefined;
+            });
 
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show debug information', function() {
@@ -218,5 +283,29 @@
 
     angular.module('SmartMirror')
         .controller('MirrorCtrl', MirrorCtrl);
+
+
+
+
+    function themeController($scope) {
+
+        var layoutName = 'main';
+        if(typeof config.layout != 'undefined' && config.layout){
+            layoutName = config.layout;
+        }
+
+        $scope.layoutName = layoutName;
+
+
+        var angularLang = 'en';
+        if(typeof config.language != 'undefined' && config.language){
+            angularLang = config.language;
+        }
+
+        $scope.angularLang = angularLang;
+    }
+
+    angular.module('SmartMirror')
+        .controller('Theme', themeController);
 
 }(window.angular));
