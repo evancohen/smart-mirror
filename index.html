@@ -16,7 +16,7 @@
     <script src="js/app.js"></script>
     <script src="js/annyang-service.js"></script>
     <script src="js/weather-service.js"></script>
-    <script src="js/xkcd-service.js"></script>
+    <script src="js/comic-service.js"></script>
     <script src="js/map-service.js"></script>
     <script src="js/hue-service.js"></script>
     <script src="js/giphy-service.js"></script>
@@ -31,6 +31,7 @@
 	<link rel="stylesheet" href="css/weather-icons.css">
     <!-- bower:css -->
     <!-- endbower -->
+	
   </head>
   <body ng-controller="MirrorCtrl as commands">
     <div class="top">
@@ -88,6 +89,10 @@
         </div>
         <div class="xkcd-container animate-grow" ng-show="focus == 'xkcd'">
           <img class="xkcd animate-grow" ng-src="{{xkcd}}"/>
+        </div>
+        <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
+          <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
+          <div class="comic-title">{{dilbert.title}}</div>
         </div>
       </div>
       <div class="bottom-center">
