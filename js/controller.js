@@ -84,30 +84,30 @@
                     console.log(error);
                 });
 
-                if(typeof config.greeting.midday == 'undefined') {
-                    $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
-                }
-
             };
 
             refreshMirrorData();
             $interval(refreshMirrorData, 1500000);
 
-            if(typeof config.greeting.midday != 'undefined') {
-                var greetingUpdater = function () {
+            var greetingUpdater = function () {
+                if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                    var geetingTime = "midday";
+
                     if (moment().hour() > 4 && moment().hour() < 11) {
-                        $scope.greeting = config.greeting.morning[Math.floor(Math.random() * config.greeting.morning.length)];
+                        geetingTime = "morning";
                     } else if (moment().hour() > 18 && moment().hour() < 23) {
-                        $scope.greeting = config.greeting.evening[Math.floor(Math.random() * config.greeting.evening.length)];
+                        geetingTime = "evening";
                     } else if (moment().hour() >= 23 || moment().hour() < 4) {
-                        $scope.greeting = config.greeting.night[Math.floor(Math.random() * config.greeting.night.length)];
-                    } else {
-                        $scope.greeting = config.greeting.midday[Math.floor(Math.random() * config.greeting.midday.length)];
+                        geetingTime = "night";
                     }
-                };
-                greetingUpdater();
-                $interval(greetingUpdater, 120000);
-            }
+
+                    $scope.greeting = config.greeting[geetingTime][Math.floor(Math.random() * config.greeting.morning.length)];
+                }else if(Array.isArray(config.greeting)){
+                    $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
+                }
+            };
+            greetingUpdater();
+            $interval(greetingUpdater, 120000);
 
             var refreshTrafficData = function() {
                 TrafficService.getTravelDuration().then(function(durationTraffic) {
