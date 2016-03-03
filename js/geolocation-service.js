@@ -1,6 +1,14 @@
 (function() {
     'use strict';
 
+    /*
+     var position = {
+     latitude: 78.23423423,
+     longitude: 13.123124142
+     }
+     deferred.resolve(position);
+     */
+
     function GeolocationService($q,$rootScope,$window) {
         var service = {};
         var geoloc = null;
@@ -13,7 +21,19 @@
 
         service.getLocation = function (opts) {
         var deferred = $q.defer();
-        if ($window.navigator && $window.navigator.geolocation) {
+
+        if(typeof config.geo_position != 'undefined'
+            && typeof config.geo_position.latitude != 'undefined'
+            && typeof config.geo_position.longitude != 'undefined'){//use geo postion from config file
+
+            deferred.resolve({
+                coords: {
+                    latitude: config.geo_position.latitude,
+                    longitude: config.geo_position.longitude,
+                },
+            });
+
+        }else if ($window.navigator && $window.navigator.geolocation) {
           if(geoloc !== null){
             console.log("Cached Geolocation", geoloc);
             return(geoloc);

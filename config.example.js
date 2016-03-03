@@ -16,6 +16,13 @@ var config = {
     //    evening: ["Good evening"]
     //}, // An array of greetings to randomly choose from
 
+
+    //use this only if you want to change the weather location
+    //geo_position: {
+    //    latitude: 78.23423423,
+    //    longitude: 13.123124142
+    //},
+
     sleep_timer: {
             start: 23,
             end: 06,
