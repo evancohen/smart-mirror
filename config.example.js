@@ -6,12 +6,16 @@ var config = {
         time: "hh:mm a",
         date: "EEEE, MMMM d yyyy",
     },
-    greeting : {
-        night: ["Bed?", "zZzzZz", "Time to sleep"],
-        morning: ["Good Morning"],
-        midday: ["Hey!", "Hello"],
-        evening: ["Good evening"]
-    }, // An array of greetings to randomly choose from
+    
+    greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
+    //you can also use timebased greetings
+    //greeting : {
+    //    night: ["Bed?", "zZzzZz", "Time to sleep"],
+    //    morning: ["Good Morning"],
+    //    midday: ["Hey!", "Hello"],
+    //    evening: ["Good evening"]
+    //}, // An array of greetings to randomly choose from
+
     sleep_timer: {
             start: 23,
             end: 06,
