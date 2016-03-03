@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/evancohen/smart-mirror",
   "devDependencies": {
-    "angular-dynamic-locale": "0.1.*"
+    "angular-dynamic-locale": "0.1.*",
     "bower": "^1.7.7",
     "electron-prebuilt": "^0.36.5",
     "wiredep": "^3.0.0"
