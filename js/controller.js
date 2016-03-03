@@ -142,21 +142,6 @@
                 $scope.focus = "default";
             }
 
-            //sleep timer
-            //var sleepTimer = function (){
-            //    if(typeof config.sleep_timer != 'undefined'
-            //    && typeof config.sleep_timer.start != 'undefined'
-            //    && typeof config.sleep_timer.end != 'undefined'){
-            //        console.log(moment().hour() <= config.sleep_timer.start);
-            //        console.log('END: ')
-            //        console.log(moment().hour() > config.sleep_timer.end);
-            //        if(moment().hour() <= config.sleep_timer.start || moment().hour() > config.sleep_timer.end){
-            //            $scope.focus = "sleep";
-            //        }
-            //    }
-            //};
-            //$interval(sleepTimer, 6000);
-
 
             //AnnyangService.setLanguage('de-DE');
 
@@ -177,11 +162,8 @@
             });
 
             // Go back to default view
-            AnnyangService.addCommand('wake up', function(){
+            AnnyangService.addCommand('Wake up', function(){
                 defaultView();
-                //$interval.cancel(sleepTimer);
-                //$interval(sleepTimer, 120000);
-                //sleepTimer = undefined;
             });
 
             // Hide everything and "sleep"
