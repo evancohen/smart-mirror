@@ -159,7 +159,7 @@
             AnnyangService.addCommand('Go home', defaultView);
 
             // Hide everything and "sleep"
-            AnnyangService.addCommand('good night', function() {
+            AnnyangService.addCommand('Go to sleep', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
             });
