@@ -6,7 +6,7 @@ var config = {
         time: "hh:mm a",
         date: "EEEE, MMMM d yyyy",
     },
-    
+
     greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
     //you can also use timebased greetings
     //greeting : {

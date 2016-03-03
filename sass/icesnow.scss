@@ -1,5 +1,12 @@
 @import "main";
 
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:200,400,500);
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
+}
+
 .top-left {
   float: right;
   text-align: right;
