@@ -56,6 +56,7 @@ Weather
 
 .weather-today .tempreture {
   font-size: 80px;
+  white-space: pre-wrap;
 }
 
 .weather-week-descriptor span.ng-binding {
@@ -87,6 +88,10 @@ Weather
       border-bottom: 0;
     }
   }
+
+  .weather-week .tempreture {
+    white-space: pre-wrap;
+  }
 }
 
 .weather-hourly-container {
@@ -102,6 +107,10 @@ Weather
             span {
               display: none;
             }
+          }
+
+          &.weather-tempreture {
+            white-space: pre-wrap;
           }
         }
       }

@@ -328,7 +328,8 @@ Weather
 
 */
 .weather-today .tempreture {
-  font-size: 80px; }
+  font-size: 80px;
+  white-space: pre-wrap; }
 
 .weather-week-descriptor span.ng-binding {
   text-align: left;
@@ -351,12 +352,16 @@ Weather
   border-bottom: 2px solid #aaa; }
   .weather .weather-week-descriptor span:last-child {
     border-bottom: 0; }
+.weather .weather-week .tempreture {
+  white-space: pre-wrap; }
 
 .weather-hourly-container ul.weather-list li div.weather-icon canvas {
   display: block;
   margin: auto; }
 .weather-hourly-container ul.weather-list li div.weather-icon span {
   display: none; }
+.weather-hourly-container ul.weather-list li div.weather-tempreture {
+  white-space: pre-wrap; }
 
 /*
 Calc
