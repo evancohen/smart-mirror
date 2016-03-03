@@ -266,6 +266,12 @@
                 $scope.focus = "dilbert";
             });
 
+            //show hourly weather
+            AnnyangService.addCommand('Show (the) weather', function() {
+                console.debug("Display the hourly weather.");
+                $scope.focus = "weather-hourly";
+            });
+
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
             AnnyangService.start(function(listening){

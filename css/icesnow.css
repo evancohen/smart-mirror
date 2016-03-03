@@ -240,6 +240,49 @@ ul.calendar {
   -webkit-filter: invert(100%);
   max-width: 100%; }
 
+/* weather */
+.weather-hourly-container {
+  position: relative; }
+  .weather-hourly-container ul.weather-list {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+    .weather-hourly-container ul.weather-list:after, .weather-hourly-container ul.weather-list:before {
+      width: 40%;
+      height: 100%;
+      min-width: 100px;
+      content: "";
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      right: 0px;
+      z-index: 1;
+      background: linear-gradient(-90deg, #000 25%, transparent 79%); }
+    .weather-hourly-container ul.weather-list:before {
+      width: 5%;
+      max-width: 100px;
+      right: auto;
+      left: 0px;
+      background: linear-gradient(-90deg, transparent 13%, #000 79%); }
+    .weather-hourly-container ul.weather-list li {
+      display: inline-block;
+      text-align: center;
+      margin: 0 0.5rem; }
+      .weather-hourly-container ul.weather-list li canvas {
+        display: none; }
+      .weather-hourly-container ul.weather-list li div {
+        display: block;
+        margin-bottom: 4px; }
+        .weather-hourly-container ul.weather-list li div.weather-icon span {
+          font-size: 1.4rem; }
+        .weather-hourly-container ul.weather-list li div.weather-icon {
+          font-size: 1.2rem; }
+        .weather-hourly-container ul.weather-list li div.weather-hour {
+          color: #aaa; }
+
 body {
   font-family: 'Work Sans', sans-serif;
   font-weight: 300; }
@@ -285,7 +328,8 @@ Weather
 
 */
 .weather-today .tempreture {
-  font-size: 80px; }
+  font-size: 80px;
+  white-space: pre-wrap; }
 
 .weather-week-descriptor span.ng-binding {
   text-align: left;
@@ -308,6 +352,16 @@ Weather
   border-bottom: 2px solid #aaa; }
   .weather .weather-week-descriptor span:last-child {
     border-bottom: 0; }
+.weather .weather-week .tempreture {
+  white-space: pre-wrap; }
+
+.weather-hourly-container ul.weather-list li div.weather-icon canvas {
+  display: block;
+  margin: auto; }
+.weather-hourly-container ul.weather-list li div.weather-icon span {
+  display: none; }
+.weather-hourly-container ul.weather-list li div.weather-tempreture {
+  white-space: pre-wrap; }
 
 /*
 Calc
