@@ -3,3 +3,4 @@ config.js
 .idea
 npm-debug.log
 .DS_Store
+bower_components

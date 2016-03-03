@@ -8,7 +8,7 @@
             MapService,
             HueService,
             CalendarService,
-            XKCDService,
+            ComicService,
             GiphyService,
             TrafficService,
             $scope, $timeout, $interval, tmhDynamicLocale) {
@@ -124,6 +124,18 @@
 
             refreshTrafficData();
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
+
+            var refreshComic = function () {
+            	console.log("Refreshing comic");
+            	ComicService.initDilbert().then(function(data) {
+            		console.log("Dilbert comic initialized");
+            	}, function(error) {
+            		console.log(error);
+            	});
+            };
+            
+            refreshComic();
+            $interval(refreshComic, 12*60*60000); // 12 hours
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
@@ -259,10 +271,17 @@
             // Show xkcd comic
             AnnyangService.addCommand('Show xkcd', function(state, action) {
                 console.debug("Fetching a comic for you.");
-                XKCDService.getXKCD().then(function(data){
+                ComicService.getXKCD().then(function(data){
                     $scope.xkcd = data.img;
                     $scope.focus = "xkcd";
                 });
+            });
+            
+            // Show Dilbert comic
+            AnnyangService.addCommand('Show Dilbert (comic)', function(state, action) {
+                console.debug("Fetching a Dilbert comic for you.");
+                $scope.dilbert = ComicService.getDilbert("today");  // call it with "random" for random comic
+                $scope.focus = "dilbert";
             });
 
             var resetCommandTimeout;
