@@ -1,5 +1,4 @@
 var config = {
-
     // Lenguage for the mirror
     language : "en-US",
     
@@ -30,7 +29,7 @@ var config = {
        longitude: 13.123124142
     },
     */
-    
+
     // forcast.io
     forecast : {
         key : "", // Your forcast.io api key
