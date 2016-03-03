@@ -51,6 +51,13 @@
             if(service.forcast === null){
                 return null;
             }
+
+            for (var i = 0; i < service.forcast.data.hourly.data.length; i++) {
+                service.forcast.data.hourly.data[i].hour = moment.unix(service.forcast.data.hourly.data[i].time).format(config.dateFormat.time);
+                service.forcast.data.hourly.data[i].wi = "wi-forecast-io-" + service.forcast.data.hourly.data[i].icon;
+                service.forcast.data.hourly.data[i].counter = String.fromCharCode(97 + i);
+                service.forcast.data.hourly.data[i].iconAnimation = service.forcast.data.hourly.data[i].icon;
+            }
             service.forcast.data.hourly.day = moment.unix(service.forcast.data.hourly.time).format('ddd')
             return service.forcast.data.hourly;
         }

@@ -22,6 +22,8 @@
 
         $scope.layoutName = 'main';
 
+        $scope.focus = "weather-hourly";
+
         //set lang
         tmhDynamicLocale.set(config.language);
         moment.locale(config.language);
@@ -282,6 +284,12 @@
                 console.debug("Fetching a Dilbert comic for you.");
                 $scope.dilbert = ComicService.getDilbert("today");  // call it with "random" for random comic
                 $scope.focus = "dilbert";
+            });
+
+            //show hourly weather
+            AnnyangService.addCommand('Show (the) weather', function() {
+                console.debug("Display the hourly weather.");
+                $scope.focus = "weather-hourly";
             });
 
             var resetCommandTimeout;

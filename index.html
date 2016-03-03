@@ -54,8 +54,8 @@
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
                     <span class="summary">{{event.SUMMARY}}</span>
                     <div class="details">{{event.start.format(calcDateFormat)}}</div>
-                    </li>
                 </div>
+            </li>
         </ul>
       </div>
       <div class="top-right">
@@ -109,6 +109,22 @@
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
           <div class="comic-title">{{dilbert.title}}</div>
+        </div>
+        <div class="weather-hourly-container animate-grow" ng-show="focus == 'weather-hourly'">
+          <ul class="weather-list">
+            <li ng-repeat="forcast in hourlyForcast.data" ng-if="$index > 0 && $index <= 20">
+                <div class="weather-icon">
+                  <canvas id="icon_weather_hourly_{{ forcast.counter }}" width="42" height="32"></canvas>
+                  <span class="icon-small dimmed wi wi-fw {{ forcast.wi }}"></span>
+                </div>
+                <div class="weather-tempreture">{{ forcast.temperature }}°</div>
+                <div class="weather-hour">{{ forcast.hour }}</div>
+            </li>
+          </ul>
+          <!-- Workaround: -->
+          <div style="display: none;" ng-repeat="forcast in hourlyForcast.data" ng-if="$index > 0">
+            <span ng-init="iconLoad('icon_weather_hourly_'+forcast.counter, forcast.iconAnimation)"></span>
+          </div>
         </div>
       </div>
       <div class="bottom-center">

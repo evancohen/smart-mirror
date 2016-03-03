@@ -89,6 +89,26 @@ Weather
   }
 }
 
+.weather-hourly-container {
+  ul {
+    &.weather-list {
+      li {
+        div {
+          &.weather-icon {
+            canvas {
+              display: block;
+              margin: auto;
+            }
+            span {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /*
 Calc
 */
