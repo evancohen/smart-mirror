@@ -12,16 +12,12 @@
             ComicService,
             GiphyService,
             TrafficService,
-<<<<<<< HEAD
             TimerService,
             ReminderService,
             SearchService,
             SoundCloudService,
             RssService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
-=======
-            $scope, $timeout, $interval, $filter) {
->>>>>>> auto-wake/auto-sleep functionality
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
@@ -64,10 +60,7 @@
 
         //Update the time
         function updateTime(){
-<<<<<<< HEAD
             $scope.date = new moment();
-=======
-            $scope.date = new Date();
 
             if (config.autoTimer.enabled === true && config.autoTimer.autowake == $filter('date')($scope.date, 'HH:mm:ss'))
             {
@@ -75,7 +68,6 @@
                 $scope.focus = "default";
                 $scope.startAutoSleepTimer();
             }
->>>>>>> auto-wake/auto-sleep functionality
         }
 
         // Reset the command text
