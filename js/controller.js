@@ -3,6 +3,8 @@
 
     function MirrorCtrl(
             SpeechService,
+            AnnyangService,
+            AutoSleepService,
             GeolocationService,
             WeatherService,
             FitbitService,
@@ -84,10 +86,7 @@
         };
 
         _this.init = function() {
-            if (config.autoTimer.enabled)
-            {
-                $scope.startAutoSleepTimer();
-            }
+            AutoSleepService.startAutoSleepTimer($scope);
 
             var tick = $interval(updateTime, 1000);
             updateTime();
