@@ -42,27 +42,6 @@
         moment.locale((typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
         console.log('moment local', moment.locale());
 
-        var autoSleepTimer;
-
-        $scope.startAutoSleepTimer = function() {
-            $scope.stopAutoSleepTimer();
-            autoSleepTimer = $interval($scope.sleepInterval, config.autoTimer.autosleep);
-            console.debug('Starting autosleep timer', config.autoTimer.autosleep);
-        }
-
-        $scope.sleepInterval = function() {
-            console.debug('Auto-sleep.')
-            // Sleep the screen
-            $scope.focus = "sleep";
-            // Sleep the HDMI output
-            exec("/opt/vc/bin/tvservice -o", puts);
-        }
-
-        $scope.stopAutoSleepTimer = function() {
-            console.debug('Stopping autosleep timer');
-            $interval.cancel(autoSleepTimer);
-        }
-
         //Update the time
         function updateTime(){
             $scope.date = new moment();
