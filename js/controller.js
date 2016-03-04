@@ -52,7 +52,10 @@
 
         $scope.sleepInterval = function() {
             console.debug('Auto-sleep.')
+            // Sleep the screen
             $scope.focus = "sleep";
+            // Sleep the HDMI output
+            exec("/opt/vc/bin/tvservice -o", puts);
         }
 
         $scope.stopAutoSleepTimer = function() {
