@@ -18,6 +18,7 @@
             $interval.cancel(autoSleepTimer);
         };
 
+<<<<<<< HEAD
         service.wake = function() {
             service.exec("/opt/vc/bin/tvservice -p", service.puts);
         };
