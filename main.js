@@ -50,7 +50,7 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow(browserWindowOptions);
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // Open the DevTools if run with "npm start dev"
   if(process.argv[2] == "dev"){  
