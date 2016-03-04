@@ -8,7 +8,6 @@
 
     <!-- bower:js -->
     <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
@@ -43,7 +42,7 @@
     <!-- endbower -->
 	
   </head>
-  <body ng-controller="MirrorCtrl as commands">
+  <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
       <div class="top-left">
         <div class="date grey">{{date | date : dateFormat.date}}</div>
