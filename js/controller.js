@@ -23,8 +23,10 @@
         $scope.layoutName = 'main';
 
         //set lang
+        $scope.locale = config.language;
         tmhDynamicLocale.set(config.language);
         moment.locale(config.language);
+        console.log('moment local', moment.locale());
 
 
         $scope.dateFormat = config.dateFormat;
@@ -90,13 +92,14 @@
 
             var greetingUpdater = function () {
                 if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                    var hour = moment().hour();
                     var geetingTime = "midday";
 
-                    if (moment().hour() > 4 && moment().hour() < 11) {
+                    if (hour > 4 && hour < 11) {
                         geetingTime = "morning";
-                    } else if (moment().hour() > 18 && moment().hour() < 23) {
+                    } else if (hour > 18 && hour < 23) {
                         geetingTime = "evening";
-                    } else if (moment().hour() >= 23 || moment().hour() < 4) {
+                    } else if (hour >= 23 || hour < 4) {
                         geetingTime = "night";
                     }
 
@@ -284,25 +287,8 @@
     angular.module('SmartMirror')
         .controller('MirrorCtrl', MirrorCtrl);
 
-
-
-
     function themeController($scope) {
-
-        var layoutName = 'main';
-        if(typeof config.layout != 'undefined' && config.layout){
-            layoutName = config.layout;
-        }
-
-        $scope.layoutName = layoutName;
-
-
-        var angularLang = 'en';
-        if(typeof config.language != 'undefined' && config.language){
-            angularLang = config.language;
-        }
-
-        $scope.angularLang = angularLang;
+        $scope.layoutName = (typeof config.layout != 'undefined' && config.layout)?config.layout:'main';
     }
 
     angular.module('SmartMirror')
