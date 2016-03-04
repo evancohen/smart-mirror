@@ -236,15 +236,15 @@
             addCommand('wake_up', defaultView);
 
             // Turn off HDMI output
-            AnnyangService.addCommand('Screen off', function() {
+            AnnyangService.addCommand('screen off', function() {
                 console.debug('turning screen off');
-                exec("/opt/vc/bin/tvservice -o", puts);
+                AutoSleepService.sleep();
             });
 
             // Turn on HDMI output
-            AnnyangService.addCommand('Screen on', function() {
+            AnnyangService.addCommand('screen on', function() {
                 console.debug('turning screen on');
-                exec("/opt/vc/bin/tvservice -p", puts);
+                AutoSleepService.wake();
             })
 
             // Hide everything and "sleep"

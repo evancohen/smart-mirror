@@ -9,15 +9,9 @@
             if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autosleep !== 'undefined' && typeof config.autoTimer.autowake !== 'undefined') {
                 service.scope = $scope;
                 service.stopAutoSleepTimer();
-                autoSleepTimer = $interval(service.sleepInterval, config.autoTimer.autosleep);
+                autoSleepTimer = $interval(service.sleep, config.autoTimer.autosleep);
                 console.debug('Starting auto-sleep timer', config.autoTimer.autosleep);
             }
-        };
-
-        service.sleepInterval = function() {
-            console.debug('Auto-sleep.');
-            service.scope.focus = "sleep";
-            exec("/opt/vc/bin/tvservice -o", puts);
         };
 
         service.stopAutoSleepTimer = function() {
@@ -27,11 +21,20 @@
 
         service.checkWakeUp = function() {
             if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autowake !== 'undefined' && config.autoTimer.autowake == $filter('date')(service.scope.date, 'HH:mm:ss')) {
-                console.debug('Auto-wake', config.autoTimer.autowake)
-                exec("/opt/vc/bin/tvservice -p", puts);
-                service.scope.focus = "default";
+                console.debug('Auto-wake', config.autoTimer.autowake);
+                service.wake();
                 service.startAutoSleepTimer(service.scope);
             }
+        };
+
+        service.wake = function() {
+            exec("/opt/vc/bin/tvservice -p", puts);
+            service.scope.focus = "default";
+        };
+
+        service.sleep = function() {
+            exec("/opt/vc/bin/tvservice -o", puts);
+            service.scope.focus = "sleep";
         };
 
         return service;
