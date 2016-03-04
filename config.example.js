@@ -2,11 +2,6 @@ var config = {
     // Lenguage for the mirror
     language : "en", //must also manually update locale/X.js bower component in index.html
     layout: "main",
-    dateFormat: {
-        time: "hh:mm a",
-        date: "EEEE, MMMM d yyyy",
-    },
-
     greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
     
     // Alternativly you can have greetings that appear based on the time of day
@@ -32,8 +27,7 @@ var config = {
     calendar: {
       icals : [],
       maxResults: 9, // Number of calender events to display (Defaults is 9)
-      maxDays: 365, // Number of days to display (Default is one year)
-      dateFormat: "MMMM Do YYYY, h:mm:ss a",
+      maxDays: 365 // Number of days to display (Default is one year)
     },
     // Giphy
     giphy: {

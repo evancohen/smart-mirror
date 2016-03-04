@@ -44,14 +44,14 @@
   <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
       <div class="top-left">
-        <div class="date grey">{{date | date : dateFormat.date}}</div>
-        <div class="time">{{date | date : dateFormat.time}}</div>
+        <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
+        <div class="time">{{date.format('LT')}}</div>
         <ul class="calendar fade" ng-show="focus == 'default'">
             <li class="event" ng-repeat="event in calendar">
                 <div class="event-details">
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
                     <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format(calcDateFormat)}}</div>
+                    <div class="details">{{event.start.format('LLL')}}</div>
                     </li>
                 </div>
         </ul>

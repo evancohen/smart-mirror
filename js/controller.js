@@ -27,13 +27,10 @@
         tmhDynamicLocale.set(config.language);
         moment.locale(config.language);
         console.log('moment local', moment.locale());
-
-
-        $scope.dateFormat = config.dateFormat;
-        $scope.calcDateFormat = config.calendar.dateFormat;
+        
         //Update the time
         function updateTime(){
-            $scope.date = new Date();
+            $scope.date = new moment();
         }
 
         // Reset the command text
