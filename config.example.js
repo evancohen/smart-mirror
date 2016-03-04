@@ -18,7 +18,7 @@ var config = {
 
     sleep_timer: {
             start: 23,
-            end: 06,
+            end: 6,
     },//automatic "good night" mod
     // forcast.io
     forcast : {
