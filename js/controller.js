@@ -11,6 +11,7 @@
             XKCDService,
             GiphyService,
             TrafficService,
+            ConnectionCheckService,
             $scope, $timeout, $interval) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
@@ -19,10 +20,30 @@
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        $scope.isOffline = false;
 
         //Update the time
         function updateTime(){
             $scope.date = new Date();
+
+            // Always check to see if we are online. Do we want to check every second though?
+            if (!ConnectionCheckService.isOnline())
+            {
+                if (!$scope.isOffline) {
+                    console.debug('No Network Connection');
+                }
+
+                $scope.isOffline = true;
+                $scope.interimResult = "You currently do not have a network connection. Some services will be unavailable."
+            }
+
+            // We only want to execute this once, when we have a connection again.
+            if ($scope.isOffline && ConnectionCheckService.isOnline())
+            {
+                $scope.isOffline = false;
+                console.debug('online');
+                restCommand();
+            }
         }
 
         // Reset the command text
