@@ -66,7 +66,6 @@
                         skycons.play();
 
                         $scope.iconLoad = function (elementId, iconAnimation){
-                            console.log(iconAnimation);
                             skycons.add(document.getElementById(elementId), iconAnimation);
                             skycons.play();
                         };
