@@ -47,7 +47,11 @@ git clone https://github.com/evancohen/smart-mirror.git
 You'll need to fill in a few things into `config.js`, which should end up looking something like this:
 ``` javascript
 var config = {
+<<<<<<< HEAD
     locale : "en-US",
+=======
+    lenguage : "en",
+>>>>>>> ede4d990521197a542af3b93dee9925d19b4aec3
     greeting : ["Hi, sexy!", "Hey There!", "Looking Awesome!"],
     forcast : {
         key : "a6s5dg39j78qj38sjs91je9djadfa1e",

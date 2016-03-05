@@ -147,6 +147,7 @@
             }
 
             //AnnyangService.setLanguage('de-DE');
+
             // List commands
             AnnyangService.addCommand(commands['list']['voice'], function() {
                 console.debug("Here is a list of commands...");
@@ -306,6 +307,12 @@
         }
 
         $scope.locale = locale;
+        var angularLang = 'en';
+        if(typeof config.language != 'undefined' && config.language){
+            angularLang = config.language;
+        }
+
+        $scope.angularLang = angularLang;
     }
 
     angular.module('SmartMirror')
