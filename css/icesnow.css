@@ -375,4 +375,28 @@ Calc
   .middle-center h1 {
     font-size: 90px; }
 
+/* rss */
+.box-rss {
+  -webkit-flex: 3;
+  flex: 3;
+  -webkit-order: 3;
+  order: 3;
+  max-width: 100%; }
+  .box-rss .rss {
+    text-align: left; }
+    .box-rss .rss .rss-entry {
+      position: relative; }
+      .box-rss .rss .rss-entry > i {
+        position: absolute;
+        top: 0px;
+        left: 0px; }
+      .box-rss .rss .rss-entry > div {
+        width: 95%;
+        margin-left: 28px; }
+        .box-rss .rss .rss-entry > div .rss-entry-date {
+          width: 100%; }
+        .box-rss .rss .rss-entry > div .rss-entry-title {
+          display: block;
+          width: 100%; }
+
 /*# sourceMappingURL=icesnow.css.map */

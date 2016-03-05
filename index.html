@@ -51,7 +51,7 @@
       <div class="top-left">
         <div class="date grey">{{date | date : dateFormat.date}}</div>
         <div class="time">{{date | date : dateFormat.time}}</div>
-        <ul class="calendar fade" ng-show="focus == 'default'">
+        <ul class="calendar fade" ng-if="calendar.length > 0" ng-show="focus == 'default'">
           <li class="event" ng-repeat="event in calendar">
             <div class="event-details">
               <span class="day">{{event.start.format('dddd') | uppercase}}</span>
@@ -60,7 +60,7 @@
             </div>
           </li>
         </ul>
-        <div class="box-rss">
+        <div class="box-rss" ng-if="rssEntrys.length > 0" ng-show="focus == 'default'">
           <h2>{{ rssTitle }}</h2>
           <ul class="rss">
             <li class="rss-entry" ng-animate="'animate'" ng-repeat="entry in rssEntrys">
@@ -84,7 +84,7 @@
             <span>{{hourlyForcast.summary}}</span>
             <span>{{weeklyForcast.summary}}</span>
           </div>
-          <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+          <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0" ng-show="focus == 'default'">
             <div class="weather-week-day">
               <span class="day light-grey">{{forcast.day}}</span>
               <canvas id="icon_weather_{{forcast.counter}}" width="33" height="25"></canvas>
