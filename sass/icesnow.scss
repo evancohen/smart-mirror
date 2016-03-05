@@ -112,3 +112,42 @@ Calc
     font-size: 90px;
   }
 }
+
+/* rss */
+.box-rss {
+  -webkit-flex: 3;
+  flex: 3;
+  -webkit-order: 3;
+  order: 3;
+  max-width: 100%;
+
+  .rss {
+
+    text-align: left;
+
+    .rss-entry {
+
+      position: relative;
+
+      > i {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+
+      > div {
+        width: 95%;
+        margin-left: 28px;
+
+        .rss-entry-date {
+          width: 100%;
+        }
+
+        .rss-entry-title {
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

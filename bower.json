@@ -20,6 +20,7 @@
     "jquery": "^2.2.1",
     "angular": "angularjs#^1.5.0",
     "angular-animate": "1.5.0",
-    "angular-dynamic-locale": "0.1.*"
+    "angular-dynamic-locale": "0.1.*",
+    "components-font-awesome": "4.5.*"
   }
 }

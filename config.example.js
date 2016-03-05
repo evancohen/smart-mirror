@@ -50,5 +50,22 @@ var config = {
       destination : "", // Destination of your trip. Human readable address.
       name : "work", // Name of your destination ex: "work"
       reload_interval : 5 // Number of minutes the information is refreshed
+    },
+    rss: {
+        refreshTime: 60000, //one minute
+        feeds: [
+            {
+                url: "http://9to5mac.com/feed/",
+                name: "9to5mac",
+            },
+            {
+                url: "http://9to5toys.com/feed/",
+                name: "9to5toys",
+            },
+            {
+                url: "http://9to5google.com/feed/",
+                name: "9to5google",
+            },
+        ]
     }
 }

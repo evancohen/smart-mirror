@@ -11,6 +11,7 @@
             ComicService,
             GiphyService,
             TrafficService,
+            RssService,
             $scope, $timeout, $interval, tmhDynamicLocale) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
@@ -142,6 +143,31 @@
                 $scope.focus = "default";
             }
 
+
+            var rssFeedCounter = 0;
+            var refreshRssFeeds = function (){
+                var feedId = rssFeedCounter;
+                var rssFeed = config.rss.feeds[feedId];
+                if(rssFeed.url) {
+                    RssService.callRss(rssFeed.url).then(function (data) {
+                        var entrys = RssService.getEntrys(5);
+                        console.log(entrys);
+                        $scope.rssEntrys = entrys;
+                        return entrys;
+                    });
+
+                    console.log(rssFeed.url);
+                    $scope.rssTitle = rssFeed.name;
+                  }
+                rssFeedCounter ++; //set next feed for refresh
+
+                if(rssFeedCounter >= config.rss.feeds.length){
+                    rssFeedCounter = 0;
+                }
+            };
+
+            refreshRssFeeds();
+            $interval(refreshRssFeeds, config.rss.refreshTime); // 12 hours
 
             //AnnyangService.setLanguage('de-DE');
 
