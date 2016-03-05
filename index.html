@@ -29,6 +29,7 @@
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
     <script src="js/traffic-service.js"></script>
+    <script src="js/rss-service.js"></script>
     <script src="js/controller.js"></script>
 
     <link rel="stylesheet" ng-href="node_moduels/angular-i18n/angular-locale_{{ angularLang }}.js">
@@ -39,7 +40,9 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
 	<link rel="stylesheet" href="css/weather-icons.css">
+
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <!-- endbower -->
 	
   </head>
@@ -49,14 +52,26 @@
         <div class="date grey">{{date | date : dateFormat.date}}</div>
         <div class="time">{{date | date : dateFormat.time}}</div>
         <ul class="calendar fade" ng-show="focus == 'default'">
-            <li class="event" ng-repeat="event in calendar">
-                <div class="event-details">
-                    <span class="day">{{event.start.format('dddd') | uppercase}}</span>
-                    <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format(calcDateFormat)}}</div>
-                    </li>
-                </div>
+          <li class="event" ng-repeat="event in calendar">
+            <div class="event-details">
+              <span class="day">{{event.start.format('dddd') | uppercase}}</span>
+              <span class="summary">{{event.SUMMARY}}</span>
+              <div class="details">{{event.start.format(calcDateFormat)}}</div>
+            </div>
+          </li>
         </ul>
+        <div class="box-rss">
+          <h2>{{ rssTitle }}</h2>
+          <ul class="rss">
+            <li class="rss-entry" ng-animate="'animate'" ng-repeat="entry in rssEntrys">
+              <i class="fa fa-calendar fa-fw"></i>
+              <div>
+                <span class="rss-entry-title">{{ entry.title }}</span>
+                <span class="rss-entry-date">{{ entry.date }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="top-right">
         <div class="weather">

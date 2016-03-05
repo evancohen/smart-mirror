@@ -240,6 +240,55 @@ ul.calendar {
   -webkit-filter: invert(100%);
   max-width: 100%; }
 
+.box-rss h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 9px; }
+.box-rss .rss {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+  .box-rss .rss .rss-entry {
+    margin-bottom: 5px;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    transition: 0.5s linear all; }
+    .box-rss .rss .rss-entry > i {
+      vertical-align: top;
+      color: #aaa; }
+    .box-rss .rss .rss-entry > div {
+      vertical-align: top;
+      display: inline-block; }
+      .box-rss .rss .rss-entry > div .rss-entry-title {
+        width: 90%;
+        max-width: 450px;
+        display: inline-block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; }
+      .box-rss .rss .rss-entry > div .rss-entry-date {
+        display: block;
+        color: #aaa;
+        font-size: 0.9rem; }
+    .box-rss .rss .rss-entry.ng-enter, .box-rss .rss .rss-entry.ng-leave {
+      -webkit-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+      -moz-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+      -ms-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+      -o-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+      transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+      position: relative;
+      display: block; }
+    .box-rss .rss .rss-entry.ng-enter.ng-enter-active, .box-rss .rss .rss-entry.ng-leave {
+      opacity: 1;
+      top: 0;
+      height: 30px; }
+    .box-rss .rss .rss-entry.ng-leave.ng-leave-active, .box-rss .rss .rss-entry.ng-enter {
+      opacity: 0;
+      top: -50px;
+      height: 0px; }
+
 body {
   font-family: 'Work Sans', sans-serif;
   font-weight: 300; }
