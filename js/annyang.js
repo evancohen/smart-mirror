@@ -136,7 +136,7 @@
       recognition.interimResults = true;
 
       // Sets the language to the default 'en-US'. This can be changed with annyang.setLanguage()
-      recognition.lang = 'en-US';
+      recognition.lang = config.locale;
 
       recognition.onstart   = function()      { invokeCallbacks(callbacks.start); };
 

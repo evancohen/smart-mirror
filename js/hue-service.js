@@ -27,7 +27,7 @@
 
             for(var i = 0; i <= spokenWords.length; i++){
                 console.log("Checking word:", spokenWords[i]);
-                              
+
                 //Check for color updates
                 if(spokenWords[i] == 'red' || spokenWords[i] == 'reed' || spokenWords[i] == 'read'){
                     update["xy"] = [0.674,0.322];
@@ -105,7 +105,7 @@
         }
         return service;
     }
-    
+
     angular.module('SmartMirror')
         .factory('HueService', HueService);
 
