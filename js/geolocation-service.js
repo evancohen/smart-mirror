@@ -45,7 +45,7 @@
         }
         return deferred.promise;
       }
-        
+
         return service;
     }
 

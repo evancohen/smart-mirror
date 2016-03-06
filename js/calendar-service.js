@@ -82,7 +82,7 @@
           if (type.startsWith('DTSTART')) {
             cur_event.start = makeDate(type, val);
           }
-          
+
           //If the type is an end date, do the same as above
           else if (type.startsWith('DTEND')) {
             cur_event.end = makeDate(type, val);
@@ -125,7 +125,7 @@
         //If the event ends after the current time or if there is no end time and the event starts today add it.
         if ((itm.end != undefined && itm.end.isAfter(current_date)) || itm.start.diff(current_date, 'days') == 0){
             future_events.push(itm);
-        } 
+        }
       });
       future_events = sortAscending(future_events);
       return future_events.slice(0, 9);
@@ -154,7 +154,7 @@
         //If the event ended before the current time, add it to the array to return.
         if (itm.end != undefined && itm.end.isBefore(current_date)){
             past_events.push(itm);
-        } 
+        }
       });
       return past_events.reverse();
     }

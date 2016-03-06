@@ -27,8 +27,8 @@ In order to get started I suggest a clean install of Raspbian. You can snag a fr
 
 You'll also need to install Node (v4.0.0+) which now comes bundled with npm.
 ```
-wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz 
-tar -xvf node-v4.0.0-linux-armv7l.tar.gz 
+wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz
+tar -xvf node-v4.0.0-linux-armv7l.tar.gz
 cd node-v4.0.0-linux-armv7l
 ```
 Copy to /usr/local
@@ -87,7 +87,7 @@ To launch the mirror with a debug window attached use the following command:
 ```
 npm start dev
 ```
-More info coming soon(ish). In the meantime head over to the [gitter chat](https://gitter.im/evancohen/smart-mirror) for help. 
+More info coming soon(ish). In the meantime head over to the [gitter chat](https://gitter.im/evancohen/smart-mirror) for help.
 
 #### Troubleshooting
 If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)

@@ -47,10 +47,10 @@
 
             for(var i = 0; i <= spokenWords.length; i++){
                 console.log("Checking word:", spokenWords[i]);
-                
+
                 //Set a default saturation
                 update["sat"] = 254;
-                
+
                 //Check for color updates
                 if(spokenWords[i] == 'red' || spokenWords[i] == 'reed' || spokenWords[i] == 'read'){
                     update["hue"] = 65535;
@@ -91,10 +91,10 @@
                 }
 
             }
-            
+
             return update;
         }
-        
+
         return service;
     }
 
