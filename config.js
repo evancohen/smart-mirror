@@ -5,7 +5,8 @@ var config = {
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
-        units : "auto" // See forcast.io documentation if you are getting the wrong units
+        units : "auto", // See forcast.io documentation if you are getting the wrong units
+        lang : "en" // Forcast language
     },
     // Philips Hue
     hue : {
