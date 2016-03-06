@@ -27,8 +27,8 @@ In order to get started I suggest a clean install of Raspbian. You can snag a fr
 
 You'll also need to install Node (v4.0.0+) which now comes bundled with npm.
 ```
-wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz 
-tar -xvf node-v4.0.0-linux-armv7l.tar.gz 
+wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz
+tar -xvf node-v4.0.0-linux-armv7l.tar.gz
 cd node-v4.0.0-linux-armv7l
 ```
 Copy to /usr/local
@@ -44,41 +44,19 @@ git clone https://github.com/evancohen/smart-mirror.git
 ```
 
 ##### Configuring the mirror
-You'll need to fill in a few things into `config.js`, which should end up looking something like this:
-``` javascript
-var config = {
-    lenguage : "en",
-    greeting : ["Hi, sexy!", "Hey There!", "Looking Awesome!"],
-    forcast : {
-        key : "a6s5dg39j78qj38sjs91je9djadfa1e",
-        units : "auto"
-    },
-    hue : {
-        ip : "192.168.1.99",
-        uername : "as9234ho0dfhoq01f2as3yh4m0",
-        group : "0",
-    },
-    calendar: {
-      icals : ["https://calendar.google.com/calendar/ical/SOMESTUFF/basic.ics",
-"https://outlook.office365.com/owa/calendar/SOMESTUFF/reachcalendar.ics"],
-      maxResults: 9,
-      maxDays: 365
-    },
-    giphy: {
-      key : "a6s5dg39j78qj38sjs91je9djadfa1e"
-    },
-    traffic: {
-      key : "a6s5dg39j78qj38sjs91je9djadfa1e",
-      mode : "Driving",
-      origin : "350 5th Ave, New York, NY 10118",
-      destination : "1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102",
-      name : "work",
-      reload_interval : 5
-    }
-}
-```
-Note that if you start the mirror and get a black screen you most likeley have an issue with your config.
+You'll need to fill in two things into `js/config.js`:
 
+1. A [Forecast API key](https://developer.forecast.io/) (don't worry it's free)
+2. Philips Hue Bridge IP address with a configured user. Details about how to set this up in the [Philips Hue Developer Documentation](http://www.developers.meethue.com/documentation/getting-started)
+3. [Optional] An array of iCal addresses (from your Google or Outlook calendar for example)
+
+The format of your config should look something like this:
+```
+var FORCAST_API_KEY = "a6s5dg39j78qj38sjs91je9djadfa1e";
+var HUE_BASE = "http://192.168.1.99/api/as9234ho0dfhoq01f2as3yh4m0/";
+var PERSONAL_CALENDAR = ["https://calendar.google.com/calendar/ical/SOMESTUFF/basic.ics",
+"https://outlook.office365.com/owa/calendar/SOMESTUFF/reachcalendar.ics"];
+```
 ##### Configuring the Pi
 In order to rotate your monitor you'll need to add the following line to `/boot/config.txt`
 ```
@@ -109,7 +87,7 @@ To launch the mirror with a debug window attached use the following command:
 ```
 npm start dev
 ```
-More info coming soon(ish). In the meantime head over to the [gitter chat](https://gitter.im/evancohen/smart-mirror) for help. 
+More info coming soon(ish). In the meantime head over to the [gitter chat](https://gitter.im/evancohen/smart-mirror) for help.
 
 #### Troubleshooting
 If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)

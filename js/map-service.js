@@ -5,6 +5,8 @@
         var service = {};
         service.center = "Seattle, WA"; //default map locaiton
         service.zoom = 13; //default zoom is 13
+        // COMMANDS
+        service.commands = {};
 
         service.generateMap = function(targetCenter, targetZoom) {
             if (targetCenter === undefined) {
