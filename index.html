@@ -1,176 +1,192 @@
 <!DOCTYPE html>
 <html ng-app="SmartMirror">
-  <head ng-controller="Theme">
-    <meta charset="utf-8">
-    <title>Smart Mirror</title>
+<head ng-controller="Theme">
+  <meta charset="utf-8">
+  <title>Smart Mirror</title>
 
-    <script src="js/annyang.js"></script>
+  <script src="js/annyang.js"></script>
 
-    <!-- bower:js -->
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
-    <!-- endbower -->
+  <!-- bower:js -->
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+  <!-- endbower -->
 
-    <script src="js/inc/skycons.js"></script>
+  <script src="js/inc/skycons.js"></script>
 
-    <!-- App -->
-    <script src="config.js"></script>
-    <script src="js/rrule.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/annyang-service.js"></script>
-    <script src="js/weather-service.js"></script>
-    <script src="js/comic-service.js"></script>
-    <script src="js/map-service.js"></script>
-    <script src="js/hue-service.js"></script>
-    <script src="js/giphy-service.js"></script>
-    <script src="js/geolocation-service.js"></script>
-    <script src="js/calendar-service.js"></script>
-    <script src="js/traffic-service.js"></script>
-    <script src="js/controller.js"></script>
+  <!-- App -->
+  <script src="config.js"></script>
+  <script src="js/rrule.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/annyang-service.js"></script>
+  <script src="js/weather-service.js"></script>
+  <script src="js/comic-service.js"></script>
+  <script src="js/map-service.js"></script>
+  <script src="js/hue-service.js"></script>
+  <script src="js/giphy-service.js"></script>
+  <script src="js/geolocation-service.js"></script>
+  <script src="js/calendar-service.js"></script>
+  <script src="js/traffic-service.js"></script>
+  <script src="js/controller.js"></script>
 
-    <link rel="stylesheet" ng-href="node_moduels/angular-i18n/angular-locale_{{ angularLang }}.js">
+  <link rel="stylesheet" ng-href="node_moduels/angular-i18n/angular-locale_{{ angularLang }}.js">
+
+  <!-- Styles and Resources -->
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700">
+  <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
+  <link rel="stylesheet" href="css/weather-icons.css">
+
+  <!-- bower:css -->
+  <!-- endbower -->
+
+</head>
+<body ng-controller="MirrorCtrl as commands">
 
 
-    <!-- Styles and Resources -->
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
-	<link rel="stylesheet" href="css/weather-icons.css">
-    <!-- bower:css -->
-    <!-- endbower -->
-	
-  </head>
-  <body ng-controller="MirrorCtrl as commands">
-    <div class="top">
-      <div class="top-left">
-        <div class="date grey">{{date | date : dateFormat.date}}</div>
-        <div class="time">{{date | date : dateFormat.time}}</div>
-        <ul class="calendar fade" ng-show="focus == 'default'">
-            <li class="event" ng-repeat="event in calendar">
-                <div class="event-details">
-                    <span class="day">{{event.start.format('dddd') | uppercase}}</span>
-                    <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format(calcDateFormat)}}</div>
-                    </li>
-                </div>
-        </ul>
-      </div>
-      <div class="top-right">
-        <div class="weather">
-          <div class="weather-today">
-            <span class="icon dimmed wi {{currentForcast.wi}}"></span>
-            <canvas id="icon_weather_current" width="90" height="70"></canvas>
-            <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+  <div class="top">
+
+    <div class="top-left">
+      <div class="date grey">{{date | date : dateFormat.date}}</div>
+      <div class="time">{{date | date : dateFormat.time}}</div>
+      <ul class="calendar fade" ng-show="focus == 'default'">
+        <li class="event" ng-repeat="event in calendar">
+          <div class="event-details">
+            <span class="day">{{event.start.format('dddd') | uppercase}}</span>
+            <span class="summary">{{event.SUMMARY}}</span>
+            <div class="details">{{event.start.format(calcDateFormat)}}</div>
           </div>
-          <div class="weather-week-descriptor">
-            <span>{{hourlyForcast.summary}}</span>
-            <span>{{weeklyForcast.summary}}</span>
-          </div>
-          <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
-            <div class="weather-week-day">
-              <span class="day light-grey">{{forcast.day}}</span>
-              <canvas id="icon_weather_{{forcast.counter}}" width="33" height="25"></canvas>
-              <span class="icon-small dimmed wi wi-fw {{forcast.wi}}"></span>
-              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}&deg;</span>
-              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}&deg;</span>
-            </div>
-          </div>
-          <!-- Workaround: -->
-          <div style="display: none;" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
-            <span ng-init="iconLoad('icon_weather_'+forcast.counter, forcast.iconAnimation)"></span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="top-right">
+      <div class="weather">
+        <div class="weather-today">
+          <span class="icon dimmed wi {{currentForcast.wi}}"></span>
+          <canvas id="icon_weather_current" width="90" height="70"></canvas>
+          <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+        </div>
+        <div class="weather-week-descriptor">
+          <span>{{hourlyForcast.summary}}</span>
+          <span>{{weeklyForcast.summary}}</span>
+        </div>
+        <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+          <div class="weather-week-day">
+            <span class="day light-grey">{{forcast.day}}</span>
+            <canvas id="icon_weather_{{forcast.counter}}" width="33" height="25"></canvas>
+            <span class="icon-small dimmed wi wi-fw {{forcast.wi}}"></span>
+            <span class="tempreture tempreture-min">{{forcast.temperatureMin}}&deg;</span>
+            <span class="tempreture tempreture-max">{{forcast.temperatureMax}}&deg;</span>
           </div>
         </div>
-        <div class="traffic">
-          <div ng-show="!traffic.error" class="traffic-information">
-            <span class="time-to">Time to {{traffic.destination}}:</span>
-            <span ng-show="traffic.hours > 0">{{traffic.hours}} hours and</span>
-            <span>{{traffic.minutes}} minutes</span>
-          </div>
+        <!-- Workaround: -->
+        <div style="display: none;" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+          <span ng-init="iconLoad('icon_weather_'+forcast.counter, forcast.iconAnimation)"></span>
+        </div>
+      </div>
+      <div class="traffic">
+        <div ng-show="!traffic.error" class="traffic-information">
+          <span class="time-to">Time to {{traffic.destination}}:</span>
+          <span ng-show="traffic.hours > 0">{{traffic.hours}} hours and</span>
+          <span>{{traffic.minutes}} minutes</span>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="middle-center">
-        <h1>{{greeting}}</h1>
-        <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
-        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
-        <div class="contents-box map animate-grow" ng-show="focus == 'map'">
-          <img class="contents map animate-grow" ng-src="{{map}}"/>
-        </div>
-        <div class="contents-box gif animate-grow" ng-show="focus == 'gif'">
-          <img class="contents gif animate-grow" ng-src="{{gifimg}}"/>
-        </div>
-        <div class="xkcd-container animate-grow" ng-show="focus == 'xkcd'">
-          <img class="xkcd animate-grow" ng-src="{{xkcd}}"/>
-        </div>
-        <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
-          <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
-          <div class="comic-title">{{dilbert.title}}</div>
-        </div>
-      </div>
-      <div class="bottom-center">
-        <!-- Command list -->
-        <div class="commands animate-grow" ng-show="focus == 'commands'">
-          <h2>Available Commands</h2>
-          <dl>
-            <dt>What can I say?</dt>
-            <dd>Shows a list of voice commands available to you.</dd>
-            <dt>Go home</dt>
-            <dd>Takes you back to the home screen</dd>
-            <dt>Show me ________</dt>
-            <dd>Will show you pictures of the requested item.</dd>
-            <dt>Remind me to ________</dt>
-            <dd>Add something to the reminders list.</dd>
-            <dt>Clear reminders</dt>
-            <dd>Clears out your reminders list.</dd>
-            <dt>Show map</dt>
-            <dd>Shows a map of your current city.</dd>
-            <dt>Show map of ________</dt>
-            <dd>Shows a map of the given location.</dd>
-            <dt>Giphy ________</dt>
-            <dd>Shows a giphy image </dd>
-            <dt>Show xkcd</dt>
-            <dd>Shows the most recent xkcd comic.</dd>
-          </dl>
-          <small>
-            We are using node <script>document.write(process.versions.node)</script>,
-            Chrome <script>document.write(process.versions.chrome)</script>,
-            and Electron <script>document.write(process.versions.electron)</script>.
-          </small>
-        </div>
 
-        <div class="interim-result" ng-bind="interimResult"></div>
+  </div> <!-- .top -->
+
+
+  <div class="container">
+
+    <div class="middle-center">
+      <h1>{{greeting}}</h1>
+      <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
+      <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+      <div class="contents-box map animate-grow" ng-show="focus == 'map'">
+        <img class="contents map animate-grow" ng-src="{{map}}"/>
       </div>
-      <div class="colors animate-grow" ng-show="focus == 'colors'">
-        <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
+      <div class="contents-box gif animate-grow" ng-show="focus == 'gif'">
+        <img class="contents gif animate-grow" ng-src="{{gifimg}}"/>
       </div>
-    </div>
-    <!-- Debug Buttons -->
-    <div class="debug-info">
-      <!--<button ng-click="debug = true">Open Debug</button>-->
-    </div>
-    <div class="debug-info" ng-show="debug == true">
-      <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
-      <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
-      <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
-      <button ng-click="focus = (focus == 'gif')?'default':'gif'">Gif</button>
-      <button ng-click="debug = false">Close Debug</button>
-      <!-- Has results -->
-      <div ng-show="commands.results.length > 0">
-        <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
-        <hr/>
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="result in commands.results">
-            <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
-            {{ result.content }}
-          </li>
-        </ul>
+      <div class="xkcd-container animate-grow" ng-show="focus == 'xkcd'">
+        <img class="xkcd animate-grow" ng-src="{{xkcd}}"/>
+      </div>
+      <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
+        <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
+        <div class="comic-title">{{dilbert.title}}</div>
       </div>
     </div>
-    <!-- Sleep cover -->
-    <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
-  </body>
+
+    <div class="bottom-center">
+      <!-- Command list -->
+      <div class="commands animate-grow" ng-show="focus == 'commands'">
+        <h2>Available Commands</h2>
+        <dl>
+          <dt>What can I say?</dt>
+          <dd>Shows a list of voice commands available to you.</dd>
+          <dt>Go home</dt>
+          <dd>Takes you back to the home screen</dd>
+          <dt>Show me ________</dt>
+          <dd>Will show you pictures of the requested item.</dd>
+          <dt>Remind me to ________</dt>
+          <dd>Add something to the reminders list.</dd>
+          <dt>Clear reminders</dt>
+          <dd>Clears out your reminders list.</dd>
+          <dt>Show map</dt>
+          <dd>Shows a map of your current city.</dd>
+          <dt>Show map of ________</dt>
+          <dd>Shows a map of the given location.</dd>
+          <dt>Giphy ________</dt>
+          <dd>Shows a giphy image </dd>
+          <dt>Show xkcd</dt>
+          <dd>Shows the most recent xkcd comic.</dd>
+        </dl>
+        <small>
+          We are using node <script>document.write(process.versions.node)</script>,
+          Chrome <script>document.write(process.versions.chrome)</script>,
+          and Electron <script>document.write(process.versions.electron)</script>.
+        </small>
+      </div>
+      <div class="interim-result" ng-bind="interimResult"></div>
+    </div>
+
+    <div class="colors animate-grow" ng-show="focus == 'colors'">
+      <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
+    </div>
+
+  </div> <!-- .container -->
+
+
+  <!-- Debug Buttons -->
+  <div class="debug-info">
+    <!--<button ng-click="debug = true">Open Debug</button>-->
+  </div>
+  <div class="debug-info" ng-show="debug == true">
+    <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
+    <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
+    <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
+    <button ng-click="focus = (focus == 'gif')?'default':'gif'">Gif</button>
+    <button ng-click="debug = false">Close Debug</button>
+
+    <!-- Has results -->
+    <div ng-show="commands.results.length > 0">
+      <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
+      <hr/>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="result in commands.results">
+          <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
+          {{ result.content }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Sleep cover -->
+  <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
+
+</body>
 </html>
