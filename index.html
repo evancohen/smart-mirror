@@ -28,12 +28,21 @@
     <script src="js/giphy-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
+<<<<<<< HEAD
     <script src="js/traffic-service.js"></script>
     <script src="js/controller.js"></script>
     <!-- responsivevoice.js -->
     <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
 
     <link rel="stylesheet" ng-href="node_moduels/angular-i18n/angular-locale_{{ angularLang }}.js">
+=======
+    <script src="js/search-service.js"></script>
+    <script src="js/dateFormatFilter.js"></script>
+    <script src="js/controller.js"></script>
+	<script src="js/soundcloud-service.js"></script>
+
+	<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+>>>>>>> upstream/search
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
@@ -97,6 +106,7 @@
         <h1>{{greeting}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
         <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+<<<<<<< HEAD
         <div class="contents-box map animate-grow" ng-show="focus == 'map'">
           <img class="contents map animate-grow" ng-src="{{map}}"/>
         </div>
@@ -109,6 +119,18 @@
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
           <div class="comic-title">{{dilbert.title}}</div>
+=======
+        <div class="map-container animate-grow" ng-show="focus == 'map'">
+          <img class="map" ng-src="{{map}}"/>
+        </div>
+        <div class="video-container animate-grow" ng-show="focus == 'video'">
+          <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
+        </div>
+		<div class="sc-container animate-grow" ng-show="focus == 'sc'">
+          <img class="sc" ng-src="{{scThumb}}"/>
+		  <img class="scWaveform" ng-src="{{scWaveform}}"/>
+		  <h2 class="sc">{{scTrack}}</h2>
+>>>>>>> upstream/search
         </div>
       </div>
       <div class="bottom-center">
@@ -130,10 +152,15 @@
             <dd>Shows a map of your current city.</dd>
             <dt>Show map of ________</dt>
             <dd>Shows a map of the given location.</dd>
+<<<<<<< HEAD
             <dt>Giphy ________</dt>
             <dd>Shows a giphy image </dd>
             <dt>Show xkcd</dt>
             <dd>Shows the most recent xkcd comic.</dd>
+=======
+			<dt>SoundCloud play/pause/resume/stop/repeat</dt>
+            <dd>SoundCloud player controls.</dd>
+>>>>>>> upstream/search
           </dl>
           <small>
             We are using node <script>document.write(process.versions.node)</script>,
