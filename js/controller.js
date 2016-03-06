@@ -2,17 +2,17 @@
     'use strict';
 
     function MirrorCtrl(
-            AnnyangService, 
-            GeolocationService, 
-            WeatherService, 
-            MapService, 
-            HueService, 
-            CalendarService, 
+            AnnyangService,
+            GeolocationService,
+            WeatherService,
+            MapService,
+            HueService,
+            CalendarService,
             SearchService,
-            $scope, 
-            $timeout, 
+            $scope,
+            $timeout,
             $interval) {
-                
+
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -65,7 +65,7 @@
             };
 
             $timeout(refreshMirrorData(), 3600000);
-            
+
             //Set the mirror's focus (and reset any vars)
             var setFocus = function(target){
                 $scope.focus = target;
@@ -140,7 +140,7 @@
                 $scope.map = MapService.reset();
                 setFocus("map");
             });
-            
+
             //Search for a video
             AnnyangService.addCommand('show me (a video)(of)(about) *query', function(query){
                 SearchService.searchYouTube(query).then(function(results){
@@ -148,6 +148,21 @@
                     $scope.video = 'http://www.youtube.com/embed/'+results.data.items[0].id.videoId+'?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
                     setFocus("video");
                 });
+            });
+
+            //Search for youtube playlist
+            AnnyangService.addCommand('show me (a video)(of)(about) *query playlist', function(query){
+                SearchService.searchYouTubePlaylist(query).then(function(results){
+                    $scope.video = "http://www.youtube.com/embed?autoplay=1&listType=playlist&list=" + results.data.items[0].id.playlistId
+                    setFocus("video");
+                });
+            });
+
+            //Stop youtube
+            AnnyangService.addCommand('stop the video', function() {
+              var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
+              iframe.postMessage('{"event":"command","func":"' + 'stopVideo' +   '","args":""}', '*');
+              $scope.focus = "default";
             });
 
             // Change name
