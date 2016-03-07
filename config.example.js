@@ -1,7 +1,7 @@
 var config = {
 
     // Lenguage for the mirror
-    language : "en-US", //must also manually update locales/X.js bower component in index.html
+    language : "en", //must also manually update locales/X.js bower component in index.html
     layout: "main",
     greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
     
