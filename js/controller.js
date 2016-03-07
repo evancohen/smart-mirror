@@ -11,10 +11,8 @@
             ComicService,
             GiphyService,
             TrafficService,
-            tmhDynamicLocale,
-            $scope, $timeout, $interval) {
+            $scope, $timeout, $interval, tmhDynamicLocale) {
         var _this = this;
-        tmhDynamicLocale.set(config.locale.toLowerCase())
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
         $scope.debug = false;
@@ -25,16 +23,15 @@
 
         $scope.layoutName = 'main';
 
-        //set locale configuration
-        tmhDynamicLocale.set(config.language);
+        //set lang
+        $scope.locale = config.language;
+        tmhDynamicLocale.set(config.language.toLowerCase());
         moment.locale(config.language);
-
-
-        $scope.dateFormat = config.dateFormat;
-        $scope.calcDateFormat = config.calendar.dateFormat;
+        console.log('moment local', moment.locale());
+        
         //Update the time
         function updateTime(){
-            $scope.date = new Date();
+            $scope.date = new moment();
         }
 
         // Reset the command text
@@ -69,7 +66,6 @@
                         skycons.play();
 
                         $scope.iconLoad = function (elementId, iconAnimation){
-                            console.log(iconAnimation);
                             skycons.add(document.getElementById(elementId), iconAnimation);
                             skycons.play();
                         };
@@ -84,7 +80,6 @@
                 CalendarService.getCalendarEvents().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
                     $scope.formats = formats;
-                    $scope.locale = config.locale
                 }, function(error) {
                     console.log(error);
                 });
@@ -96,13 +91,14 @@
 
             var greetingUpdater = function () {
                 if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                    var hour = moment().hour();
                     var geetingTime = "midday";
 
-                    if (moment().hour() > 4 && moment().hour() < 11) {
+                    if (hour > 4 && hour < 11) {
                         geetingTime = "morning";
-                    } else if (moment().hour() > 18 && moment().hour() < 23) {
+                    } else if (hour > 18 && hour < 23) {
                         geetingTime = "evening";
-                    } else if (moment().hour() >= 23 || moment().hour() < 4) {
+                    } else if (hour >= 23 || hour < 4) {
                         geetingTime = "night";
                     }
 
@@ -288,31 +284,8 @@
     angular.module('SmartMirror')
         .controller('MirrorCtrl', MirrorCtrl);
 
-
-
-
     function themeController($scope) {
-
-        var layoutName = 'main';
-        if(typeof config.layout != 'undefined' && config.layout){
-            layoutName = config.layout;
-        }
-
-        $scope.layoutName = layoutName;
-
-
-        var locale = 'en-US';
-        if(typeof config.locale != 'undefined' && config.locale){
-            locale = config.locale.toLocaleLowerCase();
-        }
-
-        $scope.locale = locale;
-        var angularLang = 'en';
-        if(typeof config.language != 'undefined' && config.language){
-            angularLang = config.language;
-        }
-
-        $scope.angularLang = angularLang;
+        $scope.layoutName = (typeof config.layout != 'undefined' && config.layout)?config.layout:'main';
     }
 
     angular.module('SmartMirror')

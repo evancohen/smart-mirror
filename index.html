@@ -7,8 +7,7 @@
     <script src="js/annyang.js"></script>
 
     <!-- bower:js -->
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
@@ -32,8 +31,7 @@
     <script src="js/traffic-service.js"></script>
     <script src="js/controller.js"></script>
 
-    <link rel="stylesheet" ng-href="bower_components/angular-i18n/angular-locale_{{ locale }}.js">
-
+    <link rel="stylesheet" ng-href="bower_components/angular-i18n/angular-locale_{{ locale | lowercase }}.js">
 
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -44,17 +42,17 @@
     <!-- endbower -->
 	
   </head>
-  <body ng-controller="MirrorCtrl as commands">
+  <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
       <div class="top-left">
-        <div class="date grey">{{date | date:'fullDate'}}</div>
-        <div class="time">{{date | date:'shortTime'}}</div>
+        <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
+        <div class="time">{{date.format('LT')}}</div>
         <ul class="calendar fade" ng-show="focus == 'default'">
             <li class="event" ng-repeat="event in calendar">
                 <div class="event-details">
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
                     <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format(formats['full'])}}</div>
+                    <div class="details">{{event.start.format('LLL')}}</div>
                 </div>
             </li>
         </ul>

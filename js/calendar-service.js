@@ -96,7 +96,9 @@
           }
 
           //Add the value to our event object.
-          cur_event[type] = val;
+          if ( type !== 'SUMMARY' || (type=='SUMMARY' && cur_event['SUMMARY'] == undefined)) {
+            cur_event[type] = val;
+          }
           if (cur_event['SUMMARY'] !== undefined && cur_event['RRULE'] !== undefined) {
             var options = new RRule.parseString(cur_event['RRULE']);
       			options.dtstart = cur_event.start.toDate();

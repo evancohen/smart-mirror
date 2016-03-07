@@ -2,8 +2,8 @@
     'use strict';
 
     angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale']).config(function(tmhDynamicLocaleProvider) {
-        var locale = config.locale.toLowerCase();
-        tmhDynamicLocaleProvider.localeLocationPattern('https://code.angularjs.org/1.2.20/i18n/angular-locale_'+locale+'.js');
+        var locale = config.language.toLowerCase();
+        tmhDynamicLocaleProvider.localeLocationPattern('node_modules/angular-i18n/angular-locale_' + locale + '.js');
     });
 
 }(window.angular));

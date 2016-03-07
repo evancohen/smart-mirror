@@ -1,21 +1,18 @@
 var config = {
-    // Lenguage for the mirror (currently not implemented)
-    locale : "en-US",
+
+    // Lenguage for the mirror
+    language : "en-US", //must also manually update locales/X.js bower component in index.html
     layout: "main",
-
     greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
-    //you can also use timebased greetings
-    //greeting : {
-    //    night: ["Bed?", "zZzzZz", "Time to sleep"],
-    //    morning: ["Good Morning"],
-    //    midday: ["Hey!", "Hello"],
-    //    evening: ["Good evening"]
-    //}, // An array of greetings to randomly choose from
+    
+    // Alternativly you can have greetings that appear based on the time of day
+    /*greeting : {
+       night: ["Bed?", "zZzzZz", "Time to sleep"],
+       morning: ["Good Morning"],
+       midday: ["Hey!", "Hello"],
+       evening: ["Good evening"]
+    }, // An array of greetings to randomly choose from*/
 
-    sleep_timer: {
-        start: 23,
-        end: 06
-    },//automatic "good night" mod
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
@@ -45,4 +42,4 @@ var config = {
       name : "work", // Name of your destination ex: "work"
       reload_interval : 5 // Number of minutes the information is refreshed
     }
-}
+};
