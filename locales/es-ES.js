@@ -95,9 +95,3 @@ var commands = {
         "description" : "(turn) (the) :state (the) light(s) *action"
     }
 };
-
-var formats = {
-    "date" : 'EEEE, MMMM d yyyy',
-    "hour" : 'hh:mm',
-    "full" : 'd MMMM YYYY hh:mm'
-};

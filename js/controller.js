@@ -79,7 +79,6 @@
 
                 CalendarService.getCalendarEvents().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
-                    $scope.formats = formats;
                 }, function(error) {
                     console.log(error);
                 });
