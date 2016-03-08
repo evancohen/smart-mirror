@@ -1,0 +1,1 @@
+document.write('\x3Cscript src="locales/es-ES.js">\x3C/script>');

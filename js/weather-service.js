@@ -21,7 +21,7 @@
             if(service.forcast === null){
                 return null;
             }
-            service.forcast.data.currently.day = moment.unix(service.forcast.data.currently.time).format('ddd')
+            service.forcast.data.currently.day = moment.unix(service.forcast.data.currently.time).format('ddd');
             service.forcast.data.currently.temperature = parseFloat(service.forcast.data.currently.temperature).toFixed(1);
             service.forcast.data.currently.wi = "wi-forecast-io-" + service.forcast.data.currently.icon;
             service.forcast.data.currently.iconAnimation = service.forcast.data.currently.icon;
