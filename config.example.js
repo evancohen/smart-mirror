@@ -6,12 +6,14 @@ var config = {
     greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
     
     // Alternativly you can have greetings that appear based on the time of day
-    /*greeting : {
+    /*
+    greeting : {
        night: ["Bed?", "zZzzZz", "Time to sleep"],
        morning: ["Good Morning"],
        midday: ["Hey!", "Hello"],
        evening: ["Good evening"]
-    }, // An array of greetings to randomly choose from*/
+    },
+    */
 
     // forcast.io
     forcast : {

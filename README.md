@@ -44,28 +44,34 @@ git clone https://github.com/evancohen/smart-mirror.git
 ```
 
 ##### Configuring the mirror
-You'll need to fill in a few things into `config.js`, which should end up looking something like this:
+You'll need to create a `config.js` file, a template for this can be found at config.example.js. Simply copy the template and save it as `config.js`
+``` bash
+cp config.example.js config.js
+```
+
+Then fill out the config file, which should end up looking something like this:
 ``` javascript
 var config = {
-    language : "en",
-    greeting : ["Hi, sexy!", "Hey There!", "Looking Awesome!"],
+    language : "en", 
+    layout: "main",
+    greeting : ["Hi, sexy!", "Hey There!", "Looking Awesome!"], 
     forcast : {
-        key : "a6s5dg39j78qj38sjs91je9djadfa1e",
-        units : "auto"
+        key : "a6s5dg39j78qj38sjs91je9djadfa1e", 
+        units : "auto" 
     },
     hue : {
-        ip : "192.168.1.99",
-        uername : "as9234ho0dfhoq01f2as3yh4m0",
-        group : "0",
+        ip : "192.168.1.99", 
+        uername : "as9234ho0dfhoq01f2as3yh4m0", 
+        group : "0" 
     },
     calendar: {
       icals : ["https://calendar.google.com/calendar/ical/SOMESTUFF/basic.ics",
 "https://outlook.office365.com/owa/calendar/SOMESTUFF/reachcalendar.ics"],
-      maxResults: 9,
-      maxDays: 365
+      maxResults: 9, 
+      maxDays: 365 
     },
     giphy: {
-      key : "a6s5dg39j78qj38sjs91je9djadfa1e"
+      key : "a6s5dg39j78qj38sjs91je9djadfa1e" 
     },
     traffic: {
       key : "a6s5dg39j78qj38sjs91je9djadfa1e",
@@ -75,7 +81,7 @@ var config = {
       name : "work",
       reload_interval : 5
     }
-}
+};
 ```
 Note that if you start the mirror and get a black screen you most likeley have an issue with your config.
 
