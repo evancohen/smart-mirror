@@ -110,7 +110,9 @@ This will take a minute, it has to download [electron-prebuilt](https://github.c
 npm start
 ```
 
-#### Development
+#### Development and Contributing
+See the `dev` branch for features that are curently in development.
+If you would like to contribue please follow the [contribution guidelines](https://github.com/evancohen/smart-mirror/blob/master/CONTRIBUTING.md).
 To launch the mirror with a debug window attached use the following command:
 ```
 npm start dev
