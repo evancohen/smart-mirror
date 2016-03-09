@@ -11,6 +11,8 @@ const powerSaveBlocker = require('electron').powerSaveBlocker;
 var id = powerSaveBlocker.start('prevent-display-sleep');
 console.log(powerSaveBlocker.isStarted(id));
 
+app.commandLine.appendSwitch('enable-speech-dispatcher')
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;

@@ -45,6 +45,14 @@
             };
         };
 
+        service.pause = function(){
+            annyang.abort();
+        };
+
+        service.resume = function(){
+            annyang.resume();
+        }
+
         return service;
     }
 
