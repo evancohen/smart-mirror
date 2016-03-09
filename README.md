@@ -99,6 +99,24 @@ In order to disable the screensaver you'll want to comment out (with a '#') the 
 @xset s noblank
 ```
 
+Optionally, you can configure your Pi to start the mirror on boot
+In **/home/pi/**, create the file called smart-start.sh with the following content:
+```
+#!/bin/bash
+export DISPLAY=:0
+export XAUTHORITY=/home/pi/.Xauthority
+cd /home/pi/smart-mirror && npm start
+```
+
+Make the file owned by the user pi
+`chown pi:pi /home/pi/smart-start.sh`
+And make it executable
+`chmod +x /home/pi/smart-start.sh`
+Then, edit the file **/home/pi/.config/lxsession/LXDE-pi/autostart**
+and add the following line to the end:
+/`home/pi/smart-start.sh &`
+Reboot the Pi and you should be good to go
+
 ##### Install dependencies and run
 Before we can run the thing we've got to install the projects dependencies. From the root of the `smart-mirror` directory run:
 ```
