@@ -109,6 +109,28 @@
             greetingUpdater();
             $interval(greetingUpdater, 120000);
 
+            var welcomeMessage = function () {
+                if ('speechSynthesis' in window) {
+                    var u = new SpeechSynthesisUtterance();
+                    u.text = $scope.greeting;
+                    u.lang = config.language;
+
+                    u.onend = function () {
+                        AnnyangService.resume();
+                    };
+
+                    u.onerror = function (e) {
+                        console.log("Error speak", e);
+                        AnnyangService.resume();
+                    };
+
+                    AnnyangService.pause();
+                    speechSynthesis.speak(u);
+                }
+            };
+            welcomeMessage();
+            $timeout(welcomeMessage, 1000);
+
             var refreshTrafficData = function() {
                 TrafficService.getTravelDuration().then(function(durationTraffic) {
                     console.log("Traffic", durationTraffic);
