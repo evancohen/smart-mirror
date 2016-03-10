@@ -1,1 +1,1 @@
-document.write('\x3Cscript src="locales/de-de.js">\x3C/script>');
+document.write('\x3Cscript src="locales/de-DE.js">\x3C/script>');
