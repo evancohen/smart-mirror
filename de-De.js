@@ -67,7 +67,7 @@ var commands = {
     "image_giphy": {
         "text" : "Bild von ________",
         "voice": "Bild von *img",
-        "description" : "Zeigt ein giphy Bild"
+        "description" : "Zeigt ein Giphy Bild"
     },
     "image_comic": {
         "text" : "Zeige Comic",
@@ -82,7 +82,7 @@ var commands = {
     "reminder_clear": {
         "text" : "Erinnerungen löschen",
         "voice": "Erinnerungen löschen",
-        "description" : "Löscht die Einträge der Erinnerugen im Kalender."
+        "description" : "Löscht die Einträge der Erinnerungen im Kalender."
     },
     "time_show": {
         "text" : "Wie spät ist es",
