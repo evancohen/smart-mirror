@@ -180,6 +180,33 @@ ul.calendar {
     width: 60px;
 }
 
+.fitbit-title {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.fitbit-subtitle {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.fitbit-item {
+    color: #ccc;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.fitbit-badge {
+    width: 16px;
+    height: 16px;
+}
+
+.fitbit-main {
+    display: inline-block;
+    margin-right: 10px;
+    width: 450px;
+}
+
 .traffic-information {
     text-align: right;
     margin-top: 10px;

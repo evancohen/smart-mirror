@@ -123,19 +123,20 @@
         <div class="interim-result" ng-bind="interimResult"></div>
       </div>
       <div class="bottom-left">
-        <div class="fitbit">
-          <div class="weather-week-day animate-grow">
-            <ul class="list-group">
-              <li class="list-group-item">
-                <span class="day light-grey">Fitbit stats for {{fbDailyAverage.fullName}}</span>
-              </li>
-              <li class="list-group-item">
-                <span class="day light-grey">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span>
-              </li>
-              <li class="list-group-item">
-                <span class="day light-grey">Today's steps: {{fbToday.summary.steps}}</span>
-              </li>
-            </ul>
+        <div>
+          <div><span class="fitbit-title">Fitbit stats for {{fbDailyAverage.fullName}}</span></div>
+          <div><span class="fitbit-item">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span></div>
+          <div><span class="fitbit-item">Today's steps: {{fbToday.summary.steps}}</span></div>
+          <div><span class="fitbit-item">Today's distance: {{fbToday.summary.distances[0].distance}} KM</span></div>
+          <div><span class="fitbit-item">Today's active minutes: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}</span></div>
+          <div><span class="fitbit-item">Calories burned: {{fbToday.summary.caloriesOut}}</span></div>
+          <p></p>
+          <div><span class="fitbit-subtitle">Latest badges</span></div>
+          <div class="" ng-repeat="badge in fbDailyAverage.topBadges">
+            <div>
+              <span class="fitbit-item"><img class="fitbit-badge" ng-src="{{badge.image50px}}"/></span>
+              <span class="fitbit-item">{{badge.description}}</span>
+            </div>
           </div>
         </div>
       </div>
