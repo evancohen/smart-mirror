@@ -3,6 +3,7 @@
 
     function MirrorCtrl(
             AnnyangService,
+            SayService,
             GeolocationService,
             WeatherService,
             MapService,
@@ -31,6 +32,7 @@
         }
 
         _this.init = function() {
+            //console.log(SayService.speak());
             var tick = $interval(updateTime, 1000);
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -85,22 +87,26 @@
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
+                SayService.speak("Ok, going to default view...");
                 $scope.focus = "default";
             }
 
             // List commands
             AnnyangService.addCommand('What can I say', function() {
                 console.debug("Here is a list of commands...");
+                SayService.speak("OK, Here is a list of commands...");
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
 
             // Go back to default view
             AnnyangService.addCommand('Go home', defaultView);
+            SayService.speak("Ok, Going home");
 
             // Hide everything and "sleep"
             AnnyangService.addCommand('Go to sleep', function() {
                 console.debug("Ok, going to sleep...");
+                SayService.speak("Ok, going to sleep...");
                 $scope.focus = "sleep";
             });
 
@@ -116,6 +122,7 @@
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show map', function() {
                 console.debug("Going on an adventure?");
+                SayService.speak("Ok, showig map...");
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
                     console.log("Geoposition", geoposition);
                     $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
@@ -126,6 +133,7 @@
             // Hide everything and "sleep"
             AnnyangService.addCommand('Show (me a) map of *location', function(location) {
                 console.debug("Getting map of", location);
+                SayService.speak("Ok, Getting map of", location);
                 $scope.map = MapService.generateMap(location);
                 $scope.focus = "map";
             });
@@ -133,11 +141,13 @@
             // Zoom in map
             AnnyangService.addCommand('(map) zoom in', function() {
                 console.debug("Zoooooooom!!!");
+                SayService.speak("Ok, zoom in ");
                 $scope.map = MapService.zoomIn();
             });
 
             AnnyangService.addCommand('(map) zoom out', function() {
                 console.debug("Moooooooooz!!!");
+                SayService.speak("Ok, zoom out ");
                 $scope.map = MapService.zoomOut();
             });
 
@@ -155,6 +165,7 @@
             // Search images
             AnnyangService.addCommand('Show me *term', function(term) {
                 console.debug("Showing", term);
+                SayService.speak("Ok, showing");
             });
 
             // Change name
@@ -166,16 +177,19 @@
             // Set a reminder
             AnnyangService.addCommand('Remind me to *task', function(task) {
                 console.debug("I'll remind you to", task);
+                SayService.speak("Ok, I'll remind you to", task);
             });
 
             // Clear reminders
             AnnyangService.addCommand('Clear reminders', function() {
                 console.debug("Clearing reminders");
+                SayService.speak("Ok, Clearing reminders");
             });
 
             // Check the time
             AnnyangService.addCommand('what time is it', function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
+                 SayService.speak("Ok, It is", moment().format('h:mm:ss a'));
             });
 
             // Turn lights off
@@ -206,6 +220,7 @@
                 $scope.listening = listening;
             }, function(interimResult){
                 $scope.interimResult = interimResult;
+                //console.log(interimResult);
                 $timeout.cancel(resetCommandTimeout);
             }, function(result){
                 $scope.interimResult = result[0];
