@@ -124,8 +124,18 @@
       </div>
       <div class="bottom-left">
         <div class="fitbit">
-          <div class="weather-week-day">
-            <span class="day light-grey">test {{fbDailyAverage.averageDailySteps}}</span>
+          <div class="weather-week-day animate-grow">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="day light-grey">Fitbit stats for {{fbDailyAverage.fullName}}</span>
+              </li>
+              <li class="list-group-item">
+                <span class="day light-grey">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span>
+              </li>
+              <li class="list-group-item">
+                <span class="day light-grey">Today's steps: {{fbToday.summary.steps}}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

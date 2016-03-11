@@ -9,6 +9,7 @@
     function FitbitService($http) {
         var service = {};
         var summary = null;
+        var today = null;
         
         // Simple token persist functions.
         //
@@ -162,9 +163,7 @@
                 //console.log( JSON.stringify( JSON.parse( body ), null, 2 ) );
 
                 var res = JSON.parse(body);
-                //console.log( res.user);
-                var resMsg = 'Hi ' + res.user.fullName + ' your avg daily is: ' + res.user.averageDailySteps + '. Awesome!';
-                console.log(resMsg);
+
                 // If the token arg is not null, then a refresh has occured and
                 // we must persist the new token.
                 if ( token )
@@ -176,8 +175,57 @@
                     //process.exit(0);
                 }
 
-                console.log(res.user);
+                //console.log(res.user);
                 return callback(res.user);
+            });
+        }
+
+        service.todaySummary = function(callback) {
+            if(service.today === null){
+                return null;
+            }
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if(dd<10) {
+                dd='0'+dd
+            } 
+
+            if(mm<10) {
+                mm='0'+mm
+            } 
+
+            today = yyyy+'-'+mm+'-'+dd;
+                
+            // Make an API call
+            fitbit.request({
+                uri: "https://api.fitbit.com/1/user/-/activities/date/" + today + ".json",
+                method: 'GET',
+            }, function( err, body, token ) {
+                if ( err ) {
+                    console.log( err );
+                    //process.exit(1);
+                }
+                //console.log( JSON.stringify( JSON.parse( body ), null, 2 ) );
+
+                var res = JSON.parse(body);
+                //console.log( res.user);
+                //console.log(res);
+                // If the token arg is not null, then a refresh has occured and
+                // we must persist the new token.
+                if ( token )
+                    persist.write( tfile, token, function( err ) {
+                    if ( err ) console.log( err );
+                        process.exit(0);
+                    });
+                else {
+                    //process.exit(0);
+                }
+
+                return callback(res);
             });
         }
         

@@ -62,31 +62,22 @@
                 });
 
                 FitbitService.init().then(function(){
-                    
                     FitbitService.profileSummary(function(response){
-                        // Here you have access to your variable
                         console.log(response);
-                        // Set scope variable with latest fitbit data...
                         $scope.fbDailyAverage = response;
                     });
-
                     
-                    // $scope.fbDailyAverage = FitbitService.profileSummary();
-                    // console.log('done with weather init from main controller.');
-
-                    // setTimeout(function() {
-                    //     console.log("Done!");
-                    //     $scope.fbDailyAverage = FitbitService.summary;
-                    //     console.log(FitbitService.summary);
-                    // }, 1 * 2000)
-
+                    FitbitService.todaySummary(function(response){
+                        console.log(response);
+                        $scope.fbToday = response;
+                    });
                 });
 
                 $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
 
             refreshMirrorData();
-            $interval(refreshMirrorData, 3600000);
+            $interval(refreshMirrorData, 60000); //3600000
 
             var refreshTrafficData = function() {
                 TrafficService.getTravelDuration().then(function(durationTraffic) {
@@ -123,6 +114,11 @@
             AnnyangService.addCommand('Go to sleep', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
+            });
+
+            AnnyangService.addCommand('Refresh stats', function() {
+                console.debug("Ok...");
+                refreshMirrorData();
             });
 
             // Go back to default view

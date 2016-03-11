@@ -100,6 +100,7 @@ dt {
 }
 
 .bottom-left {
+    font-family: 'Open Sans', sans-serif;
     position: absolute;
     bottom: 20px;
     left: 20px;
