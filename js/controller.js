@@ -61,7 +61,14 @@
                     console.log(error);
                 });
 
+                refreshFitbitData();
+
+                $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
+            };
+
+            var refreshFitbitData = function() {
                 FitbitService.init().then(function(){
+                    console.log('refreshed fitbit summary stats');
                     FitbitService.profileSummary(function(response){
                         console.log(response);
                         $scope.fbDailyAverage = response;
@@ -72,8 +79,6 @@
                         $scope.fbToday = response;
                     });
                 });
-
-                $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
 
             refreshMirrorData();
@@ -114,11 +119,6 @@
             AnnyangService.addCommand('Go to sleep', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
-            });
-
-            AnnyangService.addCommand('Refresh stats', function() {
-                console.debug("Ok...");
-                refreshMirrorData();
             });
 
             // Go back to default view
@@ -206,6 +206,12 @@
                     $scope.gifimg = GiphyService.giphyImg();
                     $scope.focus = "gif";
                 });
+            });
+
+            //Show fitbit stats
+            AnnyangService.addCommand('show my walking', function() {
+                refreshFitbitData();
+                $scope.focus = "fitbit";
             });
 
             // Show xkcd comic

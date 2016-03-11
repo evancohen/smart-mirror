@@ -180,6 +180,10 @@ ul.calendar {
     width: 60px;
 }
 
+.fitbit {
+    height: 100%;
+}
+
 .fitbit-title {
     margin-right: 10px;
     font-size: 24px;

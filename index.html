@@ -88,6 +88,23 @@
         <div class="xkcd-container animate-grow" ng-show="focus == 'xkcd'">
           <img class="xkcd animate-grow" ng-src="{{xkcd}}"/>
         </div>
+        <div class="fitbit-container animate-grow" ng-show="focus == 'fitbit'">
+          <!-- <img class="fitbit animate-grow" ng-src="{{xkcd}}"/> -->
+          <div><span class="fitbit-title">Fitbit stats for {{fbDailyAverage.fullName}}</span></div>
+          <div><span class="fitbit-item">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span></div>
+          <div><span class="fitbit-item">Today's steps: {{fbToday.summary.steps}}</span></div>
+          <div><span class="fitbit-item">Today's distance: {{fbToday.summary.distances[0].distance}} KM</span></div>
+          <div><span class="fitbit-item">Today's active minutes: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}</span></div>
+          <div><span class="fitbit-item">Calories burned: {{fbToday.summary.caloriesOut}}</span></div>
+          <p></p>
+          <div><span class="fitbit-subtitle">Latest badges</span></div>
+          <div class="" ng-repeat="badge in fbDailyAverage.topBadges">
+            <div>
+              <span class="fitbit-item"><img class="fitbit-badge" ng-src="{{badge.image50px}}"/></span>
+              <span class="fitbit-item">{{badge.description}}</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="bottom-center">
         <!-- Command list -->
