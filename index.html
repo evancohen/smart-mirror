@@ -15,6 +15,7 @@
     <script src="js/app.js"></script>
     <script src="js/annyang-service.js"></script>
     <script src="js/weather-service.js"></script>
+    <script src="js/fitbit-service.js"></script>
     <script src="js/xkcd-service.js"></script>
     <script src="js/map-service.js"></script>
     <script src="js/hue-service.js"></script>
@@ -120,6 +121,13 @@
         </div>
 
         <div class="interim-result" ng-bind="interimResult"></div>
+      </div>
+      <div class="bottom-left">
+        <div class="fitbit">
+          <div class="weather-week-day">
+            <span class="day light-grey">test {{fbDailyAverage.averageDailySteps}}</span>
+          </div>
+        </div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>

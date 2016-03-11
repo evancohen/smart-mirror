@@ -5,6 +5,7 @@
             AnnyangService,
             GeolocationService,
             WeatherService,
+            FitbitService,
             MapService,
             HueService,
             CalendarService,
@@ -38,7 +39,6 @@
                 $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
             });
             restCommand();
-
             var refreshMirrorData = function() {
                 //Get our location and then get the weather for our location
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -59,6 +59,27 @@
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
                     console.log(error);
+                });
+
+                FitbitService.init().then(function(){
+                    
+                    FitbitService.profileSummary(function(response){
+                        // Here you have access to your variable
+                        console.log(response);
+                        // Set scope variable with latest fitbit data...
+                        $scope.fbDailyAverage = response;
+                    });
+
+                    
+                    // $scope.fbDailyAverage = FitbitService.profileSummary();
+                    // console.log('done with weather init from main controller.');
+
+                    // setTimeout(function() {
+                    //     console.log("Done!");
+                    //     $scope.fbDailyAverage = FitbitService.summary;
+                    //     console.log(FitbitService.summary);
+                    // }, 1 * 2000)
+
                 });
 
                 $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
