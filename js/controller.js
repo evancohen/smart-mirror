@@ -20,6 +20,7 @@
         $scope.focus = "default";
         $scope.user = {};
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        $scope.fitbitEnabled = config.fitbit.enabled;
 
         //Update the time
         function updateTime(){
@@ -62,12 +63,12 @@
                 });
 
                 setTimeout(function() { refreshFitbitData(); }, 1000);
-                
 
                 $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
 
             var refreshFitbitData = function() {
+                if (!config.fitbit.enabled) return; // Return if fitbit integration is disabled in main config
                 console.log('refreshing fitbit data');
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
@@ -205,11 +206,12 @@
                 });
             });
 
-            //Show fitbit stats
-            AnnyangService.addCommand('show my walking', function() {
-                refreshFitbitData();
-                $scope.focus = "fitbit";
-            });
+            //Show fitbit stats (registered only if fitbit integration is enabled in main config)
+            if (config.fitbit.enabled) {
+                AnnyangService.addCommand('show my walking', function() {
+                    refreshFitbitData();
+                });
+            }
 
             // Show xkcd comic
             AnnyangService.addCommand('Show xkcd', function(state, action) {

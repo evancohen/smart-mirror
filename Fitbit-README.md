@@ -6,7 +6,9 @@ Sign up for the Fitbit API (https://dev.fitbit.com) and create a new application
 
 #### Setup your config.js file
 
-Now, head over to the main config.js file and enter your Client ID key and Client secret for Fitbit under the fitbit creds section, and be sure that the callback URL you specified in your Fitbit personal application entry is set to the same value as redirect_uri in config.js. This is so that when you do the initial auth with Fitbit, their auth process takes redirects back to http://localhost:4000 - and the server running in express on port 4000 will get the callback request from fitbit and be able to persist save your token. This is a once off process. After this, the fb-token.json file is persisted and the OAuth2 library included will handle refresh tokens automatically as needed from Fitbit.
+Now, head over to the main config.js file and set the enabled property value to 'true'. This will enable fitbit stats to be displayed in the UI and allow the API calls to Fitbit to work.
+
+Now enter your Client ID key and Client secret for Fitbit under the fitbit creds section in the fitbit-service.js file (fitbitConfig object at the top of the file), and be sure that the callback URL you specified in your Fitbit personal application entry is set to the same value as redirect_uri in the fitbitConfig object. This is so that when you do the initial auth with Fitbit, their auth process takes redirects back to http://localhost:4000 - and the server running in express on port 4000 will get the callback request from fitbit and be able to persist save your token. This is a once off process. After this, the fb-token.json file is persisted and the OAuth2 library included will handle refresh tokens automatically as needed from Fitbit.
 
 #### First time run
 
@@ -18,11 +20,11 @@ Error reading Fitbit token file! This might be the first time you are running th
 
 At this point, you need to open up another browser on this machine (Task switch if you need to) and navigate to http://localhost:4000/fitbit
 
-You will be redirected to the Fitbit auth page, and as long as your Client ID and Secret were entered correctly in your config file, you'll see the page requesting access for your application. Allow and the token will be saved (you'll see fb-token.json appear in your smart-mirror root). You might get an error web page after clicking Allow - this is a hiccup in the Fitbit OAuth2 library that I have not yet smoothed out, but not to worry, the token should have been saved, so you should be good now regardless of this error.
+You will be redirected to the Fitbit auth page, and as long as your Client ID and Secret were entered correctly in your fitbit-service.js file, you'll see the page requesting access for your application. Allow and the token will be saved (you'll see fb-token.json appear in your smart-mirror root). You might get an error web page after clicking Allow - this is a hiccup in the Fitbit OAuth2 library that I have not yet smoothed out, but not to worry, the token should have been saved, so you should be good now regardless of this error.
 
 #### Seeing your Fitbit data
 
-If you wait for the refresh interval of the smart-mirror your fitbit stats will update at that point. Alternatively, you can issue the voice command 'show my walking' to prompt a refresh of the fitbit stats (instead of at the bottom left, they will also appear in a container in the middle of the display), or you could close the smart-mirror app (CTRL-W) and re-launch it.
+If you wait for the refresh interval of the smart-mirror your fitbit stats will update at that point (or the first time you start Smart Mirror). Alternatively, you can issue the voice command 'show my walking' to prompt a refresh of the fitbit stats.
 
 #### What data is displayed?
 

@@ -32,22 +32,6 @@ var config = {
       reload_interval : 5 // Number of minutes the information is refreshed
     },
     fitbit: {
-        "timeout": 10000,
-        "creds": {
-            "clientID": "CLIENTID",
-            "clientSecret": "SECRET"
-        },
-        "uris": {
-            "authorizationUri": "https://www.fitbit.com",
-            "authorizationPath": "/oauth2/authorize",
-            "tokenUri": "https://api.fitbit.com",
-            "tokenPath": "/oauth2/token"
-        },
-        "authorization_uri": {
-            "redirect_uri": "http://localhost:4000/fitbit_auth_callback/",
-            "response_type": "code",
-            "scope": "activity nutrition profile settings sleep social weight heartrate",
-            "state": "3(#0/!~"
-        }
+        "enabled": true // Setup your API user ID and secret for Fitbit if true in the fitbit-service.js controller
     }
 }

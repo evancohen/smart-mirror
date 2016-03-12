@@ -6,7 +6,28 @@
     var fs      = require( 'fs' );
     var Fitbit  = require( 'fitbit-oauth2' );
 
+    var fitbitConfig = {
+        "timeout": 10000,
+        "creds": {
+            "clientID": "227NBY",
+            "clientSecret": "953d9cc658b15de8ad0503529c5b3674"
+        },
+        "uris": {
+            "authorizationUri": "https://www.fitbit.com",
+            "authorizationPath": "/oauth2/authorize",
+            "tokenUri": "https://api.fitbit.com",
+            "tokenPath": "/oauth2/token"
+        },
+        "authorization_uri": {
+            "redirect_uri": "http://localhost:4000/fitbit_auth_callback/",
+            "response_type": "code",
+            "scope": "activity nutrition profile settings sleep social weight heartrate",
+            "state": "3(#0/!~"
+        }
+    }
+
     function FitbitService($http) {
+
         var service = {};
         var summary = null;
         var today = null;
@@ -34,7 +55,7 @@
 
         // Instanciate a fitbit client.  See example config below.
         //
-        var fitbit = new Fitbit(config.fitbit); 
+        var fitbit = new Fitbit(fitbitConfig); 
 
         // In a browser, http://localhost:4000/fitbit to authorize a user for the first time.
         //
