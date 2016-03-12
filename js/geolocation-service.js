@@ -20,6 +20,7 @@
           }
           else {
             $window.navigator.geolocation.getCurrentPosition(function(position){
+                console.debug("Geoposition: " + position.coords.latitude + ", " + position.coords.longitude)
               $rootScope.$apply(function(){deferred.resolve(position);});
             }, function(error) {
               switch (error.code) {
