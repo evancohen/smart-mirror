@@ -5,6 +5,7 @@
             AnnyangService,
             GeolocationService,
             WeatherService,
+            FitbitService,
             MapService,
             HueService,
             CalendarService,
@@ -20,6 +21,7 @@
         $scope.user = {};
         $scope.commands = commands
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        $scope.fitbitEnabled = config.fitbit.enabled;
 
         $scope.layoutName = 'main';
 
@@ -47,7 +49,6 @@
                 $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
             });
             restCommand();
-
             var refreshMirrorData = function() {
                 //Get our location and then get the weather for our location
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -83,6 +84,20 @@
                     console.log(error);
                 });
 
+                setTimeout(function() { refreshFitbitData(); }, 1000);
+
+            };
+
+            var refreshFitbitData = function() {
+                if (!config.fitbit.enabled) return; // Return if fitbit integration is disabled in main config
+                console.log('refreshing fitbit data');
+                FitbitService.profileSummary(function(response){
+                    $scope.fbDailyAverage = response;
+                });
+                
+                FitbitService.todaySummary(function(response){
+                    $scope.fbToday = response;
+                });
             };
 
             refreshMirrorData();
@@ -247,6 +262,13 @@
                     $scope.focus = "gif";
                 });
             });
+
+            //Show fitbit stats (registered only if fitbit integration is enabled in main config)
+            if (config.fitbit.enabled) {
+                AnnyangService.addCommand('show my walking', function() {
+                    refreshFitbitData();
+                });
+            }
 
             // Show xkcd comic
             AnnyangService.addCommand(commands['image_comic']['voice'], function(state, action) {
