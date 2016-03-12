@@ -89,7 +89,6 @@
           <img class="xkcd animate-grow" ng-src="{{xkcd}}"/>
         </div>
         <div class="fitbit-container animate-grow" ng-show="focus == 'fitbit'">
-          <!-- <img class="fitbit animate-grow" ng-src="{{xkcd}}"/> -->
           <div><span class="fitbit-title">Fitbit stats for {{fbDailyAverage.fullName}}</span></div>
           <div><span class="fitbit-item">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span></div>
           <div><span class="fitbit-item">Today's steps: {{fbToday.summary.steps}}</span></div>
@@ -129,6 +128,8 @@
             <dd>Shows a giphy image </dd>
             <dt>Show xkcd</dt>
             <dd>Shows the most recent xkcd comic.</dd>
+            <dt>Show my walking</dt>
+            <dd>Refreshes fitbit data and shows stats on screen.</dd>
           </dl>
           <small>
             We are using node <script>document.write(process.versions.node)</script>,

@@ -61,28 +61,25 @@
                     console.log(error);
                 });
 
-                refreshFitbitData();
+                setTimeout(function() { refreshFitbitData(); }, 1000);
+                
 
                 $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
             };
 
             var refreshFitbitData = function() {
-                FitbitService.init().then(function(){
-                    console.log('refreshed fitbit summary stats');
-                    FitbitService.profileSummary(function(response){
-                        console.log(response);
-                        $scope.fbDailyAverage = response;
-                    });
-                    
-                    FitbitService.todaySummary(function(response){
-                        console.log(response);
-                        $scope.fbToday = response;
-                    });
+                console.log('refreshing fitbit data');
+                FitbitService.profileSummary(function(response){
+                    $scope.fbDailyAverage = response;
+                });
+                
+                FitbitService.todaySummary(function(response){
+                    $scope.fbToday = response;
                 });
             };
 
             refreshMirrorData();
-            $interval(refreshMirrorData, 60000); //3600000
+            $interval(refreshMirrorData, 3600000);
 
             var refreshTrafficData = function() {
                 TrafficService.getTravelDuration().then(function(durationTraffic) {
