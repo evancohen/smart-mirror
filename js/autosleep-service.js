@@ -19,11 +19,18 @@
         };
 
         service.wake = function() {
-            exec("/opt/vc/bin/tvservice -p", puts);
+            service.exec("/opt/vc/bin/tvservice -p", service.puts);
         };
 
         service.sleep = function() {
-            exec("/opt/vc/bin/tvservice -o", puts);
+            service.exec("/opt/vc/bin/tvservice -o", service.puts);
+        };
+
+        service.sys = require('sys');
+        service.exec = require('child_process').exec;
+
+        service.puts = function (error, stdout, stderr) {
+            service.puts(stdout);
         };
 
         return service;
