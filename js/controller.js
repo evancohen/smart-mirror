@@ -239,12 +239,14 @@
             AnnyangService.addCommand('screen off', function() {
                 console.debug('turning screen off');
                 AutoSleepService.sleep();
+                $scope.focus = "sleep"
             });
 
             // Turn on HDMI output
             AnnyangService.addCommand('screen on', function() {
                 console.debug('turning screen on');
                 AutoSleepService.wake();
+                $scope.focus = "default"
             })
 
             // Hide everything and "sleep"
