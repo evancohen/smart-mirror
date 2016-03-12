@@ -9,8 +9,8 @@
     var fitbitConfig = {
         "timeout": 10000,
         "creds": {
-            "clientID": "227NBY",
-            "clientSecret": "953d9cc658b15de8ad0503529c5b3674"
+            "clientID": "YOURFITBITCLIENTID",
+            "clientSecret": "YOURFITBITCLIENTSECRET"
         },
         "uris": {
             "authorizationUri": "https://www.fitbit.com",
