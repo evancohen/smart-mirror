@@ -1,7 +1,7 @@
 var config = {
     // Lenguage for the mirror (currently not implemented)
     lenguage : "en",
-    greeting : ["Hi, sexy!", "Hello there!"], // An array of greetings to randomly choose from
+    greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
