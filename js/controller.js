@@ -67,16 +67,12 @@
         function updateTime(){
             $scope.date = new moment();
 
-            if (config.autoTimer.enabled === true && config.autoTimer.autowake == $filter('date')($scope.date, 'HH:mm:ss'))
-            {
-                console.debug('Auto-wake', config.autoTimer.autowake)
-
-                // Wake the screen
+            // Auto wake at a specific time
+            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autowake !== 'undefined' && config.autoTimer.autowake == $filter('date')($scope.date, 'HH:mm:ss')) {
+                console.debug('Auto-wake', config.autoTimer.autowake);
                 $scope.focus = "default";
-                // Wake the HDMI output
-                exec("/opt/vc/bin/tvservice -p", puts);
-
-                $scope.startAutoSleepTimer();
+                AutoSleepService.wake();
+                AutoSleepService.startAutoSleepTimer();
             }
         }
 
@@ -88,7 +84,7 @@
         };
 
         _this.init = function() {
-            AutoSleepService.startAutoSleepTimer($scope);
+            AutoSleepService.startAutoSleepTimer();
 
             var tick = $interval(updateTime, 1000);
             updateTime();
