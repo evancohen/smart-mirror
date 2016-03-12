@@ -31,5 +31,10 @@
     "install": "^0.5.4",
     "npm": "^3.7.5",
     "wiredep": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "fitbit-oauth2": "0.0.1",
+    "fs": "0.0.2"
   }
 }
