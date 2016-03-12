@@ -44,28 +44,34 @@ git clone https://github.com/evancohen/smart-mirror.git
 ```
 
 ##### Configuring the mirror
-You'll need to fill in a few things into `config.js`, which should end up looking something like this:
+You'll need to create a `config.js` file, a template for this can be found at config.example.js. Simply copy the template and save it as `config.js`
+``` bash
+cp config.example.js config.js
+```
+
+Then fill out the config file, which should end up looking something like this:
 ``` javascript
 var config = {
-    lenguage : "en",
-    greeting : ["Hi, sexy!", "Hey There!", "Looking Awesome!"],
+    language : "en", 
+    layout: "main",
+    greeting : ["Hi, sexy!", "Hey There!", "Looking Awesome!"], 
     forcast : {
-        key : "a6s5dg39j78qj38sjs91je9djadfa1e",
-        units : "auto"
+        key : "a6s5dg39j78qj38sjs91je9djadfa1e", 
+        units : "auto" 
     },
     hue : {
-        ip : "192.168.1.99",
-        uername : "as9234ho0dfhoq01f2as3yh4m0",
-        group : "0",
+        ip : "192.168.1.99", 
+        uername : "as9234ho0dfhoq01f2as3yh4m0", 
+        group : "0" 
     },
     calendar: {
       icals : ["https://calendar.google.com/calendar/ical/SOMESTUFF/basic.ics",
 "https://outlook.office365.com/owa/calendar/SOMESTUFF/reachcalendar.ics"],
-      maxResults: 9,
-      maxDays: 365
+      maxResults: 9, 
+      maxDays: 365 
     },
     giphy: {
-      key : "a6s5dg39j78qj38sjs91je9djadfa1e"
+      key : "a6s5dg39j78qj38sjs91je9djadfa1e" 
     },
     traffic: {
       key : "a6s5dg39j78qj38sjs91je9djadfa1e",
@@ -75,7 +81,7 @@ var config = {
       name : "work",
       reload_interval : 5
     }
-}
+};
 ```
 Note that if you start the mirror and get a black screen you most likeley have an issue with your config.
 
@@ -93,6 +99,24 @@ In order to disable the screensaver you'll want to comment out (with a '#') the 
 @xset s noblank
 ```
 
+Optionally, you can configure your Pi to start the mirror on boot
+In **/home/pi/**, create the file called smart-start.sh with the following content:
+```
+#!/bin/bash
+export DISPLAY=:0
+export XAUTHORITY=/home/pi/.Xauthority
+cd /home/pi/smart-mirror && npm start
+```
+
+Make the file owned by the user pi
+`chown pi:pi /home/pi/smart-start.sh`
+And make it executable
+`chmod +x /home/pi/smart-start.sh`
+Then, edit the file **/home/pi/.config/lxsession/LXDE-pi/autostart**
+and add the following line to the end:
+/`home/pi/smart-start.sh &`
+Reboot the Pi and you should be good to go
+
 ##### Install dependencies and run
 Before we can run the thing we've got to install the projects dependencies. From the root of the `smart-mirror` directory run:
 ```
@@ -104,7 +128,9 @@ This will take a minute, it has to download [electron-prebuilt](https://github.c
 npm start
 ```
 
-#### Development
+#### Development and Contributing
+See the `dev` branch for features that are curently in development.
+If you would like to contribue please follow the [contribution guidelines](https://github.com/evancohen/smart-mirror/blob/master/CONTRIBUTING.md).
 To launch the mirror with a debug window attached use the following command:
 ```
 npm start dev
@@ -113,6 +139,11 @@ More info coming soon(ish). In the meantime head over to the [gitter chat](https
 
 #### Troubleshooting
 If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)
+
+#### For full localization you need to change some values in the index.html. 
+Look for the line:  <span class="time-to">Time to {{traffic.destination}}:</span> and change to
+"<span class="time-to">in your language {{traffic.destination}}:</span>
+Furthermore change  <h2>Available Commands</h2> into  <h2>in your language</h2>
 
 ### License
 MIT

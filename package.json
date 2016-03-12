@@ -4,7 +4,9 @@
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js "
+    "install": "bower install",
+    "start": "electron main.js ",
+    "wiredep": "wiredep -s index.html"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,11 @@
   },
   "homepage": "https://github.com/evancohen/smart-mirror",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.5"
+    "angular-i18n": "^1.5.0",
+    "bower": "^1.7.7",
+    "electron-prebuilt": "^0.36.5",
+    "install": "^0.5.4",
+    "npm": "^3.7.5",
+    "wiredep": "^3.0.0"
   }
 }
