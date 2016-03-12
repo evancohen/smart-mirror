@@ -99,9 +99,11 @@
           if ( type !== 'SUMMARY' || (type=='SUMMARY' && cur_event['SUMMARY'] == undefined)) {
             cur_event[type] = val;
           }
-          if (cur_event['SUMMARY'] !== undefined && cur_event['RRULE'] !== undefined) {
+          if (cur_event['SUMMARY'] !== undefined && cur_event['RRULE'] !== undefined &&
+              cur_event['DTSTART'] !== undefined && cur_event['DTEND'] !== undefined) {
             var options = new RRule.parseString(cur_event['RRULE']);
       			options.dtstart = cur_event.start.toDate();
+      			var event_duration = cur_event.end.diff(cur_event.start,'minutes');
       			var rule = new RRule(options);
             var oneYear = new Date();
       			oneYear.setFullYear(oneYear.getFullYear() + 1);
@@ -111,8 +113,10 @@
               recuring_event.SUMMARY = cur_event.SUMMARY;
       				var dt = new Date(dates[date]);
       				var startDate = moment(dt);
+      				var endDate = moment(dt);
+              endDate.add(event_duration, 'minutes');
               recuring_event.start = startDate;
-              recuring_event.end = startDate;
+              recuring_event.end = endDate;
               if(!contains(events, recuring_event)) {
                 events.push(recuring_event);
               }
