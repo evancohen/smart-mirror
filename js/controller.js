@@ -266,7 +266,7 @@
                 console.debug('turning screen on');
                 AutoSleepService.wake();
                 $scope.focus = "default"
-            })
+            });
 
             // Hide everything and "sleep"
             addCommand('debug', function() {
