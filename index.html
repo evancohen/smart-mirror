@@ -29,6 +29,7 @@
   <script src="js/geolocation-service.js"></script>
   <script src="js/calendar-service.js"></script>
   <script src="js/traffic-service.js"></script>
+  <script src="js/timer-service.js"></script>
   <script src="js/controller.js"></script>
 
   <link rel="stylesheet" ng-href="node_moduels/angular-i18n/angular-locale_{{ angularLang }}.js">
@@ -117,6 +118,13 @@
       <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
         <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
         <div class="comic-title">{{dilbert.title}}</div>
+      </div>
+      <div class="contents-box timer animate-grow" ng-show="focus == 'timer'">
+        <div class="contents timer animate-grow">
+          <div class="timer-countdown">{{timer.countdown | secondsToDateTime | date:"mm:ss"}}</div>
+          <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>
+          <timer-circle class="timer-circle" />
+        </div>
       </div>
     </div>
 
