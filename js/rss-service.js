@@ -24,7 +24,6 @@
                     }    
                 });
             });
-            //console.log("FEED SOURCE:", service.feedSource);
             return service.feed;
         };
 
@@ -32,7 +31,6 @@
             return service.init();
         };
 
-        //Returns the YouTube search results for the given query
         service.getNews = function() {
             if (service.feed == null) {
                 return null;
