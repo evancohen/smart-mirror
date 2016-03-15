@@ -43,5 +43,9 @@ var config = {
       destination : "", // Destination of your trip. Human readable address.
       name : "work", // Name of your destination ex: "work"
       reload_interval : 5 // Number of minutes the information is refreshed
+    },
+    rss: {
+      feeds : ["https://news.google.com/news?cf=all&hl=en&ned=us&topic=tc&output=rss"],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
+      refreshInterval : 120 // Number of minutes the information is refreshed
     }
 };
