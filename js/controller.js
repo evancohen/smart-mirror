@@ -11,6 +11,7 @@
             ComicService,
             GiphyService,
             TrafficService,
+            RssService,
             $scope, $timeout, $interval, tmhDynamicLocale) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
@@ -135,7 +136,20 @@
             
             refreshComic();
             $interval(refreshComic, 12*60*60000); // 12 hours
+            
+            var refreshRss = function () {
+                console.log ("Refreshing RSS");
+                $scope.news = null;
+                RssService.refreshRssList();
+            };
 
+            var updateNews = function() {
+                $scope.news = RssService.getNews();
+            };
+
+            refreshRss();
+            $interval(refreshRss, config.rss.refreshInterval * 60000);
+            
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
