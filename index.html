@@ -122,6 +122,15 @@
           </small>
         </div>
 
+        <div class="fade animate-grow" ng-show="focus == 'default' && news != null">
+          <div class="news-title dimmed">
+            <span>Source: {{news.title}},   Last Updated: {{news.lastUpdated.format('MMM DD, h:mm a')}} </span>
+          </div>
+          <div class="news-content">
+            <span>{{news.content}}</span>
+          </div>
+        </div>
+        
         <div class="interim-result" ng-bind="interimResult"></div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
