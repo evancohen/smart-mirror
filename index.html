@@ -30,6 +30,7 @@
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
     <script src="js/traffic-service.js"></script>
+    <script src="js/rss-service.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -122,7 +123,14 @@
             and Electron <script>document.write(process.versions.electron)</script>.
           </small>
         </div>
-
+        <div class="fade animate-grow" ng-show="focus == 'default' && news != null">
+          <div class="news-title dimmed">
+            <span>Source: {{news.title}},   Last Updated: {{news.lastUpdated.format('MMM DD, h:mm a')}} </span>
+          </div>
+          <div class="news-content">
+            <span>{{news.content}}</span>
+          </div>
+        </div>
         <div class="interim-result" ng-bind="interimResult"></div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
