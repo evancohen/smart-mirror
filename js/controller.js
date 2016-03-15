@@ -150,6 +150,9 @@
             refreshRss();
             $interval(refreshRss, config.rss.refreshInterval * 60000);
             
+            updateNews();
+            $interval(updateNews, 8000);  // cycle through news every 8 seconds
+
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
