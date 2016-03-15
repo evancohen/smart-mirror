@@ -140,6 +140,11 @@ More info coming soon(ish). In the meantime head over to the [gitter chat](https
 #### Troubleshooting
 If you are having trouble getting a USB microphone to work on your Pi try following [these steps](https://github.com/evancohen/smart-mirror/issues/20)
 
+#### For full localization you need to change some values in the index.html. 
+Look for the line:  ```<span class="time-to">Time to {{traffic.destination}}:</span>``` and change to
+```<span class="time-to">in your language {{traffic.destination}}:</span>```
+You'll also want to change  ```<h2>Available Commands</h2>``` into  ```<h2>in your language</h2>```.
+
 ### License
 MIT
 
