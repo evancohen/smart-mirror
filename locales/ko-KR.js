@@ -65,13 +65,13 @@ var commands = {
         "description" : "요청한 것의 사진을 보여 줍니다."
     },
     "image_giphy": {
-        "text" : "________ 짤 보여 줘",
-        "voice": "*img짤 보여 줘",
+        "text" : "________ 짤",
+        "voice": "*img짤",
         "description" : "gif 이미지를 보여줍니다."
     },
     "image_comic": {
-        "text" : "카툰 보여 줘",
-        "voice": "카툰 보여 줘",
+        "text" : "카툰 보고 싶어",
+        "voice": "카툰 보고 싶어",
         "description" : "카툰을 보여줍니다."
     },
     "reminder_insert": {
@@ -80,8 +80,8 @@ var commands = {
         "description" : "미리 알림 리스트에 추가 합니다."
     },
     "reminder_clear": {
-        "text" : "미리 알림 삭제 해줘",
-        "voice": "미리 알림 삭제 해줘",
+        "text" : "미리 알림 삭제 해 줘",
+        "voice": "미리 알림 삭제 해 줘",
         "description" : "미리 알림리스트를 삭제 합니다."
     },
     "time_show": {
