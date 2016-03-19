@@ -285,20 +285,28 @@
             // Show timer
             AnnyangService.addCommand('show (the) timer', function() {
               if (TimerService.running) {
+                // Update animation
+                if (TimerService.paused) {
+                  TimerService.start();
+                  TimerService.stop();
+                } else {
+                  TimerService.start();
+                }
+
                 $scope.focus = "timer";
               }
             });
 
             // Stop timer
             AnnyangService.addCommand('stop (the) timer', function() {
-              if (TimerService.running) {
+              if (TimerService.running && !TimerService.paused) {
                 TimerService.stop();
               }
             });
 
             // Resume timer
             AnnyangService.addCommand('resume (the) timer', function() {
-              if (TimerService.running) {
+              if (TimerService.running && TimerService.paused) {
                 TimerService.start();
                 $scope.focus = "timer";
               }

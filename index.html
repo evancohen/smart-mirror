@@ -119,7 +119,7 @@
         <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
         <div class="comic-title">{{dilbert.title}}</div>
       </div>
-      <div class="contents-box timer animate-grow" ng-show="focus == 'timer'">
+      <div class="contents-box animate-grow" ng-show="focus == 'timer'">
         <div class="contents timer animate-grow">
           <div class="timer-countdown">{{timer.countdown | secondsToDateTime | date:"mm:ss"}}</div>
           <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>

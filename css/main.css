@@ -149,6 +149,9 @@ ul.calendar {
 @keyframes reduce-dashoffset {
   to {
     stroke-dashoffset: 0; } }
+@keyframes increase-dashoffset {
+  from {
+    stroke-dashoffset: 0; } }
 .timer {
   font-size: 120px;
   position: relative; }
@@ -156,21 +159,24 @@ ul.calendar {
 .timer-circle {
   width: 3.25em;
   height: 3.25em;
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scaleY(-1);
   margin: 20px auto;
   display: block; }
-  .timer-circle circle {
+  .timer-circle .background,
+  .timer-circle .progress {
     r: 1.525em;
     cx: 1.625em;
     cy: 1.625em;
     stroke-width: 0.1em;
+    fill: none;
+    stroke: #222; }
+  .timer-circle .progress {
     stroke-dasharray: 10.2101761239em;
     stroke-dashoffset: 10.2101761239em;
     stroke-linecap: round;
-    animation-name: reduce-dashoffset;
+    animation-name: increase-dashoffset;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
-    fill: none;
     stroke: white; }
 
 .timer-countdown, .timer-duration {

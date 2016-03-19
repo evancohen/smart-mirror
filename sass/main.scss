@@ -189,6 +189,10 @@ ul.calendar {
   to { stroke-dashoffset: 0; }
 }
 
+@keyframes increase-dashoffset {
+  from { stroke-dashoffset: 0; }
+}
+
 .timer {
   font-size: 120px;
   position: relative;
@@ -201,25 +205,35 @@ ul.calendar {
 
   width: $size;
   height: $size;
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scaleY(-1);
   margin: 20px auto;
   display: block;
 
-  circle {
+  .background,
+  .progress {
     r: $size / 2 - $stroke;
     cx: $size / 2;
     cy: $size / 2;
+    fill: none;
+    stroke: #222;
     stroke-width: $stroke;
+  }
+
+  .progress {
     stroke-dasharray: $pi * $size;
     stroke-dashoffset: $pi * $size;
 
+    stroke: white;
     stroke-linecap: round;
-    animation-name: reduce-dashoffset;
+    animation-name: increase-dashoffset;
     animation-timing-function: linear;
     animation-fill-mode: forwards;
+  }
 
-    fill: none;
-    stroke: white;
+  &.finish .progress {
+    // animation-name: reduce-dashoffset;
+    // animation-duration: 1500ms;
+    // animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);
   }
 }
 

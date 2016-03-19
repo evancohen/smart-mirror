@@ -23,6 +23,7 @@
   var TimerService = function($rootScope, $interval){
     var service = {};
     service.running = false;
+    service.paused = true;
     service.duration = 0;
     service.countdown = service.duration;
 
@@ -44,10 +45,16 @@
         }
         service.countdown = duration;
         service.duration = duration;
+
         $rootScope.$broadcast("timer:init", duration);
       }
-      if (angular.isUndefined(intervalId) && service.countdown > 0) {
+      if (service.countdown > 0) {
+        if (angular.isDefined(intervalId)){
+          service.stop();
+        }
         intervalId = startTimer();
+        service.paused = false;
+
         $rootScope.$broadcast("timer:start", service.countdown);
       }
     };
@@ -56,8 +63,9 @@
       if (angular.isDefined(intervalId)){
         $interval.cancel(intervalId);
         intervalId = undefined;
+        service.paused = true;
 
-        $rootScope.$broadcast("timer:stop");
+        $rootScope.$broadcast("timer:stop", service.countdown);
       }
     };
 
@@ -65,8 +73,6 @@
       service.running = false;
       service.countdown = 0;
       service.stop();
-
-      $rootScope.$broadcast("timer:reset");
     };
 
     return service;
@@ -87,37 +93,51 @@
   var TimerCircle = function(){
   	return {
     	replace: true,
-      template: '<svg><circle></circle></svg>',
+      template: '<svg><circle class="background"></circle><circle class="progress"></circle></svg>',
       link: function(scope, element, attrs){
-        var circle = angular.element(element[0].querySelector('circle'));
+        var circle = angular.element(element[0].querySelector('.progress'));
 
         scope.$on('timer:init', function(event, duration){
           circle.css({
-            'animation-play-state': 'paused',
-            'animation-duration': duration + 's'
+            animationPlayState: 'paused',
+            animationDuration: duration + 's'
           });
+
         	console.debug('timer:init', duration);
         });
 
         scope.$on('timer:start', function(event, countdown){
           var current = circle.css('animation-duration').slice(0, -1);
+
           circle.css({
-            'display': 'none',
-            'animation-delay': -(current - countdown) + 's',
-        	  'animation-play-state': 'running'
+            display: 'none',
+            animationDelay: -(current - countdown) + 's',
+          	animationPlayState: 'running'
           });
 
           circle[0].offsetHeight;   // trigger reflow to reset the animation
 
-          setTimeout(function() {
-            circle.css('display', 'block');
+          setTimeout(function(){
+            circle.css({
+              display: ''
+            });
           }, 0);
 
         	console.debug('timer:start');
         });
 
-        scope.$on('timer:stop', function(){
-        	circle.css('animation-play-state', 'paused');
+        scope.$on('timer:stop', function(event, countdown){
+          if (countdown > 0){
+            circle.css({
+              animationPlayState: 'paused'
+            });
+          } else {
+            circle.css({
+              animationDuration: '',
+              animationDelay: ''
+            });
+          }
+
         	console.debug('timer:stop');
         });
       }
