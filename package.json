@@ -30,6 +30,7 @@
     "electron-prebuilt": "^0.36.5",
     "install": "^0.5.4",
     "npm": "^3.7.5",
+    "say": "^0.9.0",
     "wiredep": "^3.0.0"
   }
 }

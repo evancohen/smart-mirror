@@ -3,6 +3,7 @@
 
     function MirrorCtrl(
             AnnyangService,
+            SayService,
             GeolocationService,
             WeatherService,
             MapService,
@@ -11,6 +12,7 @@
             ComicService,
             GiphyService,
             TrafficService,
+            RssService,
             $scope, $timeout, $interval, tmhDynamicLocale) {
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
@@ -40,6 +42,7 @@
         }
 
         _this.init = function() {
+            console.log(SayService.speak('Welcome'));
             var tick = $interval(updateTime, 1000);
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -136,8 +139,25 @@
             refreshComic();
             $interval(refreshComic, 12*60*60000); // 12 hours
 
+            var refreshRss = function () {
+                console.log ("Refreshing RSS");
+                $scope.news = null;
+                RssService.refreshRssList();
+            };
+
+            var updateNews = function() {
+                $scope.news = RssService.getNews();
+            };
+
+            refreshRss();
+            $interval(refreshRss, config.rss.refreshInterval * 60000);
+            
+            updateNews();
+            $interval(updateNews, 8000);  // cycle through news every 8 seconds
+
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
+                SayService.speak("Ok, going to default view...");
                 $scope.focus = "default";
             }
 
@@ -146,16 +166,19 @@
             // List commands
             AnnyangService.addCommand(commands['list']['voice'], function() {
                 console.debug("Here is a list of commands...");
+                SayService.speak("OK, Here is a list of commands...");
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
             });
 
             // Go back to default view
+
             AnnyangService.addCommand(commands['home']['voice'], defaultView);
 
             // Hide everything and "sleep"
             AnnyangService.addCommand(commands['sleep']['voice'], function() {
                 console.debug("Ok, going to sleep...");
+                SayService.speak("Ok, going to sleep...");
                 $scope.focus = "sleep";
             });
 
@@ -173,6 +196,7 @@
             // Show map
             AnnyangService.addCommand(commands['map_show']['voice'], function() {
                 console.debug("Going on an adventure?");
+                SayService.speak("Ok, showig map...");
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
                     console.log("Geoposition", geoposition);
                     $scope.map = MapService.generateMap(geoposition.coords.latitude+','+geoposition.coords.longitude);
@@ -183,6 +207,7 @@
             // Hide everything and "sleep"
             AnnyangService.addCommand(commands['map_location']['voice'], function(location) {
                 console.debug("Getting map of", location);
+                SayService.speak("Ok, Getting map of", location);
                 $scope.map = MapService.generateMap(location);
                 $scope.focus = "map";
             });
@@ -190,11 +215,13 @@
             // Zoom in map
             AnnyangService.addCommand(commands['map_zoom_in']['voice'], function() {
                 console.debug("Zoooooooom!!!");
+                SayService.speak("Ok, zoom in ");
                 $scope.map = MapService.zoomIn();
             });
 
             AnnyangService.addCommand(commands['map_zoom_out']['voice'], function() {
                 console.debug("Moooooooooz!!!");
+                SayService.speak("Ok, zoom out ");
                 $scope.map = MapService.zoomOut();
             });
 
@@ -212,6 +239,7 @@
             // Search images
             AnnyangService.addCommand(commands['images_search']['voice'], function(term) {
                 console.debug("Showing", term);
+                SayService.speak("Ok, showing");
             });
 
             // Change name
@@ -223,16 +251,19 @@
             // Set a reminder
             AnnyangService.addCommand(commands['reminder_insert']['voice'], function(task) {
                 console.debug("I'll remind you to", task);
+                SayService.speak("Ok, I'll remind you to", task);
             });
 
             // Clear reminders
             AnnyangService.addCommand(commands['reminder_clear']['voice'], function() {
                 console.debug("Clearing reminders");
+                SayService.speak("Ok, Clearing reminders");
             });
 
             // Check the time
             AnnyangService.addCommand(commands['time_show']['voice'], function(task) {
                  console.debug("It is", moment().format('h:mm:ss a'));
+                 SayService.speak("Ok, It is", moment().format('h:mm:ss a'));
             });
 
             // Turn lights off
@@ -270,6 +301,7 @@
                 $scope.listening = listening;
             }, function(interimResult){
                 $scope.interimResult = interimResult;
+                //console.log(interimResult);
                 $timeout.cancel(resetCommandTimeout);
             }, function(result){
                 $scope.interimResult = result[0];
