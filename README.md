@@ -1,8 +1,7 @@
 # Smart Mirror
-
 [![Join the chat at https://gitter.im/evancohen/smart-mirror](https://badges.gitter.im/evancohen/smart-mirror.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-You can find the official documentation at [docs.smart-mirror.io](http://docs.smart-mirror.io)
+Check out the [documentation](http://docs.smart-mirror.io) for installation instructions and troubleshooting.
 
 #### Gitter:
 A live chat to get help and discuss mirror related issues: https://gitter.im/evancohen/smart-mirror. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
