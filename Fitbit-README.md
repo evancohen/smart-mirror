@@ -37,3 +37,5 @@ Basic profile summary stats and the day's activities, like:
 - calories burned
 
 You can easily modify the fitbit-service.js controller to add more API GET methods and hook these up to variables that AngularJS can watch and display in the main Smart Mirror app.
+
+For help, please get in touch with the author of the Fitbit module/service for Smart Mirror at: https://github.com/Shogan
