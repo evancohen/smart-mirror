@@ -1,6 +1,6 @@
 // Warn the user if they have not filled out config.js or if it has an error
 if(typeof config === "undefined"){
-    alert("config.js is missing or contains an error!");
+    alert("'config.js' is missing or contains an error!");
 }
 
 // Load localization files
