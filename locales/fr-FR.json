@@ -3,7 +3,7 @@
         "commands" : "Dis: \"Que puis-je dire?\" pour voir une liste de commandes..."
     },
     "traffic" : {
-        "time_to" : "Zeit zu {{destination}}: "
+        "time_to" : "Temps de {{destination}}: "
     },
     "commands": {
         "title" : "Commandes disponibles",
