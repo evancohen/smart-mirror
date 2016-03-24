@@ -43,8 +43,5 @@ var config = {
       destination : "", // Destination of your trip. Human readable address.
       name : "work", // Name of your destination ex: "work"
       reload_interval : 5 // Number of minutes the information is refreshed
-    },
-    fitbit: {
-        "enabled": false // Set this to true if you would like to display your Fitbit stats on Smart Mirror. Setup your API user ID and secret for Fitbit if true in the fitbit-service.js controller
     }
 };
