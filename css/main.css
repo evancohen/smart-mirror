@@ -146,6 +146,49 @@ ul.calendar {
 .time-to {
   font-weight: bold; }
 
+@keyframes reduce-dashoffset {
+  to {
+    stroke-dashoffset: 0; } }
+@keyframes increase-dashoffset {
+  from {
+    stroke-dashoffset: 0; } }
+.timer {
+  font-size: 120px;
+  position: relative; }
+
+.timer-circle {
+  width: 3.25em;
+  height: 3.25em;
+  transform: rotate(-90deg) scaleY(-1);
+  margin: 20px auto;
+  display: block; }
+  .timer-circle .background,
+  .timer-circle .progress {
+    r: 1.525em;
+    cx: 1.625em;
+    cy: 1.625em;
+    stroke-width: 0.1em;
+    fill: none;
+    stroke: #222; }
+  .timer-circle .progress {
+    stroke-dasharray: 10.2101761239em;
+    stroke-dashoffset: 10.2101761239em;
+    stroke-linecap: round;
+    animation-name: increase-dashoffset;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    stroke: white; }
+
+.timer-countdown, .timer-duration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%); }
+
+.timer-duration {
+  top: 75%;
+  font-size: 25%; }
+
 .contents {
   max-width: 100%; }
 
@@ -238,5 +281,3 @@ ul.calendar {
 .xkcd {
   -webkit-filter: invert(100%);
   max-width: 100%; }
-
-/*# sourceMappingURL=main.css.map */
