@@ -318,8 +318,16 @@
                 $scope.interimResult = interimResult;
                 $timeout.cancel(resetCommandTimeout);
             }, function(result){
-                $scope.interimResult = result[0];
-                resetCommandTimeout = $timeout(restCommand, 5000);
+                if(typeof result != 'undefined'){
+                    $scope.interimResult = result[0];
+                    resetCommandTimeout = $timeout(restCommand, 5000);
+                }
+            }, function(error){
+                console.log(error);
+                if(error.error == "network"){
+                    $scope.speechError = "Google Speech Recognizer is down :(";
+                    AnnyangService.abort();
+                }
             });
         };
 

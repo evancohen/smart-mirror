@@ -129,7 +129,8 @@
           </small>
         </div>
 
-        <div class="interim-result" ng-bind="interimResult"></div>
+        <div class="error" ng-bind="speechError" ng-show="speechError"></div>
+        <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
