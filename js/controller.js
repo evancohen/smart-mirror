@@ -5,6 +5,7 @@
             AnnyangService,
             GeolocationService,
             WeatherService,
+            FitbitService,
             MapService,
             HueService,
             CalendarService,
@@ -24,6 +25,11 @@
         });*/
         $scope.interimResult = $translate.instant('home.commands');
         $scope.layoutName = 'main';
+
+        $scope.fitbitEnabled = false;
+        if (typeof config.fitbit != 'undefined') {
+            $scope.fitbitEnabled = true;
+        }
 
         //set lang
         $scope.locale = config.language;
@@ -87,6 +93,20 @@
                     console.log(error);
                 });
 
+                if ($scope.fitbitEnabled) {
+                    setTimeout(function() { refreshFitbitData(); }, 5000);
+                }
+            };
+
+            var refreshFitbitData = function() {
+                console.log('refreshing fitbit data');
+                FitbitService.profileSummary(function(response){
+                    $scope.fbDailyAverage = response;
+                });
+                
+                FitbitService.todaySummary(function(response){
+                    $scope.fbToday = response;
+                });
             };
 
             refreshMirrorData();
@@ -261,6 +281,13 @@
                     $scope.focus = "gif";
                 });
             });
+
+            //Show fitbit stats (registered only if fitbit is configured in the main config)
+            if ($scope.fitbitEnabled) {
+                AnnyangService.addCommand('show my walking', function() {
+                    refreshFitbitData();
+                });
+            }
 
             // Show xkcd comic
             addCommand('image_comic', function(state, action) {

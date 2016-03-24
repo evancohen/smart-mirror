@@ -32,6 +32,7 @@
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
     <script src="js/traffic-service.js"></script>
+    <script src="js/fitbit-service.js"></script> 
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -124,6 +125,8 @@
           <dl>
             <dt ng-repeat-start="command in commands">{{command['text']}}</dt>
             <dd ng-repeat-end>{{command['description']}}</dd>
+            <dt ng-show="fitbitEnabled">Show my walking</dt>
+            <dd ng-show="fitbitEnabled">Refreshes fitbit data.</dd>
           </dl>
           <small>
             We are using node <script>document.write(process.versions.node)</script>,
@@ -134,6 +137,24 @@
 
         <div class="error" ng-bind="speechError" ng-show="speechError"></div>
         <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
+      </div>
+      <div class="bottom-left" ng-show="fitbitEnabled">
+        <div>
+          <div><span class="fitbit-title">Fitbit stats for {{fbDailyAverage.fullName}}</span></div>
+          <div><span class="fitbit-item">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span></div>
+          <div><span class="fitbit-item">Today's steps: {{fbToday.summary.steps}}</span></div>
+          <div><span class="fitbit-item">Today's distance: {{fbToday.summary.distances[0].distance}} KM</span></div>
+          <div><span class="fitbit-item">Today's active minutes: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}</span></div>
+          <div><span class="fitbit-item">Calories burned: {{fbToday.summary.caloriesOut}}</span></div>
+          <p></p>
+          <div><span class="fitbit-subtitle">Latest badges</span></div>
+          <div class="" ng-repeat="badge in fbDailyAverage.topBadges">
+            <div>
+              <span class="fitbit-item"><img class="fitbit-badge" ng-src="{{badge.image50px}}"/></span>
+              <span class="fitbit-item">{{badge.description}}</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
