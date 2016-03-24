@@ -21,7 +21,10 @@
         $scope.user = {};
         $scope.commands = commands
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
-        $scope.fitbitEnabled = config.fitbit.enabled;
+        $scope.fitbitEnabled = false;
+        if (typeof config.fitbit != 'undefined') {
+            $scope.fitbitEnabled = true;
+        }
 
         $scope.layoutName = 'main';
 
@@ -84,12 +87,13 @@
                     console.log(error);
                 });
 
-                setTimeout(function() { refreshFitbitData(); }, 1000);
+                if ($scope.fitbitEnabled) {
+                    setTimeout(function() { refreshFitbitData(); }, 5000);
+                }
 
             };
 
             var refreshFitbitData = function() {
-                if (!config.fitbit.enabled) return; // Return if fitbit integration is disabled in main config
                 console.log('refreshing fitbit data');
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
@@ -263,8 +267,8 @@
                 });
             });
 
-            //Show fitbit stats (registered only if fitbit integration is enabled in main config)
-            if (config.fitbit.enabled) {
+            //Show fitbit stats (registered only if fitbit is configured in the main config)
+            if ($scope.fitbitEnabled) {
                 AnnyangService.addCommand('show my walking', function() {
                     refreshFitbitData();
                 });

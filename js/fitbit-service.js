@@ -5,27 +5,7 @@
     var app     = express();
     var fs      = require( 'fs' );
     var Fitbit  = require( 'fitbit-oauth2' );
-
-    var fitbitConfig = {
-        "timeout": 10000,
-        "creds": {
-            "clientID": "YOURFITBITCLIENTID",
-            "clientSecret": "YOURFITBITCLIENTSECRET"
-        },
-        "uris": {
-            "authorizationUri": "https://www.fitbit.com",
-            "authorizationPath": "/oauth2/authorize",
-            "tokenUri": "https://api.fitbit.com",
-            "tokenPath": "/oauth2/token"
-        },
-        "authorization_uri": {
-            "redirect_uri": "http://localhost:4000/fitbit_auth_callback/",
-            "response_type": "code",
-            "scope": "activity nutrition profile settings sleep social weight heartrate",
-            "state": "3(#0/!~"
-        }
-    }
-
+    
     function FitbitService($http) {
 
         var service = {};
@@ -53,9 +33,12 @@
             }
         };
 
-        // Instanciate a fitbit client.  See example config below.
+        // Instantiate a fitbit client.
         //
-        var fitbit = new Fitbit(fitbitConfig); 
+        var fitbit = {};
+        if (typeof config.fitbit != 'undefined') {
+            fitbit = new Fitbit(config.fitbit); 
+        }
 
         // In a browser, http://localhost:4000/fitbit to authorize a user for the first time.
         //
@@ -80,7 +63,7 @@
             });
         });
 
-        // Call an API.  fitbit.request() mimics nodejs request() library, automatically
+        // Call an API. fitbit.request() mimics nodejs request() library, automatically
         // adding the required oauth2 headers.  The callback is a bit different, called
         // with ( err, body, token ).  If token is non-null, this means a refresh has happened
         // and you should persist the new token.
@@ -103,30 +86,33 @@
             });
         });
 
-        var port = process.env.PORT || 4000;
-        console.log('express is listening on: ', port);
-        app.listen(port);
+        // Only start up express and enable the fitbit service to start making API calls if the fitbit config is present in config.js.
+        if (typeof config.fitbit != 'undefined') {
+            // do express and Fitbit things
+            var port = process.env.PORT || 4000;
+            console.log('express is listening on port: ', port);
+            app.listen(port);
+            // Read the persisted token, initially captured by a webapp.
+            //
+            fs.stat(tfile, function(err, stat) {
+                if(err == null) {
+                    console.log('Fitbit token File exists');
 
-        // Read the persisted token, initially captured by a webapp.
-        //
-        fs.stat(tfile, function(err, stat) {
-            if(err == null) {
-                console.log('Fitbit token File exists');
+                    persist.read(tfile, function(err, token) {
+                        if (err) {
+                            console.log('persist read error: ', err);
+                        }
 
-                persist.read(tfile, function(err, token) {
-                    if (err) {
-                        console.log('persist read error: ', err);
-                    }
-
-                    // Set the client's token
-                    fitbit.setToken(token);
-                });
-            } else if(err.code == 'ENOENT') {
-                console.log('Error reading Fitbit token file! This might be the first time you are running the app, if so, make sure you browse to http://yourappurl:yourport/fitbit - this will redirect you to the auth page.', err);
-            } else {
-                console.log(err);
-            }
-        });
+                        // Set the client's token
+                        fitbit.setToken(token);
+                    });
+                } else if(err.code == 'ENOENT') {
+                    console.log('Error reading Fitbit token file! This might be the first time you are running the app, if so, make sure you browse to http://yourappurl:yourport/fitbit - this will redirect you to the auth page.', err);
+                } else {
+                    console.log(err);
+                }
+            });
+        }
 
         service.profileSummary = function(callback) {
             if(service.summary === null){
