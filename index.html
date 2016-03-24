@@ -25,6 +25,7 @@
     <script src="js/map-service.js"></script>
     <script src="js/hue-service.js"></script>
     <script src="js/giphy-service.js"></script>
+    <script src="js/timer-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
     <script src="js/traffic-service.js"></script>
@@ -37,7 +38,7 @@
 	<link rel="stylesheet" href="css/weather-icons.css">
     <!-- bower:css -->
     <!-- endbower -->
-	
+
   </head>
   <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
@@ -104,6 +105,13 @@
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
           <div class="comic-title">{{dilbert.title}}</div>
+        </div>
+        <div class="contents-box animate-grow" ng-show="focus == 'timer'">
+          <div class="contents timer animate-grow">
+            <div class="timer-countdown">{{timer.countdown | secondsToDateTime | date:"mm:ss"}}</div>
+            <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>
+            <timer-circle class="timer-circle" />
+          </div>
         </div>
       </div>
       <div class="bottom-center">
