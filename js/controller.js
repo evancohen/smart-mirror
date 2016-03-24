@@ -2,18 +2,18 @@
     'use strict';
 
     function MirrorCtrl(
-            AnnyangService, 
-            GeolocationService, 
-            WeatherService, 
-            MapService, 
-            HueService, 
-            CalendarService, 
+            AnnyangService,
+            GeolocationService,
+            WeatherService,
+            MapService,
+            HueService,
+            CalendarService,
             SearchService,
 			SoundCloudService,
-            $scope, 
-            $timeout, 
+            $scope,
+            $timeout,
             $interval) {
-                
+
         var _this = this;
         var DEFAULT_COMMAND_TEXT = 'Say "What can I say?" to see a list of commands...';
         $scope.listening = false;
@@ -46,7 +46,7 @@
 			//Initialize SoundCloud
 			var playing = false, sound;
 			SoundCloudService.init();
-			
+
             var refreshMirrorData = function() {
                 //Get our location and then get the weather for our location
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -69,7 +69,7 @@
             };
 
             $timeout(refreshMirrorData(), 3600000);
-            
+
             //Set the mirror's focus (and reset any vars)
             var setFocus = function(target){
                 $scope.focus = target;
@@ -144,22 +144,22 @@
                 $scope.map = MapService.reset();
                 setFocus("map");
             });
-			
+
 			//SoundCloud search and play
 			AnnyangService.addCommand('SoundCloud play *query', function(query) {
-				SoundCloudService.searchSoundCloud(query).then(function(response){					
+				SoundCloudService.searchSoundCloud(query).then(function(response){
 					SC.stream('/tracks/' + response[0].id).then(function(player){
 						player.play();
 						sound = player;
-						playing = true; 
+						playing = true;
 					});
 
 					if (response[0].artwork_url){
-						$scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500."); 
+						$scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
 					} else {
 						$scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
 					}
-					$scope.scWaveform = response[0].waveform_url; 
+					$scope.scWaveform = response[0].waveform_url;
 					$scope.scTrack = response[0].title;
 					$scope.focus = "sc";
 				});
@@ -177,7 +177,7 @@
 				sound.seek(0);
 				sound.play();
             });
-			
+
             //Search for a video
             AnnyangService.addCommand('show me (a video)(of)(about) *query', function(query){
                 SearchService.searchYouTube(query).then(function(results){
@@ -185,6 +185,12 @@
                     $scope.video = 'http://www.youtube.com/embed/'+results.data.items[0].id.videoId+'?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
                     setFocus("video");
                 });
+            });
+            //Stop video
+            AnnyangService.addCommand('stop video', function() {
+              var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
+              iframe.postMessage('{"event":"command","func":"' + 'stopVideo' +   '","args":""}', '*');
+              $scope.focus = "default";
             });
 
             // Change name
