@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/evancohen/smart-mirror.png?label=ready&title=Ready)](https://waffle.io/evancohen/smart-mirror)
 # Smart Mirror
 
 [![Join the chat at https://gitter.im/evancohen/smart-mirror](https://badges.gitter.im/evancohen/smart-mirror.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
