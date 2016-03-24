@@ -3,9 +3,6 @@ if(typeof config === "undefined"){
     alert("config.js is missing or contains an error!");
 }
 
-// Load localization files
-document.write('\x3Cscript src="locales/' + config.language + '.js">\x3C/script>');
-
 // Bootstrap Angular
 (function(angular) {
     'use strict';
@@ -23,7 +20,11 @@ document.write('\x3Cscript src="locales/' + config.language + '.js">\x3C/script>
                     suffix: '.json'
                 });
             $translateProvider.useSanitizeValueStrategy(null);
-            $translateProvider.preferredLanguage(config.language);
+            // Avoiding the duplicity of the locale for the default language, xx-YY -> xx
+            // We are considering only the language
+            // Please refer https://github.com/evancohen/smart-mirror/pull/179 for further discussion
+            var language = config.language.substring(0, 2);
+            $translateProvider.preferredLanguage(language);
         }]);
 
 }(window.angular));
