@@ -3,16 +3,28 @@ if(typeof config == 'undefined'){
     alert("'config.js' is missing or contains an error!");
 }
 
-// Load localization files
-document.write('\x3Cscript src="locales/' + config.language + '.js">\x3C/script>');
-
 // Bootstrap Angular
 (function(angular) {
     'use strict';
 
-    angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale']).config(function(tmhDynamicLocaleProvider) {
+    angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
+        .config(function(tmhDynamicLocaleProvider) {
         var locale = config.language.toLowerCase();
         tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_' + locale + '.js');
-    });
+    })
+        .config(['$translateProvider', function ($translateProvider) {
+            $translateProvider
+                .uniformLanguageTag('bcp47')
+                .useStaticFilesLoader({
+                    prefix: 'locales/',
+                    suffix: '.json'
+                });
+            $translateProvider.useSanitizeValueStrategy(null);
+            // Avoiding the duplicity of the locale for the default language, xx-YY -> xx
+            // We are considering only the language
+            // Please refer https://github.com/evancohen/smart-mirror/pull/179 for further discussion
+            var language = config.language.substring(0, 2);
+            $translateProvider.preferredLanguage(language);
+        }]);
 
 }(window.angular));
