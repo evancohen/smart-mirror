@@ -28,6 +28,7 @@
     <script src="js/map-service.js"></script>
     <script src="js/hue-service.js"></script>
     <script src="js/giphy-service.js"></script>
+    <script src="js/timer-service.js"></script>
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
     <script src="js/traffic-service.js"></script>
@@ -40,7 +41,7 @@
 	<link rel="stylesheet" href="css/weather-icons.css">
     <!-- bower:css -->
     <!-- endbower -->
-	
+
   </head>
   <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
@@ -108,6 +109,13 @@
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
           <div class="comic-title">{{dilbert.title}}</div>
         </div>
+        <div class="contents-box animate-grow" ng-show="focus == 'timer'">
+          <div class="contents timer animate-grow">
+            <div class="timer-countdown">{{timer.countdown | secondsToDateTime | date:"mm:ss"}}</div>
+            <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>
+            <timer-circle class="timer-circle" />
+          </div>
+        </div>
       </div>
       <div class="bottom-center">
         <!-- Command list -->
@@ -124,7 +132,8 @@
           </small>
         </div>
 
-        <div class="interim-result" ng-bind="interimResult"></div>
+        <div class="error" ng-bind="speechError" ng-show="speechError"></div>
+        <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>

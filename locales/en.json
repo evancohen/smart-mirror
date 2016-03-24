@@ -102,6 +102,26 @@
             "voice": "what time is it",
             "description": "what time is it"
         },
+        "timer_start": {
+            "text": "",
+            "voice": "(set a) timer (for) *duration",
+            "description": ""
+        },
+        "timer_show": {
+            "text": "",
+            "voice": "show (the) timer",
+            "description": ""
+        },
+        "timer_stop": {
+            "text": "",
+            "voice": "stop (the) timer",
+            "description": ""
+        },
+        "timer_resume": {
+            "text": "",
+            "voice": "resume (the) timer",
+            "description": ""
+        },
         "light_action": {
             "text": "Turn the (state) light (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",

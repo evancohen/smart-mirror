@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Device Switching</title>
+    <style>
+        button {
+            font: 18px sans-serif;
+            padding: 8px;
+        }
+        #error {
+            color: red;
+        }
+    </style>
+    <script type="text/javascript">
+        shell = require('electron').shell;
+    </script>
+  </head>
+  <body>
+    <!-- Adapted from: http://typedarray.org/from-microphone-to-wav-with-getusermedia-and-web-audio/ -->
+    <h1>Electron Microphone Tester</h1>
+    <p>
+        This application is intended to help you debug any microphone issues that you are having on the Pi.
+        The dropdown below contains all of the available audio input devices (An empty entry is your Pi's default).
+    </p>
+    <p>
+        Please read the <a href="#" onclick="shell.openExternal('http://docs.smart-mirror.io/');">documentation</a> for instructions!
+    </p>
+    <br>
+    <div id="error" style="display: none;">No microphone available</div>
+    <select id="sources" onchange="sourceChanged()"></select>
+    
+    <div id="choices">
+    </div>
+    <p id="output"></p>
+    <script src="microphone.js"></script>
+  </body>
+</html>

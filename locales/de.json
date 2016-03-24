@@ -102,6 +102,26 @@
             "voice": "Wie spät ist es",
             "description": "Wie spät ist es"
         },
+        "timer_start": {
+            "text": "",
+            "voice": "(set a) timer (for) *duration",
+            "description": ""
+        },
+        "timer_show": {
+            "text": "",
+            "voice": "show (the) timer",
+            "description": ""
+        },
+        "timer_stop": {
+            "text": "",
+            "voice": "stop (the) timer",
+            "description": ""
+        },
+        "timer_resume": {
+            "text": "",
+            "voice": "resume (the) timer",
+            "description": ""
+        },
         "light_action": {
             "text": "Schalte das (state) Licht (action)",
             "voice": "(Schalte) (das) :state (die) Licht(er) *action",

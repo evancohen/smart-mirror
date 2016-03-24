@@ -102,10 +102,30 @@
             "voice": "que hora es",
             "description": "Muestra la hora actual"
         },
+        "timer_start": {
+            "text": "",
+            "voice": "cronómetro de *duration",
+            "description": ""
+        },
+        "timer_show": {
+            "text": "",
+            "voice": "cronómetro",
+            "description": ""
+        },
+        "timer_stop": {
+            "text": "",
+            "voice": "para (el) cronómetro",
+            "description": ""
+        },
+        "timer_resume": {
+            "text": "",
+            "voice": "continua (el) cronómetro",
+            "description": ""
+        },
         "light_action": {
-            "text": "(turn) (the) :state (the) light(s) *action",
-            "voice": "(turn) (the) :state (the) light(s) *action",
-            "description": "(turn) (the) :state (the) light(s) *action"
+            "text": "Cambia las luces [estado] a [acción]",
+            "voice": "cambia las luces :state a *action",
+            "description": "Cambia el estado de las luces"
         }
     }
 }

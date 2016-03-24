@@ -102,6 +102,26 @@
             "voice": "지금 몇 시",
             "description": "지금 몇 시"
         },
+        "timer_start": {
+            "text": "",
+            "voice": "(set a) timer (for) *duration",
+            "description": ""
+        },
+        "timer_show": {
+            "text": "",
+            "voice": "show (the) timer",
+            "description": ""
+        },
+        "timer_stop": {
+            "text": "",
+            "voice": "stop (the) timer",
+            "description": ""
+        },
+        "timer_resume": {
+            "text": "",
+            "voice": "resume (the) timer",
+            "description": ""
+        },
         "light_action": {
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
             "voice": "불 :state *action (해)줘",

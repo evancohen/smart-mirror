@@ -11,7 +11,8 @@
             ComicService,
             GiphyService,
             TrafficService,
-            $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
+            TimerService,
+            $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
@@ -135,7 +136,7 @@
             		console.log(error);
             	});
             };
-            
+
             refreshComic();
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
@@ -150,8 +151,10 @@
                 var descId = 'commands.'+commandId+'.description';
                 $translate([voiceId, textId, descId]).then(function (translations) {
                     AnnyangService.addCommand(translations[voiceId], commandFunction);
-                    var command = {"text" : translations[textId], "description": translations[descId]};
-                    $scope.commands.push(command);
+                    if (translations[textId] != '') {
+                        var command = {"text": translations[textId], "description": translations[descId]};
+                        $scope.commands.push(command);
+                    }
                 });
             };
 
@@ -275,6 +278,50 @@
                 $scope.focus = "dilbert";
             });
 
+            // Start timer
+            addCommand('timer_start', function(duration) {
+                console.debug("Starting timer");
+                TimerService.start(duration);
+                $scope.timer = TimerService;
+                $scope.focus = "timer";
+
+                $scope.$watch('timer.countdown', function(countdown){
+                    if (countdown === 0) {
+                        TimerService.stop();
+                        // defaultView();
+                    }
+                });
+            });
+
+            // Show timer
+            addCommand('timer_show', function() {
+              if (TimerService.running) {
+                // Update animation
+                if (TimerService.paused) {
+                  TimerService.start();
+                  TimerService.stop();
+                } else {
+                  TimerService.start();
+                }
+
+                $scope.focus = "timer";
+              }
+            });
+
+            // Stop timer
+            addCommand('timer_stop', function() {
+              if (TimerService.running && !TimerService.paused) {
+                TimerService.stop();
+              }
+            });
+
+            // Resume timer
+            addCommand('timer_resume', function() {
+              if (TimerService.running && TimerService.paused) {
+                TimerService.start();
+                $scope.focus = "timer";
+              }
+            });
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
@@ -284,8 +331,16 @@
                 $scope.interimResult = interimResult;
                 $timeout.cancel(resetCommandTimeout);
             }, function(result){
-                $scope.interimResult = result[0];
-                resetCommandTimeout = $timeout(restCommand, 5000);
+                if(typeof result != 'undefined'){
+                    $scope.interimResult = result[0];
+                    resetCommandTimeout = $timeout(restCommand, 5000);
+                }
+            }, function(error){
+                console.log(error);
+                if(error.error == "network"){
+                    $scope.speechError = "Google Speech Recognizer is down :(";
+                    AnnyangService.abort();
+                }
             });
         };
 

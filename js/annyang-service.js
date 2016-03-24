@@ -29,10 +29,10 @@
 
         service.setLanguage(config.language);
 
-        service.start = function(listening, interimResult, result) {
+        service.start = function(listening, interimResult, result, error) {
             annyang.addCommands(service.commands);
             annyang.debug(true);
-            annyang.start();
+            // add specified callback functions
             if (typeof(listening) == "function") {
                 annyang.addCallback('start', function(){$rootScope.$apply(listening(true));});
                 annyang.addCallback('end', function(data){console.log("End", data)});
@@ -43,7 +43,15 @@
             if (typeof(result) == "function") {
                 annyang.addCallback('result', function(data){$rootScope.$apply(result(data));});
             };
+            if (typeof(error) == "function") {
+                annyang.addCallback('error', function(data){$rootScope.$apply(error(data));});
+            };
+            annyang.start();
         };
+        
+        service.abort = function(){
+            annyang.abort();
+        }
 
         return service;
     }
