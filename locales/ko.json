@@ -5,6 +5,11 @@
     "traffic" : {
         "time_to" : "{{destination}} 에 시간: "
     },
+    "timer": {
+      "one": "일",
+      "minute": "분",
+      "second": "초"
+    },
     "commands": {
         "title" : "사용 가능한 명령",
         "list": {

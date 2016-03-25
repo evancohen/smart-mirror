@@ -5,6 +5,11 @@
     "traffic" : {
         "time_to" : "Tiempo al {{destination}}: "
     },
+    "timer": {
+      "one": "Uno",
+      "minute": "Minuto(s)?",
+      "second": "Segundo(s)?"
+    },
     "commands": {
         "title" : "Listado de Órdenes",
         "list": {
@@ -103,24 +108,24 @@
             "description": "Muestra la hora actual"
         },
         "timer_start": {
-            "text": "",
-            "voice": "cronómetro de *duration",
-            "description": ""
+            "text": "Temporizador a _______",
+            "voice": "(ajusta el) temporizador (a) *duration",
+            "description": "Inicia un temporizador."
         },
         "timer_show": {
-            "text": "",
-            "voice": "cronómetro",
-            "description": ""
+            "text": "Muestra temporizador",
+            "voice": "muestra (el) temporizador",
+            "description": "Muestra el temporizador."
         },
         "timer_stop": {
-            "text": "",
-            "voice": "para (el) cronómetro",
-            "description": ""
+            "text": "Para temporizador",
+            "voice": "para (el) temporizador",
+            "description": "Para el temporizador."
         },
         "timer_resume": {
-            "text": "",
-            "voice": "continua (el) cronómetro",
-            "description": ""
+            "text": "Continua temporizador",
+            "voice": "continua (el) temporizador",
+            "description": "Continua el temporizador."
         },
         "light_action": {
             "text": "Cambia las luces [estado] a [acción]",

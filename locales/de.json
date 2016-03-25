@@ -5,6 +5,11 @@
     "traffic" : {
         "time_to" : "Zeit zu {{destination}}: "
     },
+    "timer": {
+      "one": "Eine",
+      "minute": "Minute(n)?",
+      "second": "Sekunde(n)?"
+    },
     "commands": {
         "title" : "Zur Verfügung stehenden Befehle",
         "list": {
@@ -103,24 +108,24 @@
             "description": "Wie spät ist es"
         },
         "timer_start": {
-            "text": "",
-            "voice": "(set a) timer (for) *duration",
-            "description": ""
+            "text": "Timer auf ________",
+            "voice": "(stelle den) timer (auf) *duration",
+            "description": "Startet einen Timer."
         },
         "timer_show": {
-            "text": "",
-            "voice": "show (the) timer",
-            "description": ""
+            "text": "Timer anzeigen",
+            "voice": "timer (an)zeigen",
+            "description": "Zeigt den Timer."
         },
         "timer_stop": {
-            "text": "",
-            "voice": "stop (the) timer",
-            "description": ""
+            "text": "Timer anhalten",
+            "voice": "timer anhalten",
+            "description": "Hält den Timer an."
         },
         "timer_resume": {
-            "text": "",
-            "voice": "resume (the) timer",
-            "description": ""
+            "text": "Timer fortsetzen",
+            "voice": "timer fortsetzen",
+            "description": "Setzt den Timer fort."
         },
         "light_action": {
             "text": "Schalte das (state) Licht (action)",

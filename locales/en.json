@@ -5,6 +5,11 @@
     "traffic" : {
         "time_to" : "Time to {{destination}}: "
     },
+    "timer": {
+      "one": "One",
+      "minute": "Minute(s)?",
+      "second": "Second(s)?"
+    },
     "commands": {
         "title" : "Available Commands",
         "list": {
@@ -103,24 +108,24 @@
             "description": "what time is it"
         },
         "timer_start": {
-            "text": "",
+            "text": "Timer for ________",
             "voice": "(set a) timer (for) *duration",
-            "description": ""
+            "description": "Starts a timer."
         },
         "timer_show": {
-            "text": "",
+            "text": "Show timer",
             "voice": "show (the) timer",
-            "description": ""
+            "description": "Show the timer."
         },
         "timer_stop": {
-            "text": "",
+            "text": "Stop timer",
             "voice": "stop (the) timer",
-            "description": ""
+            "description": "Stop the timer."
         },
         "timer_resume": {
-            "text": "",
+            "text": "Resume timer",
             "voice": "resume (the) timer",
-            "description": ""
+            "description": "Resume timer"
         },
         "light_action": {
             "text": "Turn the (state) light (action)",
