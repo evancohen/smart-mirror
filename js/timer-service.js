@@ -123,7 +123,8 @@
           	animationPlayState: 'running'
           });
 
-          circle[0].offsetHeight;   // trigger reflow to reset the animation
+          // trigger reflow to reset the animation
+          circle[0].getBoundingClientRect();
 
           setTimeout(function(){
             circle.css({
