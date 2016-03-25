@@ -5,6 +5,11 @@
     "traffic" : {
         "time_to" : "Tiempo al {{destination}}: "
     },
+    "timer": {
+      "one": "Uno",
+      "minute": "Minuto(s)?",
+      "second": "Segundo(s)?"
+    },
     "commands": {
         "title" : "Listado de Órdenes",
         "list": {

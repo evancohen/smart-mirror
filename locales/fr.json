@@ -5,6 +5,11 @@
     "traffic" : {
         "time_to" : "Temps de {{destination}}: "
     },
+    "timer": {
+      "one": "Une",
+      "minute": "Minute(s)?",
+      "second": "Seconde(s)?"
+    },
     "commands": {
         "title" : "Commandes disponibles",
         "list": {
