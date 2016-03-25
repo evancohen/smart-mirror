@@ -103,24 +103,24 @@
             "description": "Quel heure est-il?"
         },
         "timer_start": {
-            "text": "",
-            "voice": "(set a) timer (for) *duration",
-            "description": ""
+            "text": "Timer pour ________",
+            "voice": "(Programme le) timer (pour) *duration",
+            "description": "Démarre un timer."
         },
         "timer_show": {
-            "text": "",
-            "voice": "show (the) timer",
-            "description": ""
+            "text": "Montrer timer",
+            "voice": "Montrer(-moi) (le) timer",
+            "description": "Affiche le timer."
         },
         "timer_stop": {
-            "text": "",
-            "voice": "stop (the) timer",
-            "description": ""
+            "text": "Arrête timer",
+            "voice": "Arrête (le) timer",
+            "description": "Arrête le timer."
         },
         "timer_resume": {
-            "text": "",
-            "voice": "resume (the) timer",
-            "description": ""
+            "text": "Reprendre timer",
+            "voice": "Reprendre (le) timer",
+            "description": "Reprendre le timer."
         },
         "light_action": {
             "text": "Turn the (state) light (action)",
