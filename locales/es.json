@@ -62,11 +62,6 @@
             "voice": "Resetea (el) (mapa)",
             "description": "Resetea (el) (mapa)"
         },
-        "account_set_name": {
-            "text": "Mi nombre es _______",
-            "voice": "Mi nombre es *name",
-            "description": "Estable tu nombre"
-        },
         "images_search": {
             "text": "Busca imagen de _______",
             "voice": "Busca imagen de *term",

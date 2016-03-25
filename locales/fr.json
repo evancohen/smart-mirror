@@ -62,11 +62,6 @@
             "voice": "(map) reset zoom",
             "description": "Réinitilalise la fonction zoom"
         },
-        "account_set_name": {
-            "text": "Mon nom est ________",
-            "voice": "Mon nom est *name",
-            "description": "Mon nom est *name"
-        },
         "images_search": {
             "text": "Recherche image  ________",
             "voice": "Recherche une image *term",

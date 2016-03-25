@@ -62,11 +62,6 @@
             "voice": "(map) reset zoom",
             "description": "Resets zoom"
         },
-        "account_set_name": {
-            "text": "My name is ________",
-            "voice": "My (name is)(name\\'s) *name",
-            "description": "My (name is)(name\\'s) *name"
-        },
         "images_search": {
             "text": "Show me ________",
             "voice": "Show me *term",
