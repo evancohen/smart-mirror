@@ -1,5 +1,5 @@
 # Smart Mirror
-[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://badges.gitter.im/evancohen/smart-mirror.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![devDependency Status](https://david-dm.org/evancohen/smart-mirror/dev-status.svg)](https://david-dm.org/evancohen/smart-mirror#info=devDependencies)
 
 Check out the [documentation](http://docs.smart-mirror.io) for installation instructions and troubleshooting.
 
