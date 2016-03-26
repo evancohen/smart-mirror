@@ -27,11 +27,11 @@
   "homepage": "https://github.com/evancohen/smart-mirror",
   "devDependencies": {
     "angular-i18n": "^1.5.0",
+    "bower": "^1.7.7",
     "electron-prebuilt": "^0.37.2",
     "install": "^0.6.1",
     "npm": "^3.8.2",
-    "wiredep": "^4.0.0",
-    "bower": "^1.7.7"
+    "wiredep": "^4.0.0"
   },
   "dependencies": {
     "express": "^4.13.4",
