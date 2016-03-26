@@ -2,30 +2,38 @@
   'use strict';
 
   /**
-   * Parse spoken duration into seconds
-   * @param  {String} string - e.g.: `1 minute` or `5 minutes and 10 seconds`
-   * @return {Number}        - duration in seconds
-   */
-	var parseDuration = function(string) {
-    var pattern = '([0-9]*) ((?:hour|minute|second)(?:s)?)';
-    var matches = string.match(new RegExp(pattern, 'ig'));
-    var duration = moment.duration(0);
-    for (var i = 0; i < matches.length; i++) {
-      var match = matches[i].match(pattern);
-      if (match.length) duration.add(parseInt(match[1], 10), match[2]);
-    }
-    return duration.asSeconds();
-  };
-
-  /**
    * Factory function for the timer service
    */
-  var TimerService = function($rootScope, $interval){
+  var TimerService = function($rootScope, $interval, $filter){
     var service = {};
     service.running = false;
     service.paused = true;
     service.duration = 0;
     service.countdown = service.duration;
+
+    /**
+     * Parse spoken duration into seconds
+     * @param  {String} string - e.g.: `1 minute` or `5 minutes and 10 seconds`
+     * @return {Number}        - duration in seconds
+     */
+  	var parseDuration = function(string) {
+
+      string = string
+        .replace(new RegExp($filter('translate')('timer.one'), 'ig'), '1')
+        .replace(new RegExp($filter('translate')('timer.minute'), 'i'), 'minutes')
+        .replace(new RegExp($filter('translate')('timer.second'), 'i'), 'seconds');
+
+      var pattern = '([0-9]+) (minutes|seconds)';
+      var matches = string.match(new RegExp(pattern, 'ig'));
+      var duration = moment.duration(0);
+      for (var i = 0; i < matches.length; i++) {
+        var match = matches[i].match(pattern);
+        if (match.length) {
+          duration.add(parseInt(match[1], 10), match[2]);
+        }
+      }
+      return duration.asSeconds();
+    };
 
     var intervalId;
     var startTimer = function(){
@@ -38,7 +46,7 @@
 		service.start = function(duration){
       if (angular.isDefined(duration)){
         if (isNaN(duration)){
-        	duration = parseDuration(duration);
+          duration = parseDuration(duration);
         }
         if (service.running){
           service.reset();
@@ -115,7 +123,8 @@
           	animationPlayState: 'running'
           });
 
-          circle[0].offsetHeight;   // trigger reflow to reset the animation
+          // trigger reflow to reset the animation
+          circle[0].getBoundingClientRect();
 
           setTimeout(function(){
             circle.css({
