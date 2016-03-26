@@ -23,7 +23,8 @@
         .replace(new RegExp($filter('translate')('timer.minute'), 'i'), 'minutes')
         .replace(new RegExp($filter('translate')('timer.second'), 'i'), 'seconds');
 
-      var pattern = '([0-9]+) (minutes|seconds)';
+      console.log(string);
+      var pattern = '([0-9]+) ?(minutes|seconds)';
       var matches = string.match(new RegExp(pattern, 'ig'));
       var duration = moment.duration(0);
       for (var i = 0; i < matches.length; i++) {
