@@ -80,6 +80,13 @@ dt {
   text-align: center;
   margin-bottom: 20px; }
 
+.bottom-left {
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
 .commands {
   width: 450px;
   text-align: left;
@@ -137,6 +144,37 @@ ul.calendar {
 
 .weather .weather-today canvas, .weather .weather-week-day canvas {
   display: none; }
+
+.fitbit {
+    height: 100%;
+}
+
+.fitbit-title {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.fitbit-subtitle {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.fitbit-item {
+    color: #ccc;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.fitbit-badge {
+    width: 16px;
+    height: 16px;
+}
+
+.fitbit-main {
+    display: inline-block;
+    margin-right: 10px;
+    width: 450px;
+}
 
 .traffic-information {
   text-align: right;

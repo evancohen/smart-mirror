@@ -32,5 +32,10 @@
     "npm": "^3.8.2",
     "wiredep": "^4.0.0",
     "bower": "^1.7.7"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "fitbit-oauth2": "0.0.1",
+    "fs": "0.0.2"
   }
 }
