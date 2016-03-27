@@ -37,6 +37,11 @@
             "voice": "Show debug information",
             "description": "Show debug information"
         },
+        "dublinbus_show": {
+            "text": "Show Dublin Bus times",
+            "voice": "Show Dublin Bus times",
+            "description": "Show Dublin Bus times heading towards town."
+        },
         "map_show": {
             "text": "Show map",
             "voice": "Show map",

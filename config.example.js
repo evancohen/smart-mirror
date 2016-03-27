@@ -4,7 +4,7 @@ var config = {
     language : "en", //must also manually update locales/X.js bower component in index.html
     layout: "main",
     greeting : ["Hi, sexy!"], // An array of greetings to randomly choose from
-    
+
     // Alternativly you can have greetings that appear based on the time of day
     /*
     greeting : {
@@ -43,5 +43,8 @@ var config = {
       destination : "", // Destination of your trip. Human readable address.
       name : "work", // Name of your destination ex: "work"
       reload_interval : 5 // Number of minutes the information is refreshed
+    },
+    dublinbus: {
+        stopNumber: 2188
     }
 };

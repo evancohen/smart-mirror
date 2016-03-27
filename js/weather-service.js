@@ -16,7 +16,7 @@
                 });
         };
 
-        //Returns the current forcast along with high and low tempratures for the current day 
+        //Returns the current forcast along with high and low tempratures for the current day
         service.currentForcast = function() {
             if(service.forcast === null){
                 return null;
@@ -43,7 +43,7 @@
             };
             return service.forcast.data.daily;
         }
-		
+
         service.hourlyForcast = function() {
             if(service.forcast === null){
                 return null;
@@ -51,11 +51,11 @@
             service.forcast.data.hourly.day = moment.unix(service.forcast.data.hourly.time).format('ddd')
             return service.forcast.data.hourly;
         }
-		
+
         service.refreshWeather = function(){
             return service.init(geoloc);
         }
-        
+
         return service;
     }
 

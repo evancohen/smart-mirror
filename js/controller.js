@@ -13,6 +13,7 @@
             GiphyService,
             TrafficService,
             TimerService,
+            DublinbusService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -36,7 +37,7 @@
         tmhDynamicLocale.set(config.language.toLowerCase());
         moment.locale(config.language);
         console.log('moment local', moment.locale());
-        
+
         //Update the time
         function updateTime(){
             $scope.date = new moment();
@@ -103,7 +104,7 @@
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
                 });
-                
+
                 FitbitService.todaySummary(function(response){
                     $scope.fbToday = response;
                 });
@@ -185,7 +186,7 @@
                 $scope.focus = "commands";
             });
 
-            
+
             // Go back to default view
             addCommand('home', defaultView);
 
@@ -203,7 +204,16 @@
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
             });
-            
+
+            // Show Dublin bus times
+            addCommand('dublinbus_show', function() {
+                console.debug("Getting a bus?");
+                DublinbusService.init().then(function(dublinbus){
+                    console.log("Dublin Bus: ", dublinbus)
+                    console.log("Test ", DublinbusService.currentTimes())
+                });
+            });
+
             // Show map
             addCommand('map_show', function() {
                 console.debug("Going on an adventure?");
@@ -213,7 +223,7 @@
                     $scope.focus = "map";
                 });
             });
-            
+
             // Hide everything and "sleep"
             addCommand('map_location', function(location) {
                 console.debug("Getting map of", location);
