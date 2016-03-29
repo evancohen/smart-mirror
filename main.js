@@ -3,13 +3,12 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
-// Report crashes to our server.
-require('crash-reporter').start();
+// Report crashes to our server. Disabled for now.
+//require('crash-reporter').start();
 
 // Prevent the computer from going to sleep
 const powerSaveBlocker = require('electron').powerSaveBlocker;
-var id = powerSaveBlocker.start('prevent-display-sleep');
-console.log(powerSaveBlocker.isStarted(id));
+powerSaveBlocker.start('prevent-display-sleep');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.

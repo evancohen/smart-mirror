@@ -67,11 +67,6 @@
             "voice": "(Karte) Normalansicht",
             "description": "Setzt die Ansicht zurück"
         },
-        "account_set_name": {
-            "text": "Mein Name ist ________",
-            "voice": "Mein (Name ist) *name",
-            "description": "Mein (Name ist) *name"
-        },
         "images_search": {
             "text": "Zeige mir ________",
             "voice": "Zeige mir *term",

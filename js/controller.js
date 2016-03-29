@@ -248,12 +248,6 @@
                 console.debug("Showing", term);
             });
 
-            // Change name
-            addCommand('account_set_name', function(name) {
-                console.debug("Hi", name, "nice to meet you");
-                $scope.user.name = name;
-            });
-
             // Set a reminder
             addCommand('reminder_insert', function(task) {
                 console.debug("I'll remind you to", task);
