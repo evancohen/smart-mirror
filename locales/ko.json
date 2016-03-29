@@ -5,6 +5,11 @@
     "traffic" : {
         "time_to" : "{{destination}} 에 시간: "
     },
+    "timer": {
+      "one": "일",
+      "minute": "분",
+      "second": "초"
+    },
     "commands": {
         "title" : "사용 가능한 명령",
         "list": {
@@ -98,24 +103,24 @@
             "description": "지금 몇 시"
         },
         "timer_start": {
-            "text": "",
-            "voice": "(set a) timer (for) *duration",
-            "description": ""
+            "text": "______ 타이머 (설정)",
+            "voice": "*duration 타이머 (설정)",
+            "description": "*duration 타이머 (설정)"
         },
         "timer_show": {
-            "text": "",
-            "voice": "show (the) timer",
-            "description": ""
+            "text": "타이머 보여줄래",
+            "voice": "타이머 보여줄래",
+            "description": "타이머 보여줄래"
         },
         "timer_stop": {
-            "text": "",
-            "voice": "stop (the) timer",
-            "description": ""
+            "text": "타이머 정지",
+            "voice": "타이머 정지",
+            "description": "타이머 정지"
         },
         "timer_resume": {
-            "text": "",
-            "voice": "resume (the) timer",
-            "description": ""
+            "text": "타이머 재시작",
+            "voice": "타이머 재시작",
+            "description": "타이머 재시작"
         },
         "light_action": {
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
