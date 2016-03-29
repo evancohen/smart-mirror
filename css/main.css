@@ -20,10 +20,10 @@ dt {
 
 /* Colors */
 .light-grey {
-  color: #ccc; }
+  color: #FFFFFF; }
 
 .grey {
-  color: #999; }
+  color: #FFFFFF; }
 
 /* Displays */
 .sleep-cover {
@@ -56,7 +56,8 @@ dt {
   float: left; }
 
 .date {
-  font-size: 42px; }
+  font-size: 42px;
+  font-weight: bold; }
 
 .time {
   font-size: 110px; }
@@ -118,10 +119,11 @@ ul.calendar {
 .weather {
   margin-left: auto;
   display: inline-block;
-  text-align: right;
+  text-align: center;
   width: 230px; }
 
 .weather-today .tempreture {
+  text-align: center;
   font-size: 60px; }
 
 .weather-week-descriptor {
@@ -133,7 +135,7 @@ ul.calendar {
 
 .weather-week {
   margin-right: 10px;
-  font-size: 22px; }
+  font-size: 24px; }
   .weather-week .day {
     display: inline-block;
     margin-right: 10px;
@@ -176,13 +178,15 @@ ul.calendar {
     width: 450px;
 }
 
+.time-to {
+  font-weight: bold; 
+  text-align: center;
+}
+
 .traffic-information {
-  text-align: right;
+  text-align: center;
   margin-top: 10px;
   margin-right: 10px; }
-
-.time-to {
-  font-weight: bold; }
 
 @keyframes reduce-dashoffset {
   to {
@@ -281,7 +285,7 @@ ul.calendar {
     max-height: 0 !important; }
 
 .dimmed {
-  color: #aaa; }
+  color: #FFFFFF; }
 
 .xxsmall, .xsmall, .small {
   font-family: "HelveticaNeue-Medium", sans-serif;
@@ -319,3 +323,18 @@ ul.calendar {
 .xkcd {
   -webkit-filter: invert(100%);
   max-width: 100%; }
+
+.weather-week-descriptor span.ng-binding {
+  text-align: center;
+  word-spacing: normal;
+  display: inline-block; }
+  .weather-week-descriptor span.ng-binding:first-child {
+    font-size: 21px; }
+
+.weather .weather-week-descriptor span {
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+  display: block;
+  border-bottom: 2px solid #aaa; }
+  .weather .weather-week-descriptor span:last-child {
+    border-bottom: 0; }
