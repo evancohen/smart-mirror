@@ -84,7 +84,7 @@
             <span ng-init="iconLoad('icon_weather_'+forcast.counter, forcast.iconAnimation)"></span>
           </div>
         </div>
-        <div class="traffic">
+        <div class="traffic" ng-repeat="traffic in trips">
           <div ng-show="!traffic.error" class="traffic-information">
             <span class="time-to">{{ 'traffic.time_to' | translate:traffic }}</span>
             <span>{{traffic.duration.humanize()}}</span>
