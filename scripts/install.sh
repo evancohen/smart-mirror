@@ -17,6 +17,17 @@ wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz
 tar -xvf node-v4.0.0-linux-armv7l.tar.gz 
 cd node-v4.0.0-linux-armv7l
 
+# Rotate Display
+sed -i -e '$a\
+display_rotate=1' /boot/config.txt
+
+#Hide the mouse when inactive
+echo "Installing unclutter"
+sudo apt-get install unclutter
+
+sed -i -e '$a\
+unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
+
 # Copy to /usr/local
 echo "Copying NodeJS to /usr/local/"
 sudo cp -R * /usr/local/
@@ -33,11 +44,6 @@ cd smart-mirror
 
 echo "Renaming Config File"
 cp config.example.js config.js
-
-
-#Hide the mouse when inactive
-echo "Installing unclutter"
-sudo apt-get install unclutter
 
 echo "Installing Ndde Packages"
 npm install
