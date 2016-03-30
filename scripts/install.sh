@@ -80,14 +80,14 @@ fi
 
 # Getting the code
 printf "\n$(tput setaf 12)Cloning Git Repo$(tput sgr0)\n"
-cd /home/$LOGNAME
-sudo -u $LOGNAME git clone https://github.com/evancohen/smart-mirror.git
+cd /home/$SUDO_USER
+sudo -u $SUDO_USER git clone https://github.com/evancohen/smart-mirror.git
 printf "\n$(tput setaf 10)smart-mirror code is now downloaded$(tput sgr0)\n"
 
 cd smart-mirror
 
 printf "$(tput setaf 12)generating config template$(tput sgr0)\n"
-sudo -u $LOGNAME cp config.example.js config.js
+sudo -u $SUDO_USER cp config.example.js config.js
 
 # Install package to hide the mouse when inactive
 printf "\n$(tput setaf 12)Installing unclutter$(tput sgr0)\n"
@@ -101,7 +101,7 @@ unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
 
 printf "\n$(tput setaf 12)Installing smart-mirror dependencies...$(tput sgr0)\n"
 printf "$(tput setaf 11)This may take a while. Go grab a beer :)$(tput sgr0)\n"
-sudo -u $LOGNAME npm install
+sudo -u $SUDO_USER npm install
 
 # The mirror is now installed, yay!
 cat << "EOF"
