@@ -65,9 +65,6 @@ else
 fi
 
 # Getting the code
-
-# Next up you'll want to clone this repository into your user's home folder on your Pi:
-
 echo "$(tput setaf 9)Cloning Git Repo$(tput sgr0)"
 cd ~
 git clone https://github.com/evancohen/smart-mirror.git
@@ -78,10 +75,17 @@ cd smart-mirror
 echo "$(tput setaf 9)Creating Mirror Config$(tput sgr0)"
 cp config.example.js config.js
 
-
-#Hide the mouse when inactive
+# Install package to hide the mouse when inactive
 echo "$(tput setaf 9)Installing unclutter$(tput sgr0)"
 sudo apt-get install unclutter
+
+# Apply LXDE unclutter autostart 
+sed -i -e '$a\
+unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
+
+# Rotate Display
+sed -i -e '$a\
+display_rotate=1' /boot/config.txt
 
 echo "$(tput setaf 9)Installing smart-mirror dependencies...$(tput sgr0)"
 echo "$(tput setaf 11)This may take a bit$(tput sgr0)"
