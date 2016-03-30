@@ -11,12 +11,6 @@ echo "
 
 echo "Installing Smart Mirror Dependencies........!"
 
-echo "Installing Home Brew and wget!"
-
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-brew install wget
-
 # You'll also need to install Node (v4.0.0+) which now comes bundled with npm.
 echo "Installing NodeJS!"
 wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz
