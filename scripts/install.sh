@@ -41,6 +41,14 @@ else
     exit 1
 fi
 
+read -r -p "[Requires Reboot] Would you like to automoticlly rotate your monitor? [y/N]" rotateResponse
+if [[ $rotateResponse =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+   # Rotate Display
+    sed -i -e '$a\
+    display_rotate=1' /boot/config.txt
+fi
+
 echo "Checking for node"
 node --version | grep ${NODE_VERSION}
 if [[ $? != 0 ]] ;
@@ -82,10 +90,6 @@ sudo apt-get install unclutter
 # Apply LXDE unclutter autostart 
 sed -i -e '$a\
 unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
-
-# Rotate Display
-sed -i -e '$a\
-display_rotate=1' /boot/config.txt
 
 echo "$(tput setaf 9)Installing smart-mirror dependencies...$(tput sgr0)"
 echo "$(tput setaf 11)This may take a bit$(tput sgr0)"
