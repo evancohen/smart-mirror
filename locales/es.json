@@ -3,7 +3,7 @@
         "commands" : "Dí \"¿Qué digo?\" para mostrar las órdenes..."
     },
     "traffic" : {
-        "time_to" : "Tiempo al {{destination}}: "
+        "time_to" : "Tiempo al {{name}}: "
     },
     "timer": {
       "one": "Uno",

@@ -3,7 +3,7 @@
       "commands" : "Sagen Sie \"Was kann ich sagen?\" eine Liste von Befehlen zu sehen..."
     },
     "traffic" : {
-        "time_to" : "Zeit zu {{destination}}: "
+        "time_to" : "Zeit zu {{name}}: "
     },
     "timer": {
       "one": "Eine",
