@@ -42,18 +42,18 @@ cat << "EOF"
 
 EOF
 
-printf "%s\n" "This script will install the smart-mirror and it's dependencies.\n"
+printf "%sThis script will install the smart-mirror and it's dependencies.\n"
 
 # Ensure the use would like to start the install
 read -r -p "Would you like to continue? [y/N] " response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
 then
-    printf "%s\n" "Excellent! ${red}Please do not exit this script until it is complete.${end}\n"
+    printf "%sExcellent! ${red}Please do not exit this script until it is complete.${end}\n"
 else
     exit 1
 fi
 
-printf "%s\n" "\n"
+printf "%s\n"
 read -r -p "[Requires Reboot] Would you like to automoticlly rotate your monitor? [y/N]" rotateResponse
 if [[ $rotateResponse =~ ^([yY][eE][sS]|[yY])$ ]]
 then
@@ -64,42 +64,42 @@ then
 display_rotate=1' /boot/config.txt
 fi
 
-printf "%s\n" "\nChecking for node...\n"
+printf "%s\nChecking for node...\n"
 node --version | grep ${NODE_VERSION}
 if [[ $? != 0 ]] ;
 then
     # Install Node
-    printf "%s\n" "{blu}Downloading node${end}\n"
+    printf "%s{blu}Downloading node${end}\n"
     wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv7l.tar.gz
     tar -xvf node-v4.0.0-linux-armv7l.tar.gz 
     cd node-v4.0.0-linux-armv7l
     
     # Copy to /usr/local
-    printf "%s\n" "{blu}Installing node${end}\n"
+    printf "%s{blu}Installing node${end}\n"
     sudo cp -R * /usr/local/
     
     # Clean up after ourselvs
     cd ..
     rm node-v4.0.0-linux-armv7l.tar.gz
     rm -R node-v4.0.0-linux-armv7l
-    printf "%s\n" "$(tput setaf 10)node is now installed!${end}\n"
+    printf "%s$(tput setaf 10)node is now installed!${end}\n"
 else
-    printf "%s\n" "$(tput setaf 10)node is already installed, great job!${end}\n"
+    printf "%s$(tput setaf 10)node is already installed, great job!${end}\n"
 fi
 
 # Getting the code
-printf "%s\n" "\n{blu}Cloning Git Repo${end}\n"
+printf "%s\n{blu}Cloning Git Repo${end}\n"
 cd /home/$SUDO_USER
 sudo -u $SUDO_USER git clone https://github.com/evancohen/smart-mirror.git
-printf "%s\n" "\n$(tput setaf 10)smart-mirror code is now downloaded${end}\n"
+printf "%s\n$(tput setaf 10)smart-mirror code is now downloaded${end}\n"
 
 cd smart-mirror
 
-printf "%s\n" "{blu}generating config template${end}\n"
+printf "%s{blu}generating config template${end}\n"
 sudo -u $SUDO_USER cp config.example.js config.js
 
 # Install package to hide the mouse when inactive
-printf "%s\n" "\n{blu}Installing unclutter${end}\n"
+printf "%s\n{blu}Installing unclutter${end}\n"
 sudo apt-get install unclutter
 
 # Apply LXDE unclutter autostart 
@@ -108,8 +108,8 @@ sed -i -e '$a\
 #Hide the mouse when inactive (smart-mirror)\
 unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
 
-printf "%s\n" "\n{blu}Installing smart-mirror dependencies...${end}\n"
-printf "%s\n" "${yel}This may take a while. Go grab a beer :)${end}\n"
+printf "%s\n{blu}Installing smart-mirror dependencies...${end}\n"
+printf "%s${yel}This may take a while. Go grab a beer :)${end}\n"
 sudo -u $SUDO_USER npm install
 
 # The mirror is now installed, yay!
