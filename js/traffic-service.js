@@ -10,7 +10,10 @@
             var promises = [];
 
             angular.forEach(config.traffic.trips, function(trip) {
+              if (trip.hasOwnProperty('startTime') && TimeboxService.shouldDisplay(trip.startTime, trip.endTime)
+                || !trip.hasOwnProperty('startTime')) {
                 promises.push(getTripDuration(trip));
+              }
             });
 
             $q.all(promises).then(function(data) {
