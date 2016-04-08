@@ -132,7 +132,7 @@
                 }
             };
             greetingUpdater();
-            $interval(greetingUpdater, 1200);
+            $interval(greetingUpdater, 120000);
 
             var refreshTrafficData = function() {
                 TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
