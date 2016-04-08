@@ -115,23 +115,24 @@
             var greetingUpdater = function () {
                 if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
                     var hour = moment().hour();
-                    var geetingTime = "midday";
+                    var greetingTime = "midday";
 
                     if (hour > 4 && hour < 11) {
-                        geetingTime = "morning";
+                        greetingTime = "morning";
                     } else if (hour > 18 && hour < 23) {
-                        geetingTime = "evening";
+                        greetingTime = "evening";
                     } else if (hour >= 23 || hour < 4) {
-                        geetingTime = "night";
+                        greetingTime = "night";
                     }
-
-                    $scope.greeting = config.greeting[geetingTime][Math.floor(Math.random() * config.greeting.morning.length)];
+                    var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
+                    var nextGreeting = config.greeting[greetingTime][nextIndex]
+                    $scope.greeting = nextGreeting;
                 }else if(Array.isArray(config.greeting)){
                     $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
                 }
             };
             greetingUpdater();
-            $interval(greetingUpdater, 120000);
+            $interval(greetingUpdater, 1200);
 
             var refreshTrafficData = function() {
                 TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
