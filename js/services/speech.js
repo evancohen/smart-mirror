@@ -74,6 +74,7 @@
             isRecognizerReady = true;
             updateUI();
             updateStatus("Recognizer ready");
+            keywordSpotterStart();
         };
 
         var updateKeywords = function() {
@@ -149,6 +150,7 @@
             
             updateStatus("Initializing Web Audio and keyword spotter");
             callbackManager = new CallbackManager();
+            var oldCount = 0;
             spawnWorker("js/services/speech/recognizer.js", function(worker) {
                 worker.onmessage = function(e) {
                     if (e.data.hasOwnProperty('id')) {
@@ -163,13 +165,12 @@
                     }
                     if (e.data.hasOwnProperty('count')) {
                         var newCount = e.data.count;
-                        if (e.data.hasOwnProperty('final') &&  e.data.final) {
-                            newCount = "Final: " + newCount;
+                        if(oldCount != newCount){
+                            oldCount = newCount; 
+                            // Annyang listen for a command
+                            service.start();
                         }
                         updateCount(newCount);
-                        // pause Keyword spotter and start Annyang
-                        keywordSpotterStop();
-                        service.start();
                     }
                     if (e.data.hasOwnProperty('status') && (e.data.status == "error")) {
                         updateStatus("Error in " + e.data.command + " with code " + e.data.code);
@@ -203,13 +204,14 @@
 
         service.registerCallbacks = function(listening, interimResult, result, error) {
             annyang.addCommands(service.commands);
-            annyang.debug(true);
+            annyang.debug(false);
             // add specified callback functions
             if (typeof(listening) == "function") {
-                annyang.addCallback('start', function(){$rootScope.$apply(listening(true));});
+                annyang.addCallback('start', function(){
+                    $rootScope.$apply(listening(true));
+                });
                 annyang.addCallback('end', function(data){
-                    console.log("End", data);
-                    keywordSpotterStart();
+                    $rootScope.$apply(listening(false));
                 });
             };
             if (typeof(interimResult) == "function") {
