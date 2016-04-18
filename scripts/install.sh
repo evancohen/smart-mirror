@@ -106,7 +106,7 @@ sudo apt-get install unclutter
 sed -i -e '$a\
 \
 #Hide the mouse when inactive (smart-mirror)\
-unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
+unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE-pi/autostart
 
 printf "%s\n{blu}Installing smart-mirror dependencies...${end}\n"
 printf "%s${yel}This may take a while. Go grab a beer :)${end}\n"
