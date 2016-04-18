@@ -10,6 +10,33 @@
       "minute": "분",
       "second": "초"
     },
+    "lights": {
+        "colors": {
+            "red": "빨간",
+            "dark_green": "짙은 녹색",
+            "green": "녹색",
+            "blue": "푸른",
+            "yellow": "황색",
+            "orange":  "오렌지",
+            "pink": "핑크",
+            "purple": "보라색",
+            "white": "화이트",
+            "movie": "영화",
+            "colorloop": "색",
+            "stop": "중지"
+        },
+        "intensity": {
+            "increase": "증가",
+            "decrease": "감소",
+            "max": "최대"
+        },
+        "action": {
+            "on": "조명",
+            "off": "끄다"
+        },
+        "nb_places": "2",
+        "places": ["방", "살롱"]
+    },
     "commands": {
         "title" : "사용 가능한 명령",
         "list": {
