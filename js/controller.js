@@ -10,7 +10,7 @@
             CalendarService,
             SearchService,
 			SoundCloudService,
-      SoundVisualizerService,
+            SoundVisualizerService,
             $scope,
             $timeout,
             $interval) {
