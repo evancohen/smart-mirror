@@ -345,23 +345,47 @@
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
-            SpeechService.registerCallbacks(function(listening){
-                $scope.listening = listening;
-            }, function(interimResult){
-                $scope.interimResult = interimResult;
-                $timeout.cancel(resetCommandTimeout);
-            }, function(result){
-                if(typeof result != 'undefined'){
-                    $scope.interimResult = result[0];
-                    resetCommandTimeout = $timeout(restCommand, 5000);
-                }
-            }, function(error){
-                console.log(error);
-                if(error.error == "network"){
-                    $scope.speechError = "Google Speech Recognizer is down :(";
-                    SpeechService.abort();
+            SpeechService.registerCallbacks({
+                listening : function(listening){
+                    $scope.listening = listening;
+                },
+                interimResult : function(interimResult){
+                    $scope.interimResult = interimResult;
+                    $timeout.cancel(resetCommandTimeout);
+                },
+                result : function(result){
+                    if(typeof result != 'undefined'){
+                        $scope.interimResult = result[0];
+                        resetCommandTimeout = $timeout(restCommand, 5000);
+                    }
+                },
+                error : function(error){
+                    console.log(error);
+                    if(error.error == "network"){
+                        $scope.speechError = "Google Speech Recognizer is down :(";
+                        SpeechService.abort();
+                    }
                 }
             });
+            
+            // SpeechService.registerCallbacks(
+            // function(listening){
+            //     $scope.listening = listening;
+            // }, function(interimResult){
+            //     $scope.interimResult = interimResult;
+            //     $timeout.cancel(resetCommandTimeout);
+            // }, function(result){
+            //     if(typeof result != 'undefined'){
+            //         $scope.interimResult = result[0];
+            //         resetCommandTimeout = $timeout(restCommand, 5000);
+            //     }
+            // }, function(error){
+            //     console.log(error);
+            //     if(error.error == "network"){
+            //         $scope.speechError = "Google Speech Recognizer is down :(";
+            //         SpeechService.abort();
+            //     }
+            // });
         };
 
         _this.init();

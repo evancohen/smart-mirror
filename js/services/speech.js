@@ -34,8 +34,11 @@
             document.getElementById('output').innerHTML = count;
         };
         
-        function updateUI() {
-            if (isRecorderReady && isRecognizerReady) startBtn.disabled = stopBtn.disabled = false;
+        function updateState() {
+            if (isRecorderReady && isRecognizerReady) {
+                startBtn.disabled = stopBtn.disabled = false;
+                
+            }
         };
 
         function updateStatus(newStatus) {
@@ -55,24 +58,26 @@
         // If a recognizer is ready, we pass it to the recorder
         if (recognizer) recorder.consumers = [recognizer];
         isRecorderReady = true;
-        updateUI();
+        updateState();
         updateStatus("Audio recorder ready");
         };
 
         var keywordSpotterStart = function() {
-        var id = document.getElementById('keywords').value;
-        if (recorder && recorder.start(id)) displayRecording(true);
+            var id = document.getElementById('keywords').value;
+            if (recorder && recorder.start(id)) {
+                displayRecording(true);
+            }
         };
 
         var keywordSpotterStop = function() {
-        recorder && recorder.stop();
-        displayRecording(false);
+            recorder && recorder.stop();
+            displayRecording(false);
         };
 
         var recognizerReady = function() {
             updateKeywords();
             isRecognizerReady = true;
-            updateUI();
+            updateState();
             updateStatus("Recognizer ready");
             keywordSpotterStart();
         };
@@ -181,7 +186,7 @@
             try {
                 window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-                window.URL = window.URL || window.webkitURL;
+                //window.URL = window.URL || window.webkitURL;
                 audio_context = new AudioContext();
             } catch (e) {
                 updateStatus("Error initializing Web Audio browser");
@@ -202,34 +207,49 @@
             stopBtn.onclick = keywordSpotterStop;
         };
 
-        service.registerCallbacks = function(listening, interimResult, result, error) {
-            annyang.addCommands(service.commands);
+        service.registerCallbacks = function(cb) {
+            // annyang.addCommands(service.commands);
             annyang.debug(false);
             // add specified callback functions
-            if (typeof(listening) == "function") {
+            if (isCallback(cb.listening)) {
                 annyang.addCallback('start', function(){
-                    $rootScope.$apply(listening(true));
+                    $rootScope.$apply(cb.listening(true));
                 });
                 annyang.addCallback('end', function(data){
-                    $rootScope.$apply(listening(false));
+                    $rootScope.$apply(cb.listening(false));
                 });
             };
-            if (typeof(interimResult) == "function") {
+            if (isCallback(cb.interimResult)) {
                 annyang.addCallback('interimResult', function(data){
-                    $rootScope.$apply(interimResult(data));
+                    $rootScope.$apply(cb.interimResult(data));
                 });
             };
-            if (typeof(result) == "function") {
+            if (isCallback(cb.result)) {
                 annyang.addCallback('result', function(data){
-                    $rootScope.$apply(result(data));
+                    $rootScope.$apply(cb.result(data));
                 });
             };
-            if (typeof(error) == "function") {
+            if (isCallback(cb.error)) {
                 annyang.addCallback('error', function(data){
-                    $rootScope.$apply(error(data));
+                    $rootScope.$apply(cb.error(data));
                 });
+            };
+            if (isCallback(cb.spottingState)) {
+                // TODO create a callback that tracks the readyness/state of keyword spotting
+                // so it can reflect in the UI
+                // maybe I should use $watch() here?
+                
+                // if for some reason we missed initialization 
+                if(isRecognizerReady){
+                    $rootScope.$apply(cb.spottingState('spotting'))
+                }
             };
         };
+        
+        // Ensure callback is a valid function
+        function isCallback(callback){
+            return typeof(callback) == "function";
+        }
         
         // Annyang start listening
         service.start = function(){
