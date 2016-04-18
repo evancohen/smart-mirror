@@ -43,7 +43,6 @@
               console.error(error.statusText);
               deferred.reject('Unknown error');
             }
-            duration = deferred.promise;
           });
           return deferred.promise;
         }

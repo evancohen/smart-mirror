@@ -17,6 +17,8 @@
 
     <script src="js/inc/skycons.js"></script>
     <script src="js/rrule.js"></script>
+    <script src="js/services/speech/audioRecorder.js"></script>
+    <script src="js/services/speech/callbackManager.js"></script>
 
     <!-- App -->
     <script src="config.js"></script>
@@ -61,6 +63,18 @@
                 </div>
             </li>
         </ul>
+        <!-- Keyword Spotting (Debug) -->
+        <section id="main-content">
+            <select id="keywords"></select>
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+            <span id="recording-indicator" style="border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; width: 20px; height: 20px; background: red;"></span>
+            <h4>Number of keywords spotted</h4>
+            <div id="output" class="reco-output" style="height:100px;" >
+            </div>
+            <h4>Status</h4>
+            <div class="reco-output" id="current-status">Loading page</div>
+        </section>
       </div>
       <div class="top-right">
         <div class="weather">
