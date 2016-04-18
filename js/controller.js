@@ -344,7 +344,8 @@
             });
 
             var resetCommandTimeout;
-            //Track when the Annyang is listening to us
+            
+            //Register callbacks for Annyang and the Keyword Spotter
             SpeechService.registerCallbacks({
                 listening : function(listening){
                     $scope.listening = listening;
@@ -362,30 +363,12 @@
                 error : function(error){
                     console.log(error);
                     if(error.error == "network"){
-                        $scope.speechError = "Google Speech Recognizer is down :(";
+                        $scope.speechError = "Google Speech Recognizer: Network Error (Speech quota exceeded?)";
                         SpeechService.abort();
                     }
                 }
             });
             
-            // SpeechService.registerCallbacks(
-            // function(listening){
-            //     $scope.listening = listening;
-            // }, function(interimResult){
-            //     $scope.interimResult = interimResult;
-            //     $timeout.cancel(resetCommandTimeout);
-            // }, function(result){
-            //     if(typeof result != 'undefined'){
-            //         $scope.interimResult = result[0];
-            //         resetCommandTimeout = $timeout(restCommand, 5000);
-            //     }
-            // }, function(error){
-            //     console.log(error);
-            //     if(error.error == "network"){
-            //         $scope.speechError = "Google Speech Recognizer is down :(";
-            //         SpeechService.abort();
-            //     }
-            // });
         };
 
         _this.init();
