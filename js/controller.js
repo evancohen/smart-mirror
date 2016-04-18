@@ -345,7 +345,7 @@
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
-            SpeechService.start(function(listening){
+            SpeechService.registerCallbacks(function(listening){
                 $scope.listening = listening;
             }, function(interimResult){
                 $scope.interimResult = interimResult;
