@@ -2,7 +2,7 @@
     'use strict';
 
     function MirrorCtrl(
-            AnnyangService,
+            SpeechService,
             GeolocationService,
             WeatherService,
             FitbitService,
@@ -170,7 +170,7 @@
                 var textId = 'commands.'+commandId+'.text';
                 var descId = 'commands.'+commandId+'.description';
                 $translate([voiceId, textId, descId]).then(function (translations) {
-                    AnnyangService.addCommand(translations[voiceId], commandFunction);
+                    SpeechService.addCommand(translations[voiceId], commandFunction);
                     if (translations[textId] != '') {
                         var command = {"text": translations[textId], "description": translations[descId]};
                         $scope.commands.push(command);
@@ -181,7 +181,7 @@
             // List commands
             addCommand('list', function() {
                 console.debug("Here is a list of commands...");
-                console.log(AnnyangService.commands);
+                console.log(SpeechService.commands);
                 $scope.focus = "commands";
             });
 
@@ -289,7 +289,7 @@
 
             //Show fitbit stats (registered only if fitbit is configured in the main config)
             if ($scope.fitbitEnabled) {
-                AnnyangService.addCommand('show my walking', function() {
+                SpeechService.addCommand('show my walking', function() {
                     refreshFitbitData();
                 });
             }
@@ -357,7 +357,7 @@
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
-            AnnyangService.start(function(listening){
+            SpeechService.start(function(listening){
                 $scope.listening = listening;
             }, function(interimResult){
                 $scope.interimResult = interimResult;
@@ -371,7 +371,7 @@
                 console.log(error);
                 if(error.error == "network"){
                     $scope.speechError = "Google Speech Recognizer is down :(";
-                    AnnyangService.abort();
+                    SpeechService.abort();
                 }
             });
         };
