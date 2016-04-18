@@ -42,6 +42,7 @@ var recognizer = undefined;
 var buffer = undefined;
 
 function initialize(data, clbId) {
+    Module.printErr = false; // Do not pollute the console with errors
     var config = new Module.Config();
     buffer = new Module.AudioBuffer();
     if (data) {
