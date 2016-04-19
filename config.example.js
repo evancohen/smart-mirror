@@ -4,7 +4,7 @@ var config = {
     language : "en", //must also manually update locales/X.js bower component in index.html
     layout: "main",
     greeting : ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
-    
+
     // Alternativly you can have greetings that appear based on the time of day
     /*
     greeting : {
@@ -45,6 +45,8 @@ var config = {
         origin : "", // Start of your trip. Human readable address.
         destination : "", // Destination of your trip. Human readable address.
         name : "work", // Name of your destination ex: "work"
+        /*startTime: "",
+        endTime: ""*/ // Optional starttime and endtime when the traffic information should be displayed on screen. The format can be either hh:mm or hh:mm am/pm
       }]
     }
 };

@@ -1,25 +1,28 @@
 (function() {
     'use strict';
 
-    function TrafficService($http, $q) {
+    function TrafficService($http, $q, TimeboxService) {
         var service = {};
         var BING_MAPS = "http://dev.virtualearth.net/REST/V1/Routes/"
 
         service.getDurationForTrips = function(){
             var deferred = $q.defer();
             var promises = [];
-          
+
             angular.forEach(config.traffic.trips, function(trip) {
+              if (trip.hasOwnProperty('startTime') && TimeboxService.shouldDisplay(trip.startTime, trip.endTime)
+                || !trip.hasOwnProperty('startTime')) {
                 promises.push(getTripDuration(trip));
+              }
             });
-            
+
             $q.all(promises).then(function(data) {
                 deferred.resolve(data)
             });
-            
+
             return deferred.promise;
         };
-        
+
         // Request traffic info for the configured mode of transport
         function getTripDuration(trip){
           var deferred = $q.defer();
@@ -44,7 +47,7 @@
           });
           return deferred.promise;
         }
-        
+
         // Depending on the mode of transport different paramaters are required.
         function getEndpoint(trip){
             var endpoint = BING_MAPS + trip.mode + "?wp.0=" + trip.origin + "&wp.1="+trip.destination;
@@ -56,7 +59,7 @@
                 endpoint += "&optmz=distance";
             }
             endpoint += "&key=" + config.traffic.key;
-            
+
             return endpoint;
         }
 
@@ -64,6 +67,6 @@
     }
 
     angular.module('SmartMirror')
-        .factory('TrafficService', TrafficService);
+        .factory('TrafficService', ['$http', '$q', 'TimeboxService', TrafficService]);
 
 }());

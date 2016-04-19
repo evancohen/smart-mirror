@@ -30,7 +30,7 @@
     "angular-i18n": "^1.5.0",
     "wiredep-cli": "^0.1.0",
     "electron-prebuilt": "^0.37.2",
-    "npm": "^3.8.2",
+    "npm": "^3.8.6",
     "bower": "^1.7.7"
   },
   "dependencies": {
