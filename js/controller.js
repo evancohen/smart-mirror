@@ -10,7 +10,6 @@
             CalendarService,
             SearchService,
 			SoundCloudService,
-            SoundVisualizerService,
             $scope,
             $timeout,
             $interval) {
@@ -163,26 +162,26 @@
 					$scope.scWaveform = response[0].waveform_url;
 					$scope.scTrack = response[0].title;
 					$scope.focus = "sc";
-          SoundVisualizerService.start();
+          SoundCloudService.startVisualizer();
 				});
             });
 			//SoundCloud stop
 			AnnyangService.addCommand('SoundCloud (pause)(post)(stop)(stock)', function() {
 				sound.pause();
-        SoundVisualizerService.stop();
+        SoundCloudService.stopVisualizer();
         $scope.focus = "default";
             });
 			//SoundCloud resume
 			AnnyangService.addCommand('SoundCloud (play)(resume)', function() {
 				sound.play();
-        SoundVisualizerService.start();
+        SoundCloudService.startVisualizer();
         $scope.focus = "sc";
             });
 			//SoundCloud replay
 			AnnyangService.addCommand('SoundCloud replay', function() {
 				sound.seek(0);
 				sound.play();
-        SoundVisualizerService.start();
+        SoundCloudService.startVisualizer();
         $scope.focus = "sc";
             });
 
