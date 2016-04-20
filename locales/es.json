@@ -33,9 +33,7 @@
         "action": {
             "on": "enciende",
             "off": "apagar"
-        },
-        "nb_places": "2",
-        "places": ["habitación", "salón"]
+        }
     },
     "commands": {
         "title" : "Listado de Órdenes",

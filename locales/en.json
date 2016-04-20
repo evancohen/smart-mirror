@@ -33,9 +33,7 @@
         "action": {
             "on": "on",
             "off": "off"
-        },
-        "nb_places": "2",
-        "places": ["chamber", "salon"]
+        }
     },
     "commands": {
         "title" : "Available Commands",

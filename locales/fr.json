@@ -33,9 +33,7 @@
         "action": {
             "on": "allume",
             "off": "éteins"
-        },
-        "nb_places": "2",
-        "places": ["chambre", "salon"]
+        }
     },
     "commands": {
         "title" : "Commandes disponibles",

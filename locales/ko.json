@@ -33,9 +33,7 @@
         "action": {
             "on": "조명",
             "off": "끄다"
-        },
-        "nb_places": "2",
-        "places": ["방", "살롱"]
+        }
     },
     "commands": {
         "title" : "사용 가능한 명령",

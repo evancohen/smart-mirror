@@ -33,9 +33,7 @@
         "action": {
             "on": "beleuchtung",
             "off": "verstimmt"
-        },
-        "nb_places": "2",
-        "places": ["zimmer", "salon"]
+        }
     },
     "commands": {
         "title" : "Zur Verfügung stehenden Befehle",

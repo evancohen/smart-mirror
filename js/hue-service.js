@@ -111,14 +111,13 @@
             console.log("Spoken Words:", spokenWords)
             var light = "/groups/0/action";
             for(var i = 0; i <= spokenWords.length; i++){
-                console.log("Checking word for light:", spokenWords[i]);
-                var nb_places = $translate.instant('lights.nb_places');
-                console.log(nb_places);
-                for (var j = 0; j < nb_places; j++){
-                    console.log("Test place : " + $translate.instant('lights.places.'+j));
-                    if (spokenWords[i] == $translate.instant('lights.places.'+j)){
-                        console.log("Get the lights : " + $translate.instant('lights.places.'+j));
-                        return "/lights/"+(j+1)+"/state";
+                console.log("Checking word to get light:", spokenWords[i]);
+                var groups = config.hue.groups;
+                for (var j = 0; j < groups.length; j++){
+                    console.log("Check if it's place : " + groups[j].name);
+                    if (spokenWords[i] == groups[j].name){
+                        console.log("Get the lights : " + groups[j].name);
+                        return "/groups/"+j+"/action";
                     }
                 }
             }
