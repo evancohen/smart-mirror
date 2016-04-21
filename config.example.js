@@ -24,7 +24,16 @@ var config = {
     hue : {
         ip : "", // The IP address of your hue base
         uername : "", // The username used to control your hue
-        group : "0" // The group you'd like the mirror to control (0 is all hue lights connected to your hub)
+        groups : [{
+            id : 0, // The group id 0 will change all the lights on the network
+            name : "toutes"
+        }, {
+            id : 1,
+            name : "chamber"
+        }, {
+            id : 2,
+            name : "kitchen"
+        }]
     },
     // Calendar (An array of iCals)
     calendar: {

@@ -10,6 +10,31 @@
       "minute": "Minute(n)?",
       "second": "Sekunde(n)?"
     },
+    "lights": {
+        "colors": {
+            "red": "rot",
+            "dark_green": "dunkelgrün",
+            "green": "grün",
+            "blue": "blau",
+            "yellow": "gelb",
+            "orange":  "orange",
+            "pink": "rosa",
+            "purple": "lila",
+            "white": "weiß",
+            "movie": "Kino",
+            "colorloop": "Farbe",
+            "stop": "stoppen"
+        },
+        "intensity": {
+            "increase": "erhöht",
+            "decrease": "sinkt",
+            "max": "max"
+        },
+        "action": {
+            "on": "beleuchtung",
+            "off": "verstimmt"
+        }
+    },
     "commands": {
         "title" : "Zur Verfügung stehenden Befehle",
         "list": {

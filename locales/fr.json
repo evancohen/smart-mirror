@@ -10,6 +10,31 @@
       "minute": "Minute(s)?",
       "second": "Seconde(s)?"
     },
+    "lights": {
+        "colors": {
+            "red": "rouge",
+            "dark_green": "vert foncé",
+            "green": "vert",
+            "blue": "bleu",
+            "yellow": "jaune",
+            "orange":  "orange",
+            "pink": "rose",
+            "purple": "violet",
+            "white": "blanc",
+            "movie": "cinéma",
+            "colorloop": "couleur",
+            "stop": "stop"
+        },
+        "intensity": {
+            "increase": "augmente",
+            "decrease": "baisse",
+            "max": "max"
+        },
+        "action": {
+            "on": "allume",
+            "off": "éteins"
+        }
+    },
     "commands": {
         "title" : "Commandes disponibles",
         "list": {
@@ -49,22 +74,22 @@
         },
         "map_zoom_in": {
             "text": "Zoom avant",
-            "voice": "(carte) zoom avant",
+            "voice": "Zoom (avant) (sur la carte)",
             "description": "Zoom avant sur la carte actuelle"
         },
         "map_zoom_out": {
             "text": "Zoom arrière",
-            "voice": "(Carte) zoom arrière",
+            "voice": "Zoom arrière (sur la carte)",
             "description": "Zoom arrière sur la carte actuelle"
         },
         "map_zoom_point": {
             "text": "Zoom vers ________",
-            "voice": "(carte) zoom (vers) *value",
+            "voice": "Zoom (vers) *value",
             "description": "Zoom vers le point indiqué"
         },
         "map_zoom_reset": {
             "text": "Reset zoom",
-            "voice": "(map) reset zoom",
+            "voice": "Reset le zoom",
             "description": "Réinitilalise la fonction zoom"
         },
         "images_search": {
@@ -79,22 +104,22 @@
         },
         "image_comic": {
             "text": "Recherche bande dessinée ",
-            "voice": "Recherche bande dessinée de xkcd",
+            "voice": "Recherche une bande dessinée de xkcd",
             "description": "Affiche la plus récente bande dessinée de xkcd."
         },
         "image_comic_dilbert": {
             "text": "Comic Dilbert",
             "voice": "Comic Dilbert",
-            "description": "Muestra el comic Dilbert."
+            "description": "J'ai trouvé le dernier comic de Diblert."
         },
         "reminder_insert": {
-            "text": "Rappel moi de ________",
-            "voice": "Rappel moi de *task",
+            "text": "Rappelle moi de ________",
+            "voice": "Rappelle moi de *task",
             "description": "Ajouter quelque chose à la liste des rappels."
         },
         "reminder_clear": {
-            "text": "Supprimer les rappels",
-            "voice": "Supprimer les rappels",
+            "text": "Supprime les rappels",
+            "voice": "Supprime les rappels",
             "description": "Supprimer la liste des rappels."
         },
         "time_show": {
@@ -123,9 +148,9 @@
             "description": "Reprendre le timer."
         },
         "light_action": {
-            "text": "Turn the (state) light (action)",
-            "voice": "(turn) (the) :state (the) light(s) *action",
-            "description": "(turn) (the) :state (the) light(s) *action"
+            "text": "(Allume|Éteins) (la|les) lumières (action)",
+            "voice": ":state (les) (la) lumière(s) (*action)",
+            "description": ":state (les) (la) lumière(s) (*action)"
         }
     }
 }

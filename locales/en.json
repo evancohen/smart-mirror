@@ -10,6 +10,31 @@
       "minute": "Minute(s)?",
       "second": "Second(s)?"
     },
+    "lights": {
+        "colors": {
+            "red": "red",
+            "dark_green": "dark green",
+            "green": "green",
+            "blue": "blue",
+            "yellow": "yellow",
+            "orange":  "orange",
+            "pink": "pink",
+            "purple": "purple",
+            "white": "white",
+            "movie": "movie",
+            "colorloop": "colorloop",
+            "stop": "stop"
+        },
+        "intensity": {
+            "increase": "increase",
+            "decrease": "decrease",
+            "max": "max"
+        },
+        "action": {
+            "on": "on",
+            "off": "off"
+        }
+    },
     "commands": {
         "title" : "Available Commands",
         "list": {
