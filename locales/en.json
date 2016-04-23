@@ -28,11 +28,16 @@
         "intensity": {
             "increase": "increase",
             "decrease": "decrease",
-            "max": "max"
+            "max": "max",
+            "half": "half",
+            "quarter": "quarter",
+            "threequarter": ["three-quarter", "three-fourth"]
         },
         "action": {
             "on": "on",
-            "off": "off"
+            "off": "off",
+            "nightmode": "nightmode",
+            "reset": "reset"
         }
     },
     "commands": {
@@ -151,6 +156,11 @@
             "text": "Turn the (state) light (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",
             "description": "(turn) (the) :state (the) light(s) *action"
+        },
+        "hyperion_action": {
+            "text": "Turn (state) LED (action)",
+            "voice": "(turn) (the) LED(s) *action",
+            "description": "Control color and brightness of LEDs"
         }
     }
 }

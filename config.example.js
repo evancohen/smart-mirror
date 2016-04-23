@@ -35,6 +35,18 @@ var config = {
             name : "kitchen"
         }]
     },
+    // Hyperion
+    hyperion : [{
+        ip : "", // The IP address of your hyperion client
+        port : "19444", // The default JSON port of your hyperion
+        name : "parlor" // Single word room name for speech recognition
+    },
+    {
+        ip : "",
+        port : "19444",
+        name : "hall"
+    }
+    ],
     // Calendar (An array of iCals)
     calendar: {
       icals : [], // Be sure to wrap your URLs in quotes

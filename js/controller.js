@@ -8,6 +8,7 @@
             FitbitService,
             MapService,
             HueService,
+            HyperionService,
             CalendarService,
             ComicService,
             GiphyService,
@@ -265,6 +266,12 @@
             // Turn lights off
             addCommand('light_action', function(state, action) {
                 HueService.performUpdate(state + " " + action);
+            });
+            
+            // Control Hyperion light
+            addCommand('hyperion_action', function(action){
+                HyperionService.performUpdate(action);
+                console.debug("Controlling light");
             });
 
             //Show giphy image

@@ -28,11 +28,16 @@
         "intensity": {
             "increase": "erhöht",
             "decrease": "sinkt",
-            "max": "max"
+            "max": "maximaler",
+            "half": "halber",
+            "quarter": "viertel",
+            "threequarter": "dreiviertel"
         },
         "action": {
-            "on": "beleuchtung",
-            "off": "verstimmt"
+            "on": "an",
+            "off": "aus",
+            "nightmode": "nachtmodus",
+            "reset": "zurücksetzen"
         }
     },
     "commands": {
@@ -151,6 +156,11 @@
             "text": "Schalte das (state) Licht (action)",
             "voice": "(Schalte) (das) :state (die) Licht(er) *action",
             "description": "(Schalte) (das) :state (die) Licht(er) *action"
+        },
+        "hyperion_action": {
+            "text": "Schalte (state) LED (action)",
+            "voice": "(Schalte) (die) LED(s) *action",
+            "description": "Steuert Farbe und Helligḱeit von LEDs"
         }
     }
 }
