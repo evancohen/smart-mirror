@@ -3,9 +3,9 @@
 
     function SoundCloudService($http) {
         var service = {};
-        var audioCtx = null;
-        var _stream = null;
-        var intv = null;
+        var audioCtx = null,
+            _stream = null,
+            intv = null;
 		service.scResponse = null;
 
 		service.init = function() {
