@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "Temps de {{name}}: "
     },
+    "reminders": {
+        "empty": "Aucun rappel"
+    },
     "timer": {
       "one": "Une",
       "minute": "Minute(s)?",
@@ -121,6 +124,11 @@
             "text": "Efface (les) (mes) rappels",
             "voice": "Efface (les) (mes) rappels",
             "description": "Supprimer la liste des rappels."
+        },
+        "reminder_show": {
+            "text": "Montre-moi (les) (mes) rappels",
+            "voice": "Montre-moi (les) (mes) rappels",
+            "description": "Montre la liste des rappels."
         },
         "time_show": {
             "text": "Quel heure est-il",

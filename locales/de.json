@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "Zeit zu {{name}}: "
     },
+    "reminders": {
+        "empty": "Kein Rückruf"
+    },
     "timer": {
       "one": "Eine",
       "minute": "Minute(n)?",
@@ -121,6 +124,11 @@
             "text": "Erinnerungen löschen",
             "voice": "Erinnerungen löschen",
             "description": "Löscht die Einträge der Erinnerungen im Kalender."
+        },
+        "reminder_show": {
+            "text": "Zeigen Sie mir Erinnerungen",
+            "voice": "Zeigen Sie mir Erinnerungen",
+            "description": "Zeigt die Rückrufliste"
         },
         "time_show": {
             "text": "Wie spät ist es",

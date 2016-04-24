@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "Time to {{name}}: "
     },
+    "reminders": {
+        "empty": "Empty list"
+    },
     "timer": {
       "one": "One",
       "minute": "Minute(s)?",
@@ -121,6 +124,11 @@
             "text": "Clear reminders",
             "voice": "Clear reminders",
             "description": "Clears out your reminders list."
+        },
+        "reminder_show": {
+            "text": "Show me reminders",
+            "voice": "Show me reminders",
+            "description": "Display the reminders list"
         },
         "time_show": {
             "text": "what time is it",
