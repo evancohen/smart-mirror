@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "{{name}} 에 시간: "
     },
+    "reminders": {
+        "empty": "더 리콜 없습니다"
+    },
     "timer": {
       "one": "일",
       "minute": "분",
@@ -121,6 +124,11 @@
             "text": "미리 알림 삭제 해 줘",
             "voice": "미리 알림 삭제 해 줘",
             "description": "미리 알림리스트를 삭제 합니다."
+        },
+        "reminder_show": {
+            "text": "나에게 리콜 목록을 표시",
+            "voice": "나에게 리콜 목록을 표시",
+            "description": "리콜 목록을 표시합니다"
         },
         "time_show": {
             "text": "지금 몇 시",
