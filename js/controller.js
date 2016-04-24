@@ -13,6 +13,7 @@
             GiphyService,
             TrafficService,
             TimerService,
+            ReminderService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -249,11 +250,22 @@
             // Set a reminder
             addCommand('reminder_insert', function(task) {
                 console.debug("I'll remind you to", task);
+                $scope.reminders = ReminderService.insertReminder(task);
+                $scope.focus = "reminders";
             });
 
             // Clear reminders
             addCommand('reminder_clear', function() {
                 console.debug("Clearing reminders");
+                $scope.reminders = ReminderService.clearReminder();
+                $scope.focus = "default";
+            });
+
+            // Clear reminders
+            addCommand('reminder_show', function() {
+                console.debug("Showing reminders");
+                $scope.reminders = ReminderService.getReminders();
+                $scope.focus = "reminders";
             });
 
             // Check the time

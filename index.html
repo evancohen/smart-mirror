@@ -14,13 +14,14 @@
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <!-- endbower -->
-    
+
     <script src="js/inc/skycons.js"></script>
 
     <!-- App -->
     <script src="config.js"></script>
     <script src="js/rrule.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/timebox-service.js"></script>
     <!-- <script src="js/translations.js"></script>-->
     <script src="js/annyang-service.js"></script>
     <script src="js/weather-service.js"></script>
@@ -32,7 +33,8 @@
     <script src="js/geolocation-service.js"></script>
     <script src="js/calendar-service.js"></script>
     <script src="js/traffic-service.js"></script>
-    <script src="js/fitbit-service.js"></script> 
+    <script src="js/fitbit-service.js"></script>
+    <script src="js/reminder-service.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -109,6 +111,13 @@
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
           <div class="comic-title">{{dilbert.title}}</div>
+        </div>
+        <div class="reminders-container animate-grow" ng-show="focus == 'reminders'">
+          <ul>
+            <li class="reminders animate-grow" ng-repeat="reminder in reminders">
+              <span class="reminder">{{reminder}}</span>
+            </li>
+          </ul>
         </div>
         <div class="contents-box animate-grow" ng-show="focus == 'timer'">
           <div class="contents timer animate-grow">

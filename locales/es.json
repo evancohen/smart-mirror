@@ -5,10 +5,38 @@
     "traffic" : {
         "time_to" : "Tiempo al {{name}}: "
     },
+    "reminders": {
+        "empty": "No recuerdo"
+    },
     "timer": {
       "one": "Uno",
       "minute": "Minuto(s)?",
       "second": "Segundo(s)?"
+    },
+    "lights": {
+        "colors": {
+            "red": "rojo",
+            "dark_green": "verde oscuro",
+            "green": "verde",
+            "blue": "azul",
+            "yellow": "amarillo",
+            "orange":  "naranja",
+            "pink": "rosa",
+            "purple": "púrpura",
+            "white": "blanco",
+            "movie": "película",
+            "colorloop": "color",
+            "stop": "detener"
+        },
+        "intensity": {
+            "increase": "aumentos",
+            "decrease": "disminuye",
+            "max": "max"
+        },
+        "action": {
+            "on": "enciende",
+            "off": "apagar"
+        }
     },
     "commands": {
         "title" : "Listado de Órdenes",
@@ -97,6 +125,11 @@
             "voice": "Limpia la tareas pendientes",
             "description": "Limpia la tareas pendientes"
         },
+        "reminder_show": {
+            "text": "Muéstrame la lista de retiro",
+            "voice": "Muéstrame la lista de retiro",
+            "description": "Muestra la lista de retiro"
+        },
         "time_show": {
             "text": "¿Qué hora es?",
             "voice": "que hora es",
@@ -123,8 +156,8 @@
             "description": "Continua el temporizador."
         },
         "light_action": {
-            "text": "Cambia las luces [estado] a [acción]",
-            "voice": "cambia las luces :state a *action",
+            "text": "[estado] las luces a [acción]",
+            "voice": ":state las luces a *action",
             "description": "Cambia el estado de las luces"
         }
     }

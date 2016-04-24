@@ -5,10 +5,38 @@
     "traffic" : {
         "time_to" : "Zeit zu {{name}}: "
     },
+    "reminders": {
+        "empty": "Kein Rückruf"
+    },
     "timer": {
       "one": "Eine",
       "minute": "Minute(n)?",
       "second": "Sekunde(n)?"
+    },
+    "lights": {
+        "colors": {
+            "red": "rot",
+            "dark_green": "dunkelgrün",
+            "green": "grün",
+            "blue": "blau",
+            "yellow": "gelb",
+            "orange":  "orange",
+            "pink": "rosa",
+            "purple": "lila",
+            "white": "weiß",
+            "movie": "Kino",
+            "colorloop": "Farbe",
+            "stop": "stoppen"
+        },
+        "intensity": {
+            "increase": "erhöht",
+            "decrease": "sinkt",
+            "max": "max"
+        },
+        "action": {
+            "on": "beleuchtung",
+            "off": "verstimmt"
+        }
     },
     "commands": {
         "title" : "Zur Verfügung stehenden Befehle",
@@ -96,6 +124,11 @@
             "text": "Erinnerungen löschen",
             "voice": "Erinnerungen löschen",
             "description": "Löscht die Einträge der Erinnerungen im Kalender."
+        },
+        "reminder_show": {
+            "text": "Zeigen Sie mir Erinnerungen",
+            "voice": "Zeigen Sie mir Erinnerungen",
+            "description": "Zeigt die Rückrufliste"
         },
         "time_show": {
             "text": "Wie spät ist es",
