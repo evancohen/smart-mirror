@@ -16,8 +16,8 @@
     "lights": {
         "colors": {
             "red": "rouge",
-            "dark_green": "verre foncé",
-            "green": "verre",
+            "dark_green": "vert foncé",
+            "green": "vert",
             "blue": "bleu",
             "yellow": "jaune",
             "orange":  "orange",
@@ -91,8 +91,8 @@
             "description": "Zoom vers le point indiqué"
         },
         "map_zoom_reset": {
-            "text": "Réinitialise zoom",
-            "voice": "Réinitialise le zoom",
+            "text": "Reset zoom",
+            "voice": "Reset le zoom",
             "description": "Réinitilalise la fonction zoom"
         },
         "images_search": {
@@ -106,23 +106,23 @@
             "description": "Affiche une image de giphy"
         },
         "image_comic": {
-            "text": "Montre(-moi) le dernier xkcd ",
-            "voice": "Montre(-moi) le dernier xkcd",
+            "text": "Recherche bande dessinée ",
+            "voice": "Recherche une bande dessinée de xkcd",
             "description": "Affiche la plus récente bande dessinée de xkcd."
         },
         "image_comic_dilbert": {
-            "text": "Montre(-moi) le dernier Dilbert",
-            "voice": "Montre(-moi) le dernier Gilbert",
-            "description": "Affiche le dernier comic de Diblert."
+            "text": "Comic Dilbert",
+            "voice": "Comic Dilbert",
+            "description": "J'ai trouvé le dernier comic de Diblert."
         },
         "reminder_insert": {
-            "text": "Rappelle-moi de ________",
-            "voice": "Rappelle-moi (de) (d') *task",
+            "text": "Rappelle moi de ________",
+            "voice": "Rappelle moi de *task",
             "description": "Ajouter quelque chose à la liste des rappels."
         },
         "reminder_clear": {
-            "text": "Efface (les) (mes) rappels",
-            "voice": "Efface (les) (mes) rappels",
+            "text": "Supprime les rappels",
+            "voice": "Supprime les rappels",
             "description": "Supprimer la liste des rappels."
         },
         "reminder_show": {
