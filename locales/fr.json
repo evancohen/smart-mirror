@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "Temps de {{name}}: "
     },
+    "reminders": {
+        "empty": "Aucun rappel"
+    },
     "timer": {
       "one": "Une",
       "minute": "Minute(s)?",
@@ -13,8 +16,8 @@
     "lights": {
         "colors": {
             "red": "rouge",
-            "dark_green": "vert foncé",
-            "green": "vert",
+            "dark_green": "verre foncé",
+            "green": "verre",
             "blue": "bleu",
             "yellow": "jaune",
             "orange":  "orange",
@@ -88,39 +91,44 @@
             "description": "Zoom vers le point indiqué"
         },
         "map_zoom_reset": {
-            "text": "Reset zoom",
-            "voice": "Reset le zoom",
+            "text": "Réinitialise zoom",
+            "voice": "Réinitialise le zoom",
             "description": "Réinitilalise la fonction zoom"
         },
         "images_search": {
-            "text": "Recherche image  ________",
-            "voice": "Recherche une image *term",
+            "text": "(Re)cherche une image de ________",
+            "voice": "(Re)cherche une image de *term",
             "description": "Affiche une image recherchée."
         },
         "image_giphy": {
-            "text": "Recherche image Giphy ________",
-            "voice": "Recherche une image Giphy *img",
+            "text": "(Re)cherche une image animée de ________",
+            "voice": "(Re)cherche une image animée de *img",
             "description": "Affiche une image de giphy"
         },
         "image_comic": {
-            "text": "Recherche bande dessinée ",
-            "voice": "Recherche une bande dessinée de xkcd",
+            "text": "Montre(-moi) le dernier xkcd ",
+            "voice": "Montre(-moi) le dernier xkcd",
             "description": "Affiche la plus récente bande dessinée de xkcd."
         },
         "image_comic_dilbert": {
-            "text": "Comic Dilbert",
-            "voice": "Comic Dilbert",
-            "description": "J'ai trouvé le dernier comic de Diblert."
+            "text": "Montre(-moi) le dernier Dilbert",
+            "voice": "Montre(-moi) le dernier Gilbert",
+            "description": "Affiche le dernier comic de Diblert."
         },
         "reminder_insert": {
-            "text": "Rappelle moi de ________",
-            "voice": "Rappelle moi de *task",
+            "text": "Rappelle-moi de ________",
+            "voice": "Rappelle-moi (de) (d') *task",
             "description": "Ajouter quelque chose à la liste des rappels."
         },
         "reminder_clear": {
-            "text": "Supprime les rappels",
-            "voice": "Supprime les rappels",
+            "text": "Efface (les) (mes) rappels",
+            "voice": "Efface (les) (mes) rappels",
             "description": "Supprimer la liste des rappels."
+        },
+        "reminder_show": {
+            "text": "Montre-moi (les) (mes) rappels",
+            "voice": "Montre-moi (les) (mes) rappels",
+            "description": "Montre la liste des rappels."
         },
         "time_show": {
             "text": "Quel heure est-il",
@@ -128,23 +136,23 @@
             "description": "Quel heure est-il?"
         },
         "timer_start": {
-            "text": "Timer pour ________",
-            "voice": "(Programme le) timer (pour) *duration",
+            "text": "(Mets le) minuteur (pour) ________",
+            "voice": "(Mets le) minuteur (pour) *duration",
             "description": "Démarre un timer."
         },
         "timer_show": {
-            "text": "Montrer timer",
-            "voice": "Montrer(-moi) (le) timer",
+            "text": "Montre(-moi) (le) minuteur",
+            "voice": "Montre(-moi) (le) minuteur",
             "description": "Affiche le timer."
         },
         "timer_stop": {
-            "text": "Arrête timer",
-            "voice": "Arrête (le) timer",
+            "text": "Arrête (le) minuteur",
+            "voice": "Arrête (le) minuteur",
             "description": "Arrête le timer."
         },
         "timer_resume": {
-            "text": "Reprendre timer",
-            "voice": "Reprendre (le) timer",
+            "text": "Reprend (le) minuteur",
+            "voice": "Reprend (le) minuteur",
             "description": "Reprendre le timer."
         },
         "light_action": {

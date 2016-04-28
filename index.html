@@ -34,6 +34,7 @@
     <script src="js/calendar-service.js"></script>
     <script src="js/traffic-service.js"></script>
     <script src="js/fitbit-service.js"></script>
+    <script src="js/reminder-service.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -110,6 +111,13 @@
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
           <div class="comic-title">{{dilbert.title}}</div>
+        </div>
+        <div class="reminders-container animate-grow" ng-show="focus == 'reminders'">
+          <ul>
+            <li class="reminders animate-grow" ng-repeat="reminder in reminders">
+              <span class="reminder">{{reminder}}</span>
+            </li>
+          </ul>
         </div>
         <div class="contents-box animate-grow" ng-show="focus == 'timer'">
           <div class="contents timer animate-grow">

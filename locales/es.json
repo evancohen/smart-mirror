@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "Tiempo al {{name}}: "
     },
+    "reminders": {
+        "empty": "No recuerdo"
+    },
     "timer": {
       "one": "Uno",
       "minute": "Minuto(s)?",
@@ -121,6 +124,11 @@
             "text": "Limpia la tareas pendientes",
             "voice": "Limpia la tareas pendientes",
             "description": "Limpia la tareas pendientes"
+        },
+        "reminder_show": {
+            "text": "Muéstrame la lista de retiro",
+            "voice": "Muéstrame la lista de retiro",
+            "description": "Muestra la lista de retiro"
         },
         "time_show": {
             "text": "¿Qué hora es?",
