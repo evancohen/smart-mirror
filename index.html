@@ -21,7 +21,7 @@
     <script src="js/search-service.js"></script>
     <script src="js/dateFormatFilter.js"></script>
     <script src="js/controller.js"></script>
-	<script src="js/soundcloud-service.js"></script>
+	  <script src="js/soundcloud-service.js"></script>
 
 	<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
     <!-- Styles and Resources -->
@@ -72,6 +72,9 @@
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
 		<div class="sc-container animate-grow" ng-show="focus == 'sc'">
+        <div>
+          <canvas id="visualizer" width="150" height="150"></canvas>
+        </div>
           <img class="sc" ng-src="{{scThumb}}"/>
 		  <img class="scWaveform" ng-src="{{scWaveform}}"/>
 		  <h2 class="sc">{{scTrack}}</h2>

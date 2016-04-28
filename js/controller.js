@@ -162,20 +162,27 @@
 					$scope.scWaveform = response[0].waveform_url;
 					$scope.scTrack = response[0].title;
 					$scope.focus = "sc";
+          SoundCloudService.startVisualizer();
 				});
             });
 			//SoundCloud stop
 			AnnyangService.addCommand('SoundCloud (pause)(post)(stop)(stock)', function() {
 				sound.pause();
+        SoundCloudService.stopVisualizer();
+        $scope.focus = "default";
             });
 			//SoundCloud resume
 			AnnyangService.addCommand('SoundCloud (play)(resume)', function() {
 				sound.play();
+        SoundCloudService.startVisualizer();
+        $scope.focus = "sc";
             });
 			//SoundCloud replay
 			AnnyangService.addCommand('SoundCloud replay', function() {
 				sound.seek(0);
 				sound.play();
+        SoundCloudService.startVisualizer();
+        $scope.focus = "sc";
             });
 
             //Search for a video
