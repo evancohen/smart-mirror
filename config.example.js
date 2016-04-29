@@ -26,10 +26,10 @@ var config = {
         uername : "", // The username used to control your hue
         groups : [{
             id : 0, // The group id 0 will change all the lights on the network
-            name : "toutes"
+            name : "all"
         }, {
             id : 1,
-            name : "chamber"
+            name : "bedroom"
         }, {
             id : 2,
             name : "kitchen"
