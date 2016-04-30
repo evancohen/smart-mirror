@@ -13,6 +13,7 @@
             GiphyService,
             TrafficService,
             TimerService,
+            ReminderService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -115,17 +116,18 @@
             var greetingUpdater = function () {
                 if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
                     var hour = moment().hour();
-                    var geetingTime = "midday";
+                    var greetingTime = "midday";
 
                     if (hour > 4 && hour < 11) {
-                        geetingTime = "morning";
+                        greetingTime = "morning";
                     } else if (hour > 18 && hour < 23) {
-                        geetingTime = "evening";
+                        greetingTime = "evening";
                     } else if (hour >= 23 || hour < 4) {
-                        geetingTime = "night";
+                        greetingTime = "night";
                     }
-
-                    $scope.greeting = config.greeting[geetingTime][Math.floor(Math.random() * config.greeting.morning.length)];
+                    var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
+                    var nextGreeting = config.greeting[greetingTime][nextIndex]
+                    $scope.greeting = nextGreeting;
                 }else if(Array.isArray(config.greeting)){
                     $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
                 }
@@ -249,11 +251,22 @@
             // Set a reminder
             addCommand('reminder_insert', function(task) {
                 console.debug("I'll remind you to", task);
+                $scope.reminders = ReminderService.insertReminder(task);
+                $scope.focus = "reminders";
             });
 
             // Clear reminders
             addCommand('reminder_clear', function() {
                 console.debug("Clearing reminders");
+                $scope.reminders = ReminderService.clearReminder();
+                $scope.focus = "default";
+            });
+
+            // Clear reminders
+            addCommand('reminder_show', function() {
+                console.debug("Showing reminders");
+                $scope.reminders = ReminderService.getReminders();
+                $scope.focus = "reminders";
             });
 
             // Check the time

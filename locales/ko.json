@@ -5,10 +5,38 @@
     "traffic" : {
         "time_to" : "{{name}} 에 시간: "
     },
+    "reminders": {
+        "empty": "더 리콜 없습니다"
+    },
     "timer": {
       "one": "일",
       "minute": "분",
       "second": "초"
+    },
+    "lights": {
+        "colors": {
+            "red": "빨간",
+            "dark_green": "짙은 녹색",
+            "green": "녹색",
+            "blue": "푸른",
+            "yellow": "황색",
+            "orange":  "오렌지",
+            "pink": "핑크",
+            "purple": "보라색",
+            "white": "화이트",
+            "movie": "영화",
+            "colorloop": "색",
+            "stop": "중지"
+        },
+        "intensity": {
+            "increase": "증가",
+            "decrease": "감소",
+            "max": "최대"
+        },
+        "action": {
+            "on": "조명",
+            "off": "끄다"
+        }
     },
     "commands": {
         "title" : "사용 가능한 명령",
@@ -96,6 +124,11 @@
             "text": "미리 알림 삭제 해 줘",
             "voice": "미리 알림 삭제 해 줘",
             "description": "미리 알림리스트를 삭제 합니다."
+        },
+        "reminder_show": {
+            "text": "나에게 리콜 목록을 표시",
+            "voice": "나에게 리콜 목록을 표시",
+            "description": "리콜 목록을 표시합니다"
         },
         "time_show": {
             "text": "지금 몇 시",

@@ -4,7 +4,7 @@ var config = {
     language : "en", //must also manually update locales/X.js bower component in index.html
     layout: "main",
     greeting : ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
-    
+
     // Alternativly you can have greetings that appear based on the time of day
     /*
     greeting : {
@@ -24,7 +24,16 @@ var config = {
     hue : {
         ip : "", // The IP address of your hue base
         uername : "", // The username used to control your hue
-        group : "0" // The group you'd like the mirror to control (0 is all hue lights connected to your hub)
+        groups : [{
+            id : 0, // The group id 0 will change all the lights on the network
+            name : "all"
+        }, {
+            id : 1,
+            name : "bedroom"
+        }, {
+            id : 2,
+            name : "kitchen"
+        }]
     },
     // Calendar (An array of iCals)
     calendar: {
@@ -45,6 +54,8 @@ var config = {
         origin : "", // Start of your trip. Human readable address.
         destination : "", // Destination of your trip. Human readable address.
         name : "work", // Name of your destination ex: "work"
+        /*startTime: "",
+        endTime: ""*/ // Optional starttime and endtime when the traffic information should be displayed on screen. The format can be either hh:mm or hh:mm am/pm
       }]
     }
 };

@@ -236,6 +236,12 @@ ul.calendar {
 .map {
   height: 1080px; }
 
+.reminders-container {
+  width: 250px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto; }
+
 .contents-box {
   text-align: center;
   width: 100%;
