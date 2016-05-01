@@ -6,7 +6,7 @@
   "scripts": {
     "install": "bower install",
     "start": "electron main.js ",
-    "microphone-debug" : "electron scripts/microphone-debug/main.js",
+    "microphone-debug": "electron scripts/microphone-debug/main.js",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {
@@ -34,6 +34,7 @@
     "bower": "^1.7.7"
   },
   "dependencies": {
+    "clap-detector": "^0.4.0",
     "express": "^4.13.4",
     "fitbit-oauth2": "0.0.1",
     "fs": "0.0.2"

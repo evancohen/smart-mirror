@@ -7,10 +7,11 @@
         // KEYWORD SPOTTER
         // some other samples: [["SMART", "S M AA R T"], ["MIRROR", "M IH R ER"], ["OKAY", "OW K EY"], ["GOOGLE", "G UW G AH L"], ["START", "S T AA R T"], ["STOP", "S T AA P"], ["HELLO",  "HH AH L OW"], ["HELLO(1)", "HH EH L OW"], ["GOODBYE", "G UH D B AY"]];
         // other keywords = [{title: "Smart Mirror", g: "SMART MIRROR"}, {title: "OK Google", g: "OKAY GOOGLE"}, {title: "Start", g: "START"}, {title: "Stop", g: "STOP"}, {title: "Hello", g: "HELLO"}, {title: "Goodbye", g: "GOODBYE"}
-        var wordList = [["SMART", "S M AA R T"], ["MIRROR", "M IH R ER"]];
-        var keyword = {title: "Smart Mirror", g: "SMART MIRROR"};
+        var wordList = config.trigger.settings.ks.wordList;
+        var keyword = config.trigger.settings.ks.keyword;
+        console.log(keyword, wordList);
         var keywordId;
-      
+        
         var recognizer, recorder, callbackManager, audio_context, isRecognizerReady;
         var isRecorderReady = isRecognizerReady = false;
         
@@ -96,7 +97,7 @@
         var feedKeyword = function() {
             postRecognizerJob({
                 command: 'addKeyword', 
-                data: keyword.g
+                data: keyword
             }, function(id) {
                 keywordId = id;
                 recognizerReady();
@@ -115,53 +116,76 @@
             });
         };
         
+        // CLAP DETECTOR
+        
         service.init = function() {
             // Set the lenguage for Speech to text (Only applis to Annyang)
-            annyang.setLanguage(config.language);
+            annyang.setLanguage(config.language);            
             
-            updateStatus("Initializing Web Audio and keyword spotter");
-            callbackManager = new CallbackManager();
-            var oldCount = 0;
-            spawnWorker("js/services/speech/recognizer.js", function(worker) {
-                worker.onmessage = function(e) {
-                    if (e.data.hasOwnProperty('id')) {
-                        var clb = callbackManager.get(e.data['id']);
-                        var data = {};
-                        if( e.data.hasOwnProperty('data')) {
-                            data = e.data.data;
+            // Based on mirror configuration deturmine initialize trigger type
+            if(config.trigger.type == "clap"){
+                // Require the module
+                var clapDetector = require('clap-detector');
+                clapDetector.start(config.trigger.settings.clap.overrides);
+                
+                if(config.trigger.settings.clap.count > 1){
+                    // Register to a serie of n claps occuring within n*1.3 seconds
+                    var count = config.trigger.settings.clap.count;
+                    clapDetector.onClaps(count, count * 1.3, function(delay) {
+                        service.start();
+                    });
+                } else {
+                    clapDetector.onClap(function() {
+                        //Annyang listen for command
+                        service.start();
+                    });
+                }
+            } else if(config.trigger.type == "ks"){
+                
+                updateStatus("Initializing Web Audio and keyword spotter");
+                callbackManager = new CallbackManager();
+                var oldCount = 0;
+                spawnWorker("js/services/speech/recognizer.js", function(worker) {
+                    worker.onmessage = function(e) {
+                        if (e.data.hasOwnProperty('id')) {
+                            var clb = callbackManager.get(e.data['id']);
+                            var data = {};
+                            if( e.data.hasOwnProperty('data')) {
+                                data = e.data.data;
+                            }
+                            if(clb){
+                                clb(data);
+                            }
                         }
-                        if(clb){
-                            clb(data);
+                        if (e.data.hasOwnProperty('count')) {
+                            var newCount = e.data.count;
+                            if(oldCount != newCount){
+                                oldCount = newCount; 
+                                // Annyang listen for a command
+                                service.start();
+                            }
                         }
-                    }
-                    if (e.data.hasOwnProperty('count')) {
-                        var newCount = e.data.count;
-                        if(oldCount != newCount){
-                            oldCount = newCount; 
-                            // Annyang listen for a command
-                            service.start();
+                        if (e.data.hasOwnProperty('status') && (e.data.status == "error")) {
+                            updateStatus("Error in " + e.data.command + " with code " + e.data.code);
                         }
-                    }
-                    if (e.data.hasOwnProperty('status') && (e.data.status == "error")) {
-                        updateStatus("Error in " + e.data.command + " with code " + e.data.code);
-                    }
-                };
-                initRecognizer();
-            });
-            try {
-                window.AudioContext = window.AudioContext || window.webkitAudioContext;
-                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-                //window.URL = window.URL || window.webkitURL;
-                audio_context = new AudioContext();
-            } catch (e) {
-                updateStatus("Error initializing Web Audio browser");
-            }
-            if (navigator.getUserMedia){
-                navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-                    updateStatus("No live audio input in this browser");
-                })
-            } else {
-                updateStatus("No web audio support in this browser");
+                    };
+                    initRecognizer();
+                });
+                try {
+                    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+                    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+                    //window.URL = window.URL || window.webkitURL;
+                    audio_context = new AudioContext();
+                } catch (e) {
+                    updateStatus("Error initializing Web Audio browser");
+                }
+                if (navigator.getUserMedia){
+                    navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+                        updateStatus("No live audio input in this browser");
+                    })
+                } else {
+                    updateStatus("No web audio support in this browser");
+                }
             }
         };
 
