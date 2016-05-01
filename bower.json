@@ -22,11 +22,15 @@
     "angular-dynamic-locale": "0.1.*",
     "angular-i18n": "1.5.0",
     "angular-translate": "2.11.0",
-    "angular-translate-loader-static-files": "2.11.0"
+    "angular-translate-loader-static-files": "2.11.0",
+    "rrule": "^2.1.0"
   },
   "overrides": {
     "moment": {
       "main": "min/moment-with-locales.js"
+    },
+    "rrule": {
+      "main": "lib/rrule.js"
     }
   }
 }
