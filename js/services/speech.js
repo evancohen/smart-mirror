@@ -5,11 +5,8 @@
         var service = {};
         
         // KEYWORD SPOTTER
-        // some other samples: [["SMART", "S M AA R T"], ["MIRROR", "M IH R ER"], ["OKAY", "OW K EY"], ["GOOGLE", "G UW G AH L"], ["START", "S T AA R T"], ["STOP", "S T AA P"], ["HELLO",  "HH AH L OW"], ["HELLO(1)", "HH EH L OW"], ["GOODBYE", "G UH D B AY"]];
-        // other keywords = [{title: "Smart Mirror", g: "SMART MIRROR"}, {title: "OK Google", g: "OKAY GOOGLE"}, {title: "Start", g: "START"}, {title: "Stop", g: "STOP"}, {title: "Hello", g: "HELLO"}, {title: "Goodbye", g: "GOODBYE"}
         var wordList = config.trigger.settings.ks.wordList;
         var keyword = config.trigger.settings.ks.keyword;
-        console.log(keyword, wordList);
         var keywordId;
         
         var recognizer, recorder, callbackManager, audio_context, isRecognizerReady;
@@ -115,9 +112,7 @@
                 feedWords(wordList);
             });
         };
-        
-        // CLAP DETECTOR
-        
+              
         service.init = function() {
             // Set the lenguage for Speech to text (Only applis to Annyang)
             annyang.setLanguage(config.language);            
@@ -128,10 +123,10 @@
                 var clapDetector = require('clap-detector');
                 clapDetector.start(config.trigger.settings.clap.overrides);
                 
-                if(config.trigger.settings.clap.count > 1){
-                    // Register to a serie of n claps occuring within n*1.3 seconds
-                    var count = config.trigger.settings.clap.count;
-                    clapDetector.onClaps(count, count * 1.3, function(delay) {
+                var count = config.trigger.settings.clap.count;
+                if(count > 1){
+                    // Register to a serie of n claps occuring within n*750 miliseconds
+                    clapDetector.onClaps(count, count * 750, function(delay) {
                         service.start();
                     });
                 } else {
@@ -141,7 +136,6 @@
                     });
                 }
             } else if(config.trigger.type == "ks"){
-                
                 updateStatus("Initializing Web Audio and keyword spotter");
                 callbackManager = new CallbackManager();
                 var oldCount = 0;
