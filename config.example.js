@@ -15,6 +15,14 @@ var config = {
     },
     */
 
+    //use this only if you want to hardcode your geoposition (used for weather)
+    /*
+    geo_position: {
+       latitude: 78.23423423,
+       longitude: 13.123124142
+    },
+    */
+    
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
