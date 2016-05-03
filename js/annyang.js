@@ -300,27 +300,6 @@
       simulatedEvent.results[0].isFinal = true,
       recognition.onresult(simulatedEvent);
     },
-    
-    /**
-     * 
-     * SpeechRecognitionEvent
-bubbles:false
-cancelBubble:false
-cancelable:false
-currentTarget:SpeechRecognition
-defaultPrevented:false
-emma:null
-eventPhase:2
-interpretation:null
-path:Array[0]
-resultIndex:0
-results:SpeechRecognitionResultList
-returnValue:true
-srcElement:SpeechRecognition
-target:SpeechRecognition
-timeStamp:83627.365
-type:"result"
-     */
 
     /**
      * Stop listening, and turn off mic.
