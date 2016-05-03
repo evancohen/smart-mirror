@@ -34,4 +34,5 @@ if(typeof config == 'undefined'){
                 "http://www.youtube.com/embed/**"
             ]);
         }]);
+
 }(window.angular));

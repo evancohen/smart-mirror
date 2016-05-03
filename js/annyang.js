@@ -173,7 +173,7 @@
             root.annyang.start();
           }
         }
-      };      
+      };
 
       recognition.onresult  = function(event) {
         if(pauseListening) {
@@ -290,9 +290,7 @@
      *  @method simulate
      */
     simulate: function(command) {
-      var simulatedResults = [];
       var simulatedEvent = {};
-      
       simulatedEvent.resultIndex = 0;
       simulatedEvent.results = [[{
         transcript : command

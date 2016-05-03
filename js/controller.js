@@ -15,7 +15,7 @@
             TimerService,
             ReminderService,
             SearchService,
-			SoundCloudService,
+            SoundCloudService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -61,9 +61,9 @@
             });
             restCommand();
 
-			//Initialize SoundCloud
-			var playing = false, sound;
-			SoundCloudService.init();
+            //Initialize SoundCloud
+            var playing = false, sound;
+            SoundCloudService.init();
 
             var refreshMirrorData = function() {
                 //Get our location and then get the weather for our location
@@ -153,18 +153,18 @@
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
             var refreshComic = function () {
-            	console.log("Refreshing comic");
-            	ComicService.initDilbert().then(function(data) {
-            		console.log("Dilbert comic initialized");
-            	}, function(error) {
-            		console.log(error);
-            	});
+                        nsole.log("Refreshing comic");
+                        micService.initDilbert().then(function(data) {
+                        onsole.log("Dilbert comic initialized");
+                         function(error) {
+                        onsole.log(error);
+                        ;
             };
 
             refreshComic();
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
-                setFocus("default");
+                $scope.focus = "default";
             }
 
             $interval(refreshComic, 12*60*60000); // 12 hours
@@ -186,7 +186,7 @@
             addCommand('list', function() {
                 console.debug("Here is a list of commands...");
                 console.log(AnnyangService.commands);
-                setFocus("commands");
+                $scope.focus = "commands";
             });
 
             
@@ -196,7 +196,7 @@
             // Hide everything and "sleep"
             addCommand('sleep', function() {
                 console.debug("Ok, going to sleep...");
-                setFocus("sleep");
+                $scope.focus = "sleep";
             });
 
             // Go back to default view
@@ -222,7 +222,7 @@
             addCommand('map_location', function(location) {
                 console.debug("Getting map of", location);
                 $scope.map = MapService.generateMap(location);
-                setFocus("map");
+                $scope.focus = "map";
             });
 
             // Zoom in map
@@ -244,45 +244,46 @@
             addCommand('map_zoom_reset', function() {
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
-                setFocus("map");
+                $scope.focus = "map";
             });
 
-			//SoundCloud search and play
-			addCommand('sc_play', function(query) {
-				SoundCloudService.searchSoundCloud(query).then(function(response){
-					SC.stream('/tracks/' + response[0].id).then(function(player){
-						player.play();
-						sound = player;
-						playing = true;
-					});
+            //SoundCloud search and play
+            addCommand('sc_play', function(query) {
+                SoundCloudService.searchSoundCloud(query).then(function(response){
+                    SC.stream('/tracks/' + response[0].id).then(function(player){
+                        player.play();
+                        sound = player;
+                        playing = true;
+                    });
 
-					if (response[0].artwork_url){
-						$scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
-					} else {
-						$scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
-					}
-					$scope.scWaveform = response[0].waveform_url;
-					$scope.scTrack = response[0].title;
-					$scope.focus = "sc";
+                    if (response[0].artwork_url){
+                        $scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
+                    } else {
+                        $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+                    }
+                    $scope.scWaveform = response[0].waveform_url;
+                    $scope.scTrack = response[0].title;
+                    $scope.focus = "sc";
                     SoundCloudService.startVisualizer();
-				});
+                });
             });
-			//SoundCloud stop
-			addCommand('sc_pause', function() {
-				sound.pause();
+            
+            //SoundCloud stop
+            addCommand('sc_pause', function() {
+                sound.pause();
                 SoundCloudService.stopVisualizer();
                 $scope.focus = "default";
             });
-			//SoundCloud resume
-			addCommand('sc_resume', function() {
-				sound.play();
+            //SoundCloud resume
+            addCommand('sc_resume', function() {
+                sound.play();
                 SoundCloudService.startVisualizer();
                 $scope.focus = "sc";
             });
-			//SoundCloud replay
-			addCommand('sc_replay', function() {
-				sound.seek(0);
-				sound.play();
+            //SoundCloud replay
+            addCommand('sc_replay', function() {
+                sound.seek(0);
+                sound.play();
                 SoundCloudService.startVisualizer();
                 $scope.focus = "sc";
             });
