@@ -12,9 +12,9 @@
             // Deturmine which light to swith on/off
             var light = deturmineLight(spokenWordsArray);
             //Parse the update string and see what actions we need to perform
-            console.log(update);
+            console.log("Updating hue group [" + light + "]:", update);
 
-            $http.put('http://' + config.hue.ip + '/api/' + config.hue.uername + light, update)
+            $http.put('http://' + config.hue.ip + '/api/' + config.hue.uername + "/groups/" + light + "/action", update)
             .success(function (data, status, headers) {
                 console.log(data);
             })
@@ -22,13 +22,11 @@
 
         //Detect any kind of target color
         function deturmineUpdates(spokenWords){
-            console.log("Spoken Words:", spokenWords)
             var update = {};
 
             update["transitiontime"] = 10;
 
-            for(var i = 0; i <= spokenWords.length; i++){
-                console.log("Checking word:", spokenWords[i]);
+            for(var i = 0; i < spokenWords.length; i++){
 
                 //Check for color updates
                 if($translate.instant('lights.colors.red') == spokenWords[i]){
@@ -106,22 +104,17 @@
             return update;
         }
 
-        //Detect light
+        // Detect light
+        // TODO make this return an array of groups to update
         function deturmineLight(spokenWords){
-            console.log("Spoken Words:", spokenWords)
-            var light = "/groups/0/action";
-            for(var i = 0; i <= spokenWords.length; i++){
-                console.log("Checking word to get light:", spokenWords[i]);
-                var groups = config.hue.groups;
-                for (var j = 0; j < groups.length; j++){
-                    console.log("Check if it's place : " + groups[j].name);
-                    if (spokenWords[i] == groups[j].name){
-                        console.log("Get the lights : " + groups[j].name);
-                        return "/groups/"+j+"/action";
+            for(var i = 0; i < spokenWords.length; i++){
+                for (var j = 0; j < config.hue.groups.length; j++){
+                    if (spokenWords[i] == config.hue.groups[j].name){
+                        return j;
                     }
                 }
             }
-            return light;
+            return 0;
         }
         return service;
     }
