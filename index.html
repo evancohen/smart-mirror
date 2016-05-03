@@ -21,6 +21,9 @@
     <script src="js/search-service.js"></script>
     <script src="js/dateFormatFilter.js"></script>
     <script src="js/controller.js"></script>
+	  <script src="js/soundcloud-service.js"></script>
+
+	<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
@@ -68,6 +71,14 @@
         <div class="video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
+		<div class="sc-container animate-grow" ng-show="focus == 'sc'">
+        <div>
+          <canvas id="visualizer" width="150" height="150"></canvas>
+        </div>
+          <img class="sc" ng-src="{{scThumb}}"/>
+		  <img class="scWaveform" ng-src="{{scWaveform}}"/>
+		  <h2 class="sc">{{scTrack}}</h2>
+        </div>
       </div>
       <div class="bottom-center">
         <!-- Command list -->
@@ -88,6 +99,8 @@
             <dd>Shows a map of your current city.</dd>
             <dt>Show map of ________</dt>
             <dd>Shows a map of the given location.</dd>
+			<dt>SoundCloud play/pause/resume/stop/repeat</dt>
+            <dd>SoundCloud player controls.</dd>
           </dl>
           <small>
             We are using node <script>document.write(process.versions.node)</script>,
