@@ -1,106 +1,151 @@
 <!DOCTYPE html>
 <html ng-app="SmartMirror">
-  <head>
+  <head ng-controller="Theme">
+    <meta charset="utf-8">
     <title>Smart Mirror</title>
-    <!-- Libraries -->
-    <script src="js/annyang.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
-    <!-- App -->
-    <!--<script src="/js/init.js"></script>-->
-    <script src="js/config.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/annyang-service.js"></script>
-    <script src="js/weather-service.js"></script>
-    <script src="js/map-service.js"></script>
-    <script src="js/hue-service.js"></script>
-    <script src="js/geolocation-service.js"></script>
-    <script src="js/calendar-service.js"></script>
-    <script src="js/search-service.js"></script>
-    <script src="js/dateFormatFilter.js"></script>
-    <script src="js/controller.js"></script>
-	  <script src="js/soundcloud-service.js"></script>
 
-	<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+    <script src="js/annyang.js"></script>
+
+    <!-- bower:js -->
+    <script src="bower_components/moment/min/moment-with-locales.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <!-- endbower -->
+
+    <script src="js/inc/skycons.js"></script>
+	  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+
+    <!-- App -->
+    <script src="config.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services/timebox.js"></script>
+	  <script src="js/services/soundcloud.js"></script>
+    <script src="js/services/search.js"></script>
+    <script src="js/services/annyang.js"></script>
+    <script src="js/services/weather.js"></script>
+    <script src="js/services/comic.js"></script>
+    <script src="js/services/map.js"></script>
+    <script src="js/services/hue.js"></script>
+    <script src="js/services/giphy.js"></script>
+    <script src="js/services/timer.js"></script>
+    <script src="js/services/geolocation.js"></script>
+    <script src="js/services/calendar.js"></script>
+    <script src="js/services/traffic.js"></script>
+    <script src="js/services/fitbit.js"></script>
+    <script src="js/services/reminder.js"></script>
+    <script src="js/controller.js"></script>
+
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
+	<link rel="stylesheet" href="css/weather-icons.css">
+    <!-- bower:css -->
+    <!-- endbower -->
+
   </head>
-  <body ng-controller="MirrorCtrl as commands">
+  <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
       <div class="top-left">
-        <div class="date grey">{{date | date : 'EEEE, MMMM d yyyy'}}</div>
-        <div class="time">{{date | date : 'hh:mm a'}}</div>
+        <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
+        <div class="time">{{date.format('LT')}}</div>
         <ul class="calendar fade" ng-show="focus == 'default'">
             <li class="event" ng-repeat="event in calendar">
                 <div class="event-details">
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
                     <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format('MMMM Do YYYY, h:mm:ss a')}}</div>
-                    </li>
+                    <div class="details">{{event.start.format('LLL')}}</div>
                 </div>
+            </li>
         </ul>
       </div>
       <div class="top-right">
         <div class="weather">
           <div class="weather-today">
+            <span class="icon dimmed wi {{currentForcast.wi}}"></span>
+            <canvas id="icon_weather_current" width="90" height="70"></canvas>
             <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
           </div>
-          <div class="weather-week-descriptor">{{weeklyForcast.summary}}</div>
+          <div class="weather-week-descriptor">
+            <span>{{hourlyForcast.summary}}</span>
+            <span>{{weeklyForcast.summary}}</span>
+          </div>
           <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
             <div class="weather-week-day">
               <span class="day light-grey">{{forcast.day}}</span>
-              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}</span>
-              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}</span>
+              <canvas id="icon_weather_{{forcast.counter}}" width="33" height="25"></canvas>
+              <span class="icon-small dimmed wi wi-fw {{forcast.wi}}"></span>
+              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}&deg;</span>
+              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}&deg;</span>
             </div>
+          </div>
+          <!-- Workaround: -->
+          <div style="display: none;" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+            <span ng-init="iconLoad('icon_weather_'+forcast.counter, forcast.iconAnimation)"></span>
+          </div>
+        </div>
+        <div class="traffic" ng-repeat="traffic in trips">
+          <div ng-show="!traffic.error" class="traffic-information">
+            <span class="time-to">{{ 'traffic.time_to' | translate:traffic }}</span>
+            <span>{{traffic.duration.humanize()}}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="container">
       <div class="middle-center">
-        <h1>{{complement}}</h1>
+        <h1>{{greeting}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
         <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
-        <div class="map-container animate-grow" ng-show="focus == 'map'">
-          <img class="map" ng-src="{{map}}"/>
-        </div>
-        <div class="video-container animate-grow" ng-show="focus == 'video'">
+        <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
-		<div class="sc-container animate-grow" ng-show="focus == 'sc'">
-        <div>
-          <canvas id="visualizer" width="150" height="150"></canvas>
-        </div>
+        <div class="contents-box sc-container animate-grow" ng-show="focus == 'sc'">
+          <div><canvas id="visualizer" width="150" height="150"></canvas></div>
           <img class="sc" ng-src="{{scThumb}}"/>
-		  <img class="scWaveform" ng-src="{{scWaveform}}"/>
-		  <h2 class="sc">{{scTrack}}</h2>
+          <img class="scWaveform" ng-src="{{scWaveform}}"/>
+          <h2 class="sc">{{scTrack}}</h2>
+        </div>
+        <div class="contents-box map animate-grow" ng-show="focus == 'map'">
+          <img class="contents map animate-grow" ng-src="{{map}}"/>
+        </div>
+        <div class="contents-box gif animate-grow" ng-show="focus == 'gif'">
+          <img class="contents gif animate-grow" ng-src="{{gifimg}}"/>
+        </div>
+        <div class="xkcd-container animate-grow" ng-show="focus == 'xkcd'">
+          <img class="xkcd animate-grow" ng-src="{{xkcd}}"/>
+        </div>
+        <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
+          <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
+          <div class="comic-title">{{dilbert.title}}</div>
+        </div>
+        <div class="reminders-container animate-grow" ng-show="focus == 'reminders'">
+          <ul>
+            <li class="reminders animate-grow" ng-repeat="reminder in reminders">
+              <span class="reminder">{{reminder}}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="contents-box animate-grow" ng-show="focus == 'timer'">
+          <div class="contents timer animate-grow">
+            <div class="timer-countdown">{{timer.countdown | secondsToDateTime | date:"mm:ss"}}</div>
+            <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>
+            <timer-circle class="timer-circle" />
+          </div>
         </div>
       </div>
       <div class="bottom-center">
         <!-- Command list -->
         <div class="commands animate-grow" ng-show="focus == 'commands'">
-          <h2>Availalble Commands</h2>
+          <h2>{{ 'commands.title' | translate }}</h2>
           <dl>
-            <dt>What can I say?</dt>
-            <dd>Shows a list of voice commands available to you.</dd>
-            <dt>Go home</dt>
-            <dd>Takes you back to the home screen</dd>
-            <dt>Show me ________</dt>
-            <dd>Will show you pictures of the requested item.</dd>
-            <dt>Remind me to ________</dt>
-            <dd>Add something to the reminders list.</dd>
-            <dt>Clear reminders</dt>
-            <dd>Clears out your reminders list.</dd>
-            <dt>Show map</dt>
-            <dd>Shows a map of your current city.</dd>
-            <dt>Show map of ________</dt>
-            <dd>Shows a map of the given location.</dd>
-			<dt>SoundCloud play/pause/resume/stop/repeat</dt>
-            <dd>SoundCloud player controls.</dd>
+            <dt ng-repeat-start="command in commands">{{command['text']}}</dt>
+            <dd ng-repeat-end>{{command['description']}}</dd>
+            <dt ng-show="fitbitEnabled">Show my walking</dt>
+            <dd ng-show="fitbitEnabled">Refreshes fitbit data.</dd>
           </dl>
           <small>
             We are using node <script>document.write(process.versions.node)</script>,
@@ -109,7 +154,26 @@
           </small>
         </div>
 
-        <div class="interim-result" ng-bind="interimResult"></div>
+        <div class="error" ng-bind="speechError" ng-show="speechError"></div>
+        <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
+      </div>
+      <div class="bottom-left" ng-show="fitbitEnabled">
+        <div>
+          <div><span class="fitbit-title">Fitbit stats for {{fbDailyAverage.fullName}}</span></div>
+          <div><span class="fitbit-item">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span></div>
+          <div><span class="fitbit-item">Today's steps: {{fbToday.summary.steps}}</span></div>
+          <div><span class="fitbit-item">Today's distance: {{fbToday.summary.distances[0].distance}} KM</span></div>
+          <div><span class="fitbit-item">Today's active minutes: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}</span></div>
+          <div><span class="fitbit-item">Calories burned: {{fbToday.summary.caloriesOut}}</span></div>
+          <p></p>
+          <div><span class="fitbit-subtitle">Latest badges</span></div>
+          <div class="" ng-repeat="badge in fbDailyAverage.topBadges">
+            <div>
+              <span class="fitbit-item"><img class="fitbit-badge" ng-src="{{badge.image50px}}"/></span>
+              <span class="fitbit-item">{{badge.description}}</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
@@ -123,6 +187,7 @@
       <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
       <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
       <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
+      <button ng-click="focus = (focus == 'gif')?'default':'gif'">Gif</button>
       <button ng-click="debug = false">Close Debug</button>
       <!-- Has results -->
       <div ng-show="commands.results.length > 0">

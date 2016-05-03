@@ -10,13 +10,13 @@
 
 		service.init = function() {
 			SC.initialize({
-				client_id: SOUNDCLOUD_KEY
+				client_id: config.soundcloud.key
 			});
 		}
 
         //Returns the soundcloud search results for the given query
         service.searchSoundCloud = function(query) {
-            return $http.get('https://api.soundcloud.com/tracks.json?client_id=' + SOUNDCLOUD_KEY + '&q=' + query + '&limit=1').
+            return $http.get('https://api.soundcloud.com/tracks.json?client_id=' + config.soundcloud.key + '&q=' + query + '&limit=1').
                 then(function(response) {
                     service.scResponse = response.data;
 					console.debug("SoundCloud link: ", service.scResponse[0].permalink_url);
