@@ -153,12 +153,12 @@
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
             var refreshComic = function () {
-                        nsole.log("Refreshing comic");
-                        micService.initDilbert().then(function(data) {
-                        onsole.log("Dilbert comic initialized");
-                         function(error) {
-                        onsole.log(error);
-                        ;
+                console.log("Refreshing comic");
+                ComicService.initDilbert().then(function(data) {
+                    console.log("Dilbert comic initialized");
+                }, function(error) {
+                    console.log(error);
+                });
             };
 
             refreshComic();
