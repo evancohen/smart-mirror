@@ -3,6 +3,7 @@
 //! author  : Tal Ater @TalAter
 //! license : MIT
 //! https://www.TalAter.com/annyang/
+//! Modified by Evan Cohen
 
 (function (undefined) {
   "use strict";
@@ -172,7 +173,7 @@
             root.annyang.start();
           }
         }
-      };
+      };      
 
       recognition.onresult  = function(event) {
         if(pauseListening) {
@@ -282,6 +283,44 @@
         }
       }
     },
+    
+    /**
+     * Shim to call recognition from the command line
+     * 
+     *  @method simulate
+     */
+    simulate: function(command) {
+      var simulatedResults = [];
+      var simulatedEvent = {};
+      
+      simulatedEvent.resultIndex = 0;
+      simulatedEvent.results = [[{
+        transcript : command
+      }]]
+      simulatedEvent.results[0].isFinal = true,
+      recognition.onresult(simulatedEvent);
+    },
+    
+    /**
+     * 
+     * SpeechRecognitionEvent
+bubbles:false
+cancelBubble:false
+cancelable:false
+currentTarget:SpeechRecognition
+defaultPrevented:false
+emma:null
+eventPhase:2
+interpretation:null
+path:Array[0]
+resultIndex:0
+results:SpeechRecognitionResultList
+returnValue:true
+srcElement:SpeechRecognition
+target:SpeechRecognition
+timeStamp:83627.365
+type:"result"
+     */
 
     /**
      * Stop listening, and turn off mic.
