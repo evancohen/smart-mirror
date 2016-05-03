@@ -45,6 +45,10 @@ var config = {
     giphy: {
       key : "" // Your Gliphy API key
     },
+    // SoundCloud
+    soundcloud: {
+        key : "" // Your SoundCloud API key
+    },
     traffic: {
       key : "", // Bing Maps API Key
       reload_interval : 5, // Number of minutes the information is refreshed
