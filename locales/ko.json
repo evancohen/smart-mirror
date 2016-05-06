@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "{{name}} 에 시간: "
     },
+    "reminders": {
+        "empty": "더 리콜 없습니다"
+    },
     "timer": {
       "one": "일",
       "minute": "분",
@@ -92,10 +95,15 @@
             "voice": "(지도) 리셋",
             "description": "지도를 이전 값으로 되돌립니다."
         },
-        "images_search": {
+        "video_search": {
             "text": "________ 보여 줘",
             "voice": "*term 보여 줘",
             "description": "요청한 것의 사진을 보여 줍니다."
+        },
+        "video_stop": {
+            "text": "Stop video",
+            "voice": "stop (the) video",
+            "description": "Stops the playback of video content."
         },
         "image_giphy": {
             "text": "________ 짤",
@@ -122,6 +130,11 @@
             "voice": "미리 알림 삭제 해 줘",
             "description": "미리 알림리스트를 삭제 합니다."
         },
+        "reminder_show": {
+            "text": "나에게 리콜 목록을 표시",
+            "voice": "나에게 리콜 목록을 표시",
+            "description": "리콜 목록을 표시합니다"
+        },
         "time_show": {
             "text": "지금 몇 시",
             "voice": "지금 몇 시",
@@ -146,6 +159,26 @@
             "text": "타이머 재시작",
             "voice": "타이머 재시작",
             "description": "타이머 재시작"
+        },
+        "sc_play": {
+            "text": "SoundCloud play ________",
+            "voice": "SoundCloud play *query",
+            "description": "Play a song on SoundCloud"
+        },
+        "sc_pause": {
+            "text": "SoundCloud pause/stop",
+            "voice": "SoundCloud (pause)(post)(stop)(stock)",
+            "description": "Stop/pause SoundCoud playback"
+        },
+        "sc_resume": {
+            "text": "SoundCloud play",
+            "voice": "SoundCloud (play)(resume)",
+            "description": "Resumes playback"
+        },
+        "sc_replay": {
+            "text": "SoundCloud replay",
+            "voice": "SoundCloud replay",
+            "description": "Replays the current song on SoundCloud"
         },
         "light_action": {
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",

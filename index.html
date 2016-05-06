@@ -13,35 +13,39 @@
     <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/rrule/lib/rrule.js"></script>
     <!-- endbower -->
 
     <script src="js/inc/skycons.js"></script>
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 
     <!-- App -->
     <script src="config.js"></script>
-    <script src="js/rrule.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/timebox-service.js"></script>
-    <!-- <script src="js/translations.js"></script>-->
-    <script src="js/annyang-service.js"></script>
-    <script src="js/weather-service.js"></script>
-    <script src="js/comic-service.js"></script>
-    <script src="js/map-service.js"></script>
-    <script src="js/hue-service.js"></script>
+
+    <script src="js/services/timebox.js"></script>
+    <script src="js/services/soundcloud.js"></script>
+    <script src="js/services/search.js"></script>
+    <script src="js/services/annyang.js"></script>
+    <script src="js/services/weather.js"></script>
+    <script src="js/services/comic.js"></script>
+    <script src="js/services/map.js"></script>
+    <script src="js/services/hue.js"></script>
     <script src="js/hyperion-service.js"></script>
-    <script src="js/giphy-service.js"></script>
-    <script src="js/timer-service.js"></script>
-    <script src="js/geolocation-service.js"></script>
-    <script src="js/calendar-service.js"></script>
-    <script src="js/traffic-service.js"></script>
-    <script src="js/fitbit-service.js"></script>
+    <script src="js/services/giphy.js"></script>
+    <script src="js/services/timer.js"></script>
+    <script src="js/services/geolocation.js"></script>
+    <script src="js/services/calendar.js"></script>
+    <script src="js/services/traffic.js"></script>
+    <script src="js/services/fitbit.js"></script>
+    <script src="js/services/reminder.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
-	<link rel="stylesheet" href="css/weather-icons.css">
+      <link rel="stylesheet" href="css/weather-icons.css">
     <!-- bower:css -->
     <!-- endbower -->
 
@@ -99,6 +103,15 @@
         <h1>{{greeting}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
         <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+        <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
+          <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
+        </div>
+        <div class="contents-box sc-container animate-grow" ng-show="focus == 'sc'">
+          <div><canvas id="visualizer" width="150" height="150"></canvas></div>
+          <img class="sc" ng-src="{{scThumb}}"/>
+          <img class="scWaveform" ng-src="{{scWaveform}}"/>
+          <h2 class="sc">{{scTrack}}</h2>
+        </div>
         <div class="contents-box map animate-grow" ng-show="focus == 'map'">
           <img class="contents map animate-grow" ng-src="{{map}}"/>
         </div>
@@ -111,6 +124,13 @@
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
           <div class="comic-title">{{dilbert.title}}</div>
+        </div>
+        <div class="reminders-container animate-grow" ng-show="focus == 'reminders'">
+          <ul>
+            <li class="reminders animate-grow" ng-repeat="reminder in reminders">
+              <span class="reminder">{{reminder}}</span>
+            </li>
+          </ul>
         </div>
         <div class="contents-box animate-grow" ng-show="focus == 'timer'">
           <div class="contents timer animate-grow">

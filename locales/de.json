@@ -1,9 +1,12 @@
 {
     "home" : {
-      "commands" : "Sagen Sie \"Was kann ich sagen?\" eine Liste von Befehlen zu sehen..."
+      "commands" : "Sag' \"Was kann ich sagen?\" um eine Liste von Befehlen zu sehen..."
     },
     "traffic" : {
-        "time_to" : "Zeit zu {{name}}: "
+        "time_to" : "Zeit bis {{name}}: "
+    },
+    "reminders": {
+        "empty": "Keine Erinnerungen"
     },
     "timer": {
       "one": "Eine",
@@ -23,12 +26,12 @@
             "white": "weiß",
             "movie": "Kino",
             "colorloop": "Farbe",
-            "stop": "stoppen"
+            "stop": "stop"
         },
         "intensity": {
-            "increase": "erhöht",
-            "decrease": "sinkt",
-            "max": "maximaler",
+            "increase": "heller",
+            "decrease": "dunkler",
+            "max": "maximal",
             "half": "halber",
             "quarter": "viertel",
             "threequarter": "dreiviertel"
@@ -41,7 +44,7 @@
         }
     },
     "commands": {
-        "title" : "Zur Verfügung stehenden Befehle",
+        "title" : "Zur Verfügung stehende Befehle",
         "list": {
             "text": "Was kann ich sagen?",
             "voice": "Was kann ich sagen",
@@ -50,22 +53,22 @@
         "home": {
             "text": "Zurück",
             "voice": "Zurück",
-            "description": "zurück"
+            "description": "Zurück zum Startbildschirm."
         },
         "sleep": {
-            "text": "Bereitschaft",
-            "voice": "Bereitschaft",
-            "description": "Bereitschaft"
+            "text": "Ausschalten",
+            "voice": "Ausschalten",
+            "description": "Schaltet den Bildschirm aus."
         },
         "wake_up": {
-            "text": "Aktiviere",
-            "voice": "Aktivieren",
-            "description": "Aktivieren"
+            "text": "Einschalten",
+            "voice": "Einschalten",
+            "description": "Schaltet den Bildschirm ein."
         },
         "debug": {
             "text": "Zeige Fehlerprotokoll",
             "voice": "Zeige Fehlerprotokoll",
-            "description": "Zeige Fehlerprotokoll"
+            "description": "Zeigt das Fehlerprotokoll."
         },
         "map_show": {
             "text": "Zeige Karte",
@@ -97,10 +100,15 @@
             "voice": "(Karte) Normalansicht",
             "description": "Setzt die Ansicht zurück"
         },
-        "images_search": {
+        "video_search": {
             "text": "Zeige mir ________",
             "voice": "Zeige mir *term",
             "description": "Zeigt Bilder von dem gewünschten Objekt."
+        },
+        "video_stop": {
+            "text": "Stop video",
+            "voice": "stop (the) video",
+            "description": "Stops the playback of video content."
         },
         "image_giphy": {
             "text": "Bild von ________",
@@ -127,10 +135,15 @@
             "voice": "Erinnerungen löschen",
             "description": "Löscht die Einträge der Erinnerungen im Kalender."
         },
+        "reminder_show": {
+            "text": "Zeige meine Erinnerungen",
+            "voice": "Zeige meine Erinnerungen",
+            "description": "Zeigt die verfügbaren Erinnerungen."
+        },
         "time_show": {
             "text": "Wie spät ist es",
             "voice": "Wie spät ist es",
-            "description": "Wie spät ist es"
+            "description": "Zeigt die Uhrzeit an."
         },
         "timer_start": {
             "text": "Timer auf ________",
@@ -151,6 +164,26 @@
             "text": "Timer fortsetzen",
             "voice": "timer fortsetzen",
             "description": "Setzt den Timer fort."
+        },
+        "sc_play": {
+            "text": "SoundCloud play ________",
+            "voice": "SoundCloud play *query",
+            "description": "Play a song on SoundCloud"
+        },
+        "sc_pause": {
+            "text": "SoundCloud pause/stop",
+            "voice": "SoundCloud (pause)(post)(stop)(stock)",
+            "description": "Stop/pause SoundCoud playback"
+        },
+        "sc_resume": {
+            "text": "SoundCloud play",
+            "voice": "SoundCloud (play)(resume)",
+            "description": "Resumes playback"
+        },
+        "sc_replay": {
+            "text": "SoundCloud replay",
+            "voice": "SoundCloud replay",
+            "description": "Replays the current song on SoundCloud"
         },
         "light_action": {
             "text": "Schalte das (state) Licht (action)",

@@ -3,6 +3,7 @@
 //! author  : Tal Ater @TalAter
 //! license : MIT
 //! https://www.TalAter.com/annyang/
+//! Modified by Evan Cohen
 
 (function (undefined) {
   "use strict";
@@ -281,6 +282,21 @@
           root.console.log(e.message);
         }
       }
+    },
+    
+    /**
+     * Shim to call recognition from the command line
+     * 
+     *  @method simulate
+     */
+    simulate: function(command) {
+      var simulatedEvent = {};
+      simulatedEvent.resultIndex = 0;
+      simulatedEvent.results = [[{
+        transcript : command
+      }]]
+      simulatedEvent.results[0].isFinal = true,
+      recognition.onresult(simulatedEvent);
     },
 
     /**

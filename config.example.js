@@ -15,6 +15,14 @@ var config = {
     },
     */
 
+    //use this only if you want to hardcode your geoposition (used for weather)
+    /*
+    geo_position: {
+       latitude: 78.23423423,
+       longitude: 13.123124142
+    },
+    */
+    
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
@@ -26,10 +34,10 @@ var config = {
         uername : "", // The username used to control your hue
         groups : [{
             id : 0, // The group id 0 will change all the lights on the network
-            name : "toutes"
+            name : "all"
         }, {
             id : 1,
-            name : "chamber"
+            name : "bedroom"
         }, {
             id : 2,
             name : "kitchen"
@@ -56,6 +64,10 @@ var config = {
     // Giphy
     giphy: {
       key : "" // Your Gliphy API key
+    },
+    // SoundCloud
+    soundcloud: {
+        key : "" // Your SoundCloud API key
     },
     traffic: {
       key : "", // Bing Maps API Key
