@@ -1,5 +1,15 @@
 (function(angular) {
     'use strict';
+    //Python-Shell include KM55
+    var PythonShell = require('python-shell');
+
+    var options = {
+        mode: 'text',
+        pythonPath: '/usr/bin/python',
+        pythonOptions: ['-u'],
+        scriptPath: './scripts/python/',
+        args: ['value1', 'value2', 'value3']
+    };
 
     function MirrorCtrl(
             AnnyangService,
@@ -189,6 +199,13 @@
                 console.debug("Here is a list of commands...");
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
+
+            //python Test code - KM55
+            PythonShell.run('my_script.py', options, function (err, results) {
+                if (err) throw err;
+                // results is an array consisting of messages collected during execution
+                console.log('results: %j', results);
+              });
             });
 
             
@@ -392,6 +409,7 @@
                 sound.pause();
                 SoundCloudService.stopVisualizer();
                 $scope.focus = "default";
+
             });
 
             addCommand('musicresume', function() {

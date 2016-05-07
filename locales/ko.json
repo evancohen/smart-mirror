@@ -1,6 +1,6 @@
 {
     "home" : {
-        "commands" : "Say \"사용가능한 질문\" to see a list of commands..."
+        "commands" : "Say \"메뉴\" to see a list of commands..."
     },
     "traffic" : {
         "time_to" : "{{name}} 에 시간: "
@@ -39,11 +39,11 @@
         }
     },
     "commands": {
-        "title" : "사용 가능한 명령",
+        "title" : "메뉴",
         "list": {
-            "text": "사용가능한 질문",
-            "voice": "사용가능한 질문",
-            "description": "사용 가능한 질문\" 이라 말해 보세요\""
+            "text": "메뉴",
+            "voice": "메뉴",
+            "description": "\"메뉴\"라고 말하면 사용 가능한 명령어가 표시됩니다."
         },
         "home": {
             "text": "집",
