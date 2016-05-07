@@ -159,6 +159,26 @@
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
             "voice": "불 :state *action (해)줘",
             "description": "불 :state *action (해)줘"
-        }
+        },
+        "musicplay" : {
+            "text": "\"가수(노래명)\"음악 (재생)(켜 줘)",
+            "voice": "*track 음악 (재생)(켜 줘)",
+            "description": "ex)자우림 음악 재생"
+        },
+        "musicreplay" : {
+            "text": "음악 처음부터",
+            "voice": "음악 처음부터",
+            "description": "음악을 처음부터 재생합니다."
+        },
+        "musicresume" : {
+            "text": "음악 다시시작",
+            "voice": "음악 다시시작",
+            "description": "음악을 듣던 부분부터 재생합니다."
+        },
+        "musicstop" : {
+            "text": "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
+            "voice": "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
+            "description": "음악이 중지됩니다."
+        }                        
     }
 }

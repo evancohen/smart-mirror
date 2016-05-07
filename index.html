@@ -36,6 +36,10 @@
     <script src="js/services/reminder.js"></script>
     <script src="js/controller.js"></script>
 
+    <!--ADD Sound Cloud API -->
+    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+    <script src="js/services/soundcloud.js"></script>
+
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
@@ -95,7 +99,8 @@
     </div>
     <div class="container">
       <div class="middle-center">
-        <h1>{{greeting}}</h1>
+        <!--<h1>{{greeting}}</h1>-->
+        <h1 ng-show="focus == 'default'" class="fade">{{greeting}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
         <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
         <div class="contents-box map animate-grow" ng-show="focus == 'map'">
@@ -125,6 +130,15 @@
             <timer-circle class="timer-circle" />
           </div>
         </div>
+        <!--사운드클라우드-->
+        <div class="sc-container animate-grow" ng-show="focus == 'music'">
+        <div>
+          <canvas id="visualizer" width="150" height="150"></canvas>
+        </div>
+        <img class="sc" ng-src="{{scThumb}}"/>
+        <h2 class="sc">{{scTrack}}</h2>
+        </div>
+        <!--사운드클라우드-->
       </div>
       <div class="bottom-center">
         <!-- Command list -->

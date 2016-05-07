@@ -14,6 +14,7 @@
             TrafficService,
             TimerService,
             ReminderService,
+            SoundCloudService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -50,7 +51,12 @@
             });
         };
 
+
         _this.init = function() {
+            //Init Sound Cloud
+            var playing = false, sound;
+            SoundCloudService.init();
+
             var tick = $interval(updateTime, 1000);
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -354,6 +360,54 @@
                 $scope.focus = "timer";
               }
             });
+
+            /* KM55----------------*/
+            // Sound Cloud Controll
+            addCommand('musicplay', function(track) {
+                SoundCloudService.searchSoundCloud(track).then(function(response){
+                    SC.stream('/tracks/' + response[0].id).then(function(player){
+                        player.play();
+                        sound = player;
+                        playing = true;
+                    });
+                    console.debug("사운드 클래우드 트랙 음악 재생");
+                    if (response[0].artwork_url){
+                        $scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
+                    } else {
+                        $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+                    }
+                    $scope.scTrack = response[0].title;
+                    $scope.focus = "music";
+                    SoundCloudService.startVisualizer();
+                });
+            });
+
+            // addCommand('musicstop', function() {
+            //     console.debug("사운드 클래우드 음악 중지1,");
+            //     $scope.musicplay.pause();
+            // });           
+  
+            addCommand('musicstop', function() {
+                console.debug("사운드 클래우드 음악 중지2");
+                sound.pause();
+                SoundCloudService.stopVisualizer();
+                $scope.focus = "default";
+            });
+
+            addCommand('musicresume', function() {
+                sound.play();
+                SoundCloudService.startVisualizer();
+                $scope.focus = "music";
+            });
+          
+            addCommand('musicreplay', function() {
+                sound.seek(0);
+                sound.play();
+                SoundCloudService.startVisualizer();
+                $scope.focus = "music";
+            });
+
+            /* KM55-END  ---------------*/
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us
