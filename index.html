@@ -51,6 +51,7 @@
   </head>
   <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
+      <input onclick='annyang.simulate("메뉴");' type='button' value='Play' />
       <div class="top-left">
         <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
         <div class="time">{{date.format('LT')}}</div>

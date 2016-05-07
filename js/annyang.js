@@ -282,7 +282,22 @@
         }
       }
     },
-
+    
+    /**
+     * Shim to call recognition from the command line
+     * 
+     *  @method simulate
+     */
+    simulate: function(command) {
+      var simulatedEvent = {};
+      simulatedEvent.resultIndex = 0;
+      simulatedEvent.results = [[{
+        transcript : command
+      }]]
+      simulatedEvent.results[0].isFinal = true,
+      recognition.onresult(simulatedEvent);
+    },
+    
     /**
      * Stop listening, and turn off mic.
      *
