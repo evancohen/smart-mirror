@@ -2,10 +2,20 @@
   font-family: "HelveticaNeue-UltraLight";
   src: url("../fonts/HelveticaNeue-UltraLight.ttf");
   /* EOT file for IE */ }
+
+@font-face {
+    font-family: "NanumKor-ttf";
+    src: url("../fonts/NanumBarunGothic.ttf");
+}
+
+@font-face {
+    font-family: "NanumBKor-ttf";
+    src: url("../fonts/NanumBarunGothicBold.ttf");
+}
 body {
   background-color: black;
   color: #fff;
-  font-family: 'HelveticaNeue-UltraLight', 'Open Sans', sans-serif;
+  font-family: 'HelveticaNeue-UltraLight', 'Open Sans', 'NanumKor-ttf', 'NanumBKor-ttf', sans-serif;
   font-weight: 300;
   position: relative; }
 
@@ -123,6 +133,10 @@ ul.calendar {
 
 .weather-today .tempreture {
   font-size: 60px; }
+
+.tempreture_home {
+  font-size: 30px; 
+  text-align: center;}
 
 .weather-week-descriptor {
   font-family: 'Open Sans', sans-serif;
@@ -308,7 +322,7 @@ ul.calendar {
   position: relative;
   top: -10px;
   display: inline-block;
-  font-size: 45px;
+  font-size: 130px;
   padding-right: 5px;
   font-weight: 100;
   margin-right: 10px; }

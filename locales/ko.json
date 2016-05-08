@@ -179,6 +179,26 @@
             "text": "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
             "voice": "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
             "description": "음악이 중지됩니다."
-        }                        
+        },
+        "give_praise" : {
+            "text": "칭찬 (해 줘)(해 봐)(시작)",
+            "voice": "칭찬 (해 줘)(해 봐)(시작)",
+            "description": "칭찬을 해 줍니다."
+        },
+        "hello_mirror" : {
+            "text": "(안녕)(반가워)(너 누구야)",
+            "voice": "(안녕)(반가워)(너 누구야)",
+            "description": "미러와 인사합니다. 반가워요"
+        },
+        "hello_mirror_who" : {
+            "text": "\"이름\"사용자 등록",
+            "voice": "*whoname 사용자 등록",
+            "description": "미러에게 이름을 알려주세요."
+        },
+        "week_weather" : {
+            "text": "이번주 날씨",
+            "voice": "이번주 날씨",
+            "description": "이번주 날씨를 알려줍니다."
+        }
     }
 }

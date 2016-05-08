@@ -387,7 +387,7 @@
                         sound = player;
                         playing = true;
                     });
-                    console.debug("사운드 클래우드 트랙 음악 재생");
+                    console.debug("사운드 클라우드 트랙 음악 재생");
                     if (response[0].artwork_url){
                         $scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
                     } else {
@@ -398,14 +398,10 @@
                     SoundCloudService.startVisualizer();
                 });
             });
-
-            // addCommand('musicstop', function() {
-            //     console.debug("사운드 클래우드 음악 중지1,");
-            //     $scope.musicplay.pause();
-            // });           
+         
   
             addCommand('musicstop', function() {
-                console.debug("사운드 클래우드 음악 중지2");
+                console.debug("사운드 클라우드 음악 중지");
                 sound.pause();
                 SoundCloudService.stopVisualizer();
                 $scope.focus = "default";
@@ -413,18 +409,64 @@
             });
 
             addCommand('musicresume', function() {
+                console.debug("사운드 클라우드 음악 재생");
                 sound.play();
                 SoundCloudService.startVisualizer();
                 $scope.focus = "music";
             });
           
             addCommand('musicreplay', function() {
+                console.debug("사운드 클라우드 음악 처음부터 재생");
                 sound.seek(0);
                 sound.play();
                 SoundCloudService.startVisualizer();
                 $scope.focus = "music";
             });
 
+            // Reaction Commnad
+            addCommand('hello_mirror', function() {
+                console.debug("REACTION : hello_mirror");
+                var reActSpeakMessage = ["오늘도 참 멋지시네요", "잘 주무셨어요?", "오늘도 행복한 하루 되세요", "어제보다 더 젊어지신것 같아요", "커피한잔 먹고 싶은 날이네요",
+                                        "마음은 언제나 화창하게!! 아시죠", "오늘도 술 한잔해야죠!", "힘들니까 한번더 스마일^^", "제가 부족하다면.. 디버깅을 좀 해보세요", "로또가 될 것 같은 날이에요. 책임은 못져"];
+                var pickNum = Math.floor(Math.random() * 10);
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak(reActSpeakMessage[pickNum],"Korean Female");
+                }
+                $scope.reactTitle = "안녕하세요"
+                $scope.reactMessage = reActSpeakMessage[pickNum];
+                $scope.focus = "user_reaction";
+            });
+
+
+            addCommand('hello_mirror_who', function(whoname) {
+                console.debug("REACTION : hello_mirror_who" + whoname);
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak("안녕하세요" + whoname + "님 만나서 반가워요","Korean Female");
+                }
+                $scope.reactTitle = whoname + "님!!"
+                $scope.reactMessage = "안녕하세요" + whoname + "님 만나서 반가워요";
+                $scope.focus = "user_reaction";
+            });
+
+            addCommand('give_praise', function() {
+                console.debug("REACTION : give_praise");
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak("언제나 좋은일이 있을 수는 없지만 오늘은 어제보다 좋을꺼야","Korean Female");
+                }
+                $scope.focus = "user_reaction";
+            });
+
+            //week weather
+            addCommand('week_weather', function() {
+                console.debug("1 Week Weather : week_weather");
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak("이번주 날씨입니다.","Korean Female");
+                }
+                $scope.focus = "user_week_weather";
+                setTimeout(function(){
+                    AnnyangService.manualCommand("집");
+                }, 5000);
+            });
             /* KM55-END  ---------------*/
 
             var resetCommandTimeout;
