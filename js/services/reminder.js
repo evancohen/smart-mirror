@@ -47,7 +47,7 @@
         service.clearReminder = function(){
             service.reminders = [$translate.instant('reminders.empty')];
             service.empty = true;
-            storage.set('sm-reminder', { reminders: service.reminders }, function(error) {
+            storage.remove('sm-reminder', function(error) {
                 if (error) throw error;
             });
             return service.reminders;
