@@ -155,11 +155,6 @@
             "voice": "타이머 재시작",
             "description": "타이머 재시작"
         },
-        "light_action": {
-            "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
-            "voice": "불 :state *action (해)줘",
-            "description": "불 :state *action (해)줘"
-        },
         "musicplay" : {
             "text": "\"가수(노래명)\"음악 (재생)(켜 줘)",
             "voice": "*track 음악 (재생)(켜 줘)",
@@ -199,6 +194,11 @@
             "text": "이번주 날씨",
             "voice": "이번주 날씨",
             "description": "이번주 날씨를 알려줍니다."
+        },
+        "led_onoff" : {
+            "text": "불 (켜/꺼)줘",
+            "voice": "불 *action 줘",
+            "description": "LED조명을 켜거나 끕니다. "
         }
     }
 }

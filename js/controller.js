@@ -199,16 +199,8 @@
                 console.debug("Here is a list of commands...");
                 console.log(AnnyangService.commands);
                 $scope.focus = "commands";
-
-            //python Test code - KM55
-            PythonShell.run('rPlay.py', options, function (err, results) {
-                if (err) throw err;
-                // results is an array consisting of messages collected during execution
-                console.log('results: %j', results);
-              });
             });
 
-            
             // Go back to default view
             addCommand('home', defaultView);
 
@@ -466,6 +458,26 @@
                 setTimeout(function(){
                     AnnyangService.manualCommand("집");
                 }, 5000);
+            });
+
+            addCommand('led_onoff', function(action) {
+                console.log(action);
+                if(action == '꺼') {
+                    PythonShell.run('led_off.py', options, function (err, results) {
+                        if (err) throw err;
+                        // results is an array consisting of messages collected during execution
+                        console.log('RunPy : led_on.py : %j', results);
+                    });
+                    console.log("LED가 꺼집니다.");
+                } else {
+                    PythonShell.run('led_on.py', options, function (err, results) {
+                        if (err) throw err;
+                        // results is an array consisting of messages collected during execution
+                        console.log('RunPy : led_on.py : %j', results);
+                    });
+                    console.log("LED가 켜집니다.");
+                }
+                //python Test code - KM55
             });
             /* KM55-END  ---------------*/
 
