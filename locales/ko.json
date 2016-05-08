@@ -1,6 +1,6 @@
 {
     "home" : {
-        "commands" : "Say \"사용가능한 질문\" to see a list of commands..."
+        "commands" : "Say \"메뉴\" to see a list of commands..."
     },
     "traffic" : {
         "time_to" : "{{name}} 에 시간: "
@@ -39,11 +39,11 @@
         }
     },
     "commands": {
-        "title" : "사용 가능한 명령",
+        "title" : "메뉴",
         "list": {
-            "text": "사용가능한 질문",
-            "voice": "사용가능한 질문",
-            "description": "사용 가능한 질문\" 이라 말해 보세요\""
+            "text": "메뉴",
+            "voice": "메뉴",
+            "description": "\"메뉴\"라고 말하면 사용 가능한 명령어가 표시됩니다."
         },
         "home": {
             "text": "집",
@@ -155,10 +155,50 @@
             "voice": "타이머 재시작",
             "description": "타이머 재시작"
         },
-        "light_action": {
-            "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
-            "voice": "불 :state *action (해)줘",
-            "description": "불 :state *action (해)줘"
+        "musicplay" : {
+            "text": "\"가수(노래명)\"음악 (재생)(켜 줘)",
+            "voice": "*track 음악 (재생)(켜 줘)",
+            "description": "ex)자우림 음악 재생"
+        },
+        "musicreplay" : {
+            "text": "음악 처음부터",
+            "voice": "음악 처음부터",
+            "description": "음악을 처음부터 재생합니다."
+        },
+        "musicresume" : {
+            "text": "음악 다시시작",
+            "voice": "음악 다시시작",
+            "description": "음악을 듣던 부분부터 재생합니다."
+        },
+        "musicstop" : {
+            "text": "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
+            "voice": "음악 (꺼 봐)(꺼 줘)(정지)(중지)(꺼져)",
+            "description": "음악이 중지됩니다."
+        },
+        "give_praise" : {
+            "text": "칭찬 (해 줘)(해 봐)(시작)",
+            "voice": "칭찬 (해 줘)(해 봐)(시작)",
+            "description": "칭찬을 해 줍니다."
+        },
+        "hello_mirror" : {
+            "text": "(안녕)(반가워)(너 누구야)",
+            "voice": "(안녕)(반가워)(너 누구야)",
+            "description": "미러와 인사합니다. 반가워요"
+        },
+        "hello_mirror_who" : {
+            "text": "\"이름\"사용자 등록",
+            "voice": "*whoname 사용자 등록",
+            "description": "미러에게 이름을 알려주세요."
+        },
+        "week_weather" : {
+            "text": "이번주 날씨",
+            "voice": "이번주 날씨",
+            "description": "이번주 날씨를 알려줍니다."
+        },
+        "led_onoff" : {
+            "text": "불 (켜/꺼)줘",
+            "voice": "불 *action 줘",
+            "description": "LED조명을 켜거나 끕니다. "
         }
     }
 }

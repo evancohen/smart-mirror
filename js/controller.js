@@ -1,5 +1,15 @@
 (function(angular) {
     'use strict';
+    //Python-Shell include KM55
+    var PythonShell = require('python-shell');
+
+    var options = {
+        mode: 'text',
+        pythonPath: '/usr/bin/python',
+        pythonOptions: ['-u'],
+        scriptPath: './scripts/python/',
+        args: ['value1', 'value2', 'value3']
+    };
 
     function MirrorCtrl(
             AnnyangService,
@@ -14,6 +24,7 @@
             TrafficService,
             TimerService,
             ReminderService,
+            SoundCloudService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
@@ -50,7 +61,12 @@
             });
         };
 
+
         _this.init = function() {
+            //Init Sound Cloud
+            var playing = false, sound;
+            SoundCloudService.init();
+
             var tick = $interval(updateTime, 1000);
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -185,7 +201,6 @@
                 $scope.focus = "commands";
             });
 
-            
             // Go back to default view
             addCommand('home', defaultView);
 
@@ -354,6 +369,117 @@
                 $scope.focus = "timer";
               }
             });
+
+            /* KM55----------------*/
+            // Sound Cloud Controll
+            addCommand('musicplay', function(track) {
+                SoundCloudService.searchSoundCloud(track).then(function(response){
+                    SC.stream('/tracks/' + response[0].id).then(function(player){
+                        player.play();
+                        sound = player;
+                        playing = true;
+                    });
+                    console.debug("사운드 클라우드 트랙 음악 재생");
+                    if (response[0].artwork_url){
+                        $scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
+                    } else {
+                        $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+                    }
+                    $scope.scTrack = response[0].title;
+                    $scope.focus = "music";
+                    SoundCloudService.startVisualizer();
+                });
+            });
+         
+  
+            addCommand('musicstop', function() {
+                console.debug("사운드 클라우드 음악 중지");
+                sound.pause();
+                SoundCloudService.stopVisualizer();
+                $scope.focus = "default";
+
+            });
+
+            addCommand('musicresume', function() {
+                console.debug("사운드 클라우드 음악 재생");
+                sound.play();
+                SoundCloudService.startVisualizer();
+                $scope.focus = "music";
+            });
+          
+            addCommand('musicreplay', function() {
+                console.debug("사운드 클라우드 음악 처음부터 재생");
+                sound.seek(0);
+                sound.play();
+                SoundCloudService.startVisualizer();
+                $scope.focus = "music";
+            });
+
+            // Reaction Commnad
+            addCommand('hello_mirror', function() {
+                console.debug("REACTION : hello_mirror");
+                var reActSpeakMessage = ["오늘도 참 멋지시네요", "잘 주무셨어요?", "오늘도 행복한 하루 되세요", "어제보다 더 젊어지신것 같아요", "커피한잔 먹고 싶은 날이네요",
+                                        "마음은 언제나 화창하게!! 아시죠", "오늘도 술 한잔해야죠!", "힘들니까 한번더 스마일^^", "제가 부족하다면.. 디버깅을 좀 해보세요", "로또가 될 것 같은 날이에요. 책임은 못져"];
+                var pickNum = Math.floor(Math.random() * 10);
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak(reActSpeakMessage[pickNum],"Korean Female");
+                }
+                $scope.reactTitle = "안녕하세요"
+                $scope.reactMessage = reActSpeakMessage[pickNum];
+                $scope.focus = "user_reaction";
+            });
+
+
+            addCommand('hello_mirror_who', function(whoname) {
+                console.debug("REACTION : hello_mirror_who" + whoname);
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak("안녕하세요" + whoname + "님 만나서 반가워요","Korean Female");
+                }
+                $scope.reactTitle = whoname + "님!!"
+                $scope.reactMessage = "안녕하세요" + whoname + "님 만나서 반가워요";
+                $scope.focus = "user_reaction";
+            });
+
+            addCommand('give_praise', function() {
+                console.debug("REACTION : give_praise");
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak("언제나 좋은일이 있을 수는 없지만 오늘은 어제보다 좋을꺼야","Korean Female");
+                }
+                $scope.focus = "user_reaction";
+            });
+
+            //week weather
+            addCommand('week_weather', function() {
+                console.debug("1 Week Weather : week_weather");
+                if(responsiveVoice.voiceSupport()) {
+                    responsiveVoice.speak("이번주 날씨입니다.","Korean Female");
+                }
+                $scope.focus = "user_week_weather";
+                setTimeout(function(){
+                    AnnyangService.manualCommand("집");
+                }, 5000);
+            });
+
+            addCommand('led_onoff', function(action) {
+                console.log(action);
+                if(action == '꺼') {
+                    PythonShell.run('led_off.py', options, function (err, results) {
+                        if (err) throw err;
+                        // results is an array consisting of messages collected during execution
+                        console.log('RunPy : led_on.py : %j', results);
+                    });
+                    console.log("LED가 꺼집니다.");
+                } else {
+                    PythonShell.run('led_on.py', options, function (err, results) {
+                        if (err) throw err;
+                        // results is an array consisting of messages collected during execution
+                        console.log('RunPy : led_on.py : %j', results);
+                    });
+                    console.log("LED가 켜집니다.");
+                }
+                //python Test code - KM55
+            });
+            /* KM55-END  ---------------*/
 
             var resetCommandTimeout;
             //Track when the Annyang is listening to us

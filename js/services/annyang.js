@@ -48,6 +48,11 @@
             };
             annyang.start();
         };
+
+        service.manualCommand = function(keyword) {
+            console.debug("Run service.manualCommand");
+            annyang.simulate(keyword);
+        }
         
         service.abort = function(){
             annyang.abort();
