@@ -29,7 +29,7 @@
     "install": "^0.7.3",
     "angular-i18n": "^1.5.5",
     "wiredep-cli": "^0.1.0",
-    "electron-prebuilt": "^0.37.8",
+    "electron-prebuilt": "^1.0.0",
     "npm": "^3.8.8",
     "bower": "^1.7.9"
   },
