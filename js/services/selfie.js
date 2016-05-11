@@ -18,13 +18,13 @@
 
         
         service.runScript = function() {
-            runShell(‘./takeaselfie.sh’);
+            runShell('./takeaselfie.sh');
         }
 
         return service;
     }
 
     angular.module('SmartMirror')
-        .factory(’SelfieService’, SelfieService);
+        .factory('SelfieService', SelfieService);
 
 }(window.annyang));
