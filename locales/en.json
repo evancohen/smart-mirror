@@ -60,8 +60,8 @@
             "voice": "Wake up",
             "description": "Wake up"
         },
-        “take_a_selfie”: {
-            "text": “Take a selfie“,
+        "take_a_selfie": {
+            "text": "Take a selfie",
             "voice": "Take a selfie",
             "description": "Take a selfie"
         },
