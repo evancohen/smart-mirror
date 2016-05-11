@@ -11,6 +11,7 @@
             CalendarService,
             ComicService,
             GiphyService,
+            SelfieService,
             TrafficService,
             TimerService,
             ReminderService,
@@ -241,6 +242,12 @@
                 console.debug("Zoooommmmmzzz00000!!!");
                 $scope.map = MapService.reset();
                 $scope.focus = "map";
+            });
+
+        // Take A Selfie
+            addCommand('take_a_selfie', function() {
+                console.debug("Taking a selfie..");
+                SelfieService.runScript;
             });
 
             // Search images

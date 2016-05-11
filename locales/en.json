@@ -60,6 +60,11 @@
             "voice": "Wake up",
             "description": "Wake up"
         },
+        "take_a_selfie": {
+            "text": "Take a selfie",
+            "voice": "Take a selfie",
+            "description": "Take a selfie"
+        },
         "debug": {
             "text": "Show debug information",
             "voice": "Show debug information",
