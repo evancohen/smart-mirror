@@ -29,13 +29,14 @@
     "install": "^0.7.3",
     "angular-i18n": "^1.5.5",
     "wiredep-cli": "^0.1.0",
-    "electron-prebuilt": "^0.37.8",
+    "electron-prebuilt": "^1.0.0",
     "npm": "^3.8.8",
     "bower": "^1.7.9"
   },
   "dependencies": {
     "express": "^4.13.4",
     "fitbit-oauth2": "0.0.1",
-    "fs": "0.0.2"
+    "fs": "0.0.2",
+    "electron-json-storage": "2.0.0"
   }
 }
