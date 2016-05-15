@@ -22,7 +22,7 @@ var config = {
        longitude: 13.123124142
     },
     */
-    
+
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
@@ -69,5 +69,7 @@ var config = {
         /*startTime: "",
         endTime: ""*/ // Optional starttime and endtime when the traffic information should be displayed on screen. The format can be either hh:mm or hh:mm am/pm
       }]
-    }
+  },
+  // Choose the alarm you want to set at the end of the timer. Sounds are in the sound folder
+  alarm: "timer.mp3"
 };
