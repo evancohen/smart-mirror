@@ -73,7 +73,8 @@
         $interval.cancel(intervalId);
         intervalId = undefined;
         service.paused = true;
-
+        var audio = new Audio("sound/"+config.alarm);
+        audio.play();
         $rootScope.$broadcast("timer:stop", service.countdown);
       }
     };
