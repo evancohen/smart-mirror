@@ -7,8 +7,7 @@
             WeatherService,
             FitbitService,
             MapService,
-            HueService,
-            HyperionService,
+            LightService,
             CalendarService,
             ComicService,
             GiphyService,
@@ -330,15 +329,9 @@
                  console.debug("It is", moment().format('h:mm:ss a'));
             });
 
-            // Turn lights off
+            // Control light
             addCommand('light_action', function(state, action) {
-                HueService.performUpdate(state + " " + action);
-            });
-            
-            // Control Hyperion light
-            addCommand('hyperion_action', function(action){
-                HyperionService.performUpdate(action);
-                console.debug("Controlling light");
+                LightService.performUpdate(state + " " + action);
             });
 
             //Show giphy image

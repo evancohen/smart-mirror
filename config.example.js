@@ -28,33 +28,38 @@ var config = {
         key : "", // Your forcast.io api key
         units : "auto" // See forcast.io documentation if you are getting the wrong units
     },
-    // Philips Hue
-    hue : {
-        ip : "", // The IP address of your hue base
-        uername : "", // The username used to control your hue
-        groups : [{
-            id : 0, // The group id 0 will change all the lights on the network
-            name : "all"
-        }, {
-            id : 1,
-            name : "bedroom"
-        }, {
-            id : 2,
-            name : "kitchen"
-        }]
+    // lights
+    light : {
+        settings : {
+            hue_ip : "", // The IP address of your hue base
+            hue_username : "" // The username used to control your hue
+        },
+        setup : [
+            {
+                name : "parlor", // Single word room name for speech recognition
+                targets : [
+                    {
+                        type : "hyperion",
+                        ip : "", // The IP address of your hyperion
+                        port : "19444" // The port of your hyperion
+                    },
+                    {
+                        type : "hue", // Philips Hue
+                        id : 1 // The group id (0 will change all the lights on the network)
+                    }
+                ]
+            },
+            {
+                name : "bath",
+                targets : [
+                    {
+                        type : "hue",
+                        id : 2
+                    }
+                ]
+            }
+        ]
     },
-    // Hyperion
-    hyperion : [{
-        ip : "", // The IP address of your hyperion client
-        port : "19444", // The default JSON port of your hyperion
-        name : "parlor" // Single word room name for speech recognition
-    },
-    {
-        ip : "",
-        port : "19444",
-        name : "hall"
-    }
-    ],
     // Calendar (An array of iCals)
     calendar: {
       icals : [], // Be sure to wrap your URLs in quotes
