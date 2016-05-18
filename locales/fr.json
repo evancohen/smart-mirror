@@ -95,10 +95,15 @@
             "voice": "Réinitialise le zoom",
             "description": "Réinitilalise la fonction zoom"
         },
-        "images_search": {
+        "video_search": {
             "text": "(Re)cherche une image de ________",
             "voice": "(Re)cherche une image de *term",
             "description": "Affiche une image recherchée."
+        },
+        "video_stop": {
+            "text": "Stop video",
+            "voice": "stop (the) video",
+            "description": "Stops the playback of video content."
         },
         "image_giphy": {
             "text": "(Re)cherche une image animée de ________",
@@ -154,6 +159,26 @@
             "text": "Reprend (le) minuteur",
             "voice": "Reprend (le) minuteur",
             "description": "Reprendre le timer."
+        },
+        "sc_play": {
+            "text": "SoundCloud play ________",
+            "voice": "SoundCloud play *query",
+            "description": "Play a song on SoundCloud"
+        },
+        "sc_pause": {
+            "text": "SoundCloud pause/stop",
+            "voice": "SoundCloud (pause)(post)(stop)(stock)",
+            "description": "Stop/pause SoundCoud playback"
+        },
+        "sc_resume": {
+            "text": "SoundCloud play",
+            "voice": "SoundCloud (play)(resume)",
+            "description": "Resumes playback"
+        },
+        "sc_replay": {
+            "text": "SoundCloud replay",
+            "voice": "SoundCloud replay",
+            "description": "Replays the current song on SoundCloud"
         },
         "light_action": {
             "text": "(Allume|Éteins) (la|les) lumières (action)",

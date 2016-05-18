@@ -15,6 +15,14 @@ var config = {
     },
     */
 
+    //use this only if you want to hardcode your geoposition (used for weather)
+    /*
+    geo_position: {
+       latitude: 78.23423423,
+       longitude: 13.123124142
+    },
+    */
+    
     // forcast.io
     forcast : {
         key : "", // Your forcast.io api key
@@ -44,6 +52,14 @@ var config = {
     // Giphy
     giphy: {
       key : "" // Your Gliphy API key
+    },
+    // YouTube
+    youtube: {
+      key : "" // Your YouTube API key
+    },
+    // SoundCloud
+    soundcloud: {
+        key : "" // Your SoundCloud API key
     },
     traffic: {
       key : "", // Bing Maps API Key
