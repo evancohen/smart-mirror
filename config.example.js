@@ -53,6 +53,10 @@ var config = {
     giphy: {
       key : "" // Your Gliphy API key
     },
+    // YouTube
+    youtube: {
+      key : "" // Your YouTube API key
+    },
     // SoundCloud
     soundcloud: {
         key : "" // Your SoundCloud API key
