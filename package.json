@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -14,10 +14,10 @@
     "url": "git+https://github.com/evancohen/smart-mirror.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Smart Mirror",
+    "IoT",
+    "Voice Control",
+    "DIY"
   ],
   "author": "Evan Cohen",
   "license": "MIT",
