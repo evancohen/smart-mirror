@@ -22,7 +22,7 @@
                 return null;
             }
             service.forcast.data.currently.day = moment.unix(service.forcast.data.currently.time).format('ddd');
-            service.forcast.data.currently.temperature = parseFloat(service.forcast.data.currently.temperature).toFixed(1);
+            service.forcast.data.currently.temperature = parseFloat(service.forcast.data.currently.temperature).toFixed(0);
             service.forcast.data.currently.wi = "wi-forecast-io-" + service.forcast.data.currently.icon;
             service.forcast.data.currently.iconAnimation = service.forcast.data.currently.icon;
             return service.forcast.data.currently;
@@ -35,8 +35,8 @@
             // Add human readable info to info
             for (var i = 0; i < service.forcast.data.daily.data.length; i++) {
                 service.forcast.data.daily.data[i].day = moment.unix(service.forcast.data.daily.data[i].time).format('ddd');
-                service.forcast.data.daily.data[i].temperatureMin = parseFloat(service.forcast.data.daily.data[i].temperatureMin).toFixed(1);
-                service.forcast.data.daily.data[i].temperatureMax = parseFloat(service.forcast.data.daily.data[i].temperatureMax).toFixed(1);
+                service.forcast.data.daily.data[i].temperatureMin = parseFloat(service.forcast.data.daily.data[i].temperatureMin).toFixed(0);
+                service.forcast.data.daily.data[i].temperatureMax = parseFloat(service.forcast.data.daily.data[i].temperatureMax).toFixed(0);
                 service.forcast.data.daily.data[i].wi = "wi-forecast-io-" + service.forcast.data.daily.data[i].icon;
                 service.forcast.data.daily.data[i].counter = String.fromCharCode(97 + i);
                 service.forcast.data.daily.data[i].iconAnimation = service.forcast.data.daily.data[i].icon;
