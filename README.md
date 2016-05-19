@@ -1,13 +1,13 @@
 # Smart Mirror
-[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Progress](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg)](https://waffle.io/evancohen/smart-mirror) [![devDependency Status](https://david-dm.org/evancohen/smart-mirror/dev-status.svg)](https://david-dm.org/evancohen/smart-mirror#info=devDependencies)
+[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Progress](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg)] (https://waffle.io/evancohen/smart-mirror) [![Suggestions](https://img.shields.io/waffle/label/evancohen/smart-mirror/suggestion.svg?label=suggestions)]  (https://github.com/evancohen/smart-mirror/issues?q=is%3Aissue+is%3Aopen+label%3Asuggestion) [![devDependency Status](https://david-dm.org/evancohen/smart-mirror/dev-status.svg)](https://david-dm.org/evancohen/smart-mirror#info=devDependencies)
 
-Check out the [documentation](http://docs.smart-mirror.io) for installation instructions and troubleshooting.
+Check out the [smart mirror documentation](http://docs.smart-mirror.io) for installation instructions and troubleshooting.
 
 #### Gitter:
 A live chat to get help and discuss mirror related issues: https://gitter.im/evancohen/smart-mirror. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
 
 #### Development and Contributing
-See the `dev` branch for features that are curently in development.
+See the [dev](https://github.com/evancohen/smart-mirror/tree/dev) branch for features that are curently in development.
 If you would like to contribue please follow the [contribution guidelines](https://github.com/evancohen/smart-mirror/blob/master/CONTRIBUTING.md).
 To launch the mirror with a debug window attached use the following command:
 ```
