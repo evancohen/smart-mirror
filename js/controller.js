@@ -431,6 +431,9 @@
                     if(error.error == "network"){
                         $scope.speechError = "Google Speech Recognizer: Network Error (Speech quota exceeded?)";
                         SpeechService.abort();
+                    } else {
+                        // Even if it isn't a network error, stop making requests
+                        SpeechService.abort();
                     }
                 }
             });
