@@ -6,12 +6,15 @@ const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
-const powerSaveBlocker = electron.powerSaveBlocker;
-powerSaveBlocker.start('prevent-display-sleep');
+const powerSaveBlocker = electron.powerSaveBlocker
+powerSaveBlocker.start('prevent-display-sleep')
 
 // Set the default ALSA input device for chromium
-console.log("Platform:", process.platform);
-app.commandLine.appendArgument('--alsa-input-device=hw:1,0');
+if(process.platform = "linux"){
+  var inputDevice = "hw:1,0";
+  console.log("Input device: " +inputDevice);
+  app.commandLine.appendArgument('--alsa-input-device=' + inputDevice)
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -33,7 +36,7 @@ function createWindow () {
   var browserWindowOptions = {width: 800, height: 600, icon: 'favicon.ico' , kiosk:true, autoHideMenuBar:true, darkTheme:true};
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50;
-    browserWindowOptions.y = externalDisplay.bounds.y + 50
+    browserWindowOptions.y = externalDisplay.bounds.y + 50;
   }
   
   // Create the browser window.
