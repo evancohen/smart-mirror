@@ -9,6 +9,10 @@ const BrowserWindow = electron.BrowserWindow
 const powerSaveBlocker = electron.powerSaveBlocker;
 powerSaveBlocker.start('prevent-display-sleep');
 
+// Set the default ALSA input device for chromium
+console.log("Platform:", process.platform);
+app.commandLine.appendArgument('--alsa-input-device=hw:1,0');
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
