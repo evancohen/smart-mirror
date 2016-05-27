@@ -37,6 +37,9 @@ const {ipcRenderer} = require('electron');
             if (isCallback(cb.result)) {
                 annyang.addCallback('result', function(data){
                     $rootScope.$apply(cb.result(data));
+                    if(!config.speech.continuous){
+                        service.abort();
+                    }
                 });
             };
             if (isCallback(cb.error)) {
