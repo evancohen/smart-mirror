@@ -3,9 +3,10 @@
 
     function SoundCloudService($http) {
         var service = {};
-        var audioCtx = null,
-            _stream = null,
-            intv = null;
+        var intv,
+            audio = document.querySelector('audio'),
+            audiosource = new SoundCloudAudioSource(audio);
+
 		service.scResponse = null;
 
 		service.init = function() {
@@ -20,55 +21,52 @@
                 then(function(response) {
                     service.scResponse = response.data;
 					console.debug("SoundCloud link: ", service.scResponse[0].permalink_url);
+          var streamUrl = service.scResponse[0].stream_url + '?client_id=' + config.soundcloud.key;
+          audio.setAttribute('src', streamUrl);
 					return service.scResponse;
                 });
         };
 
-        service.startVisualizer = function(){
-            navigator.getUserMedia  = navigator.getUserMedia ||
-                                    navigator.webkitGetUserMedia ||
-                                    navigator.mozGetUserMedia ||
-                                    navigator.msGetUserMedia;
-
-            var audio = document.querySelector('audio');
-
-            var errorCallback = function(e) {
-              console.log('Reeeejected!', e);
-            };
-
-            if (navigator.getUserMedia) {
-              navigator.getUserMedia({audio: true}, function(stream) {
-                _stream = stream;
-                audioCtx = new (window.AudioContext)()
-                var source = audioCtx.createMediaStreamSource(_stream);
-                var filter = audioCtx.createBiquadFilter();
-
-                var analyser = audioCtx.createAnalyser();
-                source.connect(analyser);
-                filter.connect(audioCtx.destination);
-
-                var bufferLength = analyser.frequencyBinCount;
-                console.log(bufferLength);
-
-                var dataArray = new Uint8Array(bufferLength);
-
-                function draw() {
-                  analyser.getByteTimeDomainData(dataArray);
-                  drawCanvas(dataArray,bufferLength);
-                };
-
-                intv = setInterval(function(){ draw() }, 1000 / 30);
-
-              }, errorCallback);
-            }
+        service.play = function(){
+          audio.play();
+          intv = setInterval(function(){ audiosource.draw() }, 1000 / 30);
         };
 
-        service.stopVisualizer = function(){
-            clearInterval(intv);
-            audioCtx.close();
-            _stream.getAudioTracks()[0].stop();
-        }
+        service.pause = function(){
+          audio.pause();
+          clearInterval(intv);
+        };
+
+        service.replay = function(){
+          audio.currentTime = 0;
+          audio.pause();
+          audio.play();
+          intv = setInterval(function(){ audiosource.draw() }, 1000 / 30);
+        };
+
         return service;
+    }
+
+    var SoundCloudAudioSource = function(audio){
+      var self = this;
+      var audioCtx = new (window.AudioContext || window.webkitAudioContext);
+      var source = audioCtx.createMediaElementSource(audio);
+
+      var analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      audio.crossOrigin = "anonymous";
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+
+      this.bufferLength = analyser.frequencyBinCount;
+
+      this.dataArray = new Uint8Array(this.bufferLength);
+
+      this.draw = function() {
+        analyser.getByteTimeDomainData(this.dataArray);
+        drawCanvas(this.dataArray,this.bufferLength);
+      };
+
     }
 
     function drawCanvas(dataArray,bufferLength){
@@ -80,8 +78,6 @@
 
       canvasCtx.fillStyle = 'rgb(0, 0, 0)';
       canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
-      canvasCtx.strokeStyle = 'rgb(255,255,255)';
-
       canvasCtx.lineWidth = 2;
       canvasCtx.beginPath();
 
@@ -92,6 +88,12 @@
         var data = dataArray[i];
         var v = data / 128.0;
         var y = v * HEIGHT/2;
+
+        var r = data + 60 ;
+        var g = 255 -  data ;
+        var b = data / 5;
+
+        canvasCtx.strokeStyle = 'rgb(' + r + ', ' + g + ', ' + b + ')';
 
         if(i === 0) {
           canvasCtx.moveTo(x, y);

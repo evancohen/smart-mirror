@@ -39,7 +39,7 @@
         tmhDynamicLocale.set(config.language.toLowerCase());
         moment.locale(config.language);
         console.log('moment local', moment.locale());
-        
+
         //Update the time
         function updateTime(){
             $scope.date = new moment();
@@ -108,7 +108,7 @@
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
                 });
-                
+
                 FitbitService.todaySummary(function(response){
                     $scope.fbToday = response;
                 });
@@ -189,7 +189,7 @@
                 $scope.focus = "commands";
             });
 
-            
+
             // Go back to default view
             addCommand('home', defaultView);
 
@@ -207,7 +207,7 @@
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
             });
-            
+
             // Show map
             addCommand('map_show', function() {
                 console.debug("Going on an adventure?");
@@ -217,7 +217,7 @@
                     $scope.focus = "map";
                 });
             });
-            
+
             // Hide everything and "sleep"
             addCommand('map_location', function(location) {
                 console.debug("Getting map of", location);
@@ -250,12 +250,6 @@
             //SoundCloud search and play
             addCommand('sc_play', function(query) {
                 SoundCloudService.searchSoundCloud(query).then(function(response){
-                    SC.stream('/tracks/' + response[0].id).then(function(player){
-                        player.play();
-                        sound = player;
-                        playing = true;
-                    });
-
                     if (response[0].artwork_url){
                         $scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
                     } else {
@@ -264,27 +258,23 @@
                     $scope.scWaveform = response[0].waveform_url;
                     $scope.scTrack = response[0].title;
                     $scope.focus = "sc";
-                    SoundCloudService.startVisualizer();
+                    SoundCloudService.play();
                 });
             });
-            
+
             //SoundCloud stop
             addCommand('sc_pause', function() {
-                sound.pause();
-                SoundCloudService.stopVisualizer();
+                SoundCloudService.pause();
                 $scope.focus = "default";
             });
             //SoundCloud resume
             addCommand('sc_resume', function() {
-                sound.play();
-                SoundCloudService.startVisualizer();
+                oundCloudService.play();
                 $scope.focus = "sc";
             });
             //SoundCloud replay
             addCommand('sc_replay', function() {
-                sound.seek(0);
-                sound.play();
-                SoundCloudService.startVisualizer();
+                SoundCloudService.replay();
                 $scope.focus = "sc";
             });
 
