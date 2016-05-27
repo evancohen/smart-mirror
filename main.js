@@ -11,11 +11,22 @@ const BrowserWindow = electron.BrowserWindow
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
-// Get smart mirror config
-const config = require(__dirname + "/config.js");
-if(typeof config == 'undefined'){
-  console.log("Config error! Please ensure that you have created config.js in the root of your smart-mirror directory");
-  app.quit();
+// Load the smart mirror config
+var config;
+try{
+  config = require(__dirname + "/config.js");
+} catch (e) {
+  var error = "Unknown Error"
+  
+  if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
+    error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
+      "in the root of your smart-mirror directory."
+  } else if (typeof e.message != 'undefined') {
+    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message
+  }
+  
+  console.log("Config Error: ", error)
+  app.quit()
 }
 
 // Keep a global reference of the window object, if you don't, the window will
