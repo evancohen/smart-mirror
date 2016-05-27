@@ -32,7 +32,7 @@ var config = {
     */
     
     // forcast.io
-    forcast : {
+    forecast : {
         key : "", // Your forcast.io api key
         units : "auto" // See forcast.io documentation if you are getting the wrong units
     },
