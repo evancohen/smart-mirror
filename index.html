@@ -25,7 +25,7 @@
     <script src="js/services/timebox.js"></script>
     <script src="js/services/soundcloud.js"></script>
     <script src="js/services/search.js"></script>
-    <script src="js/services/annyang.js"></script>
+    <script src="js/services/speech.js"></script>
     <script src="js/services/weather.js"></script>
     <script src="js/services/comic.js"></script>
     <script src="js/services/map.js"></script>
@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
       <div class="middle-center">
         <h1>{{greeting}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>

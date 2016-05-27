@@ -49,7 +49,11 @@ dt {
   justify-content: center;
   height: 100%; }
 
-.listening, .interim-result {
+.listening {
+  box-shadow: inset 0px -40px 40px -40px #fff
+}  
+
+.interim-result {
   font-family: 'Open Sans', sans-serif; }
 
 .top-left {

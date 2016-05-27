@@ -2,6 +2,13 @@ var config = {
 
     // Lenguage for the mirror
     language : "en", //must also manually update locales/X.js bower component in index.html
+    
+    // Keyword Spotting (Hotword Detection)
+    kws : {
+        keyword : "Smart Mirror",
+        model : "smart_mirror.pmdl", // The name of your model
+        sensitivity : 0.5 // Too many false positives? Change this.
+    },
     layout: "main",
     greeting : ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
 
@@ -75,3 +82,6 @@ var config = {
       }]
     }
 };
+
+// DO NOT REMOVE
+if (typeof module !== 'undefined') {module.exports = config;}
