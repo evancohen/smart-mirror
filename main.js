@@ -1,6 +1,8 @@
 /* global __dirname */
 /* global process */
 const electron = require('electron')
+// Child Process for keyword spotter
+const {spawn} = require('child_process')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -8,6 +10,13 @@ const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
+
+// Get smart mirror config
+const config = require(__dirname + "/config.js");
+if(typeof config == 'undefined'){
+  console.log("Config error! Please ensure that you have created config.js in the root of your smart-mirror directory");
+  app.quit();
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -52,6 +61,26 @@ function createWindow () {
   })
 }
 
+// Get keyword spotting config
+var modelFile = config.kws.model || "smart_mirror.pmdl"
+var kwsSensitivity = config.kws.sensitivity || 0.5
+
+// Initilize the keyword spotter
+var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false})
+// Handel messages from python script
+kwsProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    if(message.startsWith('INFO')){
+        // When a keyword is spotted, ping the speech service
+        mainWindow.webContents.send('keyword-spotted', true)
+    }else{
+        console.error(message)
+    }
+})
+kwsProcess.stdout.on('data', function (data) {
+    console.log(data.toString())
+})
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -59,17 +88,10 @@ app.on('ready', createWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit()
 })
 
-app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
-  }
+// No matter how the app is quit, we should clean up after ourselvs
+app.on('will-quit', function () {
+  kwsProcess.kill()
 })

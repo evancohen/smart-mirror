@@ -1,3 +1,5 @@
+const {ipcRenderer} = require('electron');
+
 (function(annyang) {
     'use strict';
 
@@ -5,26 +7,10 @@
         var service = {};
    
         service.init = function() {
-            annyang.setLanguage(config.language);            
-            console.log("Initializing keyword spotter");
-            
-            var modelFile = config.kws.model || "smart_mirror.pmdl";
-            var kwsSensitivity = config.kws.sensitivity || 0.5;
-            
-            var spawn = require('child_process').spawn;
-            var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false});
-            console.log(kwsProcess);
-            kwsProcess.stderr.on('data', function (data) {
-                var message = data.toString();
-                if(message.startsWith('INFO')){
-                    annyang.start();
-                }else{
-                    console.error(message);
-                }
-            })
-            kwsProcess.stdout.on('data', function (data) {
-                console.log(data.toString())
-            })
+            // Inicialize Keyword Spotter IPC
+            ipcRenderer.on('keyword-spotted', (event, arg) => {
+                annyang.start();
+            });
         }
 
         // Register callbacks for the controller. does not utelize CallbackManager()

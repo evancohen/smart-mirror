@@ -82,3 +82,6 @@ var config = {
       }]
     }
 };
+
+// DO NOT REMOVE
+if (typeof module !== 'undefined') {module.exports = config;}
