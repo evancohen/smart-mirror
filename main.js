@@ -73,8 +73,8 @@ function createWindow () {
 }
 
 // Get keyword spotting config
-var modelFile = config.kws.model || "smart_mirror.pmdl"
-var kwsSensitivity = config.kws.sensitivity || 0.5
+var modelFile = config.speech.model || "smart_mirror.pmdl"
+var kwsSensitivity = config.speech.sensitivity || 0.5
 
 // Initilize the keyword spotter
 var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false})
