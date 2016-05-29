@@ -269,7 +269,7 @@
             });
             //SoundCloud resume
             addCommand('sc_resume', function() {
-                oundCloudService.play();
+                SoundCloudService.play();
                 $scope.focus = "sc";
             });
             //SoundCloud replay
