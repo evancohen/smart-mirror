@@ -36,7 +36,6 @@
 
         }else if ($window.navigator && $window.navigator.geolocation) {
           if(geoloc !== null){
-            console.log("Cached Geolocation", geoloc);
             return(geoloc);
           }
           else {

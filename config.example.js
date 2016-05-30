@@ -1,7 +1,23 @@
 var config = {
 
     // Lenguage for the mirror
-    language : "en", //must also manually update locales/X.js bower component in index.html
+    language : "en",
+    // The trigger you would like to use to have the mirror start listening to you
+    trigger : {
+        type : "clap", // Either "clap" or "ks" (for keyword spotting, which does not work on the pi)
+        // The configuration for the type you have selected
+        settings : {
+            clap : {
+                count : 1,  // Number of claps to trigger the mirror (max 3)
+                overrides: {} // Clap configuration overrides (mic source, clap amplitude/engergy threshhoald, etc)
+            },
+            ks : {
+                //Pronounciation dictionary http://www.speech.cs.cmu.edu/cgi-bin/cmudict
+                wordList : [["SMART", "S M AA R T"], ["MIRROR", "M IH R ER"]],
+                keyword : "SMART MIRROR"
+            }
+        }
+    },
     layout: "main",
     greeting : ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
 
