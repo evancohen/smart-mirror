@@ -9,16 +9,20 @@
             var deferred = $q.defer();
             var promises = [];
 
-            angular.forEach(config.traffic.trips, function(trip) {
-              if (trip.hasOwnProperty('startTime') && TimeboxService.shouldDisplay(trip.startTime, trip.endTime)
-                || !trip.hasOwnProperty('startTime')) {
-                promises.push(getTripDuration(trip));
-              }
-            });
+            if(typeof config.traffic != 'undefined' && config.traffic.trips != 'undefined'){                
+                angular.forEach(config.traffic.trips, function(trip) {
+                    if (trip.hasOwnProperty('startTime') && TimeboxService.shouldDisplay(trip.startTime, trip.endTime)
+                        || !trip.hasOwnProperty('startTime')) {
+                        promises.push(getTripDuration(trip));
+                    }
+                });
 
-            $q.all(promises).then(function(data) {
-                deferred.resolve(data)
-            });
+                $q.all(promises).then(function(data) {
+                    deferred.resolve(data)
+                });
+            } else {
+                deferred.reject;
+            }
 
             return deferred.promise;
         };

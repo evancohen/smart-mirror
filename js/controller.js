@@ -35,9 +35,7 @@
         }
 
         //set lang
-        $scope.locale = config.language;
-        tmhDynamicLocale.set(config.language.toLowerCase());
-        moment.locale(config.language);
+        moment.locale((typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
         console.log('moment local', moment.locale());
 
         //Update the time
@@ -118,7 +116,7 @@
             $interval(refreshMirrorData, 1500000);
 
             var greetingUpdater = function () {
-                if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
                     var hour = moment().hour();
                     var greetingTime = "midday";
 
@@ -149,8 +147,10 @@
                 });
             };
 
-            refreshTrafficData();
-            $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
+            if(typeof config.traffic != 'undefined'){
+                refreshTrafficData();
+                $interval(refreshTrafficData, config.traffic.reload_interval * 60000);    
+            }
 
             var refreshComic = function () {
                 console.log("Refreshing comic");

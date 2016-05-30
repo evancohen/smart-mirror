@@ -1,11 +1,13 @@
 // Bootstrap Angular
 (function(angular) {
     'use strict';
-
+    
+    var language = (typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en';
+    
     angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
         .config(function(tmhDynamicLocaleProvider) {
-            var locale = config.language.toLowerCase();
-            tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_' + locale + '.js');
+            console.log(config)
+            tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_' + language + '.js');
         })
         
         .config(['$translateProvider', function ($translateProvider) {
@@ -19,7 +21,7 @@
             // Avoiding the duplicity of the locale for the default language, xx-YY -> xx
             // We are considering only the language
             // Please refer https://github.com/evancohen/smart-mirror/pull/179 for further discussion
-            var language = config.language.substring(0, 2);
+            var language = (typeof config.language != 'undefined')?config.language.substring(0, 2): 'en';
             $translateProvider.preferredLanguage(language);
         }])
         

@@ -68,7 +68,7 @@
           <div class="weather-today">
             <span class="icon dimmed wi {{currentForcast.wi}}"></span>
             <canvas id="icon_weather_current" width="90" height="70"></canvas>
-            <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+            <span class="tempreture" ng-show="currentForcast.temperature">{{currentForcast.temperature}}&deg;</span>
           </div>
           <div class="weather-week-descriptor">
             <span>{{hourlyForcast.summary}}</span>
