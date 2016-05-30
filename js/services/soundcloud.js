@@ -10,9 +10,12 @@
 		service.scResponse = null;
 
 		service.init = function() {
-			SC.initialize({
-				client_id: config.soundcloud.key
-			});
+      // If the soundcloud key is defined and not empty
+      if(typeof config.soundcloud != 'undefined' && config.soundcloud.length) {
+          SC.initialize({
+            client_id: config.soundcloud.key
+          });
+      }
 		}
 
         //Returns the soundcloud search results for the given query

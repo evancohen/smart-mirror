@@ -17,7 +17,7 @@
         };
 
         //Returns the current forecast along with high and low tempratures for the current day 
-        service.currentforecast = function() {
+        service.currentForecast = function() {
             if(service.forecast === null){
                 return null;
             }
@@ -28,7 +28,7 @@
             return service.forecast.data.currently;
         }
 
-        service.weeklyforecast = function(){
+        service.weeklyForecast = function(){
             if(service.forecast === null){
                 return null;
             }
@@ -44,7 +44,7 @@
             return service.forecast.data.daily;
         }
 		
-        service.hourlyforecast = function() {
+        service.hourlyForecast = function() {
             if(service.forecast === null){
                 return null;
             }

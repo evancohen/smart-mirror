@@ -35,9 +35,7 @@
         }
 
         //set lang
-        $scope.locale = config.language;
-        tmhDynamicLocale.set(config.language.toLowerCase());
-        moment.locale(config.language);
+        moment.locale((typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
         console.log('moment local', moment.locale());
 
         //Update the time
@@ -70,15 +68,15 @@
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
                     console.log("Geoposition", geoposition);
                     WeatherService.init(geoposition).then(function(){
-                        $scope.currentForcast = WeatherService.currentForcast();
-                        $scope.weeklyForcast = WeatherService.weeklyForcast();
-                        $scope.hourlyForcast = WeatherService.hourlyForcast();
-                        console.log("Current", $scope.currentForcast);
-                        console.log("Weekly", $scope.weeklyForcast);
-                        console.log("Hourly", $scope.hourlyForcast);
+                        $scope.currentForecast = WeatherService.currentForecast();
+                        $scope.weeklyForecast = WeatherService.weeklyForecast();
+                        $scope.hourlyForecast = WeatherService.hourlyForecast();
+                        console.log("Current", $scope.currentForecast);
+                        console.log("Weekly", $scope.weeklyForecast);
+                        console.log("Hourly", $scope.hourlyForecast);
 
                         var skycons = new Skycons({"color": "#aaa"});
-                        skycons.add("icon_weather_current", $scope.currentForcast.iconAnimation);
+                        skycons.add("icon_weather_current", $scope.currentForecast.iconAnimation);
 
                         skycons.play();
 
@@ -118,7 +116,7 @@
             $interval(refreshMirrorData, 1500000);
 
             var greetingUpdater = function () {
-                if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
                     var hour = moment().hour();
                     var greetingTime = "midday";
 
@@ -149,8 +147,10 @@
                 });
             };
 
-            refreshTrafficData();
-            $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
+            if(typeof config.traffic != 'undefined'){
+                refreshTrafficData();
+                $interval(refreshTrafficData, config.traffic.reload_interval * 60000);    
+            }
 
             var refreshComic = function () {
                 console.log("Refreshing comic");

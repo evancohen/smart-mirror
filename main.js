@@ -73,6 +73,9 @@ function createWindow () {
 }
 
 // Get keyword spotting config
+if(typeof config.speech == 'undefined'){
+  config.speech = {}
+}
 var modelFile = config.speech.model || "smart_mirror.pmdl"
 var kwsSensitivity = config.speech.sensitivity || 0.5
 

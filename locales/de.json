@@ -1,6 +1,6 @@
 {
     "home" : {
-      "commands" : "Sag' \"Was kann ich sagen?\" um eine Liste von Befehlen zu sehen..."
+      "commands" : "Sag: \"Was kann ich sagen?\" um eine Liste von Befehlen zu sehen..."
     },
     "traffic" : {
         "time_to" : "Zeit bis {{name}}: "
