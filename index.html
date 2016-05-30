@@ -25,7 +25,7 @@
     <script src="js/services/timebox.js"></script>
     <script src="js/services/soundcloud.js"></script>
     <script src="js/services/search.js"></script>
-    <script src="js/services/annyang.js"></script>
+    <script src="js/services/speech.js"></script>
     <script src="js/services/weather.js"></script>
     <script src="js/services/comic.js"></script>
     <script src="js/services/map.js"></script>
@@ -66,26 +66,26 @@
       <div class="top-right">
         <div class="weather">
           <div class="weather-today">
-            <span class="icon dimmed wi {{currentForcast.wi}}"></span>
+            <span class="icon dimmed wi {{currentForecast.wi}}"></span>
             <canvas id="icon_weather_current" width="90" height="70"></canvas>
-            <span class="tempreture">{{currentForcast.temperature}}&deg;</span>
+            <span class="tempreture" ng-show="currentForecast.temperature">{{currentForecast.temperature}}&deg;</span>
           </div>
           <div class="weather-week-descriptor">
-            <span>{{hourlyForcast.summary}}</span>
-            <span>{{weeklyForcast.summary}}</span>
+            <span>{{hourlyForecast.summary}}</span>
+            <span>{{weeklyForecast.summary}}</span>
           </div>
-          <div class="weather-week" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
+          <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
             <div class="weather-week-day">
-              <span class="day light-grey">{{forcast.day}}</span>
-              <canvas id="icon_weather_{{forcast.counter}}" width="33" height="25"></canvas>
-              <span class="icon-small dimmed wi wi-fw {{forcast.wi}}"></span>
-              <span class="tempreture tempreture-min">{{forcast.temperatureMin}}&deg;</span>
-              <span class="tempreture tempreture-max">{{forcast.temperatureMax}}&deg;</span>
+              <span class="day light-grey">{{forecast.day}}</span>
+              <canvas id="icon_weather_{{forecast.counter}}" width="33" height="25"></canvas>
+              <span class="icon-small dimmed wi wi-fw {{forecast.wi}}"></span>
+              <span class="tempreture tempreture-min">{{forecast.temperatureMin}}&deg;</span>
+              <span class="tempreture tempreture-max">{{forecast.temperatureMax}}&deg;</span>
             </div>
           </div>
           <!-- Workaround: -->
-          <div style="display: none;" ng-repeat="forcast in weeklyForcast.data" ng-if="$index > 0">
-            <span ng-init="iconLoad('icon_weather_'+forcast.counter, forcast.iconAnimation)"></span>
+          <div style="display: none;" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
+            <span ng-init="iconLoad('icon_weather_'+forecast.counter, forecast.iconAnimation)"></span>
           </div>
         </div>
         <div class="traffic" ng-repeat="traffic in trips">
@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
       <div class="middle-center">
         <h1>{{greeting}}</h1>
         <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
@@ -105,6 +105,7 @@
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
         <div class="contents-box sc-container animate-grow" ng-show="focus == 'sc'">
+          <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>
           <div><canvas id="visualizer" width="150" height="150"></canvas></div>
           <img class="sc" ng-src="{{scThumb}}"/>
           <img class="scWaveform" ng-src="{{scWaveform}}"/>

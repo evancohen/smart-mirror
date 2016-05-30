@@ -7,8 +7,18 @@
     service.events = [];
 
     service.getCalendarEvents = function() {
+      var deferred = $q.defer();
+      
       service.events = [];
-      return loadFile(config.calendar.icals);
+      if(typeof config.calendar != 'undefined' && typeof config.calendar.icals != 'undefined'){
+        loadFile(config.calendar.icals).then(function(){
+          deferred.resolve();
+        });
+      } else {
+        deferred.reject("No iCals defined");
+      }
+        
+      return deferred.promise;
     }
 
     var loadFile = function(urls) {

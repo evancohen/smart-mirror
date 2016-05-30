@@ -1,13 +1,33 @@
 /* global __dirname */
 /* global process */
 const electron = require('electron')
+// Child Process for keyword spotter
+const {spawn} = require('child_process')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
-const powerSaveBlocker = electron.powerSaveBlocker;
-powerSaveBlocker.start('prevent-display-sleep');
+const powerSaveBlocker = electron.powerSaveBlocker
+powerSaveBlocker.start('prevent-display-sleep')
+
+// Load the smart mirror config
+var config;
+try{
+  config = require(__dirname + "/config.js");
+} catch (e) {
+  var error = "Unknown Error"
+  
+  if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
+    error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
+      "in the root of your smart-mirror directory."
+  } else if (typeof e.message != 'undefined') {
+    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message
+  }
+  
+  console.log("Config Error: ", error)
+  app.quit()
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -28,7 +48,7 @@ function createWindow () {
 
   var browserWindowOptions = {width: 800, height: 600, icon: 'favicon.ico' , kiosk:true, autoHideMenuBar:true, darkTheme:true};
   if (externalDisplay) {
-    browserWindowOptions.x = externalDisplay.bounds.x + 50;
+    browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
   }
   
@@ -52,6 +72,29 @@ function createWindow () {
   })
 }
 
+// Get keyword spotting config
+if(typeof config.speech == 'undefined'){
+  config.speech = {}
+}
+var modelFile = config.speech.model || "smart_mirror.pmdl"
+var kwsSensitivity = config.speech.sensitivity || 0.5
+
+// Initilize the keyword spotter
+var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false})
+// Handel messages from python script
+kwsProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    if(message.startsWith('INFO')){
+        // When a keyword is spotted, ping the speech service
+        mainWindow.webContents.send('keyword-spotted', true)
+    }else{
+        console.error(message)
+    }
+})
+kwsProcess.stdout.on('data', function (data) {
+    console.log(data.toString())
+})
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -59,17 +102,10 @@ app.on('ready', createWindow)
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit()
 })
 
-app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
-  }
+// No matter how the app is quit, we should clean up after ourselvs
+app.on('will-quit', function () {
+  kwsProcess.kill()
 })

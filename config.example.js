@@ -2,6 +2,14 @@ var config = {
 
     // Lenguage for the mirror
     language : "en", //must also manually update locales/X.js bower component in index.html
+    
+    // Keyword Spotting (Hotword Detection)
+    speech : {
+        keyword : "Smart Mirror",
+        model : "smart_mirror.pmdl", // The name of your model
+        sensitivity : 0.5, // Keyword getting too many false positives or not detecting? Change this.
+        continuous: false // After a keyword is detected keep listening until speech is not heard
+    },
     layout: "main",
     greeting : ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
 
@@ -24,7 +32,7 @@ var config = {
     */
     
     // forcast.io
-    forcast : {
+    forecast : {
         key : "", // Your forcast.io api key
         units : "auto" // See forcast.io documentation if you are getting the wrong units
     },
@@ -53,6 +61,10 @@ var config = {
     giphy: {
       key : "" // Your Gliphy API key
     },
+    // YouTube
+    youtube: {
+      key : "" // Your YouTube API key
+    },
     // SoundCloud
     soundcloud: {
         key : "" // Your SoundCloud API key
@@ -71,3 +83,6 @@ var config = {
       }]
     }
 };
+
+// DO NOT REMOVE
+if (typeof module !== 'undefined') {module.exports = config;}
