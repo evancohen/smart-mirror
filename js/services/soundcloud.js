@@ -11,7 +11,7 @@
 
 		service.init = function() {
       // If the soundcloud key is defined and not empty
-      if(typeof config.soundcloud != 'undefined' && config.soundcloud.length()){
+      if(typeof config.soundcloud != 'undefined' && config.soundcloud.length) {
           SC.initialize({
             client_id: config.soundcloud.key
           });

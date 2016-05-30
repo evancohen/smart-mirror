@@ -12,7 +12,7 @@
       service.events = [];
       if(typeof config.calendar != 'undefined' && typeof config.calendar.icals != 'undefined'){
         loadFile(config.calendar.icals).then(function(){
-          deferred.reolve();
+          deferred.resolve();
         });
       } else {
         deferred.reject("No iCals defined");

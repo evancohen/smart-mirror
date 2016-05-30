@@ -68,15 +68,15 @@
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
                     console.log("Geoposition", geoposition);
                     WeatherService.init(geoposition).then(function(){
-                        $scope.currentForcast = WeatherService.currentForcast();
-                        $scope.weeklyForcast = WeatherService.weeklyForcast();
-                        $scope.hourlyForcast = WeatherService.hourlyForcast();
-                        console.log("Current", $scope.currentForcast);
-                        console.log("Weekly", $scope.weeklyForcast);
-                        console.log("Hourly", $scope.hourlyForcast);
+                        $scope.currentForecast = WeatherService.currentForecast();
+                        $scope.weeklyForecast = WeatherService.weeklyForecast();
+                        $scope.hourlyForecast = WeatherService.hourlyForecast();
+                        console.log("Current", $scope.currentForecast);
+                        console.log("Weekly", $scope.weeklyForecast);
+                        console.log("Hourly", $scope.hourlyForecast);
 
                         var skycons = new Skycons({"color": "#aaa"});
-                        skycons.add("icon_weather_current", $scope.currentForcast.iconAnimation);
+                        skycons.add("icon_weather_current", $scope.currentForecast.iconAnimation);
 
                         skycons.play();
 
