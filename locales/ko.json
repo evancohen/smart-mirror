@@ -184,6 +184,11 @@
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
             "voice": "불 :state *action (해)줘",
             "description": "불 :state *action (해)줘"
+        },
+        "stop_listening": {
+            "text": "(고맙습니다) (정지) (확인)",
+            "voice": "(고맙습니다) (정지) (확인)",
+            "description": "(고맙습니다) (정지) (확인)"
         }
     }
 }

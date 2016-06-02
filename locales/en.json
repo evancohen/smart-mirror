@@ -184,6 +184,11 @@
             "text": "Turn the (state) light (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",
             "description": "(turn) (the) :state (the) light(s) *action"
+        },
+        "stop_listening": {
+            "text": "(Thank you) (Stop) (Ok)",
+            "voice": "(Thank you) (Stop) (Ok)",
+            "description": "(Thank you) (Stop) (Ok)"
         }
     }
 }

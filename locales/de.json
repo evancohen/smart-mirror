@@ -184,6 +184,11 @@
             "text": "Schalte das (state) Licht (action)",
             "voice": "(Schalte) (das) :state (die) Licht(er) *action",
             "description": "(Schalte) (das) :state (die) Licht(er) *action"
+        },
+        "stop_listening": {
+            "text": "(Danke) (Stopp) (Ok)",
+            "voice": "(Danke) (Stopp) (Ok)",
+            "description": "(Danke) (Stopp) (Ok)"
         }
     }
 }

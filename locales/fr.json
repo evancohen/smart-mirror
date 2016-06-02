@@ -184,6 +184,11 @@
             "text": "(Allume|Éteins) (la|les) lumières (action)",
             "voice": ":state (les) (la) lumière(s) (*action)",
             "description": ":state (les) (la) lumière(s) (*action)"
+        },
+        "stop_listening": {
+            "text": "(Merci) (Stop) (Ok)",
+            "voice": "(Merci) (Stop) (Ok)",
+            "description": "(Merci) (Stop) (Ok)"
         }
     }
 }
