@@ -400,6 +400,13 @@
               }
             });
 
+            // Stop listening
+            addCommand('stop_listening', function() {
+                console.debug("Stop listening.");
+                SpeechService.abort();
+                $scope.focus = "default";
+            });
+
             var resetCommandTimeout;
             //Register callbacks for Annyang and the Keyword Spotter
             SpeechService.registerCallbacks({

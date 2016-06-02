@@ -184,6 +184,11 @@
             "text": "[estado] las luces a [acción]",
             "voice": ":state las luces a *action",
             "description": "Cambia el estado de las luces"
+        },
+        "stop_listening": {
+            "text": "(Gracias) (bueno)",
+            "voice": "(Gracias) (bueno)",
+            "description": "(Gracias) (bueno)"
         }
     }
 }
