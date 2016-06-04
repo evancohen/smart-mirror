@@ -140,18 +140,18 @@
             greetingUpdater();
             $interval(greetingUpdater, 120000);
 
-            // var refreshTrafficData = function() {
-            //     TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
-            //         console.log("Traffic", tripsWithTraffic);
-            //         //Todo this needs to be an array of traffic objects -> $trips[]
-            //         $scope.trips = tripsWithTraffic;
-            //     }, function(error){
-            //         $scope.traffic = {error: error};
-            //     });
-            // };
-            //
-            // refreshTrafficData();
-            // $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
+            var refreshTrafficData = function() {
+                TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
+                    console.log("Traffic", tripsWithTraffic);
+                    //Todo this needs to be an array of traffic objects -> $trips[]
+                    $scope.trips = tripsWithTraffic;
+                }, function(error){
+                    $scope.traffic = {error: error};
+                });
+            };
+            
+            refreshTrafficData();
+            $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
             var refreshComic = function () {
                 console.log("Refreshing comic");
