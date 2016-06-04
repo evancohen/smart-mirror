@@ -329,41 +329,12 @@
                  console.debug("It is", moment().format('h:mm:ss a'));
             });
 
-            // Turn lights off
-            addCommand('light_action', function(state, action) {
-                HueService.performUpdate(state + " " + action);
-            });
-
-            //Show giphy image
-            addCommand('image_giphy', function(img) {
-                GiphyService.init(img).then(function(){
-                    $scope.gifimg = GiphyService.giphyImg();
-                    $scope.focus = "gif";
-                });
-            });
-
             //Show fitbit stats (registered only if fitbit is configured in the main config)
             if ($scope.fitbitEnabled) {
                 AnnyangService.addCommand('show my walking', function() {
                     refreshFitbitData();
                 });
             }
-
-            // Show xkcd comic
-            addCommand('image_comic', function(state, action) {
-                console.debug("Fetching a comic for you.");
-                ComicService.getXKCD().then(function(data){
-                    $scope.xkcd = data.img;
-                    $scope.focus = "xkcd";
-                });
-            });
-
-            // Show Dilbert comic
-            addCommand('image_comic_dilbert', function(state, action) {
-                console.debug("Fetching a Dilbert comic for you.");
-                $scope.dilbert = ComicService.getDilbert("today");  // call it with "random" for random comic
-                $scope.focus = "dilbert";
-            });
 
             // Start timer
             addCommand('timer_start', function(duration) {
