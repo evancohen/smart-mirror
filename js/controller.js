@@ -13,6 +13,7 @@
             GiphyService,
             TrafficService,
             TimerService,
+            SubwayService,
             ReminderService,
             SearchService,
             SoundCloudService,
@@ -139,18 +140,18 @@
             greetingUpdater();
             $interval(greetingUpdater, 120000);
 
-            var refreshTrafficData = function() {
-                TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
-                    console.log("Traffic", tripsWithTraffic);
-                    //Todo this needs to be an array of traffic objects -> $trips[]
-                    $scope.trips = tripsWithTraffic;
-                }, function(error){
-                    $scope.traffic = {error: error};
-                });
-            };
-
-            refreshTrafficData();
-            $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
+            // var refreshTrafficData = function() {
+            //     TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
+            //         console.log("Traffic", tripsWithTraffic);
+            //         //Todo this needs to be an array of traffic objects -> $trips[]
+            //         $scope.trips = tripsWithTraffic;
+            //     }, function(error){
+            //         $scope.traffic = {error: error};
+            //     });
+            // };
+            //
+            // refreshTrafficData();
+            // $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
             var refreshComic = function () {
                 console.log("Refreshing comic");
@@ -192,6 +193,21 @@
             
             // Go back to default view
             addCommand('home', defaultView);
+
+            // Subway info view
+            addCommand('subway', function(station,linenumber,updown) {
+                SubwayService.init(station).then(function(){
+                    SubwayService.getArriveTime(linenumber,updown).then(function(data){
+
+                        if(data != null){
+                            $scope.subwayinfo = data[0].ARRIVETIME + "에 " + data[0].SUBWAYNAME + "행 열차가 들어오겠습니다.";
+                        }else{
+                            $scope.subwayinfo = "운행하는 열차가 존재 하지 않습니다."
+                        }
+                        $scope.focus = "subway";
+                    });
+                });
+            });
 
             // Hide everything and "sleep"
             addCommand('sleep', function() {
