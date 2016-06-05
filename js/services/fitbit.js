@@ -33,6 +33,24 @@
             }
         };
 
+        service.getToday = function(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            // Add padding for the date, (we want 0x where x is the day or month number if its less than 10)
+            if(dd<10) {
+                dd='0'+dd;
+            } 
+
+            if(mm<10) {
+                mm='0'+mm
+            } 
+
+            return yyyy+'-'+mm+'-'+dd;
+        }
+
         // Instantiate a fitbit client.
         //
         var fitbit = {};
@@ -146,21 +164,7 @@
                 return null;
             }
 
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth()+1; //January is 0!
-            var yyyy = today.getFullYear();
-
-            // Add padding for the date, (we want 0x where x is the day or month number if its less than 10)
-            if(dd<10) {
-                dd='0'+dd
-            } 
-
-            if(mm<10) {
-                mm='0'+mm
-            } 
-
-            today = yyyy+'-'+mm+'-'+dd;
+            today = service.getToday();
                 
             // Make an API call to get the users activities for today
             fitbit.request({
@@ -171,7 +175,7 @@
                     console.log(err);
                 }
                 var result = JSON.parse(body);
-                
+                console.log(result);
                 // If the token arg is not null, then a refresh has occured and
                 // we must persist the new token.
                 if (token) {
@@ -181,8 +185,68 @@
                 }
                 return callback(result);
             });
+
+
+        }
+
+        service.sleepSummary = function(callback) {
+            if(service.today === null){
+                return null;
+            }
+
+            today = service.getToday();
+                
+            // Make an API call to get the users sleep summary for today
+            fitbit.request({
+                uri: "https://api.fitbit.com/1/user/-/sleep/date/" + today + ".json",
+                method: 'GET',
+            }, function(err, body, token) {
+                if (err) {
+                    console.log(err);
+                }
+                var result = JSON.parse(body);
+                console.log(result);
+                // If the token arg is not null, then a refresh has occured and
+                // we must persist the new token.
+                if (token) {
+                    persist.write(tfile, token, function(err) {
+                        if (err) console.log(err);
+                    });
+                }
+                return callback(result);
+            });
+
+            
         }
         
+        service.deviceSummary = function(callback) {
+            if(service.today === null){
+                return null;
+            }
+
+            // Make an API call to get the users device status
+            fitbit.request({
+                uri: "https://api.fitbit.com/1/user/-/devices.json",
+                method: 'GET',
+            }, function(err, body, token) {
+                if (err) {
+                    console.log(err);
+                }
+                var result = JSON.parse(body);
+                console.log(result);
+                // If the token arg is not null, then a refresh has occured and
+                // we must persist the new token.
+                if (token) {
+                    persist.write(tfile, token, function(err) {
+                        if (err) console.log(err);
+                    });
+                }
+                return callback(result);
+            });
+
+            
+        }
+
         return service;
     }
 
