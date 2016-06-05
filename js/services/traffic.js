@@ -33,6 +33,8 @@
             } else {
                 trip.duration = moment.duration(response.data.resourceSets[0].resources[0].travelDurationTraffic, 'seconds')
             }
+            trip.durationInMinutes = Math.floor(trip.duration.asMinutes());
+
             deferred.resolve(trip);
           }, function(error) {
             // Most of the time this is because an address can't be found
@@ -50,7 +52,13 @@
 
         // Depending on the mode of transport different paramaters are required.
         function getEndpoint(trip){
-            var endpoint = BING_MAPS + trip.mode + "?wp.0=" + trip.origin + "&wp.1="+trip.destination;
+            var waypoints = 1;
+            var intermediateGoal = ''
+            if (trip.via != null && trip.via != '') {
+                waypoints = 2;
+                intermediateGoal = "&wp.1=" + trip.via;
+            }
+            var endpoint = BING_MAPS + trip.mode + "?wp.0=" + trip.origin + intermediateGoal + "&wp."+ waypoints + "="+trip.destination;
             if(trip.mode == "Driving"){
                 endpoint += "&avoid=minimizeTolls";
             } else if(trip.mode == "Transit"){

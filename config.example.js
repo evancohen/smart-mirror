@@ -72,6 +72,15 @@ var config = {
         name : "work", // Name of your destination ex: "work"
         /*startTime: "",
         endTime: ""*/ // Optional starttime and endtime when the traffic information should be displayed on screen. The format can be either hh:mm or hh:mm am/pm
+      },
+      {
+        mode : "Driving", // Possibilities: Driving / Transit / Walking
+        origin : "", // Start of your trip. Human readable address.
+        via : "",  // Set an intermediate goal for getting an alternate route for example
+        destination : "", // Destination of your trip. Human readable address.
+        name : "work", // Name of your destination ex: "work"
+        /*startTime: "",
+        endTime: ""*/ // Optional starttime and endtime when the traffic information should be displayed on screen. The format can be either hh:mm or hh:mm am/pm
       }]
     }
 };

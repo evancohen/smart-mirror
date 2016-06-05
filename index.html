@@ -92,7 +92,7 @@
         <div class="traffic" ng-repeat="traffic in trips">
           <div ng-show="!traffic.error" class="traffic-information">
             <span class="time-to">{{ 'traffic.time_to' | translate:traffic }}</span>
-            <span>{{traffic.duration.humanize()}}</span>
+            <span>{{traffic.durationInMinutes}} Minuten</span>
           </div>
         </div>
       </div>
