@@ -14,6 +14,7 @@
     <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="bower_components/rrule/lib/rrule.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.js"></script>
     <!-- endbower -->
 
     <script src="js/inc/skycons.js"></script>
@@ -174,7 +175,7 @@
           <div><span class="fitbit-subtitle">Device status</span></div>
           <div class="" ng-repeat="device in fbDevices">
             <div>
-              <span class="fitbit-item">{{device.deviceVersion}} {{device.battery}} {{device.lastSyncTime}}</span>
+              <span class="fitbit-item">{{device.deviceVersion}} {{device.battery}} synced <span am-time-ago="device.lastSyncTime"></span></span>
             </div>
           </div>
           <p></p>
