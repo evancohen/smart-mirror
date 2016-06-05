@@ -7,7 +7,7 @@ if(typeof config == 'undefined'){
 (function(angular) {
     'use strict';
 
-    angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
+    angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate', 'angularMoment'])
         .config(function(tmhDynamicLocaleProvider) {
             var locale = config.language.toLowerCase();
             tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_' + locale + '.js');
