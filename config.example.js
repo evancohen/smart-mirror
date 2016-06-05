@@ -3,18 +3,17 @@ var config = {
     // Lenguage for the mirror
     language : "en", //must also manually update locales/X.js bower component in index.html
     layout: "main",
-    greeting : ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
+    // greeting : ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
 
     // Alternativly you can have greetings that appear based on the time of day
-    /*
+    
     greeting : {
-       night: ["Bed?", "zZzzZz", "Time to sleep"],
-       morning: ["Good Morning"],
-       midday: ["Hey!", "Hello"],
-       evening: ["Good evening"]
+       night: ["자장?", "zZzzZz", "잠잘 시간이얌....."],
+       morning: ["굿모닝!!"],
+       midday: ["안녕?", "좋은 하루"],
+       evening: ["멋진 저녁이군!!"]
     },
-    */
-
+    
     //use this only if you want to hardcode your geoposition (used for weather)
     /*
     geo_position: {
@@ -25,7 +24,7 @@ var config = {
     
     // forcast.io
     forcast : {
-        key : "", // Your forcast.io api key
+        key : "84257e7f98ebba17f84593ce06daeb95", // Your forcast.io api key
         units : "auto" // See forcast.io documentation if you are getting the wrong units
     },
     // Philips Hue

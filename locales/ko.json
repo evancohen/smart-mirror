@@ -1,6 +1,6 @@
 {
     "home" : {
-        "commands" : "Say \"사용가능한 질문\" to see a list of commands..."
+        "commands" : "\"사용 가능한 명령\"라고 말하면 명령어를 볼 수 있어요."
     },
     "traffic" : {
         "time_to" : "{{name}} 에 시간: "
@@ -41,12 +41,12 @@
     "commands": {
         "title" : "사용 가능한 명령",
         "list": {
-            "text": "사용가능한 질문",
-            "voice": "사용가능한 질문",
-            "description": "사용 가능한 질문\" 이라 말해 보세요\""
+            "text": "사용 가능한 명령",
+            "voice": "사용 가능한 명령",
+            "description": "사용 가능한 명령\" 이라 말해 보세요\""
         },
         "home": {
-            "text": "집",
+            "text": "집/메인화면",
             "voice": "(집)(메인 화면)",
             "description": "메인 화면으로 돌아갑니다."
         },
@@ -101,28 +101,13 @@
             "description": "요청한 것의 사진을 보여 줍니다."
         },
         "video_stop": {
-            "text": "Stop video",
-            "voice": "stop (the) video",
-            "description": "Stops the playback of video content."
-        },
-        "image_giphy": {
-            "text": "________ 짤",
-            "voice": "*img짤",
-            "description": "gif 이미지를 보여줍니다."
-        },
-        "image_comic": {
-            "text": "카툰 보고 싶어",
-            "voice": "카툰 보고 싶어",
-            "description": "카툰을 보여줍니다."
-        },
-        "image_comic_dilbert": {
-            "text": "Comic Dilbert",
-            "voice": "Comic Dilbert",
-            "description": "Muestra el comic Dilbert."
+            "text": "비디오 멈춰",
+            "voice": "비디오 멈춰",
+            "description": "비디오를 정지합니다."
         },
         "reminder_insert": {
-            "text": " ________상기 시켜 줘 ",
-            "voice": "*task 상기 시켜 줘",
+            "text": " ________ 저장",
+            "voice": "*task 저장",
             "description": "미리 알림 리스트에 추가 합니다."
         },
         "reminder_clear": {
@@ -143,7 +128,7 @@
         "timer_start": {
             "text": "______ 타이머 (설정)",
             "voice": "*duration 타이머 (설정)",
-            "description": "*duration 타이머 (설정)"
+            "description": "타이머 (설정)"
         },
         "timer_show": {
             "text": "타이머 보여줄래",
@@ -161,29 +146,29 @@
             "description": "타이머 재시작"
         },
         "sc_play": {
-            "text": "SoundCloud play ________",
-            "voice": "SoundCloud play *query",
-            "description": "Play a song on SoundCloud"
+            "text": "________ 불러줘",
+            "voice": "*query 불러줘",
+            "description": "사운드클라우드가 노래를 불러줍니다."
         },
         "sc_pause": {
-            "text": "SoundCloud pause/stop",
-            "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stop/pause SoundCoud playback"
+            "text": "음악 정지",
+            "voice": "음악 정지 (pause)(post)(stop)(stock)",
+            "description": "음악을 정지합니다."
         },
         "sc_resume": {
-            "text": "SoundCloud play",
-            "voice": "SoundCloud (play)(resume)",
-            "description": "Resumes playback"
+            "text": "음악 재생",
+            "voice": "음악 재생 (play)(resume)",
+            "description": "음악을 재생합니다."
         },
         "sc_replay": {
-            "text": "SoundCloud replay",
-            "voice": "SoundCloud replay",
-            "description": "Replays the current song on SoundCloud"
+            "text": "음악 다시 재생",
+            "voice": "음악 다시 재생",
+            "description": "음악을 다시 재생합니다."
         },
-        "light_action": {
-            "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
-            "voice": "불 :state *action (해)줘",
-            "description": "불 :state *action (해)줘"
+        "subway": {
+            "text": "__역 __호선 __행선",
+            "voice": "*station역 *linenumber(호)선 *updown",
+            "description": "음악을 다시 재생합니다."
         }
     }
 }

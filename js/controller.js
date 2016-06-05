@@ -13,6 +13,7 @@
             GiphyService,
             TrafficService,
             TimerService,
+            SubwayService,
             ReminderService,
             SearchService,
             SoundCloudService,
@@ -148,7 +149,7 @@
                     $scope.traffic = {error: error};
                 });
             };
-
+            
             refreshTrafficData();
             $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
 
@@ -192,6 +193,21 @@
             
             // Go back to default view
             addCommand('home', defaultView);
+
+            // Subway info view
+            addCommand('subway', function(station,linenumber,updown) {
+                SubwayService.init(station).then(function(){
+                    SubwayService.getArriveTime(linenumber,updown).then(function(data){
+
+                        if(data != null){
+                            $scope.subwayinfo = data[0].ARRIVETIME + "에 " + data[0].SUBWAYNAME + "행 열차가 들어오겠습니다.";
+                        }else{
+                            $scope.subwayinfo = "운행하는 열차가 존재 하지 않습니다."
+                        }
+                        $scope.focus = "subway";
+                    });
+                });
+            });
 
             // Hide everything and "sleep"
             addCommand('sleep', function() {
@@ -329,41 +345,12 @@
                  console.debug("It is", moment().format('h:mm:ss a'));
             });
 
-            // Turn lights off
-            addCommand('light_action', function(state, action) {
-                HueService.performUpdate(state + " " + action);
-            });
-
-            //Show giphy image
-            addCommand('image_giphy', function(img) {
-                GiphyService.init(img).then(function(){
-                    $scope.gifimg = GiphyService.giphyImg();
-                    $scope.focus = "gif";
-                });
-            });
-
             //Show fitbit stats (registered only if fitbit is configured in the main config)
             if ($scope.fitbitEnabled) {
                 AnnyangService.addCommand('show my walking', function() {
                     refreshFitbitData();
                 });
             }
-
-            // Show xkcd comic
-            addCommand('image_comic', function(state, action) {
-                console.debug("Fetching a comic for you.");
-                ComicService.getXKCD().then(function(data){
-                    $scope.xkcd = data.img;
-                    $scope.focus = "xkcd";
-                });
-            });
-
-            // Show Dilbert comic
-            addCommand('image_comic_dilbert', function(state, action) {
-                console.debug("Fetching a Dilbert comic for you.");
-                $scope.dilbert = ComicService.getDilbert("today");  // call it with "random" for random comic
-                $scope.focus = "dilbert";
-            });
 
             // Start timer
             addCommand('timer_start', function(duration) {

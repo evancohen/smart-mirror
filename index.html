@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <title>Smart Mirror</title>
 
-    <script src="js/annyang.js"></script>
+    <script type="text/javascript">
+      window.annyang = require('annyang');
+    </script>
 
     <!-- bower:js -->
     <script src="bower_components/moment/min/moment-with-locales.js"></script>
@@ -36,6 +38,8 @@
     <script src="js/services/calendar.js"></script>
     <script src="js/services/traffic.js"></script>
     <script src="js/services/fitbit.js"></script>
+    <script src="js/services/subway-service.js"></script>
+    <script src="js/xml2json.js"></script>
     <script src="js/services/reminder.js"></script>
     <script src="js/controller.js"></script>
 
@@ -109,6 +113,9 @@
           <img class="sc" ng-src="{{scThumb}}"/>
           <img class="scWaveform" ng-src="{{scWaveform}}"/>
           <h2 class="sc">{{scTrack}}</h2>
+        </div>
+        <div class="contents-box subway animate-grow" ng-show="focus == 'subway'">
+          <p>{{subwayinfo}}</p>
         </div>
         <div class="contents-box map animate-grow" ng-show="focus == 'map'">
           <img class="contents map animate-grow" ng-src="{{map}}"/>

@@ -1,17 +1,17 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.2",
-  "description": "The fairest of them all",
+  "version": "0.1.0",
+  "description": "This version has been fitted for Korea.",
   "main": "main.js",
   "scripts": {
     "install": "bower install",
     "start": "electron main.js ",
-    "microphone-debug" : "electron scripts/microphone-debug/main.js",
+    "microphone-debug": "electron scripts/microphone-debug/main.js",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evancohen/smart-mirror.git"
+    "url": "git+https://github.com/WithCampKr/smart-mirror.git"
   },
   "keywords": [
     "Smart Mirror",
@@ -34,9 +34,10 @@
     "bower": "^1.7.9"
   },
   "dependencies": {
+    "annyang": "^2.4.0",
+    "electron-json-storage": "2.0.0",
     "express": "^4.13.4",
     "fitbit-oauth2": "0.0.1",
-    "fs": "0.0.2",
-    "electron-json-storage": "2.0.0"
+    "fs": "0.0.2"
   }
 }
