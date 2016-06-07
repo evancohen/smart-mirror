@@ -1,7 +1,7 @@
 var config = {
 
     // Lenguage for the mirror
-    language : "en", //must also manually update locales/X.js bower component in index.html
+    language : "en-US",
     
     // Keyword Spotting (Hotword Detection)
     speech : {

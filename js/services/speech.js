@@ -7,6 +7,9 @@ const {ipcRenderer} = require('electron');
         var service = {};
    
         service.init = function() {
+            // Set annyang language defined in the config file
+            annyang.setLanguage((typeof config.language != 'undefined')?config.language : 'en-US');
+            
             // Inicialize Keyword Spotter IPC
             ipcRenderer.on('keyword-spotted', (event, arg) => {
                 annyang.start();
