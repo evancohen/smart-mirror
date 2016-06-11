@@ -21,6 +21,7 @@
         $scope.user = {};
         $scope.commands = commands
         $scope.interimResult = DEFAULT_COMMAND_TEXT;
+        $scope.shownews = true;
 
         $scope.layoutName = 'main';
 
@@ -144,7 +145,8 @@
             };
 
             var updateNews = function() {
-                $scope.news = RssService.getNews();
+                $scope.shownews = false;
+                setTimeout(function(){ $scope.news = RssService.getNews(); $scope.shownews = true; }, 990);
             };
 
             refreshRss();
