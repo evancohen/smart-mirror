@@ -35,13 +35,20 @@
             if (service.feed == null) {
                 return null;
             }
+            switch (config.rss.mode) {
+                case 'random':
+                    service.currentFeed = Math.floor(Math.random() * service.feed.length);
+                break;
 
-            if (service.currentFeed == (service.feed.length-1)){
-                service.currentFeed = 0;
-            }
-            else {
-                service.currentFeed = service.currentFeed + 1;
-            }
+                case 'sequence':
+                default:
+                    if (service.currentFeed == (service.feed.length-1)){
+                        service.currentFeed = 0;
+                    }
+                    else {
+                        service.currentFeed = service.currentFeed + 1;
+                    }               
+            };
             return service.feed[service.currentFeed];
         } ;
 
