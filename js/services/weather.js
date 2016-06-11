@@ -3,53 +3,53 @@
 
     function WeatherService($http) {
         var service = {};
-        service.forcast = null;
+        service.forecast = null;
         var geoloc = null;
 
         service.init = function(geoposition) {
             geoloc = geoposition;
-            return $http.jsonp('https://api.forecast.io/forecast/'+config.forcast.key+'/'+
+            return $http.jsonp('https://api.forecast.io/forecast/'+config.forecast.key+'/'+
                     geoposition.coords.latitude+','+geoposition.coords.longitude+'?units=' +
-                    config.forcast.units + "&lang="+ config.language.substr(0, 2) + "&callback=JSON_CALLBACK")
+                    config.forecast.units + "&lang="+ config.language.substr(0, 2) + "&callback=JSON_CALLBACK")
                 .then(function(response) {
-                    return service.forcast = response;
+                    return service.forecast = response;
                 });
         };
 
-        //Returns the current forcast along with high and low tempratures for the current day 
-        service.currentForcast = function() {
-            if(service.forcast === null){
+        //Returns the current forecast along with high and low tempratures for the current day 
+        service.currentForecast = function() {
+            if(service.forecast === null){
                 return null;
             }
-            service.forcast.data.currently.day = moment.unix(service.forcast.data.currently.time).format('ddd');
-            service.forcast.data.currently.temperature = parseFloat(service.forcast.data.currently.temperature).toFixed(0);
-            service.forcast.data.currently.wi = "wi-forecast-io-" + service.forcast.data.currently.icon;
-            service.forcast.data.currently.iconAnimation = service.forcast.data.currently.icon;
-            return service.forcast.data.currently;
+            service.forecast.data.currently.day = moment.unix(service.forecast.data.currently.time).format('ddd');
+            service.forecast.data.currently.temperature = parseFloat(service.forecast.data.currently.temperature).toFixed(0);
+            service.forecast.data.currently.wi = "wi-forecast-io-" + service.forecast.data.currently.icon;
+            service.forecast.data.currently.iconAnimation = service.forecast.data.currently.icon;
+            return service.forecast.data.currently;
         }
 
-        service.weeklyForcast = function(){
-            if(service.forcast === null){
+        service.weeklyForecast = function(){
+            if(service.forecast === null){
                 return null;
             }
             // Add human readable info to info
-            for (var i = 0; i < service.forcast.data.daily.data.length; i++) {
-                service.forcast.data.daily.data[i].day = moment.unix(service.forcast.data.daily.data[i].time).format('ddd');
-                service.forcast.data.daily.data[i].temperatureMin = parseFloat(service.forcast.data.daily.data[i].temperatureMin).toFixed(0);
-                service.forcast.data.daily.data[i].temperatureMax = parseFloat(service.forcast.data.daily.data[i].temperatureMax).toFixed(0);
-                service.forcast.data.daily.data[i].wi = "wi-forecast-io-" + service.forcast.data.daily.data[i].icon;
-                service.forcast.data.daily.data[i].counter = String.fromCharCode(97 + i);
-                service.forcast.data.daily.data[i].iconAnimation = service.forcast.data.daily.data[i].icon;
+            for (var i = 0; i < service.forecast.data.daily.data.length; i++) {
+                service.forecast.data.daily.data[i].day = moment.unix(service.forecast.data.daily.data[i].time).format('ddd');
+                service.forecast.data.daily.data[i].temperatureMin = parseFloat(service.forecast.data.daily.data[i].temperatureMin).toFixed(0);
+                service.forecast.data.daily.data[i].temperatureMax = parseFloat(service.forecast.data.daily.data[i].temperatureMax).toFixed(0);
+                service.forecast.data.daily.data[i].wi = "wi-forecast-io-" + service.forecast.data.daily.data[i].icon;
+                service.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
+                service.forecast.data.daily.data[i].iconAnimation = service.forecast.data.daily.data[i].icon;
             };
-            return service.forcast.data.daily;
+            return service.forecast.data.daily;
         }
 		
-        service.hourlyForcast = function() {
-            if(service.forcast === null){
+        service.hourlyForecast = function() {
+            if(service.forecast === null){
                 return null;
             }
-            service.forcast.data.hourly.day = moment.unix(service.forcast.data.hourly.time).format('ddd')
-            return service.forcast.data.hourly;
+            service.forecast.data.hourly.day = moment.unix(service.forecast.data.hourly.time).format('ddd')
+            return service.forecast.data.hourly;
         }
 		
         service.refreshWeather = function(){

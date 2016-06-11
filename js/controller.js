@@ -2,7 +2,7 @@
     'use strict';
 
     function MirrorCtrl(
-            AnnyangService,
+            SpeechService,
             GeolocationService,
             WeatherService,
             FitbitService,
@@ -35,11 +35,9 @@
         }
 
         //set lang
-        $scope.locale = config.language;
-        tmhDynamicLocale.set(config.language.toLowerCase());
-        moment.locale(config.language);
+        moment.locale((typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
         console.log('moment local', moment.locale());
-        
+
         //Update the time
         function updateTime(){
             $scope.date = new moment();
@@ -70,15 +68,15 @@
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
                     console.log("Geoposition", geoposition);
                     WeatherService.init(geoposition).then(function(){
-                        $scope.currentForcast = WeatherService.currentForcast();
-                        $scope.weeklyForcast = WeatherService.weeklyForcast();
-                        $scope.hourlyForcast = WeatherService.hourlyForcast();
-                        console.log("Current", $scope.currentForcast);
-                        console.log("Weekly", $scope.weeklyForcast);
-                        console.log("Hourly", $scope.hourlyForcast);
+                        $scope.currentForecast = WeatherService.currentForecast();
+                        $scope.weeklyForecast = WeatherService.weeklyForecast();
+                        $scope.hourlyForecast = WeatherService.hourlyForecast();
+                        console.log("Current", $scope.currentForecast);
+                        console.log("Weekly", $scope.weeklyForecast);
+                        console.log("Hourly", $scope.hourlyForecast);
 
                         var skycons = new Skycons({"color": "#aaa"});
-                        skycons.add("icon_weather_current", $scope.currentForcast.iconAnimation);
+                        skycons.add("icon_weather_current", $scope.currentForecast.iconAnimation);
 
                         skycons.play();
 
@@ -108,7 +106,7 @@
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
                 });
-                
+
                 FitbitService.todaySummary(function(response){
                     $scope.fbToday = response;
                 });
@@ -118,7 +116,7 @@
             $interval(refreshMirrorData, 1500000);
 
             var greetingUpdater = function () {
-                if(!Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
                     var hour = moment().hour();
                     var greetingTime = "midday";
 
@@ -149,8 +147,10 @@
                 });
             };
 
-            refreshTrafficData();
-            $interval(refreshTrafficData, config.traffic.reload_interval * 60000);
+            if(typeof config.traffic != 'undefined'){
+                refreshTrafficData();
+                $interval(refreshTrafficData, config.traffic.reload_interval * 60000);    
+            }
 
             var refreshComic = function () {
                 console.log("Refreshing comic");
@@ -174,7 +174,7 @@
                 var textId = 'commands.'+commandId+'.text';
                 var descId = 'commands.'+commandId+'.description';
                 $translate([voiceId, textId, descId]).then(function (translations) {
-                    AnnyangService.addCommand(translations[voiceId], commandFunction);
+                    SpeechService.addCommand(translations[voiceId], commandFunction);
                     if (translations[textId] != '') {
                         var command = {"text": translations[textId], "description": translations[descId]};
                         $scope.commands.push(command);
@@ -185,11 +185,11 @@
             // List commands
             addCommand('list', function() {
                 console.debug("Here is a list of commands...");
-                console.log(AnnyangService.commands);
+                console.log(SpeechService.commands);
                 $scope.focus = "commands";
             });
 
-            
+
             // Go back to default view
             addCommand('home', defaultView);
 
@@ -207,7 +207,7 @@
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
             });
-            
+
             // Show map
             addCommand('map_show', function() {
                 console.debug("Going on an adventure?");
@@ -217,7 +217,7 @@
                     $scope.focus = "map";
                 });
             });
-            
+
             // Hide everything and "sleep"
             addCommand('map_location', function(location) {
                 console.debug("Getting map of", location);
@@ -250,12 +250,6 @@
             //SoundCloud search and play
             addCommand('sc_play', function(query) {
                 SoundCloudService.searchSoundCloud(query).then(function(response){
-                    SC.stream('/tracks/' + response[0].id).then(function(player){
-                        player.play();
-                        sound = player;
-                        playing = true;
-                    });
-
                     if (response[0].artwork_url){
                         $scope.scThumb = response[0].artwork_url.replace("-large.", "-t500x500.");
                     } else {
@@ -264,27 +258,23 @@
                     $scope.scWaveform = response[0].waveform_url;
                     $scope.scTrack = response[0].title;
                     $scope.focus = "sc";
-                    SoundCloudService.startVisualizer();
+                    SoundCloudService.play();
                 });
             });
-            
+
             //SoundCloud stop
             addCommand('sc_pause', function() {
-                sound.pause();
-                SoundCloudService.stopVisualizer();
+                SoundCloudService.pause();
                 $scope.focus = "default";
             });
             //SoundCloud resume
             addCommand('sc_resume', function() {
-                sound.play();
-                SoundCloudService.startVisualizer();
+                SoundCloudService.play();
                 $scope.focus = "sc";
             });
             //SoundCloud replay
             addCommand('sc_replay', function() {
-                sound.seek(0);
-                sound.play();
-                SoundCloudService.startVisualizer();
+                SoundCloudService.replay();
                 $scope.focus = "sc";
             });
 
@@ -344,7 +334,7 @@
 
             //Show fitbit stats (registered only if fitbit is configured in the main config)
             if ($scope.fitbitEnabled) {
-                AnnyangService.addCommand('show my walking', function() {
+                SpeechService.addCommand('show my walking', function() {
                     refreshFitbitData();
                 });
             }
@@ -411,22 +401,30 @@
             });
 
             var resetCommandTimeout;
-            //Track when the Annyang is listening to us
-            AnnyangService.start(function(listening){
-                $scope.listening = listening;
-            }, function(interimResult){
-                $scope.interimResult = interimResult;
-                $timeout.cancel(resetCommandTimeout);
-            }, function(result){
-                if(typeof result != 'undefined'){
-                    $scope.interimResult = result[0];
-                    resetCommandTimeout = $timeout(restCommand, 5000);
-                }
-            }, function(error){
-                console.log(error);
-                if(error.error == "network"){
-                    $scope.speechError = "Google Speech Recognizer is down :(";
-                    AnnyangService.abort();
+            //Register callbacks for Annyang and the Keyword Spotter
+            SpeechService.registerCallbacks({
+                listening : function(listening){
+                    $scope.listening = listening;
+                },
+                interimResult : function(interimResult){
+                    $scope.interimResult = interimResult;
+                    $timeout.cancel(resetCommandTimeout);
+                },
+                result : function(result){
+                    if(typeof result != 'undefined'){
+                        $scope.interimResult = result[0];
+                        resetCommandTimeout = $timeout(restCommand, 5000);
+                    }
+                },
+                error : function(error){
+                    console.log(error);
+                    if(error.error == "network"){
+                        $scope.speechError = "Google Speech Recognizer: Network Error (Speech quota exceeded?)";
+                        SpeechService.abort();
+                    } else {
+                        // Even if it isn't a network error, stop making requests
+                        SpeechService.abort();
+                    }
                 }
             });
         };

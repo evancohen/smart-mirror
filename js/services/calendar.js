@@ -7,8 +7,18 @@
     service.events = [];
 
     service.getCalendarEvents = function() {
+      var deferred = $q.defer();
+
       service.events = [];
-      return loadFile(config.calendar.icals);
+      if(typeof config.calendar != 'undefined' && typeof config.calendar.icals != 'undefined'){
+        loadFile(config.calendar.icals).then(function(){
+          deferred.resolve();
+        });
+      } else {
+        deferred.reject("No iCals defined");
+      }
+
+      return deferred.promise;
     }
 
     var loadFile = function(urls) {
@@ -99,8 +109,10 @@
           if ( type !== 'SUMMARY' || (type=='SUMMARY' && cur_event['SUMMARY'] == undefined)) {
             cur_event[type] = val;
           }
+          var keys = Object.keys(cur_event);
           if (cur_event['SUMMARY'] !== undefined && cur_event['RRULE'] !== undefined &&
-              cur_event['DTSTART'] !== undefined && cur_event['DTEND'] !== undefined) {
+              (keys.some(function(k){ return ~k.indexOf("DTSTART") })) &&
+                keys.some(function(k){ return ~k.indexOf("DTEND") })) {
             var options = new RRule.parseString(cur_event['RRULE']);
       			options.dtstart = cur_event.start.toDate();
       			var event_duration = cur_event.end.diff(cur_event.start,'minutes');
