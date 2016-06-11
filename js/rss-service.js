@@ -4,6 +4,7 @@
     function RssService($http) {
         var service = {};
         service.feed = [];
+        service.currentFeed = 0;
 
         service.init = function() {
             service.feed = [];
@@ -34,7 +35,14 @@
             if (service.feed == null) {
                 return null;
             }
-            return service.feed[Math.floor(Math.random() * service.feed.length)];
+
+            if (service.currentFeed == (service.feed.length-1)){
+                service.currentFeed = 0;
+            }
+            else {
+                service.currentFeed = service.currentFeed + 1;
+            }
+            return service.feed[service.currentFeed];
         } ;
 
         return service;
