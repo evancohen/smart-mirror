@@ -1,11 +1,12 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
     "install": "bower install",
     "start": "electron main.js ",
+    "microphone-debug" : "electron scripts/microphone-debug/main.js",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {
@@ -13,10 +14,10 @@
     "url": "git+https://github.com/evancohen/smart-mirror.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Smart Mirror",
+    "IoT",
+    "Voice Control",
+    "DIY"
   ],
   "author": "Evan Cohen",
   "license": "MIT",
@@ -25,11 +26,17 @@
   },
   "homepage": "https://github.com/evancohen/smart-mirror",
   "devDependencies": {
-    "angular-i18n": "^1.5.0",
-    "bower": "^1.7.7",
-    "electron-prebuilt": "^0.36.5",
-    "install": "^0.5.4",
-    "npm": "^3.7.5",
-    "wiredep": "^3.0.0"
+    "wiredep-cli": "^0.1.0",
+    "bower": "^1.7.9",
+    "install": "^0.8.1",
+    "angular-i18n": "^1.5.5",
+    "electron-prebuilt": "^1.0.0",
+    "npm": "^3.8.8"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "fitbit-oauth2": "0.0.1",
+    "fs": "0.0.2",
+    "electron-json-storage": "2.0.0"
   }
 }
