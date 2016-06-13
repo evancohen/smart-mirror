@@ -37,6 +37,7 @@
     <script src="js/services/traffic.js"></script>
     <script src="js/services/fitbit.js"></script>
     <script src="js/services/reminder.js"></script>
+    <script src="js/services/rss.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -156,6 +157,16 @@
           </small>
         </div>
 
+        <div class="fade animate-grow" ng-show="focus == 'default' && shownews && news != null">
+          <div class="news-title dimmed fade animate-grow">
+            <span><i class="fa fa-rss fade animate-grow" style="margin-right: 5px";></i></span>
+            <span fade animate-grow>Source: {{news.title}},   Last Updated: {{news.lastUpdated.format('MMM DD, h:mm a')}} </span>
+          </div>
+          <div class="news-content fade animate-grow">
+            <span class="fade animate-grow">{{news.content}}</span>
+          </div>
+        </div>
+        
         <div class="error" ng-bind="speechError" ng-show="speechError"></div>
         <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
       </div>
