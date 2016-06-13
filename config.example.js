@@ -71,6 +71,7 @@ var config = {
     },
     traffic: {
       key : "", // Bing Maps API Key
+
       reload_interval : 5, // Number of minutes the information is refreshed
       // An array of tips that you would like to display travel time for
       trips : [{
@@ -81,6 +82,10 @@ var config = {
         /*startTime: "",
         endTime: ""*/ // Optional starttime and endtime when the traffic information should be displayed on screen. The format can be either hh:mm or hh:mm am/pm
       }]
+    },
+    rss: {
+      feeds : [],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
+      refreshInterval : 120 // Number of minutes the information is refreshed
     }
 };
 
