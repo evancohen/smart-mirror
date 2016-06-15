@@ -356,4 +356,22 @@ ul.calendar {
 
 .xkcd {
   -webkit-filter: invert(100%);
-  max-width: 100%; }
+  max-width: 100%; 
+}
+
+.news {
+    height: 75px; 
+    margin-bottom: 5px;
+}
+
+.news-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.news-content {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    margin-bottom: 55px;
+}

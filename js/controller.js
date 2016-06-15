@@ -16,12 +16,14 @@
             ReminderService,
             SearchService,
             SoundCloudService,
+            RssService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
         $scope.focus = "default";
         $scope.user = {};
+        $scope.shownews = true;
         $scope.commands = [];
         /*$translate('home.commands').then(function (translation) {
             $scope.interimResult = translation;
@@ -168,6 +170,23 @@
             }
 
             $interval(refreshComic, 12*60*60000); // 12 hours
+
+            var refreshRss = function () {
+                console.log ("Refreshing RSS");
+                $scope.news = null;
+                RssService.refreshRssList();
+            };
+
+            var updateNews = function() {
+                $scope.shownews = false;
+                setTimeout(function(){ $scope.news = RssService.getNews(); $scope.shownews = true; }, 1000);
+            };
+
+            refreshRss();
+            $interval(refreshRss, config.rss.refreshInterval * 60000);
+            
+            updateNews();
+            $interval(updateNews, 8000);  // cycle through news every 8 seconds
 
             var addCommand = function(commandId, commandFunction){
                 var voiceId = 'commands.'+commandId+'.voice';

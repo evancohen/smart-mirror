@@ -37,6 +37,7 @@
     <script src="js/services/traffic.js"></script>
     <script src="js/services/fitbit.js"></script>
     <script src="js/services/reminder.js"></script>
+    <script src="js/services/rss.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -154,6 +155,18 @@
             Chrome <script>document.write(process.versions.chrome)</script>,
             and Electron <script>document.write(process.versions.electron)</script>.
           </small>
+        </div>
+
+        <div class="news">
+          <div class="fade" ng-show="focus == 'default' && shownews && news != null">
+            <div class="news-title dimmed fade">
+              <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
+              <span fade>Source: {{news.title}},   Last Updated: {{news.lastUpdated.format('MMM DD, h:mm a')}} </span>
+            </div>
+            <div class="news-content fade">
+              <span class="fade">{{news.content}}</span>
+            </div>
+          </div>
         </div>
 
         <div class="error" ng-bind="speechError" ng-show="speechError"></div>
