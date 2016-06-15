@@ -16,7 +16,7 @@ def interrupt_callback():
 
 def hotword_detected_callback():
     print("!Hotword Detected")
-    snowboydecoder.play_audio_file(snowboydecoder.DETECT_DING)
+    #snowboydecoder.play_audio_file(snowboydecoder.DETECT_DING)
 
 if len(sys.argv) < 2:
     print("Error: need to specify model name and sensitivity")
