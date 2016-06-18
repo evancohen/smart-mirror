@@ -76,7 +76,7 @@
       var canvas = document.getElementById('visualizer');
       var canvasCtx = canvas.getContext("2d");
 
-      var WIDTH = 150;
+      var WIDTH = 300;
       var HEIGHT = 150;
 
       canvasCtx.fillStyle = 'rgb(0, 0, 0)';
