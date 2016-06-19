@@ -5,6 +5,8 @@
         var service = {};
         var autoSleepTimer;
 
+        service.exec = require('child_process').exec;
+
         service.startAutoSleepTimer = function() {
             if (typeof config.auto_timer !== 'undefined' && typeof config.auto_timer.auto_sleep !== 'undefined' && typeof config.auto_timer.auto_wake !== 'undefined') {
                 service.stopAutoSleepTimer();
@@ -26,11 +28,12 @@
             service.exec(config.auto_timer.sleep_cmd, service.puts);
         };
 
-        service.sys = require('sys');
-        service.exec = require('child_process').exec;
-
         service.puts = function (error, stdout, stderr) {
-            service.puts(stdout);
+            if (error) {
+                console.debug('auto-sleep error', error);
+            }
+
+            console.debug('autosleep stdout:', stdout)
         };
 
         return service;

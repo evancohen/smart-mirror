@@ -236,7 +236,6 @@
             addCommand('screen off', function() {
                 console.debug('turning screen off');
                 AutoSleepService.sleep();
-                $scope.focus = "sleep"
             });
 
             // Turn on HDMI output
