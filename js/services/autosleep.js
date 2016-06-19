@@ -6,10 +6,10 @@
         var autoSleepTimer;
 
         service.startAutoSleepTimer = function() {
-            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autosleep !== 'undefined' && typeof config.autoTimer.autowake !== 'undefined') {
+            if (typeof config.auto_timer !== 'undefined' && typeof config.auto_timer.auto_sleep !== 'undefined' && typeof config.auto_timer.auto_wake !== 'undefined') {
                 service.stopAutoSleepTimer();
-                autoSleepTimer = $interval(service.sleep, config.autoTimer.autosleep);
-                console.debug('Starting auto-sleep timer', config.autoTimer.autosleep);
+                autoSleepTimer = $interval(service.sleep, config.auto_timer.auto_sleep);
+                console.debug('Starting auto-sleep timer', config.auto_timer.auto_sleep);
             }
         };
 
@@ -19,11 +19,11 @@
         };
 
         service.wake = function() {
-            service.exec(config.autoTimer.wake_cmd, service.puts);
+            service.exec(config.auto_timer.wake_cmd, service.puts);
         };
 
         service.sleep = function() {
-            service.exec(config.autoTimer.sleep_cmd, service.puts);
+            service.exec(config.auto_timer.sleep_cmd, service.puts);
         };
 
         service.sys = require('sys');
