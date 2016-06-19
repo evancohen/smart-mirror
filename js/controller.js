@@ -3,7 +3,6 @@
 
     function MirrorCtrl(
             SpeechService,
-            AnnyangService,
             AutoSleepService,
             GeolocationService,
             WeatherService,

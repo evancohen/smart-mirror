@@ -1,4 +1,5 @@
 var config = {
+  
     // Lenguage for the mirror
     language : "en-US",
     
