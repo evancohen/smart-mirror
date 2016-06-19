@@ -32,7 +32,9 @@ var config = {
       reload_interval : 5 // Number of minutes the information is refreshed
     },
     autoTimer: {
-        autosleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
-        autowake: '07:00:00' // When to automatically wake the screen up (7:00AM)
+      autosleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
+      autowake: '07:00:00', // When to automatically wake the screen up (7:00AM)
+      'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
+      'slee_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
     }
 }

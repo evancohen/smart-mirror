@@ -19,11 +19,11 @@
         };
 
         service.wake = function() {
-            service.exec("/opt/vc/bin/tvservice -p", service.puts);
+            service.exec(config.autoTimer.wake_cmd, service.puts);
         };
 
         service.sleep = function() {
-            service.exec("/opt/vc/bin/tvservice -o", service.puts);
+            service.exec(config.autoTimer.sleep_cmd, service.puts);
         };
 
         service.sys = require('sys');
