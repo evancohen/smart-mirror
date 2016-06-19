@@ -1,18 +1,29 @@
 @font-face {
-  font-family: "HelveticaNeue-UltraLight";
-  src: url("../fonts/HelveticaNeue-UltraLight.ttf");
-  /* EOT file for IE */
+  font-family: 'HelveticaNeue-UltraLight';
+  src: url('../fonts/HelveticaNeue-UltraLight.ttf');
+  // EOT file for IE
 }
 
+$black: #000;
+$dark-grey: #aaa;
+$grey: #999;
+$light-grey: #ccc;
+$off-black: #222;
+$white: #fff;
+
 body {
-  background-color: black;
-  color: #fff;
+  background-color: $black;
+  color: $white;
   font-family: 'HelveticaNeue-UltraLight', 'Open Sans', sans-serif;
   font-weight: 300;
   position: relative;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-weight: 300;
 }
 
@@ -24,44 +35,43 @@ dt {
   font-weight: 600;
 }
 
-/* Colors */
+// Colors
 
 .light-grey {
-  color: #ccc;
+  color: $light-grey;
 }
 
 .grey {
-  color: #999;
+  color: $grey;
 }
 
-/* Displays */
+// Displays
 
 .sleep-cover {
-  background-color: black;
+  background-color: $black;
+  height: 100%;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
   z-index: 999;
 }
 
 .container {
-  z-index: -1;
-  /* so things are still selectable */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: -1;
 }
 
-.listening, .interim-result {
+.listening,
+.interim-result {
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -82,33 +92,33 @@ dt {
 }
 
 .middle-center {
-  display: flex;
-  flex: 1;
   align-items: stretch;
   align-self: flex-start;
+  display: flex;
+  flex: 1;
   flex-direction: column;
-  width: 100%;
-  text-align: center;
   justify-content: center;
+  text-align: center;
+  width: 100%;
 }
 
 .bottom-center {
   font-family: 'Open Sans', sans-serif;
-  width: 100%;
-  text-align: center;
   margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
 }
 
 .commands {
-  width: 450px;
-  text-align: left;
   margin-left: auto;
   margin-right: auto;
+  text-align: left;
+  width: 450px;
 }
 
 ul.calendar {
-  list-style: none;
   font-size: 22px;
+  list-style: none;
   margin-left: 10px;
   padding: 0;
 }
@@ -117,30 +127,39 @@ ul.calendar {
   .event {
     margin-bottom: 10px;
   }
+
   span {
     display: inline-block;
+
     &.day {
       font-weight: bold;
-      width: 128px;
       vertical-align: top;
+      width: 128px;
     }
+
     &.summary {
       max-width: 400px;
     }
   }
+
   .event-details .details {
-    font-size: 12px;
-    padding-left: 135px;
     font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
     font-weight: lighter;
+    padding-left: 135px;
   }
 }
 
 .weather {
-  margin-left: auto;
   display: inline-block;
+  margin-left: auto;
   text-align: right;
   width: 230px;
+
+  .weather-today canvas,
+  .weather-week-day canvas {
+    display: none;
+  }
 }
 
 .weather-today .temperature {
@@ -150,35 +169,31 @@ ul.calendar {
 .weather-week-descriptor {
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
-  margin-left: auto;
   margin-bottom: 10px;
+  margin-left: auto;
   text-align: justify;
 }
 
 .weather-week {
-  margin-right: 10px;
   font-size: 22px;
+  margin-right: 10px;
+
   .day {
     display: inline-block;
     margin-right: 10px;
     width: 40px;
   }
+
   .temperature {
     display: inline-block;
     width: 60px;
   }
 }
 
-.weather {
-  .weather-today canvas, .weather-week-day canvas {
-    display: none;
-  }
-}
-
 .traffic-information {
-  text-align: right;
-  margin-top: 10px;
   margin-right: 10px;
+  margin-top: 10px;
+  text-align: right;
 }
 
 .time-to {
@@ -200,54 +215,48 @@ ul.calendar {
 
 .timer-circle {
   $size: 3.25em;
-  $stroke: 0.1em;
+  $stroke: .1em;
   $pi: 3.1415926535;
 
-  width: $size;
-  height: $size;
-  transform: rotate(-90deg) scaleY(-1);
-  margin: 20px auto;
   display: block;
+  height: $size;
+  margin: 20px auto;
+  transform: rotate(-90deg) scaleY(-1);
+  width: $size;
 
   .background,
   .progress {
-    r: $size / 2 - $stroke;
     cx: $size / 2;
     cy: $size / 2;
     fill: none;
-    stroke: #222;
+    r: $size / 2 - $stroke;
     stroke-width: $stroke;
+    stroke: $off-black;
   }
 
   .progress {
-    stroke-dasharray: $pi * $size;
-    stroke-dashoffset: $pi * $size;
-
-    stroke: white;
-    stroke-linecap: round;
+    animation-fill-mode: forwards;
     animation-name: increase-dashoffset;
     animation-timing-function: linear;
-    animation-fill-mode: forwards;
-  }
-
-  &.finish .progress {
-    // animation-name: reduce-dashoffset;
-    // animation-duration: 1500ms;
-    // animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    stroke: $white;
+    stroke-dasharray: $pi * $size;
+    stroke-dashoffset: $pi * $size;
+    stroke-linecap: round;
   }
 }
 
 .timer-countdown {
+  left: 50%;
   position: absolute;
   top: 50%;
-  left: 50%;
   transform: translateY(-50%) translateX(-50%);
 }
 
 .timer-duration {
   @extend .timer-countdown;
-  top: 75%;
+
   font-size: 25%;
+  top: 75%;
 }
 
 .contents {
@@ -263,48 +272,53 @@ ul.calendar {
 }
 
 .contents-box {
+  overflow: hidden;
+  position: relative;
   text-align: center;
   width: 100%;
-  position: relative;
-  overflow: hidden;
-  &:after {
+
+  &::after {
+    -moz-box-shadow: inset 0 0 10px 10px $black;
+    -webkit-box-shadow: inset 0 0 10px 10px $black;
+    box-shadow: inset 0 0 10px 10px $black;
     content: '';
+    height: 100%;
+    left: 0;
+    overflow: hidden;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    -webkit-box-shadow: inset 0 0 10px 10px #000;
-    -moz-box-shadow: inset 0 0 10px 10px #000;
-    box-shadow: inset 0 0 10px 10px #000;
-    overflow: hidden;
   }
 }
 
 .color-block {
-  height: 200px;
-  width: 200px;
   display: inline-block;
+  height: 200px;
   margin: 10px;
   margin-bottom: 20px;
+  width: 200px;
 }
 
 .debug-info {
   width: 500px;
 }
 
-/* Animations */
+// Animations
 
 .fade {
   &.ng-hide {
     opacity: 0;
   }
-  &.ng-hide-remove, &.ng-hide-add {
+
+  &.ng-hide-remove,
+  &.ng-hide-add {
     display: block !important;
   }
+
   &.ng-hide-remove {
     transition: all ease 1500ms;
   }
+
   &.ng-hide-add {
     transition: all ease 500ms;
   }
@@ -312,25 +326,31 @@ ul.calendar {
 
 .animate-grow {
   max-height: 1280px !important;
-  &.ng-hide-add, &.ng-hide-remove {
+
+  &.ng-hide-add,
+  &.ng-hide-remove {
     transition: all linear 500ms;
   }
+
   &.ng-hide {
     max-height: 0 !important;
   }
 }
 
 .dimmed {
-  color: #aaa;
+  color: $dark-grey;
 }
 
-.xxsmall, .xsmall, .small {
-  font-family: "HelveticaNeue-Medium", sans-serif;
+.xxsmall,
+.xsmall,
+.small {
+  font-family: 'HelveticaNeue-Medium', sans-serif;
   letter-spacing: 0;
 }
 
 .xxsmall {
   font-size: 15px;
+
   .wi {
     line-height: 15px;
   }
@@ -345,22 +365,22 @@ ul.calendar {
 }
 
 .icon {
-  position: relative;
-  top: -10px;
   display: inline-block;
   font-size: 45px;
-  padding-right: 5px;
   font-weight: 100;
   margin-right: 10px;
+  padding-right: 5px;
+  position: relative;
+  top: -10px;
 }
 
 .icon-small {
-  position: relative;
   display: inline-block;
   font-size: 20px;
-  padding-left: 0px;
-  padding-right: -10px;
   font-weight: 100;
+  padding-left: 0;
+  padding-right: -10px;
+  position: relative;
   width: 20px;
 }
 
