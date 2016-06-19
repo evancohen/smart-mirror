@@ -46,7 +46,7 @@
             $scope.date = new moment();
 
             // Auto wake at a specific time
-            if (typeof config.auto_timer !== 'undefined' && typeof config.autot_timer.auto_wake !== 'undefined' && config.auto_timer.auto_wake == $filter('date')($scope.date, 'HH:mm:ss')) {
+            if (typeof config.auto_timer !== 'undefined' && typeof config.auto_timer.auto_wake !== 'undefined' && config.auto_timer.auto_wake == moment().format('HH:mm:ss')) {
                 console.debug('Auto-wake', config.auto_timer.auto_wake);
                 $scope.focus = "default";
                 AutoSleepService.wake();
@@ -233,14 +233,14 @@
             addCommand('wake_up', defaultView);
 
             // Turn off HDMI output
-            AnnyangService.addCommand('screen off', function() {
+            addCommand('screen off', function() {
                 console.debug('turning screen off');
                 AutoSleepService.sleep();
                 $scope.focus = "sleep"
             });
 
             // Turn on HDMI output
-            AnnyangService.addCommand('screen on', function() {
+            addCommand('screen on', function() {
                 console.debug('turning screen on');
                 AutoSleepService.wake();
                 $scope.focus = "default"
