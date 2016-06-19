@@ -31,10 +31,10 @@ var config = {
     },
     */
     
-    // forcast.io
+    // forecast.io
     forecast : {
-        key : "", // Your forcast.io api key
-        units : "auto" // See forcast.io documentation if you are getting the wrong units
+        key : "", // Your forecast.io api key
+        units : "auto" // See forecast.io documentation if you are getting the wrong units
     },
     // Philips Hue
     hue : {
