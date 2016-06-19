@@ -115,7 +115,7 @@ ul.calendar {
   text-align: right;
   width: 230px; }
 
-.weather-today .tempreture {
+.weather-today .temperature {
   font-size: 60px; }
 
 .weather-week-descriptor {
@@ -132,7 +132,7 @@ ul.calendar {
     display: inline-block;
     margin-right: 10px;
     width: 40px; }
-  .weather-week .tempreture {
+  .weather-week .temperature {
     display: inline-block;
     width: 60px; }
 
@@ -284,7 +284,7 @@ body {
 Weather
 
 */
-.weather-today .tempreture {
+.weather-today .temperature {
   font-size: 80px; }
 
 .weather-week-descriptor span.ng-binding {
