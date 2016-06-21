@@ -1,4 +1,4 @@
-@import "main";
+@import 'main';
 
 @import url(https://fonts.googleapis.com/css?family=Work+Sans:300,400,500);
 
@@ -8,13 +8,13 @@ body {
 }
 
 .top-left {
-  float: right;
-  text-align: right;
-  display: -webkit-flex;
   -webkit-flex-direction: column;
+  display: -webkit-flex;
   flex-direction: column;
   float: right;
+  text-align: right;
   width: 420px;
+
   .date {
     -webkit-flex: 2;
     flex: 2;
@@ -24,12 +24,14 @@ body {
     position: relative;
     left: 200px;
   }
+
   ul.calendar {
     -webkit-flex: 3;
     flex: 3;
     -webkit-order: 3;
     order: 3;
   }
+
   .time {
     -webkit-flex: 1;
     flex: 1;
@@ -42,6 +44,7 @@ body {
   float: left;
   text-align: left;
   width: 265px;
+
   .weather {
     text-align: left;
     width: 100%;
