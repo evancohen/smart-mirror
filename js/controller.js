@@ -73,9 +73,11 @@
                         $scope.currentForecast = WeatherService.currentForecast();
                         $scope.weeklyForecast = WeatherService.weeklyForecast();
                         $scope.hourlyForecast = WeatherService.hourlyForecast();
+                        $scope.minutelyForecast = WeatherService.minutelyForecast();
                         console.log("Current", $scope.currentForecast);
                         console.log("Weekly", $scope.weeklyForecast);
                         console.log("Hourly", $scope.hourlyForecast);
+                        console.log("Minutely", $scope.minutelyForecast);
 
                         var skycons = new Skycons({"color": "#aaa"});
                         skycons.add("icon_weather_current", $scope.currentForecast.iconAnimation);
