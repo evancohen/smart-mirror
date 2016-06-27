@@ -113,7 +113,7 @@ MotionProcess.stderr.on('data', function (data) {
     console.error(message)
 })
 MotionProcess.stdout.on('data', function (data) {
-    console.print(data.toString())
+    console.error(data.toString())
 })
 }
 // This method will be called when Electron has finished

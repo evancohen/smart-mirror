@@ -31,7 +31,7 @@ def debugging(msg):
 
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(pirPin, GPIO.IN)
+GPIO.setup(motionPin, GPIO.IN)
 timer = False
 monitor_is_on = True
 
@@ -55,7 +55,7 @@ signal.signal(signal.SIGINT, signal_handler)
 while True:
   debugging("Waiting for movement")
   time.sleep(0.5)
-  movement = GPIO.input(pirPin)
+  movement = GPIO.input(motionPin)
   if movement:
     debugging("  movement active")
     if timer:
