@@ -14,14 +14,14 @@ def signal_handler(signal, frame):
     interrupted = True
     exit(0)
 if len(sys.argv) < 2:
-  pirPin = 26
+  motionPin = 26
   ScreenTimeOut = float(0.5)
   
 else:
-  pirPin = int(sys.argv[1])
+  motionPin = int(sys.argv[1])
   ScreenTimeOut = round(float(sys.argv[2]), 2)
 
-print pirPin
+print motionPin
 print ScreenTimeOut
 
 def debugging(msg):

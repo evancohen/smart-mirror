@@ -95,25 +95,26 @@ kwsProcess.stdout.on('data', function (data) {
     console.log(data.toString())
 })
 
-// Get PIRHDMI config
-if(typeof config.pirhdmi == 'undefined'){
-  config.pirhdmi = {}
+// Get motion config
+if(typeof config.motion == 'undefined'){
+  config.motion = {}
 }
-var pirPin = config.pirhdmi.PirPin || 26
-var pirDebug = config.pirhdmi.Debug || true
-var ScreenTimeOut = config.pirhdmi.ScreenTimeOut || 0.5
-var pirEnable = config.pirhdmi.Enable || false
+var motionPin = config.pirhdmi.Pin || 26
+var motionDebug = config.pirhdmi.Debug || true
+var ScreenTimeOut = config.pirhdmi.ScreenTimeOut || 5.0
+var motionEnable = config.pirhdmi.Enable || false
 
-// Initilize the PIR-HDMI process
-if (pirEnable == true){
-var PirProcess = spawn('python', ['./pir-hdmi/pir-hdmi.py', pirPin, ScreenTimeOut, pirDebug], {detached: false})
+// Initilize the motion process
+if (motionEnable == true){
+var MotionProcess = spawn('python', ['./motion/motiondetect.py', pirPin, ScreenTimeOut, pirDebug], {detached: false})
 // Handle messages from python script
-PirProcess.stderr.on('data', function (data) {
+MotionProcess.stderr.on('data', function (data) {
     var message = data.toString()
     console.error(message)
+	console.debug(message)
 })
-PirProcess.stdout.on('data', function (data) {
-    console.error(data.toString())
+MotionProcess.stdout.on('data', function (data) {
+    console.debug(data.toString())
 })
 }
 // This method will be called when Electron has finished
@@ -129,7 +130,7 @@ app.on('window-all-closed', function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
   kwsProcess.kill()
-  if (pirEnable==true){
-	  PirProcess.kill()
+  if (motionEnable==true){
+	  motionProcess.kill()
   }
 })
