@@ -6,9 +6,9 @@ var config = {
     // PIR Detection
     motion : {
         Pin : 26, //Default pirPin is GPIO pin 26.
-        ScreenTimeOut : 5.0 //Default timeout is 5 minutes must be a float number.
-        Enable : true // Enable or disable this functionality
-        Debug : true // send debug info to dev console, if debug timeout is 30 seconds (not yet working)
+        ScreenTimeOut : 5.0, //Default timeout is 5 minutes must be a float number.
+        Enable : true, // Enable or disable this functionality
+        Debug : true, // send debug info to dev console, if debug timeout is 30 seconds (not yet working)
     },
 	// Keyword Spotting (Hotword Detection)
     speech : {
