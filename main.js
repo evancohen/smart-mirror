@@ -99,10 +99,10 @@ kwsProcess.stdout.on('data', function (data) {
 if(typeof config.motion == 'undefined'){
   config.motion = {}
 }
-var motionPin = config.pirhdmi.Pin || 26
-var motionDebug = config.pirhdmi.Debug || true
-var ScreenTimeOut = config.pirhdmi.ScreenTimeOut || 5.0
-var motionEnable = config.pirhdmi.Enable || false
+var motionPin = config.motion.Pin || 26
+var motionDebug = config.motion.Debug || true
+var ScreenTimeOut = config.motion.ScreenTimeOut || 5.0
+var motionEnable = config.motion.Enable || false
 
 // Initilize the motion process
 if (motionEnable == true){
