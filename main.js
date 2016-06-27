@@ -106,7 +106,7 @@ var motionEnable = config.motion.Enable || false
 
 // Initilize the motion process
 if (motionEnable == true){
-var MotionProcess = spawn('python', ['./motion/motiondetect.py', pirPin, ScreenTimeOut, pirDebug], {detached: false})
+var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionPin, ScreenTimeOut, motionDebug], {detached: false})
 // Handle messages from python script
 MotionProcess.stderr.on('data', function (data) {
     var message = data.toString()
