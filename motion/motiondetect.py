@@ -38,13 +38,14 @@ monitor_is_on = True
 def monitor_off():
   global monitor_is_on
   debugging("monitor off")
-  subprocess.call('sudo /opt/vc/bin/tvservice -o', shell=True)
+  subprocess.Popen('tvservice -o', shell=True)
   monitor_is_on = False
 
 def monitor_on():
   global monitor_is_on
   debugging("monitor on")
-  subprocess.call('sudo /opt/vc/bin/tvservice -p && sudo fbset -depth 8 && sudo fbset -depth 16 && sudo xrefresh -d :0.0', shell=True)
+  subprocess.Popen('tvservice -p', shell=True)
+  subprocess.Popen('fbset -depth 8 && fbset -depth 16 && xrefresh', shell=True)
   monitor_is_on = True
 
 signal.signal(signal.SIGINT, signal_handler)

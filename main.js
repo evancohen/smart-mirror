@@ -110,10 +110,10 @@ var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionPin, Scre
 // Handle messages from python script
 MotionProcess.stderr.on('data', function (data) {
     var message = data.toString()
-    console.error(message)
+    console.log(message)
 })
 MotionProcess.stdout.on('data', function (data) {
-    console.print(data.toString())
+    console.log(data.toString())
 })
 }
 // This method will be called when Electron has finished
