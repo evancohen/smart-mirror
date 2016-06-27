@@ -95,6 +95,28 @@ kwsProcess.stdout.on('data', function (data) {
     console.log(data.toString())
 })
 
+// Get PIR-HDMI config
+if(typeof config.pir-hdmi == 'undefined'){
+  config.pir-hdmi = {}
+}
+var pirPin = config.pir-hdmi.PirPin || 11
+var ScreenTimeOut = config.pir-hdmi.ScreenTimeOut || 5.0
+
+// Initilize the PIR-HDMI process
+var PirProcess = spawn('python', ['./pir-hdmi/pir-hdmi.py', pirPin, ScreenTimeOut], {detached: false})
+// Handel messages from python script
+PirProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    if(message.startsWith('INFO')){
+        // When a keyword is spotted, ping the speech service
+        mainWindow.webContents.send('PIR-Triggered', true)
+    }else{
+        console.error(message)
+    }
+})
+PirProcess.stdout.on('data', function (data) {
+    console.log(data.toString())
+})
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -108,4 +130,5 @@ app.on('window-all-closed', function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
   kwsProcess.kill()
+  PirProcess.kill()
 })

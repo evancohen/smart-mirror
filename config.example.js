@@ -3,7 +3,12 @@ var config = {
     // Lenguage for the mirror
     language : "en-US",
     
-    // Keyword Spotting (Hotword Detection)
+    // PIR Detection
+    pir-hdmi : {
+        pirPin : 11, //Default pirPin is GPIO pin 11.
+		ScreenTimeOut : 5.0 //Default timeout is 5 minutes must be a float number.
+    },
+	// Keyword Spotting (Hotword Detection)
     speech : {
         keyword : "Smart Mirror",
         model : "smart_mirror.pmdl", // The name of your model
