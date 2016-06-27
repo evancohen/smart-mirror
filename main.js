@@ -99,7 +99,7 @@ kwsProcess.stdout.on('data', function (data) {
 if(typeof config.pir-hdmi == 'undefined'){
   config.pir-hdmi = {}
 }
-var pirPin = config.pir-hdmi.PirPin || 11
+var pirPin = config.pir-hdmi.PirPin || 26
 var ScreenTimeOut = config.pir-hdmi.ScreenTimeOut || 5.0
 
 // Initilize the PIR-HDMI process

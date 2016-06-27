@@ -5,7 +5,7 @@ var config = {
     
     // PIR Detection
     pir-hdmi : {
-        pirPin : 11, //Default pirPin is GPIO pin 11.
+        pirPin : 26, //Default pirPin is GPIO pin 26.
 		ScreenTimeOut : 5.0 //Default timeout is 5 minutes must be a float number.
     },
 	// Keyword Spotting (Hotword Detection)
