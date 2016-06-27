@@ -111,10 +111,9 @@ var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionPin, Scre
 MotionProcess.stderr.on('data', function (data) {
     var message = data.toString()
     console.error(message)
-	console.debug(message)
 })
 MotionProcess.stdout.on('data', function (data) {
-    console.debug(data.toString())
+    console.print(data.toString())
 })
 }
 // This method will be called when Electron has finished
@@ -131,6 +130,6 @@ app.on('window-all-closed', function () {
 app.on('will-quit', function () {
   kwsProcess.kill()
   if (motionEnable==true){
-	  motionProcess.kill()
+	  MotionProcess.kill()
   }
 })
