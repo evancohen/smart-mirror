@@ -5,7 +5,7 @@ import subprocess
 import sys
 import signal
 
-isdebug = False
+isDebug = True
 interrupted = False
 
 
@@ -26,7 +26,7 @@ print ScreenTimeOut
 
 def debugging(msg):
   global isDebug
-  if isDebug
+  if isDebug:
     print msg
 
 
@@ -66,8 +66,8 @@ while True:
       debugging("    calling monitor on")
       monitor_on()
   else:
-    print "  movement inactive"
+    debugging("  movement inactive")
     if not timer:
-      print "    starting timer"
+      debugging("    starting timer")
       timer = Timer(60*ScreenTimeOut, monitor_off)
       timer.start()
