@@ -99,14 +99,14 @@ kwsProcess.stdout.on('data', function (data) {
 if(typeof config.motion == 'undefined'){
   config.motion = {}
 }
-var motionPin = config.motion.Pin || 26
-var motionDebug = config.motion.Debug || true
-var ScreenTimeOut = config.motion.ScreenTimeOut || 5.0
-var motionEnable = config.motion.Enable || false
+var motionpin = config.motion.pin || 26
+var motiondebug = config.motion.debug || true
+var screentimeout = config.motion.screentimeout || 5.0
+var motionenable = config.motion.enable || false
 
 // Initilize the motion process
 if (motionEnable == true){
-var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionPin, ScreenTimeOut, motionDebug], {detached: false})
+var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionpin, screentimeout, motiondebug], {detached: false})
 // Handle messages from python script
 MotionProcess.stderr.on('data', function (data) {
     var message = data.toString()
