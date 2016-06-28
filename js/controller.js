@@ -7,7 +7,7 @@
             WeatherService,
             FitbitService,
             MapService,
-            HueService,
+            LightService,
             CalendarService,
             ComicService,
             GiphyService,
@@ -340,9 +340,9 @@
                  console.debug("It is", moment().format('h:mm:ss a'));
             });
 
-            // Turn lights off
+            // Control light
             addCommand('light_action', function(state, action) {
-                HueService.performUpdate(state + " " + action);
+                LightService.performUpdate(state + " " + action);
             });
 
             //Show giphy image
