@@ -95,6 +95,27 @@ kwsProcess.stdout.on('data', function (data) {
     console.log(data.toString())
 })
 
+// Get motion config
+if(typeof config.motion == 'undefined'){
+  config.motion = {}
+}
+var motionpin = config.motion.pin || 26
+var motiondebug = config.motion.debug || true
+var screentimeout = config.motion.screentimeout || 5.0
+var motionenable = config.motion.enable || false
+
+// Initilize the motion process
+if (motionEnable == true){
+var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionpin, screentimeout, motiondebug], {detached: false})
+// Handle messages from python script
+MotionProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    console.log(message)
+})
+MotionProcess.stdout.on('data', function (data) {
+    console.log(data.toString())
+})
+}
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -108,4 +129,7 @@ app.on('window-all-closed', function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
   kwsProcess.kill()
+  if (motionEnable==true){
+	  MotionProcess.kill()
+  }
 })
