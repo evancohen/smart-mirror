@@ -66,6 +66,32 @@
             SoundCloudService.init();
 
             var refreshMirrorData = function() {
+                CalendarService.getCalendarEvents().then(function(response) {
+                    $scope.calendar = CalendarService.getFutureEvents();
+                }, function(error) {
+                    console.log(error);
+                });
+
+                if ($scope.fitbitEnabled) {
+                    setTimeout(function() { refreshFitbitData(); }, 5000);
+                }
+            };
+
+            var refreshFitbitData = function() {
+                console.log('refreshing fitbit data');
+                FitbitService.profileSummary(function(response){
+                    $scope.fbDailyAverage = response;
+                });
+
+                FitbitService.todaySummary(function(response){
+                    $scope.fbToday = response;
+                });
+            };
+
+            refreshMirrorData();
+            $interval(refreshMirrorData, 1500000);
+
+            var refreshWeatherData = function() {
                 //Get our location and then get the weather for our location
                 GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
                     console.log("Geoposition", geoposition);
@@ -93,31 +119,10 @@
                 }, function(error){
                     console.log(error);
                 });
-
-                CalendarService.getCalendarEvents().then(function(response) {
-                    $scope.calendar = CalendarService.getFutureEvents();
-                }, function(error) {
-                    console.log(error);
-                });
-
-                if ($scope.fitbitEnabled) {
-                    setTimeout(function() { refreshFitbitData(); }, 5000);
-                }
             };
 
-            var refreshFitbitData = function() {
-                console.log('refreshing fitbit data');
-                FitbitService.profileSummary(function(response){
-                    $scope.fbDailyAverage = response;
-                });
-
-                FitbitService.todaySummary(function(response){
-                    $scope.fbToday = response;
-                });
-            };
-
-            refreshMirrorData();
-            $interval(refreshMirrorData, 1500000);
+            refreshWeatherData();
+            $interval(refreshWeatherData, config.forecast.reload_interval * 60000);
 
             var greetingUpdater = function () {
                 if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
