@@ -46,8 +46,8 @@
             $scope.date = new moment();
 
             // Auto wake at a specific time
-            if (typeof config.auto_timer !== 'undefined' && typeof config.auto_timer.auto_wake !== 'undefined' && config.auto_timer.auto_wake == moment().format('HH:mm:ss')) {
-                console.debug('Auto-wake', config.auto_timer.auto_wake);
+            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined' && config.autoTimer.auto_wake == moment().format('HH:mm:ss')) {
+                console.debug('Auto-wake', config.autoTimer.auto_wake);
                 $scope.focus = "default";
                 AutoSleepService.wake();
                 AutoSleepService.startAutoSleepTimer();
@@ -133,7 +133,7 @@
             };
 
             refreshWeatherData();
-            $interval(refreshWeatherData, config.forecast.reload_interval * 60000);
+            $interval(refreshWeatherData, config.forecast.refreshInterval * 60000);
 
             var greetingUpdater = function () {
                 if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
@@ -169,7 +169,7 @@
 
             if(typeof config.traffic != 'undefined'){
                 refreshTrafficData();
-                $interval(refreshTrafficData, config.traffic.reload_interval * 60000);    
+                $interval(refreshTrafficData, config.traffic.refreshInterval * 60000);    
             }
 
             var refreshComic = function () {
