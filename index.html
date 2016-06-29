@@ -57,7 +57,7 @@
         <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
         <div class="time">{{date.format('LT')}}</div>
         <ul class="calendar fade" ng-show="focus == 'default'">
-            <li class="event" ng-repeat="event in calendar">
+            <li class="event" ng-repeat="event in calendar" ng-class="(calendar[$index - 1].start.format('MD') != event.start.format('MD')) ? 'day-marker' : ''">
                 <div class="event-details">
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
                     <span class="summary">{{event.SUMMARY}}</span>
