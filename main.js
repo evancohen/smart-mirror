@@ -102,7 +102,7 @@ if(typeof config.motion == 'undefined'){
 var motionpin = config.motion.pin || 26
 var motiondebug = config.motion.debug || true
 var screentimeout = config.motion.screentimeout || 5.0
-var motionenable = config.motion.enable || false
+var motionEnable = config.motion.enable || false
 
 // Initilize the motion process
 if (motionEnable == true){
