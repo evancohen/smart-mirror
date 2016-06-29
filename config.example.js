@@ -34,7 +34,8 @@ var config = {
     // forecast.io
     forecast : {
         key : "", // Your forecast.io api key
-        units : "auto" // See forecast.io documentation if you are getting the wrong units
+        units : "auto", // See forecast.io documentation if you are getting the wrong units
+        reload_interval : 2, // Number of minutes the information is refreshed. Forecast.io limits requests to 1000/day: a 2min interval = 720 calls/day
     },
     // Philips Hue
     hue : {
