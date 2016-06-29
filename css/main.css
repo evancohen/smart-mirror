@@ -112,7 +112,6 @@ ul.calendar {
   margin-bottom: 10px; }
 .calendar span {
   display: inline-block; }
-  .calendar span.day {
   .calendar .day {
     display: none;
     font-weight: bold;
