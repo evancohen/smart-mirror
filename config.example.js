@@ -2,7 +2,7 @@ var config = {
 
     // Lenguage for the mirror
     language : "en-US",
-    
+
     // PIR Detection
     motion : {
         pin : 26, //Default pirPin is GPIO pin 26.
@@ -32,23 +32,23 @@ var config = {
 
     //use this only if you want to hardcode your geoposition (used for weather)
     /*
-    geo_position: {
+    geoPosition: {
        latitude: 78.23423423,
        longitude: 13.123124142
     },
     */
-    
+
     // forecast.io
     forecast : {
         key : "", // Your forecast.io api key
         units : "auto", // See forecast.io documentation if you are getting the wrong units
-        reload_interval : 2, // Number of minutes the information is refreshed. Forecast.io limits requests to 1000/day: a 2min interval = 720 calls/day
+        refreshInterval : 2, // Number of minutes the information is refreshed. Forecast.io limits requests to 1000/day: a 2min interval = 720 calls/day
     },
     // lights
     light : {
         settings : {
-            hue_ip : "", // The IP address of your hue base
-            hue_username : "" // The username used to control your hue
+            hueIp : "", // The IP address of your hue base
+            hueUsername : "" // The username used to control your hue
         },
         setup : [
             {
@@ -97,7 +97,7 @@ var config = {
     traffic: {
       key : "", // Bing Maps API Key
 
-      reload_interval : 5, // Number of minutes the information is refreshed
+      refreshInterval : 5, // Number of minutes the information is refreshed
       // An array of tips that you would like to display travel time for
       trips : [{
         mode : "Driving", // Possibilities: Driving / Transit / Walking
@@ -112,9 +112,9 @@ var config = {
       feeds : [],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
       refreshInterval : 120 // Number of minutes the information is refreshed
     },
-    auto_timer: {
-      auto_sleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
-      auto_wake: '07:00:00', // When to automatically wake the screen up (7:00AM)
+    autoTimer: {
+      autoSleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
+      autoWake: '07:00:00', // When to automatically wake the screen up (7:00AM)
       'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
       'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
     }
