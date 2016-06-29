@@ -3,6 +3,7 @@
 
     function MirrorCtrl(
             SpeechService,
+            AutoSleepService,
             GeolocationService,
             WeatherService,
             FitbitService,
@@ -43,6 +44,14 @@
         //Update the time
         function updateTime(){
             $scope.date = new moment();
+
+            // Auto wake at a specific time
+            if (typeof config.auto_timer !== 'undefined' && typeof config.auto_timer.auto_wake !== 'undefined' && config.auto_timer.auto_wake == moment().format('HH:mm:ss')) {
+                console.debug('Auto-wake', config.auto_timer.auto_wake);
+                $scope.focus = "default";
+                AutoSleepService.wake();
+                AutoSleepService.startAutoSleepTimer();
+            }
         }
 
         // Reset the command text
@@ -53,6 +62,8 @@
         };
 
         _this.init = function() {
+            AutoSleepService.startAutoSleepTimer();
+
             var tick = $interval(updateTime, 1000);
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -227,6 +238,19 @@
 
             // Go back to default view
             addCommand('wake_up', defaultView);
+
+            // Turn off HDMI output
+            addCommand('screen off', function() {
+                console.debug('turning screen off');
+                AutoSleepService.sleep();
+            });
+
+            // Turn on HDMI output
+            addCommand('screen on', function() {
+                console.debug('turning screen on');
+                AutoSleepService.wake();
+                $scope.focus = "default"
+            });
 
             // Hide everything and "sleep"
             addCommand('debug', function() {
