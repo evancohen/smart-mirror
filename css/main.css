@@ -1,377 +1,469 @@
 @font-face {
-  font-family: "HelveticaNeue-UltraLight";
-  src: url("../fonts/HelveticaNeue-UltraLight.ttf");
-  /* EOT file for IE */ }
+  font-family: 'HelveticaNeue-UltraLight';
+  src: url('../fonts/HelveticaNeue-UltraLight.ttf');
+  /* EOT file for IE */
+}
+
 body {
-  background-color: black;
+  background-color: #000;
   color: #fff;
   font-family: 'HelveticaNeue-UltraLight', 'Open Sans', sans-serif;
   font-weight: 300;
-  position: relative; }
+  position: relative;
+}
 
-h1, h2, h3, h4, h5 {
-  font-weight: 300; }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 300;
+}
 
 h1 {
-  font-size: 120px; }
+  font-size: 120px;
+}
 
 dt {
-  font-weight: 600; }
+  font-weight: 600;
+}
 
 /* Colors */
 .light-grey {
-  color: #ccc; }
+  color: #ccc;
+}
 
 .grey {
-  color: #999; }
+  color: #999;
+}
 
 /* Displays */
 .sleep-cover {
-  background-color: black;
+  background-color: #000;
+  height: 100%;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  z-index: 999; }
+  z-index: 999;
+}
 
 .container {
-  z-index: -1;
-  /* so things are still selectable */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
+  transition: all .3s ease;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%; 
-  transition: all 0.3s ease;}
+  z-index: -1;
+}
 
 .listening {
-  box-shadow: inset 0px -40px 40px -40px #fff
-}  
+  box-shadow: inset 0 -40px 40px -40px #fff;
+}
 
 .not-listening {
-  box-shadow: inset 0px 0px 0px 0px #fff
-}  
+  box-shadow: inset 0 0 0 0 #fff;
+}
 
 .interim-result {
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+}
 
 .top-left {
-  float: left; }
+  float: left;
+}
 
 .date {
-  font-size: 42px; }
+  font-size: 42px;
+}
 
 .time {
-  font-size: 110px; }
+  font-size: 110px;
+}
 
 .top-right {
-  float: right; }
+  float: right;
+}
 
 .middle-center {
-  display: flex;
-  flex: 1;
   align-items: stretch;
   align-self: flex-start;
+  display: flex;
+  flex: 1;
   flex-direction: column;
-  width: 100%;
+  justify-content: center;
   text-align: center;
-  justify-content: center; }
+  width: 100%;
+}
 
 .bottom-center {
   font-family: 'Open Sans', sans-serif;
-  width: 100%;
+  margin-bottom: 20px;
   text-align: center;
-  margin-bottom: 20px; }
+  width: 100%;
+}
 
 .bottom-left {
-    font-family: 'Open Sans', sans-serif;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
+  bottom: 20px;
+  font-family: 'Open Sans', sans-serif;
+  left: 20px;
+  position: absolute;
 }
 
 .commands {
-  width: 450px;
-  text-align: left;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  text-align: left;
+  width: 450px;
+}
 
-ul.calendar {
-  list-style: none;
+.calendar {
   font-size: 22px;
+  list-style: none;
   margin-left: 10px;
-  padding: 0; }
+  padding: 0;
+}
 
 .calendar .event {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+}
+
 .calendar span {
-  display: inline-block; }
-  .calendar span.day {
-    font-weight: bold;
-    width: 128px;
-    vertical-align: top; }
-  .calendar span.summary {
-    max-width: 400px; }
+  display: inline-block;
+}
+
+.calendar .day {
+  font-weight: bold;
+  vertical-align: top;
+  width: 128px;
+}
+
+.calendar .summary {
+  max-width: 400px;
+}
+
 .calendar .event-details .details {
-  font-size: 12px;
-  padding-left: 135px;
   font-family: 'Open Sans', sans-serif;
-  font-weight: lighter; }
+  font-size: 12px;
+  font-weight: lighter;
+  padding-left: 135px;
+}
 
 .weather {
-  margin-left: auto;
   display: inline-block;
+  margin-left: auto;
   text-align: right;
-  width: 230px; }
+  width: 230px;
+}
 
 .weather-today .temperature {
-  font-size: 60px; }
+  font-size: 60px;
+}
 
 .weather-week-descriptor {
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
-  margin-left: auto;
   margin-bottom: 10px;
-  text-align: justify; }
+  margin-left: auto;
+  text-align: justify;
+}
 
 .weather-week {
+  font-size: 22px;
   margin-right: 10px;
-  font-size: 22px; }
-  .weather-week .day {
-    display: inline-block;
-    margin-right: 10px;
-    width: 40px; }
-  .weather-week .temperature {
-    display: inline-block;
-    width: 50px; }
+}
 
-.weather .weather-today canvas, .weather .weather-week-day canvas {
-  display: none; }
+.weather-week .day {
+  display: inline-block;
+  margin-right: 10px;
+  width: 40px;
+}
+
+.weather-week .temperature {
+  display: inline-block;
+  width: 50px;
+}
+
+.weather .weather-today canvas,
+.weather .weather-week-day canvas {
+  display: none;
+}
 
 .fitbit {
-    height: 100%;
+  height: 100%;
 }
 
 .fitbit-title {
-    margin-right: 10px;
-    font-size: 24px;
+  font-size: 24px;
+  margin-right: 10px;
 }
 
 .fitbit-subtitle {
-    margin-right: 10px;
-    font-size: 20px;
+  font-size: 20px;
+  margin-right: 10px;
 }
 
 .fitbit-item {
-    color: #ccc;
-    margin-right: 10px;
-    font-size: 16px;
+  color: #ccc;
+  font-size: 16px;
+  margin-right: 10px;
 }
 
 .fitbit-badge {
-    width: 16px;
-    height: 16px;
+  height: 16px;
+  width: 16px;
 }
 
 .fitbit-main {
-    display: inline-block;
-    margin-right: 10px;
-    width: 450px;
+  display: inline-block;
+  margin-right: 10px;
+  width: 450px;
 }
 
 .traffic-information {
-  text-align: right;
+  margin-right: 10px;
   margin-top: 10px;
-  margin-right: 10px; }
+  text-align: right;
+}
 
 .time-to {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 @keyframes reduce-dashoffset {
   to {
-    stroke-dashoffset: 0; } }
+    stroke-dashoffset: 0;
+  }
+}
+
 @keyframes increase-dashoffset {
   from {
-    stroke-dashoffset: 0; } }
+    stroke-dashoffset: 0;
+  }
+}
+
 .timer {
   font-size: 120px;
-  position: relative; }
+  position: relative;
+}
 
 .timer-circle {
-  width: 3.25em;
+  display: block;
   height: 3.25em;
-  transform: rotate(-90deg) scaleY(-1);
   margin: 20px auto;
-  display: block; }
-  .timer-circle .background,
-  .timer-circle .progress {
-    r: 1.525em;
-    cx: 1.625em;
-    cy: 1.625em;
-    stroke-width: 0.1em;
-    fill: none;
-    stroke: #222; }
-  .timer-circle .progress {
-    stroke-dasharray: 10.2101761239em;
-    stroke-dashoffset: 10.2101761239em;
-    stroke-linecap: round;
-    animation-name: increase-dashoffset;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    stroke: white; }
+  transform: rotate(-90deg) scaleY(-1);
+  width: 3.25em;
+}
 
-.timer-countdown, .timer-duration {
+.timer-circle .background,
+.timer-circle .progress {
+  cx: 1.625em;
+  cy: 1.625em;
+  fill: none;
+  r: 1.525em;
+  stroke: #222;
+  stroke-width: .1em;
+}
+
+.timer-circle .progress {
+  animation-fill-mode: forwards;
+  animation-name: increase-dashoffset;
+  animation-timing-function: linear;
+  stroke: #fff;
+  stroke-dasharray: 10.2101761239em;
+  stroke-dashoffset: 10.2101761239em;
+  stroke-linecap: round;
+}
+
+.timer-countdown,
+.timer-duration {
+  left: 50%;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%); }
+  transform: translateY(-50%) translateX(-50%);
+}
 
 .timer-duration {
+  font-size: 25%;
   top: 75%;
-  font-size: 25%; }
+}
 
 .contents {
-  max-width: 100%; }
+  max-width: 100%;
+}
 
 .gif {
-  height: 100%; }
+  height: 100%;
+}
 
 .map {
-  height: 1080px; }
+  height: 1080;
+}
 
 .reminders-container {
-  width: 250px;
-  text-align: left;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  text-align: left;
+  width: 250px;
+}
 
 .contents-box {
+  overflow: hidden;
+  position: relative;
   text-align: center;
   width: 100%;
-  position: relative;
-  overflow: hidden; }
-  .contents-box:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-box-shadow: inset 0 0 10px 10px #000;
-    -moz-box-shadow: inset 0 0 10px 10px #000;
-    box-shadow: inset 0 0 10px 10px #000;
-    overflow: hidden; }
+}
+
+.contents-box::after {
+  -moz-box-shadow: inset 0 0 10px 10px #000;
+  -webkit-box-shadow: inset 0 0 10px 10px #000;
+  box-shadow: inset 0 0 10px 10px #000;
+  content: '';
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 
 .video {
-    width: 100%;
-    height: 680px;
-    border: none;
-    /* If you want to make the video black and white
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    */
+  border: 0;
+  height: 680px;
+  width: 100%;
+  /* If you want to make the video #000 and white
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  */
 }
 
 .sc-container {
-	margin:auto;
-	-webkit-filter: grayscale(70%);
-	filter: grayscale(70%);
-	font-family: bold;
+  -webkit-filter: grayscale(70%);
+  filter: grayscale(70%);
+  font-family: bold;
+  margin: auto;
 }
+
 .scWaveform {
-	background-color: #000000;
-	width: 500px;
-	-webkit-filter: invert(100%);
-	filter: invert(100%);
+  -webkit-filter: invert(100%);
+  background-color: #000;
+  filter: invert(100%);
+  width: 500px;
 }
 
 .color-block {
-  height: 200px;
-  width: 200px;
   display: inline-block;
+  height: 200px;
   margin: 10px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  width: 200px;
+}
 
 .debug-info {
-  width: 500px; }
+  width: 500px;
+}
 
 /* Animations */
 .fade.ng-hide {
-  opacity: 0; }
-.fade.ng-hide-remove, .fade.ng-hide-add {
-  display: block !important; }
-.fade.ng-hide-remove {
-  transition: all ease 1500ms; }
+  opacity: 0;
+}
+
+.fade.ng-hide-remove,
 .fade.ng-hide-add {
-  transition: all ease 500ms; }
+  display: block !important;
+}
+
+.fade.ng-hide-remove {
+  transition: all ease 1500ms;
+}
+
+.fade.ng-hide-add {
+  transition: all ease 500ms;
+}
 
 .animate-grow {
-  max-height: 1280px !important; }
-  .animate-grow.ng-hide-add, .animate-grow.ng-hide-remove {
-    transition: all linear 500ms; }
-  .animate-grow.ng-hide {
-    max-height: 0 !important; }
+  max-height: 1280px !important;
+}
+
+.animate-grow.ng-hide-add,
+.animate-grow.ng-hide-remove {
+  transition: all linear 500ms;
+}
+
+.animate-grow.ng-hide {
+  max-height: 0 !important;
+}
 
 .dimmed {
-  color: #aaa; }
+  color: #aaa;
+}
 
-.xxsmall, .xsmall, .small {
+.xxsmall,
+.xsmall,
+.small {
   font-family: "HelveticaNeue-Medium", sans-serif;
-  letter-spacing: 0; }
+  letter-spacing: 0;
+}
 
 .xxsmall {
-  font-size: 15px; }
-  .xxsmall .wi {
-    line-height: 15px; }
+  font-size: 15px;
+}
+
+.xxsmall .wi {
+  line-height: 15px;
+}
 
 .xsmall {
-  font-size: 20px; }
+  font-size: 20px;
+}
 
 .small {
-  font-size: 25px; }
+  font-size: 25px;
+}
 
 .icon {
-  position: relative;
-  top: -10px;
   display: inline-block;
   font-size: 45px;
+  font-weight: 100px;
+  margin-right: 10px;
   padding-right: 5px;
-  font-weight: 100;
-  margin-right: 10px; }
+  position: relative;
+  top: -10px;
+}
 
 .icon-small {
-  position: relative;
   display: inline-block;
   font-size: 20px;
-  padding-left: 0px;
-  padding-right: -10px;
   font-weight: 100;
-  width: 20px; }
+  padding-left: 0;
+  padding-right: -10px;
+  position: relative;
+  width: 20px;
+}
 
 .xkcd {
   -webkit-filter: invert(100%);
-  max-width: 100%; 
+  max-width: 100%;
 }
 
 .news {
-    height: 75px; 
-    margin-bottom: 5px;
+  height: 75px;
+  margin-bottom: 5px;
 }
 
 .news-title {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
-    margin-bottom: 5px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .news-content {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 20px;
-    margin-bottom: 55px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  margin-bottom: 55px;
 }
