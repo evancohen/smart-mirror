@@ -182,7 +182,7 @@
             };
 
             if(typeof config.traffic !== 'undefined'){
-                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval);    
+                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);    
             }
 
             var refreshComic = function () {
@@ -208,14 +208,12 @@
             };
 
             var updateNews = function() {
-                registerRefreshInterval(function(){ 
-                    $scope.news = RssService.getNews(); 
-                }, 5);
+                $scope.news = RssService.getNews(); 
             };
 
             if(typeof config.rss !== 'undefined'){
-                registerRefreshInterval(refreshRss, config.rss.refreshInterval);
-                registerRefreshInterval(updateNews, 8);
+                registerRefreshInterval(refreshRss, config.rss.refreshInterval || 30);
+                registerRefreshInterval(updateNews, 2);
             }
 
             var addCommand = function(commandId, commandFunction){
