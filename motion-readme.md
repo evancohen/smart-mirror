@@ -2,6 +2,18 @@
 
 ### Configuration
 
+If you do not have a `config.js` file please enter `cd ~/motion-detect && cp config.example.js config.js` to create the `config.js` file
+If you already have a `config.js` file you must add the following code to the file:
+```
+    // PIR Detection
+    motion : {
+        pin : 26, //Default pirPin is GPIO pin 26.
+        screentimeout : 5.0, //Default timeout is 5 minutes must be a float number.
+        enable : true, // Enable or disable this functionality
+        debug : true // send debug info to dev console, if debug timeout is 30 seconds (not yet working)
+    },
+```
+
 Variable | Usage | Data Type | Default Value if not included in config.js
 ---------|-------|-----------|--------------
 pin | Identify GPIO input Pin connected to output pin of the PIR device or other device used to detect motion | int | 26
