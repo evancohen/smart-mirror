@@ -133,7 +133,7 @@
             };
 
             refreshWeatherData();
-            $interval(refreshWeatherData, config.forecast.refreshInterval * 60000);
+            $interval(refreshWeatherData, (config.forecast.refreshInterval || 2) * 60000);
 
             var greetingUpdater = function () {
                 if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
@@ -169,7 +169,7 @@
 
             if(typeof config.traffic != 'undefined'){
                 refreshTrafficData();
-                $interval(refreshTrafficData, config.traffic.refreshInterval * 60000);    
+                $interval(refreshTrafficData, (config.traffic.refreshInterval || 5) * 60000);
             }
 
             var refreshComic = function () {
@@ -201,8 +201,8 @@
             };
 
             refreshRss();
-            $interval(refreshRss, config.rss.refreshInterval * 60000);
-            
+            $interval(refreshRss, (config.rss.refreshInterval || 120) * 60000);
+
             updateNews();
             $interval(updateNews, 8000);  // cycle through news every 8 seconds
 
