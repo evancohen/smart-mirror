@@ -22,6 +22,7 @@
     <!-- App -->
     <script src="config.js"></script>
     <script src="js/app.js"></script>
+
     <script src="js/services/timebox.js"></script>
     <script src="js/services/soundcloud.js"></script>
     <script src="js/services/search.js"></script>
@@ -29,7 +30,7 @@
     <script src="js/services/weather.js"></script>
     <script src="js/services/comic.js"></script>
     <script src="js/services/map.js"></script>
-    <script src="js/services/hue.js"></script>
+    <script src="js/services/light.js"></script>
     <script src="js/services/giphy.js"></script>
     <script src="js/services/timer.js"></script>
     <script src="js/services/geolocation.js"></script>
@@ -38,13 +39,14 @@
     <script src="js/services/fitbit.js"></script>
     <script src="js/services/reminder.js"></script>
     <script src="js/services/rss.js"></script>
+    <script src="js/services/autosleep.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
-	  <link rel="stylesheet" href="css/weather-icons.css">
+      <link rel="stylesheet" href="css/weather-icons.css">
     <!-- bower:css -->
     <!-- endbower -->
 
@@ -55,7 +57,7 @@
         <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
         <div class="time">{{date.format('LT')}}</div>
         <ul class="calendar fade" ng-show="focus == 'default'">
-            <li class="event" ng-repeat="event in calendar">
+            <li class="event" ng-repeat="event in calendar" ng-class="(calendar[$index - 1].start.format('MD') != event.start.format('MD')) ? 'day-marker' : ''">
                 <div class="event-details">
                     <span class="day">{{event.start.format('dddd') | uppercase}}</span>
                     <span class="summary">{{event.SUMMARY}}</span>
@@ -72,6 +74,7 @@
             <span class="temperature" ng-show="currentForecast.temperature">{{currentForecast.temperature}}&deg;</span>
           </div>
           <div class="weather-week-descriptor">
+            <span>{{minutelyForecast.summary}}</span>
             <span>{{hourlyForecast.summary}}</span>
             <span>{{weeklyForecast.summary}}</span>
           </div>
@@ -158,7 +161,7 @@
         </div>
 
         <div class="news">
-          <div class="fade" ng-show="focus == 'default' && shownews && news != null">
+          <div class="fade" ng-show="focus == 'default' && news">
             <div class="news-title dimmed fade">
               <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
               <span fade>Source: {{news.title}},   Last Updated: {{news.lastUpdated.format('MMM DD, h:mm a')}} </span>

@@ -31,11 +31,16 @@
         "intensity": {
             "increase": "increase",
             "decrease": "decrease",
-            "max": "max"
+            "max": "max",
+            "half": "half",
+            "quarter": "quarter",
+            "threequarter": ["three-quarter", "three-fourth"]
         },
         "action": {
             "on": "on",
-            "off": "off"
+            "off": "off",
+            "nightmode": "nightmode",
+            "reset": "reset"
         }
     },
     "commands": {
@@ -181,9 +186,9 @@
             "description": "Replays the current song on SoundCloud"
         },
         "light_action": {
-            "text": "Turn the (state) light (action)",
+            "text": "Turn (state) light(s) (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",
-            "description": "(turn) (the) :state (the) light(s) *action"
+            "description": "Control color and brightness of lights"
         }
     }
 }

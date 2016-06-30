@@ -2,8 +2,15 @@ var config = {
 
     // Lenguage for the mirror
     language : "en-US",
-    
-    // Keyword Spotting (Hotword Detection)
+
+    // PIR Detection
+    motion : {
+        pin : 26, //Default pirPin is GPIO pin 26.
+        screentimeout : 5.0, //Default timeout is 5 minutes must be a float number.
+        enable : true, // Enable or disable this functionality
+        debug : true // send debug info to dev console, if debug timeout is 30 seconds (not yet working)
+    },
+	// Keyword Spotting (Hotword Detection)
     speech : {
         keyword : "Smart Mirror",
         model : "smart_mirror.pmdl", // The name of your model
@@ -25,31 +32,49 @@ var config = {
 
     //use this only if you want to hardcode your geoposition (used for weather)
     /*
-    geo_position: {
+    geoPosition: {
        latitude: 78.23423423,
        longitude: 13.123124142
     },
     */
-    
+
     // forecast.io
     forecast : {
         key : "", // Your forecast.io api key
-        units : "auto" // See forecast.io documentation if you are getting the wrong units
+        units : "auto", // See forecast.io documentation if you are getting the wrong units
+        refreshInterval : 2, // Number of minutes the information is refreshed. Forecast.io limits requests to 1000/day: a 2min interval = 720 calls/day
     },
-    // Philips Hue
-    hue : {
-        ip : "", // The IP address of your hue base
-        uername : "", // The username used to control your hue
-        groups : [{
-            id : 0, // The group id 0 will change all the lights on the network
-            name : "all"
-        }, {
-            id : 1,
-            name : "bedroom"
-        }, {
-            id : 2,
-            name : "kitchen"
-        }]
+    // lights
+    light : {
+        settings : {
+            hueIp : "", // The IP address of your hue base
+            hueUsername : "" // The username used to control your hue
+        },
+        setup : [
+            {
+                name : "parlor", // Single word room name for speech recognition
+                targets : [
+                    {
+                        type : "hyperion",
+                        ip : "", // The IP address of your hyperion
+                        port : "19444" // The port of your hyperion
+                    },
+                    {
+                        type : "hue", // Philips Hue
+                        id : 1 // The group id (0 will change all the lights on the network)
+                    }
+                ]
+            },
+            {
+                name : "bath",
+                targets : [
+                    {
+                        type : "hue",
+                        id : 2
+                    }
+                ]
+            }
+        ]
     },
     // Calendar (An array of iCals)
     calendar: {
@@ -72,7 +97,7 @@ var config = {
     traffic: {
       key : "", // Bing Maps API Key
 
-      reload_interval : 5, // Number of minutes the information is refreshed
+      refreshInterval : 5, // Number of minutes the information is refreshed
       // An array of tips that you would like to display travel time for
       trips : [{
         mode : "Driving", // Possibilities: Driving / Transit / Walking
@@ -86,6 +111,12 @@ var config = {
     rss: {
       feeds : [],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
       refreshInterval : 120 // Number of minutes the information is refreshed
+    },
+    autoTimer: {
+      autoSleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
+      autoWake: '07:00:00', // When to automatically wake the screen up (7:00AM)
+      'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
+      'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
     }
 };
 

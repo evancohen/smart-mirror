@@ -16,7 +16,14 @@
                 });
         };
 
-        //Returns the current forecast along with high and low tempratures for the current day 
+        service.minutelyForecast = function(){
+            if(service.forecast === null){
+                return null;
+            }
+            return service.forecast.data.minutely;
+        }
+
+        //Returns the current forecast along with high and low tempratures for the current day
         service.currentForecast = function() {
             if(service.forecast === null){
                 return null;

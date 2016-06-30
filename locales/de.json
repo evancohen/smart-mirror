@@ -31,11 +31,16 @@
         "intensity": {
             "increase": "heller",
             "decrease": "dunkler",
-            "max": "maximal"
+            "max": "maximal",
+            "half": "halber",
+            "quarter": "viertel",
+            "threequarter": "dreiviertel"
         },
         "action": {
             "on": "an",
-            "off": "aus"
+            "off": "aus",
+            "nightmode": "nachtmodus",
+            "reset": "zurücksetzen"
         }
     },
     "commands": {
@@ -181,9 +186,9 @@
             "description": "Replays the current song on SoundCloud"
         },
         "light_action": {
-            "text": "Schalte das (state) Licht (action)",
-            "voice": "(Schalte) (das) :state (die) Licht(er) *action",
-            "description": "(Schalte) (das) :state (die) Licht(er) *action"
+            "text": "Schalte (das|die) Licht(er) (action)",
+            "voice": "(Schalte) (das) (die) Licht(er) *action",
+            "description": "Steuert Farbe und Helligkeit von Lichtern"
         }
     }
 }
