@@ -3,11 +3,12 @@
 
     function MirrorCtrl(
             SpeechService,
+            AutoSleepService,
             GeolocationService,
             WeatherService,
             FitbitService,
             MapService,
-            HueService,
+            LightService,
             CalendarService,
             ComicService,
             GiphyService,
@@ -32,17 +33,25 @@
         $scope.layoutName = 'main';
 
         $scope.fitbitEnabled = false;
-        if (typeof config.fitbit != 'undefined') {
+        if (typeof config.fitbit !== 'undefined') {
             $scope.fitbitEnabled = true;
         }
 
         //set lang
-        moment.locale((typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
+        moment.locale((typeof config.language !== 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
         console.log('moment local', moment.locale());
 
         //Update the time
         function updateTime(){
             $scope.date = new moment();
+
+            // Auto wake at a specific time
+            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined' && config.autoTimer.auto_wake == moment().format('HH:mm:ss')) {
+                console.debug('Auto-wake', config.autoTimer.auto_wake);
+                $scope.focus = "default";
+                AutoSleepService.wake();
+                AutoSleepService.startAutoSleepTimer();
+            }
         }
 
         // Reset the command text
@@ -52,7 +61,20 @@
             });
         };
 
+        /**
+         * Register a refresh callback for a given interval (in seconds)
+         */
+        var registerRefreshInterval = function(callback, interval){
+            //Load the data initially
+            callback();
+            if(typeof interval !== 'undefined'){
+                $interval(callback, interval * 60000);
+            }
+        }
+
         _this.init = function() {
+            AutoSleepService.startAutoSleepTimer();
+
             var tick = $interval(updateTime, 1000);
             updateTime();
             GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
@@ -66,32 +88,6 @@
             SoundCloudService.init();
 
             var refreshMirrorData = function() {
-                //Get our location and then get the weather for our location
-                GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
-                    console.log("Geoposition", geoposition);
-                    WeatherService.init(geoposition).then(function(){
-                        $scope.currentForecast = WeatherService.currentForecast();
-                        $scope.weeklyForecast = WeatherService.weeklyForecast();
-                        $scope.hourlyForecast = WeatherService.hourlyForecast();
-                        console.log("Current", $scope.currentForecast);
-                        console.log("Weekly", $scope.weeklyForecast);
-                        console.log("Hourly", $scope.hourlyForecast);
-
-                        var skycons = new Skycons({"color": "#aaa"});
-                        skycons.add("icon_weather_current", $scope.currentForecast.iconAnimation);
-
-                        skycons.play();
-
-                        $scope.iconLoad = function (elementId, iconAnimation){
-                            skycons.add(document.getElementById(elementId), iconAnimation);
-                            skycons.play();
-                        };
-
-                    });
-                }, function(error){
-                    console.log(error);
-                });
-
                 CalendarService.getCalendarEvents().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
@@ -117,8 +113,42 @@
             refreshMirrorData();
             $interval(refreshMirrorData, 1500000);
 
+            var refreshWeatherData = function() {
+                //Get our location and then get the weather for our location
+                GeolocationService.getLocation({enableHighAccuracy: true}).then(function(geoposition){
+                    console.log("Geoposition", geoposition);
+                    WeatherService.init(geoposition).then(function(){
+                        $scope.currentForecast = WeatherService.currentForecast();
+                        $scope.weeklyForecast = WeatherService.weeklyForecast();
+                        $scope.hourlyForecast = WeatherService.hourlyForecast();
+                        $scope.minutelyForecast = WeatherService.minutelyForecast();
+                        console.log("Current", $scope.currentForecast);
+                        console.log("Weekly", $scope.weeklyForecast);
+                        console.log("Hourly", $scope.hourlyForecast);
+                        console.log("Minutely", $scope.minutelyForecast);
+
+                        var skycons = new Skycons({"color": "#aaa"});
+                        skycons.add("icon_weather_current", $scope.currentForecast.iconAnimation);
+
+                        skycons.play();
+
+                        $scope.iconLoad = function (elementId, iconAnimation){
+                            skycons.add(document.getElementById(elementId), iconAnimation);
+                            skycons.play();
+                        };
+
+                    });
+                }, function(error){
+                    console.log(error);
+                });
+            };
+
+            if(typeof config.forecast !== 'undefined'){
+                registerRefreshInterval(refreshWeatherData, config.forecast.refreshInterval || 2);
+            }
+
             var greetingUpdater = function () {
-                if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                if(typeof config.greeting !== 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday !== 'undefined') {
                     var hour = moment().hour();
                     var greetingTime = "midday";
 
@@ -136,8 +166,10 @@
                     $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
                 }
             };
-            greetingUpdater();
-            $interval(greetingUpdater, 120000);
+
+            if(typeof config.greeting !== 'undefined'){
+                registerRefreshInterval(greetingUpdater, 120000);
+            }
 
             var refreshTrafficData = function() {
                 TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
@@ -149,9 +181,8 @@
                 });
             };
 
-            if(typeof config.traffic != 'undefined'){
-                refreshTrafficData();
-                $interval(refreshTrafficData, config.traffic.reload_interval * 60000);    
+            if(typeof config.traffic !== 'undefined'){
+                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);    
             }
 
             var refreshComic = function () {
@@ -162,15 +193,14 @@
                     console.log(error);
                 });
             };
+            
+            registerRefreshInterval(refreshComic, 12*60); // 12 hours
 
-            refreshComic();
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
             }
-
-            $interval(refreshComic, 12*60*60000); // 12 hours
-
+        
             var refreshRss = function () {
                 console.log ("Refreshing RSS");
                 $scope.news = null;
@@ -178,15 +208,13 @@
             };
 
             var updateNews = function() {
-                $scope.shownews = false;
-                setTimeout(function(){ $scope.news = RssService.getNews(); $scope.shownews = true; }, 1000);
+                $scope.news = RssService.getNews(); 
             };
 
-            refreshRss();
-            $interval(refreshRss, config.rss.refreshInterval * 60000);
-            
-            updateNews();
-            $interval(updateNews, 8000);  // cycle through news every 8 seconds
+            if(typeof config.rss !== 'undefined'){
+                registerRefreshInterval(refreshRss, config.rss.refreshInterval || 30);
+                registerRefreshInterval(updateNews, 2);
+            }
 
             var addCommand = function(commandId, commandFunction){
                 var voiceId = 'commands.'+commandId+'.voice';
@@ -194,7 +222,7 @@
                 var descId = 'commands.'+commandId+'.description';
                 $translate([voiceId, textId, descId]).then(function (translations) {
                     SpeechService.addCommand(translations[voiceId], commandFunction);
-                    if (translations[textId] != '') {
+                    if (translations[textId] !== '') {
                         var command = {"text": translations[textId], "description": translations[descId]};
                         $scope.commands.push(command);
                     }
@@ -220,6 +248,19 @@
 
             // Go back to default view
             addCommand('wake_up', defaultView);
+
+            // Turn off HDMI output
+            addCommand('screen off', function() {
+                console.debug('turning screen off');
+                AutoSleepService.sleep();
+            });
+
+            // Turn on HDMI output
+            addCommand('screen on', function() {
+                console.debug('turning screen on');
+                AutoSleepService.wake();
+                $scope.focus = "default"
+            });
 
             // Hide everything and "sleep"
             addCommand('debug', function() {
@@ -338,9 +379,9 @@
                  console.debug("It is", moment().format('h:mm:ss a'));
             });
 
-            // Turn lights off
+            // Control light
             addCommand('light_action', function(state, action) {
-                HueService.performUpdate(state + " " + action);
+                LightService.performUpdate(state + " " + action);
             });
 
             //Show giphy image
@@ -430,7 +471,7 @@
                     $timeout.cancel(resetCommandTimeout);
                 },
                 result : function(result){
-                    if(typeof result != 'undefined'){
+                    if(typeof result !== 'undefined'){
                         $scope.interimResult = result[0];
                         resetCommandTimeout = $timeout(restCommand, 5000);
                     }
@@ -455,7 +496,7 @@
         .controller('MirrorCtrl', MirrorCtrl);
 
     function themeController($scope) {
-        $scope.layoutName = (typeof config.layout != 'undefined' && config.layout)?config.layout:'main';
+        $scope.layoutName = (typeof config.layout !== 'undefined' && config.layout)?config.layout:'main';
     }
 
     angular.module('SmartMirror')
