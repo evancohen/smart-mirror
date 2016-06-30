@@ -143,8 +143,9 @@
                 });
             };
 
-            refreshWeatherData();
-            $interval(refreshWeatherData, ((config.forecast.refreshInterval)? config.forecast.refreshInterval : 2) * 60000);
+            if(typeof config.forecast !== 'undefined'){
+                registerRefreshInterval(refreshWeatherData, config.forecast.refreshInterval || 2);
+            }
 
             var greetingUpdater = function () {
                 if(typeof config.greeting !== 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday !== 'undefined') {
