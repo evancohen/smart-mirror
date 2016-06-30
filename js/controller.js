@@ -33,12 +33,12 @@
         $scope.layoutName = 'main';
 
         $scope.fitbitEnabled = false;
-        if (typeof config.fitbit != 'undefined') {
+        if (typeof config.fitbit !== 'undefined') {
             $scope.fitbitEnabled = true;
         }
 
         //set lang
-        moment.locale((typeof config.language != 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
+        moment.locale((typeof config.language !== 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
         console.log('moment local', moment.locale());
 
         //Update the time
@@ -60,6 +60,17 @@
                 $scope.interimResult = translation;
             });
         };
+
+        /**
+         * Register a refresh callback for a given interval (in seconds)
+         */
+        var registerRefreshInterval = function(callback, interval){
+            //Load the data initially
+            callback();
+            if(typeof interval !== 'undefined'){
+                $interval(callback, interval * 60000);
+            }
+        }
 
         _this.init = function() {
             AutoSleepService.startAutoSleepTimer();
@@ -133,10 +144,10 @@
             };
 
             refreshWeatherData();
-            $interval(refreshWeatherData, config.forecast.refreshInterval * 60000);
+            $interval(refreshWeatherData, ((config.forecast.refreshInterval)? config.forecast.refreshInterval : 2) * 60000);
 
             var greetingUpdater = function () {
-                if(typeof config.greeting != 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday != 'undefined') {
+                if(typeof config.greeting !== 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday !== 'undefined') {
                     var hour = moment().hour();
                     var greetingTime = "midday";
 
@@ -154,8 +165,10 @@
                     $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
                 }
             };
-            greetingUpdater();
-            $interval(greetingUpdater, 120000);
+
+            if(typeof config.greeting !== 'undefined'){
+                registerRefreshInterval(greetingUpdater, 120000);
+            }
 
             var refreshTrafficData = function() {
                 TrafficService.getDurationForTrips().then(function(tripsWithTraffic) {
@@ -167,9 +180,8 @@
                 });
             };
 
-            if(typeof config.traffic != 'undefined'){
-                refreshTrafficData();
-                $interval(refreshTrafficData, config.traffic.refreshInterval * 60000);    
+            if(typeof config.traffic !== 'undefined'){
+                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval);    
             }
 
             var refreshComic = function () {
@@ -180,15 +192,14 @@
                     console.log(error);
                 });
             };
+            
+            registerRefreshInterval(refreshComic, 12*60); // 12 hours
 
-            refreshComic();
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
             }
-
-            $interval(refreshComic, 12*60*60000); // 12 hours
-
+        
             var refreshRss = function () {
                 console.log ("Refreshing RSS");
                 $scope.news = null;
@@ -196,15 +207,15 @@
             };
 
             var updateNews = function() {
-                $scope.shownews = false;
-                setTimeout(function(){ $scope.news = RssService.getNews(); $scope.shownews = true; }, 1000);
+                registerRefreshInterval(function(){ 
+                    $scope.news = RssService.getNews(); 
+                }, 5);
             };
 
-            refreshRss();
-            $interval(refreshRss, config.rss.refreshInterval * 60000);
-            
-            updateNews();
-            $interval(updateNews, 8000);  // cycle through news every 8 seconds
+            if(typeof config.rss !== 'undefined'){
+                registerRefreshInterval(refreshRss, config.rss.refreshInterval);
+                registerRefreshInterval(updateNews, 8);
+            }
 
             var addCommand = function(commandId, commandFunction){
                 var voiceId = 'commands.'+commandId+'.voice';
@@ -212,7 +223,7 @@
                 var descId = 'commands.'+commandId+'.description';
                 $translate([voiceId, textId, descId]).then(function (translations) {
                     SpeechService.addCommand(translations[voiceId], commandFunction);
-                    if (translations[textId] != '') {
+                    if (translations[textId] !== '') {
                         var command = {"text": translations[textId], "description": translations[descId]};
                         $scope.commands.push(command);
                     }
@@ -461,7 +472,7 @@
                     $timeout.cancel(resetCommandTimeout);
                 },
                 result : function(result){
-                    if(typeof result != 'undefined'){
+                    if(typeof result !== 'undefined'){
                         $scope.interimResult = result[0];
                         resetCommandTimeout = $timeout(restCommand, 5000);
                     }
@@ -486,7 +497,7 @@
         .controller('MirrorCtrl', MirrorCtrl);
 
     function themeController($scope) {
-        $scope.layoutName = (typeof config.layout != 'undefined' && config.layout)?config.layout:'main';
+        $scope.layoutName = (typeof config.layout !== 'undefined' && config.layout)?config.layout:'main';
     }
 
     angular.module('SmartMirror')
