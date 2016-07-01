@@ -98,7 +98,9 @@ kwsProcess.stdout.on('data', function (data) {
 // Get autotimermotion config
   var motion_on = false
   
-  if(typeof config.autotimermotion != 'undefined'){
+  if(typeof config.autotimermotion == 'undefined'){
+    config.autotimermotion ={}
+  }
   var motionpin = config.autotimermotion.pin || 26
   var motiondebug = config.autotimermotion.debug || true
   var autosleep = 0.5
@@ -108,7 +110,7 @@ kwsProcess.stdout.on('data', function (data) {
     autosleep = config.autotimermotion.autosleep || 40.0
   }
   var motionenable = config.autotimermotion.enable || false
-  }
+  
   // Initilize the motion process
   if (motionenable){
     var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionpin, screentimeout, motiondebug], {detached: false})
