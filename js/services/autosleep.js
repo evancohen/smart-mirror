@@ -12,9 +12,9 @@ const {ipcRenderer} = require('electron');
           service.debug = config.autotimermotion.debug || true 
           service.autotimerenable = config.autotimermotion.autotimerenable || true
           if (service.debug){
-            var service.autosleep = config.autotimermotion.autosleep || 0.5
+            service.autosleep = config.autotimermotion.autosleep || 0.5
           } else {
-            var service.autosleep = config.autotimermotion.autosleep || 40.0
+            service.autosleep = config.autotimermotion.autosleep || 40.0
           }
           service.autowake = config.autotimermotion.autowake ||'07:00:00'
         }

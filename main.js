@@ -101,10 +101,11 @@ kwsProcess.stdout.on('data', function (data) {
   if(typeof config.autotimermotion != 'undefined'){
   var motionpin = config.autotimermotion.pin || 26
   var motiondebug = config.autotimermotion.debug || true
+  var autosleep = 0.5
   if (motiondebug){
-    var autosleep = config.autotimermotion.autosleep || 0.5
+    autosleep = config.autotimermotion.autosleep || 0.5
   } else {
-    var autosleep = config.autotimermotion.autosleep || 40.0
+    autosleep = config.autotimermotion.autosleep || 40.0
   }
   var motionenable = config.autotimermotion.enable || false
   }
