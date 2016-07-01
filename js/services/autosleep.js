@@ -11,22 +11,22 @@
           service.debug = config.autotimermotion.debug || true
 		  console.debug(service.debug)
           service.autotimerenable = config.autotimermotion.autotimerenable || true
-		  console.debug(service.autotimerenable)
+		  console.log(service.autotimerenable)
           if (service.debug){
             service.autosleep = config.autotimermotion.autosleep || 0.5
           } else {
             service.autosleep = config.autotimermotion.autosleep || 40.0
           }
-		  console.debug(service.autosleep)
+		  console.log(service.autosleep)
           service.autowake = config.autotimermotion.autowake ||'07:00:00'
-		  console.debug(service.autowake)
+		  console.log(service.autowake)
         }
         
         service.exec = require('child_process').exec;
         
         service.debugging = function(data) {
         if (service.debug){
-            console.debug(data);
+            console.log(data);
             }
         };
         
