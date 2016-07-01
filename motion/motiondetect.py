@@ -51,18 +51,18 @@ while True:
   movement = GPIO.input(motionPin)
   if movement:
     debugging("  movement active")
-	logger.info("Movement Active")
-    if timer:
-      debugging("    cancel timer")
-      timer.cancel()
-      timer = False
-    if not monitor_is_on:
-      debugging("    calling monitor on")
-      monitor_on()
+    logger.info("Movement Active")
+    ##if timer:
+      ##debugging("    cancel timer")
+      ##timer.cancel()
+      ##timer = False
+    ##if not monitor_is_on:
+      ##debugging("    calling monitor on")
+      ##monitor_on()
   else:
     debugging("  movement inactive")
-	logger.info("Movement Inactive")
-    if not timer:
-      debugging("    starting timer")
-      timer = Timer(60*ScreenTimeOut, monitor_off)
-      timer.start()
+    logger.info("Movement Inactive")
+    ##if not timer:
+      ##debugging("    starting timer")
+      ##timer = Timer(60*ScreenTimeOut, monitor_off)
+      ##timer.start()

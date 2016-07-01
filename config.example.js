@@ -6,10 +6,10 @@ var config = {
     // Auto Timer with Motion Detection
     autotimermotion : {
         motionenable : true, // Enable or disable this functionality
-		pin : 26, //Default pirPin is GPIO pin 26.
-		debug : true // send debug info to dev console, if debug autosleep is 30 seconds (not yet working)
+	    pin : 26, //Default pirPin is GPIO pin 26.
+	    debug : true // send debug info to dev console, if debug autosleep is 30 seconds (not yet working)
         autotimerenable : true, // Enable or disable autotimer functionality
-		autosleep: 40.0, // How long the screen will stay awake before going to sleep in minutes as float value (40 Mins)
+	    autosleep: 40.0, // How long the screen will stay awake before going to sleep in minutes as float value (40 Mins)
         autowake: '07:00:00', // When to automatically wake the screen up (7:00AM)
         //'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
         //'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen

@@ -5,21 +5,27 @@
 If you do not have a `config.js` file please enter `cd ~/motion-detect && cp config.example.js config.js` to create the `config.js` file
 If you already have a `config.js` file you must add the following code to the file:
 ```
-    // PIR Detection
-    motion : {
-        pin : 26, //Default pirPin is GPIO pin 26.
-        screentimeout : 5.0, //Default timeout is 5 minutes must be a float number.
-        enable : true, // Enable or disable this functionality
-        debug : true // send debug info to dev console, if debug timeout is 30 seconds (not yet working)
-    },
+    // Auto Timer with Motion Detection
+    autotimermotion : {
+        motionenable : true, // Enable or disable this functionality
+	    pin : 26, //Default pirPin is GPIO pin 26.
+	    debug : true // send debug info to dev console, if debug autosleep is 30 seconds
+        autotimerenable : true, // Enable or disable autotimer functionality
+	    autosleep: 40.0, // How long the screen will stay awake before going to sleep in minutes as float value (40 Mins)
+        autowake: '07:00:00', // When to automatically wake the screen up (7:00AM)
+        //'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen (no longer used)
+        //'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen (no longer used)
+    }, //don't forget comma after closing bracket if not the last set of variables
 ```
 
 Variable | Usage | Data Type | Default Value if not included in config.js
 ---------|-------|-----------|--------------
+motionenableenable | enable motion detection. disable if no motion detection is connected | boolean | false
 pin | Identify GPIO input Pin connected to output pin of the PIR device or other device used to detect motion | int | 26
-screentimeout | Amount of time in minutes before HDMI is turned off after last detected motion | float | 5.0
-enable | enable motion detection | boolean | false
-debug | enable debugging (currently not implemented) | boolean | true
+debug | enable debugging autosleep is 30 seconds if debugging is enabled | boolean | true
+autotimerenable | enable or disable autotimer functionality if this is disabled screen will not auto-sleep or auto-wake| boolean |true 
+autosleep | how long the screen will stay awake before going to sleep in minutes as a float value | float | 40.0
+autowake | When to automatically wake the screen up. In format of 'HH:mm:ss' using military time | string | '07:00:00'
 
 ### PIR device used in testing
 

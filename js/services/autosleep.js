@@ -6,75 +6,75 @@ const {ipcRenderer} = require('electron');
     function AutoSleepService($interval) {
         var service = {};
         var autoSleepTimer;
-		var timer = false;
-		var monitor_is_on = true;
-		if (typeof config.autotimer !== 'undefined'){
-		  service.debug = config.autotimermotion.debug || true 
+        var timer = false;
+        var monitor_is_on = true;
+        if (typeof config.autotimer !== 'undefined'){
+          service.debug = config.autotimermotion.debug || true 
           service.autotimerenable = config.autotimermotion.autotimerenable || true
-		  if (service.debug){
+          if (service.debug){
             var service.autosleep = config.autotimermotion.autosleep || 0.5
           } else {
             var service.autosleep = config.autotimermotion.autosleep || 40.0
           }
-		  service.autowake = config.autotimermotion.autowake ||'07:00:00'
-		}
-		
-        service.exec = require('child_process').exec;
-		
-		service.debugging = function(data) {
-			if (service.debug){
-				console.debug(data);
-			}
-		};
-		
-		// Inicialize Motion Detector IPC
-        ipcRenderer.on('motion', (event, arg) => {
-			if (arg) {
-				if (timer) {
-					service.stopAutoSleepTimer();
-				};
-				if (!(monitor_is_on)){
-					service.wake();
-				};
-			} else {
-				if (!(timer)) {
-				   service.startAutoSleepTimer();
-				}
-			});
-		ipcRenderer.on('motion_stdout', (event, arg) => {
-			service.debuging(arg);
-			});
-		ipcRenderer.on('motion_debug', (event, arg) => {
-			service.debugging(arg);
-			});
+          service.autowake = config.autotimermotion.autowake ||'07:00:00'
+        }
         
-		service.startAutoSleepTimer = function() {
+        service.exec = require('child_process').exec;
+        
+        service.debugging = function(data) {
+        if (service.debug){
+            console.debug(data);
+            }
+        };
+        
+        // Inicialize Motion Detector IPC
+        ipcRenderer.on('motion', (event, arg) => {
+            if (arg) {
+                if (timer) {
+                    service.stopAutoSleepTimer();
+                };
+                if (!(monitor_is_on)){
+                    service.wake();
+                };
+            } else {
+                if (!(timer)) {
+                   service.startAutoSleepTimer();
+                }
+            });
+        ipcRenderer.on('motion_stdout', (event, arg) => {
+            service.debuging(arg);
+            });
+        ipcRenderer.on('motion_debug', (event, arg) => {
+            service.debugging(arg);
+            });
+        
+        service.startAutoSleepTimer = function() {
             if (service.autotimerenable){
                 service.stopAutoSleepTimer();
                 autoSleepTimer = $interval(service.sleep, service.autosleep*60000);
                 service.debugging('Starting auto-sleep timer '+service.autosleep);
-				timer = true;
-			};
+                timer = true;
+            };
         };
 
         service.stopAutoSleepTimer = function() {
             service.debugging('Stopping auto-sleep timer');
             $interval.cancel(autoSleepTimer);
-			timer=false;
-		};
+            timer=false;
+        };
 
         service.wake = function() {
-			service.stopAutoSleepTimer();
+            service.stopAutoSleepTimer();
             service.exec('/opt/vc/bin/tvservice -p', service.puts);
-			service.exec('fbset -depth 8 && fbset -depth 16 && sudo xrefresh', service.puts);
+            service.exec('fbset -depth 8 && fbset -depth 16 && sudo xrefresh', service.puts);
             monitor_is_on = true;
-		};
+        };
 
         service.sleep = function() {
-			service.stopAutoSleepTimer();
-			service.exec('/opt/vc/bin/tvservice -o', service.puts);
+            service.stopAutoSleepTimer();
+            service.exec('/opt/vc/bin/tvservice -o', service.puts);
             monitor_is_on = false;
-			};
+            };
 
         service.puts = function (error, stdout, stderr) {
             if (error) {
