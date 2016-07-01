@@ -40,7 +40,8 @@ const {ipcRenderer} = require('electron');
                 if (!(timer)) {
                    service.startAutoSleepTimer();
                 }
-            });
+		    }
+		    });
         ipcRenderer.on('motion_stdout', (event, arg) => {
             service.debuging(arg);
             });
