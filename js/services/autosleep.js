@@ -8,14 +8,18 @@
         var timer = false;
         var monitor_is_on = true;
         if (typeof config.autotimer !== 'undefined'){
-          service.debug = config.autotimermotion.debug || true 
+          service.debug = config.autotimermotion.debug || true
+		  console.debug(service.debug)
           service.autotimerenable = config.autotimermotion.autotimerenable || true
+		  console.debug(service.autotimerenable)
           if (service.debug){
             service.autosleep = config.autotimermotion.autosleep || 0.5
           } else {
             service.autosleep = config.autotimermotion.autosleep || 40.0
           }
+		  console.debug(service.autosleep
           service.autowake = config.autotimermotion.autowake ||'07:00:00'
+		  console.debug(service.autowake)
         }
         
         service.exec = require('child_process').exec;
