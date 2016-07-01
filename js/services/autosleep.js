@@ -7,21 +7,22 @@
         var autoSleepTimer;
         var timer = false;
         var monitor_is_on = true;
-        if (typeof config.autotimer !== 'undefined'){
+        if (typeof config.autotimer != 'undefined'){
           service.debug = config.autotimermotion.debug || true
-		  console.debug(service.debug)
           service.autotimerenable = config.autotimermotion.autotimerenable || true
-		  console.log(service.autotimerenable)
           if (service.debug){
             service.autosleep = config.autotimermotion.autosleep || 0.5
           } else {
             service.autosleep = config.autotimermotion.autosleep || 40.0
           }
-		  console.log(service.autosleep)
+
           service.autowake = config.autotimermotion.autowake ||'07:00:00'
-		  console.log(service.autowake)
+		  
         }
-        
+		  console.log(service.debug)
+		  console.log(service.autotimerenable)
+		  console.log(service.autosleep)
+		  console.log(service.autowake)
         service.exec = require('child_process').exec;
         
         service.debugging = function(data) {
