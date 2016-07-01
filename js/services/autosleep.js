@@ -7,7 +7,7 @@
         var autoSleepTimer;
         var timer = false;
         var monitor_is_on = true;
-        if (typeof config.autotimer != 'undefined'){
+        if (typeof config.autotimer == 'undefined'){
           service.debug = config.autotimermotion.debug || true
           service.autotimerenable = config.autotimermotion.autotimerenable || true
           if (service.debug){
