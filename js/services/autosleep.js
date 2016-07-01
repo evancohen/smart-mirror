@@ -17,7 +17,7 @@
           } else {
             service.autosleep = config.autotimermotion.autosleep || 40.0
           }
-		  console.debug(service.autosleep
+		  console.debug(service.autosleep)
           service.autowake = config.autotimermotion.autowake ||'07:00:00'
 		  console.debug(service.autowake)
         }
