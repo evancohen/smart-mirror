@@ -3,13 +3,17 @@ var config = {
     // Lenguage for the mirror
     language : "en-US",
 
-    // PIR Detection
-    motion : {
-        pin : 26, //Default pirPin is GPIO pin 26.
-        screentimeout : 5.0, //Default timeout is 5 minutes must be a float number.
-        enable : true, // Enable or disable this functionality
-        debug : true // send debug info to dev console, if debug timeout is 30 seconds (not yet working)
-    },
+    // Auto Timer with Motion Detection
+    autotimermotion : {
+        motionenable : true, // Enable or disable this functionality
+		pin : 26, //Default pirPin is GPIO pin 26.
+		debug : true // send debug info to dev console, if debug autosleep is 30 seconds (not yet working)
+        autotimerenable : true, // Enable or disable autotimer functionality
+		autosleep: 40.0, // How long the screen will stay awake before going to sleep in minutes as float value (40 Mins)
+        autowake: '07:00:00', // When to automatically wake the screen up (7:00AM)
+        //'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
+        //'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
+    }
 	// Keyword Spotting (Hotword Detection)
     speech : {
         keyword : "Smart Mirror",
@@ -111,12 +115,6 @@ var config = {
     rss: {
       feeds : [],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
       refreshInterval : 120 // Number of minutes the information is refreshed
-    },
-    autoTimer: {
-      autoSleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
-      autoWake: '07:00:00', // When to automatically wake the screen up (7:00AM)
-      'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
-      'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
     }
 };
 

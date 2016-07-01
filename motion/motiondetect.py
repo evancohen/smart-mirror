@@ -4,36 +4,32 @@ from threading import Timer
 import subprocess
 import sys
 import signal
+import os
+import logging
 
-isDebug = True
+logging.basicConfig()
+logger = logging.getLogger("motionDetect")
+logger.setLevel(logging.INFO)
+
 interrupted = False
 
-
-def signal_handler(signal, frame):
-    global interrupted
-    interrupted = True
-    exit(0)
 if len(sys.argv) < 2:
   motionPin = 26
-  ScreenTimeOut = float(0.5)
-  
+  isDebug = True
 else:
   motionPin = int(sys.argv[1])
-  ScreenTimeOut = round(float(sys.argv[2]), 2)
+  isDebug = True if sys.argv[2] == 'true' else False
 
-print motionPin
-print ScreenTimeOut
 
 def debugging(msg):
   global isDebug
   if isDebug:
-    print msg
+    logger.debug(msg)
 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(motionPin, GPIO.IN)
-timer = False
-monitor_is_on = True
+
 
 def monitor_off():
   global monitor_is_on
@@ -48,7 +44,6 @@ def monitor_on():
   subprocess.Popen('fbset -depth 8 && fbset -depth 16 && xrefresh', shell=True)
   monitor_is_on = True
 
-signal.signal(signal.SIGINT, signal_handler)
 
 while True:
   debugging("Waiting for movement")
@@ -56,6 +51,7 @@ while True:
   movement = GPIO.input(motionPin)
   if movement:
     debugging("  movement active")
+	logger.info("Movement Active")
     if timer:
       debugging("    cancel timer")
       timer.cancel()
@@ -65,6 +61,7 @@ while True:
       monitor_on()
   else:
     debugging("  movement inactive")
+	logger.info("Movement Inactive")
     if not timer:
       debugging("    starting timer")
       timer = Timer(60*ScreenTimeOut, monitor_off)

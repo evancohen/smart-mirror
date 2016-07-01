@@ -95,23 +95,42 @@ kwsProcess.stdout.on('data', function (data) {
     console.log(data.toString())
 })
 
-// Get motion config
-if(typeof config.motion != 'undefined'){
-  var motionpin = config.motion.pin || 26
-  var motiondebug = config.motion.debug || true
-  var screentimeout = config.motion.screentimeout || 5.0
-  var motionenable = config.motion.enable || false
-
+// Get autotimermotion config
+  var motion_on = false
+  
+  if(typeof config.autotimermotion != 'undefined'){
+  var motionpin = config.autotimermotion.pin || 26
+  var motiondebug = config.autotimermotion.debug || true
+  if (motiondebug){
+    var autosleep = config.autotimermotion.autosleep || 0.5
+  } else {
+    var autosleep = config.autotimermotion.autosleep || 40.0
+  }
+  var motionenable = config.autotimermotion.enable || false
+  }
   // Initilize the motion process
   if (motionenable){
     var MotionProcess = spawn('python', ['./motion/motiondetect.py', motionpin, screentimeout, motiondebug], {detached: false})
     // Handle messages from python script
     MotionProcess.stderr.on('data', function (data) {
         var message = data.toString()
-        console.log(message)
+    if(message.startsWith('INFO')){
+        // When a when motion is active, ping the speech service
+        if (message.includes("Movement Active") && !(motion_on)){
+			motion_on = true
+			mainWindow.webContents.send('motion', true)
+		}else if (message.includes("Movement Inactive") && motion_on){
+			motion_on = false
+			mainWindow.webContents.send('motion', false)
+		}
+	} else if (message.startsWith('DEBUG')){
+		mainWindow.webContents.send('motion_debug', message)
+    }else{
+        console.error(message)
+    }
     })
     MotionProcess.stdout.on('data', function (data) {
-        console.log(data.toString())
+        mainWindow.webContents.send('motion_stdout', data.toString)
     })
   }
 }
