@@ -163,6 +163,14 @@ ul.calendar {
     font-weight: lighter; 
 }
 
+.calendar-name {
+  display: none;
+}
+
+.show-calendar-names .calendar-name {
+  display: block;
+}
+
 .day-marker {
 	margin-top: 30px;
 }
