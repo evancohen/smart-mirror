@@ -62,7 +62,7 @@
         };
 
         /**
-         * Register a refresh callback for a given interval (in seconds)
+         * Register a refresh callback for a given interval (in minutes)
          */
         var registerRefreshInterval = function(callback, interval){
             //Load the data initially
@@ -87,17 +87,15 @@
             var playing = false, sound;
             SoundCloudService.init();
 
-            var refreshMirrorData = function() {
+            var refreshCalendar = function() {
                 CalendarService.getCalendarEvents().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
                     console.log(error);
                 });
-
-                if ($scope.fitbitEnabled) {
-                    setTimeout(function() { refreshFitbitData(); }, 5000);
-                }
             };
+            
+            registerRefreshInterval(refreshCalendar, 25);
 
             var refreshFitbitData = function() {
                 console.log('refreshing fitbit data');
@@ -110,8 +108,9 @@
                 });
             };
 
-            refreshMirrorData();
-            $interval(refreshMirrorData, 1500000);
+            if($scope.fitbitEnabled){
+                registerRefreshInterval(refreshFitbitData, 5);
+            }
 
             var refreshWeatherData = function() {
                 //Get our location and then get the weather for our location
@@ -168,7 +167,7 @@
             };
 
             if(typeof config.greeting !== 'undefined'){
-                registerRefreshInterval(greetingUpdater, 120000);
+                registerRefreshInterval(greetingUpdater, 60);
             }
 
             var refreshTrafficData = function() {
