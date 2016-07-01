@@ -9,8 +9,8 @@ import logging
 
 logging.basicConfig()
 logger = logging.getLogger("motionDetect")
-logger.setLevel(logging.INFO)
-
+logger.setLevel(logging.DEBUG)
+lfile = logging.basicConfig(filename="motionDetect.log", level=logging.DEBUG)
 interrupted = False
 
 if len(sys.argv) < 2:
@@ -25,6 +25,7 @@ def debugging(msg):
   global isDebug
   if isDebug:
     logger.debug(msg)
+	lfile.debug(msg)
 
 
 GPIO.setmode(GPIO.BCM)
@@ -52,6 +53,7 @@ while True:
   if movement:
     debugging("  movement active")
     logger.info("Movement Active")
+	lfile.info("Movement Active")
     ##if timer:
       ##debugging("    cancel timer")
       ##timer.cancel()
@@ -62,7 +64,8 @@ while True:
   else:
     debugging("  movement inactive")
     logger.info("Movement Inactive")
-    ##if not timer:
+    lfile.info("Movement Inactive")
+	##if not timer:
       ##debugging("    starting timer")
       ##timer = Timer(60*ScreenTimeOut, monitor_off)
       ##timer.start()
