@@ -38,7 +38,17 @@
         }
 
         //set lang
-        moment.locale((typeof config.language !== 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
+        moment.locale(
+          (typeof config.language !== 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en',
+          {
+            calendar : {
+              sameDay : '[Today]',
+              nextDay : '[Tomorrow]',
+              nextWeek : 'dddd'
+            }
+          }
+        );
+
         console.log('moment local', moment.locale());
 
         //Update the time
