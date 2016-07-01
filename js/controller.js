@@ -33,6 +33,8 @@
         $scope.layoutName = 'main';
 
         $scope.fitbitEnabled = false;
+        $scope.config = config;
+
         if (typeof config.fitbit !== 'undefined') {
             $scope.fitbitEnabled = true;
         }

@@ -80,7 +80,8 @@ var config = {
     calendar: {
       icals : [], // Be sure to wrap your URLs in quotes
       maxResults: 9, // Number of calender events to display (Defaults is 9)
-      maxDays: 365 // Number of days to display (Default is one year)
+      maxDays: 365, // Number of days to display (Default is one year)
+      showCalendarNames: false // Show calendar names above events
     },
     // Giphy
     giphy: {

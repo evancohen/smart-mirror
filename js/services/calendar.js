@@ -60,6 +60,12 @@
       var cur_event = null;
       for (var i = 0; i < cal_array.length; i++) {
         var ln = cal_array[i];
+
+        // Extract calendar name
+        if (ln.startsWith('X-WR-CALNAME')) {
+          var calendarName = ln.split(':')[1];
+        }
+
         //If we encounted a new Event, create a blank event object + set in event options.
         if (!in_event && ln == 'BEGIN:VEVENT') {
           var in_event = true;
@@ -68,6 +74,7 @@
         //If we encounter end event, complete the object and add it to our events array then clear it for reuse.
         if (in_event && ln == 'END:VEVENT') {
           in_event = false;
+          cur_event.calendarName = calendarName;
           if(!contains(events, cur_event)) {
             events.push(cur_event);
           }
@@ -127,6 +134,7 @@
       				var startDate = moment(dt);
       				var endDate = moment(dt);
               endDate.add(event_duration, 'minutes');
+              recuring_event.calendarName = calendarName;
               recuring_event.start = startDate;
               recuring_event.end = endDate;
               if(!contains(events, recuring_event)) {
