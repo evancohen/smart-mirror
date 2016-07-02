@@ -18,6 +18,7 @@
             SearchService,
             SoundCloudService,
             RssService,
+            StockService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -105,7 +106,7 @@
                     console.log(error);
                 });
             };
-            
+
             registerRefreshInterval(refreshCalendar, 25);
 
             var refreshFitbitData = function() {
@@ -192,7 +193,7 @@
             };
 
             if(typeof config.traffic !== 'undefined'){
-                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);    
+                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);
             }
 
             var refreshComic = function () {
@@ -203,14 +204,14 @@
                     console.log(error);
                 });
             };
-            
+
             registerRefreshInterval(refreshComic, 12*60); // 12 hours
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
             }
-        
+
             var refreshRss = function () {
                 console.log ("Refreshing RSS");
                 $scope.news = null;
@@ -218,8 +219,20 @@
             };
 
             var updateNews = function() {
-                $scope.news = RssService.getNews(); 
+                $scope.news = RssService.getNews();
             };
+
+            var getStock = function() {
+              StockService.getStockQuotes().then(function(result) {
+                $scope.stock = result.list.resources;
+              }, function(error) {
+                console.log(error);
+              });
+            }
+
+            if (typeof config.stock !== 'undefined' && config.stock.names.length) {
+              registerRefreshInterval(getStock, 30);
+            }
 
             if(typeof config.rss !== 'undefined'){
                 registerRefreshInterval(refreshRss, config.rss.refreshInterval || 30);
