@@ -6,13 +6,15 @@
 
     service.getStockQuotes = function() {
       var deferred = $q.defer();
-      var url = 'http://finance.yahoo.com/webservice/v1/symbols/'+config.stock.names.join(',').toUpperCase()+'/quote?format=json&view=detail';
+      if (config.stock.names.length) {
+        var url = 'http://finance.yahoo.com/webservice/v1/symbols/'+config.stock.names.join(',').toUpperCase()+'/quote?format=json&view=detail';
 
-      $http.get(url).then(function(response) {
-        deferred.resolve(response.data);
-      }, function(error) {
-        deferred.reject('Unknown error');
-      });
+        $http.get(url).then(function(response) {
+          deferred.resolve(response.data);
+        }, function(error) {
+          deferred.reject('Unknown error');
+        });
+      }
 
       return deferred.promise;
     }
