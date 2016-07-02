@@ -114,7 +114,7 @@ var config = {
       refreshInterval : 120 // Number of minutes the information is refreshed
     },
     stock: {
-      names: [] // The names of the stock quotes you with to show in the official format. (e.g.: YHOO,AAPL,GOOG)
+      names: [] // The names of the stock quotes you with to show in the official format. (e.g.: 'YHOO','AAPL','GOOG')
     },
     autoTimer: {
       autoSleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
