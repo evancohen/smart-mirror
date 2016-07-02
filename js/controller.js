@@ -19,6 +19,8 @@
             SoundCloudService,
             RssService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
+
+        // Local Scope Vars
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
@@ -26,12 +28,8 @@
         $scope.user = {};
         $scope.shownews = true;
         $scope.commands = [];
-        /*$translate('home.commands').then(function (translation) {
-            $scope.interimResult = translation;
-        });*/
         $scope.interimResult = $translate.instant('home.commands');
         $scope.layoutName = 'main';
-
         $scope.fitbitEnabled = false;
         $scope.config = config;
 
@@ -46,7 +44,8 @@
             calendar : {
               sameDay : '[Today]',
               nextDay : '[Tomorrow]',
-              nextWeek : 'dddd'
+              nextWeek : 'dddd',
+              sameElse : 'L'
             }
           }
         );
