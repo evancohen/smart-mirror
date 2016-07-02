@@ -99,13 +99,13 @@
             <span class="time-to">{{ 'traffic.time_to' | translate:traffic }}</span>
             <span>{{traffic.duration.humanize()}}</span>
           </div>
-          <div class="stock">
-            <div class="stock-information" ng-repeat="quote in stock">
-              <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
-              <span fade>{{quote.resource.fields.issuer_name}}: ${{quote.resource.fields.price  | number : 3}}</span>
-            </div>
-          </div>
         </div>
+        <div class="stock">
+          <div class="stock-information" ng-repeat="quote in stock">
+            <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
+            <span fade>{{quote.resource.fields.issuer_name}}: ${{quote.resource.fields.price  | number : 3}}</span>
+          </div>
+        </div>        
       </div>
     </div>
     <div class="container" ng-class="(listening == true)?'listening':'not-listening'">

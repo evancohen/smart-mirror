@@ -6,7 +6,7 @@
 
     service.getStockQuotes = function() {
       var deferred = $q.defer();
-      var url = 'http://finance.yahoo.com/webservice/v1/symbols/'+config.stock.names+'/quote?format=json&view=detail';
+      var url = 'http://finance.yahoo.com/webservice/v1/symbols/'+config.stock.names.join(',').toUpperCase()+'/quote?format=json&view=detail';
 
       $http.get(url).then(function(response) {
         deferred.resolve(response.data);
