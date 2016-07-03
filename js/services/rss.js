@@ -13,16 +13,15 @@
 
             if (typeof config.rss != 'undefined'){
                 angular.forEach(config.rss.feeds, function(url) {
-                    $http.jsonp('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)).then(function(response) {
-                        for (var i=0; i < response.data.responseData.feed.entries.length; i++){
+                    $http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK').then(function(response) {
+                        for (var i=0; i < response.data.query.results.rss.channel.item.length; i++){
                             var feedEntry = {
-                                title  : response.data.responseData.feed.title,
-                                content: response.data.responseData.feed.entries[i].title,
+                                title  : response.data.query.results.rss.channel.title,
+                                content: response.data.query.results.rss.channel.item[i].title,
                                 lastUpdated : currentTime,
                             };
-                            //console.log(feedEntry);
                             service.feed.push(feedEntry);
-                        }    
+                        }
                     });
                 });
             }
@@ -49,7 +48,7 @@
                     }
                     else {
                         service.currentFeed = service.currentFeed + 1;
-                    }               
+                    }
             };
             return service.feed[service.currentFeed];
         } ;
