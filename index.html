@@ -41,6 +41,7 @@
     <script src="js/services/rss.js"></script>
     <script src="js/services/autosleep.js"></script>
     <script src="js/services/stock.js"></script>
+    <script src="js/services/scrobbler.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
@@ -105,7 +106,7 @@
             <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
             <span fade>{{quote.resource.fields.issuer_name}}: ${{quote.resource.fields.price  | number : 3}}</span>
           </div>
-        </div>        
+        </div>
       </div>
     </div>
     <div class="container" ng-class="(listening == true)?'listening':'not-listening'">

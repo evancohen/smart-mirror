@@ -19,6 +19,7 @@
             SoundCloudService,
             RssService,
             StockService,
+            ScrobblerService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -83,6 +84,8 @@
                 $interval(callback, interval * 60000);
             }
         }
+
+        ScrobblerService.getSongInformation();
 
         _this.init = function() {
             AutoSleepService.startAutoSleepTimer();
