@@ -2,10 +2,14 @@
 <html ng-app="SmartMirror">
   <head ng-controller="Theme">
     <meta charset="utf-8">
-    <title>Smart Mirror</title>
+    <title>Portale</title>
 
     <script src="js/annyang.js"></script>
-
+    
+      <!-- Portale -->
+    <!--link rel="stylesheet" type="text/css" href="public/health-stats.css">	
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script-->
+    
     <!-- bower:js -->
     <script src="bower_components/moment/min/moment-with-locales.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -38,7 +42,8 @@
     <script src="js/services/fitbit.js"></script>
     <script src="js/services/reminder.js"></script>
     <script src="js/controller.js"></script>
-
+    
+ 
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
@@ -50,6 +55,8 @@
   </head>
   <body ng-controller="MirrorCtrl as commands" ng-cloak>
     <div class="top">
+    		 	
+<div d3-bars bar-height="20" bar-padding="5"></div>
       <div class="top-left">
         <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
         <div class="time">{{date.format('LT')}}</div>
@@ -98,9 +105,12 @@
     </div>
     <div class="container">
       <div class="middle-center">
-        <h1>{{greeting}}</h1>
-        <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
-        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+      	
+      	<div class="contents-box animate-grow" ng-show="focus == 'default'">
+		      <h1>{{greeting}}</h1>
+		      <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
+		      <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+        </div>
         <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
@@ -110,6 +120,33 @@
           <img class="scWaveform" ng-src="{{scWaveform}}"/>
           <h2 class="sc">{{scTrack}}</h2>
         </div>
+        
+        <!-- Portale Health ----------------------------------------------------------------------->
+         <div  ng-show="focus == 'health'"> 
+					
+						 <!--bars-chart chart-data="40,100,80,15,25,60,10" ></bars-chart-->			 
+						 
+					<img src="public/health_stats.png" alt="steps icon">
+					
+        	 	<!--p class="otto">Health Statistics</p>
+						<div  class="health-container">
+							<img src="public/steps.png" alt="steps icon">
+								<div id="step-chart"></div>
+						</div>
+						<div  class="health-container">
+							<img src="public/sleep.png" alt="sleep icon">
+							<div id="sleep-chart"></div>
+						</div>
+		
+						<div  class="health-container">
+							<img src="public/drive.png" alt="drive icon">
+							<div id="drive-chart"></div>
+						</div-->
+						<!--script src="public/health-chart.js"></script-->
+					
+									     
+        </div>
+         <!-- Portale Health ----------------------------------------------------------------------->
         <div class="contents-box map animate-grow" ng-show="focus == 'map'">
           <img class="contents map animate-grow" ng-src="{{map}}"/>
         </div>

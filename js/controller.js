@@ -20,7 +20,7 @@
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
-        $scope.focus = "default";
+        $scope.focus = "default"; //default
         $scope.user = {};
         $scope.commands = [];
         /*$translate('home.commands').then(function (translation) {
@@ -183,6 +183,14 @@
             };
 
             // List commands
+            
+            /*---------Portale ---------*/
+            addCommand('health_stats',function(){
+            	console.debug("Loading Health statistics...");           
+		          $scope.focus = "health";
+            });    
+           /* --------------------------*/
+            
             addCommand('list', function() {
                 console.debug("Here is a list of commands...");
                 console.log(AnnyangService.commands);
