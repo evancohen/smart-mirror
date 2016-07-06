@@ -120,10 +120,10 @@ kwsProcess.stdout.on('data', function (data) {
     if(message.startsWith('INFO')){
         // When a when motion is active, ping the speech service
         if (message.includes("Movement Active") && !(motion_on)){
-			motion_on = true
+			//motion_on = true
 			mainWindow.webContents.send('motion', true)
 		}else if (message.includes("Movement Inactive") && motion_on){
-			motion_on = false
+			//motion_on = false
 			mainWindow.webContents.send('motion', false)
 		}
 	} else if (message.startsWith('DEBUG')){

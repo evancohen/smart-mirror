@@ -11,7 +11,7 @@
           service.debug = config.autotimermotion.debug || true
           service.autotimerenable = config.autotimermotion.autotimerenable || true
           if (service.debug){
-            service.autosleep = config.autotimermotion.autosleep || 0.5
+            service.autosleep = 0.5
           } else {
             service.autosleep = config.autotimermotion.autosleep || 40.0
           }
