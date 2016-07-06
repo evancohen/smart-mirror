@@ -189,6 +189,11 @@
             "text": "Turn (state) light(s) (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",
             "description": "Control color and brightness of lights"
+        },
+        "show_song": {
+          "text": "Show (my) song information",
+          "voice": "Show (my) song information",
+          "description": "Shows the last.fm scrobbler song information"
         }
     }
 }

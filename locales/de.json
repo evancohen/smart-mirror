@@ -189,6 +189,11 @@
             "text": "Schalte (das|die) Licht(er) (action)",
             "voice": "(Schalte) (das) (die) Licht(er) *action",
             "description": "Steuert Farbe und Helligkeit von Lichtern"
+        },
+        "show_song": {
+          "text": "Show (my) song information",
+          "voice": "Show (my) song information",
+          "description": "Shows the last.fm scrobbler song information"
         }
     }
 }

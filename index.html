@@ -111,11 +111,18 @@
     </div>
     <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
       <div class="middle-center">
-        <h1>{{greeting}}</h1>
-        <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
+        <h1 ng-show="focus !== 'showSongInformation'">{{greeting}}</h1>
+        <h3 ng-show="!(user.name === undefined) && focus !== 'showSongInformation'">{{user.name}}</h3>
         <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
         <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
+        </div>
+        <div class="content-box songInformation animage-grow" ng-show="focus == 'showSongInformation'">
+          <img ng-src="{{songInformation.cover}}" />
+          <div>{{songInformation.artist}}</div>
+          <div>{{songInformation.title}}</div>
+          <div>{{songInformation.album}}</div>
+          <div class="nowplaying" ng-show="songInformation.playing">Playing</div>
         </div>
         <div class="contents-box sc-container animate-grow" ng-show="focus == 'sc'">
           <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>

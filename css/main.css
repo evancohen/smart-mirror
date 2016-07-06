@@ -492,3 +492,11 @@ ul.calendar {
     font-size: 20px;
     margin-bottom: 55px;
 }
+
+.songInformation {
+  font-weight: bold !important;
+}
+
+.songInformation .nowplaying {
+  color: green !important;
+}
