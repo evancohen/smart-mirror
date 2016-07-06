@@ -85,7 +85,30 @@
             }
         }
 
-        ScrobblerService.getSongInformation();
+        ScrobblerService.getSongInformation().then(function(data) {
+          var information;
+          if (data.recenttracks.track[0]) {
+            information = data.recenttracks.track[0];
+          } else {
+            information = data.recenttracks.track;
+          };
+          var playing = false;
+          if (data["@attr"]) {
+            playing = data["@attr"].nowplaying;
+          };
+          console.log(data.artist);
+          console.log(typeof data.artist !== 'undefined');
+          if (typeof data.artist !== 'undefined') {
+            $scope.songInformation = {
+              title: data.title,
+              artist: data.artist["#text"],
+              album: data.album["#text"],
+              cover: data.image[2]["#text"],
+              playing: playing
+            };
+            $scope.focus = 'showSongInformation';
+          }
+        });
 
         _this.init = function() {
             AutoSleepService.startAutoSleepTimer();
@@ -484,6 +507,29 @@
                 TimerService.start();
                 $scope.focus = "timer";
               }
+            });
+
+            addCommand('show_song', function() {
+              ScrobblerService.getSongInformation().then(function(data) {
+                var information;
+                if (data.recenttracks.track[0]) {
+                  information = data.recenttracks.track[0];
+                } else {
+                  information = data.recenttracks.track;
+                };
+                var playing = false;
+                if (data["@attr"]) {
+                  playing = data["@attr"].nowplaying;
+                };
+                 $scope.songInformation = {
+                   title: data.title,
+                   artist: data.artist["#text"],
+                   album: data.album["#text"],
+                   cover: data.image[2]["#text"],
+                   playing: playing
+                 };
+                 $scope.focus = 'showSongInformation';
+              });
             });
 
             var resetCommandTimeout;
