@@ -33,7 +33,8 @@
         
         // Inicialize Motion Detector IPC
         ipcRenderer.on('motion', (event, arg) => {
-            if (arg) {
+            service.debugging("motion: "+arg);
+			if (arg) {
                 if (timer) {
                     service.stopAutoSleepTimer();
                 };
@@ -47,10 +48,10 @@
 		    }
 		    });
         ipcRenderer.on('motion_stdout', (event, arg) => {
-            service.debuging(arg);
+            service.debugging("motion_stdout: "+arg);
             });
         ipcRenderer.on('motion_debug', (event, arg) => {
-            service.debugging(arg);
+            service.debugging("motion_debug: "+arg);
             });
         
         service.startAutoSleepTimer = function() {
