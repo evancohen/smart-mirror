@@ -241,25 +241,27 @@
             addCommand('home', defaultView);
 
             // Hide everything and "sleep"
-            addCommand('sleep', function() {
+            /*addCommand('sleep', function() {
                 console.debug("Ok, going to sleep...");
                 $scope.focus = "sleep";
-            });
+            });*/
 
             // Go back to default view
-            addCommand('wake_up', defaultView);
+            //addCommand('wake_up', defaultView);
 
             // Turn off HDMI output
-            addCommand('screen off', function() {
+            addCommand('sleep', function() {
                 console.debug('turning screen off');
+				$scope.focus = "sleep";
                 AutoSleepService.sleep();
             });
 
             // Turn on HDMI output
-            addCommand('screen on', function() {
+            addCommand('wake_up', function() {
                 console.debug('turning screen on');
+				$scope.focus = "default"
+				defaultView();
                 AutoSleepService.wake();
-                $scope.focus = "default"
             });
 
             // Hide everything and "sleep"

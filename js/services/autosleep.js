@@ -1,8 +1,8 @@
 
-(function() {
+(function(annyang) {
     'use strict';
 
-    function AutoSleepService($interval) {
+    function AutoSleepService($interval,$rootScope) {
         var service = {};
         var autoSleepTimer;
         var timer = false;
