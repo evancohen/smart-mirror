@@ -10,6 +10,9 @@ const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
+// comment out line below if you're not debugging
+require('electron-debug')({showDevTools: true});
+
 
 // Load the smart mirror config
 var config;
