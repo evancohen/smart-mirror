@@ -114,9 +114,17 @@
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
                 });
-
+                
                 FitbitService.todaySummary(function(response){
                     $scope.fbToday = response;
+                });
+
+                FitbitService.sleepSummary(function(response){
+                    $scope.fbSleep = response;
+                });
+
+                FitbitService.deviceSummary(function(response){
+                    $scope.fbDevices = response;
                 });
             };
 
