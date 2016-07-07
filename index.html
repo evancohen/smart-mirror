@@ -192,6 +192,17 @@
           <div><span class="fitbit-item">Today's active minutes: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}</span></div>
           <div><span class="fitbit-item">Calories burned: {{fbToday.summary.caloriesOut}}</span></div>
           <p></p>
+          <div><span class="fitbit-subtitle">Your sleep last night</span></div>
+          <div><span class="fitbit-item">{{(fbSleep.sleep[0].minutesAsleep/60 | number:2 )}} hours / {{fbSleep.sleep[0].minutesAwake  }} min awake // {{(fbSleep.sleep[0].efficiency)}} % </span></div>
+          <div><span class="fitbit-item">Awake/restless: {{fbSleep.sleep[0].awakeCount}} / {{fbSleep.sleep[0].restlessCount}}</span></div>          
+          <p></p>
+          <div><span class="fitbit-subtitle">Device status</span></div>
+          <div class="" ng-repeat="device in fbDevices">
+            <div>
+              <span class="fitbit-item">{{device.deviceVersion}} {{device.battery}} synced <span am-time-ago="device.lastSyncTime"></span></span>
+            </div>
+          </div>
+          <p></p>
           <div><span class="fitbit-subtitle">Latest badges</span></div>
           <div class="" ng-repeat="badge in fbDailyAverage.topBadges">
             <div>
