@@ -105,7 +105,7 @@
                     console.log(error);
                 });
             };
-            
+
             registerRefreshInterval(refreshCalendar, 25);
 
             var refreshFitbitData = function() {
@@ -192,7 +192,7 @@
             };
 
             if(typeof config.traffic !== 'undefined'){
-                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);    
+                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);
             }
 
             var refreshComic = function () {
@@ -203,22 +203,25 @@
                     console.log(error);
                 });
             };
-            
+
             registerRefreshInterval(refreshComic, 12*60); // 12 hours
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
             }
-        
+
             var refreshRss = function () {
                 console.log ("Refreshing RSS");
                 $scope.news = null;
-                RssService.refreshRssList();
+                RssService.refreshRssList().then(function() {
+                  $scope.news = RssService.getNews();
+                });
+
             };
 
             var updateNews = function() {
-                $scope.news = RssService.getNews(); 
+                $scope.news = RssService.getNews();
             };
 
             if(typeof config.rss !== 'undefined'){
