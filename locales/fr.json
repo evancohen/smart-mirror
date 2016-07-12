@@ -6,7 +6,7 @@
         "time_to" : "Temps de {{name}}: "
     },
     "reminders": {
-        "empty": "Aucun rappel"
+        "empty": "Aucun rappel."
     },
     "timer": {
       "one": "Une",
@@ -48,22 +48,22 @@
         "home": {
             "text": "Accueil",
             "voice": "Accueil",
-            "description": "Vous ramène à l'écran d'accueil"
+            "description": "Vous ramène à l'écran d'accueil."
         },
         "sleep": {
             "text": "Bonne nuit",
             "voice": "Bonne nuit",
-            "description": "Va te coucher"
+            "description": "Va te coucher."
         },
         "wake_up": {
             "text": "Réveille toi",
             "voice": "Réveille toi",
-            "description": "Réveille Toi"
+            "description": "Réveille Toi."
         },
         "debug": {
             "text": "Débogage",
             "voice": "Débogage",
-            "description": "Afficher les informations de débogage"
+            "description": "Afficher les informations de débogage."
         },
         "map_show": {
             "text": "Affiche carte",
@@ -78,22 +78,22 @@
         "map_zoom_in": {
             "text": "Zoom avant",
             "voice": "Zoom (avant) (sur la carte)",
-            "description": "Zoom avant sur la carte actuelle"
+            "description": "Zoom avant sur la carte actuelle."
         },
         "map_zoom_out": {
             "text": "Zoom arrière",
             "voice": "Zoom arrière (sur la carte)",
-            "description": "Zoom arrière sur la carte actuelle"
+            "description": "Zoom arrière sur la carte actuelle."
         },
         "map_zoom_point": {
             "text": "Zoom vers ________",
             "voice": "Zoom (vers) *value",
-            "description": "Zoom vers le point indiqué"
+            "description": "Zoom vers le point indiqué."
         },
         "map_zoom_reset": {
             "text": "Réinitialise zoom",
             "voice": "Réinitialise le zoom",
-            "description": "Réinitilalise la fonction zoom"
+            "description": "Réinitilalise la fonction zoom."
         },
         "video_search": {
             "text": "(Re)cherche une image de ________",
@@ -108,7 +108,7 @@
         "image_giphy": {
             "text": "(Re)cherche une image animée de ________",
             "voice": "(Re)cherche une image animée de *img",
-            "description": "Affiche une image de giphy"
+            "description": "Affiche une image de giphy."
         },
         "image_comic": {
             "text": "Montre(-moi) le dernier xkcd ",
@@ -163,27 +163,27 @@
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
-            "description": "Play a song on SoundCloud"
+            "description": "Play a song on SoundCloud."
         },
         "sc_pause": {
             "text": "SoundCloud pause/stop",
             "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stop/pause SoundCoud playback"
+            "description": "Stop/pause SoundCoud playback."
         },
         "sc_resume": {
             "text": "SoundCloud play",
             "voice": "SoundCloud (play)(resume)",
-            "description": "Resumes playback"
+            "description": "Resumes playback."
         },
         "sc_replay": {
             "text": "SoundCloud replay",
             "voice": "SoundCloud replay",
-            "description": "Replays the current song on SoundCloud"
+            "description": "Replays the current song on SoundCloud."
         },
         "light_action": {
             "text": "(Allume|Éteins) (la|les) lumières (action)",
             "voice": ":state (les) (la) lumière(s) (*action)",
-            "description": ":state (les) (la) lumière(s) (*action)"
+            "description": ":state (les) (la) lumière(s) (*action)."
         }
     }
 }
