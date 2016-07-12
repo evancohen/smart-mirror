@@ -6,7 +6,7 @@
         "time_to" : "Zeit bis {{name}}: "
     },
     "reminders": {
-        "empty": "Keine Erinnerungen"
+        "empty": "Keine Erinnerungen."
     },
     "timer": {
       "one": "Eine",
@@ -42,24 +42,6 @@
             "nightmode": "nachtmodus",
             "reset": "zurücksetzen"
         }
-    },
-    "fitbit": {
-        "statsFor": "Fitbit Statistiken für",
-        "averageSteps": "Durschnittliche Schritte pro Tag",
-        "todaysSteps": "Heutige Schritte",
-        "todaysDistance": "Heutige Distanz",
-        "todaysActiveMinutes": "Heutige aktive Minuten",
-        "caloriesBurned": "Verbrannte Kalorien",
-        "latestBadges": "Letzte Badges",
-        "sleepLastNight": "Schlaf letzte Nacht",
-        "hours": "Stunden",
-        "awake": "wach",
-        "efficient": "effizient",
-        "restless": "ruhelos",
-        "deviceStatus": "Gerätestatus",
-        "battery": "Batterie",
-        "synched": "Synchronisiert am",
-        "latestBadges": "Letzte Badges"
     },
     "commands": {
         "title" : "Zur Verfügung stehende Befehle",
@@ -106,7 +88,7 @@
         "map_zoom_out": {
             "text": "verkleinern",
             "voice": "(Karte) verkleinern",
-            "description": "Verkleinert die aktulle Karte."
+            "description": "Verkleinert die aktuelle Karte."
         },
         "map_zoom_point": {
             "text": "vergrößere ________",
@@ -116,7 +98,7 @@
         "map_zoom_reset": {
             "text": "Normalansicht",
             "voice": "(Karte) Normalansicht",
-            "description": "Setzt die Ansicht zurück"
+            "description": "Setzt die Ansicht zurück."
         },
         "video_search": {
             "text": "Zeige mir ________",
@@ -126,12 +108,12 @@
         "video_stop": {
             "text": "Stop video",
             "voice": "stop (the) video",
-            "description": "Stops the playback of video content."
+            "description": "Stopt die Video Wiedergabe."
         },
         "image_giphy": {
             "text": "Bild von ________",
             "voice": "Bild von *img",
-            "description": "Zeigt ein Giphy Bild"
+            "description": "Zeigt ein Giphy Bild."
         },
         "image_comic": {
             "text": "Zeige Comic",
@@ -186,32 +168,27 @@
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
-            "description": "Spielt einen Song auf Soundcloud"
+            "description": "Spielt einen Song auf SoundCloud."
         },
         "sc_pause": {
             "text": "SoundCloud pause/stop",
             "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stoppt/Pausiert die SoundCoud Wiedergabe"
+            "description": "Stoppt/Pausiert die SoundCoud Wiedergabe."
         },
         "sc_resume": {
             "text": "SoundCloud play",
             "voice": "SoundCloud (play)(resume)",
-            "description": "Setzt Soundcloud Wiedergabe fort"
+            "description": "Setzt die Soundcloud Wiedergabe fort."
         },
         "sc_replay": {
             "text": "SoundCloud replay",
             "voice": "SoundCloud replay",
-            "description": "Spielt den aktuellen Soundcloud Song erneut"
+            "description": "Spielt den aktuellen Song erneut auf Soundcloud."
         },
         "light_action": {
             "text": "Schalte (das|die) Licht(er) (action)",
             "voice": "(Schalte) (das) (die) Licht(er) *action",
-            "description": "Steuert Farbe und Helligkeit von Lichtern"
-        },
-        "show_my_walking": {
-            "text": "Zeig meine Schritte",
-            "voice": "Zeig meine Schritte",
-            "description": "Aktualisiert Fitbit Daten."
+            "description": "Steuert Farbe und Helligkeit von Lichtern."
         }
     }
 }
