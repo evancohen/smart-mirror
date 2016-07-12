@@ -129,7 +129,7 @@
             };
 
             if($scope.fitbitEnabled){
-                registerRefreshInterval(refreshFitbitData, 5);
+                registerRefreshInterval(refreshFitbitData, 60);
             }
 
             var refreshWeatherData = function() {
@@ -425,7 +425,7 @@
 
             //Show fitbit stats (registered only if fitbit is configured in the main config)
             if ($scope.fitbitEnabled) {
-                SpeechService.addCommand('show my walking', function() {
+                addCommand('show_my_walking', function() {
                     refreshFitbitData();
                 });
             }
