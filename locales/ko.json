@@ -38,6 +38,24 @@
             "off": "끄다"
         }
     },
+    "fitbit": {
+        "statsFor": "Fitbit stats for",
+        "averageSteps": "Daily average steps",
+        "todaysSteps": "Todays steps",
+        "todaysDistance": "Todays distance",
+        "todaysActiveMinutes": "Todays active minutes",
+        "caloriesBurned": "Burned calories",
+        "latestBadges": "Latest badges",
+        "sleepLastNight": "Sleep last night",
+        "hours": "hours",
+        "awake": "awake",
+        "efficient": "efficient",
+        "restless": "restless",
+        "deviceStatus": "Device Status",
+        "battery": "Battery",
+        "synched": "Synched on",
+        "latestBadges": "Latest Badges"
+    },
     "commands": {
         "title" : "사용 가능한 명령",
         "list": {
@@ -184,6 +202,11 @@
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
             "voice": "불 :state *action (해)줘",
             "description": "불 :state *action (해)줘"
+        },
+        "show_my_walking": {
+            "text": "Show my walking",
+            "voice": "Show my walking",
+            "description": "Refreshes the fitbit data."
         }
     }
 }

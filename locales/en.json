@@ -43,6 +43,24 @@
             "reset": "reset"
         }
     },
+    "fitbit": {
+        "statsFor": "Fitbit stats for",
+        "averageSteps": "Daily average steps",
+        "todaysSteps": "Todays steps",
+        "todaysDistance": "Todays distance",
+        "todaysActiveMinutes": "Todays active minutes",
+        "caloriesBurned": "Burned calories",
+        "latestBadges": "Latest badges",
+        "sleepLastNight": "Sleep last night",
+        "hours": "hours",
+        "awake": "awake",
+        "efficient": "efficient",
+        "restless": "restless",
+        "deviceStatus": "Device Status",
+        "battery": "Battery",
+        "synched": "Synched on",
+        "latestBadges": "Latest Badges"
+    },
     "commands": {
         "title" : "Available Commands",
         "list": {
@@ -189,6 +207,11 @@
             "text": "Turn (state) light(s) (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",
             "description": "Control color and brightness of lights"
+        },
+        "show_my_walking": {
+            "text": "Show my walking",
+            "voice": "Show my walking",
+            "description": "Refreshes the fitbit data."
         }
     }
 }

@@ -38,6 +38,24 @@
             "off": "apagar"
         }
     },
+    "fitbit": {
+        "statsFor": "Fitbit stats for",
+        "averageSteps": "Daily average steps",
+        "todaysSteps": "Todays steps",
+        "todaysDistance": "Todays distance",
+        "todaysActiveMinutes": "Todays active minutes",
+        "caloriesBurned": "Burned calories",
+        "latestBadges": "Latest badges",
+        "sleepLastNight": "Sleep last night",
+        "hours": "hours",
+        "awake": "awake",
+        "efficient": "efficient",
+        "restless": "restless",
+        "deviceStatus": "Device Status",
+        "battery": "Battery",
+        "synched": "Synched on",
+        "latestBadges": "Latest Badges"
+    },
     "commands": {
         "title" : "Listado de Órdenes",
         "list": {
@@ -184,6 +202,11 @@
             "text": "[estado] las luces a [acción]",
             "voice": ":state las luces a *action",
             "description": "Cambia el estado de las luces"
+        },
+        "show_my_walking": {
+            "text": "Show my walking",
+            "voice": "Show my walking",
+            "description": "Refreshes the fitbit data."
         }
     }
 }

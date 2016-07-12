@@ -43,6 +43,24 @@
             "reset": "zurücksetzen"
         }
     },
+    "fitbit": {
+        "statsFor": "Fitbit Statistiken für",
+        "averageSteps": "Durschnittliche Schritte pro Tag",
+        "todaysSteps": "Heutige Schritte",
+        "todaysDistance": "Heutige Distanz",
+        "todaysActiveMinutes": "Heutige aktive Minuten",
+        "caloriesBurned": "Verbrannte Kalorien",
+        "latestBadges": "Letzte Badges",
+        "sleepLastNight": "Schlaf letzte Nacht",
+        "hours": "Stunden",
+        "awake": "wach",
+        "efficient": "effizient",
+        "restless": "ruhelos",
+        "deviceStatus": "Gerätestatus",
+        "battery": "Batterie",
+        "synched": "Synchronisiert am",
+        "latestBadges": "Letzte Badges"
+    },
     "commands": {
         "title" : "Zur Verfügung stehende Befehle",
         "list": {
@@ -88,7 +106,7 @@
         "map_zoom_out": {
             "text": "verkleinern",
             "voice": "(Karte) verkleinern",
-            "description": "Verkleinert die aktulle Karte"
+            "description": "Verkleinert die aktulle Karte."
         },
         "map_zoom_point": {
             "text": "vergrößere ________",
@@ -123,7 +141,7 @@
         "image_comic_dilbert": {
             "text": "Dilbert Comic",
             "voice": "Dilbert",
-            "description": "Dilbert Comic"
+            "description": "Zeigt den aktuellsten Dilbert Comic."
         },
         "reminder_insert": {
             "text": "Erinnere mich an  ________",
@@ -168,27 +186,32 @@
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
-            "description": "Play a song on SoundCloud"
+            "description": "Spielt einen Song auf Soundcloud"
         },
         "sc_pause": {
             "text": "SoundCloud pause/stop",
             "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stop/pause SoundCoud playback"
+            "description": "Stoppt/Pausiert die SoundCoud Wiedergabe"
         },
         "sc_resume": {
             "text": "SoundCloud play",
             "voice": "SoundCloud (play)(resume)",
-            "description": "Resumes playback"
+            "description": "Setzt Soundcloud Wiedergabe fort"
         },
         "sc_replay": {
             "text": "SoundCloud replay",
             "voice": "SoundCloud replay",
-            "description": "Replays the current song on SoundCloud"
+            "description": "Spielt den aktuellen Soundcloud Song erneut"
         },
         "light_action": {
             "text": "Schalte (das|die) Licht(er) (action)",
             "voice": "(Schalte) (das) (die) Licht(er) *action",
             "description": "Steuert Farbe und Helligkeit von Lichtern"
+        },
+        "show_my_walking": {
+            "text": "Zeig meine Schritte",
+            "voice": "Zeig meine Schritte",
+            "description": "Aktualisiert Fitbit Daten."
         }
     }
 }
