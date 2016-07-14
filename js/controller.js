@@ -18,7 +18,10 @@
             SearchService,
             SoundCloudService,
             RssService,
+            StockService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
+
+        // Local Scope Vars
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
@@ -26,19 +29,28 @@
         $scope.user = {};
         $scope.shownews = true;
         $scope.commands = [];
-        /*$translate('home.commands').then(function (translation) {
-            $scope.interimResult = translation;
-        });*/
         $scope.interimResult = $translate.instant('home.commands');
         $scope.layoutName = 'main';
-
         $scope.fitbitEnabled = false;
+        $scope.config = config;
+
         if (typeof config.fitbit !== 'undefined') {
             $scope.fitbitEnabled = true;
         }
 
         //set lang
-        moment.locale((typeof config.language !== 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en');
+        moment.locale(
+          (typeof config.language !== 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en',
+          {
+            calendar : {
+              sameDay : '[Today]',
+              nextDay : '[Tomorrow]',
+              nextWeek : 'dddd',
+              sameElse : 'L'
+            }
+          }
+        );
+
         console.log('moment local', moment.locale());
 
         //Update the time
@@ -62,7 +74,7 @@
         };
 
         /**
-         * Register a refresh callback for a given interval (in seconds)
+         * Register a refresh callback for a given interval (in minutes)
          */
         var registerRefreshInterval = function(callback, interval){
             //Load the data initially
@@ -87,31 +99,38 @@
             var playing = false, sound;
             SoundCloudService.init();
 
-            var refreshMirrorData = function() {
+            var refreshCalendar = function() {
                 CalendarService.getCalendarEvents().then(function(response) {
                     $scope.calendar = CalendarService.getFutureEvents();
                 }, function(error) {
                     console.log(error);
                 });
-
-                if ($scope.fitbitEnabled) {
-                    setTimeout(function() { refreshFitbitData(); }, 5000);
-                }
             };
+
+            registerRefreshInterval(refreshCalendar, 25);
 
             var refreshFitbitData = function() {
                 console.log('refreshing fitbit data');
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
                 });
-
+                
                 FitbitService.todaySummary(function(response){
                     $scope.fbToday = response;
                 });
+
+                FitbitService.sleepSummary(function(response){
+                    $scope.fbSleep = response;
+                });
+
+                FitbitService.deviceSummary(function(response){
+                    $scope.fbDevices = response;
+                });
             };
 
-            refreshMirrorData();
-            $interval(refreshMirrorData, 1500000);
+            if($scope.fitbitEnabled){
+                registerRefreshInterval(refreshFitbitData, 60);
+            }
 
             var refreshWeatherData = function() {
                 //Get our location and then get the weather for our location
@@ -168,7 +187,7 @@
             };
 
             if(typeof config.greeting !== 'undefined'){
-                registerRefreshInterval(greetingUpdater, 120000);
+                registerRefreshInterval(greetingUpdater, 60);
             }
 
             var refreshTrafficData = function() {
@@ -182,7 +201,7 @@
             };
 
             if(typeof config.traffic !== 'undefined'){
-                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);    
+                registerRefreshInterval(refreshTrafficData, config.traffic.refreshInterval || 5);
             }
 
             var refreshComic = function () {
@@ -193,14 +212,14 @@
                     console.log(error);
                 });
             };
-            
+
             registerRefreshInterval(refreshComic, 12*60); // 12 hours
 
             var defaultView = function() {
                 console.debug("Ok, going to default view...");
                 $scope.focus = "default";
             }
-        
+
             var refreshRss = function () {
                 console.log ("Refreshing RSS");
                 $scope.news = null;
@@ -208,8 +227,20 @@
             };
 
             var updateNews = function() {
-                $scope.news = RssService.getNews(); 
+                $scope.news = RssService.getNews();
             };
+
+            var getStock = function() {
+              StockService.getStockQuotes().then(function(result) {
+                $scope.stock = result.list.resources;
+              }, function(error) {
+                console.log(error);
+              });
+            }
+
+            if (typeof config.stock !== 'undefined' && config.stock.names.length) {
+              registerRefreshInterval(getStock, 30);
+            }
 
             if(typeof config.rss !== 'undefined'){
                 registerRefreshInterval(refreshRss, config.rss.refreshInterval || 30);
@@ -396,7 +427,7 @@
 
             //Show fitbit stats (registered only if fitbit is configured in the main config)
             if ($scope.fitbitEnabled) {
-                SpeechService.addCommand('show my walking', function() {
+                addCommand('show_my_walking', function() {
                     refreshFitbitData();
                 });
             }

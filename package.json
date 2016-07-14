@@ -6,7 +6,8 @@
   "scripts": {
     "install": "bower install",
     "start": "electron main.js ",
-    "microphone-debug": "electron scripts/microphone-debug/main.js",
+    "microphone-debug" : "electron scripts/microphone-debug/main.js",
+    "train-model" : "electron scripts/train-model.js",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {
@@ -34,11 +35,10 @@
     "npm": "^3.8.8"
   },
   "dependencies": {
-    "electron-debug": "^1.0.1",
-    "electron-json-storage": "2.0.0",
     "express": "^4.13.4",
     "fitbit-oauth2": "0.0.1",
     "fs": "0.0.2",
-    "hyperion-client": "1.0.3"
+    "hyperion-client": "1.0.3",
+    "electron-json-storage": "2.0.0"
   }
 }

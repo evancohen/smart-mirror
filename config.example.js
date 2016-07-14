@@ -3,16 +3,12 @@ var config = {
     // Lenguage for the mirror
     language : "en-US",
 
-    // Auto Timer with Motion Detection
-    autotimermotion : {
-        motionenable : true, // Enable or disable this functionality
-	    pin : 26, //Default pirPin is GPIO pin 26.
-	    debug : true, // send debug info to dev console, if debug autosleep is 30 seconds (not yet working)
-        autotimerenable : true, // Enable or disable autotimer functionality
-	    autosleep: 40.0, // How long the screen will stay awake before going to sleep in minutes as float value (40 Mins)
-        autowake: '07:00:00', // When to automatically wake the screen up (7:00AM)
-        //'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen (no longer used)
-        //'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen (no longer used)
+    // PIR Detection
+    motion : {
+        pin : 26, //Default pirPin is GPIO pin 26.
+        screentimeout : 5.0, //Default timeout is 5 minutes must be a float number.
+        enable : true, // Enable or disable this functionality
+        debug : true // send debug info to dev console, if debug timeout is 30 seconds (not yet working)
     },
 	// Keyword Spotting (Hotword Detection)
     speech : {
@@ -84,7 +80,8 @@ var config = {
     calendar: {
       icals : [], // Be sure to wrap your URLs in quotes
       maxResults: 9, // Number of calender events to display (Defaults is 9)
-      maxDays: 365 // Number of days to display (Default is one year)
+      maxDays: 365, // Number of days to display (Default is one year)
+      showCalendarNames: false // Show calendar names above events
     },
     // Giphy
     giphy: {
@@ -106,6 +103,7 @@ var config = {
       trips : [{
         mode : "Driving", // Possibilities: Driving / Transit / Walking
         origin : "", // Start of your trip. Human readable address.
+        via : "",  // [Optional] Set an intermediate goal for getting an alternate route for example
         destination : "", // Destination of your trip. Human readable address.
         name : "work", // Name of your destination ex: "work"
         /*startTime: "",
@@ -115,6 +113,15 @@ var config = {
     rss: {
       feeds : [],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
       refreshInterval : 120 // Number of minutes the information is refreshed
+    },
+    stock: {
+      names: [] // The names of the stock quotes you with to show in the official format. (e.g.: 'YHOO','AAPL','GOOG')
+    },
+    autoTimer: {
+      autoSleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
+      autoWake: '07:00:00', // When to automatically wake the screen up (7:00AM)
+      'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
+      'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
     }
 };
 
