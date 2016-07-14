@@ -54,7 +54,7 @@ dt {
 
 .container {
     z-index: -1;
-    /* so things are still selectable */    
+    /* so things are still selectable */
     position: fixed;
     top: 0;
     left: 0;
@@ -140,7 +140,7 @@ ul.calendar {
 }
 
 .calendar span {
-	display: inline-block; 
+	display: inline-block;
 }
 
 .calendar .day {
@@ -148,7 +148,7 @@ ul.calendar {
     font-weight: bold;
     position: absolute;
     width: 128px;
-    vertical-align: top; 
+    vertical-align: top;
 }
 
 .calendar span.summary {
@@ -160,7 +160,15 @@ ul.calendar {
     font-size: 12px;
     padding-left: 150px;
     font-family: 'Open Sans', sans-serif;
-    font-weight: lighter; 
+    font-weight: lighter;
+}
+
+.calendar-name {
+  display: none;
+}
+
+.show-calendar-names .calendar-name {
+  display: block;
 }
 
 .day-marker {
@@ -241,7 +249,7 @@ ul.calendar {
     width: 450px;
 }
 
-.traffic-information {
+.traffic-information, .stock-information {
     text-align: right;
     margin-top: 10px;
     margin-right: 10px;

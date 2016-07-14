@@ -46,6 +46,7 @@
             "name": "Debug",
             "type": "chrome",
             "request": "launch",
+            "address": "10.5.3.215",
             "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
             "runtimeArgs": [
                 "${workspaceRoot}",
