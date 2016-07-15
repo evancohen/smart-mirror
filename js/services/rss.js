@@ -1,7 +1,7 @@
 (function(annyang) {
     'use strict';
 
-    function RssService($http) {
+    function RssService($http, $q) {
         var service = {};
         service.feed = [];
         service.currentFeed = 0;
@@ -12,25 +12,28 @@
             var currentTime = new moment();
 
             if (typeof config.rss != 'undefined'){
+                var promises = [];
                 angular.forEach(config.rss.feeds, function(url) {
-                    $http.jsonp('http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)).then(function(response) {
-                        for (var i=0; i < response.data.responseData.feed.entries.length; i++){
-                            var feedEntry = {
-                                title  : response.data.responseData.feed.title,
-                                content: response.data.responseData.feed.entries[i].title,
+                    promises.push($http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK'));
+                });
+
+                return $q.all(promises).then(function(response) {
+                      for (var i=0; i < response['0'].data.query.results.rss.channel.item.length; i++){
+                          var feedEntry = {
+                                title  : response['0'].data.query.results.rss.channel.title,
+                                content: response['0'].data.query.results.rss.channel.item[i].title,
                                 lastUpdated : currentTime,
-                            };
-                            //console.log(feedEntry);
-                            service.feed.push(feedEntry);
-                        }    
-                    });
+                          };
+                          service.feed.push(feedEntry);
+                      }
                 });
             }
-            return service.feed;
         };
 
         service.refreshRssList = function() {
-            return service.init();
+          return service.init().then(function(entries) {
+            return entries;
+          });
         };
 
         service.getNews = function() {
@@ -49,7 +52,7 @@
                     }
                     else {
                         service.currentFeed = service.currentFeed + 1;
-                    }               
+                    }
             };
             return service.feed[service.currentFeed];
         } ;

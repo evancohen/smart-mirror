@@ -103,6 +103,7 @@ var config = {
       trips : [{
         mode : "Driving", // Possibilities: Driving / Transit / Walking
         origin : "", // Start of your trip. Human readable address.
+        via : "",  // [Optional] Set an intermediate goal for getting an alternate route for example
         destination : "", // Destination of your trip. Human readable address.
         name : "work", // Name of your destination ex: "work"
         /*startTime: "",
