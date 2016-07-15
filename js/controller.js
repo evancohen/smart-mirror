@@ -223,7 +223,10 @@
             var refreshRss = function () {
                 console.log ("Refreshing RSS");
                 $scope.news = null;
-                RssService.refreshRssList();
+                RssService.refreshRssList().then(function() {
+                  $scope.news = RssService.getNews();
+                });
+
             };
 
             var updateNews = function() {
