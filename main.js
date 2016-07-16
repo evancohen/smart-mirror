@@ -11,6 +11,9 @@ const BrowserWindow = electron.BrowserWindow
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
+// Launching the mirror in dev mode
+const DevelopmentMode = process.argv[2] == "dev";
+
 // Load the smart mirror config
 var config;
 try{
@@ -59,7 +62,7 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/index.html')
 
   // Open the DevTools if run with "npm start dev"
-  if(process.argv[2] == "dev"){
+  if(DevelopmentMode){
     mainWindow.webContents.openDevTools();
   }
 
