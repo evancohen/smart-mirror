@@ -111,18 +111,9 @@
     </div>
     <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
       <div class="middle-center">
-        <h1 ng-show="focus !== 'showSongInformation'">{{greeting}}</h1>
-        <h3 ng-show="!(user.name === undefined) && focus !== 'showSongInformation'">{{user.name}}</h3>
-        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+        <h1>{{greeting}}</h1>
         <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
-        </div>
-        <div class="content-box songInformation animage-grow" ng-show="focus == 'showSongInformation'">
-          <img ng-src="{{songInformation.cover}}" />
-          <div>{{songInformation.artist}}</div>
-          <div>{{songInformation.title}}</div>
-          <div>{{songInformation.album}}</div>
-          <div class="nowplaying" ng-show="songInformation.playing">Playing</div>
         </div>
         <div class="contents-box sc-container animate-grow" ng-show="focus == 'sc'">
           <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>
@@ -191,8 +182,8 @@
         <div class="error" ng-bind="speechError" ng-show="speechError"></div>
         <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
       </div>
-      <div class="bottom-left" ng-show="fitbitEnabled">
-        <div>
+      <div class="bottom-left">
+        <div class="fitbit" ng-show="fitbitEnabled">
           <div><span class="fitbit-title">{{'fitbit.statsFor' | translate}} {{fbDailyAverage.fullName}}</span></div>
           <div><span class="fitbit-item">{{'fitbit.averageSteps' | translate}}: {{fbDailyAverage.averageDailySteps}}</span></div>
           <div><span class="fitbit-item">{{'fitbit.todaysSteps' | translate}}: {{fbToday.summary.steps}}</span></div>
@@ -221,6 +212,16 @@
             </div>
           </div>
         </div>
+        <div class="playing-track">
+          <img ng-src="{{track.cover}}" />
+          <div>{{track.artist}}</div>
+          <div>{{track.title}}</div>
+          <div>{{track.album}}</div>
+          <div class="nowplaying" ng-show="track.playing">Playing</div>
+        </div>
+      </div>
+      <div class="bottom-right">
+        <!-- Someday something will live here -->
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>

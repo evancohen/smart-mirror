@@ -184,11 +184,6 @@
             "text": "[estado] las luces a [acción]",
             "voice": ":state las luces a *action",
             "description": "Cambia el estado de las luces."
-        },
-        "show_song": {
-          "text": "Show (my) song information",
-          "voice": "Show (my) song information",
-          "description": "Shows the last.fm scrobbler song information"
         }
     }
 }

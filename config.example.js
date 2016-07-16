@@ -124,8 +124,9 @@ var config = {
       'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
     },
     lastfm: {
-      user: '',
-      apikey: ''
+      key: "", // Your last.fm api key
+      user: "", // Your last.fm username
+      refreshInterval : 0.6 // Number of minutes between checks for playing track
     }
 };
 

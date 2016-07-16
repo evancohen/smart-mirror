@@ -85,12 +85,6 @@
             }
         }
 
-        var initializeScrobblerService = ScrobblerService.getSongInformation().then(function(data) {
-          $scope.songInformation = data;
-          $scope.focus = 'showSongInformation';
-        });
-
-
         _this.init = function() {
             AutoSleepService.startAutoSleepTimer();
 
@@ -255,6 +249,16 @@
             if(typeof config.rss !== 'undefined'){
                 registerRefreshInterval(refreshRss, config.rss.refreshInterval || 30);
                 registerRefreshInterval(updateNews, 2);
+            }
+
+            var getScrobblingTrack = function(){
+                ScrobblerService.getCurrentTrack().then(function(track) {
+                    $scope.track = track;
+                });
+            }
+
+            if(typeof config.lastfm.key !== 'undefined' && config.lastfm.user !== 'undefined'){
+                registerRefreshInterval(getScrobblingTrack, config.lastfm.refreshInterval || 0.6)
             }
 
             var addCommand = function(commandId, commandFunction){
@@ -499,10 +503,6 @@
                 TimerService.start();
                 $scope.focus = "timer";
               }
-            });
-
-            addCommand('show_song', function() {
-              initializeScrobblerService();
             });
 
             var resetCommandTimeout;

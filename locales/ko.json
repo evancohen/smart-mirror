@@ -184,11 +184,6 @@
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
             "voice": "불 :state *action (해)줘",
             "description": "불 :state *action (해)줘."
-        },
-        "show_song": {
-          "text": "Show (my) song information",
-          "voice": "Show (my) song information",
-          "description": "Shows the last.fm scrobbler song information"
         }
     }
 }
