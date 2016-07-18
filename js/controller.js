@@ -43,6 +43,8 @@
           (typeof config.language !== 'undefined')?config.language.substring(0, 2).toLowerCase(): 'en',
           {
             calendar : {
+              lastWeek : '[Last] dddd',
+              lastDay : '[Yesterday]',
               sameDay : '[Today]',
               nextDay : '[Tomorrow]',
               nextWeek : 'dddd',

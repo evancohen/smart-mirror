@@ -58,12 +58,19 @@
         <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
         <div class="time">{{date.format('LT')}}</div>
         <ul class="calendar fade" ng-show="focus == 'default'" ng-class="config.calendar.showCalendarNames ? 'show-calendar-names' : ''">
-            <li class="event" ng-repeat="event in calendar" ng-class="(calendar[$index - 1].start.format('MD') != event.start.format('MD')) ? 'day-marker' : ''">
+            <li class="event" ng-repeat="event in calendar" ng-class="(calendar[$index - 1].label != event.label) ? 'day-marker' : ''">
                 <div class="event-details">
-                    <span class="day">{{event.start.calendar() | uppercase}}</span>
+                    <span class="day">
+                      <span>{{event.startName}}</span>
+                      <span ng-if="event.startName != event.endName"> - {{event.endName}}</span>
+                    </span>
                     <div class="details calendar-name">{{event.calendarName}}</div>
                     <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format('LLL')}}</div>
+                    <div class="details" ng-if="event.start.format('LT') != event.end.format('LT')">
+                      <span ng-if="event.startName != event.endName">{{event.start.format('M/D')}} {{event.start.format('LT')}} - {{event.end.format('M/D')}} {{event.end.format('LT')}}</span>
+                      <span ng-if="event.startName == event.endName">{{event.start.format('LT')}} - {{event.end.format('LT')}}</span>
+                    </div>
+                    <div class="details" ng-if="event.start.format('LT') == event.end.format('LT')">All day</div>
                 </div>
             </li>
         </ul>

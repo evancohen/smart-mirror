@@ -146,19 +146,16 @@ ul.calendar {
 .calendar .day {
     display: none;
     font-weight: bold;
-    position: absolute;
-    width: 128px;
     vertical-align: top;
 }
 
 .calendar span.summary {
-    margin-left: 150px;
-    max-width: 400px;
+  font-size: 25px;
+  max-width: 400px;
 }
 
 .calendar .event-details .details {
     font-size: 12px;
-    padding-left: 150px;
     font-family: 'Open Sans', sans-serif;
     font-weight: lighter;
 }
@@ -174,8 +171,12 @@ ul.calendar {
 .day-marker {
 	margin-top: 30px;
 }
+
 .day-marker .day {
 	display: block;
+  font-size: 15px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 
 .weather {
