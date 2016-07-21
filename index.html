@@ -118,11 +118,7 @@
     </div>
     <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
       <div class="middle-center">
-<<<<<<< 23814814d8d1a074e15494b0445feccec776e534
-        <h1>{{greeting}}</h1>
-=======
-        <h1 ng-bind="greeting"></h1>
->>>>>>> improve performance of digest binding
+        <h1 ng-bind="greeting"></h1>a
         <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
@@ -188,8 +184,8 @@
         <div class="error" ng-bind="speechError" ng-show="speechError"></div>
         <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
       </div>
-      <div class="bottom-left" ng-if="fitbitEnabled">
-        <div class="fitbit">
+      <div class="bottom-left">
+        <div class="fitbit" ng-if="fitbitEnabled">
           <div><span class="fitbit-title">{{'fitbit.statsFor' | translate}} {{fbDailyAverage.fullName}}</span></div>
           <div><span class="fitbit-item">{{'fitbit.averageSteps' | translate}}: {{fbDailyAverage.averageDailySteps}}</span></div>
           <div><span class="fitbit-item">{{'fitbit.todaysSteps' | translate}}: {{fbToday.summary.steps}}</span></div>
