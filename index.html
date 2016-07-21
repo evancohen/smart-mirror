@@ -149,7 +149,7 @@
             </li>
           </ul>
         </div>
-        <div class="contents-box animate-grow" ng-show="focus == 'timer'">
+        <div class="contents-box animate-grow" ng-if="focus == 'timer'">
           <div class="contents timer animate-grow">
             <div class="timer-countdown">{{timer.countdown | secondsToDateTime | date:"mm:ss"}}</div>
             <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>
@@ -159,7 +159,7 @@
       </div>
       <div class="bottom-center">
         <!-- Command list -->
-        <div class="commands animate-grow" ng-show="focus == 'commands'">
+        <div class="commands animate-grow" ng-if="focus == 'commands'">
           <h2>{{ 'commands.title' | translate }}</h2>
           <dl>
             <dt ng-repeat-start="command in commands">{{command['text']}}</dt>
@@ -175,7 +175,7 @@
         </div>
 
         <div class="news">
-          <div class="fade" ng-show="focus == 'default' && news">
+          <div class="fade" ng-if="focus == 'default' && news">
             <div class="news-title dimmed fade">
               <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
               <span fade>Source: {{news.title}},   Last Updated: {{news.lastUpdated.format('MMM DD, h:mm a')}} </span>
@@ -189,8 +189,8 @@
         <div class="error" ng-bind="speechError" ng-show="speechError"></div>
         <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
       </div>
-      <div class="bottom-left">
-        <div class="fitbit" ng-show="fitbitEnabled">
+      <div class="bottom-left" ng-if="fitbitEnabled">
+        <div class="fitbit">
           <div><span class="fitbit-title">{{'fitbit.statsFor' | translate}} {{fbDailyAverage.fullName}}</span></div>
           <div><span class="fitbit-item">{{'fitbit.averageSteps' | translate}}: {{fbDailyAverage.averageDailySteps}}</span></div>
           <div><span class="fitbit-item">{{'fitbit.todaysSteps' | translate}}: {{fbToday.summary.steps}}</span></div>
