@@ -115,6 +115,11 @@ var config = {
       autoWake: '07:00:00', // When to automatically wake the screen up (7:00AM)
       'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
       'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
+    },
+    lastfm: {
+      key: "", // Your last.fm api key
+      user: "", // Your last.fm username
+      refreshInterval : 0.6 // Number of minutes between checks for playing track
     }
 };
 

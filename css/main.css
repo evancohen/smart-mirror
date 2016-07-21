@@ -114,11 +114,19 @@ dt {
     margin-bottom: 20px;
 }
 
-.bottom-left {
+.bottom-left, .bottom-right {
     font-family: 'Open Sans', sans-serif;
     position: absolute;
-    bottom: 20px;
+    bottom: 50px;
+    width: 50%;
+}
+
+.bottom-left {
     left: 20px;
+}
+
+.bottom-right {
+    right: 20px;
 }
 
 .commands {
@@ -248,6 +256,11 @@ ul.calendar {
     display: inline-block;
     margin-right: 10px;
     width: 450px;
+}
+
+.playing-track img {
+    float: left;
+    margin-right: 5px;
 }
 
 .traffic-information, .stock-information {
@@ -478,7 +491,6 @@ ul.calendar {
 }
 
 .news {
-    height: 75px;
     margin-bottom: 5px;
 }
 

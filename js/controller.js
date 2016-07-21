@@ -19,6 +19,7 @@
             SoundCloudService,
             RssService,
             StockService,
+            ScrobblerService,
             $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -250,6 +251,16 @@
             if(typeof config.rss !== 'undefined'){
                 registerRefreshInterval(refreshRss, config.rss.refreshInterval || 30);
                 registerRefreshInterval(updateNews, 2);
+            }
+
+            var getScrobblingTrack = function(){
+                ScrobblerService.getCurrentTrack().then(function(track) {
+                    $scope.track = track;
+                });
+            }
+
+            if(typeof config.lastfm.key !== 'undefined' && config.lastfm.user !== 'undefined'){
+                registerRefreshInterval(getScrobblingTrack, config.lastfm.refreshInterval || 0.6)
             }
 
             var addCommand = function(commandId, commandFunction){
