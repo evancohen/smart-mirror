@@ -117,7 +117,7 @@
                 FitbitService.profileSummary(function(response){
                     $scope.fbDailyAverage = response;
                 });
-                
+
                 FitbitService.todaySummary(function(response){
                     $scope.fbToday = response;
                 });
@@ -238,11 +238,11 @@
 
             var getStock = function() {
               StockService.getStockQuotes().then(function(result) {
-                $scope.stock = result.list.resources;
+                $scope.stock = result.query.results.quote;
               }, function(error) {
                 console.log(error);
               });
-            }
+            }        
 
             if (typeof config.stock !== 'undefined' && config.stock.names.length) {
               registerRefreshInterval(getStock, 30);
