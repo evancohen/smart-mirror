@@ -259,7 +259,7 @@
                 });
             }
 
-            if(typeof config.lastfm.key !== 'undefined' && config.lastfm.user !== 'undefined'){
+            if(typeof config.lastfm !== 'undefined' && typeof config.lastfm.key !== 'undefined' && config.lastfm.user !== 'undefined'){
                 registerRefreshInterval(getScrobblingTrack, config.lastfm.refreshInterval || 0.6)
             }
 

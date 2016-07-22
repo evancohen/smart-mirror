@@ -1,10 +1,5 @@
 (function() {
     'use strict';
-
-    var express = require('express');
-    var app     = express();
-    var fs      = require( 'fs' );
-    var Fitbit  = require( 'fitbit-oauth2' );
     
     function FitbitService($http) {
 
@@ -56,53 +51,58 @@
         var fitbit = {};
         if (typeof config.fitbit != 'undefined') {
             fitbit = new Fitbit(config.fitbit); 
-        }
 
-        // In a browser, http://localhost:4000/fitbit to authorize a user for the first time.
-        //
-        app.get('/fitbit', function (req, res) {
-            res.redirect(fitbit.authorizeURL());
-        });
+            var express = require('express');
+            var app     = express();
+            var fs      = require( 'fs' );
+            var Fitbit  = require( 'fitbit-oauth2' );
 
-        // Callback service parsing the authorization token and asking for the access token.  This
-        // endpoint is refered to in config.fitbit.authorization_uri.redirect_uri.  See example
-        // config below.
-        //
-        app.get('/fitbit_auth_callback', function (req, res, next) {
-            var code = req.query.code;
-            fitbit.fetchToken( code, function(err, token) {
-                if (err) return next(err);
-
-                // persist the token
-                persist.write(tfile, token, function(err) {
-                    if (err) return next(err);
-                    res.redirect('/fb-profile');
-                });
+            // In a browser, http://localhost:4000/fitbit to authorize a user for the first time.
+            //
+            app.get('/fitbit', function (req, res) {
+                res.redirect(fitbit.authorizeURL());
             });
-        });
 
-        // Call an API. fitbit.request() mimics nodejs request() library, automatically
-        // adding the required oauth2 headers.  The callback is a bit different, called
-        // with ( err, body, token ).  If token is non-null, this means a refresh has happened
-        // and you should persist the new token.
-        //
-        app.get( '/fb-profile', function(req, res, next) {
-            fitbit.request({
-                uri: "https://api.fitbit.com/1/user/-/profile.json",
-                method: 'GET',
-            }, function(err, body, token) {
-                if (err) return next(err);
-                var profile = JSON.parse(body);
-                // if token is not null, a refesh has happened and we need to persist the new token
-                if (token)
+            // Callback service parsing the authorization token and asking for the access token.  This
+            // endpoint is refered to in config.fitbit.authorization_uri.redirect_uri.  See example
+            // config below.
+            //
+            app.get('/fitbit_auth_callback', function (req, res, next) {
+                var code = req.query.code;
+                fitbit.fetchToken( code, function(err, token) {
+                    if (err) return next(err);
+
+                    // persist the token
                     persist.write(tfile, token, function(err) {
                         if (err) return next(err);
-                            res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+                        res.redirect('/fb-profile');
                     });
-                else
-                    res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+                });
             });
-        });
+
+            // Call an API. fitbit.request() mimics nodejs request() library, automatically
+            // adding the required oauth2 headers.  The callback is a bit different, called
+            // with ( err, body, token ).  If token is non-null, this means a refresh has happened
+            // and you should persist the new token.
+            //
+            app.get( '/fb-profile', function(req, res, next) {
+                fitbit.request({
+                    uri: "https://api.fitbit.com/1/user/-/profile.json",
+                    method: 'GET',
+                }, function(err, body, token) {
+                    if (err) return next(err);
+                    var profile = JSON.parse(body);
+                    // if token is not null, a refesh has happened and we need to persist the new token
+                    if (token)
+                        persist.write(tfile, token, function(err) {
+                            if (err) return next(err);
+                                res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+                        });
+                    else
+                        res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+                });
+            });
+        }
 
         // Only start up express and enable the fitbit service to start making API calls if the fitbit config is present in config.js.
         if (typeof config.fitbit != 'undefined') {
