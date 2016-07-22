@@ -111,7 +111,7 @@
         <div class="stock">
           <div class="stock-information" ng-repeat="quote in stock">
             <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
-            <span fade>{{quote.resource.fields.issuer_name}}: ${{quote.resource.fields.price  | number : 3}}</span>
+            <span fade>{{quote.Name}}: ${{quote.LastTradePriceOnly  | number : 3}} ({{quote.Change}}%)</span>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@
           <p></p>
           <div><span class="fitbit-subtitle" ng-show="fbSleep.sleep[0]">{{'fitbit.sleepLastNight' | translate}}</span></div>
           <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{(fbSleep.sleep[0].minutesAsleep/60 | number:2 )}} {{'fitbit.hours' | translate}} / {{fbSleep.sleep[0].minutesAwake  }} min {{'fitbit.awake' | translate}} // {{(fbSleep.sleep[0].efficiency)}} % {{'fitbit.efficient' | translate}}</span></div>
-          <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{'fitbit.awake' | translate}}/{{'fitbit.restless' | translate}}: {{fbSleep.sleep[0].awakeCount}} / {{fbSleep.sleep[0].restlessCount}}</span></div>          
+          <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{'fitbit.awake' | translate}}/{{'fitbit.restless' | translate}}: {{fbSleep.sleep[0].awakeCount}} / {{fbSleep.sleep[0].restlessCount}}</span></div>
           <p></p>
           <div><span class="fitbit-subtitle">{{'fitbit.deviceStatus' | translate}}</span></div>
           <div class="" ng-repeat="device in fbDevices">
