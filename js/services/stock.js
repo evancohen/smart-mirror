@@ -7,7 +7,7 @@
     service.getStockQuotes = function() {
       var deferred = $q.defer();
       if (config.stock.names.length) {
-        var url = 'http://finance.yahoo.com/webservice/v1/symbols/'+config.stock.names.join(',').toUpperCase()+'/quote?format=json&view=detail';
+        var url = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20('+"'" + config.stock.names.join("','") + "'"+')&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json';
 
         $http.get(url).then(function(response) {
           deferred.resolve(response.data);
