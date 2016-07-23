@@ -238,11 +238,17 @@
 
             var getStock = function() {
               StockService.getStockQuotes().then(function(result) {
-                $scope.stock = result.query.results.quote;
+                var stock = [];
+                if (result.query.results.quote instanceof Array) {
+                  stock = stock.concat(result.query.results.quote);
+                } else {
+                  stock.push(result.query.results.quote);
+                }
+                $scope.stock = stock;
               }, function(error) {
                 console.log(error);
               });
-            }        
+            }    
 
             if (typeof config.stock !== 'undefined' && config.stock.names.length) {
               registerRefreshInterval(getStock, 30);
