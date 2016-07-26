@@ -90,7 +90,6 @@ var config = {
     },
     traffic: {
       key : "", // Bing Maps API Key
-
       refreshInterval : 5, // Number of minutes the information is refreshed
       // An array of tips that you would like to display travel time for
       trips : [{

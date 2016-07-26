@@ -269,6 +269,23 @@
                 registerRefreshInterval(getScrobblingTrack, config.lastfm.refreshInterval || 0.6)
             }
 
+            var refreshRss = function () {
+                console.log ("Refreshing RSS");
+                $scope.news = null;
+                RssService.refreshRssList();
+            };
+
+            var updateNews = function() {
+                $scope.shownews = false;
+                setTimeout(function(){ $scope.news = RssService.getNews(); $scope.shownews = true; }, 1000);
+            };
+
+            refreshRss();
+            $interval(refreshRss, config.rss.refreshInterval * 60000);
+            
+            updateNews();
+            $interval(updateNews, 8000);  // cycle through news every 8 seconds
+
             var addCommand = function(commandId, commandFunction){
                 var voiceId = 'commands.'+commandId+'.voice';
                 var textId = 'commands.'+commandId+'.text';

@@ -52,7 +52,7 @@
                     }
                     else {
                         service.currentFeed = service.currentFeed + 1;
-                    }
+                    }               
             };
             return service.feed[service.currentFeed];
         } ;
