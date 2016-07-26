@@ -76,17 +76,8 @@ fi
 # display_rotate=1' /boot/config.txt
 # fi
 
-# Sound configuration
-printf "%s\n${blu}Would you like to install and auto-configure sound and audio capture dependencies (reccomended)?${end}\n"
-read -r -p "If you have an existing sound setup you can skip this [y/N] " response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    ## TODO: is pulseaudio-module-jack actually required?
-	printf "%s\n${blu}Installing audio dependencies${end}\n"
-    sudo apt-get install pulseaudio pulseaudio-module-zeroconf pulseaudio-module-jack
-fi
-
 # Install native dependencies
-printf "%s\n${blu}Installing non-audio native dependencies${end}\n"
+printf "%s\n${blu}Installing native dependencies${end}\n"
 sudo apt-get install curl wget git python-pyaudio python3-pyaudio sox unclutter
 
 # Check if we need to install or upgrade Node.js.
