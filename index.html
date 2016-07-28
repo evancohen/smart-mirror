@@ -22,6 +22,7 @@
     <!-- App -->
     <script src="config.js"></script>
     <script src="js/app.js"></script>
+
     <script src="js/services/timebox.js"></script>
     <script src="js/services/soundcloud.js"></script>
     <script src="js/services/search.js"></script>
@@ -29,7 +30,7 @@
     <script src="js/services/weather.js"></script>
     <script src="js/services/comic.js"></script>
     <script src="js/services/map.js"></script>
-    <script src="js/services/hue.js"></script>
+    <script src="js/services/light.js"></script>
     <script src="js/services/giphy.js"></script>
     <script src="js/services/timer.js"></script>
     <script src="js/services/geolocation.js"></script>
@@ -38,28 +39,39 @@
     <script src="js/services/fitbit.js"></script>
     <script src="js/services/reminder.js"></script>
     <script src="js/services/rss.js"></script>
+    <script src="js/services/autosleep.js"></script>
+    <script src="js/services/stock.js"></script>
+    <script src="js/services/scrobbler.js"></script>
     <script src="js/controller.js"></script>
 
     <!-- Styles and Resources -->
     <link rel="shortcut icon" href="favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
-	  <link rel="stylesheet" href="css/weather-icons.css">
+      <link rel="stylesheet" href="css/weather-icons.css">
     <!-- bower:css -->
     <!-- endbower -->
 
   </head>
-  <body ng-controller="MirrorCtrl as commands" ng-cloak>
+  <body ng-controller="MirrorCtrl" ng-cloak="">
     <div class="top">
       <div class="top-left">
-        <div class="date grey">{{date.format('dddd')}}, {{date.format('LL')}}</div>
-        <div class="time">{{date.format('LT')}}</div>
-        <ul class="calendar fade" ng-show="focus == 'default'">
-            <li class="event" ng-repeat="event in calendar">
+        <div class="date grey"><span ng-bind="date.format('dddd')"></span>, <span ng-bind="date.format('LL')"></span></div>
+        <div class="time" ng-bind="date.format('LT')"></div>
+        <ul class="calendar fade" ng-show="focus == 'default'" ng-class="config.calendar.showCalendarNames ? 'show-calendar-names' : ''">
+            <li class="event" ng-repeat="event in calendar" ng-class="(calendar[$index - 1].label != event.label) ? 'day-marker' : ''">
                 <div class="event-details">
-                    <span class="day">{{event.start.format('dddd') | uppercase}}</span>
-                    <span class="summary">{{event.SUMMARY}}</span>
-                    <div class="details">{{event.start.format('LLL')}}</div>
+                    <span class="day">
+                      <span ng-bind="event.startName"></span>
+                      <span ng-if="event.startName != event.endName"> - <span ng-bind="event.endName"></span></span>
+                    </span>
+                    <div class="details calendar-name" ng-bind="event.calendarName"></div>
+                    <span class="summary" ng-bind="event.SUMMARY"></span>
+                    <div class="details" ng-if="event.start.format('LT') != event.end.format('LT')">
+                      <span ng-if="event.startName != event.endName"><span ng-bind="event.start.format('M/D')"></span> <span ng-bind="event.start.format('LT')"></span> - <span ng-bind="event.end.format('M/D')"></span> <span ng-bind="event.end.format('LT')"></span></span>
+                      <span ng-if="event.startName == event.endName"><span ng-bind="event.start.format('LT')"></span> - <span ng-bind="event.end.format('LT')"></span></span>
+                    </div>
+                    <div class="details" ng-if="event.start.format('LT') == event.end.format('LT')">All day</div>
                 </div>
             </li>
         </ul>
@@ -69,19 +81,20 @@
           <div class="weather-today">
             <span class="icon dimmed wi {{currentForecast.wi}}"></span>
             <canvas id="icon_weather_current" width="90" height="70"></canvas>
-            <span class="tempreture" ng-show="currentForecast.temperature">{{currentForecast.temperature}}&deg;</span>
+            <span class="temperature" ng-show="currentForecast.temperature" ng-bind="currentForecast.temperature + '&deg;'"></span>
           </div>
           <div class="weather-week-descriptor">
-            <span>{{hourlyForecast.summary}}</span>
-            <span>{{weeklyForecast.summary}}</span>
+            <span ng-bind="minutelyForecast.summary"></span>
+            <span ng-bind="hourlyForecast.summary"></span>
+            <span ng-bind="weeklyForecast.summary"></span>
           </div>
           <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
             <div class="weather-week-day">
-              <span class="day light-grey">{{forecast.day}}</span>
+              <span class="day light-grey" ng-bind="forecast.day"></span>
               <canvas id="icon_weather_{{forecast.counter}}" width="33" height="25"></canvas>
               <span class="icon-small dimmed wi wi-fw {{forecast.wi}}"></span>
-              <span class="tempreture tempreture-min">{{forecast.temperatureMin}}&deg;</span>
-              <span class="tempreture tempreture-max">{{forecast.temperatureMax}}&deg;</span>
+              <span class="temperature temperature-min" ng-bind="forecast.temperatureMin + '&deg;'"></span>
+              <span class="temperature temperature-max" ng-bind="forecast.temperatureMax + '&deg;'"></span>
             </div>
           </div>
           <!-- Workaround: -->
@@ -91,26 +104,30 @@
         </div>
         <div class="traffic" ng-repeat="traffic in trips">
           <div ng-show="!traffic.error" class="traffic-information">
-            <span class="time-to">{{ 'traffic.time_to' | translate:traffic }}</span>
-            <span>{{traffic.duration.humanize()}}</span>
+            <span class="time-to" ng-bind="'traffic.time_to' | translate:traffic"></span>
+            <span ng-bind="traffic.duration.humanize()"></span>
+          </div>
+        </div>
+        <div class="stock">
+          <div class="stock-information" ng-repeat="quote in stock">
+            <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
+            <span fade ng-bind="quote.Name"></span>: $<span fade ng-bind="quote.LastTradePriceOnly  | number : 3"></span><span ng-bind="quote.Change"></span>
           </div>
         </div>
       </div>
     </div>
     <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
       <div class="middle-center">
-        <h1>{{greeting}}</h1>
-        <h3 ng-show="!(user.name === undefined)">{{user.name}}</h3>
-        <!-- <div class="listening" ng-show="listening">Ready: {{focus}}</div> -->
+        <h1 ng-bind="greeting"></h1>
         <div class="contents-box video-container animate-grow" ng-show="focus == 'video'">
           <iframe class="video animate-grow" ng-src="{{video}}"/></iframe>
         </div>
         <div class="contents-box sc-container animate-grow" ng-show="focus == 'sc'">
           <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>
-          <div><canvas id="visualizer" width="150" height="150"></canvas></div>
+          <div><canvas id="visualizer" width="300" height="150"></canvas></div>
           <img class="sc" ng-src="{{scThumb}}"/>
           <img class="scWaveform" ng-src="{{scWaveform}}"/>
-          <h2 class="sc">{{scTrack}}</h2>
+          <h2 class="sc" ng-bind="scTrack"></h2>
         </div>
         <div class="contents-box map animate-grow" ng-show="focus == 'map'">
           <img class="contents map animate-grow" ng-src="{{map}}"/>
@@ -123,38 +140,45 @@
         </div>
         <div class="dilbert-container animate-grow" ng-show="focus == 'dilbert'">
           <img class="dilbert animate-grow" ng-src="{{dilbert.content}}"/>
-          <div class="comic-title">{{dilbert.title}}</div>
+          <div class="comic-title" ng-bind="dilbert.title"></div>
         </div>
         <div class="reminders-container animate-grow" ng-show="focus == 'reminders'">
           <ul>
             <li class="reminders animate-grow" ng-repeat="reminder in reminders">
-              <span class="reminder">{{reminder}}</span>
+              <span class="reminder" ng-show="reminder"></span>
             </li>
           </ul>
         </div>
-        <div class="contents-box animate-grow" ng-show="focus == 'timer'">
+        <div class="contents-box animate-grow" ng-if="focus == 'timer'">
           <div class="contents timer animate-grow">
-            <div class="timer-countdown">{{timer.countdown | secondsToDateTime | date:"mm:ss"}}</div>
-            <div class="timer-duration grey">{{timer.duration | secondsToDateTime | date:"mm:ss"}}</div>
+            <div class="timer-countdown" ng-bind="timer.countdown | secondsToDateTime | date:'mm:ss'"></div>
+            <div class="timer-duration grey" ng-bind="timer.duration | secondsToDateTime | date:'mm:ss''"></div>
             <timer-circle class="timer-circle" />
           </div>
         </div>
       </div>
       <div class="bottom-center">
         <!-- Command list -->
-        <div class="commands animate-grow" ng-show="focus == 'commands'">
-          <h2>{{ 'commands.title' | translate }}</h2>
+        <div class="commands animate-grow" ng-if="focus == 'commands'">
+          <h2 ng-bind="'commands.title' | translate"></h2>
           <dl>
-            <dt ng-repeat-start="command in commands">{{command['text']}}</dt>
-            <dd ng-repeat-end>{{command['description']}}</dd>
+            <dt ng-repeat-start="command in commands" ng-bind="command['text']"></dt>
+            <dd ng-repeat-end ng-bind="command['description']"></dd>
             <dt ng-show="fitbitEnabled">Show my walking</dt>
             <dd ng-show="fitbitEnabled">Refreshes fitbit data.</dd>
           </dl>
-          <small>
-            We are using node <script>document.write(process.versions.node)</script>,
-            Chrome <script>document.write(process.versions.chrome)</script>,
-            and Electron <script>document.write(process.versions.electron)</script>.
-          </small>
+        </div>
+
+        <div class="news">
+          <div class="fade" ng-if="focus == 'default' && news">
+            <div class="news-title dimmed fade">
+              <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
+              <span fade>Source: <span ng-bind="news.title"></span>, Last Updated: <span ng-bind="news.lastUpdated.format('MMM DD, h:mm a')"></span></span>
+            </div>
+            <div class="news-content fade">
+              <span class="fade" ng-bind="news.content"></span>
+            </div>
+          </div>
         </div>
 
         <div class="news">
@@ -172,16 +196,29 @@
         <div class="error" ng-bind="speechError" ng-show="speechError"></div>
         <div class="interim-result" ng-bind="interimResult" ng-hide="speechError"></div>
       </div>
-      <div class="bottom-left" ng-show="fitbitEnabled">
-        <div>
-          <div><span class="fitbit-title">Fitbit stats for {{fbDailyAverage.fullName}}</span></div>
-          <div><span class="fitbit-item">Your daily average steps: {{fbDailyAverage.averageDailySteps}}</span></div>
-          <div><span class="fitbit-item">Today's steps: {{fbToday.summary.steps}}</span></div>
-          <div><span class="fitbit-item">Today's distance: {{fbToday.summary.distances[0].distance}} KM</span></div>
-          <div><span class="fitbit-item">Today's active minutes: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}</span></div>
-          <div><span class="fitbit-item">Calories burned: {{fbToday.summary.caloriesOut}}</span></div>
+      <div class="bottom-left">
+        <div class="fitbit" ng-if="fitbitEnabled">
+          <div><span class="fitbit-title">{{'fitbit.statsFor' | translate}} {{fbDailyAverage.fullName}}</span></div>
+          <div><span class="fitbit-item">{{'fitbit.averageSteps' | translate}}: {{fbDailyAverage.averageDailySteps}}</span></div>
+          <div><span class="fitbit-item">{{'fitbit.todaysSteps' | translate}}: {{fbToday.summary.steps}}</span></div>
+          <div><span class="fitbit-item">{{'fitbit.todaysDistance' | translate}}: {{fbToday.summary.distances[0].distance}} km</span></div>
+          <div><span class="fitbit-item">{{'fitbit.todaysActiveMinutes' | translate}}: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}} min</span></div>
+          <div><span class="fitbit-item">{{'fitbit.caloriesBurned' | translate}}: {{fbToday.summary.caloriesOut}} kcal</span></div>
           <p></p>
-          <div><span class="fitbit-subtitle">Latest badges</span></div>
+          <div><span class="fitbit-subtitle" ng-show="fbSleep.sleep[0]">{{'fitbit.sleepLastNight' | translate}}</span></div>
+          <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{(fbSleep.sleep[0].minutesAsleep/60 | number:2 )}} {{'fitbit.hours' | translate}} / {{fbSleep.sleep[0].minutesAwake  }} min {{'fitbit.awake' | translate}} // {{(fbSleep.sleep[0].efficiency)}} % {{'fitbit.efficient' | translate}}</span></div>
+          <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{'fitbit.awake' | translate}}/{{'fitbit.restless' | translate}}: {{fbSleep.sleep[0].awakeCount}} / {{fbSleep.sleep[0].restlessCount}}</span></div>
+          <p></p>
+          <div><span class="fitbit-subtitle">{{'fitbit.deviceStatus' | translate}}</span></div>
+          <div class="" ng-repeat="device in fbDevices">
+            <div>
+              <span class="fitbit-item" ng-show="device.deviceVersion">{{device.deviceVersion}}</span><br>
+              <span class="fitbit-item" ng-show="device.battery">{{'fitbit.battery' | translate}}: {{device.battery}}<br>
+              <span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.synched' | translate}}: {{device.lastSyncTime | date: 'dd.MM.yyyy HH:mm:ss'}}</span>
+            </div>
+          </div>
+          <p></p>
+          <div><span class="fitbit-subtitle">{{'fitbit.latestBadges' | translate}}</span></div>
           <div class="" ng-repeat="badge in fbDailyAverage.topBadges">
             <div>
               <span class="fitbit-item"><img class="fitbit-badge" ng-src="{{badge.image50px}}"/></span>
@@ -189,31 +226,19 @@
             </div>
           </div>
         </div>
+        <div class="playing-track">
+          <img ng-src="{{track.cover}}" />
+          <div>{{track.artist}}</div>
+          <div>{{track.title}}</div>
+          <div>{{track.album}}</div>
+          <div class="nowplaying" ng-show="track.playing">Playing</div>
+        </div>
+      </div>
+      <div class="bottom-right">
+        <!-- Someday something will live here -->
       </div>
       <div class="colors animate-grow" ng-show="focus == 'colors'">
         <div class="color-block" ng-repeat="color in colors" style="background-color:{{color}}"></div>
-      </div>
-    </div>
-    <!-- Debug Buttons -->
-    <div class="debug-info">
-      <!--<button ng-click="debug = true">Open Debug</button>-->
-    </div>
-    <div class="debug-info" ng-show="debug == true">
-      <button ng-click="focus = (focus == 'map')?'default':'map'">Map</button>
-      <button ng-click="focus = (focus == 'colors')?'default':'colors'">Colors</button>
-      <button ng-click="focus = (focus == 'commands')?'default':'commands'">Commands</button>
-      <button ng-click="focus = (focus == 'gif')?'default':'gif'">Gif</button>
-      <button ng-click="debug = false">Close Debug</button>
-      <!-- Has results -->
-      <div ng-show="commands.results.length > 0">
-        <button class="btn btn-default" ng-click="commands.clearResults()">Clear</button>
-        <hr/>
-        <ul class="list-group">
-          <li class="list-group-item" ng-repeat="result in commands.results">
-            <span class="badge">{{ result.date | date : 'EEE MMM, yyyy hh:mm:ss a' }}</span>
-            {{ result.content }}
-          </li>
-        </ul>
       </div>
     </div>
     <!-- Sleep cover -->

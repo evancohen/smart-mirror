@@ -6,7 +6,7 @@
         "time_to" : "Zeit bis {{name}}: "
     },
     "reminders": {
-        "empty": "Keine Erinnerungen"
+        "empty": "Keine Erinnerungen."
     },
     "timer": {
       "one": "Eine",
@@ -31,11 +31,16 @@
         "intensity": {
             "increase": "heller",
             "decrease": "dunkler",
-            "max": "maximal"
+            "max": "maximal",
+            "half": "halber",
+            "quarter": "viertel",
+            "threequarter": "dreiviertel"
         },
         "action": {
             "on": "an",
-            "off": "aus"
+            "off": "aus",
+            "nightmode": "nachtmodus",
+            "reset": "zurücksetzen"
         }
     },
     "commands": {
@@ -83,7 +88,7 @@
         "map_zoom_out": {
             "text": "verkleinern",
             "voice": "(Karte) verkleinern",
-            "description": "Verkleinert die aktulle Karte"
+            "description": "Verkleinert die aktuelle Karte."
         },
         "map_zoom_point": {
             "text": "vergrößere ________",
@@ -93,7 +98,7 @@
         "map_zoom_reset": {
             "text": "Normalansicht",
             "voice": "(Karte) Normalansicht",
-            "description": "Setzt die Ansicht zurück"
+            "description": "Setzt die Ansicht zurück."
         },
         "video_search": {
             "text": "Zeige mir ________",
@@ -103,12 +108,12 @@
         "video_stop": {
             "text": "Stop video",
             "voice": "stop (the) video",
-            "description": "Stops the playback of video content."
+            "description": "Stopt die Video Wiedergabe."
         },
         "image_giphy": {
             "text": "Bild von ________",
             "voice": "Bild von *img",
-            "description": "Zeigt ein Giphy Bild"
+            "description": "Zeigt ein Giphy Bild."
         },
         "image_comic": {
             "text": "Zeige Comic",
@@ -118,7 +123,7 @@
         "image_comic_dilbert": {
             "text": "Dilbert Comic",
             "voice": "Dilbert",
-            "description": "Dilbert Comic"
+            "description": "Zeigt den aktuellsten Dilbert Comic."
         },
         "reminder_insert": {
             "text": "Erinnere mich an  ________",
@@ -163,27 +168,27 @@
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
-            "description": "Play a song on SoundCloud"
+            "description": "Spielt einen Song auf SoundCloud."
         },
         "sc_pause": {
             "text": "SoundCloud pause/stop",
             "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stop/pause SoundCoud playback"
+            "description": "Stoppt/Pausiert die SoundCoud Wiedergabe."
         },
         "sc_resume": {
             "text": "SoundCloud play",
             "voice": "SoundCloud (play)(resume)",
-            "description": "Resumes playback"
+            "description": "Setzt die Soundcloud Wiedergabe fort."
         },
         "sc_replay": {
             "text": "SoundCloud replay",
             "voice": "SoundCloud replay",
-            "description": "Replays the current song on SoundCloud"
+            "description": "Spielt den aktuellen Song erneut auf Soundcloud."
         },
         "light_action": {
-            "text": "Schalte das (state) Licht (action)",
-            "voice": "(Schalte) (das) :state (die) Licht(er) *action",
-            "description": "(Schalte) (das) :state (die) Licht(er) *action"
+            "text": "Schalte (das|die) Licht(er) (action)",
+            "voice": "(Schalte) (das) (die) Licht(er) *action",
+            "description": "Steuert Farbe und Helligkeit von Lichtern."
         }
     }
 }

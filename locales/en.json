@@ -6,7 +6,7 @@
         "time_to" : "Time to {{name}}: "
     },
     "reminders": {
-        "empty": "Empty list"
+        "empty": "Empty list."
     },
     "timer": {
       "one": "One",
@@ -31,11 +31,16 @@
         "intensity": {
             "increase": "increase",
             "decrease": "decrease",
-            "max": "max"
+            "max": "max",
+            "half": "half",
+            "quarter": "quarter",
+            "threequarter": ["three-quarter", "three-fourth"]
         },
         "action": {
             "on": "on",
-            "off": "off"
+            "off": "off",
+            "nightmode": "nightmode",
+            "reset": "reset"
         }
     },
     "commands": {
@@ -48,22 +53,22 @@
         "home": {
             "text": "Go home",
             "voice": "Go home",
-            "description": "Takes you back to the home screen"
+            "description": "Takes you back to the home screen."
         },
         "sleep": {
             "text": "Go to sleep",
             "voice": "Go to sleep",
-            "description": "Go to sleep"
+            "description": "Go to sleep."
         },
         "wake_up": {
             "text": "Wake up",
             "voice": "Wake up",
-            "description": "Wake up"
+            "description": "Wake up."
         },
         "debug": {
             "text": "Show debug information",
             "voice": "Show debug information",
-            "description": "Show debug information"
+            "description": "Show debug information."
         },
         "map_show": {
             "text": "Show map",
@@ -78,22 +83,22 @@
         "map_zoom_in": {
             "text": "Zoom in",
             "voice": "(map) zoom in",
-            "description": "Zooms in the current map"
+            "description": "Zooms in the current map."
         },
         "map_zoom_out": {
             "text": "Zoom out",
             "voice": "(map) zoom out",
-            "description": "Zooms out the current map"
+            "description": "Zooms out the current map."
         },
         "map_zoom_point": {
             "text": "Zoom to ________",
             "voice": "(map) zoom (to) *value",
-            "description": "Zooms to indicated point"
+            "description": "Zooms to indicated point."
         },
         "map_zoom_reset": {
             "text": "Reset zoom",
             "voice": "(map) reset zoom",
-            "description": "Resets zoom"
+            "description": "Resets zoom."
         },
         "video_search": {
             "text": "Show me ________",
@@ -108,7 +113,7 @@
         "image_giphy": {
             "text": "Giphy ________",
             "voice": "giphy *img",
-            "description": "Shows a giphy image"
+            "description": "Shows a Giphy image."
         },
         "image_comic": {
             "text": "Show xkcd",
@@ -118,7 +123,7 @@
         "image_comic_dilbert": {
             "text": "Show Dilbert comic",
             "voice": "Show Dilbert (comic)",
-            "description": "Show Dilbert comic."
+            "description": "Show the most recent Dilbert comic."
         },
         "reminder_insert": {
             "text": "Remind me to ________",
@@ -133,12 +138,12 @@
         "reminder_show": {
             "text": "Show me reminders",
             "voice": "Show me reminders",
-            "description": "Display the reminders list"
+            "description": "Display the reminders list."
         },
         "time_show": {
             "text": "what time is it",
             "voice": "what time is it",
-            "description": "what time is it"
+            "description": "Shows the current time."
         },
         "timer_start": {
             "text": "Timer for ________",
@@ -158,32 +163,32 @@
         "timer_resume": {
             "text": "Resume timer",
             "voice": "resume (the) timer",
-            "description": "Resume timer"
+            "description": "Resume timer."
         },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
-            "description": "Play a song on SoundCloud"
+            "description": "Play a song on SoundCloud."
         },
         "sc_pause": {
             "text": "SoundCloud pause/stop",
             "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stop/pause SoundCoud playback"
+            "description": "Stop/pause SoundCoud playback."
         },
         "sc_resume": {
             "text": "SoundCloud play",
             "voice": "SoundCloud (play)(resume)",
-            "description": "Resumes playback"
+            "description": "Resumes playback."
         },
         "sc_replay": {
             "text": "SoundCloud replay",
             "voice": "SoundCloud replay",
-            "description": "Replays the current song on SoundCloud"
+            "description": "Replays the current song on SoundCloud."
         },
         "light_action": {
-            "text": "Turn the (state) light (action)",
+            "text": "Turn (state) light(s) (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",
-            "description": "(turn) (the) :state (the) light(s) *action"
+            "description": "Control color and brightness of lights."
         }
     }
 }

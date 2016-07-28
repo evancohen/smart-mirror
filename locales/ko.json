@@ -6,7 +6,7 @@
         "time_to" : "{{name}} 에 시간: "
     },
     "reminders": {
-        "empty": "더 리콜 없습니다"
+        "empty": "더 리콜 없습니다."
     },
     "timer": {
       "one": "일",
@@ -53,12 +53,12 @@
         "sleep": {
             "text": "잠자러가",
             "voice": "잠자러가",
-            "description": "잠자러가"
+            "description": "잠자러가."
         },
         "wake_up": {
             "text": "일어나",
             "voice": "일어나",
-            "description": "일어나"
+            "description": "일어나."
         },
         "debug": {
             "text": "디버그 정보 보여 줘",
@@ -133,57 +133,57 @@
         "reminder_show": {
             "text": "나에게 리콜 목록을 표시",
             "voice": "나에게 리콜 목록을 표시",
-            "description": "리콜 목록을 표시합니다"
+            "description": "리콜 목록을 표시합니다."
         },
         "time_show": {
             "text": "지금 몇 시",
             "voice": "지금 몇 시",
-            "description": "지금 몇 시"
+            "description": "지금 몇 시."
         },
         "timer_start": {
             "text": "______ 타이머 (설정)",
             "voice": "*duration 타이머 (설정)",
-            "description": "*duration 타이머 (설정)"
+            "description": "*duration 타이머 (설정)."
         },
         "timer_show": {
             "text": "타이머 보여줄래",
             "voice": "타이머 보여줄래",
-            "description": "타이머 보여줄래"
+            "description": "타이머 보여줄래."
         },
         "timer_stop": {
             "text": "타이머 정지",
             "voice": "타이머 정지",
-            "description": "타이머 정지"
+            "description": "타이머 정지."
         },
         "timer_resume": {
             "text": "타이머 재시작",
             "voice": "타이머 재시작",
-            "description": "타이머 재시작"
+            "description": "타이머 재시작."
         },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
-            "description": "Play a song on SoundCloud"
+            "description": "Play a song on SoundCloud."
         },
         "sc_pause": {
             "text": "SoundCloud pause/stop",
             "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stop/pause SoundCoud playback"
+            "description": "Stop/pause SoundCoud playback."
         },
         "sc_resume": {
             "text": "SoundCloud play",
             "voice": "SoundCloud (play)(resume)",
-            "description": "Resumes playback"
+            "description": "Resumes playback."
         },
         "sc_replay": {
             "text": "SoundCloud replay",
             "voice": "SoundCloud replay",
-            "description": "Replays the current song on SoundCloud"
+            "description": "Replays the current song on SoundCloud."
         },
         "light_action": {
             "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
             "voice": "불 :state *action (해)줘",
-            "description": "불 :state *action (해)줘"
+            "description": "불 :state *action (해)줘."
         }
     }
 }

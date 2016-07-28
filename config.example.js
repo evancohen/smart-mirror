@@ -25,37 +25,56 @@ var config = {
 
     //use this only if you want to hardcode your geoposition (used for weather)
     /*
-    geo_position: {
+    geoPosition: {
        latitude: 78.23423423,
        longitude: 13.123124142
     },
     */
-    
-    // forcast.io
+
+    // forecast.io
     forecast : {
-        key : "", // Your forcast.io api key
-        units : "auto" // See forcast.io documentation if you are getting the wrong units
+        key : "", // Your forecast.io api key
+        units : "auto", // See forecast.io documentation if you are getting the wrong units
+        refreshInterval : 2, // Number of minutes the information is refreshed. Forecast.io limits requests to 1000/day: a 2min interval = 720 calls/day
     },
-    // Philips Hue
-    hue : {
-        ip : "", // The IP address of your hue base
-        uername : "", // The username used to control your hue
-        groups : [{
-            id : 0, // The group id 0 will change all the lights on the network
-            name : "all"
-        }, {
-            id : 1,
-            name : "bedroom"
-        }, {
-            id : 2,
-            name : "kitchen"
-        }]
+    // lights
+    light : {
+        settings : {
+            hueIp : "", // The IP address of your hue base
+            hueUsername : "" // The username used to control your hue
+        },
+        setup : [
+            {
+                name : "parlor", // Single word room name for speech recognition
+                targets : [
+                    {
+                        type : "hyperion",
+                        ip : "", // The IP address of your hyperion
+                        port : "19444" // The port of your hyperion
+                    },
+                    {
+                        type : "hue", // Philips Hue
+                        id : 1 // The group id (0 will change all the lights on the network)
+                    }
+                ]
+            },
+            {
+                name : "bath",
+                targets : [
+                    {
+                        type : "hue",
+                        id : 2
+                    }
+                ]
+            }
+        ]
     },
     // Calendar (An array of iCals)
     calendar: {
       icals : [], // Be sure to wrap your URLs in quotes
       maxResults: 9, // Number of calender events to display (Defaults is 9)
-      maxDays: 365 // Number of days to display (Default is one year)
+      maxDays: 365, // Number of days to display (Default is one year)
+      showCalendarNames: false // Show calendar names above events
     },
     // Giphy
     giphy: {
@@ -71,12 +90,12 @@ var config = {
     },
     traffic: {
       key : "", // Bing Maps API Key
-
-      reload_interval : 5, // Number of minutes the information is refreshed
+      refreshInterval : 5, // Number of minutes the information is refreshed
       // An array of tips that you would like to display travel time for
       trips : [{
         mode : "Driving", // Possibilities: Driving / Transit / Walking
         origin : "", // Start of your trip. Human readable address.
+        via : "",  // [Optional] Set an intermediate goal for getting an alternate route for example
         destination : "", // Destination of your trip. Human readable address.
         name : "work", // Name of your destination ex: "work"
         /*startTime: "",
@@ -86,6 +105,20 @@ var config = {
     rss: {
       feeds : [],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
       refreshInterval : 120 // Number of minutes the information is refreshed
+    },
+    stock: {
+      names: [] // The names of the stock quotes you with to show in the official format. (e.g.: 'YHOO','AAPL','GOOG')
+    },
+    autoTimer: {
+      autoSleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
+      autoWake: '07:00:00', // When to automatically wake the screen up (7:00AM)
+      'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
+      'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
+    },
+    lastfm: {
+      key: "", // Your last.fm api key
+      user: "", // Your last.fm username
+      refreshInterval : 0.6 // Number of minutes between checks for playing track
     }
 };
 

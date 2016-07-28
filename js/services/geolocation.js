@@ -23,14 +23,14 @@
         var deferred = $q.defer();
 
         // Use geo postion from config file if it is defined
-        if(typeof config.geo_position != 'undefined'
-            && typeof config.geo_position.latitude != 'undefined'
-            && typeof config.geo_position.longitude != 'undefined'){
+        if(typeof config.geoPosition != 'undefined'
+            && typeof config.geoPosition.latitude != 'undefined'
+            && typeof config.geoPosition.longitude != 'undefined'){
 
             deferred.resolve({
                 coords: {
-                    latitude: config.geo_position.latitude,
-                    longitude: config.geo_position.longitude,
+                    latitude: config.geoPosition.latitude,
+                    longitude: config.geoPosition.longitude,
                 },
             });
 
