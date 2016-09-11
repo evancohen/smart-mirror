@@ -78,7 +78,7 @@ var config = {
     },
     // Giphy
     giphy: {
-      key : "" // Your Gliphy API key
+      key : "dc6zaTOxFJmzC" // Your Gliphy API key
     },
     // YouTube
     youtube: {
