@@ -49,7 +49,7 @@ EOF
 
 ARCH=$(uname -m) 
 # Check processor archetecture.
-if [$ARCH != "armv7l" ]; then
+if ["$ARCH" != "armv7l" ]; then
 	printf "%s${red} Unupported device!${end} The smart-mirror only works on the Pi 2 and 3"
 	exit;
 fi
