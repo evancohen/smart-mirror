@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Any subsequent(*) commands which fail will cause the shell script to exit immediately
 set -e
 
 # Supported versions of node: v4.x, v5.x
@@ -22,9 +21,9 @@ cyn=$'\e[1;36m'
 end=$'\e[0m'
 
 # Ensure we are using sudo
-if [ "$(whoami)" != "root" ];
+if [ "$(whoami)" == "root" ];
 then
-	echo "This script requires root permissions, try: sudo ./${0##*/} "
+	echo "Do not run this script with root permissions, try: ./${0##*/} "
 	exit 0
 fi
 
@@ -110,7 +109,7 @@ if $NODE_INSTALL; then
 fi
 
 #Install magic mirror
-cd /home/"$SUDO_USER"
+cd ~
 if [ -d "$HOME/smart-mirror" ]; then
 	printf "%s${red}Looks like the smart mirror is already installed.${end}\n"
 	printf "%sPlease rename or remove the ${mag}smart-mirror${end} folder and re-run the installer.\n"
@@ -120,7 +119,7 @@ fi
 
 # Getting the code
 printf "%s\n${blu}Cloning smart-mirror Git Repo${end}\n"
-if sudo -u "$SUDO_USER" git clone https://github.com/evancohen/smart-mirror.git; then
+if git clone https://github.com/evancohen/smart-mirror.git; then
     printf "%s${grn}smart-mirror code is now downloaded${end}\n"
 else
     printf "%s${red}Unable to clone smart-mirror :( ${end}\n"
@@ -130,12 +129,12 @@ fi
 # Generate config and install dependencies
 cd smart-mirror  || exit
 printf "%s\n${blu}generating config template...${end}\n"
-sudo -u "$SUDO_USER" cp config.example.js config.js
+cp config.example.js config.js
 
 # Install smart-mirror dependencies
 printf "%s\n${blu}Installing smart-mirror dependencies...${end}\n"
 printf "%s${yel}This may take a while. Go grab a beer :)${end}\n"
-if sudo -u "$SUDO_USER" npm install; then 
+if npm install; then 
 	printf "%s${grn}Dependency installation complete!${end}\n"
 else
 	printf "%s${red}Unable to install dependencies :( ${end}\n"
@@ -143,22 +142,22 @@ else
 fi
 
 # Apply LXDE unclutter autostart (if we haven't already)
-if ! grep -q '(smart-mirror)' /etc/xdg/lxsession/LXDE/autostart; then
-    sed -i -e '$a\
+if ! sudo grep -q '(smart-mirror)' /etc/xdg/lxsession/LXDE/autostart; then
+    sudo sed -i -e '$a\
 \
 #Hide the mouse when inactive (smart-mirror)\
 unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
 fi
 
 # Disable the screensaver (if we haven't already)
-if ! grep -q '(smart-mirror)' /home/"$SUDO_USER"/.config/lxsession/LXDE-pi/autostart; then
+if ! grep -q '(smart-mirror)' ~/.config/lxsession/LXDE-pi/autostart; then
     sed -i -e '$a\
 \
 #Disable screen saver (smart-mirror)\
 @xset s 0 0\
 @xset s noblank\
 @xset s noexpose\
-@xset dpms 0 0 0' /home/"$SUDO_USER"/.config/lxsession/LXDE-pi/autostart
+@xset dpms 0 0 0' ~/.config/lxsession/LXDE-pi/autostart
 fi
 
 
