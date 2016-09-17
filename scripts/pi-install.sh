@@ -49,20 +49,13 @@ EOF
 
 ARCH=$(uname -m) 
 # Check processor archetecture.
-if ["$ARCH" != "armv7l" ]; then
+if [ "$ARCH" != "armv7l" ]; then
 	printf "%s${red} Unupported device!${end} The smart-mirror only works on the Pi 2 and 3"
 	exit;
 fi
 
 printf "%sThis script will install the smart-mirror and it's dependencies.\n"
-
-# Ensure the use would like to start the install
-read -r -p "Would you like to continue? [y/N] " response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
-    printf "%sExcellent! ${red}Please do not exit this script until it is complete.${end}\n"
-else
-    exit 1
-fi
+printf "%s${red}Please do not exit this script until it is complete.${end}\n"
 
 # # Rotate the monitor
 # printf "%s\n"
@@ -77,7 +70,7 @@ fi
 
 # Install native dependencies
 printf "%s\n${blu}Installing native dependencies${end}\n"
-sudo apt-get install curl wget git python-pyaudio python3-pyaudio sox unclutter
+sudo apt-get install -y curl wget git python-pyaudio python3-pyaudio sox unclutter
 
 # Check if we need to install or upgrade Node.js.
 printf "%s\n${blu}Checking current Node installation${end}\n"
