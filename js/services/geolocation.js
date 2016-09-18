@@ -9,7 +9,7 @@
      deferred.resolve(position);
      */
 
-    function GeolocationService($q,$rootScope,$window) {
+    function GeolocationService($q,$rootScope,$window,$http) {
         var service = {};
         var geoloc = null;
         var geolocation_msgs = {
@@ -34,44 +34,24 @@
                 },
             });
 
-        }else if ($window.navigator && $window.navigator.geolocation) {
-          if(geoloc !== null){
-            console.log("Cached Geolocation", geoloc);
-            return(geoloc);
-          }
-          else {
-            $window.navigator.geolocation.getCurrentPosition(function(position){
-                console.debug("Geoposition: " + position.coords.latitude + ", " + position.coords.longitude)
-              $rootScope.$apply(function(){deferred.resolve(position);});
-            }, function(error) {
-              switch (error.code) {
-                case 1:
-                  $rootScope.$broadcast('error',geolocation_msgs['errors.location.permissionDenied']);
-                  $rootScope.$apply(function() {
-                    deferred.reject(geolocation_msgs['errors.location.permissionDenied']);
-                  });
-                  break;
-                case 2:
-                  $rootScope.$broadcast('error',geolocation_msgs['errors.location.positionUnavailable']);
-                  $rootScope.$apply(function() {
-                    deferred.reject(geolocation_msgs['errors.location.positionUnavailable']);
-                  });
-                  break;
-                case 3:
-                  $rootScope.$broadcast('error',geolocation_msgs['errors.location.timeout']);
-                  $rootScope.$apply(function() {
-                    deferred.reject(geolocation_msgs['errors.location.timeout']);
-                  });
-                  break;
-              }
-            }, opts);
-          }
+        } else {
+            if(geoloc !== null){
+              console.log("Cached Geolocation", geoloc);
+              return(geoloc);
+            }
+
+            $http.get("http://ipinfo.io").then(
+              function(ipinfo){
+                var loc = angular.fromJson(ipinfo).data.loc
+                var latLong = loc.split(",")
+                deferred.resolve({'coords': {'latitude': latLong[0], 'longitude':latLong[1]}})
+              },
+              function(err) {
+                console.debug("Failed to retrieve geolocation.")
+                deferred.reject("Failed to retrieve geolocation.")
+              });
         }
-        else
-        {
-          $rootScope.$broadcast('error',geolocation_msgs['errors.location.unsupportedBrowser']);
-          $rootScope.$apply(function(){deferred.reject(geolocation_msgs['errors.location.unsupportedBrowser']);});
-        }
+
         geoloc = deferred.promise;
         return deferred.promise;
       }
