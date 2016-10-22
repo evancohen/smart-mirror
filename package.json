@@ -8,8 +8,7 @@
     "start": "electron main.js ",
     "microphone-debug": "electron scripts/microphone-debug/main.js",
     "train-model": "electron scripts/train-model.js",
-    "wiredep": "wiredep -s index.html",
-    "rebuild" : "./node_modules/.bin/electron-rebuild -p"
+    "wiredep": "wiredep -s index.html"
   },
   "repository": {
     "type": "git",
@@ -36,7 +35,7 @@
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
-    "electron-rebuild": "^1.2.1",
+    "annyang": "^2.6.0",
     "electron-json-storage": "2.0.0",
     "express": "^4.13.4",
     "fitbit-oauth2": "0.0.1",
