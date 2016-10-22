@@ -79,23 +79,29 @@ function createWindow () {
 if(typeof config.speech == 'undefined'){
   config.speech = {}
 }
+
 var modelFile = config.speech.model || "smart_mirror.pmdl"
-var kwsSensitivity = config.speech.sensitivity || 0.5
+var language = config.language || "en-US"
+var kwsSensitivity = config.speech.sensitivity || "0.5"
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false})
-// Handel messages from python script
+var kwsProcess = spawn('node', ['./sonus.js', modelFile, language, kwsSensitivity], {detached: false})
+// Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
-    var message = data.toString()
-    if(message.startsWith('INFO')){
-        // When a keyword is spotted, ping the speech service
-        mainWindow.webContents.send('keyword-spotted', true)
-    }else{
-        console.error(message)
-    }
+    console.log("ERROR", message.substring(3))
 })
+
 kwsProcess.stdout.on('data', function (data) {
-    console.log(data.toString())
+    var message = data.toString()
+    if(message.startsWith('!h:')){
+        mainWindow.webContents.send('hotword', true)
+    }else if (message.startsWith('!p:')){
+        mainWindow.webContents.send('partial-results', message.substring(3))
+    }else if (message.startsWith('!f:')){
+        mainWindow.webContents.send('final-results', message.substring(3))
+    }else{
+        console.error(message.substring(3))
+    }
 })
 
 // This method will be called when Electron has finished
