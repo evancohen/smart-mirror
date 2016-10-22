@@ -5,52 +5,50 @@ const {ipcRenderer} = require('electron');
 
     function SpeechService($rootScope) {
         var service = {};
+        var callbacks = {};
    
-        service.init = function() {
+        service.init = function(cb) {
             // Set annyang language defined in the config file
             annyang.setLanguage((typeof config.language != 'undefined')?config.language : 'en-US');
-            
-            // Inicialize Keyword Spotter IPC
-            ipcRenderer.on('keyword-spotted', (event, arg) => {
-                annyang.start();
-            });
-        }
-
-        // Register callbacks for the controller. does not utelize CallbackManager()
-        service.registerCallbacks = function(cb) {
-            // annyang.addCommands(service.commands);
-            
-            // Annyang is a bit "chatty", turn this on only for debugging
             annyang.debug(false);
             
             // add specified callback functions
             if (isCallback(cb.listening)) {
-                annyang.addCallback('start', function(){
-                    $rootScope.$apply(cb.listening(true));
-                });
-                annyang.addCallback('end', function(data){
-                    $rootScope.$apply(cb.listening(false));
-                });
-            };
-            if (isCallback(cb.interimResult)) {
-                annyang.addCallback('interimResult', function(data){
-                    $rootScope.$apply(cb.interimResult(data));
-                });
-            };
-            if (isCallback(cb.result)) {
-                annyang.addCallback('result', function(data){
-                    $rootScope.$apply(cb.result(data));
-                    if(!config.speech.continuous){
-                        service.abort();
-                    }
-                });
-            };
+                callbacks.listening = function(bool){
+                    $rootScope.$apply(cb.listening(bool));
+                }
+            }
+            if (isCallback(cb.partialResult)) {
+                callbacks.partialResult = function(data){
+                    $rootScope.$apply(cb.partialResult(data));
+                }
+            }
+            if (isCallback(cb.finalResult)) {
+                callbacks.finalResult = function(data){
+                    $rootScope.$apply(cb.finalResult(data));
+                }
+            }
             if (isCallback(cb.error)) {
-                annyang.addCallback('error', function(data){
+                callbacks.error = function(data){
                     $rootScope.$apply(cb.error(data));
-                });
-            };
-        };
+                }
+            }
+            
+            ipcRenderer.on('hotword', (event, spotted) => {
+                callbacks.listening(true)
+            })
+
+            ipcRenderer.on('partial-results', (event, text) => {
+                callbacks.partialResult(text)
+            })
+
+            ipcRenderer.on('final-results', (event, text) => {
+                callbacks.finalResult(text)
+                annyang.simulate(text)
+                callbacks.listening(false)
+            })
+            
+        }
         
         // Ensure callback is a valid function
         function isCallback(callback){
@@ -74,19 +72,6 @@ const {ipcRenderer} = require('electron');
             annyang.addCommands(service.commands);
             console.debug('added command "' + phrase + '"', service.commands);
         };
-        
-        // Annyang start listening
-        service.start = function(){
-            // Listen for the next utterance and then stop
-            annyang.start({autoRestart: false, continuous: false});
-        }
-        
-        // Annyang stop listening
-        service.abort = function(){
-            annyang.abort();
-        }
-        
-        service.init();
 
         return service;
     }

@@ -30,7 +30,7 @@
         $scope.user = {};
         $scope.shownews = true;
         $scope.commands = [];
-        $scope.interimResult = $translate.instant('home.commands');
+        $scope.partialResult = $translate.instant('home.commands');
         $scope.layoutName = 'main';
         $scope.fitbitEnabled = false;
         $scope.config = config;
@@ -56,6 +56,30 @@
 
         console.log('moment local', moment.locale());
 
+        var resetCommandTimeout;
+        //Initialize the speech service
+        SpeechService.init({
+            listening : function(listening){
+                $scope.listening = listening;
+            },
+            partialResult : function(result){
+                $scope.partialResult = result;
+                $timeout.cancel(resetCommandTimeout);
+            },
+            finalResult : function(result){
+                if(typeof result !== 'undefined'){
+                    $scope.partialResult = result[0];
+                    resetCommandTimeout = $timeout(restCommand, 5000);
+                }
+            },
+            error : function(error){
+                console.log(error);
+                if(error.error == "network"){
+                    $scope.speechError = "Google Speech Recognizer: Network Error (Speech quota exceeded?)";
+                }
+            }
+        });
+
         //Update the time
         function updateTime(){
             $scope.date = new moment();
@@ -72,7 +96,7 @@
         // Reset the command text
         var restCommand = function(){
             $translate('home.commands').then(function (translation) {
-                $scope.interimResult = translation;
+                $scope.partialResult = translation;
             });
         };
 
@@ -528,34 +552,6 @@
                 TimerService.start();
                 $scope.focus = "timer";
               }
-            });
-
-            var resetCommandTimeout;
-            //Register callbacks for Annyang and the Keyword Spotter
-            SpeechService.registerCallbacks({
-                listening : function(listening){
-                    $scope.listening = listening;
-                },
-                interimResult : function(interimResult){
-                    $scope.interimResult = interimResult;
-                    $timeout.cancel(resetCommandTimeout);
-                },
-                result : function(result){
-                    if(typeof result !== 'undefined'){
-                        $scope.interimResult = result[0];
-                        resetCommandTimeout = $timeout(restCommand, 5000);
-                    }
-                },
-                error : function(error){
-                    console.log(error);
-                    if(error.error == "network"){
-                        $scope.speechError = "Google Speech Recognizer: Network Error (Speech quota exceeded?)";
-                        SpeechService.abort();
-                    } else {
-                        // Even if it isn't a network error, stop making requests
-                        SpeechService.abort();
-                    }
-                }
             });
         };
 
