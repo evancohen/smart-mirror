@@ -88,7 +88,8 @@ var kwsSensitivity = config.speech.sensitivity || "0.5"
 var kwsProcess = spawn('node', ['./sonus.js', modelFile, language, kwsSensitivity], {detached: false})
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
-    console.log("ERROR", message.substring(3))
+    var message = data.toString()
+    console.log("ERROR", message.substring(4))
 })
 
 kwsProcess.stdout.on('data', function (data) {
@@ -96,9 +97,9 @@ kwsProcess.stdout.on('data', function (data) {
     if(message.startsWith('!h:')){
         mainWindow.webContents.send('hotword', true)
     }else if (message.startsWith('!p:')){
-        mainWindow.webContents.send('partial-results', message.substring(3))
+        mainWindow.webContents.send('partial-results', message.substring(4))
     }else if (message.startsWith('!f:')){
-        mainWindow.webContents.send('final-results', message.substring(3))
+        mainWindow.webContents.send('final-results', message.substring(4))
     }else{
         console.error(message.substring(3))
     }
