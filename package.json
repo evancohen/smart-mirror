@@ -8,6 +8,7 @@
     "start": "electron main.js ",
     "microphone-debug": "electron scripts/microphone-debug/main.js",
     "train-model": "electron scripts/train-model.js",
+    "sonus": "node sonus.js ./keyfile.json smart_mirror.pmdl en-US 0.5",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {
