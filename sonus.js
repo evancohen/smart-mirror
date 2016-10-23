@@ -1,14 +1,15 @@
 'use strict'
 
+const argKeyfile = process.argv[2] || "./keyfile.json"
+const argModel = process.argv[3] || "smart_mirror.pmdl"
+const argLanguage = process.argv[4] || "en-US"
+const argSensitivity = process.argv[5] || "0.5"
+
 const Sonus = require('sonus')
 const speech = require('@google-cloud/speech')({
   projectId: 'streaming-speech-sample',
-  keyFilename: 'keyfile.json'
+  keyFilename: argKeyfile
 })
-
-const argModel = process.argv[2] || "smart_mirror.pmdl"
-const argLanguage = process.argv[3] || "en-US"
-const argSensitivity = process.argv[4] || "0.5"
 
 const hotwords = [{ file: argModel, hotword: 'hotword', sensitivity:  argSensitivity}]
 const language = argLanguage
