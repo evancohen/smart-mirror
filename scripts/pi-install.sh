@@ -70,7 +70,7 @@ printf "%s${red}Please do not exit this script until it is complete.${end}\n"
 
 # Install native dependencies
 printf "%s\n${blu}Installing native dependencies${end}\n"
-sudo apt-get install -y curl wget git sox unclutter
+sudo apt-get install -y curl wget git sox unclutter libatlas-base-dev
 
 # Check if we need to install or upgrade Node.js.
 printf "%s\n${blu}Checking current Node installation${end}\n"
