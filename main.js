@@ -86,7 +86,7 @@ var language = config.language || "en-US"
 var kwsSensitivity = config.speech.sensitivity || "0.5"
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('node', ['./sonus.js', keyfile, modelFile, language, kwsSensitivity], {detached: false})
+var kwsProcess = spawn('node', ['./sonus.js', keyFile, modelFile, language, kwsSensitivity], {detached: false})
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
     var message = data.toString()
