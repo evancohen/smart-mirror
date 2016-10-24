@@ -68,7 +68,7 @@
             },
             finalResult : function(result){
                 if(typeof result !== 'undefined'){
-                    $scope.partialResult = result[0];
+                    $scope.partialResult = result;
                     resetCommandTimeout = $timeout(restCommand, 5000);
                 }
             },
