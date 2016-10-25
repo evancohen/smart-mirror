@@ -75,16 +75,6 @@ function createWindow () {
   })
 }
 
-// Get keyword spotting config
-if(typeof config.speech == 'undefined'){
-  config.speech = {}
-}
-
-var keyFile = config.speech.keyFilename || "./keyfile.json"
-var modelFile = config.speech.model || "smart_mirror.pmdl"
-var language = config.language || "en-US"
-var kwsSensitivity = config.speech.sensitivity || "0.5"
-
 // Initilize the keyword spotter
 var kwsProcess = spawn('node', ['./sonus.js', keyFile, modelFile, language, kwsSensitivity], {detached: false})
 // Handel messages from node

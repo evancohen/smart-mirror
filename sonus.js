@@ -1,22 +1,26 @@
 'use strict'
 
-const argKeyfile = process.argv[2] || "./keyfile.json"
-const argModel = process.argv[3] || "smart_mirror.pmdl"
-const argLanguage = process.argv[4] || "en-US"
-const argSensitivity = process.argv[5] || "0.5"
+// Load in smart mirror config
+const config = require(__dirname + "/config.js")
+if(!config || !config.speech || !config.speech.keyFilename || !config.speech.model || !config.language){
+  throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech"
+}
 
+// Configure Sonus
 const Sonus = require('sonus')
 const speech = require('@google-cloud/speech')({
-  projectId: 'streaming-speech-sample',
-  keyFilename: argKeyfile
+  projectId: config.speech.projectId,
+  keyFilename: config.speech.keyFilename
 })
 
-const hotwords = [{ file: argModel, hotword: 'hotword', sensitivity:  argSensitivity}]
-const language = argLanguage
+const hotwords = [{ file: config.speech.model, hotword: config.speech.keyword, sensitivity:  config.speech.sensitivity || '0.5'}]
+const language = config.language
 const sonus = Sonus.init({ hotwords, language }, speech)
 
+// Start Recognition
 Sonus.start(sonus)
 
+// Event IPC
 sonus.on('hotword', (index, keyword) => console.log("!h:", index))
 sonus.on('partial-result', result => console.log("!p:", result))
 sonus.on('final-result', result => console.log("!f:", result))
