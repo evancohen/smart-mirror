@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     function AutoSleepService($interval) {
@@ -7,7 +7,7 @@
 
         service.exec = require('child_process').exec;
 
-        service.startAutoSleepTimer = function() {
+        service.startAutoSleepTimer = function () {
             if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined') {
                 service.stopAutoSleepTimer();
                 autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep);
@@ -15,16 +15,16 @@
             }
         };
 
-        service.stopAutoSleepTimer = function() {
+        service.stopAutoSleepTimer = function () {
             console.debug('Stopping auto-sleep timer');
             $interval.cancel(autoSleepTimer);
         };
 
-        service.wake = function() {
+        service.wake = function () {
             service.exec(config.autoTimer.wake_cmd, service.puts);
         };
 
-        service.sleep = function() {
+        service.sleep = function () {
             service.exec(config.autoTimer.sleep_cmd, service.puts);
         };
 
@@ -42,4 +42,4 @@
     angular.module('SmartMirror')
         .factory('AutoSleepService', AutoSleepService);
 
-}());
+} ());

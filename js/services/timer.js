@@ -1,10 +1,10 @@
-(function(angular){
+(function (angular) {
   'use strict';
 
   /**
    * Factory function for the timer service
    */
-  var TimerService = function($rootScope, $interval, $filter){
+  var TimerService = function ($rootScope, $interval, $filter) {
     var service = {};
     service.running = false;
     service.paused = true;
@@ -16,7 +16,7 @@
      * @param  {String} string - e.g.: `1 minute` or `5 minutes and 10 seconds`
      * @return {Number}        - duration in seconds
      */
-  	var parseDuration = function(string) {
+    var parseDuration = function (string) {
 
       string = string
         .replace(new RegExp($filter('translate')('timer.one'), 'ig'), '1')
@@ -37,19 +37,19 @@
     };
 
     var intervalId;
-    var startTimer = function(){
+    var startTimer = function () {
       service.running = true;
-      return $interval(function(){
+      return $interval(function () {
         service.countdown--;
       }, 1000);
     };
 
-		service.start = function(duration){
-      if (angular.isDefined(duration)){
-        if (isNaN(duration)){
+    service.start = function (duration) {
+      if (angular.isDefined(duration)) {
+        if (isNaN(duration)) {
           duration = parseDuration(duration);
         }
-        if (service.running){
+        if (service.running) {
           service.reset();
         }
         service.countdown = duration;
@@ -58,7 +58,7 @@
         $rootScope.$broadcast("timer:init", duration);
       }
       if (service.countdown > 0) {
-        if (angular.isDefined(intervalId)){
+        if (angular.isDefined(intervalId)) {
           service.stop();
         }
         intervalId = startTimer();
@@ -68,8 +68,8 @@
       }
     };
 
-    service.stop = function(){
-      if (angular.isDefined(intervalId)){
+    service.stop = function () {
+      if (angular.isDefined(intervalId)) {
         $interval.cancel(intervalId);
         intervalId = undefined;
         service.paused = true;
@@ -78,20 +78,20 @@
       }
     };
 
-		service.reset = function(){
+    service.reset = function () {
       service.running = false;
       service.countdown = 0;
       service.stop();
     };
 
     return service;
-	}
+  }
 
   /**
    * Filter for parsing seconds to date
    */
-  var secondsToDateTime = function() {
-    return function(seconds) {
+  var secondsToDateTime = function () {
+    return function (seconds) {
       return new Date(1970, 0, 1).setSeconds(seconds);
     };
   };
@@ -99,45 +99,45 @@
   /**
    * Directive for the svg circle
    */
-  var TimerCircle = function(){
-  	return {
-    	replace: true,
+  var TimerCircle = function () {
+    return {
+      replace: true,
       template: '<svg><circle class="background"></circle><circle class="progress"></circle></svg>',
-      link: function(scope, element, attrs){
+      link: function (scope, element, attrs) {
         var circle = angular.element(element[0].querySelector('.progress'));
 
-        scope.$on('timer:init', function(event, duration){
+        scope.$on('timer:init', function (event, duration) {
           circle.css({
             animationPlayState: 'paused',
             animationDuration: duration + 's'
           });
 
-        	console.debug('timer:init', duration);
+          console.debug('timer:init', duration);
         });
 
-        scope.$on('timer:start', function(event, countdown){
+        scope.$on('timer:start', function (event, countdown) {
           var current = circle.css('animation-duration').slice(0, -1);
 
           circle.css({
             display: 'none',
             animationDelay: -(current - countdown) + 's',
-          	animationPlayState: 'running'
+            animationPlayState: 'running'
           });
 
           // trigger reflow to reset the animation
           circle[0].getBoundingClientRect();
 
-          setTimeout(function(){
+          setTimeout(function () {
             circle.css({
               display: ''
             });
           }, 0);
 
-        	console.debug('timer:start');
+          console.debug('timer:start');
         });
 
-        scope.$on('timer:stop', function(event, countdown){
-          if (countdown > 0){
+        scope.$on('timer:stop', function (event, countdown) {
+          if (countdown > 0) {
             circle.css({
               animationPlayState: 'paused'
             });
@@ -148,7 +148,7 @@
             });
           }
 
-        	console.debug('timer:stop');
+          console.debug('timer:stop');
         });
       }
     };
@@ -159,4 +159,4 @@
     .filter('secondsToDateTime', secondsToDateTime)
     .directive('timerCircle', TimerCircle);
 
-}(window.angular));
+} (window.angular));
