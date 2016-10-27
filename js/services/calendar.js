@@ -1,4 +1,4 @@
-(function(annyang) {
+(function (annyang) {
   'use strict';
 
   function CalendarService($window, $http, $q) {
@@ -6,12 +6,12 @@
 
     service.events = [];
 
-    service.getCalendarEvents = function() {
+    service.getCalendarEvents = function () {
       var deferred = $q.defer();
 
       service.events = [];
-      if(typeof config.calendar != 'undefined' && typeof config.calendar.icals != 'undefined'){
-        loadFile(config.calendar.icals).then(function(){
+      if (typeof config.calendar != 'undefined' && typeof config.calendar.icals != 'undefined') {
+        loadFile(config.calendar.icals).then(function () {
           deferred.resolve();
         });
       } else {
@@ -21,33 +21,33 @@
       return deferred.promise;
     }
 
-    var loadFile = function(urls) {
+    var loadFile = function (urls) {
       var promises = [];
 
-      angular.forEach(urls, function(url) {
+      angular.forEach(urls, function (url) {
         promises.push($http.get(url));
       });
 
-      return $q.all(promises).then(function(data) {
+      return $q.all(promises).then(function (data) {
         for (var i = 0; i < promises.length; i++) {
           parseICAL(data[i].data);
         }
       });
     }
 
-    var makeDate = function(type, ical_date) {
-        if(ical_date.endsWith('Z')){
-            return moment(ical_date, 'YYYYMMDDTHHmmssZ');
-        }
+    var makeDate = function (type, ical_date) {
+      if (ical_date.endsWith('Z')) {
+        return moment(ical_date, 'YYYYMMDDTHHmmssZ');
+      }
 
-        if(!type.endsWith('VALUE=DATE')){
-            return moment(ical_date, 'YYYYMMDDTHHmmss');
-        } else {
-            return moment(ical_date, 'YYYYMMDD');
-        }
+      if (!type.endsWith('VALUE=DATE')) {
+        return moment(ical_date, 'YYYYMMDDTHHmmss');
+      } else {
+        return moment(ical_date, 'YYYYMMDD');
+      }
     }
 
-    var parseICAL = function(data) {
+    var parseICAL = function (data) {
       //Ensure cal is empty
       var events = [];
 
@@ -75,7 +75,7 @@
         if (in_event && ln == 'END:VEVENT') {
           in_event = false;
           cur_event.calendarName = calendarName;
-          if(!contains(events, cur_event)) {
+          if (!contains(events, cur_event)) {
             events.push(cur_event);
           }
           cur_event = null;
@@ -102,15 +102,15 @@
           //If the type is an end date, do the same as above
           else if (type.startsWith('DTEND')) {
             cur_event.end = makeDate(type, val);
-            
+
             // Subtract one second so that single-day events endon the same day
             cur_event.endName = makeDate(type, val).subtract(1, 'seconds').calendar().toUpperCase();
           }
-          
+
           if (cur_event.startName && cur_event.endName) {
             cur_event.label = cur_event.startName + " - " + cur_event.endName;
           }
-          
+
           //Convert timestamp
           else if (type == 'DTSTAMP') {
             //val = makeDate(type, val);
@@ -122,36 +122,36 @@
           }
 
           //Add the value to our event object.
-          if ( type !== 'SUMMARY' || (type=='SUMMARY' && cur_event['SUMMARY'] == undefined)) {
+          if (type !== 'SUMMARY' || (type == 'SUMMARY' && cur_event['SUMMARY'] == undefined)) {
             cur_event[type] = val;
           }
           var keys = Object.keys(cur_event);
           if (cur_event['SUMMARY'] !== undefined && cur_event['RRULE'] !== undefined &&
-              (keys.some(function(k){ return ~k.indexOf("DTSTART") })) &&
-                keys.some(function(k){ return ~k.indexOf("DTEND") })) {
+            (keys.some(function (k) { return ~k.indexOf("DTSTART") })) &&
+            keys.some(function (k) { return ~k.indexOf("DTEND") })) {
             var options = new RRule.parseString(cur_event['RRULE']);
-      			options.dtstart = cur_event.start.toDate();
-      			var event_duration = cur_event.end.diff(cur_event.start,'minutes');
-      			var rule = new RRule(options);
+            options.dtstart = cur_event.start.toDate();
+            var event_duration = cur_event.end.diff(cur_event.start, 'minutes');
+            var rule = new RRule(options);
             var oneYear = new Date();
-      			oneYear.setFullYear(oneYear.getFullYear() + 1);
-      			var dates = rule.between(new Date(), oneYear, true, function (date, i){return i < 10});
-      			for (var date in dates) {
+            oneYear.setFullYear(oneYear.getFullYear() + 1);
+            var dates = rule.between(new Date(), oneYear, true, function (date, i) { return i < 10 });
+            for (var date in dates) {
               var recuring_event = {};
               recuring_event.SUMMARY = cur_event.SUMMARY;
-      				var dt = new Date(dates[date]);
-      				var startDate = moment(dt);
-      				var endDate = moment(dt);
+              var dt = new Date(dates[date]);
+              var startDate = moment(dt);
+              var endDate = moment(dt);
               endDate.add(event_duration, 'minutes');
               recuring_event.calendarName = calendarName;
               recuring_event.start = startDate;
               recuring_event.startName = startDate.calendar().toUpperCase();
               recuring_event.end = endDate;
               recuring_event.endName = endDate.subtract(1, 'seconds').calendar().toUpperCase();
-              if(!contains(events, recuring_event)) {
+              if (!contains(events, recuring_event)) {
                 events.push(recuring_event);
               }
-      			}
+            }
           }
         }
       }
@@ -159,7 +159,7 @@
       service.events.push.apply(service.events, events);
     }
 
-    var contains = function(input, obj) {
+    var contains = function (input, obj) {
       var i = input.length;
       while (i--) {
         var current = input[i];
@@ -172,38 +172,38 @@
       return false;
     }
 
-    Array.prototype.contains = function(obj) {
-        var i = this.length;
-        while (i--) {
-            if (this[i] === obj) {
-                return true;
-            }
+    Array.prototype.contains = function (obj) {
+      var i = this.length;
+      while (i--) {
+        if (this[i] === obj) {
+          return true;
         }
-        return false;
+      }
+      return false;
     }
 
-    service.getEvents = function(events) {
+    service.getEvents = function (events) {
       return service.events;
     }
 
-    service.getFutureEvents = function() {
+    service.getFutureEvents = function () {
       var future_events = [],
         current_date = new moment(),
         end_date = new moment().add(config.calendar.maxDays, 'days');
 
-      service.events.forEach(function(itm) {
+      service.events.forEach(function (itm) {
         //If the event started before current time but ends after the current time or
         // if there is no end time and the event starts between today and the max number of days add it.
-        if ((itm.end != undefined && (itm.end.isAfter(current_date) && itm.start.isBefore(current_date))) || itm.start.isBetween(current_date, end_date)){
-            future_events.push(itm);
+        if ((itm.end != undefined && (itm.end.isAfter(current_date) && itm.start.isBefore(current_date))) || itm.start.isBetween(current_date, end_date)) {
+          future_events.push(itm);
         }
       });
       future_events = sortAscending(future_events);
       return future_events.slice(0, config.calendar.maxResults);
     }
 
-    var sortAscending = function(events) {
-      return events.sort(function(a, b) {
+    var sortAscending = function (events) {
+      return events.sort(function (a, b) {
         var key1 = a.start;
         var key2 = b.start;
 
@@ -217,14 +217,14 @@
       });
     }
 
-    service.getPastEvents = function(events) {
+    service.getPastEvents = function (events) {
       var past_events = [],
         current_date = new moment();
 
-      service.events.forEach(function(itm) {
+      service.events.forEach(function (itm) {
         //If the event ended before the current time, add it to the array to return.
-        if (itm.end != undefined && itm.end.isBefore(current_date)){
-            past_events.push(itm);
+        if (itm.end != undefined && itm.end.isBefore(current_date)) {
+          past_events.push(itm);
         }
       });
       return past_events.reverse();
@@ -235,4 +235,4 @@
 
   angular.module('SmartMirror')
     .factory('CalendarService', CalendarService);
-}(window.annyang));
+} (window.annyang));
