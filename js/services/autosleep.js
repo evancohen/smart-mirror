@@ -15,18 +15,22 @@
             }
         };
 
-	service.stopAutoSleepTimer = function () {
+        service.stopAutoSleepTimer = function () {
             console.debug('Stopping auto-sleep timer');
             $interval.cancel(autoSleepTimer);
         };
 
         service.wake = function () {
+
 	    service.woke = true;
+
             service.exec(config.autoTimer.wake_cmd, service.puts);
         };
 
         service.sleep = function () {
+
 	    service.woke = false;
+
             service.exec(config.autoTimer.sleep_cmd, service.puts);
         };
 

@@ -20,7 +20,10 @@
         RssService,
         StockService,
         ScrobblerService,
+<<<<<<< HEAD
         TVShowService,
+=======
+>>>>>>> formatting JS
         $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -345,13 +348,21 @@
             addCommand('wake_up', defaultView);
 
             // Turn off HDMI output
+<<<<<<< HEAD
             addCommand('screen_off', function () {
+=======
+            addCommand('screen off', function () {
+>>>>>>> formatting JS
                 console.debug('turning screen off');
                 AutoSleepService.sleep();
             });
 
             // Turn on HDMI output
+<<<<<<< HEAD
             addCommand('screen_on', function () {
+=======
+            addCommand('screen on', function () {
+>>>>>>> formatting JS
                 console.debug('turning screen on');
                 AutoSleepService.wake();
                 $scope.focus = "default"
@@ -433,6 +444,24 @@
                 $scope.focus = "sc";
             });
 
+<<<<<<< HEAD
+=======
+            //Search for a video
+            addCommand('video_search', function (query) {
+                SearchService.searchYouTube(query).then(function (results) {
+                    //Set cc_load_policy=1 to force captions
+                    $scope.video = 'http://www.youtube.com/embed/' + results.data.items[0].id.videoId + '?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
+                    $scope.focus = "video";
+                });
+            });
+            //Stop video
+            addCommand('video_stop', function () {
+                var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
+                iframe.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                $scope.focus = "default";
+            });
+
+>>>>>>> formatting JS
             // Set a reminder
             addCommand('reminder_insert', function (task) {
                 console.debug("I'll remind you to", task);
