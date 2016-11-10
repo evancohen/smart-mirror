@@ -33,7 +33,6 @@ function getCard {
 		if echo "${arr_alsaOut[index]}" | grep -q "card"
 		then
 			recDev[recInd]="${arr_alsaOut[index]}"
-			echo "$[recInd]) ${recDev[recInd]}"
 			let recInd=$recInd+$counter
 		fi
 	
@@ -49,7 +48,6 @@ function getCard {
 			test=`echo "$test" | tr -d '\n'`
 			test=`echo "$test" | tr : ,`
 			test=${test::-1}
-			echo "$test"
 			tempasound="${tempasound/$2_DevID/$test}"
 			tempasound="${tempasound/$2_Desc/$recDev[choice]}"
 		fi
