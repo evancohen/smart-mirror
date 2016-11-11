@@ -1,4 +1,5 @@
 #!/bin/bash
+
 asoundrcFile=~/.asoundrc
 if [ -f "$asoundrcFile" ]
 then
@@ -6,7 +7,7 @@ then
 fi
 arecout=`arecord -l | grep "card"`
 aplaout=`aplay -l | grep "card"`
-tempasound="pcm.!default {
+tempasound='pcm.!default {
   type asym
    playback.pcm {
      type plug
@@ -18,7 +19,7 @@ tempasound="pcm.!default {
      # Capture_Desc
      slave.pcm "hw:Capture_DevID"
    }
-}"
+}'
 
 function getCard {
 	readarray -t arr_alsaOut <<<"$1"
@@ -33,6 +34,7 @@ function getCard {
 		if echo "${arr_alsaOut[index]}" | grep -q "card"
 		then
 			recDev[recInd]="${arr_alsaOut[index]}"
+			echo "$[recInd]) ${recDev[recInd]}"
 			let recInd=$recInd+$counter
 		fi
 	
