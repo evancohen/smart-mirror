@@ -1,6 +1,7 @@
 #!/bin/bash
 alias _todo_="if [ ]; then"
 alias _todone_="fi"
+alias InvalidInput-"clear && echo $'\n\n' && echo '**** Invalid Input ****'"
 _todo_
 echo "make function to check for an asoundrc file and prompt to rerun audio config"
 echo "make function to check for the boot script and prompt to run if it doesn't exist"
@@ -9,12 +10,11 @@ echo "finish the steps to configure smart mirror checking the step first and pro
 _todone_
 
 
-clear
+
+
+
+function init(){
 asoundrcFile=~/.asoundrc
-if [ -f "$asoundrcFile" ]
-then
-	mv $asoundrcFile ${asoundrcFile/./old}_$(date +%d%m%Y-%T).txt
-fi
 arecout=`arecord -l | grep "card"`
 aplaout=`aplay -l | grep "card"`
 tempasound='pcm.!default {
@@ -30,6 +30,9 @@ tempasound='pcm.!default {
      slave.pcm "hw:Capture_DevID"
    }
 }'
+
+}
+
 
 function getCard {
 	gc_result="-1"
@@ -75,13 +78,10 @@ function getCard {
 				gc_result="0"
 			fi
 		else
-			echo "failed ge"
+			InvalidInput
 		fi
 	else
-		clear
-		echo $'\n\n'
-		echo "**** Invalid Input ****"
-		
+		InvalidInput
 	fi
 }
 _todo_
@@ -93,21 +93,44 @@ function SetRunOnBoot(){
 	prompt="Would you like to run the Smart Mirror on boot? [Y/n] "
 	clear 
 	read -n 1 -p "$prompt" choice
+		echo ""
 	if [ "$choice" = "y" ] || [ "$choice" = "Y" ]
 	then
-		echo ""
 		echo "Copying the Start script."
 		cd ~ && cp ./smart-mirror/scripts/bash-start.sh smart-start.sh
 		echo "configuring Start Script permissions"
 		chown pi:pi /home/pi/smart-start.sh && chmod +x /home/pi/smart-start.sh
 		echo "checking to see if start up script is configured" 
 		echo "/home/pi/smart-start.sh &" >> /home/pi/.config/lxsession/LXDE-pi/autostart
-	else
-		echo ""
+	elif [ "$choice" = "n" ] || [ "$choice" = "N" ]
 		echo "Start script not copied"
+	else
+		InvalidInput
+		SetRunOnBoot
+		return -1
 	fi
 }
-function mainAudio(){
+function checkAudioFile(){
+if [ -f "$1" ]
+then
+	prompt='File: "$1" already exists. Would you like to re-run the audio configuration? [y/N] '
+	read -n 1 -p "$prompt" choice
+	if [ "$choice" = "y" ] || [ "$choice" = "Y" ]
+	then
+		echo 'Renaming file: "$1" to start a fresh Audio file'
+		mv $1 ${1/./old}_$(date +%d%m%Y-%T).txt
+		return 0
+	elif [ "$choice" = "n" ] || [ "$choice" = "N" ]
+		echo "Audio Configuration Not Run"
+		return 1
+	else
+		InvalidInput
+		return -1
+	fi
+else
+fi
+}
+function configAudio(){
 gc_result="-1"
 while (( gc_result != 0 )); do
 	getCard "$arecout" "Capture"
@@ -135,6 +158,23 @@ else
 	echo "~/.asoundrc File Creation Failed!"
 fi
 }
+function mainAudio(){
+until checkAudioFile "$asoundrcFile";
+do
+	case $? in
+		0)
+			configAudio
+		;;
+		1)
+			return 0
+		;;
+	esac
+done
+	
+}
+
+
+clear
+init
 
 mainAudio
-runOnBoot
