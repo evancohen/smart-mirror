@@ -39,6 +39,7 @@
     <script src="js/services/fitbit.js"></script>
     <script src="js/services/reminder.js"></script>
     <script src="js/services/rss.js"></script>
+    <script src="js/services/tvshows.js"></script>
     <script src="js/services/autosleep.js"></script>
     <script src="js/services/stock.js"></script>
     <script src="js/services/scrobbler.js"></script>
@@ -112,6 +113,12 @@
           <div class="stock-information" ng-repeat="quote in stock">
             <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
             <span fade ng-bind="quote.Name"></span>: $<span fade ng-bind="quote.LastTradePriceOnly  | number : 3"></span><span ng-bind="quote.Change"></span>
+          </div>
+        </div>
+        <div class="tvshows">
+          <div class="tv-information time-to" ng-repeat="show in tvshows">
+            <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
+            <span fade><span style="font-weight: bold" ng-bind="show.data.episode.show.title"></span> – <span ng-bind="show.data.episode.release_date"></span></span>
           </div>
         </div>
       </div>
