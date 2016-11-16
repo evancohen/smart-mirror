@@ -16,7 +16,7 @@ const DevelopmentMode = process.argv[2] == "dev";
 
 // Load the smart mirror config
 var config;
-try {
+try{
   config = require(__dirname + "/config.js");
 } catch (e) {
   var error = "Unknown Error"
@@ -36,7 +36,7 @@ try {
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow() {
+function createWindow () {
 
   // Get the displays and render the mirror on a secondary screen if it exists
   var atomScreen = electron.screen;
@@ -49,7 +49,7 @@ function createWindow() {
     }
   }
 
-  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true };
+  var browserWindowOptions = {width: 800, height: 600, icon: 'favicon.ico' , kiosk: true, autoHideMenuBar: true, darkTheme: true};
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
@@ -62,7 +62,7 @@ function createWindow() {
   mainWindow.loadURL('file://' + __dirname + '/index.html')
 
   // Open the DevTools if run with "npm start dev"
-  if (DevelopmentMode) {
+  if(DevelopmentMode){
     mainWindow.webContents.openDevTools();
   }
 
@@ -76,24 +76,24 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('node', ['./sonus.js', keyFile, modelFile, language, kwsSensitivity], { detached: false })
+var kwsProcess = spawn('node', ['./sonus.js', keyFile, modelFile, language, kwsSensitivity], {detached: false})
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
-  var message = data.toString()
-  console.log("ERROR", message.substring(4))
+    var message = data.toString()
+    console.log("ERROR", message.substring(4))
 })
 
 kwsProcess.stdout.on('data', function (data) {
-  var message = data.toString()
-  if (message.startsWith('!h:')) {
-    mainWindow.webContents.send('hotword', true)
-  } else if (message.startsWith('!p:')) {
-    mainWindow.webContents.send('partial-results', message.substring(4))
-  } else if (message.startsWith('!f:')) {
-    mainWindow.webContents.send('final-results', message.substring(4))
-  } else {
-    console.error(message.substring(3))
-  }
+    var message = data.toString()
+    if (message.startsWith('!h:')) {
+        mainWindow.webContents.send('hotword', true)
+    } else if (message.startsWith('!p:')) {
+        mainWindow.webContents.send('partial-results', message.substring(4))
+    } else if (message.startsWith('!f:')) {
+        mainWindow.webContents.send('final-results', message.substring(4))
+    } else {
+        console.error(message.substring(3))
+   }
 })
 
 // This method will be called when Electron has finished
