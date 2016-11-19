@@ -1,7 +1,7 @@
 (function(annyang) {
   'use strict';
 
-  function TVShowService($window, $http, $q) {
+  function TVShowService($http, $q) {
     var service = {};
     service.shows = []; // hold show data here
 
