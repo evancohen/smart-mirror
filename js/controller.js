@@ -566,7 +566,7 @@
 
             // Register refresh of TV shows once a day
             if (typeof config.tvshows !== 'undefined'){
-                registerRefreshInterval(refreshTVShows, 24 * 60); // 24 hours * 60 min -- update once a day
+                registerRefreshInterval(refreshTVShows, config.tvshows.refreshInterval);
             }
         };
 
