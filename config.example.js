@@ -8,7 +8,7 @@ var config = {
         projectId: 'streaming-speech-sample',
         keyFilename: './keyfile.json',
         keyword: "Smart Mirror",
-        model: "smart_mirror.pmdl", // The name of your model
+        model: ["smart_mirror.pmdl"], // The name of your model (for multiple files use ["smart_mirror.pmdl","second.pmdl","third.pmdl"])
         sensitivity: 0.5, // Keyword getting too many false positives or not detecting? Change this.
         continuous: false // After a keyword is detected keep listening until speech is not heard
     },

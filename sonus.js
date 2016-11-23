@@ -13,7 +13,11 @@ const speech = require('@google-cloud/speech')({
   keyFilename: config.speech.keyFilename
 })
 
-const hotwords = [{ file: config.speech.model, hotword: config.speech.keyword, sensitivity:  config.speech.sensitivity || '0.5'}]
+var hotwords = []
+config.speech.model.forEach(function(item, index) {
+  hotwords.push({ file: item, hotword: config.speech.hotword, sensitivity: config.speech.sensitivity || '0.5'})
+}, this);
+
 const language = config.language
 const sonus = Sonus.init({ hotwords, language }, speech)
 
