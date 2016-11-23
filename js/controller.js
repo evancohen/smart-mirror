@@ -20,6 +20,7 @@
         RssService,
         StockService,
         ScrobblerService,
+        TVShowService,
         $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -553,6 +554,20 @@
                     $scope.focus = "timer";
                 }
             });
+
+            // Function to refresh TV show data
+            var refreshTVShows = function () {
+                console.log ("Refreshing TVShows");
+                $scope.tvshows = null;
+                TVShowService.refreshTVShows().then(function() {
+                  $scope.tvshows = TVShowService.getTVShows();
+                });
+            };
+
+            // Register refresh of TV shows once a day
+            if (typeof config.tvshows !== 'undefined'){
+                registerRefreshInterval(refreshTVShows, config.tvshows.refreshInterval);
+            }
         };
 
         _this.init();
