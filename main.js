@@ -76,7 +76,7 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('node', ['./sonus.js', keyFile, modelFile, language, kwsSensitivity], { detached: false })
+var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
   var message = data.toString()
