@@ -123,7 +123,7 @@ var config = {
         refreshInterval: 0.6 // Number of minutes between checks for playing track
     },
     tvshows: {
-        shows : ["Game of Thrones", "The Walking Dead"],  // TV Shows list - e.g. ["Mad Men", "The Walking Dead", "Game of Thrones"]
+        shows: ["Game of Thrones", "The Walking Dead"],  // TV Shows list - e.g. ["Mad Men", "The Walking Dead", "Game of Thrones"]
         refreshInterval: 1440 // Number of minutes between checking for new episodes
     }
 };
