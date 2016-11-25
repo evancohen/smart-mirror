@@ -9,7 +9,7 @@
             var deferred = $q.defer();
             var promises = [];
 
-            if (typeof config.traffic != 'undefined' && config.traffic.trips != 'undefined') {
+            if (typeof config.traffic != 'undefined' && config.traffic.key != '' && config.traffic.trips ) {
                 angular.forEach(config.traffic.trips, function (trip) {
                     if (trip.hasOwnProperty('startTime') && TimeboxService.shouldDisplay(trip.startTime, trip.endTime)
                         || !trip.hasOwnProperty('startTime')) {
@@ -44,11 +44,13 @@
                 if (error.status === 404) {
                     console.error('No transit information available between start and end');
                     deferred.reject('Unavailable');
+                } else if (error.status === 401) {
+                    console.error('Unauthorized. Check your traffic key.');
+                    deferred.reject('Unauthorized');
                 } else {
-                    console.error(error.statusText);
-                    deferred.reject('Unknown error');
+                    console.error('Traffic error:', error.statusText);
+                    deferred.reject(error.statusText);
                 }
-                duration = deferred.promise;
             });
             return deferred.promise;
         }
