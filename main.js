@@ -103,6 +103,20 @@ kwsProcess.stdout.on('data', function (data) {
 if (config.remote && config.remote.enabled) {
   remote.start()
 
+  // Deturmine the local IP address
+  const interfaces = require('os').networkInterfaces()
+  let addresses = []
+  for (let k in interfaces) {
+    for (let k2 in interfaces[k]) {
+      let address = interfaces[k][k2]
+      if (address.family === 'IPv4' && !address.internal) {
+        addresses.push(address.address)
+      }
+    }
+  }
+  console.log('Remote listening on http://%s:%d', addresses[0], config.remote.port)
+  mainWindow.webContents.send('remote', { ip: addresses[0], port: config.remote.port })
+
   remote.on('command', function (command) {
     mainWindow.webContents.send('final-results', command)
   })

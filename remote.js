@@ -11,9 +11,7 @@ remote.start = function () {
   const server = require('http').createServer(app)
 
   // Start the server
-  server.listen(config.remote.port, function () {
-    console.log('Remote: listening at %d', config.remote.port)
-  })
+  server.listen(config.remote.port)
   // Use the remote directory and initilize socket connection
   app.use(express.static(__dirname + '/remote'))
   remote.io = require('socket.io')(server)
@@ -22,7 +20,6 @@ remote.start = function () {
    * When the connection begins
    */
   remote.io.on('connection', function (socket) {
-    remote.emit('connected')
     // When the mirror recieves a remote command
     socket.on('command', function (command) {
       remote.emit('command', command)
