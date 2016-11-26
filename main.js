@@ -136,8 +136,12 @@ if (config.remote && config.remote.enabled) {
     }
   })
 
-  remote.on('kiosk', function (fullscreen) {
-    mainWindow.setKiosk(fullscreen)
+  remote.on('kiosk', function () {
+    if(mainWindow.isKiosk()){
+      mainWindow.setKiosk(false)
+    } else {
+      mainWindow.setKiosk(true)
+    }
   })
 
   remote.on('reload', function () {

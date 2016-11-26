@@ -20,7 +20,7 @@
 <body>
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
@@ -72,19 +72,17 @@
         <div class="row">
             <form class="lead col-md-6 col-md-offset-3">
                 <div class="checkbox">
-                    <label><input id="open-devtools" type="checkbox"> Open Devtools</label>
+                    <label><input id="devtools" type="checkbox"> Toggle Devtools</label>
                 </div>
-                <div class="checkbox">
-                    <label><input id="kiosk-modde" type="checkbox" checked> Kiosk Mode</label>
-                </div>
-                <button id="reload" class="btn btn-link">Reload</button>
+                <button id="kiosk" class="btn btn-default">Toggle Kiosk Mode</button>
+                <button id="reload" class="btn btn-warning">Reload</button>
             </form>
         </div>
     </div>
 
     <footer class="footer">
-        <div class="container">
-            <p class="text-muted">Have a great day!</p>
+        <div id="connection-bar" class="container">
+            <p id="connection-text" class="text-muted">Connecting...</p>
         </div>
     </footer>
 

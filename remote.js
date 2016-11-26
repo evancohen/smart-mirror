@@ -20,6 +20,8 @@ remote.start = function () {
    * When the connection begins
    */
   remote.io.on('connection', function (socket) {
+    socket.emit('connected')
+
     // When the mirror recieves a remote command
     socket.on('command', function (command) {
       remote.emit('command', command)
@@ -29,15 +31,14 @@ remote.start = function () {
       remote.emit('devtools', open)
     })
 
-    socket.on('kiosk', function (fullscreen) {
-      remote.emit('kiosk', fullscreen)
+    socket.on('kiosk', function () {
+      remote.emit('kiosk')
     })
 
-    socket.on('reload', function (fullscreen) {
-      remote.emit('reload', fullscreen)
+    socket.on('reload', function () {
+      remote.emit('reload')
     })
 
-    socket.emit('message-from-mirror', { message: 'hi' })
   }) // end - connection
 
   /**

@@ -2,6 +2,19 @@ $(function () {
 
   var socket = io()
 
+  $connectionBar = $('#connection-bar')
+  $connectionText = $('#connection-text')
+  socket.on('connected', function () {
+    $connectionBar.removeClass('disconnected').addClass('connected')
+    $connectionText.html('Connected!')
+  })
+
+  socket.on('disconnect', function () {
+    
+    $connectionBar.removeClass('connected').addClass('disconnected')
+    $connectionText.html('Disconnected :(')
+  })
+
   if (annyang) {
     // Let's define our first command. First the text we expect, and then the function it should call
     var command = {
@@ -20,26 +33,16 @@ $(function () {
     })
   }
 
-  $('#open-devtools').change(function () {
+  $('#devtools').change(function () {
     socket.emit('devtools', $(this).is(":checked"))
   });
 
-  $('#kiosk-modde').change(function () {
-    socket.emit('kiosk', $(this).is(":checked"))
+  $('#kiosk').click(function () {
+    socket.emit('kiosk')
   });
 
   $('#reload').click(function () {
     socket.emit('reload')
-  })
-
-  socket.on('login', function (data) {
-    connected = true
-    // Display the welcome message
-    var message = "Welcome to Socket.IO Chat – "
-    log(message, {
-      prepend: true
-    })
-    addParticipantsMessage(data)
   })
 
 })
