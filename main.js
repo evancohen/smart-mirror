@@ -3,6 +3,8 @@
 const electron = require('electron')
 // Child Process for keyword spotter
 const {spawn} = require('child_process')
+// Smart mirror remote
+const remote = require('./remote.js')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -15,11 +17,11 @@ powerSaveBlocker.start('prevent-display-sleep')
 const DevelopmentMode = process.argv[2] == "dev";
 
 // Load the smart mirror config
-var config;
+let config;
 try {
   config = require(__dirname + "/config.js");
 } catch (e) {
-  var error = "Unknown Error"
+  let error = "Unknown Error"
 
   if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
@@ -97,6 +99,22 @@ kwsProcess.stdout.on('data', function (data) {
     console.error(message.substring(3))
   }
 })
+
+if(config.remote && config.remote.enabled){
+  remote.start()
+
+  remote.on('command', function(command){
+    mainWindow.webContents.send('final-results', command)
+  })
+
+  remote.on('connected', function(){
+    mainWindow.webContents.send('connected')
+  })
+
+  remote.on('disconnected', function(){
+    mainWindow.webContents.send('disconnected')
+  })
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
