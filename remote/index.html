@@ -61,13 +61,24 @@
             <h1>Sticky footer with fixed navbar</h1>
         </div>-->
         <div class="row">
-            <div class="lead col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Speak!</button></div>
+            <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Speak!</button></div>
         </div>
         <div class="row">
             <div class="lead col-md-6 col-md-offset-3">
-            <p class="lead">Press the button above to begin issuing a voice command to your <code>smart mirror</code>.</p>
-            <p>This won't effect your usage quota :)</p>
+                <p class="lead">Press the button above to begin issuing a voice command to your <code>smart mirror</code>.</p>
+                <p>This won't effect your usage quota :)</p>
             </div>
+        </div>
+        <div class="row">
+            <form class="lead col-md-6 col-md-offset-3">
+                <div class="checkbox">
+                    <label><input id="open-devtools" type="checkbox"> Open Devtools</label>
+                </div>
+                <div class="checkbox">
+                    <label><input id="kiosk-modde" type="checkbox" checked> Kiosk Mode</label>
+                </div>
+                <button id="reload" class="btn btn-link">Reload</button>
+            </form>
         </div>
     </div>
 

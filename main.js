@@ -14,12 +14,12 @@ const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
-const DevelopmentMode = process.argv[2] == "dev";
+const DevelopmentMode = process.argv[2] == "dev"
 
 // Load the smart mirror config
-let config;
+let config
 try {
-  config = require(__dirname + "/config.js");
+  config = require(__dirname + "/config.js")
 } catch (e) {
   let error = "Unknown Error"
 
@@ -43,17 +43,17 @@ let mainWindow
 function createWindow() {
 
   // Get the displays and render the mirror on a secondary screen if it exists
-  var atomScreen = electron.screen;
-  var displays = atomScreen.getAllDisplays();
-  var externalDisplay = null;
+  var atomScreen = electron.screen
+  var displays = atomScreen.getAllDisplays()
+  var externalDisplay = null
   for (var i in displays) {
     if (displays[i].bounds.x > 0 || displays[i].bounds.y > 0) {
-      externalDisplay = displays[i];
-      break;
+      externalDisplay = displays[i]
+      break
     }
   }
 
-  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true };
+  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true }
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
@@ -67,7 +67,7 @@ function createWindow() {
 
   // Open the DevTools if run with "npm start dev"
   if (DevelopmentMode) {
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools()
   }
 
   // Emitted when the window is closed.
@@ -80,7 +80,7 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('node', ['./sonus.js'], {detached: false})
+var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
   var message = data.toString()
@@ -100,19 +100,35 @@ kwsProcess.stdout.on('data', function (data) {
   }
 })
 
-if(config.remote && config.remote.enabled){
+if (config.remote && config.remote.enabled) {
   remote.start()
 
-  remote.on('command', function(command){
+  remote.on('command', function (command) {
     mainWindow.webContents.send('final-results', command)
   })
 
-  remote.on('connected', function(){
+  remote.on('connected', function () {
     mainWindow.webContents.send('connected')
   })
 
-  remote.on('disconnected', function(){
+  remote.on('disconnected', function () {
     mainWindow.webContents.send('disconnected')
+  })
+
+  remote.on('devtools', function (open) {
+    if (open) {
+      mainWindow.webContents.openDevTools()
+    } else {
+      mainWindow.webContents.closeDevTools()
+    }
+  })
+
+  remote.on('kiosk', function (fullscreen) {
+    mainWindow.setKiosk(fullscreen)
+  })
+
+  remote.on('reload', function () {
+    mainWindow.reload()
   })
 }
 

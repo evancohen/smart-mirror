@@ -28,6 +28,18 @@ remote.start = function () {
       remote.emit('command', command)
     })
 
+    socket.on('devtools', function (open) {
+      remote.emit('devtools', open)
+    })
+
+    socket.on('kiosk', function (fullscreen) {
+      remote.emit('kiosk', fullscreen)
+    })
+
+    socket.on('reload', function (fullscreen) {
+      remote.emit('reload', fullscreen)
+    })
+
     socket.emit('message-from-mirror', { message: 'hi' })
   }) // end - connection
 
