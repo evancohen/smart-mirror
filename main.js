@@ -115,8 +115,7 @@ if (config.remote && config.remote.enabled) {
     }
   }
   console.log('Remote listening on http://%s:%d', addresses[0], config.remote.port)
-  mainWindow.webContents.send('remote', { ip: addresses[0], port: config.remote.port })
-
+  
   remote.on('command', function (command) {
     mainWindow.webContents.send('final-results', command)
   })
