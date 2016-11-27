@@ -19,6 +19,7 @@ For more information see the [Development and Contributing](http://docs.smart-mi
 For known issues and trobleshooting see the documentation: [Troubleshooting](http://docs.smart-mirror.io/docs/troubleshooting.html)
 
 #### Current Feature Requests/Suggestions
+Please use feathub.com to add Feature Requests and Suggestions. We also recommend looking through the already existing requests to help in ranking the most popular and useful Features to Smart-Mirror users.
 [![Feature Requests](http://feathub.com/evancohen/smart-mirror?format=svg)](http://feathub.com/evancohen/smart-mirror)
 
 
