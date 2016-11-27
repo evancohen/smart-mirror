@@ -1,5 +1,5 @@
 # Smart Mirror
-[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Progress](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg)] (https://waffle.io/evancohen/smart-mirror)  (https://github.com/evancohen/smart-mirror/issues?q=is%3Aissue+is%3Aopen+label%3Asuggestion) [![Dependency Status](https://dependencyci.com/github/evancohen/smart-mirror/badge)](https://dependencyci.com/github/evancohen/smart-mirror)
+[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Progress](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg)] (https://waffle.io/evancohen/smart-mirror) [![Dependency Status](https://dependencyci.com/github/evancohen/smart-mirror/badge)](https://dependencyci.com/github/evancohen/smart-mirror)
 
 Check out the [smart mirror documentation](http://docs.smart-mirror.io) for more information, installation instructions, and troubleshooting.
 
