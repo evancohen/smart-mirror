@@ -16,18 +16,20 @@ const DevelopmentMode = process.argv[2] == "dev";
 
 // Load the smart mirror config
 var config;
-try{
+try {
   config = require(__dirname + "/config.js");
 } catch (e) {
   var error = "Unknown Error"
-  
+
   if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
   } else if (typeof e.message != 'undefined') {
-    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message
+    console.log(e)
+    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
+    'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
   }
-  
+
   console.log("Config Error: ", error)
   app.quit()
 }
@@ -36,8 +38,8 @@ try{
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
-  
+function createWindow() {
+
   // Get the displays and render the mirror on a secondary screen if it exists
   var atomScreen = electron.screen;
   var displays = atomScreen.getAllDisplays();
@@ -49,12 +51,12 @@ function createWindow () {
     }
   }
 
-  var browserWindowOptions = {width: 800, height: 600, icon: 'favicon.ico' , kiosk:true, autoHideMenuBar:true, darkTheme:true};
+  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true };
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
   }
-  
+
   // Create the browser window.
   mainWindow = new BrowserWindow(browserWindowOptions)
 
@@ -62,7 +64,7 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/index.html')
 
   // Open the DevTools if run with "npm start dev"
-  if(DevelopmentMode){
+  if (DevelopmentMode) {
     mainWindow.webContents.openDevTools();
   }
 
@@ -79,21 +81,21 @@ function createWindow () {
 var kwsProcess = spawn('node', ['./sonus.js'], {detached: false})
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
-    var message = data.toString()
-    console.log("ERROR", message.substring(4))
+  var message = data.toString()
+  console.log("ERROR", message.substring(4))
 })
 
 kwsProcess.stdout.on('data', function (data) {
-    var message = data.toString()
-    if(message.startsWith('!h:')){
-        mainWindow.webContents.send('hotword', true)
-    }else if (message.startsWith('!p:')){
-        mainWindow.webContents.send('partial-results', message.substring(4))
-    }else if (message.startsWith('!f:')){
-        mainWindow.webContents.send('final-results', message.substring(4))
-    }else{
-        console.error(message.substring(3))
-    }
+  var message = data.toString()
+  if (message.startsWith('!h:')) {
+    mainWindow.webContents.send('hotword', true)
+  } else if (message.startsWith('!p:')) {
+    mainWindow.webContents.send('partial-results', message.substring(4))
+  } else if (message.startsWith('!f:')) {
+    mainWindow.webContents.send('final-results', message.substring(4))
+  } else {
+    console.error(message.substring(3))
+  }
 })
 
 // This method will be called when Electron has finished
