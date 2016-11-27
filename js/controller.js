@@ -13,6 +13,7 @@
         ComicService,
         GiphyService,
         TrafficService,
+        TimeService,
         TimerService,
         ReminderService,
         SearchService,
@@ -454,9 +455,11 @@
                 $scope.focus = "reminders";
             });
 
-            // Check the time
-            addCommand('time_show', function (task) {
-                console.debug("It is", moment().format('h:mm:ss a'));
+            // Speak the time
+            addCommand('time_show', function() {
+              var timeFormat = config.time; // 12 or 24
+              TimeService.speakTime(timeFormat); // do the speaking
+              $scope.focus = "default"; // show the clock
             });
 
             // Control light

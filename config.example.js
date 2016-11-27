@@ -14,6 +14,7 @@ var config = {
     },
     layout: "main",
     greeting: ["Hi, sexy!", "Greetings, commander"], // An array of greetings to randomly choose from
+    time: "12", // can also be 24
 
     // Alternativly you can have greetings that appear based on the time of day
     /*
