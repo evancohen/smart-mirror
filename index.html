@@ -140,6 +140,9 @@
           <timer-circle class="timer-circle" />
         </div>
       </div>
+      <div class="qrImage-container animate-grow" ng-show="focus == 'RemoteQR'">
+        <img class="qrImage animate-grow" src={{RemoteQR_IMG}} />
+        <H2>{{RemoteQR_TXT}}</H2>
     </div>
     <div class="bottom-center">
       <!-- Command list -->
@@ -247,6 +250,7 @@
   <script src="js/services/light.js"></script>
   <script src="js/services/giphy.js"></script>
   <script src="js/services/timer.js"></script>
+  <script src="js/services/qrservice.js"></script>
   <script src="js/services/geolocation.js"></script>
   <script src="js/services/calendar.js"></script>
   <script src="js/services/traffic.js"></script>

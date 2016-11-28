@@ -21,6 +21,7 @@
         StockService,
         ScrobblerService,
         TVShowService,
+        QRService,
         $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -556,6 +557,14 @@
                 $scope.focus = "default";
             });
 
+            // QRcode service
+            addCommand('show_remoteQR',function(){
+                QRService.getRemoteQR()
+                $scope.RemoteQR_IMG = QRService.Remote_IMG;
+                $scope.RemoteQR_TXT = QRService.Remote_TXT;
+                $scope.focus = "RemoteQR"
+            });
+            
             // Function to refresh TV show data
             var refreshTVShows = function () {
                 console.log("Refreshing TVShows");

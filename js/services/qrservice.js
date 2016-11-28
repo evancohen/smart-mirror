@@ -5,14 +5,6 @@
         var service = {};
 
 
-
-/* place holder... currently i'm linking a image using googleapis chart api to generate a QR code... this needs to be changed
-        <div class="qrImage-container animate-grow ng-scope" ng-if="focus == 'RemoteQR'">
-        <img class="qrImage animate-grow" src="https://chart.googleapis.com/chart?cht=qr&amp;chs=400x400&amp;chl=http://10.20.10.142:8080">
-<p>http://10.20.10.142:8080</p>
-    </div>
-*/
-
           service.getRemoteQR = function (){
 
               const interfaces = require('os').networkInterfaces()
