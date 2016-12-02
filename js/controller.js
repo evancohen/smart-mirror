@@ -86,8 +86,8 @@
             $scope.date = new moment();
 
             // Auto wake at a specific time
-            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined' && config.autoTimer.auto_wake == moment().format('HH:mm:ss')) {
-                console.debug('Auto-wake', config.autoTimer.auto_wake);
+            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined' && config.autoTimer.autoWake == moment().format('HH:mm:ss')) {
+                console.debug('Auto-wake', config.autoTimer.autoWake);
                 $scope.focus = "default";
                 AutoSleepService.wake();
                 AutoSleepService.startAutoSleepTimer();
