@@ -1,5 +1,8 @@
   (function() {
     'use strict';
+    
+    // use say for tts
+    var say = require('say');
 
     // Gets time in 12-hour format
     function getTime(timeFormat) {
@@ -37,7 +40,6 @@
 
     function TimeService() {
         var service = {};
-        var say = require('say');
         service.speakTime = function(timeFormat) {
           say.speak(getTime(timeFormat));
           // say.speak(getTime(), 'voice_kal_diphone', 0.5); // Can change parameters to use a different voice or change the speed
