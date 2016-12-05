@@ -119,7 +119,7 @@ var config = {
     },
 	motion: {
 		pin: "GPIO26" // based on raspi-io... https://github.com/nebrius/raspi-io/
-		type: "motion" //motion is currently the only option here
+		mode: "motion" //motion is currently the only option here
 		model: "PIR" // not yet used but must have value
 	},
     lastfm: {

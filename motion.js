@@ -2,7 +2,7 @@
 
 // Load in smart mirror config
 const config = require(__dirname + "/config.js")
-if(!config || !config.motion || !config.motion.type || !config.motion.model || !config.motion.pin || !config.language){
+if(!config || !config.motion || !config.motion.mode || !config.motion.model || !config.motion.pin || !config.language){
   throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion"
 }
 
@@ -15,7 +15,7 @@ var board = new five.Board({
 
 board.on("ready",function() {
 	
-	if (config.motion.type == "motion"){
+	if (config.motion.mode == "motion"){
 	var motion = new five.Motion(config.motion.pin);
 	
 	// "calibrated" occurs once, at the beginning of a session,
