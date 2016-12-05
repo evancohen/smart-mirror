@@ -40,11 +40,13 @@
 
 	
 	ipcRenderer.on('motionstart', (event, spotted) => {
-                service.wake();
+		console.debug('motionstart detected')
+		service.wake();
 		service.stopAutoSleepTimer();
         });
 
 	ipcRenderer.on('motionend', (event, spotted) => {
+		console.debug('motionend detected')
 		service.startAutoSleepTimer();
         });
 

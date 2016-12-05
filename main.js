@@ -110,10 +110,13 @@ mtnProcess.stdout.on('data', function (data) {
   var message = data.toString()
   if (message.startsWith('!s:')) {
     mainWindow.webContents.send('motionstart', true)
+	console.log("sent: ",message.substring(3))
   } else if (message.startsWith('!e:')) {
     mainWindow.webContents.send('motionend', true)
+	console.log("sent: ",message.substring(3))
   } else if (message.startsWith('!c:')) {
     mainWindow.webContents.send('calibrated', true)
+	console.log("sent: ",message.substring(3))
   } else {
     console.error(message.substring(3))
   }
