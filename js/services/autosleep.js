@@ -1,3 +1,5 @@
+const {ipcRenderer} = require('electron');
+
 (function () {
     'use strict';
 
@@ -15,16 +17,18 @@
             }
         };
 
-        service.stopAutoSleepTimer = function () {
+	service.stopAutoSleepTimer = function () {
             console.debug('Stopping auto-sleep timer');
             $interval.cancel(autoSleepTimer);
         };
 
         service.wake = function () {
+	    service.woke = true;
             service.exec(config.autoTimer.wake_cmd, service.puts);
         };
 
         service.sleep = function () {
+	    service.woke = false;
             service.exec(config.autoTimer.sleep_cmd, service.puts);
         };
 
@@ -35,6 +39,16 @@
 
             console.debug('autosleep stdout:', stdout)
         };
+
+	
+	ipcRenderer.on('motionstart', (event, spotted) => {
+                service.wake();
+		service.stopAutoSleepTimer();
+        });
+
+	ipcRenderer.on('motionend', (event, spotted) => {
+		service.startAutoSleepTimer();
+        });
 
         return service;
     }
