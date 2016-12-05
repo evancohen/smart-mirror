@@ -99,7 +99,7 @@ kwsProcess.stdout.on('data', function (data) {
 })
 
 // Initilize the motion spotter
-var mtnProcess = spawn('node', ['./sonus.js'], {detached: false})
+var mtnProcess = spawn('sudo', ['node','./motion.js'], {detached: false})
 // Handel messages from node
 mtnProcess.stderr.on('data', function (data) {
   var message = data.toString()
