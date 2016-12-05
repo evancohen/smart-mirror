@@ -117,6 +117,11 @@ var config = {
         'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
         'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
     },
+	motion: {
+		pin: "GPIO26" // based on raspi-io... https://github.com/nebrius/raspi-io/
+		type: "motion" //motion is currently the only option here
+		model: "PIR" // not yet used but must have value
+	},
     lastfm: {
         key: "", // Your last.fm api key
         user: "", // Your last.fm username
