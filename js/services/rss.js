@@ -11,20 +11,22 @@
             service.currentFeed = 0;
             var currentTime = new moment();
 
-            if (typeof config.rss != 'undefined') {
+            if (typeof config.rss != 'undefined' && typeof config.rss.feeds != 'undefined') {
                 var promises = [];
                 angular.forEach(config.rss.feeds, function (url) {
                     promises.push($http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK'));
                 });
 
                 return $q.all(promises).then(function (response) {
-                    for (var i = 0; i < response['0'].data.query.results.rss.channel.item.length; i++) {
-                        var feedEntry = {
-                            title: response['0'].data.query.results.rss.channel.title,
-                            content: response['0'].data.query.results.rss.channel.item[i].title,
-                            lastUpdated: currentTime,
-                        };
-                        service.feed.push(feedEntry);
+                    if (response.length > 0) {
+                        for (var i = 0; i < response['0'].data.query.results.rss.channel.item.length; i++) {
+                            var feedEntry = {
+                                title: response['0'].data.query.results.rss.channel.title,
+                                content: response['0'].data.query.results.rss.channel.item[i].title,
+                                lastUpdated: currentTime,
+                            };
+                            service.feed.push(feedEntry);
+                        }
                     }
                 });
             }

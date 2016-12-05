@@ -13,10 +13,15 @@ const speech = require('@google-cloud/speech')({
   keyFilename: config.speech.keyFilename
 })
 
-var hotwords = []
-config.speech.model.forEach(function(item, index) {
-  hotwords.push({ file: item, hotword: config.speech.hotword, sensitivity: config.speech.sensitivity || '0.5'})
-}, this);
+let hotwords = []
+
+if(typeof config.speech.model == 'string'){
+  hotwords.push({ file: config.speech.model, hotword: config.speech.keyword, sensitivity:  config.speech.sensitivity || '0.5'})
+} else {
+  for(let i =0; i < config.speech.model.length; i++){
+    hotwords.push({ file: config.speech.model[i], hotword: config.speech.keyword[i], sensitivity:  config.speech.sensitivity || '0.5'})
+  }
+}
 
 const language = config.language
 const sonus = Sonus.init({ hotwords, language }, speech)

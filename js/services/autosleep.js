@@ -8,7 +8,7 @@
         service.exec = require('child_process').exec;
 
         service.startAutoSleepTimer = function () {
-            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined') {
+            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined') {
                 service.stopAutoSleepTimer();
                 autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep);
                 console.debug('Starting auto-sleep timer', config.autoTimer.autoSleep);

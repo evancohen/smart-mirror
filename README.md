@@ -1,5 +1,5 @@
 # Smart Mirror
-[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Progress](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg)] (https://waffle.io/evancohen/smart-mirror) [![Suggestions](https://img.shields.io/waffle/label/evancohen/smart-mirror/suggestion.svg?label=suggestions)]  (https://github.com/evancohen/smart-mirror/issues?q=is%3Aissue+is%3Aopen+label%3Asuggestion) [![Dependency Status](https://dependencyci.com/github/evancohen/smart-mirror/badge)](https://dependencyci.com/github/evancohen/smart-mirror)
+[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Progress](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg)] (https://waffle.io/evancohen/smart-mirror) [![Dependency Status](https://dependencyci.com/github/evancohen/smart-mirror/badge)](https://dependencyci.com/github/evancohen/smart-mirror)
 
 Check out the [smart mirror documentation](http://docs.smart-mirror.io) for more information, installation instructions, and troubleshooting.
 
@@ -17,6 +17,11 @@ For more information see the [Development and Contributing](http://docs.smart-mi
 
 #### Troubleshooting
 For known issues and trobleshooting see the documentation: [Troubleshooting](http://docs.smart-mirror.io/docs/troubleshooting.html)
+
+#### Current Feature Requests/Suggestions
+Please use feathub.com to add Feature Requests and Suggestions. We also recommend looking through the already existing requests to help in ranking the most popular and useful Features to Smart-Mirror users.
+[![Feature Requests](http://feathub.com/evancohen/smart-mirror?format=svg)](http://feathub.com/evancohen/smart-mirror)
+
 
 ### License
 MIT

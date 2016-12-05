@@ -86,8 +86,8 @@
             $scope.date = new moment();
 
             // Auto wake at a specific time
-            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined' && config.autoTimer.auto_wake == moment().format('HH:mm:ss')) {
-                console.debug('Auto-wake', config.autoTimer.auto_wake);
+            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined' && config.autoTimer.autoWake == moment().format('HH:mm:ss')) {
+                console.debug('Auto-wake', config.autoTimer.autoWake);
                 $scope.focus = "default";
                 AutoSleepService.wake();
                 AutoSleepService.startAutoSleepTimer();
@@ -433,6 +433,7 @@
                 $scope.focus = "sc";
             });
 
+<<<<<<< HEAD
             //Search for a video
             addCommand('video_search', function (query) {
                 SearchService.searchYouTube(query).then(function (results) {
@@ -448,6 +449,8 @@
                 $scope.focus = "default";
             });
 
+=======
+>>>>>>> upstream/dev
             // Set a reminder
             addCommand('reminder_insert', function (task) {
                 console.debug("I'll remind you to", task);
@@ -555,17 +558,33 @@
                 }
             });
 
+            //Search for a video
+            addCommand('video_search', function (query) {
+                SearchService.searchYouTube(query).then(function (results) {
+                    //Set cc_load_policy=1 to force captions
+                    $scope.video = 'http://www.youtube.com/embed/' + results.data.items[0].id.videoId + '?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
+                    $scope.focus = "video";
+                });
+            });
+
+            //Stop video
+            addCommand('video_stop', function () {
+                var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
+                iframe.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+                $scope.focus = "default";
+            });
+
             // Function to refresh TV show data
             var refreshTVShows = function () {
-                console.log ("Refreshing TVShows");
+                console.log("Refreshing TVShows");
                 $scope.tvshows = null;
-                TVShowService.refreshTVShows().then(function() {
-                  $scope.tvshows = TVShowService.getTVShows();
+                TVShowService.refreshTVShows().then(function () {
+                    $scope.tvshows = TVShowService.getTVShows();
                 });
             };
 
             // Register refresh of TV shows once a day
-            if (typeof config.tvshows !== 'undefined'){
+            if (typeof config.tvshows !== 'undefined') {
                 registerRefreshInterval(refreshTVShows, config.tvshows.refreshInterval);
             }
         };

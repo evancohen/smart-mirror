@@ -25,7 +25,9 @@ try {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
   } else if (typeof e.message != 'undefined') {
-    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message
+    console.log(e)
+    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
+    'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
   }
 
   console.log("Config Error: ", error)
@@ -76,7 +78,7 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
+var kwsProcess = spawn('node', ['./sonus.js'], {detached: false})
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
   var message = data.toString()
