@@ -99,7 +99,7 @@ kwsProcess.stdout.on('data', function (data) {
 })
 
 // Initilize the motion spotter
-var mtnProcess = spawn('sudo', ['node','./motion.js'], {detached: false})
+var mtnProcess = spawn('node', ['./sonus.js'], {detached: false})
 // Handel messages from node
 mtnProcess.stderr.on('data', function (data) {
   var message = data.toString()
@@ -108,12 +108,12 @@ mtnProcess.stderr.on('data', function (data) {
 
 mtnProcess.stdout.on('data', function (data) {
   var message = data.toString()
-  if (message.startsWith('!h:')) {
-    mainWindow.webContents.send('hotword', true)
-  } else if (message.startsWith('!p:')) {
-    mainWindow.webContents.send('partial-results', message.substring(4))
-  } else if (message.startsWith('!f:')) {
-    mainWindow.webContents.send('final-results', message.substring(4))
+  if (message.startsWith('!s:')) {
+    mainWindow.webContents.send('motionstart', true)
+  } else if (message.startsWith('!e:')) {
+    mainWindow.webContents.send('motionend', true)
+  } else if (message.startsWith('!c:')) {
+    mainWindow.webContents.send('calibrated', true)
   } else {
     console.error(message.substring(3))
   }
