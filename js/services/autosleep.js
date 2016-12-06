@@ -43,13 +43,17 @@
 	    if (!service.woke) {
 		service.wake();
 	    }
-		console.debug('motionstart detected');
-		service.stopAutoSleepTimer();
+	    console.debug('motion start detected');
+	    service.stopAutoSleepTimer();
         });
 
 	ipcRenderer.on('motionend', (event, spotted) => {
-		console.debug('motionend detected');
-		service.startAutoSleepTimer();
+	    console.debug('motion end detected');
+	    service.startAutoSleepTimer();
+        });
+
+	ipcRenderer.on('calibrated', (event, spotted) => {
+	    console.debug('motion.js Calibrated');
         });
 
         return service;
