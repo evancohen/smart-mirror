@@ -4,7 +4,7 @@
     function AutoSleepService($interval) {
         var service = {};
         var autoSleepTimer;
-
+	service.woke = true;
         service.exec = require('child_process').exec;
 
         service.startAutoSleepTimer = function () {
@@ -40,13 +40,15 @@
 
 	
 	ipcRenderer.on('motionstart', (event, spotted) => {
-		console.debug('motionstart detected')
+	    if (!service.woke) {
 		service.wake();
+	    }
+		console.debug('motionstart detected');
 		service.stopAutoSleepTimer();
         });
 
 	ipcRenderer.on('motionend', (event, spotted) => {
-		console.debug('motionend detected')
+		console.debug('motionend detected');
 		service.startAutoSleepTimer();
         });
 

@@ -99,28 +99,29 @@ kwsProcess.stdout.on('data', function (data) {
 })
 
 // Initilize the motion spotter
-var mtnProcess = spawn('node', ['./sonus.js'], {detached: false})
+var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
 // Handel messages from node
 mtnProcess.stderr.on('data', function (data) {
   var message = data.toString()
   console.log("ERROR", message.substring(4))
 })
 
-console.log(mtnProcess.pid);
-
 mtnProcess.stdout.on('data', function (data) {
   var message = data.toString()
   if (message.startsWith('!s:')) {
-    mainWindow.webContents.send('motionstart', true)
-	console.log(message.substring(3))
+    console.log(message.substring(3));
+    console.error("TEST:",message.substring(3));
+    mainWindow.webContents.send('motionstart', true);
   } else if (message.startsWith('!e:')) {
-    mainWindow.webContents.send('motionend', true)
-	console.log(message.substring(3))
+    console.log(message.substring(3));
+    console.error("TEST:",message.substring(3));
+    mainWindow.webContents.send('motionend', true);
   } else if (message.startsWith('!c:')) {
-    mainWindow.webContents.send('calibrated', true)
-	console.log(message.substring(3))
+    console.log(message.substring(3));
+    console.error("TEST:",message.substring(3));
+    mainWindow.webContents.send('calibrated', true);
   } else {
-    console.error(message)
+    console.error(message);
   }
 })
 

@@ -9,7 +9,7 @@
     "microphone-debug": "electron scripts/microphone-debug/main.js",
     "train-model": "electron scripts/train-model.js",
     "sonus": "node sonus.js",
-	"motion": "node motion.js",
+    "motion": "sudo node motion.js",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {

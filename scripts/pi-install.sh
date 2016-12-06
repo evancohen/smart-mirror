@@ -114,13 +114,15 @@ fi
 printf "%s\n${blu}Cloning smart-mirror Git Repo${end}\n"
 if git clone https://github.com/evancohen/smart-mirror.git; then
     printf "%s${grn}smart-mirror code is now downloaded${end}\n"
+    cd smart-mirror/scripts
+    find . -name "*.sh" -exec chmod +x {} +
 else
     printf "%s${red}Unable to clone smart-mirror :( ${end}\n"
     exit;
 fi
 
 # Generate config and install dependencies
-cd smart-mirror  || exit
+cd "$HOME/smart-mirror"  || exit
 printf "%s\n${blu}generating config template...${end}\n"
 cp config.example.js config.js
 
