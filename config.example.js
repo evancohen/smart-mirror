@@ -118,9 +118,8 @@ var config = {
         'sleep_cmd': 'sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1', // The binary and arguments used on your system to sleep the screen
     },
     motion: {
-	pin: "GPIO26", // based on raspi-io... https://github.com/nebrius/raspi-io/
-	mode: "motion", //motion is currently the only option here
-	model: "PIR" // not yet used but must have value
+        enable: true,
+	    pin: "GPIO26", // based on raspi-io... https://github.com/nebrius/raspi-io/
     },
     lastfm: {
         key: "", // Your last.fm api key
