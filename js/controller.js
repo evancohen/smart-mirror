@@ -345,13 +345,13 @@
             addCommand('wake_up', defaultView);
 
             // Turn off HDMI output
-            addCommand('screen off', function () {
+            addCommand('screen_off', function () {
                 console.debug('turning screen off');
                 AutoSleepService.sleep();
             });
 
             // Turn on HDMI output
-            addCommand('screen on', function () {
+            addCommand('screen_on', function () {
                 console.debug('turning screen on');
                 AutoSleepService.wake();
                 $scope.focus = "default"
