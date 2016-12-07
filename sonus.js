@@ -3,7 +3,7 @@
 // Load in smart mirror config
 const config = require(__dirname + "/config.js")
 if(!config || !config.speech || !config.speech.keyFilename || !config.speech.model || !config.language){
-  throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech"
+  throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech";
 }
 
 // Configure Sonus

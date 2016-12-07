@@ -3,7 +3,7 @@
 // Load in smart mirror config
 const config = require(__dirname + "/config.js")
 if(!config || !config.motion || !config.motion.enabled || !config.motion.pin || !config.language){
-  throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion"
+  throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion";
 }
 if (config.motion.enabled) {
 	// Configure johnny-five
