@@ -47,7 +47,7 @@
         "title" : "Comandos Disponiveis",
         "list": {
             "text": "O que posso dizer?",
-            "voice": "O que posso dizer",
+            "voice": "(O) que posso dizer",
             "description": "Mostra uma lista de comandos de voz disponiveis."
         },
         "home": {
@@ -66,9 +66,9 @@
             "description": "Acordar."
         },
         "debug": {
-            "text": "Mostrar debug",
-            "voice": "Mostrar debug",
-            "description": "Mostrar informações de debug."
+            "text": "Mostrar detalhes",
+            "voice": "Mostrar detalhes",
+            "description": "Mostrar detalhes de debug."
         },
         "map_show": {
             "text": "Mostrar mapa",
@@ -101,9 +101,9 @@
             "description": "Retorna zoom."
         },
         "video_search": {
-            "text": "Mostrar ________",
-            "voice": "Mostrar (um video)(de)(sobre) *query",
-            "description": "Mostrar um video sobre o item requisitado."
+            "text": "Assistir ________",
+            "voice": "Assistir (um video)(de)(sobre) *query",
+            "description": "Assistir um video sobre o item requisitado."
         },
         "video_stop": {
             "text": "Parar video",
@@ -116,8 +116,8 @@
             "description": "Mostra uma imagem animada."
         },
         "image_comic": {
-            "text": "Mostrar xkcd",
-            "voice": "Mostrar xkcd",
+            "text": "Mostrar quadrinho xkcd",
+            "voice": "Mostrar (quadrinho) xkcd",
             "description": "Mostra o mais recente quadrinho do xkcd."
         },
         "image_comic_dilbert": {
@@ -142,7 +142,7 @@
         },
         "time_show": {
             "text": "Que horas são",
-            "voice": "que horas são",
+            "voice": "que horas sao",
             "description": "Mostra a hora atual."
         },
         "timer_start": {
@@ -186,9 +186,9 @@
             "description": "Tocar novamente a música no SoundCloud."
         },
         "light_action": {
-            "text": "Turn (state) light(s) (action)",
-            "voice": "(turn) (the) :state (the) light(s) *action",
-            "description": "Control color and brightness of lights."
+            "text": "Alterar (ligar/desligar) luz(es) (action)",
+            "voice": "(alterar) :state (a) (as) luz(es) *action",
+            "description": "Controlar cor e brilho das luzes Hue."
         }
     }
 }
