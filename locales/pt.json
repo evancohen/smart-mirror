@@ -1,0 +1,194 @@
+{
+    "home" : {
+        "commands" : "Diga \"O que posso dizer?\" para ver a lista de comandos..."
+    },
+    "traffic" : {
+        "time_to" : "Tempo para {{name}}: "
+    },
+    "reminders": {
+        "empty": "Lista vazia."
+    },
+    "timer": {
+      "one": "Um",
+      "minute": "Minuto(s)?",
+      "second": "Segundo(s)?"
+    },
+    "lights": {
+        "colors": {
+            "red": "vermemlho",
+            "dark_green": "verde escuro",
+            "green": "verde",
+            "blue": "azul",
+            "yellow": "amarelo",
+            "orange":  "laranja",
+            "pink": "rosa",
+            "purple": "roxo",
+            "white": "branco",
+            "movie": "filme",
+            "colorloop": "cores",
+            "stop": "parar"
+        },
+        "intensity": {
+            "increase": "aumentar",
+            "decrease": "diminuir",
+            "max": "max",
+            "half": "metade",
+            "quarter": "quarto",
+            "threequarter": ["tres-quartos", "tres-quartos"]
+        },
+        "action": {
+            "on": "ligar",
+            "off": "desligar",
+            "nightmode": "modo noturno",
+            "reset": "resetar"
+        }
+    },
+    "commands": {
+        "title" : "Comandos Disponiveis",
+        "list": {
+            "text": "O que posso dizer?",
+            "voice": "(O) que posso dizer",
+            "description": "Mostra uma lista de comandos de voz disponiveis."
+        },
+        "home": {
+            "text": "Voltar",
+            "voice": "Voltar",
+            "description": "Voltar para a tela inicial."
+        },
+        "sleep": {
+            "text": "Hibernar",
+            "voice": "Hibernar",
+            "description": "Hibernar."
+        },
+        "wake_up": {
+            "text": "Acordar",
+            "voice": "Acordar",
+            "description": "Acordar."
+        },
+        "debug": {
+            "text": "Mostrar detalhes",
+            "voice": "Mostrar detalhes",
+            "description": "Mostrar detalhes de debug."
+        },
+        "map_show": {
+            "text": "Mostrar mapa",
+            "voice": "Mostrar mapa",
+            "description": "Mostrar mapa de sua cidade."
+        },
+        "map_location": {
+            "text": "Mostrar mapa de ________",
+            "voice": "Mostrar (o) mapa de *location",
+            "description": "Mostra o mapa de um local."
+        },
+        "map_zoom_in": {
+            "text": "Ampliar",
+            "voice": "Ampliar (mapa)",
+            "description": "Amplia o mapa atual."
+        },
+        "map_zoom_out": {
+            "text": "Retornar",
+            "voice": "Retornar (mapa)",
+            "description": "Retorna o mapa atual."
+        },
+        "map_zoom_point": {
+            "text": "Ampliar para ________",
+            "voice": "Ampliar (mapa) (para) *value",
+            "description": "Amplia mapa para um ponto indicado."
+        },
+        "map_zoom_reset": {
+            "text": "Retornar zoom",
+            "voice": "Retornar zoom (mapa)",
+            "description": "Retorna zoom."
+        },
+        "video_search": {
+            "text": "Assistir ________",
+            "voice": "Assistir (um video)(de)(sobre) *query",
+            "description": "Assistir um video sobre o item requisitado."
+        },
+        "video_stop": {
+            "text": "Parar video",
+            "voice": "Parar (o) video",
+            "description": "Para o conteúdo de video."
+        },
+        "image_giphy": {
+            "text": "Animação ________",
+            "voice": "Animacao de *img",
+            "description": "Mostra uma imagem animada."
+        },
+        "image_comic": {
+            "text": "Mostrar quadrinho xkcd",
+            "voice": "Mostrar (quadrinho) xkcd",
+            "description": "Mostra o mais recente quadrinho do xkcd."
+        },
+        "image_comic_dilbert": {
+            "text": "Mostrar quadrinho Dilbert",
+            "voice": "Mostrar (quadrinho) (do) Dilbert",
+            "description": "Mostra o mais recente quadrinho do Dilbert."
+        },
+        "reminder_insert": {
+            "text": "Lembrar de ________",
+            "voice": "Lembrar (de) *task",
+            "description": "Adiciona lembrete na lista."
+        },
+        "reminder_clear": {
+            "text": "Limpar lembretes",
+            "voice": "Limpar lembretes",
+            "description": "Limpar lista de lembretes."
+        },
+        "reminder_show": {
+            "text": "Mostrar os lembretes",
+            "voice": "(Mostrar) (os) (meus) lembretes",
+            "description": "Mostrar a lista de lembretes."
+        },
+        "time_show": {
+            "text": "Que horas são",
+            "voice": "que horas sao",
+            "description": "Mostra a hora atual."
+        },
+        "timer_start": {
+            "text": "Alarme para ________",
+            "voice": "(ativar) alarme (para) *duration",
+            "description": "Ativa um alarme."
+        },
+        "timer_show": {
+            "text": "Mostrar alarme",
+            "voice": "mostrar (o) alarme",
+            "description": "Mostra o alarme."
+        },
+        "timer_stop": {
+            "text": "Parar alarme",
+            "voice": "parar (o) alarme",
+            "description": "Para o alarme."
+        },
+        "timer_resume": {
+            "text": "Retornar alarme",
+            "voice": "retornar (o) alarme",
+            "description": "Retorna o alarme."
+        },
+        "sc_play": {
+            "text": "SoundCloud tocar ________",
+            "voice": "SoundCloud tocar *query",
+            "description": "Toca uma música no SoundCloud."
+        },
+        "sc_pause": {
+            "text": "SoundCloud pausar/parar",
+            "voice": "SoundCloud (pausar)(post)(parar)(stock)",
+            "description": "Parar/pausar música do SoundCoud."
+        },
+        "sc_resume": {
+            "text": "SoundCloud tocar",
+            "voice": "SoundCloud (tocar)(retornar)",
+            "description": "Retorna a música."
+        },
+        "sc_replay": {
+            "text": "SoundCloud tocar novamente",
+            "voice": "SoundCloud tocar novamente",
+            "description": "Tocar novamente a música no SoundCloud."
+        },
+        "light_action": {
+            "text": "Alterar (ligar/desligar) luz(es) (action)",
+            "voice": "(alterar) :state (a) (as) luz(es) *action",
+            "description": "Controlar cor e brilho das luzes Hue."
+        }
+    }
+}
