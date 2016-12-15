@@ -98,6 +98,30 @@ kwsProcess.stdout.on('data', function (data) {
   }
 })
 
+// Initilize the motion spotter
+var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
+// Handel messages from node
+mtnProcess.stderr.on('data', function (data) {
+  var message = data.toString()
+  console.log("ERROR", message.substring(4))
+})
+
+mtnProcess.stdout.on('data', function (data) {
+  var message = data.toString()
+  if (message.startsWith('!s:')) {
+    console.log(message.substring(3));
+    mainWindow.webContents.send('motionstart', true);
+  } else if (message.startsWith('!e:')) {
+    console.log(message.substring(3));
+    mainWindow.webContents.send('motionend', true);
+  } else if (message.startsWith('!c:')) {
+    console.log(message.substring(3));
+    mainWindow.webContents.send('calibrated', true);
+  } else {
+    console.error(message);
+  }
+})
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -111,4 +135,5 @@ app.on('window-all-closed', function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
   kwsProcess.kill()
+  mtnProcess.kill()
 })
