@@ -20,10 +20,7 @@
         RssService,
         StockService,
         ScrobblerService,
-<<<<<<< HEAD
         TVShowService,
-=======
->>>>>>> formatting JS
         $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
         // Local Scope Vars
@@ -348,21 +345,13 @@
             addCommand('wake_up', defaultView);
 
             // Turn off HDMI output
-<<<<<<< HEAD
             addCommand('screen_off', function () {
-=======
-            addCommand('screen off', function () {
->>>>>>> formatting JS
                 console.debug('turning screen off');
                 AutoSleepService.sleep();
             });
 
             // Turn on HDMI output
-<<<<<<< HEAD
             addCommand('screen_on', function () {
-=======
-            addCommand('screen on', function () {
->>>>>>> formatting JS
                 console.debug('turning screen on');
                 AutoSleepService.wake();
                 $scope.focus = "default"
@@ -444,8 +433,6 @@
                 $scope.focus = "sc";
             });
 
-<<<<<<< HEAD
-=======
             //Search for a video
             addCommand('video_search', function (query) {
                 SearchService.searchYouTube(query).then(function (results) {
@@ -461,7 +448,6 @@
                 $scope.focus = "default";
             });
 
->>>>>>> formatting JS
             // Set a reminder
             addCommand('reminder_insert', function (task) {
                 console.debug("I'll remind you to", task);
