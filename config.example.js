@@ -119,7 +119,7 @@ var config = {
     },
     motion: {
         enable: true,
-	    pin: "GPIO26", // based on raspi-io... https://github.com/nebrius/raspi-io/
+	pin: "GPIO26", // based on raspi-io... https://github.com/nebrius/raspi-io/
     },
     lastfm: {
         key: "", // Your last.fm api key
