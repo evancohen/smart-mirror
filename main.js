@@ -124,6 +124,7 @@ if(!motionAutoDisabled){
       } else if (message.startsWith('!E:')) {
         console.log(message.substring(3));
         mainWindow.webContents.send('Error', message.substring(3));
+        mtn.mtnProcess.kill();
       }  else {
         console.error(message);
       }
@@ -145,6 +146,6 @@ app.on('will-quit', function () {
   kwsProcess.kill()
   mtnProcess.kill()
   // while cleaning up we should turn the screen back on in the event the program exits before the screen is woken up
-  var screenOn = require('child_process').exec;
-  screenOn(config.autoTimer.wake_cmd);
+  var screenOn= spawn(config.autoTimer.wake_cmd,{detached:false});
+  screenOn.kill()
 })

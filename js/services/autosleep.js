@@ -65,7 +65,7 @@
         });
     
     ipcRenderer.on('Error', (event, spotted) => {
-	    console.debug("Motion",spotted);
+	    console.error("Motion",spotted);
         });
 
         return service;
