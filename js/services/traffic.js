@@ -1,4 +1,4 @@
-gi(function () {
+(function () {
     'use strict';
 
     function TrafficService($http, $q, TimeboxService) {
