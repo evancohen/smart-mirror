@@ -15,6 +15,9 @@ powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv[2] == "dev"
+const fs = require('fs')
+
+
 
 // Load the smart mirror config
 let config

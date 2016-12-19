@@ -1,0 +1,412 @@
+{
+"schema": {
+    "general":{
+        "type":"object",
+        "title":"General Settings",
+        "properties":{
+            "language" : {  
+                "default":"en-US",
+                "type":"string",
+                "title":"Language",
+                "required":true
+            },
+            "layout": {  
+                "default":"main",
+                "type":"string",
+                "title":"Layout",
+                "required":true
+            },
+            "greeting" : {
+                "type":"object",
+                "title":"Greetings",
+                    "properties":{
+                        "night": {
+                            "type":"tabarray",
+                            "title":"Night Greeting",
+                            "required":true,
+                            "minitems":1,
+                            "items":{
+                                "type":"string",
+                                "default":"Bed?"
+                            }
+                        },
+                        "morning": {
+                            "type":"tabarray",
+                            "title":"Morning Greeting",
+                            "required":true,
+                            "minitems":1,
+                            "items":{
+                                "type":"string",
+                                "default":"Good Morning"
+                            }
+                        },
+                        "midday": {
+                            "type":"tabarray",
+                            "title":"Midday Greeting",
+                            "required":true,
+                            "minitems":1,
+                            "items":{
+                                "type":"string",
+                                "default":"Hey!"
+                            }
+                        },
+                        "evening":  {
+                            "type":"tabarray",
+                            "title":"Evening Greeting",
+                            "required":true,
+                            "minitems":1,
+                            "items":{
+                                "type":"string",
+                                "default":"Good evening"
+                            }
+                        }
+                    }
+            }
+        }
+    },
+    "remote" : {
+        "type":"object",
+        "title":"Remote Server Settings",
+        "properties":{
+            "enabled": {
+                "default": true,
+                "type":"boolean",
+                "title":"Remote Server Enabled"
+                },
+            "port" : {
+                "default":8080,
+                "type":"integer",
+                "title":"Remote Server Port",
+                "required":true
+                }
+        }
+    },
+    "speech":{
+        "type":"object",
+        "title":"Speech Settings",
+        "properties":{
+            "keyFilename":{
+                "type":"string",
+                "title":"Google Cloud Key Filename (should start with './')",
+                "required":true,
+                "default":"./keyfile.json"
+            },
+            "hotwords":{
+                "type":"tabarray",
+                "title": "Keyword Spotter Hotwords",
+                "required":true,
+                "items":{
+                    "title":"keyword {{idx}}",
+                    "type":"object",
+                    "properties":{
+                        "keyword":{
+                            "type":"string",
+                            "Title":"Keyword Name"
+                        },
+                        "model":{
+                            "type":"string",
+                            "title":"Model Filename"
+                        }
+                    }
+                }
+            },
+            "sensitivity":{
+                "type":"string",
+                "title":"Microphone Sensitivity",
+                "default":"0.5",
+                "required":true
+            },
+            "continuous":{
+                "type":"boolean",
+                "title":"Continuous Enabled",
+                "default":"false"
+            }
+        }
+    },
+    "geoPosition":{
+        "type":"object",
+        "title":"Geo-Position (used if not accurately being detected)",
+        "properties":{
+            "latitude":{
+                "type":"string",
+                "title":"latitude"              
+            },
+            "longitude":{
+                "type":"string",
+                "title":"longitude"   
+            }
+        }
+    },
+    "forecast":{
+        "type":"object",
+        "title":"<a href='http://Forecast.io'>Forecast.io API Settings</a>",
+        "properties":{
+            "key":{
+                "type":"string",
+                "title":"API Key"
+            },
+            "units":{
+                "type":"string",
+                "title":"Units",
+                "description": "(see forecast.io documentation if you're getting the wrong units)",
+                "default":"auto"
+            },
+            "refreshInterval":{
+                "type":"integer",
+                "title":"Refresh Interval (minutes)",
+                "default":2
+            }
+        }
+    },
+    "light":{
+        "type":"object",
+        "title":"Lights Settings",
+        "properties":{
+            "settings":{
+                "type":"object",
+                "properties":{
+                    "hueIp":{
+                      "type":"string",
+                      "title":"Hue Light IP Address"
+                    },
+                    "hueUsername":{
+                      "type":"string",
+                      "title":"Hue Light Username"
+                    }
+                }
+            },
+            "setup":{
+                "type":"tabarray",
+                "title":"Setup",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "name":{
+                            "type":"string",
+                            "title":"name"
+                        },
+                        "targets":{
+                            "type":"tabarray",
+                            "title":"targets",
+                            "items":{
+                                "type":"object",
+                                "properties":{
+                                      "lightType":{
+                                          "type":"string",
+                                          "title":"type",
+                                          "enum":["hyperion","hue"]
+                                      },
+                                      "ip":{
+                                          "type":"string",
+                                          "title":"ip"
+                                      },
+                                      "id":{
+                                          "type":"integer",
+                                          "title":"id"
+                                      },
+                                      "port":{
+                                          "type":"string",
+                                          "title":"port"
+                                      }
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+            }  
+        }
+    },
+    "calendar":{
+        "type":"object",
+        "title":"Calendar Settings",
+        "properties":{
+            "icals":{
+                "type":"tabarray",
+                "title":"iCal URL",
+                "items":{
+                    "type":"string"
+                }
+            },
+            "maxResults":{
+                "type":"integer",
+                "title":"Max Number of Events for all iCals",
+                "default":"9"
+            },
+            "maxDays":{
+                "type":"integer",
+                "title":"Max Number of Days to display",
+                "default":"9"   
+            },
+            "showCalendarNames":{
+                "type":"boolean",
+                "title":"Check to display Calendar Names",
+                "default":"false"
+            }
+        }
+    },
+    "giphy":{
+        "type":"object",
+        "properties":{
+            "key":{
+              "type":"string",
+              "title":"Giphy API Key",
+              "default":"dc6zaTOxFJmzC"
+            }
+        }
+    },
+    "youtube":{
+        "type":"object",
+        "properties":{
+            "key":{
+              "type":"string",
+              "title":"YouTube API Key"          }
+        }
+    },
+    "soundcloud":{
+        "type":"object",
+        "properties":{
+            "key":{
+              "type":"string",
+              "title":"SoundCloud API Key"
+            }
+      }
+    },
+    "traffic":{
+      "type":"object",
+      "title":"Traffic Settings",
+      "properties":{
+          "key":{
+            "type":"string",
+            "title":"Bing Traffic API Key"
+          },
+          "refreshInterval":{
+            "type":"string",
+            "title":"Refresh Traffic Interval (minutes)"
+          },
+          "trips":{
+              "type":"tabarray",
+              "title":"Trips",
+              "items":{
+                  "type":"object",
+                  "properties":{
+                      "mode":{
+                          "type":"string",
+                          "title":"Mode",
+                          "enum":["Driving","Transit","Walking"],
+                          "default":"Driving"
+                      },
+                      "origin":{
+                          "type":"string",
+                          "title":"Starting Location"
+                      },
+                      "destination":{
+                          "type":"string",
+                          "title":"Destination Location"
+                      },
+                      "name":{
+                          "type":"string",
+                          "title":"Trip Name"
+                      },
+                      "startTime":{
+                          "type":"string",
+                          "title":"Time to start displaying on Smart Mirror"
+                      },
+                      "endTime":{
+                          "type":"string",
+                          "title":"Time to start displaying on Smart Mirror"
+                      }
+                  }
+              }
+          }
+        }
+    },
+    "rss":{
+        "type":"object",
+        "title":"RSS Settings",
+        "properties":{
+            "feeds":{
+                "type":"tabarray",
+                "title":"RSS Feeds URL",
+                "items":{
+                    "type":"string"
+                }
+            },
+            "refreshInterval":{
+                "type":"integer",
+                "title":"Refresh Interval for RSS Feeds (minutes)",
+                "default":"9"
+            }
+        }
+    },
+    "stock":{
+        "type":"object",
+        "title":"Stock Settings",
+        "properties":{
+            "names":{
+                "type":"tabarray",
+                "title":"Stock Symbols",
+                "items":{
+                    "type":"string"
+                }
+            }
+        }
+    },
+    "autoTimer":{
+        "type":"object",
+        "title":"AutoTimer Settings",
+        "properties":{
+            "autoSleep":{
+                "type":"string",
+                "title":"AutoSleep Wait Time (minutes)"
+            },
+            "autoWake":{
+                "type":"string",
+                "title":"Wake up time (24 hr format)"
+            },
+            "wakeCmd":{
+                "type":"string",
+                "title":"Command used to wake up Smart Mirror"
+            },
+            "sleepCmd":{
+                "type":"string",
+                "title":"Command used put Smart Mirror to sleep"
+            }
+        }
+    },
+    "motion":{
+        "type":"object",
+        "title":"Motion Settings",
+        "properties":{
+            "enabled":{
+                "type":"boolean",
+                "title":"Check to Enable Motion Detection"
+            },
+            "pin":{
+                "type":"string",
+                "title":"PIN the for output on PIR module.",
+                "description":"based on raspi-io... https://github.com/nebrius/raspi-io/"
+            }
+        }
+    },
+    "lastfm":{
+        "type":"object",
+        "title":"last.FM Settings",
+        "properties":{
+            "key":{
+                "type":"string",
+                "title":"last.fm API key"
+            },
+            "user":{
+                "type":"string",
+                "title":"last.fm User Name"
+            },
+            "refreshInterval":{
+                "type":"number",
+                "title":"Refresh Interval for last.fm"
+            }
+        }
+    }
+    
+}
+}

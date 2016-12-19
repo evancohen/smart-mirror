@@ -12,6 +12,74 @@
 
     <title>Smart Mirror Remote</title>
 
+
+    <style>
+      @import url("../deps/opt/bootstrap.css");
+      @import url("../deps/opt/spectrum.css");
+
+      h2 { font-weight: 200; }
+      .navbar-inner {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+      }
+      .row-fluid { margin: 0.5em; }
+      .tagline {
+        padding: 10px;
+        font-weight: 200;
+        margin-top: -1em;
+      }
+      .tagline p { font-size: 16px; }
+
+      .navbar .factory a {
+        display: block;
+        padding: 10px 20px 10px;
+        background: url(http://factory.joshfire.com/css/images/topbar-beta-logo.png) 22px -3px no-repeat;
+        text-indent: -9999px;
+        width: 178px;
+      }
+
+      .footer {
+        margin-top: 40px;
+        padding: 10px 0.5em;
+        border-top: 1px solid #E5E5E5;
+      }
+      .footer p { margin-bottom: 0; }
+
+      #form select { width: auto; }
+      #form .add-on {
+        border: none;
+        background-color: inherit;
+      }
+
+      .expandable > legend:before {
+        content: '\25B8';
+        padding-right: 5px;
+      }
+      .expanded > legend:before {
+        content: '\25BE';
+      }
+
+      ._jsonform-array-buttons {
+        margin-left: 25px;
+      }
+
+      .jsonform-required > label:after {
+        content: ' *';
+        color: red;
+      }
+
+      form.jsonform-hasrequired:after {
+        content: '* Required field';
+        display: block;
+        color: red;
+        padding-top: 1em;
+      }
+    </style>
+
+
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
@@ -61,22 +129,12 @@
             <h1>Sticky footer with fixed navbar</h1>
         </div>-->
         <div class="row">
-            <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Speak!</button></div>
+            <div id="result" class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1"></div>
         </div>
         <div class="row">
-            <div class="lead col-md-6 col-md-offset-3">
-                <p class="lead">Press the button above to begin issuing a voice command to your <code>smart mirror</code>.</p>
-                <p>This won't effect your usage quota :)</p>
+            <div class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
+               <p class="alert" id="out"></p>
             </div>
-        </div>
-        <div class="row">
-            <form class="lead col-md-6 col-md-offset-3">
-                <div class="checkbox">
-                    <label><input id="devtools" type="checkbox"> Toggle Devtools</label>
-                </div>
-                <button id="kiosk" class="btn btn-default">Toggle Kiosk Mode</button>
-                <button id="reload" class="btn btn-warning">Reload</button>
-            </form>
         </div>
     </div>
 
@@ -96,7 +154,24 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/remote-client.js"></script>
+
+    <script src="../deps/underscore.js"></script>
+    <script src="../deps/opt/jsv.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.js"></script>
+    <script src="../deps/opt/ace/ace.js"></script>
+    <script src="../deps/opt/ace/mode-json.js"></script>
+    <script src="../deps/opt/ace/mode-html.js"></script>
+    <script src="../deps/opt/ace/mode-css.js"></script>
+    <script src="../deps/opt/ace/mode-javascript.js"></script>
+    <script src="../deps/opt/ace/mode-less.js"></script>
+    <script src="../deps/opt/ace/mode-markdown.js"></script>
+    <script src="https://assets.transloadit.com/js/jquery.transloadit2-latest.js"></script>
+
+    <script src="../lib/jsonform.js"></script>
+
+    <script src="/config-client.js"></script>
 
 </body>
 
