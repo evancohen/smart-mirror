@@ -3,6 +3,12 @@ var config = {
     // Lenguage for the mirror
     language: "en-US",
 
+    // Enable remote config app
+    remote : {
+        enabled: true,
+        port : 8080,
+    },
+
     // Keyword Spotting (Hotword Detection)
     speech: {
         projectId: 'streaming-speech-sample',

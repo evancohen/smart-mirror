@@ -10,8 +10,8 @@
         service.startAutoSleepTimer = function () {
             if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined') {
                 service.stopAutoSleepTimer();
-                autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep);
-                console.debug('Starting auto-sleep timer', config.autoTimer.autoSleep);
+                autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep*60000);
+                console.debug('Starting auto-sleep timer', config.autoTimer.autoSleep*60000);
             }
         };
 

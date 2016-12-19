@@ -145,10 +145,10 @@
         function updateLights(setting) {
             var index = setting['location'];
             for (var i = 0; i < config.light.setup[index].targets.length; i++) {
-                if (config.light.setup[index].targets[i].type == "hyperion") {
+                if (config.light.setup[index].targets[i].lightType == "hyperion") {
                     updateHyperion(i, index, setting);
                 }
-                else if (config.light.setup[index].targets[i].type == "hue") {
+                else if (config.light.setup[index].targets[i].lightType == "hue") {
                     updateHue(i, index, setting);
                 }
             }

@@ -3,6 +3,8 @@
 const electron = require('electron')
 // Child Process for keyword spotter
 const {spawn} = require('child_process')
+// Smart mirror remote
+const remote = require('./remote.js')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -12,14 +14,17 @@ const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
-const DevelopmentMode = process.argv[2] == "dev";
+const DevelopmentMode = process.argv[2] == "dev"
+const fs = require('fs')
+
+
 
 // Load the smart mirror config
-var config;
+let config
 try {
-  config = require(__dirname + "/config.js");
+  config = require(__dirname + "/config.js")
 } catch (e) {
-  var error = "Unknown Error"
+  let error = "Unknown Error"
 
   if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
@@ -41,17 +46,17 @@ let mainWindow
 function createWindow() {
 
   // Get the displays and render the mirror on a secondary screen if it exists
-  var atomScreen = electron.screen;
-  var displays = atomScreen.getAllDisplays();
-  var externalDisplay = null;
+  var atomScreen = electron.screen
+  var displays = atomScreen.getAllDisplays()
+  var externalDisplay = null
   for (var i in displays) {
     if (displays[i].bounds.x > 0 || displays[i].bounds.y > 0) {
-      externalDisplay = displays[i];
-      break;
+      externalDisplay = displays[i]
+      break
     }
   }
 
-  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true };
+  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true }
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
@@ -65,7 +70,7 @@ function createWindow() {
 
   // Open the DevTools if run with "npm start dev"
   if (DevelopmentMode) {
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools()
   }
 
   // Emitted when the window is closed.
@@ -78,7 +83,7 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('node', ['./sonus.js'], {detached: false})
+var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
   var message = data.toString()
@@ -121,6 +126,55 @@ mtnProcess.stdout.on('data', function (data) {
     console.error(message);
   }
 })
+
+if (config.remote && config.remote.enabled) {
+  remote.start()
+
+  // Deturmine the local IP address
+  const interfaces = require('os').networkInterfaces()
+  let addresses = []
+  for (let k in interfaces) {
+    for (let k2 in interfaces[k]) {
+      let address = interfaces[k][k2]
+      if (address.family === 'IPv4' && !address.internal) {
+        addresses.push(address.address)
+      }
+    }
+  }
+  console.log('Remote listening on http://%s:%d', addresses[0], config.remote.port)
+  
+  remote.on('command', function (command) {
+    mainWindow.webContents.send('final-results', command)
+  })
+
+  remote.on('connected', function () {
+    mainWindow.webContents.send('connected')
+  })
+
+  remote.on('disconnected', function () {
+    mainWindow.webContents.send('disconnected')
+  })
+
+  remote.on('devtools', function (open) {
+    if (open) {
+      mainWindow.webContents.openDevTools()
+    } else {
+      mainWindow.webContents.closeDevTools()
+    }
+  })
+
+  remote.on('kiosk', function () {
+    if(mainWindow.isKiosk()){
+      mainWindow.setKiosk(false)
+    } else {
+      mainWindow.setKiosk(true)
+    }
+  })
+
+  remote.on('reload', function () {
+    mainWindow.reload()
+  })
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

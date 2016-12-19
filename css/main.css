@@ -490,6 +490,11 @@ ul.calendar {
     max-width: 100%;
 }
 
+.qrImage {
+    -webkit-filter: invert(100%);
+    max-width: 100%;
+}
+
 .news {
     height: 75px; 
     margin-bottom: 5px;

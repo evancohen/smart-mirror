@@ -15,49 +15,10 @@
     }
   </script>
 
-  <!-- bower:js -->
-  <script src="bower_components/moment/min/moment-with-locales.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
-  <script src="bower_components/angular-translate/angular-translate.js"></script>
-  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-  <script src="bower_components/rrule/lib/rrule.js"></script>
-  <!-- endbower -->
-
-  <script src="js/inc/skycons.js"></script>
-  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
-
-  <!-- App -->
-  <script src="config.js"></script>
-  <script src="js/app.js"></script>
-
-  <script src="js/services/timebox.js"></script>
-  <script src="js/services/soundcloud.js"></script>
-  <script src="js/services/search.js"></script>
-  <script src="js/services/speech.js"></script>
-  <script src="js/services/weather.js"></script>
-  <script src="js/services/comic.js"></script>
-  <script src="js/services/map.js"></script>
-  <script src="js/services/light.js"></script>
-  <script src="js/services/giphy.js"></script>
-  <script src="js/services/timer.js"></script>
-  <script src="js/services/geolocation.js"></script>
-  <script src="js/services/calendar.js"></script>
-  <script src="js/services/traffic.js"></script>
-  <script src="js/services/fitbit.js"></script>
-  <script src="js/services/reminder.js"></script>
-  <script src="js/services/rss.js"></script>
-  <script src="js/services/tvshows.js"></script>
-  <script src="js/services/autosleep.js"></script>
-  <script src="js/services/stock.js"></script>
-  <script src="js/services/scrobbler.js"></script>
-  <script src="js/controller.js"></script>
-
   <!-- Styles and Resources -->
   <link rel="shortcut icon" href="favicon.ico" />
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" ng-href="css/{{ layoutName }}.css" />
+  <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/weather-icons.css">
   <!-- bower:css -->
   <!-- endbower -->
@@ -131,6 +92,9 @@
           <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
           <span fade><span style="font-weight: bold" ng-bind="show.data.episode.show.title"></span> – <span ng-bind="show.data.episode.release_date"></span></span>
         </div>
+        <img class="sc" ng-src="{{scThumb}}" />
+        <img class="scWaveform" ng-src="{{scWaveform}}" />
+        <h2 class="sc" ng-bind="scTrack"></h2>
       </div>
     </div>
   </div>
@@ -176,6 +140,9 @@
           <timer-circle class="timer-circle" />
         </div>
       </div>
+      <div class="qrImage-container animate-grow" ng-show="focus == 'RemoteQR'">
+        <img class="qrImage animate-grow" src={{RemoteQR_IMG}} />
+        <H2>{{RemoteQR_TXT}}</H2>
     </div>
     <div class="bottom-center">
       <!-- Command list -->
@@ -251,6 +218,50 @@
   </div>
   <!-- Sleep cover -->
   <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
+
+  <!-- Smart Mirror JS 
+  ==========================================================================
+  The good stuff. -->
+
+  <!-- bower:js -->
+  <script src="bower_components/moment/min/moment-with-locales.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/rrule/lib/rrule.js"></script>
+  <!-- endbower -->
+
+  <script src="js/inc/skycons.js"></script>
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+
+  <!-- App -->
+  <script src="config.js"></script>
+  <script src="js/app.js"></script>
+
+  <script src="js/services/timebox.js"></script>
+  <script src="js/services/soundcloud.js"></script>
+  <script src="js/services/search.js"></script>
+  <script src="js/services/speech.js"></script>
+  <script src="js/services/weather.js"></script>
+  <script src="js/services/comic.js"></script>
+  <script src="js/services/map.js"></script>
+  <script src="js/services/light.js"></script>
+  <script src="js/services/giphy.js"></script>
+  <script src="js/services/timer.js"></script>
+  <script src="js/services/qrservice.js"></script>
+  <script src="js/services/geolocation.js"></script>
+  <script src="js/services/calendar.js"></script>
+  <script src="js/services/traffic.js"></script>
+  <script src="js/services/fitbit.js"></script>
+  <script src="js/services/reminder.js"></script>
+  <script src="js/services/rss.js"></script>
+  <script src="js/services/tvshows.js"></script>
+  <script src="js/services/autosleep.js"></script>
+  <script src="js/services/stock.js"></script>
+  <script src="js/services/scrobbler.js"></script>
+  <script src="js/controller.js"></script>
 </body>
 
 </html>

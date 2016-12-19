@@ -1,5 +1,5 @@
 node_modules
-config.js
+config.json
 .idea
 npm-debug.log
 .DS_Store
