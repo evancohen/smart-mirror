@@ -1,5 +1,3 @@
-
-  let fs = require('fs')
   var config = ""
   var configMaster = "" 
   var configJSON = ""
