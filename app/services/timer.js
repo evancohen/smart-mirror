@@ -9,7 +9,7 @@
     service.running = false;
     service.paused = true;
     service.duration = 0;
-    service.countdown = service.duration;
+    service.countdown = -1;
 
     /**
      * Parse spoken duration into seconds
@@ -80,7 +80,7 @@
 
     service.reset = function () {
       service.running = false;
-      service.countdown = 0;
+      service.countdown = -1;
       service.stop();
     };
 

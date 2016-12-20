@@ -14,7 +14,7 @@
             $translateProvider
                 .uniformLanguageTag('bcp47')
                 .useStaticFilesLoader({
-                    prefix: 'locales/',
+                    prefix: 'app/locales/',
                     suffix: '.json'
                 });
             $translateProvider.useSanitizeValueStrategy(null);
