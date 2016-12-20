@@ -3,9 +3,10 @@ const {ipcRenderer} = require('electron');
 (function () {
     'use strict';
 
-    function SpeechService($rootScope) {
+    function SpeechService($rootScope, $translate) {
         var service = {}
         var callbacks = {}
+        var commandList = []
 
         service.init = function (cb) {
             // workaround so we can trigger requests at any time 
@@ -59,21 +60,34 @@ const {ipcRenderer} = require('electron');
 
         // COMMANDS
         service.commands = {}
-        service.addCommand = function (phrase, callback) {
-            var command = {}
 
-            // Wrap annyang command in scope apply
-            command[phrase] = function (arg1, arg2) {
-                $rootScope.$apply(callback(arg1, arg2))
-            };
+        service.addCommand = function (commandId, callback) {
+            var voiceId = 'commands.' + commandId + '.voice';
+            var textId = 'commands.' + commandId + '.text';
+            var descId = 'commands.' + commandId + '.description';
+            $translate([voiceId, textId, descId]).then(function (translations) {
+                var command = {};
+                var phrase = translations[voiceId];
+                command[phrase] = function (arg1, arg2) {
+                    $rootScope.$apply(callback(arg1, arg2))
+                };
+                if (translations[textId] !== '') {
+                    var commandItem = { "text": translations[textId], "description": translations[descId] };
+                    commandList.push(commandItem);
+                }
 
-            // Extend our commands list
-            angular.extend(service.commands, command)
+                // Extend our commands list
+                angular.extend(service.commands, command)
 
-            // Add the commands to annyang
-            annyang.addCommands(service.commands)
-            console.debug('added command "' + phrase + '"', service.commands)
+                // Add the commands to annyang
+                annyang.addCommands(service.commands)
+                console.debug('added command "' + phrase + '"', service.commands)
+            });
         };
+
+        service.getCommands = function(){
+            return commandList;
+        }
 
         return service;
     }

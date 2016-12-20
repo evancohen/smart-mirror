@@ -1,0 +1,9 @@
+<div class="commands animate-grow" ng-if="focus == 'commands'">
+    <h2 ng-bind="'commands.title' | translate"></h2>
+    <dl>
+        <dt ng-repeat-start="command in commands" ng-bind="command['text']"></dt>
+        <dd ng-repeat-end ng-bind="command['description']"></dd>
+        <dt ng-show="fitbitEnabled">Show my walking</dt>
+        <dd ng-show="fitbitEnabled">Refreshes fitbit data.</dd>
+    </dl>
+</div>

@@ -1,0 +1,11 @@
+<div ng-controller="Timer">
+    <div class="contents-box animate-grow" ng-show="focus == 'timer'">
+        <div class="contents timer animate-grow">
+            <div ng-if="focus == 'timer'">
+                <div class="timer-countdown" ng-bind="timer.countdown | secondsToDateTime | date:'mm:ss'"></div>
+                <div class="timer-duration grey" ng-bind="timer.duration | secondsToDateTime | date:'mm:ss'"></div>
+            </div>
+            <timer-circle class="timer-circle" />
+        </div>
+    </div>
+</div>
