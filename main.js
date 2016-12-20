@@ -144,8 +144,10 @@ app.on('will-quit', function () {
 
   // While cleaning up we should turn the screen back on in the event 
   // the program exits before the screen is woken up
-  if(config.motion && config.motion.enabled && mtnProcess){
+  if(mtnProcess){
     mtnProcess.kill()
+  }
+  if(config.autoTimer && config.autoTimer.wake_cmd){
     exec(config.autoTimer.wake_cmd).kill()
   }
 })
