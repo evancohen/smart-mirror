@@ -28,7 +28,7 @@
         .config(["$sceDelegateProvider", function ($sceDelegateProvider) {
             $sceDelegateProvider.resourceUrlWhitelist([
                 'self',
-                "http://www.youtube.com/embed/**"
+                "https://www.youtube.com/embed/**"
             ]);
         }]);
 

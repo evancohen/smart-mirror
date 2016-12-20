@@ -15,7 +15,6 @@
                     'q': query,
                     'type': 'video',
                     'videoEmbeddable': 'true',
-                    //Sharing this key in the hopes that it wont be abused 
                     'key': config.youtube.key
                 }
             });

@@ -87,8 +87,8 @@
             $scope.date = new moment();
 
             // Auto wake at a specific time
-            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.auto_wake !== 'undefined' && config.autoTimer.auto_wake == moment().format('HH:mm:ss')) {
-                console.debug('Auto-wake', config.autoTimer.auto_wake);
+            if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined' && config.autoTimer.autoWake == moment().format('HH:mm:ss')) {
+                console.debug('Auto-wake', config.autoTimer.autoWake);
                 $scope.focus = "default";
                 AutoSleepService.wake();
                 AutoSleepService.startAutoSleepTimer();
@@ -346,13 +346,13 @@
             addCommand('wake_up', defaultView);
 
             // Turn off HDMI output
-            addCommand('screen off', function () {
+            addCommand('screen_off', function () {
                 console.debug('turning screen off');
                 AutoSleepService.sleep();
             });
 
             // Turn on HDMI output
-            addCommand('screen on', function () {
+            addCommand('screen_on', function () {
                 console.debug('turning screen on');
                 AutoSleepService.wake();
                 $scope.focus = "default"
@@ -545,7 +545,7 @@
             addCommand('video_search', function (query) {
                 SearchService.searchYouTube(query).then(function (results) {
                     //Set cc_load_policy=1 to force captions
-                    $scope.video = 'http://www.youtube.com/embed/' + results.data.items[0].id.videoId + '?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
+                    $scope.video = 'https://www.youtube.com/embed/' + results.data.items[0].id.videoId + '?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
                     $scope.focus = "video";
                 });
             });
