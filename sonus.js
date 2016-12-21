@@ -3,7 +3,7 @@
 const fs = require('fs')
 var config = require(__dirname + "/config-index.js")
 
-if(!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords[0].model || !config.general.language){
+if(!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords[0].model || !config.language){
   throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech"
 }
 
@@ -35,7 +35,7 @@ if(typeof config.speech.model == 'string'){
   }
 }
 
-const language = config.general.language
+const language = config.language
 const sonus = Sonus.init({ hotwords, language }, speech)
 
 // Start Recognition
