@@ -43,8 +43,10 @@
     "fitbit-oauth2": "0.0.1",
     "hyperion-client": "1.0.3",
     "sonus": "^0.1.2",
-    "johnny-five": "0.10.6",
-    "raspi-io": "7.1.0",
     "socket.io": "^1.6.0"
+  },
+  "optionalDependencies": {
+    "johnny-five":"0.10.6",
+    "raspi-io":"7.1.0"
   }
 }

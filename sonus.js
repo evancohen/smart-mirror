@@ -1,6 +1,6 @@
 'use strict'
 // Load in smart mirror config
-
+const fs = require('fs')
 var config = require(__dirname + "/config-index.js")
 
 if(!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords[0].model || !config.general.language){
@@ -19,9 +19,11 @@ const speech = require('@google-cloud/speech')({
 let hotwords = []
 
 
-  for(let i =0; i < config.speech.hotwords.length; i++){
-    hotwords.push({ file: config.speech.hotwords[i].model, hotword: config.speech.hotwords[i].keyword, sensitivity:  config.speech.sensitivity || '0.5'})
-  }
+for(let i =0; i < config.speech.hotwords.length; i++){
+    if (fs.existsSync(config.speech.hotwords[i].model)) {    
+      hotwords.push({ file: config.speech.hotwords[i].model, hotword: config.speech.hotwords[i].keyword, sensitivity:  config.speech.sensitivity || '0.5'})
+    }
+}
 
 
 const language = config.general.language

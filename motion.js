@@ -1,11 +1,12 @@
 'use strict'
-
+const fs = require('fs')
 // Load in smart mirror config
 var config = require(__dirname + "/config-index.js")
 if(!config || !config.motion || !config.motion.enabled || !config.motion.pin || !config.language){
   throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion";
 }
-if (config.motion.enabled == true) {
+
+if (config.motion.enabled == true && fs.existsSync(__dirname + '/node_modules/johnny-five') && fs.existsSync(__dirname + '/node_modules/rasp-io')) {
 	// Configure johnny-five
 	var five = require('johnny-five');
 	var Raspi = require("raspi-io");
@@ -34,4 +35,6 @@ if (config.motion.enabled == true) {
 				console.log("!e:","motionend");
 			});
 	});
+} else if ( config.motion.enabled == true){
+	console.error("!E:","Motion Dependencies are missing! Therefore despite my best efforts I'll have to disable motion, Dave. This is most embarrassing for us both.")
 }
