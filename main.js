@@ -2,7 +2,7 @@
 /* global process */
 const electron = require('electron')
 // Child Process for keyword spotter
-const {spawn} = require('child_process')
+const {spawn, exec} = require('child_process')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -82,7 +82,7 @@ var kwsProcess = spawn('node', ['./sonus.js'], {detached: false})
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
   var message = data.toString()
-  console.log("ERROR", message.substring(4))
+  console.error("ERROR", message.substring(4))
 })
 
 kwsProcess.stdout.on('data', function (data) {
@@ -98,29 +98,35 @@ kwsProcess.stdout.on('data', function (data) {
   }
 })
 
-// Initilize the motion spotter
-var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
-// Handel messages from node
-mtnProcess.stderr.on('data', function (data) {
-  var message = data.toString()
-  console.log("ERROR", message.substring(4))
-})
+// Motion detection
+if(config.motion && config.motion.enabled){
+    var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
+    // Handel messages from node
+    mtnProcess.stderr.on('data', function (data) {
+      var message = data.toString()
+      console.error("ERROR", message.substring(4))
+    })
 
-mtnProcess.stdout.on('data', function (data) {
-  var message = data.toString()
-  if (message.startsWith('!s:')) {
-    console.log(message.substring(3));
-    mainWindow.webContents.send('motionstart', true);
-  } else if (message.startsWith('!e:')) {
-    console.log(message.substring(3));
-    mainWindow.webContents.send('motionend', true);
-  } else if (message.startsWith('!c:')) {
-    console.log(message.substring(3));
-    mainWindow.webContents.send('calibrated', true);
-  } else {
-    console.error(message);
-  }
-})
+    mtnProcess.stdout.on('data', function (data) {
+      var message = data.toString()
+      if (message.startsWith('!s:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('motionstart', true)
+      } else if (message.startsWith('!e:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('motionend', true)
+      } else if (message.startsWith('!c:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('calibrated', true)
+      } else if (message.startsWith('!E:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('Error', message.substring(3))
+        mtnProcess.kill();
+      }  else {
+        console.error(message)
+      }
+    })
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -135,5 +141,13 @@ app.on('window-all-closed', function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
   kwsProcess.kill()
-  mtnProcess.kill()
+
+  // While cleaning up we should turn the screen back on in the event 
+  // the program exits before the screen is woken up
+  if(mtnProcess){
+    mtnProcess.kill()
+  }
+  if(config.autoTimer && config.autoTimer.wake_cmd){
+    exec(config.autoTimer.wake_cmd).kill()
+  }
 })
