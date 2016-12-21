@@ -4,10 +4,9 @@
 <head ng-controller="Theme">
   <meta charset="utf-8">
   <title>Smart Mirror</title>
-
+  <script src="config-index.js"></script>
   <script>
     const annyang = require('annyang')
-    const fs = require('fs')
     // Error logging
     window.onerror = function (errorMsg, url, lineNumber) {
         fs.appendFileSync('./smart-mirror.log', '['+ new Date().toString() + '] ' 
@@ -237,7 +236,7 @@
   <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 
   <!-- App -->
-  <script src="config-index.js"></script>
+
   <script src="js/app.js"></script>
 
   <script src="js/services/timebox.js"></script>

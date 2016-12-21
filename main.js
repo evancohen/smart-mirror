@@ -22,7 +22,7 @@ const fs = require('fs')
 // Load the smart mirror config
 let config
 try {
-  config = require(__dirname + "/config.js")
+  config = require(__dirname + "/config-index.js")
 } catch (e) {
   let error = "Unknown Error"
 

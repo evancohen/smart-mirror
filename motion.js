@@ -1,11 +1,11 @@
 'use strict'
 
 // Load in smart mirror config
-const config = require(__dirname + "/config.js")
+var config = require(__dirname + "/config-index.js")
 if(!config || !config.motion || !config.motion.enabled || !config.motion.pin || !config.language){
   throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion";
 }
-if (config.motion.enabled) {
+if (config.motion.enabled == true) {
 	// Configure johnny-five
 	var five = require('johnny-five');
 	var Raspi = require("raspi-io");
