@@ -106,7 +106,7 @@ var config = {
     },
     rss: {
         feeds: [],  // RSS feeds list - e.g. ["rss1.com", "rss2.com"]
-        refreshInterval: 120 // Number of minutes the information is refreshed
+        reload_interval: 120 // Number of minutes the information is refreshed
     },
     stock: {
         names: [] // The names of the stock quotes you with to show in the official format. (e.g.: 'YHOO','AAPL','GOOG')
