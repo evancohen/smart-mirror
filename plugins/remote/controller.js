@@ -13,7 +13,7 @@ function Remote($scope, SpeechService) {
                 }
             }
             $scope.remoteText = addresses[0] + ":" + config.remote.port;
-            $scope.remoteImage = "https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=http://" + service.Remote_TXT;
+            $scope.remoteImage = "https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=http://" + $scope.remoteText;
             $scope.$parent.focus = "remote";
         });
     }
