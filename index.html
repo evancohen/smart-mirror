@@ -28,34 +28,39 @@
 <body ng-controller="MirrorCtrl" ng-cloak>
   <div class="top">
     <div class="top-left">
-      <div ng-include="'views/datetime.html'"></div>
-      <div ng-include="'views/calendar.html'"></div>
+      <div ng-include="'plugins/datetime/index.html'"></div>
+      <div ng-include="'plugins/calendar/index.html'"></div>
     </div>
     <div class="top-right">
-      <div ng-include="'views/weather.html'"></div>
-      <div ng-include="'views/traffic.html'"></div>
-      <div ng-include="'views/stock.html'"></div>
-      <div ng-include="'views/tvshows.html'"></div>
+      <div ng-include="'plugins/weather/index.html'"></div>
+      <div ng-include="'plugins/traffic/index.html'"></div>
+      <div ng-include="'plugins/stock/index.html'"></div>
+      <div ng-include="'plugins/tvshows/index.html'"></div>
     </div>
   </div>
   <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
     <div class="middle-center">
       <h1 ng-controller="Greeting" ng-bind="greeting" ng-cloak></h1>
-      <div ng-include="'views/soundcloud.html'"></div>
-      <div ng-include="'views/center.html'"></div>
-      <div ng-include="'views/timer.html'"></div>
+      <div ng-include="'plugins/soundcloud/index.html'"></div>
+      <div ng-include="'plugins/map/index.html'"></div>
+      <div ng-include="'plugins/xkcd/index.html'"></div>
+      <div ng-include="'plugins/dilbert/index.html'"></div>
+      <div ng-include="'plugins/search/index.html'"></div>
+      <div ng-include="'plugins/giphy/index.html'"></div>
+      <div ng-include="'plugins/reminder/index.html'"></div>
+      <div ng-include="'plugins/timer/index.html'"></div>
     </div>
     <div class="bottom-center">
       <!-- Command list -->
-      <div ng-include="'views/commands.html'"></div>
-      <div ng-include="'views/news.html'"></div>
+      <div ng-include="'plugins/commands/index.html'"></div>
+      <div ng-include="'plugins/rss/index.html'"></div>
 
       <div class="error" ng-bind="speechError" ng-show="speechError"></div>
       <div class="partial-result" ng-bind="partialResult" ng-hide="speechError"></div>
     </div>
     <div class="bottom-left">
-      <div ng-include="'views/fitbit.html'" ng-if="fitbitEnabled"></div>
-      <div ng-include="'views/scrobble.html'"></div>
+      <div ng-include="'plugins/fitbit/index.html'" ng-if="fitbit"></div>
+      <div ng-include="'plugins/scrobbler/index.html'"></div>
     </div>
     <div class="bottom-right">
       <!-- Someday something will live here -->
@@ -82,36 +87,37 @@
   <script src="app/js/app.js"></script>
 
   <!-- Services -->
-  <script src="app/services/timebox.js"></script>
-  <script src="app/services/soundcloud.js"></script>
-  <script src="app/services/speech.js"></script>
-  <script src="app/services/light.js"></script>
-  <script src="app/services/geolocation.js"></script>
-  <script src="app/services/calendar.js"></script>
-  <script src="app/services/fitbit.js"></script>
-  <script src="app/services/autosleep.js"></script>
-  <script src="app/services/scrobbler.js"></script>
-  <script src="app/services/timer.js"></script>
+  <script src="plugins/calendar/service.js"></script>
+  <script src="plugins/timebox/service.js"></script>
+  <script src="plugins/soundcloud/service.js"></script>
+  <script src="plugins/speech/service.js"></script>
+  <script src="plugins/light/service.js"></script>
+  <script src="plugins/geolocation/service.js"></script>
+  <script src="plugins/fitbit/service.js"></script>
+  <script src="plugins/autosleep/service.js"></script>
+  <script src="plugins/scrobbler/service.js"></script>
+  <script src="plugins/timer/service.js"></script>
 
   <!-- Controllers -->
-  <script src="app/controllers/controller.js"></script>
-  <script src="app/controllers/soundcloud.js"></script>
-  <script src="app/controllers/search.js"></script>
-  <script src="app/controllers/weather.js"></script>
-  <script src="app/controllers/xkcd.js"></script>
-  <script src="app/controllers/dilbert.js"></script>
-  <script src="app/controllers/map.js"></script>
-  <script src="app/controllers/giphy.js"></script>
-  <script src="app/controllers/timer.js"></script>
-  <script src="app/controllers/calendar.js"></script>
-  <script src="app/controllers/traffic.js"></script>
-  <script src="app/controllers/fitbit.js"></script>
-  <script src="app/controllers/reminder.js"></script>
-  <script src="app/controllers/rss.js"></script>
-  <script src="app/controllers/tvshows.js"></script>
-  <script src="app/controllers/stock.js"></script>
-  <script src="app/controllers/scrobbler.js"></script>
-  <script src="app/controllers/greeting.js"></script>
+  <script src="app/js/controller.js"></script>
+  <script src="plugins/soundcloud/controller.js"></script>
+  <script src="plugins/search/controller.js"></script>
+  <script src="plugins/xkcd/controller.js"></script>
+  <script src="plugins/dilbert/controller.js"></script>
+  <script src="plugins/map/controller.js"></script>
+  <script src="plugins/giphy/controller.js"></script>
+  <script src="plugins/timer/controller.js"></script>
+  <script src="plugins/traffic/controller.js"></script>
+  <script src="plugins/fitbit/controller.js"></script>
+  <script src="plugins/reminder/controller.js"></script>
+  <script src="plugins/rss/controller.js"></script>
+  <script src="plugins/tvshows/controller.js"></script>
+  <script src="plugins/stock/controller.js"></script>
+  <script src="plugins/scrobbler/controller.js"></script>
+  <script src="plugins/greeting/controller.js"></script>
+  <script src="plugins/weather/controller.js"></script>
+  <script src="plugins/calendar/controller.js"></script>
+
 </body>
 
 </html>
