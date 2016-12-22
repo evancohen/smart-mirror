@@ -120,8 +120,12 @@ var config = {
     autoTimer: {
         autoSleep: 2400000, // How long the screen will stay awake before going to sleep (40 Mins)
         autoWake: '07:00:00', // When to automatically wake the screen up (7:00AM)
-        'wake_cmd': '/opt/vc/bin/tvservice -p', // The binary and arguments used on your system to wake the screen
-        'sleep_cmd': '/opt/vc/bin/tvservice -o', // The binary and arguments used on your system to sleep the screen
+        'wake_cmd': 'sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1', // The binary and arguments used on your system to wake the screen
+        'sleep_cmd': 'sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1', // The binary and arguments used on your system to sleep the screen
+    },
+    motion: {
+        enable: true,
+        pin: "GPIO26", // based on raspi-io... https://github.com/nebrius/raspi-io/
     },
     lastfm: {
         key: "", // Your last.fm api key
