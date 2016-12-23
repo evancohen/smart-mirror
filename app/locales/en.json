@@ -60,21 +60,6 @@
             "voice": "Go to sleep",
             "description": "Go to sleep."
         },
-        "wake_up": {
-            "text": "Wake up",
-            "voice": "Wake up",
-            "description": "Wake up."
-        },
-        "screen_off": {
-            "text": "Screen Off",
-            "voice": "(turn) screen off",
-            "description": "Screen off."
-        },
-        "screen_on": {
-            "text": "Screen On",
-            "voice": "(turn) screen on",
-            "description": "Screen on."
-        },
         "debug": {
             "text": "Show debug information",
             "voice": "Show debug information",
