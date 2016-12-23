@@ -1,0 +1,25 @@
+<div class="weather" ng-controller="Weather">
+    <div class="weather-today">
+        <span class="icon dimmed wi {{currentForecast.wi}}"></span>
+        <canvas id="icon_weather_current" width="90" height="70"></canvas>
+        <span class="temperature" ng-show="currentForecast.temperature" ng-bind="currentForecast.temperature + '&deg;'"></span>
+    </div>
+    <div class="weather-week-descriptor">
+        <span ng-bind="minutelyForecast.summary"></span>
+        <span ng-bind="hourlyForecast.summary"></span>
+        <span ng-bind="weeklyForecast.summary"></span>
+    </div>
+    <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
+        <div class="weather-week-day">
+            <span class="day light-grey" ng-bind="forecast.day"></span>
+            <canvas id="icon_weather_{{forecast.counter}}" width="33" height="25"></canvas>
+            <span class="icon-small dimmed wi wi-fw {{forecast.wi}}"></span>
+            <span class="temperature temperature-min" ng-bind="forecast.temperatureMin + '&deg;'"></span>
+            <span class="temperature temperature-max" ng-bind="forecast.temperatureMax + '&deg;'"></span>
+        </div>
+    </div>
+    <!-- Workaround: -->
+    <div style="display: none;" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
+        <span ng-init="iconLoad('icon_weather_'+forecast.counter, forecast.iconAnimation)"></span>
+    </div>
+</div>

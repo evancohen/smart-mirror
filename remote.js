@@ -31,6 +31,7 @@ remote.start = function () {
     configJSON = JSON.parse(fs.readFileSync(configJsonFN,"utf8")) // holds the form schema
   }
   getFiles()
+
   const server = require('http').createServer(app)
 
   // Start the server

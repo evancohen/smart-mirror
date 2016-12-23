@@ -1,34 +1,16 @@
 'use strict'
-var fs=require('fs')
+
 // Load in smart mirror config
-var config = ""
-  var configMaster = ""
-  var configJSON = ""
-  var configFN = __dirname + "/config.json"
-  var configMasterFN = __dirname + "/remote/config.master.json"
-  var configJsonFN = __dirname + "/remote/config.schema.json"
+const fs = require('fs')
+var config = require("./config.json")
 
-  function getFiles(){
-    configMaster = JSON.parse(fs.readFileSync(configMasterFN,"utf8"))
 
-    if (fs.existsSync(configFN)){
-      try {
-        config = JSON.parse(fs.readFileSync(configFN,"utf8")) //json'd config file
-      } catch (e) {
-        config = configMaster
-      }
-    } else {
-      config = configMaster
-    }
-    configMaster = JSON.parse(fs.readFileSync(configMasterFN,"utf8"))
-  }
-  getFiles()
-
-if(!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords[0].model || !config.general.language){
+if (!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords || !config.general.language) {
   throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech"
 }
 
-var keyFile = JSON.parse(fs.readFileSync(config.speech.keyFilename,"utf8"))
+var keyFile = JSON.parse(fs.readFileSync(config.speech.keyFilename, "utf8"))
+var umdl = __dirname + '/node_modules/sonus/resources/snowboy.umdl'
 
 // Configure Sonus
 const Sonus = require('sonus')
@@ -37,12 +19,26 @@ const speech = require('@google-cloud/speech')({
   keyFilename: config.speech.keyFilename
 })
 
+// Hotword helpers
+let sensitivity = config.speech.sensitivity || '0.5'
 let hotwords = []
-
-
-  for(let i =0; i < config.speech.hotwords.length; i++){
-    hotwords.push({ file: config.speech.hotwords[i].model, hotword: config.speech.hotwords[i].keyword, sensitivity:  config.speech.sensitivity || '0.5'})
+let addHotword = function (file, hotword, sensitivity) {
+  if (fs.existsSync(file)) {
+    hotwords.push({ file, hotword, sensitivity })
+  } else {
+    hotwords.push({ file: umdl, hotword: 'snowboy', sensitivity })
   }
+}
+
+// Add our hotwords
+if (typeof config.speech.model == 'string') {
+  // Backwords compatability
+  addHotword(config.speech.model, config.speech.keyword, sensitivity)
+} else {
+  for (let i = 0; i < config.speech.hotwords.length; i++) {
+    addHotword(config.speech.hotwords[i].model, config.speech.hotwords[i].keyword, sensitivity)
+  }
+}
 
 
 const language = config.general.language
