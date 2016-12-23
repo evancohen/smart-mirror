@@ -18,7 +18,7 @@ $(function () {
   })
 
   socket.on('json', function(data){
-      data.configJSON.value = $.extend({},data.configMaster,data.config)
+      data.configJSON.value = $.extend({},data.configDefault,data.config)
       console.log(data);
 
     try {

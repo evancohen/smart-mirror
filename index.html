@@ -4,9 +4,9 @@
 <head ng-controller="Theme">
   <meta charset="utf-8">
   <title>Smart Mirror</title>
-
   <script>
     const annyang = require('annyang')
+    const fs = require('fs')
     const config = require('./config.json')
     // Error logging
     window.onerror = function (errorMsg, url, lineNumber) {

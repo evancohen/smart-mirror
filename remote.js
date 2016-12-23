@@ -9,26 +9,26 @@ remote.start = function () {
   const fs = require('fs')
   
   var config = ""
-  var configMaster = ""
+  var configDefault = ""
   var configJSON = ""
   var configFN = __dirname + "/config.json"
-  var configMasterFN = __dirname + "/remote/config.master.json"
-  var configJsonFN = __dirname + "/remote/config.schema.json"
+  var configDefaultPath = __dirname + "/remote/config.default.json"
+  var configJsonPath = __dirname + "/remote/config.schema.json"
 
   function getFiles(){
-    configMaster = JSON.parse(fs.readFileSync(configMasterFN,"utf8"))
+    configDefault = JSON.parse(fs.readFileSync(configDefaultPath,"utf8"))
 
     if (fs.existsSync(configFN)){
       try {
         config = JSON.parse(fs.readFileSync(configFN,"utf8")) //json'd config file
       } catch (e) {
-        config = configMaster
+        config = configDefault
       }
     } else {
-      config = configMaster
+      config = configDefault
     }
-    configMaster = JSON.parse(fs.readFileSync(configMasterFN,"utf8"))
-    configJSON = JSON.parse(fs.readFileSync(configJsonFN,"utf8")) // holds the form schema
+    configDefault = JSON.parse(fs.readFileSync(configDefaultPath,"utf8"))
+    configJSON = JSON.parse(fs.readFileSync(configJsonPath,"utf8")) // holds the form schema
   }
   getFiles()
 
@@ -73,7 +73,7 @@ remote.start = function () {
 
     socket.on('getForm', function(clicked){
       getFiles()
-      socket.emit("json",{"configJSON": configJSON,"configMaster":configMaster,"config":config})
+      socket.emit("json",{"configJSON": configJSON,"configDefault":configDefault,"config":config})
     })
     
   }) // end - connection

@@ -115,7 +115,7 @@
         "sleepCmd": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
     },
     "motion": {
-      "enabled": true,
+      "enabled": false,
     	"pin": "GPIO26"
     },
     "lastfm": {

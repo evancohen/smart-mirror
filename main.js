@@ -19,7 +19,7 @@ const DevelopmentMode = process.argv[2] == "dev"
 // Load the smart mirror config
 let config
 try {
-  config = require(__dirname + "/config.js")
+  config = require("./config.json")
 } catch (e) {
   let error = "Unknown Error"
 
