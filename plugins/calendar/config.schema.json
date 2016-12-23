@@ -1,0 +1,32 @@
+{
+    "schema": {
+        "calendar": {
+            "type": "object",
+            "title": "Calendar Settings",
+            "properties": {
+                "icals": {
+                    "type": "tabarray",
+                    "title": "iCal URL",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "maxResults": {
+                    "type": "integer",
+                    "title": "Max Number of Events for all iCals",
+                    "default": "9"
+                },
+                "maxDays": {
+                    "type": "integer",
+                    "title": "Max Number of Days to display",
+                    "default": "9"
+                },
+                "showCalendarNames": {
+                    "type": "boolean",
+                    "title": "Check to display Calendar Names",
+                    "default": "false"
+                }
+            }
+        }
+    }
+}

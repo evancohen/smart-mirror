@@ -1,0 +1,18 @@
+{
+    "schema": {
+        "geoPosition": {
+            "type": "object",
+            "title": "Geo-Position (used if not accurately being detected)",
+            "properties": {
+                "latitude": {
+                    "type": "string",
+                    "title": "latitude"
+                },
+                "longitude": {
+                    "type": "string",
+                    "title": "longitude"
+                }
+            }
+        }
+    }
+}

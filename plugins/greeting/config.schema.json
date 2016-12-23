@@ -1,0 +1,50 @@
+{
+    "schema": {
+        "greeting": {
+            "type": "object",
+            "title": "Greetings",
+            "properties": {
+                "night": {
+                    "type": "tabarray",
+                    "title": "Night Greeting",
+                    "required": true,
+                    "minitems": 1,
+                    "items": {
+                        "type": "string",
+                        "default": "Bed?"
+                    }
+                },
+                "morning": {
+                    "type": "tabarray",
+                    "title": "Morning Greeting",
+                    "required": true,
+                    "minitems": 1,
+                    "items": {
+                        "type": "string",
+                        "default": "Good Morning"
+                    }
+                },
+                "midday": {
+                    "type": "tabarray",
+                    "title": "Midday Greeting",
+                    "required": true,
+                    "minitems": 1,
+                    "items": {
+                        "type": "string",
+                        "default": "Hey!"
+                    }
+                },
+                "evening": {
+                    "type": "tabarray",
+                    "title": "Evening Greeting",
+                    "required": true,
+                    "minitems": 1,
+                    "items": {
+                        "type": "string",
+                        "default": "Good evening"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+{
+    "schema": {
+        "light": {
+            "type": "object",
+            "title": "Lights Settings",
+            "properties": {
+                "settings": {
+                    "type": "object",
+                    "properties": {
+                        "hueIp": {
+                            "type": "string",
+                            "title": "Hue Light IP Address"
+                        },
+                        "hueUsername": {
+                            "type": "string",
+                            "title": "Hue Light Username"
+                        }
+                    }
+                },
+                "setup": {
+                    "type": "tabarray",
+                    "title": "Setup",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "title": "name"
+                            },
+                            "targets": {
+                                "type": "tabarray",
+                                "title": "targets",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "lightType": {
+                                            "type": "string",
+                                            "title": "type",
+                                            "enum": [
+                                                "hyperion",
+                                                "hue"
+                                            ]
+                                        },
+                                        "ip": {
+                                            "type": "string",
+                                            "title": "ip"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "title": "id"
+                                        },
+                                        "port": {
+                                            "type": "string",
+                                            "title": "port"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "schema": {
+        "stock": {
+            "type": "object",
+            "title": "Stock Settings",
+            "properties": {
+                "names": {
+                    "type": "tabarray",
+                    "title": "Stock Symbols",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

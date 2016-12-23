@@ -1,0 +1,41 @@
+{
+    "schema": {
+        "autoTimer": {
+            "type": "object",
+            "title": "AutoTimer Settings",
+            "properties": {
+                "autoSleep": {
+                    "type": "string",
+                    "title": "AutoSleep Wait Time (minutes)"
+                },
+                "autoWake": {
+                    "type": "string",
+                    "title": "Wake up time (24 hr format)"
+                },
+                "wakeCmd": {
+                    "type": "string",
+                    "title": "Command used to wake up Smart Mirror"
+                },
+                "sleepCmd": {
+                    "type": "string",
+                    "title": "Command used put Smart Mirror to sleep"
+                }
+            }
+        },
+        "motion": {
+            "type": "object",
+            "title": "Motion Settings",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Check to Enable Motion Detection"
+                },
+                "pin": {
+                    "type": "string",
+                    "title": "PIN the for output on PIR module.",
+                    "description": "based on raspi-io... https://github.com/nebrius/raspi-io/"
+                }
+            }
+        }
+    }
+}

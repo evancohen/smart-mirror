@@ -1,0 +1,13 @@
+{
+    "schema": {
+        "soundcloud": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "SoundCloud API Key"
+                }
+            }
+        }
+    }
+}

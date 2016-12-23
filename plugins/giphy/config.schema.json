@@ -1,0 +1,14 @@
+{
+    "schema": {
+        "giphy": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "Giphy API Key",
+                    "default": "dc6zaTOxFJmzC"
+                }
+            }
+        }
+    }
+}

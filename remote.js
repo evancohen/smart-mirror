@@ -7,13 +7,14 @@ remote.start = function () {
   const express = require('express')
   const app = express()
   const fs = require('fs')
+  const getConfigSchema = require('./config.schema.js')
   
-  var config = ""
-  var configDefault = ""
-  var configJSON = ""
-  var configFN = __dirname + "/config.json"
-  var configDefaultPath = __dirname + "/remote/config.default.json"
-  var configJsonPath = __dirname + "/remote/config.schema.json"
+  let config = ""
+  let configDefault = ""
+  let configJSON = ""
+  let configFN = __dirname + "/config.json"
+  let configDefaultPath = __dirname + "/remote/config.default.json"
+  let configJsonPath = __dirname + "/remote/config.schema.json"
 
   function getFiles(){
     configDefault = JSON.parse(fs.readFileSync(configDefaultPath,"utf8"))
@@ -28,7 +29,10 @@ remote.start = function () {
       config = configDefault
     }
     configDefault = JSON.parse(fs.readFileSync(configDefaultPath,"utf8"))
-    configJSON = JSON.parse(fs.readFileSync(configJsonPath,"utf8")) // holds the form schema
+    //TODO this is async, all of the remote should be async too
+    getConfigSchema(function(configSchema){
+      configJSON = configSchema
+    })
   }
   getFiles()
 

@@ -1,0 +1,46 @@
+{
+    "schema": {
+        "speech": {
+            "type": "object",
+            "title": "Speech Settings",
+            "properties": {
+                "keyFilename": {
+                    "type": "string",
+                    "title": "Google Cloud Key Filename (should start with './')",
+                    "required": true,
+                    "default": "./keyfile.json"
+                },
+                "hotwords": {
+                    "type": "tabarray",
+                    "title": "Keyword Spotter Hotwords",
+                    "required": true,
+                    "items": {
+                        "title": "keyword {{idx}}",
+                        "type": "object",
+                        "properties": {
+                            "keyword": {
+                                "type": "string",
+                                "Title": "Keyword Name"
+                            },
+                            "model": {
+                                "type": "string",
+                                "title": "Model Filename"
+                            }
+                        }
+                    }
+                },
+                "sensitivity": {
+                    "type": "string",
+                    "title": "Microphone Sensitivity",
+                    "default": "0.5",
+                    "required": true
+                },
+                "continuous": {
+                    "type": "boolean",
+                    "title": "Continuous Enabled",
+                    "default": "false"
+                }
+            }
+        }
+    }
+}
