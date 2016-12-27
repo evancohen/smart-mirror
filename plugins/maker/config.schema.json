@@ -6,9 +6,8 @@
             "description" : "Codeless, custom commands",
             "properties": {
                 "commands": {
-                    "type": "tabarray",
+                    "type": "array",
                     "title": "Custom Requests",
-                    "required" : false,
                     "items": {
                         "type": "object",
                         "properties": {
@@ -39,5 +38,36 @@
                 }
             }
         }
-    }
+    },
+    "form": [
+      {
+        "type":"help",
+        "helpvalue":"<h6>Codeless, custom commands</h6>"
+      },
+      {
+        "type": "fieldset",
+        "title": "Maker Settings",
+        "items": [
+          {
+            "type": "tabarray",
+            "title": "<h4>Custom Requests</h4>",
+            "items": [
+              {
+                "type": "section",
+                "legend": "{{value}}",
+                "items": [
+                  {
+                    "key": "maker.commands[].utterance",
+                    "valueInLegend": true
+                  },
+                  "maker.commands[].method",
+                  "maker.commands[].url",
+                  "maker.commands[].body"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
 }
