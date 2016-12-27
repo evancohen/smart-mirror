@@ -1,0 +1,43 @@
+{
+    "schema": {
+        "maker": {
+            "type": "object",
+            "title": "Maker",
+            "description" : "Codeless, custom commands",
+            "properties": {
+                "commands": {
+                    "type": "tabarray",
+                    "title": "Custom Requests",
+                    "required" : false,
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                          "utterance": {
+                                "type": "string",
+                                "title": "Utterance"
+                            },  
+                            "method": {
+                                "type": "string",
+                                "title": "Method",
+                                "enum": [
+                                    "GET",
+                                    "POST",
+                                    "PUT"
+                                ],
+                                "default": "GET"
+                            },
+                            "url": {
+                                "type": "url",
+                                "title": "Request URL"
+                            },
+                            "body": {
+                                "type": "textarea",
+                                "title": "JSON Body"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
