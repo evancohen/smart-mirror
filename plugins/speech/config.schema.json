@@ -11,7 +11,7 @@
                     "default": "./keyfile.json"
                 },
                 "hotwords": {
-                    "type": "tabarray",
+                    "type": "array",
                     "title": "Keyword Spotter Hotwords",
                     "required": true,
                     "items": {
@@ -42,5 +42,36 @@
                 }
             }
         }
-    }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "title": "Speech Settings",
+            "expandable": false,
+            "order":-75,
+            "items":[
+              "speech.keyFilename",
+              {
+                "type":"tabarray",
+                "title":"Keyword Spotter Hotwords",
+                "items":[
+                    {
+                      "type":"section",
+                      "legend":"{{value}}",
+                      "items": [
+                        {
+                          "key":"speech.hotwords[].keyword",
+                          "valueInLegend":true,
+                          "title":"Keyword Name"
+                        },
+                        "speech.hotwords[].model"
+                      ]
+                    }  
+                ]
+              },
+              "speech.sensitivity",
+              "speech.continuous"
+            ]
+        }
+    ]
 }

@@ -9,5 +9,13 @@
                 }
             }
         }
-    }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "youtube",
+            "expandable": true,
+            "order":0
+        }
+    ]
 }

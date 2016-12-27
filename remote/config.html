@@ -13,31 +13,26 @@
     <title>Smart Mirror Remote</title>
 
 
-    <style>
+   <style>
       @import url("../deps/opt/bootstrap.css");
-      @import url("../deps/opt/spectrum.css");
-
+     /* @import url("../deps/opt/spectrum.css");
+    
       h2 { font-weight: 200; }
       .navbar-inner {
         -webkit-border-radius: 0;
         -moz-border-radius: 0;
         border-radius: 0;
       }
-      .row-fluid { margin: 0.5em; }
+      .row-fluid { 
+        width: 100%;
+        max-width: 800px;
+        margin: 0.5em; }
       .tagline {
         padding: 10px;
         font-weight: 200;
         margin-top: -1em;
       }
       .tagline p { font-size: 16px; }
-
-      .navbar .factory a {
-        display: block;
-        padding: 10px 20px 10px;
-        background: url(http://factory.joshfire.com/css/images/topbar-beta-logo.png) 22px -3px no-repeat;
-        text-indent: -9999px;
-        width: 178px;
-      }
 
       .footer {
         margin-top: 40px;
@@ -74,13 +69,9 @@
         display: block;
         color: red;
         padding-top: 1em;
-      }
+      }*/
     </style>
-
-
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
 </head>
@@ -128,11 +119,11 @@
         <!-- <div class="page-header">
             <h1>Sticky footer with fixed navbar</h1>
         </div>-->
-        <div class="row">
-            <div id="result" class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1"></div>
+        <div class="row-fluid">
+            <div id="result" class="col-xs-10 col-xs-offset-1"></div>
         </div>
-        <div class="row">
-            <div class="col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1">
+        <div class="row-fluid">
+            <div class="col-xs-10 col-xs-offset-1">
                <p class="alert" id="out"></p>
             </div>
         </div>
@@ -159,7 +150,7 @@
     <script src="../deps/opt/jsv.js"></script>
     <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.js"></script>-->
     <script src="../deps/opt/ace/ace.js"></script>
     <script src="../deps/opt/ace/mode-json.js"></script>
     <script src="../deps/opt/ace/mode-html.js"></script>

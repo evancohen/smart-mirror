@@ -13,7 +13,7 @@
                     "title": "Refresh Traffic Interval (minutes)"
                 },
                 "trips": {
-                    "type": "tabarray",
+                    "type": "array",
                     "title": "Trips",
                     "items": {
                         "type": "object",
@@ -46,12 +46,44 @@
                             },
                             "endTime": {
                                 "type": "string",
-                                "title": "Time to start displaying on Smart Mirror"
+                                "title": "Time to stop displaying on Smart Mirror"
                             }
                         }
                     }
                 }
             }
         }
-    }
+    },
+    "form":[
+      {
+        "type":"fieldset",
+        "title":"Traffic Settings",
+        "expandable":true,
+        "order":0,
+        "items": [
+          "traffic.key",
+          "traffic.refreshInterval",
+          {
+            "type":"tabarray",
+            "items": [
+              {
+                "type":"section",
+                "legend":"{{value}}",
+                "items": [
+                  {
+                    "key":"traffic.trips[].name",
+                    "valueInLegend":true
+                  },
+                  "traffic.trips[].mode",
+                  "traffic.trips[].origin",
+                  "traffic.trips[].destination",
+                  "traffic.trips[].startTime",
+                  "traffic.trips[].endTime"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
 }
