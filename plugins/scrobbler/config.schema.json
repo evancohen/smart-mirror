@@ -14,9 +14,18 @@
                 },
                 "refreshInterval": {
                     "type": "number",
-                    "title": "Refresh Interval for last.fm"
+                    "title": "Refresh Interval for last.fm",
+                    "default": "0.6"
                 }
             }
         }
-    }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "lastfm",
+            "expandable": true,
+            "order":0
+        }
+    ]
 }

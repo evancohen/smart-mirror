@@ -2,7 +2,7 @@
     "schema": {
         "geoPosition": {
             "type": "object",
-            "title": "Geo-Position (used if not accurately being detected)",
+            "title": "Geo-Position",
             "properties": {
                 "latitude": {
                     "type": "string",
@@ -14,5 +14,21 @@
                 }
             }
         }
-    }
+    },
+    "form":[
+        {
+          "title": "<a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Geo-Position Settings</a>",
+          "type":"fieldset",
+          "expandable":true,
+          "order":0,
+          "items":[
+            {
+              "type":"help",
+              "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br></br>"
+            },
+            "geoPosition.latitude",
+            "geoPosition.longitude"
+          ]
+        }
+    ]
 }

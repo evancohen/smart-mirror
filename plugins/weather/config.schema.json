@@ -21,5 +21,13 @@
                 }
             }
         }
-    }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "forecast",
+            "expandable": true,
+            "order":0
+        }
+    ]
 }

@@ -1,20 +1,20 @@
 {
     "schema": {
-        "rss": {
+        "tvshows": {
             "type": "object",
-            "title": "RSS Settings",
+            "title": "TV Show Settings",
             "properties": {
-                "feeds": {
+                "shows": {
                     "type": "tabarray",
-                    "title": "RSS Feeds URL",
+                    "title": "TV Show Names",
                     "items": {
-                        "type": "url"
+                        "type": "string"
                     }
                 },
                 "refreshInterval": {
                     "type": "integer",
-                    "title": "Refresh Interval for RSS Feeds (minutes)",
-                    "default": 9
+                    "title": "Refresh Interval for TV Shows (minutes)",
+                    "default": 1440
                 }
             }
         }
@@ -22,7 +22,7 @@
     "form": [
         {
             "type": "fieldset",
-            "key": "rss",
+            "key": "tvshows",
             "expandable": true,
             "order":0
         }

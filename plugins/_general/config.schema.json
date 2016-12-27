@@ -18,5 +18,20 @@
                 }
             }
         }
+    },
+    "form":[
+      {
+        "key":"general",
+        "type":"fieldset",
+        "title":"General Settings",
+        "expandable":false,
+        "order":-100
+      }
+    ],
+    "value":{
+        "general":{
+            "language": "en-US",
+            "layout":"main"
+        }
     }
 }

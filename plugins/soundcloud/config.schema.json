@@ -9,5 +9,13 @@
                 }
             }
         }
-    }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "soundcloud",
+            "expandable": true,
+            "order":0
+        }
+    ]
 }

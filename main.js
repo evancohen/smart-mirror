@@ -22,7 +22,8 @@ try {
   config = require("./config.json")
 } catch (e) {
   let error = "Unknown Error"
-
+  delete config
+  config = {"remote":{"enabled":true,"port":8080}}
   if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
@@ -33,7 +34,6 @@ try {
   }
 
   console.log("Config Error: ", error)
-  app.quit()
 }
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -80,6 +80,7 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
+if (config){
 var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
 // Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
@@ -99,9 +100,9 @@ kwsProcess.stdout.on('data', function (data) {
     console.error(message.substring(3))
   }
 })
-
+}
 // Motion detection
-if(config.motion && config.motion.enabled){
+if(config && config.motion && config.motion.enabled){
     var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
     // Handel messages from node
     mtnProcess.stderr.on('data', function (data) {
@@ -130,7 +131,7 @@ if(config.motion && config.motion.enabled){
     })
 }
 
-if (config.remote && config.remote.enabled) {
+if (config.remote.enabled || !config) {
   remote.start()
 
   // Deturmine the local IP address
@@ -191,8 +192,9 @@ app.on('window-all-closed', function () {
 
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
-  kwsProcess.kill()
-
+  if (kwsProcess){
+    kwsProcess.kill()
+  }
   // While cleaning up we should turn the screen back on in the event 
   // the program exits before the screen is woken up
   if(mtnProcess){
