@@ -18,7 +18,7 @@
                     }
                 },
                 "setup": {
-                    "type": "tabarray",
+                    "type": "array",
                     "title": "Setup",
                     "items": {
                         "type": "object",
@@ -28,11 +28,15 @@
                                 "title": "name"
                             },
                             "targets": {
-                                "type": "tabarray",
+                                "type": "array",
                                 "title": "targets",
                                 "items": {
                                     "type": "object",
                                     "properties": {
+                                        "desc":{
+                                          "type":"string",
+                                          "title":"Description"
+                                        },
                                         "lightType": {
                                             "type": "string",
                                             "title": "type",
@@ -61,5 +65,97 @@
                 }
             }
         }
+    },
+    "form":[
+        {
+          "type":"fieldset",
+          "expandable":true,
+          "title":"Light Settings",
+          "order":0,
+          "items":[
+            "light.settings",
+            {
+              "type": "fieldset",
+              "title": "Setup",
+              "items": [
+                {
+                  "type":"tabarray",
+                  "items": [
+                    {
+                      "type":"section",
+                      "legend":"{{value}}",
+                      "items":[   
+                          {
+                            "key":"light.setup[].name",
+                            "valueInLegend":true
+                          },
+                          {
+                            "type":"tabarray",
+                            "title":"Targets",
+                            "items":[
+                              {
+                                    "type": "selectfieldset",
+                                    "key": "light.setup[].targets[].lightType",
+                                    "legend":"Item {{idx}}",
+                                    "items": [
+                                      {
+                                        "type": "section",
+                                        "items":[
+                                          "light.setup[].targets[].id"
+                                        ]
+                                      },
+                                      {
+                                        "type": "section",
+                                        "items":[
+                                          "light.setup[].targets[].ip",
+                                          "light.setup[].targets[].port"
+                                        ]
+                                      }
+                                  ]
+                                  
+                              }
+                            ]
+                          }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "value":{
+        "light" : {
+        "settings" : {
+            "hueIp" : "",
+            "hueUsername" : ""
+        },
+        "setup" : [
+            {
+                "name" : "parlor",
+                "targets" : [
+                    {
+                        "lightType" : "hyperion",
+                        "ip" : "",
+                        "port" : "19444"
+                    },
+                    {
+                        "lightType" : "hue",
+                        "id" : 1
+                    }
+                ]
+            },
+            {
+                "name" : "bath",
+                "targets" : [
+                    {
+                        "lightType" : "hue",
+                        "id" : 3
+                    }
+                ]
+            }
+        ]
     }
+  }
 }

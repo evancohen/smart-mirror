@@ -12,16 +12,16 @@ remote.start = function () {
   let config = ""
   let configDefault = ""
   let configJSON = ""
-  let configFN = __dirname + "/config.json"
+  let configPath = __dirname + "/config.json"
   let configDefaultPath = __dirname + "/remote/config.default.json"
   let configJsonPath = __dirname + "/remote/config.schema.json"
 
   function getFiles(){
     configDefault = JSON.parse(fs.readFileSync(configDefaultPath,"utf8"))
 
-    if (fs.existsSync(configFN)){
+    if (fs.existsSync(configPath)){
       try {
-        config = JSON.parse(fs.readFileSync(configFN,"utf8")) //json'd config file
+        config = JSON.parse(fs.readFileSync(configPath,"utf8")) //json'd config file
       } catch (e) {
         config = configDefault
       }
@@ -31,6 +31,8 @@ remote.start = function () {
     configDefault = JSON.parse(fs.readFileSync(configDefaultPath,"utf8"))
     //TODO this is async, all of the remote should be async too
     getConfigSchema(function(configSchema){
+      //configSchema.form.push({"type":"button","title":"Submit","order":10000})
+      configSchema.form.sort(function(a, b){return a.order - b.order})
       configJSON = configSchema
     })
   }
@@ -72,7 +74,7 @@ remote.start = function () {
     })
     
     socket.on('saveConfig', function(data){ // used to save the form JSON
-      fs.writeFileSync(configFN,JSON.stringify(data,null,2),"utf8")
+      fs.writeFileSync(configPath,JSON.stringify(data,null,2),"utf8")
     })
 
     socket.on('getForm', function(clicked){

@@ -10,5 +10,12 @@
                 }
             }
         }
-    }
+    },
+    "form":[
+        {
+          "key": "giphy",
+          "expandable":true,
+          "order":0
+        }
+    ]
 }

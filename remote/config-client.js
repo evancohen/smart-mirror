@@ -20,14 +20,18 @@ $(function () {
   socket.on('json', function(data){
       data.configJSON.value = $.extend({},data.configDefault,data.config)
       console.log(data);
+      data.configJSON.form.push({"type":"button","title":"Submit","order":10000})
+      console.log(data);
 
     try {
       data.configJSON.onSubmitValid = function (values) {
         if (console && console.log) {
           console.log('Values extracted from submitted form', values);
           console.log(JSON.stringify(values, null, 2))
+
         }
         socket.emit('saveConfig', values)
+        window.alert("Config has been saved. Restart your smart-mirror to apply changes")
       };
       data.configJSON.onSubmit = function (errors, values) {
         if (errors) {
