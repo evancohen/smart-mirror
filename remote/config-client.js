@@ -31,6 +31,7 @@ $(function () {
 
         }
         socket.emit('saveConfig', values)
+        window.alert("Config has been saved. Restart your smart-mirror to apply changes")
       };
       data.configJSON.onSubmit = function (errors, values) {
         if (errors) {
