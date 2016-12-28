@@ -177,6 +177,11 @@ if (config.remote && config.remote.enabled) {
   remote.on('reload', function () {
     mainWindow.reload()
   })
+
+  remote.on('relaunch', function() {
+    app.relaunch()
+    app.quit()
+  })
 }
 
 // This method will be called when Electron has finished
