@@ -177,6 +177,7 @@ if (config.remote.enabled || !config) {
   })
 
   remote.on('relaunch', function() {
+    console.log("Relaunching...")
     app.relaunch()
     app.quit()
   })
