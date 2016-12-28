@@ -7,7 +7,12 @@
   <script>
     const annyang = require('annyang')
     const fs = require('fs')
-    const config = require('./config.json')
+    let config
+    try{
+      config = require('./config.json')
+    } catch (e){
+      config = require('./config.default.json')
+    }
     // Error logging
     window.onerror = function (errorMsg, url, lineNumber) {
         fs.appendFileSync('./smart-mirror.log', '['+ new Date().toString() + '] ' 
