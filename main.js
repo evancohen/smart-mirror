@@ -128,7 +128,7 @@ if (config && config.motion && config.motion.enabled) {
   })
 }
 
-if (config.remote.enabled || !config) {
+if (config.remote && config.remote.enabled) {
   remote.start()
 
   // Deturmine the local IP address
