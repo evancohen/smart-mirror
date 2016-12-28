@@ -22,18 +22,15 @@ try {
   config = require("./config.json")
 } catch (e) {
   let error = "Unknown Error"
-  delete config
-  config = {"remote":{"enabled":true,"port":8080}}
+  config = require("./config.default.json")
   if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
   } else if (typeof e.message != 'undefined') {
     console.log(e)
     error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
-    'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
+      'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
   }
-
-  console.log("Config Error: ", error)
 }
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -80,55 +77,55 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-if (config){
-var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
-// Handel messages from node
-kwsProcess.stderr.on('data', function (data) {
-  var message = data.toString()
-  console.error("ERROR", message.substring(4))
-})
+if (config && config.speech) {
+  var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
+  // Handel messages from node
+  kwsProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    console.error("ERROR", message.substring(4))
+  })
 
-kwsProcess.stdout.on('data', function (data) {
-  var message = data.toString()
-  if (message.startsWith('!h:')) {
-    mainWindow.webContents.send('hotword', true)
-  } else if (message.startsWith('!p:')) {
-    mainWindow.webContents.send('partial-results', message.substring(4))
-  } else if (message.startsWith('!f:')) {
-    mainWindow.webContents.send('final-results', message.substring(4))
-  } else {
-    console.error(message.substring(3))
-  }
-})
+  kwsProcess.stdout.on('data', function (data) {
+    var message = data.toString()
+    if (message.startsWith('!h:')) {
+      mainWindow.webContents.send('hotword', true)
+    } else if (message.startsWith('!p:')) {
+      mainWindow.webContents.send('partial-results', message.substring(4))
+    } else if (message.startsWith('!f:')) {
+      mainWindow.webContents.send('final-results', message.substring(4))
+    } else {
+      console.error(message.substring(3))
+    }
+  })
 }
 // Motion detection
-if(config && config.motion && config.motion.enabled){
-    var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
-    // Handel messages from node
-    mtnProcess.stderr.on('data', function (data) {
-      var message = data.toString()
-      console.error("ERROR", message.substring(4))
-    })
+if (config && config.motion && config.motion.enabled) {
+  var mtnProcess = spawn('npm', ['run', 'motion'], { detached: false })
+  // Handel messages from node
+  mtnProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    console.error("ERROR", message.substring(4))
+  })
 
-    mtnProcess.stdout.on('data', function (data) {
-      var message = data.toString()
-      if (message.startsWith('!s:')) {
-        console.log(message.substring(3))
-        mainWindow.webContents.send('motionstart', true)
-      } else if (message.startsWith('!e:')) {
-        console.log(message.substring(3))
-        mainWindow.webContents.send('motionend', true)
-      } else if (message.startsWith('!c:')) {
-        console.log(message.substring(3))
-        mainWindow.webContents.send('calibrated', true)
-      } else if (message.startsWith('!E:')) {
-        console.log(message.substring(3))
-        mainWindow.webContents.send('Error', message.substring(3))
-        mtnProcess.kill();
-      }  else {
-        console.error(message)
-      }
-    })
+  mtnProcess.stdout.on('data', function (data) {
+    var message = data.toString()
+    if (message.startsWith('!s:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('motionstart', true)
+    } else if (message.startsWith('!e:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('motionend', true)
+    } else if (message.startsWith('!c:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('calibrated', true)
+    } else if (message.startsWith('!E:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('Error', message.substring(3))
+      mtnProcess.kill();
+    } else {
+      console.error(message)
+    }
+  })
 }
 
 if (config.remote.enabled || !config) {
@@ -146,7 +143,7 @@ if (config.remote.enabled || !config) {
     }
   }
   console.log('Remote listening on http://%s:%d', addresses[0], config.remote.port)
-  
+
   remote.on('command', function (command) {
     mainWindow.webContents.send('final-results', command)
   })
@@ -168,7 +165,7 @@ if (config.remote.enabled || !config) {
   })
 
   remote.on('kiosk', function () {
-    if(mainWindow.isKiosk()){
+    if (mainWindow.isKiosk()) {
       mainWindow.setKiosk(false)
     } else {
       mainWindow.setKiosk(true)
@@ -197,15 +194,15 @@ app.on('window-all-closed', function () {
 
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
-  if (kwsProcess){
+  if (kwsProcess) {
     kwsProcess.kill()
   }
   // While cleaning up we should turn the screen back on in the event 
   // the program exits before the screen is woken up
-  if(mtnProcess){
+  if (mtnProcess) {
     mtnProcess.kill()
   }
-  if(config.autoTimer && config.autoTimer.wake_cmd){
+  if (config.autoTimer && config.autoTimer.wake_cmd) {
     exec(config.autoTimer.wake_cmd).kill()
   }
 })

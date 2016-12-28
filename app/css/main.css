@@ -37,6 +37,10 @@ dt {
     color: #999;
 }
 
+.first-run h1{
+    font-size: 48px;
+}
+
 /* Displays */
 .sleep-cover {
     background-color: black;
