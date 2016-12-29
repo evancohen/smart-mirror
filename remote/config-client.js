@@ -46,7 +46,8 @@ $(function () {
     catch (e) {
       $('#result').html('<pre>Entered content is not yet a valid' +
         ' JSON Form object.\n\nThe JSON Form library returned:\n' +
-        e + '</pre>');
+        e.stack + '</pre>');
+        console.error("error stack",e.stack)
       return;
     }
   })
