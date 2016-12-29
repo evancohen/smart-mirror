@@ -40,7 +40,7 @@ function Rss($scope, $http, $q, $interval, CalendarService) {
         $scope.currentIndex = ($scope.currentIndex >= $scope.rss.feed.length)? 0: $scope.currentIndex + 1;
     }
 
-    if (typeof config.rss !== 'undefined') {
+    if (typeof config.rss !== 'undefined' && typeof config.rss.feeds != 'undefined') {
         refreshNews();
         $interval(refreshNews, config.rss.refreshInterval * 60000 || 1800000)
         $interval(cycleNews, 8000)
