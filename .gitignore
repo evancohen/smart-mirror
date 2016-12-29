@@ -7,3 +7,6 @@ bower_components
 fb-token.json
 speech/snowboydecoder.pyc
 speech/snowboydetect.pyc
+.vscode
+keyfile.json
+smart-mirror.log

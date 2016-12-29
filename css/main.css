@@ -76,7 +76,7 @@ dt {
     box-shadow: inset 0px 0px 0px 0px #fff
 }
 
-.interim-result {
+.partial-result {
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -189,7 +189,7 @@ ul.calendar {
 
 .weather {
     margin-left: auto;
-    display: inline-block;
+    display: block;
     text-align: right;
     width: 230px;
 }
@@ -263,7 +263,7 @@ ul.calendar {
     margin-right: 5px;
 }
 
-.traffic-information, .stock-information {
+.traffic-information, .stock-information, .tv-information {
     text-align: right;
     margin-top: 10px;
     margin-right: 10px;

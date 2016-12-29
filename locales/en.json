@@ -65,6 +65,16 @@
             "voice": "Wake up",
             "description": "Wake up."
         },
+        "screen_off": {
+            "text": "Screen Off",
+            "voice": "(turn) screen off",
+            "description": "Screen off."
+        },
+        "screen_on": {
+            "text": "Screen On",
+            "voice": "(turn) screen on",
+            "description": "Screen on."
+        },
         "debug": {
             "text": "Show debug information",
             "voice": "Show debug information",
@@ -127,7 +137,7 @@
         },
         "reminder_insert": {
             "text": "Remind me to ________",
-            "voice": "Remind me to *task",
+            "voice": "(set a) Remind(er) (for) (me) (to) *task",
             "description": "Add something to the reminders list."
         },
         "reminder_clear": {
@@ -137,7 +147,7 @@
         },
         "reminder_show": {
             "text": "Show me reminders",
-            "voice": "Show me reminders",
+            "voice": "(show) (me) (my) reminders",
             "description": "Display the reminders list."
         },
         "time_show": {

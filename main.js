@@ -2,7 +2,7 @@
 /* global process */
 const electron = require('electron')
 // Child Process for keyword spotter
-const {spawn} = require('child_process')
+const {spawn, exec} = require('child_process')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -16,18 +16,20 @@ const DevelopmentMode = process.argv[2] == "dev";
 
 // Load the smart mirror config
 var config;
-try{
+try {
   config = require(__dirname + "/config.js");
 } catch (e) {
   var error = "Unknown Error"
-  
+
   if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
   } else if (typeof e.message != 'undefined') {
-    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message
+    console.log(e)
+    error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
+    'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
   }
-  
+
   console.log("Config Error: ", error)
   app.quit()
 }
@@ -36,8 +38,8 @@ try{
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
-  
+function createWindow() {
+
   // Get the displays and render the mirror on a secondary screen if it exists
   var atomScreen = electron.screen;
   var displays = atomScreen.getAllDisplays();
@@ -49,12 +51,12 @@ function createWindow () {
     }
   }
 
-  var browserWindowOptions = {width: 800, height: 600, icon: 'favicon.ico' , kiosk:true, autoHideMenuBar:true, darkTheme:true};
+  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true };
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
   }
-  
+
   // Create the browser window.
   mainWindow = new BrowserWindow(browserWindowOptions)
 
@@ -62,7 +64,7 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/index.html')
 
   // Open the DevTools if run with "npm start dev"
-  if(DevelopmentMode){
+  if (DevelopmentMode) {
     mainWindow.webContents.openDevTools();
   }
 
@@ -75,28 +77,56 @@ function createWindow () {
   })
 }
 
-// Get keyword spotting config
-if(typeof config.speech == 'undefined'){
-  config.speech = {}
-}
-var modelFile = config.speech.model || "smart_mirror.pmdl"
-var kwsSensitivity = config.speech.sensitivity || 0.5
-
 // Initilize the keyword spotter
-var kwsProcess = spawn('python', ['./speech/kws.py', modelFile, kwsSensitivity], {detached: false})
-// Handel messages from python script
+var kwsProcess = spawn('node', ['./sonus.js'], {detached: false})
+// Handel messages from node
 kwsProcess.stderr.on('data', function (data) {
-    var message = data.toString()
-    if(message.startsWith('INFO')){
-        // When a keyword is spotted, ping the speech service
-        mainWindow.webContents.send('keyword-spotted', true)
-    }else{
-        console.error(message)
-    }
+  var message = data.toString()
+  console.error("ERROR", message.substring(4))
 })
+
 kwsProcess.stdout.on('data', function (data) {
-    console.log(data.toString())
+  var message = data.toString()
+  if (message.startsWith('!h:')) {
+    mainWindow.webContents.send('hotword', true)
+  } else if (message.startsWith('!p:')) {
+    mainWindow.webContents.send('partial-results', message.substring(4))
+  } else if (message.startsWith('!f:')) {
+    mainWindow.webContents.send('final-results', message.substring(4))
+  } else {
+    console.error(message.substring(3))
+  }
 })
+
+// Motion detection
+if(config.motion && config.motion.enabled){
+    var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
+    // Handel messages from node
+    mtnProcess.stderr.on('data', function (data) {
+      var message = data.toString()
+      console.error("ERROR", message.substring(4))
+    })
+
+    mtnProcess.stdout.on('data', function (data) {
+      var message = data.toString()
+      if (message.startsWith('!s:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('motionstart', true)
+      } else if (message.startsWith('!e:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('motionend', true)
+      } else if (message.startsWith('!c:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('calibrated', true)
+      } else if (message.startsWith('!E:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('Error', message.substring(3))
+        mtnProcess.kill();
+      }  else {
+        console.error(message)
+      }
+    })
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -111,4 +141,13 @@ app.on('window-all-closed', function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
   kwsProcess.kill()
+
+  // While cleaning up we should turn the screen back on in the event 
+  // the program exits before the screen is woken up
+  if(mtnProcess){
+    mtnProcess.kill()
+  }
+  if(config.autoTimer && config.autoTimer.wake_cmd){
+    exec(config.autoTimer.wake_cmd).kill()
+  }
 })
