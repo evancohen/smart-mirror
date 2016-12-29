@@ -30,12 +30,12 @@
 
         service.wake = function () {
 	        service.woke = true;
-            service.exec(config.autoTimer.wake_cmd, service.puts);
+            service.exec(config.autoTimer.wakeCmd, service.puts);
         };
 
         service.sleep = function () {
 	        service.woke = false;
-            service.exec(config.autoTimer.sleep_cmd, service.puts);
+            service.exec(config.autoTimer.sleepCmd, service.puts);
         };
 
         service.puts = function (error, stdout, stderr) {
