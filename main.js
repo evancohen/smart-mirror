@@ -203,7 +203,7 @@ app.on('will-quit', function () {
   if (mtnProcess) {
     mtnProcess.kill()
   }
-  if (config.autoTimer && config.autoTimer.wake_cmd) {
-    exec(config.autoTimer.wake_cmd).kill()
+  if (config.autoTimer && config.autoTimer.wakeCmd) {
+    exec(config.autoTimer.wakeCmd).kill()
   }
 })
