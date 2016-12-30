@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "electron": "^1.4.4",
     "install": "^0.8.1",
     "npm": "^3.8.8",
-    "npm-platform-dependencies":"latest",
+    "npm-platform-dependencies": "latest",
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
@@ -45,5 +45,5 @@
     "hyperion-client": "1.0.3",
     "socket.io": "^1.6.0",
     "sonus": "^0.1.4"
-    }
+  }
 }
