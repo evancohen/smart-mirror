@@ -9,6 +9,7 @@ function Search($scope, $http, SpeechService) {
                 'q': query,
                 'type': 'video',
                 'videoEmbeddable': 'true',
+                'videoSyndicated': 'true',
                 //Sharing this key in the hopes that it wont be abused 
                 'key': config.youtube.key
             }
