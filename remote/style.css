@@ -8,6 +8,11 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+nav {
+  height:20px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -19,6 +24,16 @@ body {
   vertical-align: middle;
 }
 
+.navbar-header {
+  display: inline-block;
+}
+
+.navbar-config {
+  font-size: x-large;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    float: right;
+}
 
 /* Custom page CSS
 -------------------------------------------------- */
