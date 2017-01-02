@@ -1,0 +1,17 @@
+<ul ng-controller="Calendar" class="calendar fade" ng-show="focus == 'default'" ng-class="config.calendar.showCalendarNames ? 'show-calendar-names' : ''">
+    <li class="event" ng-repeat="event in calendar" ng-class="(calendar[$index - 1].label != event.label) ? 'day-marker' : ''">
+        <div class="event-details">
+            <span class="day">
+                      <span ng-bind="event.startName"></span>
+            <span ng-if="event.startName != event.endName"> - <span ng-bind="event.endName"></span></span>
+            </span>
+            <div class="details calendar-name" ng-bind="event.calendarName"></div>
+            <span class="summary" ng-bind="event.SUMMARY"></span>
+            <div class="details" ng-if="event.start.format('LT') != event.end.format('LT')">
+                <span ng-if="event.startName != event.endName"><span ng-bind="event.start.format('M/D')"></span> <span ng-bind="event.start.format('LT')"></span>                - <span ng-bind="event.end.format('M/D')"></span> <span ng-bind="event.end.format('LT')"></span></span>
+                <span ng-if="event.startName == event.endName"><span ng-bind="event.start.format('LT')"></span> - <span ng-bind="event.end.format('LT')"></span></span>
+            </div>
+            <div class="details" ng-if="event.start.format('LT') == event.end.format('LT')">All day</div>
+        </div>
+    </li>
+</ul>

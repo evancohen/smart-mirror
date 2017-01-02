@@ -1,12 +1,30 @@
-# Smart Mirror
-[![Join the chat at https://gitter.im/evancohen/smart-mirror](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/evancohen/smart-mirror?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Stories in Progress](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg)] (https://waffle.io/evancohen/smart-mirror) [![Dependency Status](https://dependencyci.com/github/evancohen/smart-mirror/badge)](https://dependencyci.com/github/evancohen/smart-mirror)
+<h1 align="center">Smart Mirror</h1>
 
-Check out the [smart mirror documentation](http://docs.smart-mirror.io) for more information, installation instructions, and troubleshooting.
+<p align="center">
+<a href="https://discord.gg/EMb4ynW"><img src="https://discordapp.com/api/guilds/258802311298547713/widget.png" alt="Discord Chat"/></a>
+<a href="https://waffle.io/evancohen/smart-mirror"><img src="https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg" alt="Stories in progress" /></a>
+<a href='https://dependencyci.com/github/evancohen/smart-mirror'><img src='https://dependencyci.com/github/evancohen/smart-mirror/badge' alt='Dependency Status'/></a>
+</p>
+<p align="center">
+A voice controlled life automation hub, most commonly powered by the Raspberry Pi.
+</p>
 
-#### Gitter:
-A live chat to get help and discuss mirror related issues: https://gitter.im/evancohen/smart-mirror. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
+### Installation
+Quick installation for the Raspberry Pi 2+
+```
+curl -sL https://raw.githubusercontent.com/evancohen/smart-mirror/master/scripts/pi-install.sh | bash
+```
 
-#### Development and Contributing
+### [Documentation](http://docs.smart-mirror.io)
+Check out the documentation for more information:
+- [Manual installation](https://docs.smart-mirror.io/docs/installation.html)
+- [Configuration](https://docs.smart-mirror.io/docs/configuration.html) 
+- [Troubleshooting](https://docs.smart-mirror.io/docs/troubleshooting.html)
+
+### Discord
+A live chat to get help and discuss mirror related issues: https://discord.gg/EMb4ynW. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
+
+### Development and Contributing
 See the [dev](https://github.com/evancohen/smart-mirror/tree/dev) branch for features that are curently in development.
 If you would like to contribue please follow the [contribution guidelines](https://github.com/evancohen/smart-mirror/blob/master/CONTRIBUTING.md).
 To launch the mirror with a debug window attached use the following command:
@@ -15,13 +33,12 @@ npm start dev
 ```
 For more information see the [Development and Contributing](http://docs.smart-mirror.io/docs/development_and_contributing.html) section of the documentation.
 
-#### Troubleshooting
-For known issues and trobleshooting see the documentation: [Troubleshooting](http://docs.smart-mirror.io/docs/troubleshooting.html)
-
-#### Current Feature Requests/Suggestions
-Please use feathub.com to add Feature Requests and Suggestions. We also recommend looking through the already existing requests to help in ranking the most popular and useful Features to Smart-Mirror users.
-[![Feature Requests](http://feathub.com/evancohen/smart-mirror?format=svg)](http://feathub.com/evancohen/smart-mirror)
-
+### Current Feature Requests/Suggestions
+Please use feathub.com to add Feature Requests and Suggestions. We also recommend looking through the already existing requests to help in ranking the most popular and useful Features to Smart-Mirror users.  
+  
+<p align="center">
+<a href="http://feathub.com/evancohen/smart-mirror"><img src="http://feathub.com/evancohen/smart-mirror?format=svg" alt="[Feature Requests"/></a>
+</p>
 
 ### License
 MIT

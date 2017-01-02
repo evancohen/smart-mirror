@@ -1,0 +1,31 @@
+{
+    "schema": {
+        "lastfm": {
+            "type": "object",
+            "title": "last.FM Settings",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "last.fm API key"
+                },
+                "user": {
+                    "type": "string",
+                    "title": "last.fm User Name"
+                },
+                "refreshInterval": {
+                    "type": "number",
+                    "title": "Refresh Interval for last.fm",
+                    "default": "0.6"
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "lastfm",
+            "expandable": true,
+            "order":0
+        }
+    ]
+}

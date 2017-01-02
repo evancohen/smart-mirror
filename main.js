@@ -3,6 +3,8 @@
 const electron = require('electron')
 // Child Process for keyword spotter
 const {spawn, exec} = require('child_process')
+// Smart mirror remote
+const remote = require('./remote.js')
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -12,26 +14,23 @@ const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
-const DevelopmentMode = process.argv[2] == "dev";
+const DevelopmentMode = process.argv[2] == "dev"
 
 // Load the smart mirror config
-var config;
+let config
 try {
-  config = require(__dirname + "/config.js");
+  config = require("./config.json")
 } catch (e) {
-  var error = "Unknown Error"
-
+  let error = "Unknown Error"
+  config = require("./config.default.json")
   if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
   } else if (typeof e.message != 'undefined') {
     console.log(e)
     error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
-    'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
+      'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
   }
-
-  console.log("Config Error: ", error)
-  app.quit()
 }
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -41,17 +40,17 @@ let mainWindow
 function createWindow() {
 
   // Get the displays and render the mirror on a secondary screen if it exists
-  var atomScreen = electron.screen;
-  var displays = atomScreen.getAllDisplays();
-  var externalDisplay = null;
+  var atomScreen = electron.screen
+  var displays = atomScreen.getAllDisplays()
+  var externalDisplay = null
   for (var i in displays) {
     if (displays[i].bounds.x > 0 || displays[i].bounds.y > 0) {
-      externalDisplay = displays[i];
-      break;
+      externalDisplay = displays[i]
+      break
     }
   }
 
-  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true };
+  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true }
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
@@ -65,7 +64,7 @@ function createWindow() {
 
   // Open the DevTools if run with "npm start dev"
   if (DevelopmentMode) {
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools()
   }
 
   // Emitted when the window is closed.
@@ -78,25 +77,111 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-var kwsProcess = spawn('node', ['./sonus.js'], {detached: false})
-// Handel messages from node
-kwsProcess.stderr.on('data', function (data) {
-  var message = data.toString()
-  console.error("ERROR", message.substring(4))
-})
+if (config && config.speech) {
+  var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
+  // Handel messages from node
+  kwsProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    console.error("ERROR", message.substring(4))
+  })
 
-kwsProcess.stdout.on('data', function (data) {
-  var message = data.toString()
-  if (message.startsWith('!h:')) {
-    mainWindow.webContents.send('hotword', true)
-  } else if (message.startsWith('!p:')) {
-    mainWindow.webContents.send('partial-results', message.substring(4))
-  } else if (message.startsWith('!f:')) {
-    mainWindow.webContents.send('final-results', message.substring(4))
-  } else {
-    console.error(message.substring(3))
+  kwsProcess.stdout.on('data', function (data) {
+    var message = data.toString()
+    if (message.startsWith('!h:')) {
+      mainWindow.webContents.send('hotword', true)
+    } else if (message.startsWith('!p:')) {
+      mainWindow.webContents.send('partial-results', message.substring(4))
+    } else if (message.startsWith('!f:')) {
+      mainWindow.webContents.send('final-results', message.substring(4))
+    } else {
+      console.error(message.substring(3))
+    }
+  })
+}
+// Motion detection
+if (config && config.motion && config.motion.enabled) {
+  var mtnProcess = spawn('npm', ['run', 'motion'], { detached: false })
+  // Handel messages from node
+  mtnProcess.stderr.on('data', function (data) {
+    var message = data.toString()
+    console.error("ERROR", message.substring(4))
+  })
+
+  mtnProcess.stdout.on('data', function (data) {
+    var message = data.toString()
+    if (message.startsWith('!s:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('motionstart', true)
+    } else if (message.startsWith('!e:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('motionend', true)
+    } else if (message.startsWith('!c:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('calibrated', true)
+    } else if (message.startsWith('!E:')) {
+      console.log(message.substring(3))
+      mainWindow.webContents.send('Error', message.substring(3))
+      mtnProcess.kill();
+    } else {
+      console.error(message)
+    }
+  })
+}
+
+if (config.remote && config.remote.enabled) {
+  remote.start()
+
+  // Deturmine the local IP address
+  const interfaces = require('os').networkInterfaces()
+  let addresses = []
+  for (let k in interfaces) {
+    for (let k2 in interfaces[k]) {
+      let address = interfaces[k][k2]
+      if (address.family === 'IPv4' && !address.internal) {
+        addresses.push(address.address)
+      }
+    }
   }
-})
+  console.log('Remote listening on http://%s:%d', addresses[0], config.remote.port)
+
+  remote.on('command', function (command) {
+    mainWindow.webContents.send('final-results', command)
+  })
+
+  remote.on('connected', function () {
+    mainWindow.webContents.send('connected')
+  })
+
+  remote.on('disconnected', function () {
+    mainWindow.webContents.send('disconnected')
+  })
+
+  remote.on('devtools', function (open) {
+    if (open) {
+      mainWindow.webContents.openDevTools()
+    } else {
+      mainWindow.webContents.closeDevTools()
+    }
+  })
+
+  remote.on('kiosk', function () {
+    if (mainWindow.isKiosk()) {
+      mainWindow.setKiosk(false)
+    } else {
+      mainWindow.setKiosk(true)
+    }
+  })
+
+  remote.on('reload', function () {
+    mainWindow.reload()
+  })
+
+  remote.on('relaunch', function() {
+    console.log("Relaunching...")
+    app.relaunch()
+    app.quit()
+  })
+}
 
 // Motion detection
 if(config.motion && config.motion.enabled){
@@ -140,14 +225,15 @@ app.on('window-all-closed', function () {
 
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
-  kwsProcess.kill()
-
+  if (kwsProcess) {
+    kwsProcess.kill()
+  }
   // While cleaning up we should turn the screen back on in the event 
   // the program exits before the screen is woken up
-  if(mtnProcess){
+  if (mtnProcess) {
     mtnProcess.kill()
   }
-  if(config.autoTimer && config.autoTimer.wake_cmd){
-    exec(config.autoTimer.wake_cmd).kill()
+  if (config.autoTimer && config.autoTimer.wakeCmd) {
+    exec(config.autoTimer.wakeCmd).kill()
   }
 })

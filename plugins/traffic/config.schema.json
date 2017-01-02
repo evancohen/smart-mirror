@@ -1,0 +1,89 @@
+{
+    "schema": {
+        "traffic": {
+            "type": "object",
+            "title": "Traffic Settings",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "Bing Traffic API Key"
+                },
+                "refreshInterval": {
+                    "type": "string",
+                    "title": "Refresh Traffic Interval (minutes)"
+                },
+                "trips": {
+                    "type": "array",
+                    "title": "Trips",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "mode": {
+                                "type": "string",
+                                "title": "Mode",
+                                "enum": [
+                                    "Driving",
+                                    "Transit",
+                                    "Walking"
+                                ],
+                                "default": "Driving"
+                            },
+                            "origin": {
+                                "type": "string",
+                                "title": "Starting Location"
+                            },
+                            "destination": {
+                                "type": "string",
+                                "title": "Destination Location"
+                            },
+                            "name": {
+                                "type": "string",
+                                "title": "Trip Name"
+                            },
+                            "startTime": {
+                                "type": "string",
+                                "title": "Time to start displaying on Smart Mirror"
+                            },
+                            "endTime": {
+                                "type": "string",
+                                "title": "Time to stop displaying on Smart Mirror"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form":[
+      {
+        "type":"fieldset",
+        "title":"Traffic Settings",
+        "expandable":true,
+        "order":0,
+        "items": [
+          "traffic.key",
+          "traffic.refreshInterval",
+          {
+            "type":"tabarray",
+            "items": [
+              {
+                "type":"section",
+                "legend":"{{value}}",
+                "items": [
+                  {
+                    "key":"traffic.trips[].name",
+                    "valueInLegend":true
+                  },
+                  "traffic.trips[].mode",
+                  "traffic.trips[].origin",
+                  "traffic.trips[].destination",
+                  "traffic.trips[].startTime",
+                  "traffic.trips[].endTime"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+}

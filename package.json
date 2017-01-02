@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -39,11 +39,10 @@
   "dependencies": {
     "annyang": "^2.6.0",
     "electron-json-storage": "2.0.0",
-    "express": "^4.13.4",
+    "express": "^4.14.0",
     "fitbit-oauth2": "0.0.1",
     "hyperion-client": "1.0.3",
-    "sonus": "^0.1.2",
-    "johnny-five": "0.10.6",
-    "raspi-io": "7.1.0"
+    "socket.io": "^1.6.0",
+    "sonus": "^0.1.4"
   }
 }

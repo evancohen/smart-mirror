@@ -1,0 +1,180 @@
+{
+    "schema": {
+        "greeting": {
+            "type": "object",
+            "title": "Greetings",
+            "properties": {
+                "option":{
+                  "type":"string",
+                  "title":"How would you like greetings displayed?",
+                  "enum":[
+                    "allDay",
+                    "time"
+                  ]
+                  },
+                "allDay": {
+                    "type": "array",
+                    "title": "Night Greeting",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "night": {
+                    "type": "array",
+                    "title": "Night Greeting",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "morning": {
+                    "type": "array",
+                    "title": "Morning Greeting",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "midday": {
+                    "type": "array",
+                    "title": "Midday Greeting",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "evening": {
+                    "type": "array",
+                    "title": "Evening Greeting",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "form":[
+        {
+          "type":"fieldset",
+          "title":"Greeting Settings",
+          "expandable":true,
+          "order":0,
+          "items":[
+            {
+              "key":"greeting.option",
+              "type":"selectfieldset",
+              "titleMap": {
+                "allDay":"Randomly All Day",
+                "time":"By Time of Day"
+              },
+              "items": [
+                  {
+                    "type":"tabarray",
+                    "title":"Random Greetings",
+                    "items":[
+                        {
+                          "type":"section",
+                          "legend":"{{value}}",
+                          "items":[
+                            {
+                              "key":"greeting.allDay[]",
+                              "valueInLegend": true
+                            }
+                          ]
+                        }
+                    ]
+                  },
+                  { 
+                    "type":"section",
+                    "items":[
+                          {
+                              "type":"tabarray",
+                              "title":"Morning Greetings",
+                              "items":[
+                                  {
+                                    "type":"section",
+                                    "legend":"{{value}}",
+                                    "items":[
+                                      {
+                                        "key":"greeting.morning[]",
+                                        "valueInLegend": true
+                                      }
+                                    ]
+                                  }
+                                ]
+                          },
+                          {
+                                "type":"tabarray",
+                                "title":"Midday Greetings",
+                                "items":[
+                                    {
+                                      "type":"section",
+                                      "legend":"{{value}}",
+                                      "items":[
+                                        {
+                                          "key":"greeting.midday[]",
+                                          "valueInLegend": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                          },
+                          {
+                                "type":"tabarray",
+                                "title":"Evening Greetings",
+                                "items":[
+                                    {
+                                      "type":"section",
+                                      "legend":"{{value}}",
+                                      "items":[
+                                        {
+                                          "key":"greeting.evening[]",
+                                          "valueInLegend": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                          },
+                          {
+                                "type":"tabarray",
+                                "title":"Night Greetings",
+                                "items":[
+                                    {
+                                      "type":"section",
+                                      "legend":"{{value}}",
+                                      "items":[
+                                        {
+                                          "key":"greeting.night[]",
+                                          "valueInLegend": true
+                                        }
+                                      ]
+                                    }
+                                  ]
+                          }
+                    ]
+                  }
+                ]
+          }
+        ]
+      }
+    ],
+    "value":{
+    "greeting": {
+      "allDay": [
+        "Hi, sexy!", "Greetings, commander"
+      ],
+      "night": [
+        "what aren't you in bed?",
+        "zZzzZz",
+        "Time to sleep"
+      ],
+      "morning": [
+        "Good Morning"
+      ],
+      "midday": [
+        "Hey!",
+        "Hello"
+      ],
+      "evening": [
+        "Good evening"
+      ]
+    }
+  }
+}

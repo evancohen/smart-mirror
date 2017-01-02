@@ -1,0 +1,11 @@
+{
+  "general": {
+    "language": "en-US",
+    "layout": "main"
+  },
+  "remote": {
+    "enabled": true,
+    "firstRun": true,
+    "port": 8080
+  }
+}

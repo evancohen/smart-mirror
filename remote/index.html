@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Smart Mirror Remote</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Smart Mirror Remote</a>
+            </div>
+            <a class="navbar-text navbar-config" href="/config.html"><span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="settings"></span></a>
+        </div>
+    </nav>
+
+    <!-- Begin page content -->
+    <div class="container">
+        <!-- <div class="page-header">
+            <h1>Sticky footer with fixed navbar</h1>
+        </div>-->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Speak!</button></div>
+        </div>
+        <div class="row">
+            <div class="lead col-md-6 col-md-offset-3">
+                <p class="lead">Press the button above to begin issuing a voice command to your <code>smart mirror</code>.</p>
+                <p>This won't effect your usage quota :)</p>
+            </div>
+        </div>
+        <div class="row">
+            <form class="lead col-md-6 col-md-offset-3">
+                <div class="checkbox">
+                    <label><input id="devtools" type="checkbox"> Toggle Devtools</label>
+                </div>
+                <button id="kiosk" class="btn btn-default">Toggle Kiosk Mode</button>
+                <button id="reload" class="btn btn-warning">Reload</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div id="connection-bar" class="container">
+            <p id="connection-text" class="text-muted">Connecting...</p>
+        </div>
+    </footer>
+
+
+    <!-- Smart Mirror remote JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document for profit -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/remote-client.js"></script>
+
+</body>
+
+</html>
