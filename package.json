@@ -10,6 +10,7 @@
     "train-model": "electron scripts/train-model.js",
     "sonus": "node sonus.js",
     "motion": "sudo node motion.js",
+    "update": "git pull && npm install",
     "wiredep": "wiredep -s index.html"
   },
   "repository": {
