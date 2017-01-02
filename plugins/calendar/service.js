@@ -148,6 +148,15 @@
               recuring_event.startName = startDate.calendar().toUpperCase();
               recuring_event.end = endDate;
               recuring_event.endName = endDate.subtract(1, 'seconds').calendar().toUpperCase();
+
+              if (recuring_event.startName && recuring_event.endName) {
+                if (recuring_event.startName == recuring_event.endName) {
+                  recuring_event.label = recuring_event.startName
+                } else {
+                  recuring_event.label = recuring_event.startName + " - " + recuring_event.endName;
+                }
+              }
+
               if (!contains(events, recuring_event)) {
                 events.push(recuring_event);
               }
