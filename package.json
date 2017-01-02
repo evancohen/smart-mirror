@@ -34,7 +34,6 @@
     "electron": "^1.4.4",
     "install": "^0.8.1",
     "npm": "^3.8.8",
-    "npm-platform-dependencies": "latest",
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
