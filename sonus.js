@@ -1,14 +1,16 @@
 'use strict'
 // Load in smart mirror config
 const fs = require('fs')
-var config = require(__dirname + "/config.js")
+var config = require("./config.json")
 
-if (!config || !config.speech || !config.speech.keyFilename || !config.speech.model || !config.language) {
+
+if (!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords || !config.general.language) {
   throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech"
 }
 
 var keyFile = JSON.parse(fs.readFileSync(config.speech.keyFilename, "utf8"))
 var umdl = __dirname + '/node_modules/sonus/resources/snowboy.umdl'
+
 // Configure Sonus
 const Sonus = require('sonus')
 const speech = require('@google-cloud/speech')({
@@ -29,14 +31,16 @@ let addHotword = function (file, hotword, sensitivity) {
 
 // Add our hotwords
 if (typeof config.speech.model == 'string') {
+  // Backwords compatability
   addHotword(config.speech.model, config.speech.keyword, sensitivity)
 } else {
-  for (let i = 0; i < config.speech.model.length; i++) {
-    addHotword(config.speech.model[i], config.speech.keyword[i], sensitivity)
+  for (let i = 0; i < config.speech.hotwords.length; i++) {
+    addHotword(config.speech.hotwords[i].model, config.speech.hotwords[i].keyword, sensitivity)
   }
 }
 
-const language = config.language
+
+const language = config.general.language
 const sonus = Sonus.init({ hotwords, language }, speech)
 
 // Start Recognition

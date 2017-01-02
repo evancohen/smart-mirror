@@ -1,7 +1,7 @@
 function Greeting($scope, $http, $interval) {
 
     var greetingUpdater = function () {
-        if (typeof config.greeting !== 'undefined' && !Array.isArray(config.greeting) && typeof config.greeting.midday !== 'undefined') {
+        if (typeof config.general.greeting !== 'undefined' && !Array.isArray(config.general.greeting) && typeof config.general.greeting.midday !== 'undefined') {
             var hour = moment().hour();
             var greetingTime = "midday";
 
@@ -12,15 +12,15 @@ function Greeting($scope, $http, $interval) {
             } else if (hour >= 23 || hour < 4) {
                 greetingTime = "night";
             }
-            var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
-            var nextGreeting = config.greeting[greetingTime][nextIndex]
+            var nextIndex = Math.floor(Math.random() * config.general.greeting[greetingTime].length);
+            var nextGreeting = config.general.greeting[greetingTime][nextIndex]
             $scope.greeting = nextGreeting;
-        } else if (Array.isArray(config.greeting)) {
-            $scope.greeting = config.greeting[Math.floor(Math.random() * config.greeting.length)];
+        } else if (Array.isArray(config.general.greeting)) {
+            $scope.greeting = config.general.greeting[Math.floor(Math.random() * config.general.greeting.length)];
         }
     };
 
-    if (typeof config.greeting !== 'undefined') {
+    if (typeof config.general.greeting !== 'undefined') {
         greetingUpdater();
         $interval(greetingUpdater, config.calendar.refreshInterval * 60000 || 3600000)
     }

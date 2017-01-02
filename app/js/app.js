@@ -2,7 +2,7 @@
 (function (angular) {
     'use strict';
 
-    var language = (typeof config.language != 'undefined') ? config.language.substring(0, 2).toLowerCase() : 'en';
+    var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2).toLowerCase() : 'en';
 
     angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
         .config(function (tmhDynamicLocaleProvider) {
@@ -21,7 +21,7 @@
             // Avoiding the duplicity of the locale for the default language, xx-YY -> xx
             // We are considering only the language
             // Please refer https://github.com/evancohen/smart-mirror/pull/179 for further discussion
-            var language = (typeof config.language != 'undefined') ? config.language.substring(0, 2) : 'en';
+            var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2) : 'en';
             $translateProvider.preferredLanguage(language);
         }])
 

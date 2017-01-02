@@ -19,7 +19,7 @@
 
         //set lang
         moment.locale(
-            (typeof config.language !== 'undefined') ? config.language.substring(0, 2).toLowerCase() : 'en',
+            (typeof config.general.language !== 'undefined') ? config.general.language.substring(0, 2).toLowerCase() : 'en',
             {
                 calendar: {
                     lastWeek: '[Last] dddd',
@@ -37,6 +37,9 @@
         SpeechService.init({
             listening: function (listening) {
                 $scope.listening = listening;
+                if (listening && !AutoSleepService.woke) {
+                    AutoSleepService.wake();
+                }
             },
             partialResult: function (result) {
                 $scope.partialResult = result;
@@ -102,24 +105,7 @@
             // Hide everything and "sleep"
             SpeechService.addCommand('sleep', function () {
                 console.debug("Ok, going to sleep...");
-                $scope.focus = "sleep";
-            });
-
-            // Go back to default view
-            SpeechService.addCommand('wake_up', defaultView);
-
-            // Turn off HDMI output
-            // THESE ARE BROKEN
-            SpeechService.addCommand('screen off', function () {
-                console.debug('turning screen off');
                 AutoSleepService.sleep();
-            });
-
-            // Turn on HDMI output
-            SpeechService.addCommand('screen on', function () {
-                console.debug('turning screen on');
-                AutoSleepService.wake();
-                $scope.focus = "default"
             });
 
             // Hide everything and "sleep"

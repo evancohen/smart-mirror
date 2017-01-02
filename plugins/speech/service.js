@@ -12,7 +12,7 @@ const {ipcRenderer} = require('electron');
             // workaround so we can trigger requests at any time 
             annyang.isListening = () => { return true }
             // Set lenguage and debug state
-            annyang.setLanguage((typeof config.language != 'undefined') ? config.language : 'en-US')
+            annyang.setLanguage((typeof config.general.language != 'undefined') ? config.general.language : 'en-US')
             annyang.debug(false)
 
             // add specified callback functions
@@ -66,26 +66,29 @@ const {ipcRenderer} = require('electron');
             var textId = 'commands.' + commandId + '.text';
             var descId = 'commands.' + commandId + '.description';
             $translate([voiceId, textId, descId]).then(function (translations) {
-                var command = {};
                 var phrase = translations[voiceId];
-                command[phrase] = function (arg1, arg2) {
-                    $rootScope.$apply(callback(arg1, arg2))
-                };
-                if (translations[textId] !== '') {
-                    var commandItem = { "text": translations[textId], "description": translations[descId] };
-                    commandList.push(commandItem);
-                }
-
-                // Extend our commands list
-                angular.extend(service.commands, command)
-
-                // Add the commands to annyang
-                annyang.addCommands(service.commands)
-                console.debug('added command "' + phrase + '"', service.commands)
+                var description = translations[textId]
+                service.addRawCommand(translations[voiceId], callback, translations[descId], translations[textId])
             });
         };
 
-        service.getCommands = function(){
+        service.addRawCommand = function (phrase, callback, commandDescription, commandText) {
+            var command = {};
+            command[phrase] = function (arg1, arg2) {
+                $rootScope.$apply(callback(arg1, arg2))
+            }
+            var commandItem = { "text": commandText || phrase, "description": commandDescription };
+            commandList.push(commandItem);
+
+            // Extend our commands list
+            angular.extend(service.commands, command)
+
+            // Add the commands to annyang
+            annyang.addCommands(service.commands)
+            console.debug('added command "' + phrase + '"', service.commands)
+        }
+
+        service.getCommands = function () {
             return commandList;
         }
 

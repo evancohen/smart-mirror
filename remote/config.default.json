@@ -1,0 +1,126 @@
+{
+  "general": {
+    "language": "en-US",
+    "layout": "main",
+    "greeting": {
+      "night": [
+        "what aren't you in bed?",
+        "zZzzZz",
+        "Time to sleep"
+      ],
+      "morning": [
+        "Good Morning"
+      ],
+      "midday": [
+        "Hey!",
+        "Hello"
+      ],
+      "evening": [
+        "Good evening"
+      ]
+    }
+  },
+  "remote": {
+    "enabled": true,
+    "port": 8080
+  },
+  "speech": {
+    "keyFilename": "./keyfile.json",
+    "hotwords": [
+      {
+        "keyword": "smart mirror",
+        "model": "smart_mirror.pmdl"
+      }
+    ],
+    "sensitivity": "0.5",
+    "continuous": false
+  },
+    "geoPosition": {
+       "latitude": 41.547188,
+       "longitude": -87.72968600000002
+    },
+    "forecast" : {
+        "key" : "",
+        "units" : "auto",
+        "refreshInterval" : 2
+    },
+    "light" : {
+        "settings" : {
+            "hueIp" : "",
+            "hueUsername" : ""
+        },
+        "setup" : [
+            {
+                "name" : "parlor",
+                "targets" : [
+                    {
+                        "lightType" : "hyperion",
+                        "ip" : "",
+                        "port" : "19444"
+                    },
+                    {
+                        "lightType" : "hue",
+                        "id" : 1
+                    }
+                ]
+            },
+            {
+                "name" : "bath",
+                "targets" : [
+                    {
+                        "lightType" : "hue",
+                        "id" : 3
+                    }
+                ]
+            }
+        ]
+    },
+   
+    "calendar": {
+      "icals" : [""],
+      "maxResults": 9,
+      "maxDays": 9,
+      "showCalendarNames": true
+    },
+   
+    "giphy": {
+      "key" : "dc6zaTOxFJmzC"
+    },
+   
+    "youtube": {
+      "key" : ""
+    },
+   
+    "soundcloud": {
+        "key" : ""
+    },
+    "traffic": {
+      "key" : "",
+
+      "refreshInterval" : 5,
+     
+      "trips" : []
+    },
+    "rss": {
+        "feeds" : [], 
+        "refreshInterval" : 120
+    },
+    "stock": {
+        "names": []
+    },
+    "autoTimer": {
+        "autoSleep": 40,
+        "autoWake": "07:00:00",
+        "wakeCmd": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1",
+        "sleepCmd": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
+    },
+    "motion": {
+      "enabled": false,
+    	"pin": "GPIO26"
+    },
+    "lastfm": {
+      "key": "",
+      "user": "",
+      "refreshInterval" : 0.6
+    }
+}

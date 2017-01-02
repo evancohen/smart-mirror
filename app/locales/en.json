@@ -60,21 +60,6 @@
             "voice": "Go to sleep",
             "description": "Go to sleep."
         },
-        "wake_up": {
-            "text": "Wake up",
-            "voice": "Wake up",
-            "description": "Wake up."
-        },
-        "screen_off": {
-            "text": "Screen Off",
-            "voice": "(turn) screen off",
-            "description": "Screen off."
-        },
-        "screen_on": {
-            "text": "Screen On",
-            "voice": "(turn) screen on",
-            "description": "Screen on."
-        },
         "debug": {
             "text": "Show debug information",
             "voice": "Show debug information",
@@ -137,7 +122,7 @@
         },
         "reminder_insert": {
             "text": "Remind me to ________",
-            "voice": "(set a) Remind(er) (for) (me) (to) *task",
+            "voice": "(set) (a) Remind(er) (for) (me) (to) *task",
             "description": "Add something to the reminders list."
         },
         "reminder_clear": {
@@ -157,7 +142,7 @@
         },
         "timer_start": {
             "text": "Timer for ________",
-            "voice": "(set a) timer (for) *duration",
+            "voice": "(set) (a) (start) (a) timer (for) *duration",
             "description": "Starts a timer."
         },
         "timer_show": {
@@ -199,6 +184,11 @@
             "text": "Turn (state) light(s) (action)",
             "voice": "(turn) (the) :state (the) light(s) *action",
             "description": "Control color and brightness of lights."
+        },
+        "show_remoteQR":{
+            "text": "Show Remote Link",
+            "voice": "Show remote (QR code) (QR) (link)",
+            "description": "Show the local IP of the Remote App URL"
         }
     }
 }

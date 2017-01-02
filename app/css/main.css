@@ -37,6 +37,10 @@ dt {
     color: #999;
 }
 
+.first-run h1{
+    font-size: 48px;
+}
+
 /* Displays */
 .sleep-cover {
     background-color: black;
@@ -482,6 +486,11 @@ ul.calendar {
 }
 
 .xkcd {
+    -webkit-filter: invert(100%);
+    max-width: 100%;
+}
+
+.qrImage {
     -webkit-filter: invert(100%);
     max-width: 100%;
 }

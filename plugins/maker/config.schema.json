@@ -1,0 +1,76 @@
+{
+    "schema": {
+        "maker": {
+            "type": "object",
+            "title": "Maker",
+            "description" : "Codeless, custom commands",
+            "properties": {
+                "commands": {
+                    "type": "array",
+                    "title": "Custom Requests",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                          "utterance": {
+                                "type": "string",
+                                "title": "Utterance"
+                            },  
+                            "method": {
+                                "type": "string",
+                                "title": "Method",
+                                "enum": [
+                                    "GET",
+                                    "POST",
+                                    "PUT"
+                                ],
+                                "default": "GET"
+                            },
+                            "url": {
+                                "type": "url",
+                                "title": "Request URL"
+                            },
+                            "body": {
+                                "type": "textarea",
+                                "title": "JSON Body"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form": [
+      
+      {
+        "type": "fieldset",
+        "title": "Maker Settings",
+        "expandable":true,
+        "order":0,
+        "items": [
+             {
+              "type":"help",
+              "helpvalue":"<h6>Codeless, custom commands</h6>"
+            },
+            {
+              "type": "tabarray",
+              "title": "<h4>Custom Requests</h4>",
+              "items": [
+                {
+                  "type": "section",
+                  "legend": "{{value}}",
+                  "items": [
+                    {
+                      "key": "maker.commands[].utterance",
+                      "valueInLegend": true
+                    },
+                    "maker.commands[].method",
+                    "maker.commands[].url",
+                    "maker.commands[].body"
+                  ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+}

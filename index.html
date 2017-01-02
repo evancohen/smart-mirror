@@ -4,10 +4,15 @@
 <head ng-controller="Theme">
   <meta charset="utf-8">
   <title>Smart Mirror</title>
-
   <script>
     const annyang = require('annyang')
     const fs = require('fs')
+    let config
+    try{
+      config = require('./config.json')
+    } catch (e){
+      config = require('./config.default.json')
+    }
     // Error logging
     window.onerror = function (errorMsg, url, lineNumber) {
         fs.appendFileSync('./smart-mirror.log', '['+ new Date().toString() + '] ' 
@@ -41,6 +46,7 @@
   <div class="container" ng-class="(listening == true)?'listening':'not-listening'">
     <div class="middle-center">
       <h1 ng-controller="Greeting" ng-bind="greeting" ng-cloak></h1>
+      <div ng-include="'plugins/remote/index.html'"></div>
       <div ng-include="'plugins/soundcloud/index.html'"></div>
       <div ng-include="'plugins/map/index.html'"></div>
       <div ng-include="'plugins/xkcd/index.html'"></div>
@@ -65,9 +71,12 @@
     <div class="bottom-right">
       <!-- Someday something will live here -->
     </div>
+    <div ng-controller="Maker"></div>
   </div>
-  <!-- Sleep cover -->
-  <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
+
+  <!-- Smart Mirror JS 
+  ==========================================================================
+  The good stuff. -->
 
   <!-- bower:js -->
   <script src="bower_components/moment/min/moment-with-locales.js"></script>
@@ -83,8 +92,8 @@
   <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 
   <!-- App -->
-  <script src="config.js"></script>
   <script src="app/js/app.js"></script>
+  
 
   <!-- Services -->
   <script src="plugins/calendar/service.js"></script>
@@ -117,6 +126,8 @@
   <script src="plugins/greeting/controller.js"></script>
   <script src="plugins/weather/controller.js"></script>
   <script src="plugins/calendar/controller.js"></script>
+  <script src="plugins/remote/controller.js"></script>
+  <script src="plugins/maker/controller.js"></script>
 
 </body>
 
