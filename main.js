@@ -183,6 +183,36 @@ if (config.remote && config.remote.enabled) {
   })
 }
 
+// Motion detection
+if(config.motion && config.motion.enabled){
+    var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
+    // Handel messages from node
+    mtnProcess.stderr.on('data', function (data) {
+      var message = data.toString()
+      console.error("ERROR", message.substring(4))
+    })
+
+    mtnProcess.stdout.on('data', function (data) {
+      var message = data.toString()
+      if (message.startsWith('!s:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('motionstart', true)
+      } else if (message.startsWith('!e:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('motionend', true)
+      } else if (message.startsWith('!c:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('calibrated', true)
+      } else if (message.startsWith('!E:')) {
+        console.log(message.substring(3))
+        mainWindow.webContents.send('Error', message.substring(3))
+        mtnProcess.kill();
+      }  else {
+        console.error(message)
+      }
+    })
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
