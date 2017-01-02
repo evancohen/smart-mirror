@@ -1,0 +1,35 @@
+{
+    "schema": {
+        "remote": {
+            "type": "object",
+            "title": "Remote Server Settings",
+            "properties": {
+                "enabled": {
+                    "default": true,
+                    "type": "boolean",
+                    "title": "Remote Server Enabled"
+                },
+                "port": {
+                    "default": 8080,
+                    "type": "integer",
+                    "title": "Remote Server Port",
+                    "required": true
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "key": "remote",
+            "type": "fieldset",
+            "expandable": false,
+            "order":-25
+        }
+    ],
+    "value": {
+        "remote": {
+            "enabled": true,
+            "port": 8080
+        }
+    }
+}

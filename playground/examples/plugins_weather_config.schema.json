@@ -1,0 +1,33 @@
+{
+    "schema": {
+        "forecast": {
+            "type": "object",
+            "title": "<a href='http://Forecast.io'>Forecast.io API Settings</a>",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "API Key"
+                },
+                "units": {
+                    "type": "string",
+                    "title": "Units",
+                    "description": "(see forecast.io documentation if you're getting the wrong units)",
+                    "default": "auto"
+                },
+                "refreshInterval": {
+                    "type": "integer",
+                    "title": "Refresh Interval (minutes)",
+                    "default": 2
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "forecast",
+            "expandable": true,
+            "order":0
+        }
+    ]
+}

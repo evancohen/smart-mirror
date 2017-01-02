@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>JSON Form Playground</title>
+    <style>
+      @import url("https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/bootstrap.css");
+      @import url("https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/spectrum.css");
+
+      /* hidden on default */
+      div#popup { display: none; text-align: center; padding: 10px; font-size:  }
+
+
+      /* use a media query to filter small devices */
+      @media only screen and (max-device-width:768px) {
+      /* show the popup */
+      div#popup { display: block; }
+      div#container {display:none;}
+      }
+
+      h2 { font-weight: 200; }
+      .navbar-inner {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+      }
+      .row-fluid { margin: 0.5em; }
+      .tagline {
+        padding: 10px;
+        font-weight: 200;
+        margin-top: -1em;
+      }
+      .tagline p { font-size: 16px; }
+
+      .navbar .factory a {
+        display: block;
+        padding: 10px 20px 10px;
+        background: url(images/logo.png) 20px -4px no-repeat;
+        text-indent: -9999px;
+        width: 178px;
+      }
+
+      .footer {
+        margin-top: 40px;
+        padding: 10px 0.5em;
+        border-top: 1px solid #E5E5E5;
+      }
+      .footer p { margin-bottom: 0; }
+
+      #form select { width: auto; }
+      #form .add-on {
+        border: none;
+        background-color: inherit;
+      }
+
+      .expandable > legend:before {
+        content: '\25B8';
+        padding-right: 5px;
+      }
+      .expanded > legend:before {
+        content: '\25BE';
+      }
+
+      ._jsonform-array-buttons {
+        margin-left: 25px;
+      }
+
+      .jsonform-required > label:after {
+        content: ' *';
+        color: red;
+      }
+
+      form.jsonform-hasrequired:after {
+        content: '* Required field';
+        display: block;
+        color: red;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <div id="container">
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="brand" href="#">JSON Form Playground</a>
+            <div>
+              <ul class="nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="http://github.com/joshfire/jsonform/wiki">Documentation</a></li>
+                <li><a href="http://github.com/joshfire/jsonform">Project on github</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                <li class="factory"><a href="http://factory.joshfire.com">Joshfire Factory</a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tagline">
+        <p>Choose a JSON Form example below and check the generated form. Refer to the <a href="http://github.com/joshfire/jsonform/wiki">documentation</a> for details and directions to extend the form.</p>
+      </div>
+      <div class="row-fluid">
+        <div class="span7">
+          <form id="form" class="form-vertical"></form>
+        </div>
+        <div class="span5">
+          <h2>Generated form</h2>
+          <div id="result" class="well">(please wait)</div>
+        </div>
+      </div>
+    </div>
+    <div id="popup">
+      <h1> This page cannot be viewed on a mobile device</h1>
+      <p>While this page will technically work on a tablet in landscape orientation over 768 pixels wide, such as an iPad.</BR>
+       It works best on a full-size computer. This is tool is intended to make creating the form schema easier on you. Using any kind of mobile device defeats that purpose.</p>
+    </div>
+    <footer class="footer">
+      <p>Originally created by <a href="http://factory.joshfire.com">Joshfire Factory</a> workers. Then cleverly adapted for <a href="https://smart-mirror.io">Smart-Mirror</a> Development</p>
+    </footer>
+    
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/jquery.min.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/underscore.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jsv.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.core.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.widget.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.mouse.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.sortable.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/bootstrap-dropdown.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/spectrum.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/ace.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-json.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-html.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-css.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-javascript.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-less.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-markdown.js"></script>
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.transloadit2.js"></script>
+
+    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/lib/jsonform.js"></script>
+
+    <script src="playground.js"></script>
+  </body>
+</html>

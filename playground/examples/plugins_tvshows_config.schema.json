@@ -1,0 +1,30 @@
+{
+    "schema": {
+        "tvshows": {
+            "type": "object",
+            "title": "TV Show Settings",
+            "properties": {
+                "shows": {
+                    "type": "tabarray",
+                    "title": "TV Show Names",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "refreshInterval": {
+                    "type": "integer",
+                    "title": "Refresh Interval for TV Shows (minutes)",
+                    "default": 1440
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "tvshows",
+            "expandable": true,
+            "order":0
+        }
+    ]
+}

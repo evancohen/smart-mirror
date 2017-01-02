@@ -1,0 +1,44 @@
+{
+    "schema": {
+        "stock": {
+            "type": "object",
+            "title": "Stock Settings",
+            "properties": {
+                "names": {
+                    "type": "array",
+                    "title": "Stock Symbols",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "title": "Stock Settings",
+            "expandable": true,
+            "order":0,
+            "items":[
+              {
+                "type":"tabarray",
+                "title":"Stock Symbols",
+                "items":[
+                    {
+                      "type":"section",
+                      "legend":"{{value}}",
+                      "items": [
+                        {
+                          "key":"stock.names[]",
+                          "notitle":true,
+                          "valueInLegend":true
+                        }
+                      ]
+                    }  
+                ]
+              }
+          ]
+        }
+    ]
+}

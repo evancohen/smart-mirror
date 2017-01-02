@@ -1,0 +1,68 @@
+{
+    "schema": {
+        "calendar": {
+            "type": "object",
+            "title": "Calendar Settings",
+            "properties": {
+                "icals": {
+                    "type": "array",
+                    "title": "iCal URLs",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "maxResults": {
+                    "type": "integer",
+                    "title": "Max Number of Events for all iCals",
+                    "default": 9
+                },
+                "maxDays": {
+                    "type": "integer",
+                    "title": "Max Number of Days to display",
+                    "default": 9
+                },
+                "showCalendarNames": {
+                    "type": "boolean",
+                    "title": "Check to display Calendar Names",
+                    "default": false
+                }
+            }
+        }
+    },
+    "form":[
+      {
+        "title": "Calendar Settings",
+        "type": "fieldset",
+        "expandable": true,
+        "order":0,
+        "items":[
+          {
+            "type":"tabarray",
+            "title":"iCal URLs",
+            "items":[
+              {
+                "type":"section",
+                "legend":"iCal {{idx}}",
+                "items":[
+                    {
+                    "key":"calendar.icals[]",
+                    "type":"textarea"
+                    }
+                ]
+              }
+            ]
+          },
+         "calendar.maxResults",
+         "calendar.maxDays",
+         "calendar.showCalendarNames"
+        ]
+      }
+    ],
+    "value":{
+      "calendar": {
+        "maxResults": 9,
+        "maxDays": 9,
+        "showCalendarNames": false
+      }
+    }
+}
