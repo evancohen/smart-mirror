@@ -1,7 +1,7 @@
 <h1 align="center">Smart Mirror</h1>
 
 <p align="center">
-<a href="https://discord.gg/JDnHaZH"><img src="https://discordapp.com/api/guilds/258802311298547713/widget.png" alt="Discord Chat"/></a>
+<a href="https://discord.gg/EMb4ynW"><img src="https://discordapp.com/api/guilds/258802311298547713/widget.png" alt="Discord Chat"/></a>
 <a href="https://waffle.io/evancohen/smart-mirror"><img src="https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg" alt="Stories in progress" /></a>
 <a href='https://dependencyci.com/github/evancohen/smart-mirror'><img src='https://dependencyci.com/github/evancohen/smart-mirror/badge' alt='Dependency Status'/></a>
 </p>
@@ -22,7 +22,7 @@ Check out the documentation for more information:
 - [Troubleshooting](https://docs.smart-mirror.io/docs/troubleshooting.html)
 
 ### Discord
-A live chat to get help and discuss mirror related issues: https://discord.gg/JDnHaZH. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
+A live chat to get help and discuss mirror related issues: https://discord.gg/EMb4ynW. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
 
 ### Development and Contributing
 See the [dev](https://github.com/evancohen/smart-mirror/tree/dev) branch for features that are curently in development.
