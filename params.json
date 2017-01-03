@@ -1,7 +1,0 @@
-{
-  "name": "Smart Mirror",
-  "tagline": "The fairest of them all",
-  "body": "### Welcome to smart-mirror.io\r\nThis is the official home of the smart-mirror, a voice controlled DIY project for the smarter home.\r\n\r\n### Official documentation\r\nHead on over to the official documentation for more information about the smart-mirror: http://docs.smart-mirror.io\r\n\r\n### Go get the code\r\nJust want the code? You can head over to the  [smart-mirror](https://github.com/evancohen/smart-mirror) GitHub repository to download the source and get started.\r\n\r\n### Author\r\n[Evan Cohen](http://evanbtcohen.com) | @evancohen\r\n\r\nTwitter: [@_evnc](https://twitter.com/_evnc)\r\n\r\n### Support or Contact\r\nPlease see the [Gitter Chat](https://gitter.im/evancohen/smart-mirror) or [file an issue](https://github.com/evancohen/smart-mirror/issues)\r\n",
-  "google": "UA-73330169-1",
-  "note": "Don't delete this file! It's used internally to help with page regeneration."
-}

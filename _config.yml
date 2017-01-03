@@ -1,2 +1,8 @@
 url: https://smart-mirror.io
 enforce_ssl: smart-mirror.io
+
+title: Smart Mirror
+description: The fairest of them all
+google_analytics: UA-73330169-1
+show_downloads: true
+theme: jekyll-theme-minimal
