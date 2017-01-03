@@ -11,15 +11,17 @@ A voice controlled life automation hub, most commonly powered by the Raspberry P
 
 ### Installation
 Quick installation for the Raspberry Pi 2+
-```
+
+```bash
 curl -sL https://raw.githubusercontent.com/evancohen/smart-mirror/master/scripts/pi-install.sh | bash
 ```
 
 ### [Documentation](https://docs.smart-mirror.io)
 Check out the documentation at https://docs.smart-mirror.io for more information:
-- [Manual installation](https://docs.smart-mirror.io/docs/installation.html)
-- [Configuration](https://docs.smart-mirror.io/docs/configuration.html) 
-- [Troubleshooting](https://docs.smart-mirror.io/docs/troubleshooting.html)
+
+*   [Manual installation](https://docs.smart-mirror.io/docs/installation.html)
+*   [Configuration](https://docs.smart-mirror.io/docs/configuration.html) 
+*   [Troubleshooting](https://docs.smart-mirror.io/docs/troubleshooting.html)
 
 ### Discord
 A live chat to get help and discuss mirror related issues: https://discord.gg/EMb4ynW. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new) on GitHub.
