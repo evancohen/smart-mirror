@@ -3,7 +3,6 @@ config.json
 config.js
 config.old.js
 .idea
-.github
 npm-debug.log
 .DS_Store
 bower_components
