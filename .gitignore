@@ -1,1 +1,7 @@
-js/config.js
+.vscode/
+bower_components/
+config.json
+keyfile.json
+node_modules/
+_site/
+smart-mirror.log
