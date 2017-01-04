@@ -2,6 +2,7 @@
     "schema": {
         "soundcloud": {
             "type": "object",
+            "title":"SoundCloud Settings",
             "properties": {
                 "key": {
                     "type": "string",

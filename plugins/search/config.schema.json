@@ -2,6 +2,7 @@
     "schema": {
         "youtube": {
             "type": "object",
+            "title":"YouTube Settings",
             "properties": {
                 "key": {
                     "type": "string",
