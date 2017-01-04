@@ -30,12 +30,20 @@
 
         service.wake = function () {
 	        service.woke = true;
-            service.exec(config.autoTimer.wakeCmd, service.puts);
+            if (config.autoTimer.mode == "monitor"){ 
+                service.exec(config.autoTimer.wakeCmd, service.puts);
+            } else if (config.autoTimer.mode == "tv"){
+                $scope.focus = "sleep"
+            } 
         };
 
         service.sleep = function () {
 	        service.woke = false;
-            service.exec(config.autoTimer.sleepCmd, service.puts);
+            if (config.autoTimer.mode == "monitor"){
+                service.exec(config.autoTimer.sleepCmd, service.puts);
+            } else if (config.autoTimer.mode == "tv"){
+                $scope.focus = "sleep"
+            }
         };
 
         service.puts = function (error, stdout, stderr) {
