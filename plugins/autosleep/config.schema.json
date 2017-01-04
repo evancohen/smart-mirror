@@ -4,6 +4,16 @@
             "type": "object",
             "title": "AutoTimer Settings",
             "properties": {
+                "mode":{
+                    "type":"string",
+                    "title":"Display Mode:",
+                    "default":"disabled",
+                    "enum":[
+                      "monitor",
+                      "TV",
+                      "disabled"
+                    ]
+                },
                 "autoSleep": {
                     "type": "number",
                     "title": "AutoSleep Wait Time (minutes)",
@@ -46,18 +56,112 @@
     },
     "form":[
         {
-          "key": "autoTimer",
+          "type":"fieldset",
+          "title":"AutoTimer Settings",
           "expandable":true,
-          "order":0
-        },
-        {
-          "key":"motion",
-          "expandable":true,
-          "order":0
+          "order":0,
+          "items":[
+            {
+              "key":"autoTimer.mode",
+              "type":"selectfieldset",
+              "titleMap":{
+                "monitor":"Monitor",
+                "TV":"TV",
+                "disabled":"Disabled"
+              },
+              "items":[
+                {
+                  "type":"section",
+                  "items": [
+                    {
+                      "key": "autoTimer.autoWake",
+                      "allowempty":true
+                    },
+                    {
+                      "key": "autoTimer.autoSleep",
+                      "allowempty":true
+                    },
+                    {
+                      "key": "autoTimer.wakeCmd",
+                      "allowempty":true
+                    },
+                    {
+                      "key": "autoTimer.sleepCmd",
+                      "allowempty":true
+                    },
+                    {
+                      "key":"motion",
+                      "expandable":true,
+                    }
+                  ]
+                },
+                {
+                  "type":"section",
+                  "items":[
+                    {
+                      "key": "autoTimer.autoWake",
+                      "allowempty":true
+                    },
+                    {
+                      "key": "autoTimer.autoSleep",
+                      "allowempty":true
+                    },
+                    {
+                      "key": "autoTimer.wakeCmd",
+                      "allowempty":true,
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.sleepCmd",
+                      "allowempty":true,
+                      "type":"hidden"
+                    },
+                    {
+                      "key":"motion",
+                      "expandable":true,
+                    }
+                  ]
+                },
+                {
+                  "type":"section",
+                  "items":[
+                    {
+                      "key": "autoTimer.autoWake",
+                      "allowempty":true,
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.autoSleep",
+                      "allowempty":true,
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.wakeCmd",
+                      "allowempty":true,
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.sleepCmd",
+                      "allowempty":true,
+                      "type":"hidden"
+                    },
+                    {
+                      "key":"motion",
+                      "expandable":true,
+                      "order":0,
+                      "type":"hidden"
+                    }
+                  ]
+                }
+              ]
+            }
+              
+          ]
         }
     ],
     "value":{
       "autoTimer": {
+          "mode":"disabled",
           "autoSleep": 40,
           "autoWake": "07:00:00",
           "wakeCmd": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1",
