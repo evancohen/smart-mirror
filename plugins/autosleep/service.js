@@ -2,7 +2,7 @@
     'use strict';
 
 
-    function AutoSleepService($interval) {
+    function AutoSleepService($interval,$rootScope) {
         var service = {};
         var autoSleepTimer;
         service.woke = true;
@@ -63,21 +63,20 @@
 
 	
 	ipcRenderer.on('motionstart', (event, spotted) => {
-	    if (!service.woke) {
-		service.wake();
-	    }
-	    console.debug('motion start detected');
-	    service.stopAutoSleepTimer();
-        });
+	    $rootScope.$broadcast("autoSleep.wak", true);
+        console.debug('motion start detected');
+	    });
 
 	ipcRenderer.on('remoteWakeUp', (event, spotted) => {
-	    if (!service.woke) {
-		service.wake();
-	    }
+	    $rootScope.$broadcast("autoSleep.wake", true);
 	    console.debug('remote wakeUp detected');
-	    service.stopAutoSleepTimer();
-        });
+	    });
 
+	ipcRenderer.on('remoteSleep', (event, spotted) => {
+	    $rootScope.$broadcast("autoSleep.sleep", true);
+	    console.debug('remote sleep detected');
+	    });
+        
 	ipcRenderer.on('motionend', (event, spotted) => {
 	    console.debug('motion end detected');
 	    service.startAutoSleepTimer();
