@@ -120,9 +120,10 @@ else
 fi
 
 # Generate config and install dependencies
-cd smart-mirror  || exit
-printf "%s\n${blu}generating config template...${end}\n"
-cp config.example.js config.js
+# stale code
+# cd smart-mirror  || exit
+# printf "%s\n${blu}generating config template...${end}\n"
+# cp config.example.js config.js
 
 # Install smart-mirror dependencies
 printf "%s\n${blu}Installing smart-mirror dependencies...${end}\n"
