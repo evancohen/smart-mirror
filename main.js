@@ -179,6 +179,9 @@ if (config.remote && config.remote.enabled) {
   remote.on('wakeUp', function () {
     mainWindow.webContents.send('remoteWakeUp', true)
   })
+  remote.on('sleep', function () {
+    mainWindow.webContents.send('remoteSleep', true)
+  })
 
   remote.on('relaunch', function() {
     console.log("Relaunching...")

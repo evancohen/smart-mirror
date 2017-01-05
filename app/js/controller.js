@@ -104,13 +104,6 @@
             SpeechService.addCommand('home', defaultView);
 
             // Hide everything and "sleep"
-            SpeechService.addCommand('sleep', function () {
-                console.debug("Ok, going to sleep...");
-                AutoSleepService.sleep();
-                $scope.focus = AutoSleepService.scope;
-            });
-
-            // Hide everything and "sleep"
             SpeechService.addCommand('debug', function () {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
