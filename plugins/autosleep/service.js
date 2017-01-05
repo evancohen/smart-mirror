@@ -6,6 +6,7 @@
         var service = {};
         var autoSleepTimer;
         service.woke = true;
+        service.scope = "default";
         service.exec = require('child_process').exec;
 
         service.startAutoSleepTimer = function () {
@@ -32,17 +33,23 @@
 	        service.woke = true;
             if (config.autoTimer.mode == "monitor"){ 
                 service.exec(config.autoTimer.wakeCmd, service.puts);
+                service.scope = "default"
             } else if (config.autoTimer.mode == "tv"){
-                $scope.focus = "sleep"
-            } 
+                service.scope = "default"
+            } else {
+                service.scope = "default"
+            }
         };
 
         service.sleep = function () {
 	        service.woke = false;
             if (config.autoTimer.mode == "monitor"){
                 service.exec(config.autoTimer.sleepCmd, service.puts);
+                service.scope = "sleep"
             } else if (config.autoTimer.mode == "tv"){
-                $scope.focus = "sleep"
+                service.scope = "sleep"
+            } else {
+                service.scope = "default"
             }
         };
 
@@ -60,6 +67,14 @@
 		service.wake();
 	    }
 	    console.debug('motion start detected');
+	    service.stopAutoSleepTimer();
+        });
+
+	ipcRenderer.on('remoteWakeUp', (event, spotted) => {
+	    if (!service.woke) {
+		service.wake();
+	    }
+	    console.debug('remote wakeUp detected');
 	    service.stopAutoSleepTimer();
         });
 

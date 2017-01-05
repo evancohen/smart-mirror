@@ -10,7 +10,7 @@
                     "default":"disabled",
                     "enum":[
                       "monitor",
-                      "TV",
+                      "tv",
                       "disabled"
                     ]
                 },
@@ -66,7 +66,7 @@
               "type":"selectfieldset",
               "titleMap":{
                 "monitor":"Monitor",
-                "TV":"TV",
+                "tv":"TV",
                 "disabled":"Disabled"
               },
               "items":[
@@ -91,7 +91,7 @@
                     },
                     {
                       "key":"motion",
-                      "expandable":true,
+                      "expandable":true
                     }
                   ]
                 },
@@ -118,7 +118,7 @@
                     },
                     {
                       "key":"motion",
-                      "expandable":true,
+                      "expandable":true
                     }
                   ]
                 },
