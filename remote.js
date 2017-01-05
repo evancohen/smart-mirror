@@ -68,8 +68,8 @@ remote.start = function () {
       remote.emit('reload')
     })
 
-    socket.on('saveForm', function (data) { // used to save the form JSON
-
+    socket.on('wakeUp', function () {
+      remote.emit('wakeUp')
     })
 
     socket.on('saveConfig', function (data) { // used to save the form JSON
