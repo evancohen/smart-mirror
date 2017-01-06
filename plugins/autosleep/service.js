@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-
-    function AutoSleepService($interval) {
+    function AutoSleepService($interval,$rootScope) {
         var service = {};
         var autoSleepTimer;
         service.woke = true;
+        service.scope = "default";
         service.exec = require('child_process').exec;
 
         service.startAutoSleepTimer = function () {
@@ -30,12 +30,26 @@
 
         service.wake = function () {
 	        service.woke = true;
-            service.exec(config.autoTimer.wakeCmd, service.puts);
+            if (config.autoTimer.mode == "monitor"){ 
+                service.exec(config.autoTimer.wakeCmd, service.puts);
+                service.scope = "default"
+            } else if (config.autoTimer.mode == "tv"){
+                service.scope = "default"
+            } else {
+                service.scope = "default"
+            }
         };
 
         service.sleep = function () {
 	        service.woke = false;
-            service.exec(config.autoTimer.sleepCmd, service.puts);
+            if (config.autoTimer.mode == "monitor"){
+                service.exec(config.autoTimer.sleepCmd, service.puts);
+                service.scope = "sleep"
+            } else if (config.autoTimer.mode == "tv"){
+                service.scope = "sleep"
+            } else {
+                service.scope = "default"
+            }
         };
 
         service.puts = function (error, stdout, stderr) {
@@ -48,13 +62,20 @@
 
 	
 	ipcRenderer.on('motionstart', (event, spotted) => {
-	    if (!service.woke) {
-		service.wake();
-	    }
-	    console.debug('motion start detected');
-	    service.stopAutoSleepTimer();
-        });
+	    $rootScope.$broadcast("autoSleep.wak", true);
+        console.debug('motion start detected');
+	    });
 
+	ipcRenderer.on('remoteWakeUp', (event, spotted) => {
+	    $rootScope.$broadcast("autoSleep.wake", true);
+	    console.debug('remote wakeUp detected');
+	    });
+
+	ipcRenderer.on('remoteSleep', (event, spotted) => {
+	    $rootScope.$broadcast("autoSleep.sleep", true);
+	    console.debug('remote sleep detected');
+	    });
+        
 	ipcRenderer.on('motionend', (event, spotted) => {
 	    console.debug('motion end detected');
 	    service.startAutoSleepTimer();

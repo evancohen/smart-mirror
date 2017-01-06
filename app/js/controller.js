@@ -38,7 +38,8 @@
             listening: function (listening) {
                 $scope.listening = listening;
                 if (listening && !AutoSleepService.woke) {
-                    AutoSleepService.wake();
+                    AutoSleepService.wake()
+                    $scope.focus = AutoSleepService.scope;
                 }
             },
             partialResult: function (result) {
@@ -66,8 +67,8 @@
             // Auto wake at a specific time
             if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined' && config.autoTimer.autoWake == moment().format('HH:mm:ss')) {
                 console.debug('Auto-wake', config.autoTimer.autoWake);
-                $scope.focus = "default";
-                AutoSleepService.wake();
+                AutoSleepService.wake()
+                $scope.focus = AutoSleepService.scope;
                 AutoSleepService.startAutoSleepTimer();
             }
         }
@@ -102,13 +103,6 @@
             // Go back to default view
             SpeechService.addCommand('home', defaultView);
 
-            // Hide everything and "sleep"
-            SpeechService.addCommand('sleep', function () {
-                console.debug("Ok, going to sleep...");
-                AutoSleepService.sleep();
-            });
-
-            // Hide everything and "sleep"
             SpeechService.addCommand('debug', function () {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;
