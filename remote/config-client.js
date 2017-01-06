@@ -34,6 +34,7 @@ $(function () {
       };
       data.configJSON.onSubmit = function (errors, values) {
         if (errors) {
+          $('#out').html(JSON.stringify(errors,null,2))
           console.log('Validation errors', errors);
           return false;
         }
