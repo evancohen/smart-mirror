@@ -103,7 +103,6 @@
             // Go back to default view
             SpeechService.addCommand('home', defaultView);
 
-            // Hide everything and "sleep"
             SpeechService.addCommand('debug', function () {
                 console.debug("Boop Boop. Showing debug info...");
                 $scope.debug = true;

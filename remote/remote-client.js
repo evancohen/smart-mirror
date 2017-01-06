@@ -44,9 +44,11 @@ $(function () {
   $('#reload').click(function () {
     socket.emit('reload')
   })
+  
   $('#wakeUp').click(function () {
     socket.emit('clickWakeUp')
   })
+  
   $('#sleep').click(function () {
     socket.emit('clickSleep')
   })
