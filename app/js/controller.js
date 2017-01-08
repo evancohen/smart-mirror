@@ -2,6 +2,7 @@
     'use strict';
 
     function MirrorCtrl(
+        Focus,
         SpeechService,
         AutoSleepService,
         LightService,
@@ -11,11 +12,17 @@
         var _this = this;
         $scope.listening = false;
         $scope.debug = false;
-        $scope.focus = "default";
         $scope.commands = [];
         $scope.partialResult = $translate.instant('home.commands');
         $scope.layoutName = 'main';
         $scope.config = config;
+
+        // Set up our Focus
+        $rootScope.$on('focus', function(targetScope, newFocus, oldFocus){
+            $scope.focus = newFocus;
+        })
+
+        Focus.change("default");
 
         //set lang
         moment.locale(
@@ -89,7 +96,7 @@
 
             var defaultView = function () {
                 console.debug("Ok, going to default view...");
-                $scope.focus = "default";
+                Focus.change("default");
             }
 
             // List commands
@@ -97,7 +104,7 @@
                 console.debug("Here is a list of commands...");
                 console.log(SpeechService.commands);
                 $scope.commands = SpeechService.getCommands();
-                $scope.focus = "commands";
+                Focus.change("commands");
             });
 
             // Go back to default view
