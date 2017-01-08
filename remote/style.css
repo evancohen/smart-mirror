@@ -30,9 +30,9 @@ nav {
 
 .navbar-config {
   font-size: x-large;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    float: right;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  float: right;
 }
 
 /* Custom page CSS
@@ -49,6 +49,16 @@ body > .container {
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
+}
+
+p.lead {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+#speech-error {
+  margin-top: 15px;
+  padding: 5px;
 }
 
 code {
