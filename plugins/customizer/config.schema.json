@@ -1,0 +1,82 @@
+{
+    "schema": {
+        "customizer": {
+            "type": "object",
+            "title": "Custom HTML Redering",
+            "description" : "custom commands that render HTML",
+            "properties": {
+                "commands": {
+                    "type": "array",
+                    "title": "Custom Requests",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                          "utterance": {
+                                "type": "string",
+                                "title": "Utterance"
+                            },  
+                            "body": {
+                                "type": "array",
+                                "title": "HTML Body",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "tag": {
+                                            "type": "string",
+                                            "title": "Tag",
+                                            "enum":[
+                                                "h1",
+                                                "10",
+                                                "12",
+                                                "16",
+                                                "10b",
+                                                "12b",
+                                                "16b"
+                                            ]
+                                        },
+                                        "text": {
+                                            "type": "textarea",
+                                            "title": "Text"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form": [
+      
+      {
+        "type": "fieldset",
+        "title": "HTML Customizer Settings",
+        "expandable":true,
+        "order":0,
+        "items": [
+             {
+              "type":"help",
+              "helpvalue":"<h6>Custom commands that render HTML</h6>"
+            },
+            {
+              "type": "tabarray",
+              "title": "<h4>Custom Commands</h4>",
+              "items": [
+                {
+                  "type": "section",
+                  "legend": "{{value}}",
+                  "items": [
+                    {
+                      "key": "customizer.commands[].utterance",
+                      "valueInLegend": true
+                    },
+                    "customizer.commands[].body[]"
+                  ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+}
