@@ -25,6 +25,8 @@ $(function () {
 
     annyang.addCallback('error', function(error){
       console.log(error)
+      $('#speech-error').text('Unsupported on iOS/Safari');
+      $('#speech-error').show()
     })
 
     // Add our commands to annyang
@@ -32,6 +34,7 @@ $(function () {
 
     // Start listening. You can call this here, or attach this call to an event, button, etc.
     $('#speak').click(function () {
+      $('#speech-error').hide()
       console.log('listening...')
       annyang.start({ autoRestart: false, continuous: false })
     })
