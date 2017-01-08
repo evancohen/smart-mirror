@@ -23,6 +23,10 @@ $(function () {
       }
     }
 
+    annyang.addCallback('error', function(error){
+      console.log(error)
+    })
+
     // Add our commands to annyang
     annyang.addCommands(command)
 
