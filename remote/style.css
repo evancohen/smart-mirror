@@ -33,8 +33,6 @@ nav {
   margin-top: 10px;
   margin-bottom: 5px;
   float: right;
-  position: relative;
-  right: 15px;
 }
 
 /* Custom page CSS
@@ -51,6 +49,11 @@ body > .container {
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
+}
+
+p.lead {
+  margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 #speech-error {
