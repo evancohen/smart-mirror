@@ -119,15 +119,10 @@ else
     exit;
 fi
 
-# Generate config and install dependencies
-# stale code
-# cd smart-mirror  || exit
-# printf "%s\n${blu}generating config template...${end}\n"
-# cp config.example.js config.js
-
 # Install smart-mirror dependencies
 printf "%s\n${blu}Installing smart-mirror dependencies...${end}\n"
 printf "%s${yel}This may take a while. Go grab a beer :)${end}\n"
+cd smart-mirror  || exit
 if npm install; then 
 	printf "%s${grn}Dependency installation complete!${end}\n"
 else
