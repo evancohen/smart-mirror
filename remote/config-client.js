@@ -31,10 +31,22 @@ $(function () {
 
         }
         socket.emit('saveConfig', values)
+        $('#outMsg').html("<p><strong>Your Configuration has saved.</strong></p>")
+        showElm('#out',1)
       };
       data.configJSON.onSubmit = function (errors, values) {
         if (errors) {
-          $('#out').html(JSON.stringify(errors,null,2))
+          console.log('Validation errors', errors);
+          let buildInner=""
+          errors.forEach(function(errItem,errIdx) {
+            let errSchemaUri = errItem.schemaUri.replace(/.+\/properties\//, "").replace("/"," >> ")  
+            buildInner += `<p><strong style="font-color:red">Error: ` + errItem.message + 
+            "</strong></br>Location: " +
+            errSchemaUri +
+            "</p>"
+          })
+          $('#outMsg').html(buildInner)
+          showElm('#out',1)
           console.log('Validation errors', errors);
           return false;
         }
@@ -53,8 +65,22 @@ $(function () {
     }
   })
 
-  $('#reset').click(function () {
-    socket.emit('getJSON',false)
+var timeoutID
+  
+  function hideElm(element){
+    $(element).fadeOut("fast")
+  }
+  function showElm(element,timeOutMins=1){
+    timeOutMillis = timeOutMins*60000
+    $(element).fadeIn() 
+    timeoutID=setTimeout(function(){
+      hideElm(element);
+      },timeOutMillis)
+  }
+  
+  $('#outClose').click(function () {
+    clearTimeout(timeoutID)
+    hideElm('#out')
   });
 
 })

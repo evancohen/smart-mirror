@@ -101,6 +101,16 @@ form.jsonform-hasrequired:after {
   color: red;
   padding-top: 1em;
 }
+#out {
+  display:none;
+}
+.top-left {
+  top: 10px;
+  left: 10px;
+}
+#outMsg {
+  padding-left: 20px;
+}
 #form select { width: auto; }
 #form .add-on {
   border: none;

@@ -8,19 +8,10 @@ function AutoSleep($scope, $http, $q, SpeechService,AutoSleepService) {
         $scope.$parent.focus = AutoSleepService.scope;
     });
 
-    $scope.$on('autoSleep.wake', function(e, value) {
-        if (!AutoSleepService.woke) {
-		    AutoSleepService.wake();
-            $scope.$parent.focus = AutoSleepService.scope; 
-	    }
-	    console.debug('controller Wake');
-	    AutoSleepService.stopAutoSleepTimer();
-    }); 
-    $scope.$on('autoSleep.sleep', function(e, value) {
-        AutoSleepService.sleep();
-        $scope.$parent.focus = AutoSleepService.scope; 
-	    console.debug('controller sleep');
+    $scope.$on('refreshScopeFocus', function (e, value) {
+        $scope.$parent.focus = value
     });
+
 }
 
 angular.module('SmartMirror')
