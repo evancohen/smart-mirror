@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    function AutoSleepService($interval,$rootScope) {
+    function AutoSleepService($interval,Focus) {
         var service = {};
         var autoSleepTimer;
         service.woke = true;
@@ -33,18 +33,18 @@
             if (config.autoTimer.mode == "monitor"){ 
                 service.exec(config.autoTimer.wakeCmd, service.puts);
             }
-                $rootScope.$broadcast("refreshScopeFocus", "default");
+                Focus.change("default");
         };
 
         service.sleep = function () {
 	        service.woke = false;
             if (config.autoTimer.mode == "monitor"){
                 service.exec(config.autoTimer.sleepCmd, service.puts);
-                $rootScope.$broadcast("refreshScopeFocus", "sleep");
+                Focus.change("sleep");
             } else if (config.autoTimer.mode == "tv"){
-                $rootScope.$broadcast("refreshScopeFocus", "sleep");
+                Focus.change("sleep");
             } else {
-                $rootScope.$broadcast("refreshScopeFocus", "default");
+                Focus.change("default");
             }
 
         };
