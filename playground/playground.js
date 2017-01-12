@@ -1,31 +1,84 @@
 /*global $, ace, console*/
+
 $('document').ready(function () {
+  var cdn = {example:"speech/config.schema",branch:"master",repo:"evancohen"}
+    cdn.url = function(){
+    	if (this.example && this.branch && this.repo){
+        this.refresh()
+        return 'https://gitcdn.xyz/repo/' + this.repo + '/smart-mirror/' + this.branch + "/plugins/" + this.example + '.json'
+      } else {
+        this.refresh()
+        return 'https://gitcdn.xyz/repo/evancohen/smart-mirror/master/plugins/speech/config.schema.json'
+      }
+    }
+    cdn.refresh = function(a,b){
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    var param = null;
+    for (var i = 0; i < vars.length; i++) {
+      param = vars[i].split('=');
+          this[param[0]] = param[1]
+    }
+    if (a && b){this[a]=b}
+    if (history) {
+    history.pushState(
+      {example:this.example},
+      "Example - " + this.example,
+      `?example=` + this.example + '&repo='+this.repo+'&branch='+this.branch)
+    }
+
+    }
   var formObject = {
     schema: {
+      repo: {
+       title: 'Repo',
+       type: 'string',
+       enum: [
+           'evancohen',
+           'other'
+       ]
+      },
+      repoOther: {
+       title: 'Other Repo',
+       type: 'string'
+      },
+      branch: {
+       title: 'Branch',
+       type: 'string',
+       enum: [
+           "master",
+           "dev",
+           "other"
+       ]
+      },
+      branchOther: {
+       title: 'branch',
+       type: 'string'
+      },
       example: {
         title: 'JSON Form example to start from',
         type: 'string',
         'enum': [
-			"plugins_autosleep_config.schema",
-			"plugins_calendar_config.schema",
-			"plugins_geolocation_config.schema",
-			"plugins_giphy_config.schema",
-			"plugins_greeting_config.schema",
-			"plugins_light_config.schema",
-			"plugins_maker_config.schema",
-			"plugins_remote_config.schema",
-			"plugins_rss_config.schema",
-			"plugins_scrobbler_config.schema",
-			"plugins_search_config.schema",
-			"plugins_soundcloud_config.schema",
-			"plugins_speech_config.schema",
-			"plugins_stock_config.schema",
-			"plugins_traffic_config.schema",
-			"plugins_tvshows_config.schema",
-			"plugins_weather_config.schema",
-			"plugins__general_config.schema"
+			"autosleep/config.schema",
+			"calendar/config.schema",
+			"geolocation/config.schema",
+			"giphy/config.schema",
+			"greeting/config.schema",
+			"light/config.schema",
+			"maker/config.schema",
+			"remote/config.schema",
+			"rss/config.schema",
+			"scrobbler/config.schema",
+			"search/config.schema",
+			"soundcloud/config.schema",
+			"speech/config.schema",
+			"stock/config.schema",
+			"traffic/config.schema",
+			"tvshows/config.schema",
+			"weather/config.schema",
+			"_general/config.schema"
 		],
-        'default': 'plugins_speech_config.schema'
+        'default': 'speech/config.schema'
       },
       greatform: {
         title: 'JSON Form object to render',
@@ -34,39 +87,124 @@ $('document').ready(function () {
     },
     form: [
       {
+        key: 'repo',
+        type: 'selectfieldset',
+        titleMap: {
+            "evancohen":"evancohen",
+            "other":"other"
+        },
+        items: [
+            {
+              type:"section",
+              items: [
+                    {
+                      key:"repoOther",
+                      type:"hidden"
+                    }
+                  ]
+            },
+            {
+              type:"section",
+              items:[
+                {
+                  key:"repoOther",
+                  htmlClass: "next-to",
+                  onChange: function (evt) {
+                    var selected = $(evt.target).val();
+                    cdn.refresh("repo",selected)
+                    loadExample();
+                  }
+                }
+              ]
+            }
+          ],
+          onChange: function (evt) {
+              var selected = $(evt.target).val();
+              if (selected != "other"){
+                cdn.refresh("repo",selected)
+                loadExample();
+              }
+          }
+      },
+      {
+        key: "branch",
+        type: 'selectfieldset',
+        titleMap: {
+            "master":"master",
+            "dev": "dev",
+            "other":"other"
+        },
+        items: [
+            {
+              type:"section",
+              items: [
+                    {
+                      key:"branchOther",
+                      type:"hidden"
+                    }
+                  ]
+            },
+            {
+              type:"section",
+              items: [
+                    {
+                      key:"branchOther",
+                      type:"hidden"
+                    }
+                  ]
+            },
+            {
+              type:"section",
+              items:[
+                {
+                  key:"branchOther",
+                  onChange: function (evt) {
+                      var selected = $(evt.target).val();
+                      cdn.refresh("branch",selected)
+                      loadExample();
+                  }
+                },
+              ]
+            }
+          ],
+          onChange: function (evt) {
+              var selected = $(evt.target).val();
+              if (selected != "other"){
+                cdn.refresh("branch",selected)
+                loadExample();
+              }
+          }
+      },
+      {
         key: 'example',
         notitle: true,
         prepend: 'Try with',
         htmlClass: 'trywith',
         titleMap: {
-			"plugins_autosleep_config.schema":"AutoSleep Form Section Example",
-			"plugins_calendar_config.schema":"Calendar Form Section Example",
-			"plugins_geolocation_config.schema":"GeoLocation Form Section Example",
-			"plugins_giphy_config.schema":"Giphy Form Section Example",
-			"plugins_greeting_config.schema":"Greeting Form Section Example",
-			"plugins_light_config.schema":"Light Form Section Example",
-			"plugins_maker_config.schema":"Maker Form Section Example",
-			"plugins_remote_config.schema":"Remote Form Section Example",
-			"plugins_rss_config.schema":"RSS Form Section Example",
-			"plugins_scrobbler_config.schema":"Scrobbler Form Section Example",
-			"plugins_search_config.schema":"Search Form Section Example",
-			"plugins_soundcloud_config.schema":"SoundCloud Form Section Example",
-			"plugins_speech_config.schema":"Speech Form Section Example",
-			"plugins_stock_config.schema":"Stock Form Section Example",
-			"plugins_traffic_config.schema":"Traffic Form Section Example",
-			"plugins_tvshows_config.schema":"TV Shows Form Section Example",
-			"plugins_weather_config.schema":"weather Form Section Example",
-			"plugins__general_config.schema":"General Form Section Example"
-		},
+          "autosleep/config.schema":"AutoSleep Form Section Example",
+          "calendar/config.schema":"Calendar Form Section Example",
+          "geolocation/config.schema":"GeoLocation Form Section Example",
+          "giphy/config.schema":"Giphy Form Section Example",
+          "greeting/config.schema":"Greeting Form Section Example",
+          "light/config.schema":"Light Form Section Example",
+          "maker/config.schema":"Maker Form Section Example",
+          "remote/config.schema":"Remote Form Section Example",
+          "rss/config.schema":"RSS Form Section Example",
+          "scrobbler/config.schema":"Scrobbler Form Section Example",
+          "search/config.schema":"Search Form Section Example",
+          "soundcloud/config.schema":"SoundCloud Form Section Example",
+          "speech/config.schema":"Speech Form Section Example",
+          "stock/config.schema":"Stock Form Section Example",
+          "traffic/config.schema":"Traffic Form Section Example",
+          "tvshows/config.schema":"TV Shows Form Section Example",
+          "weather/config.schema":"weather Form Section Example",
+          "_general/config.schema":"General Form Section Example"
+        },
         onChange: function (evt) {
           var selected = $(evt.target).val();
-
-          loadExample(selected);
-          if (history) history.pushState(
-            { example: selected},
-            'Example - ' + selected,
-            '?example=' + selected);
-        }
+          cdn.refresh("example",selected)
+          loadExample();
+        }   
       },
       {
         key: 'greatform',
@@ -90,7 +228,6 @@ $('document').ready(function () {
           var defaultJson = schemaJson.value
           delete schemaJson.value
           downloadFile(schemaJson,"config.schema.json")
-          downloadFile(defaultJson,"config.default.json")
           function downloadFile(fileContent, fileName){
           hiddenElement.href = 'data:attachment/text,' + encodeURI(fileContent);
           hiddenElement.target = '_blank';
@@ -114,23 +251,23 @@ $('document').ready(function () {
    */
   var getRequestedExample = function () {
     var query = window.location.search.substring(1);
+
     var vars = query.split('&');
     var param = null;
     for (var i = 0; i < vars.length; i++) {
       param = vars[i].split('=');
-      if (param[0] === 'example') {
-        return param[1];
-      }
+          cdn[param[0]] = param[1]
     }
-    return null;
+    return cdn.url();
   };
+
 
   /**
    * Loads and displays the example identified by the given name
    */
-  var loadExample = function (example) {
+  var loadExample = function () {
     $.ajax({
-      url: 'examples/' + example + '.json',
+      url: getRequestedExample(),
       dataType: 'text'
     }).done(function (code) {
       var aceId = $('#form .ace_editor').attr('id');
@@ -203,11 +340,11 @@ $('document').ready(function () {
 
   // Wait until ACE is loaded
   var itv = window.setInterval(function() {
-    var example = getRequestedExample() || 'plugins_speech_config.schema';
+    var example = getRequestedExample();
     $('.trywith select').val(example);
     if (window.ace) {
       window.clearInterval(itv);
-      loadExample(example);
+      loadExample();
     }
   }, 1000);
 });

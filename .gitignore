@@ -1,6 +1,7 @@
 .vscode/
 bower_components/
 config.json
+config.js
 keyfile.json
 node_modules/
 _site/

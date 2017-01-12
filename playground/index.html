@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width">
     <title>JSON Form Playground</title>
     <style>
-      @import url("https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/bootstrap.css");
-      @import url("https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/spectrum.css");
+      @import url("https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/bootstrap.css");
+      @import url("https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/spectrum.css");
 
       /* hidden on default */
-      div#popup { display: none; text-align: center; padding: 10px; font-size:  }
+      div#popup { display: none; text-align: center; padding: 10px; }
 
 
       /* use a media query to filter small devices */
@@ -40,7 +40,9 @@
         text-indent: -9999px;
         width: 178px;
       }
-
+      .next-to {
+        display: relative;
+      }
       .footer {
         margin-top: 40px;
         padding: 10px 0.5em;
@@ -93,7 +95,7 @@
                 <li><a href="http://github.com/joshfire/jsonform">Project on github</a></li>
               </ul>
               <ul class="nav pull-right">
-                <li class="factory"><a href="http://factory.joshfire.com">Joshfire Factory</a>
+                <li class="factory"><a href="http://factory.joshfire.com">joshfire Factory</a>
               </ul>
             </div>
           </div>
@@ -119,28 +121,28 @@
        It works best on a full-size computer. This is tool is intended to make creating the form schema easier on you. Using any kind of mobile device defeats that purpose.</p>
     </div>
     <footer class="footer">
-      <p>Originally created by <a href="http://factory.joshfire.com">Joshfire Factory</a> workers. Then cleverly adapted for <a href="https://smart-mirror.io">Smart-Mirror</a> Development</p>
+      <p>Originally created by <a href="http://factory.joshfire.com">joshfire Factory</a> workers. Then cleverly adapted for <a href="https://smart-mirror.io">Smart-Mirror</a> Development</p>
     </footer>
     
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/jquery.min.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/underscore.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jsv.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.core.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.widget.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.mouse.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.ui.sortable.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/bootstrap-dropdown.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/spectrum.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/ace.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-json.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-html.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-css.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-javascript.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-less.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/ace/mode-markdown.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jquery.transloadit2.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/jquery.min.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/underscore.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/jsv.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/jquery.ui.core.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/jquery.ui.widget.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/jquery.ui.mouse.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/jquery.ui.sortable.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/bootstrap-dropdown.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/spectrum.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/ace/ace.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/ace/mode-json.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/ace/mode-html.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/ace/mode-css.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/ace/mode-javascript.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/ace/mode-less.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/ace/mode-markdown.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/deps/opt/jquery.transloadit2.js"></script>
 
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/lib/jsonform.js"></script>
+    <script src="https://gitcdn.xyz/repo/evancohen/jsonform/master/lib/jsonform.js"></script>
 
     <script src="playground.js"></script>
   </body>
