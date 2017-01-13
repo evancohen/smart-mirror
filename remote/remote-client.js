@@ -2,13 +2,36 @@
 
 $(function () {
 
-  var socket = io()
 
-  var $connectionBar = $('#connection-bar')
-  var $connectionText = $('#connection-text')
+  var socket = io()
+  function isIosDevice(){
+  var iosDeviceList = [
+    "iPhone", "iPod", "iPad", "iPhone Simulator", "iPod Simulator",
+    "iPad Simulator", "Pike v7.6 release 92", "Pike v7.8 release 517"
+  ]
+  return iosDeviceList.some(function(device){
+    return device == navigator.platform
+    })
+  }
+
+  $connectionBar = $('#connection-bar')
+  $connectionText = $('#connection-text')
+  $speak = $('#speak')
+  $command = $('#command')
+  $commandBox = $('#command-box')
+  $commandBttn = $('#command-bttn')
   socket.on('connected', function () {
     $connectionBar.removeClass('disconnected').addClass('connected')
     $connectionText.html('Connected!')
+    if (isIosDevice()){
+      $speak.addClass('hidden')
+      $commandBox.removeClass('hidden')
+      $commandBttn.removeClass('hidden')
+    }else{
+      $speak.removeClass('hidden')
+      $commandBox.addClass('hidden')
+      $commandBttn.addClass('hidden')     
+    }
   })
 
   socket.on('disconnect', function () {
@@ -40,8 +63,15 @@ $(function () {
       console.log('listening...')
       annyang.start({ autoRestart: false, continuous: false })
     })
-  }
+  } else {
 
+  $('#command-bttn').click(function () {
+    $('#speech-error').hide()
+    var x = $commandBox.val();
+    socket.emit('command', x)
+  })
+  }
+  
   $('#devtools').change(function () {
     socket.emit('devtools', $(this).is(":checked"))
   });
@@ -61,5 +91,8 @@ $(function () {
   $('#sleep').click(function () {
     socket.emit('clickSleep')
   })
+
+  
+
 
 })

@@ -31,24 +31,23 @@
 <!-- Begin page content -->
 
 <div class="container">
-<p id="demo">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="form-group hidden" id="command">
-                <input type="text" id="command-box" class="input-lg form-control" placeholder="Type command...">
-                </br>
-                <button id="command-bttn" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Send Command!</button>
-            </div>
-        </div>
-        <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons hidden">Speak!</button></div>
+        <div class="col-md-6 col-md-offset-3"><input type="text" id="command" value="Type command..."></div>
+        <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons" onclick="run()">Run!</button></div>
         <div class="col-md-6 col-md-offset-3">
             <p id="speech-error" class="alert alert-danger" style="display:none"></p>
         </div>
     </div>
-    </p>
+    <script>
+        function run(){
+             var x = document.getElementById("command").value;
+              alert(x);       
+        }
+        
+    </script>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <p class="lead">Press the button above to begin issuing a voice command to your <code>smart mirror</code>.</p>
+            <p class="lead">Type in your commands for the <code>smart mirror</code>.</p>
         </div>
     </div>
     </p>

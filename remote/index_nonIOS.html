@@ -31,16 +31,17 @@
 <!-- Begin page content -->
 
 <div class="container">
+      <script>
+if (navigator.platform == "iPhone"){
+document.getElementById("speak").style.visibility = "hidden";
+}else{
+document.getElementById("speak").style.visibility = "visible";
+}
+</script>
 <p id="demo">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="form-group hidden" id="command">
-                <input type="text" id="command-box" class="input-lg form-control" placeholder="Type command...">
-                </br>
-                <button id="command-bttn" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Send Command!</button>
-            </div>
-        </div>
-        <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons hidden">Speak!</button></div>
+        
+        <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Speak!</button></div>
         <div class="col-md-6 col-md-offset-3">
             <p id="speech-error" class="alert alert-danger" style="display:none"></p>
         </div>
