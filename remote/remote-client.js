@@ -25,12 +25,10 @@ $(function () {
     $connectionText.html('Connected!')
     if (isIosDevice()){
       $speak.addClass('hidden')
-      $commandBox.removeClass('hidden')
-      $commandBttn.removeClass('hidden')
+      $command.removeClass('hidden')
     }else{
       $speak.removeClass('hidden')
-      $commandBox.addClass('hidden')
-      $commandBttn.addClass('hidden')     
+      $command.addClass('hidden')
     }
   })
 
