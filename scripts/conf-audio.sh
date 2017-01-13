@@ -11,12 +11,10 @@ tempasound='pcm.!default {
   type asym
    playback.pcm {
      type plug
-     # Playback_Desc
      slave.pcm "hw:Playback_DevID"
    }
    capture.pcm {
      type plug
-     # Capture_Desc
      slave.pcm "hw:Capture_DevID"
    }
 }'
@@ -51,7 +49,6 @@ function getCard {
 			test=`echo "$test" | tr : ,`
 			test=${test::-1}
 			tempasound="${tempasound/$2_DevID/$test}"
-			tempasound="${tempasound/$2_Desc/$recDev[choice]}"
 		fi
 	
 	fi
