@@ -1,10 +1,9 @@
 (function () {
     'use strict';
 
-    function FitbitService($http) {
+    function FitbitService() {
 
         var service = {};
-        var summary = null;
         var today = null;
 
         // Simple token persist functions.
@@ -112,7 +111,7 @@
             app.listen(port);
             // Read the persisted token, initially captured by a webapp.
             //
-            fs.stat(tfile, function (err, stat) {
+            fs.stat(tfile, function (err) {
                 if (err == null) {
                     console.log('Fitbit token File exists');
 

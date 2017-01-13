@@ -1,4 +1,4 @@
-(function (annyang) {
+(function () {
   'use strict';
 
   function CalendarService($window, $http, $q) {
@@ -68,8 +68,8 @@
 
         //If we encounted a new Event, create a blank event object + set in event options.
         if (!in_event && ln == 'BEGIN:VEVENT') {
-          var in_event = true;
-          var cur_event = {};
+          in_event = true;
+          cur_event = {};
         }
         //If we encounter end event, complete the object and add it to our events array then clear it for reuse.
         if (in_event && ln == 'END:VEVENT') {
@@ -191,7 +191,7 @@
       return false;
     }
 
-    service.getEvents = function (events) {
+    service.getEvents = function () {
       return service.events;
     }
 
@@ -226,7 +226,7 @@
       });
     }
 
-    service.getPastEvents = function (events) {
+    service.getPastEvents = function () {
       var past_events = [],
         current_date = new moment();
 
@@ -244,4 +244,4 @@
 
   angular.module('SmartMirror')
     .factory('CalendarService', CalendarService);
-} (window.annyang));
+} ());

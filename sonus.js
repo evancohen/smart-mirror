@@ -47,7 +47,7 @@ const sonus = Sonus.init({ hotwords, language }, speech)
 Sonus.start(sonus)
 
 // Event IPC
-sonus.on('hotword', (index, keyword) => console.log("!h:", index))
+sonus.on('hotword', (index) => console.log("!h:", index))
 sonus.on('partial-result', result => console.log("!p:", result))
 sonus.on('final-result', result => console.log("!f:", result))
 sonus.on('error', error => console.error("!e:", error))
