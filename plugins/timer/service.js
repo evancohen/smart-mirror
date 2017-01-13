@@ -103,7 +103,7 @@
     return {
       replace: true,
       template: '<svg><circle class="background"></circle><circle class="progress"></circle></svg>',
-      link: function (scope, element, attrs) {
+      link: function (scope, element) {
         var circle = angular.element(element[0].querySelector('.progress'));
 
         scope.$on('timer:init', function (event, duration) {

@@ -10,10 +10,7 @@ var sampleRate = null;
 var audioContext = null;
 var context = null;
 var outputElement = document.getElementById('output');
-var outputString;
 var recordedAudio;
-var mainStream;
-var choices;
 var sourceIDs = new Array();
 
 // feature detection 
@@ -35,7 +32,7 @@ function sourceChanged(){
     //Try to capture audio based on the given source:
     navigator.webkitGetUserMedia({ audio: {optional: [{sourceId: sourceIDs[selectList.selectedIndex]}]}},
         success, function(e) {
-            error.style.display = "block";
+            document.getElementById('error').style.display = "block";
             console.log("Failure:", e);
         });
 }

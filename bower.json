@@ -23,7 +23,8 @@
     "angular-i18n": "1.5.0",
     "angular-translate": "2.11.0",
     "angular-translate-loader-static-files": "2.11.0",
-    "rrule": "^2.1.0"
+    "rrule": "^2.1.0",
+    "skycons": "darkskyapp/skycons"
   },
   "overrides": {
     "moment": {
@@ -31,6 +32,9 @@
     },
     "rrule": {
       "main": "lib/rrule.js"
+    },
+    "skycons": {
+      "main": "./skycons.js"
     }
   }
 }
