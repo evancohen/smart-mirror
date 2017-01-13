@@ -1,5 +1,6 @@
 $(function () {
 
+
   var socket = io()
 
   $connectionBar = $('#connection-bar')
@@ -39,7 +40,12 @@ $(function () {
       annyang.start({ autoRestart: false, continuous: false })
     })
   }
-
+  /*$('#command').click(function () {
+      $('#speech-error').hide()
+       var x = document.getElementById("command").value;
+      console.log(annyang.trigger("x")
+    })
+*/
   $('#devtools').change(function () {
     socket.emit('devtools', $(this).is(":checked"))
   });
@@ -59,5 +65,8 @@ $(function () {
   $('#sleep').click(function () {
     socket.emit('clickSleep')
   })
+
+  
+
 
 })
