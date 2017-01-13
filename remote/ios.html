@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Smart Mirror Remote</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Smart Mirror Remote</a>
+        </div>
+        <a class="navbar-text navbar-config" href="/config.html"><span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="settings"></span></a>
+    </div>
+</nav>
+
+<!-- Begin page content -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3"><input type="text" id="command" value="Type command..."></div>
+        <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons" onclick="run()">Run!</button></div>
+        <div class="col-md-6 col-md-offset-3">
+            <p id="speech-error" class="alert alert-danger" style="display:none"></p>
+        </div>
+    </div>
+    <script>
+        function run(){
+             var x = document.getElementById("command").value;
+              alert(x);       
+        }
+        
+    </script>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <p class="lead">Type in your commands for the <code>smart mirror</code>.</p>
+        </div>
+    </div>
+    </p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+                <a href="#" id="kiosk" class="btn btn-default" role="button">Full Screen</a>
+                <a href="#" id="reload" class="btn btn-default" role="button">Reload</a>
+                <a href="#" id="sleep" class="btn btn-default" role="button">Sleep</a>
+                <a href="#" id="wakeUp" class="btn btn-default" role="button">Wake Up</a>
+		<a href="#" id=“commands” class="btn btn-default" role="button">Show help</a>
+
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Configure</h3>
+            <p>Click the gear on the top right to configure your mirror. For more information see the <a href="https://docs.smart-mirror.io">docs</a>.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Development</h3>
+            <p>For details and development see: <a href="https://docs.smart-mirror.io/docs/development_and_contributing.html">Development and Contributing</a>.</p>
+        </div>
+        <form class="col-md-6 col-md-offset-3">
+            <div class="checkbox">
+                <label><input id="devtools" type="checkbox"> Show Devtools</label>
+            </div>
+        </form>
+    </div>
+
+<footer class="footer">
+
+    <div id="connection-bar" class="container">
+        <p id="connection-text" class="text-muted">Connecting...</p>
+    </div>
+</footer>
+
+<!-- Smart Mirror remote JavaScript
+================================================== -->
+<!-- Placed at the end of the document for profit -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="/remote-client.js"></script>
+
+</body>
+
+</html>
+
