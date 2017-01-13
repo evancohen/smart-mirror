@@ -100,6 +100,7 @@
                                     "titleMap":{
                                         "hue":"Hue",
                                         "hyperion":"Hyperion"
+                                    },
                                     "items": [
                                       {
                                         "type": "section",
