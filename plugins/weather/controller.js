@@ -5,8 +5,6 @@ function Weather($scope, $interval, $http, GeolocationService) {
     var weather = {}
 
     weather.get = function () {
-        geoloc = geoposition;
-        var language = (typeof config.language !== 'undefined') ? config.language.substr(0, 2) : "en"
         return $http.jsonp('https://api.forecast.io/forecast/' + config.forecast.key + '/' +
             geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
             config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
@@ -46,7 +44,7 @@ function Weather($scope, $interval, $http, GeolocationService) {
             weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
             weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
             weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
-        };
+        }
         return weather.forecast.data.daily;
     }
 
@@ -65,7 +63,7 @@ function Weather($scope, $interval, $http, GeolocationService) {
     });
 
     function refreshWeatherData() {
-        weather.get().then(function (response) {
+        weather.get().then(function () {
             $scope.currentForecast = weather.currentForecast();
             $scope.weeklyForecast = weather.weeklyForecast();
             $scope.hourlyForecast = weather.hourlyForecast();

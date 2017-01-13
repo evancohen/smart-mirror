@@ -11,7 +11,8 @@
     "sonus": "node sonus.js",
     "motion": "sudo node motion.js",
     "update": "git pull && npm install",
-    "wiredep": "wiredep -s index.html"
+    "wiredep": "wiredep -s index.html",
+    "test": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "angular-i18n": "^1.5.5",
     "bower": "^1.7.9",
     "electron": "^1.4.4",
+    "eslint": "^3.13.1",
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
@@ -43,5 +45,23 @@
     "hyperion-client": "1.0.3",
     "socket.io": "^1.6.0",
     "sonus": "^0.1.4"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": true
+    },
+    "rules": {
+      "no-console": 0
+    },
+    "globals": {
+        "angular": false,
+        "annyang": false,
+        "moment": false,
+        "config": false,
+        "RRule": false
+    }
   }
 }

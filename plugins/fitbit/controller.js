@@ -1,4 +1,4 @@
-function Fitbit($scope, $http, $interval, FitbitService, SpeechService) {
+function Fitbit($scope, $interval, FitbitService, SpeechService) {
     var refreshFitbitData = function () {
         console.log('refreshing fitbit data');
         FitbitService.profileSummary(function (response) {

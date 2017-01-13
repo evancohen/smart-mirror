@@ -8,7 +8,7 @@ function Map($scope, $http, GeolocationService, SpeechService, Focus) {
         map.center = geoposition.coords.latitude + ',' + geoposition.coords.longitude;
     });
 
-    generateMap = function (targetCenter, targetZoom) {
+    var generateMap = function (targetCenter, targetZoom) {
         if (targetCenter === undefined) {
             targetCenter = map.center;
         } else {

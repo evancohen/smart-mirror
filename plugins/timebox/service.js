@@ -23,7 +23,7 @@
     }
 
     return service;
-  };
+  }
 
   angular.module('SmartMirror')
     .factory('TimeboxService', TimeboxService);

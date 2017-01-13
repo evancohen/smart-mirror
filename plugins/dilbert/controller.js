@@ -1,7 +1,7 @@
 function Dilbert($scope, $http, $q, SpeechService, Focus) {
     var dilbertFeed
 
-    getDilbertFeed = function () {
+    var getDilbertFeed = function () {
         var deferred = $q.defer();
         if (dilbertFeed) {
             deferred.resolve(dilbertFeed);
@@ -19,7 +19,7 @@ function Dilbert($scope, $http, $q, SpeechService, Focus) {
     };
 
     // Show Dilbert comic
-    SpeechService.addCommand('image_comic_dilbert', function (state, action) {
+    SpeechService.addCommand('image_comic_dilbert', function () {
         getDilbertFeed().then(function(feed){
             $scope.dilbert = feed.entries[0]
             Focus.change("dilbert");
