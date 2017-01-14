@@ -10,7 +10,6 @@ if (!config || !config.speech || !config.speech.keyFilename || !config.speech.ho
 }
 
 var keyFile = JSON.parse(fs.readFileSync(path.resolve(config.speech.keyFilename), "utf8"))
-var umdl = path.resolve('node_modules/sonus/resources/snowboy.umdl')
 
 // Configure Sonus
 const Sonus = require('sonus')
