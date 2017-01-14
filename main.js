@@ -14,7 +14,7 @@ const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
-const DevelopmentMode = process.argv[2] == "dev"
+const DevelopmentMode = process.argv[2] === "dev"
 
 // Load the smart mirror config
 let config
@@ -23,10 +23,10 @@ try {
 } catch (e) {
   let error = "Unknown Error"
   config = require("./config.default.json")
-  if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
+  if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
-  } else if (typeof e.message != 'undefined') {
+  } else if (typeof e.message !== 'undefined') {
     console.log(e)
     error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
       'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
