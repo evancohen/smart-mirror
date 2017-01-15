@@ -34,7 +34,7 @@ function Stock($scope, $http, $q, $interval) {
     }
 
     getStocks();
-    $interval(getStocks, defaultRefreshInterval * 60000 || 1800000)
+    $interval(getStocks, defaultRefreshInterval * 60000 || 1800000);
     //$interval(getStocks, config.stock.defaultRefreshInterval * 60000 || 1800000)
 }
 
