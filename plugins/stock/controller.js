@@ -1,8 +1,5 @@
 function Stock($scope, $http, $q, $interval) {
 
-    // I don't see the default refresh interval being set in the JSON object...
-    var defaultRefreshInterval = 100;
-
     var getStockQuotes = function () {
         var deferred = $q.defer();
 
@@ -34,8 +31,9 @@ function Stock($scope, $http, $q, $interval) {
     }
 
     getStocks();
-    $interval(getStocks, defaultRefreshInterval * 60000 || 1800000);
-    //$interval(getStocks, config.stock.defaultRefreshInterval * 60000 || 1800000)
+    // TODO: Add custom interval.
+    // 30 min refresh interval.
+    $interval(getStocks, 1800000);
 }
 
 angular.module('SmartMirror')
