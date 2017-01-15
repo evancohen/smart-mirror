@@ -26,7 +26,7 @@
 
         //set lang
         moment.locale(
-            (typeof config.general.language !== 'undefined') ? config.general.language : 'en-US',
+            (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en",
             {
                 calendar: {
                     lastWeek: '[Last] dddd',
