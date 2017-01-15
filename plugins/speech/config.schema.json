@@ -6,9 +6,9 @@
             "properties": {
                 "keyFilename": {
                     "type": "string",
-                    "title": "Google Cloud Key Filename (should start with './')",
+                    "title": "Google Cloud Speech Keyfile",
                     "required": true,
-                    "default": "./keyfile.json"
+                    "default": "keyfile.json"
                 },
                 "hotwords": {
                     "type": "array",
