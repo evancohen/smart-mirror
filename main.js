@@ -26,8 +26,7 @@ try {
   config = require("./config.default.json")
   firstRun = true
   if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
-    error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
-      "in the root of your smart-mirror directory."
+    error = "'config.js' not found. \nYou can configure your mirror at the remote address below..."
   } else if (typeof e.message !== 'undefined') {
     console.log(e)
     error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
@@ -214,7 +213,7 @@ app.on('will-quit', function () {
   if (mtnProcess) {
     mtnProcess.kill()
   }
-  if (config.autoTimer && config.autoTimer.wakeCmd) {
+  if (config.autoTimer && config.autoTimer.mode !== "disabled" && config.autoTimer.wakeCmd) {
     exec(config.autoTimer.wakeCmd).kill()
   }
 })
