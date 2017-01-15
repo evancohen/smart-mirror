@@ -18,7 +18,7 @@
         $scope.config = config;
 
         // Set up our Focus
-        $rootScope.$on('focus', function(targetScope, newFocus, oldFocus){
+        $rootScope.$on('focus', function(targetScope, newFocus){
             $scope.focus = newFocus;
         })
 
@@ -93,7 +93,7 @@
         _this.init = function () {
             AutoSleepService.startAutoSleepTimer();
 
-            var tick = $interval(updateTime, 1000);
+            $interval(updateTime, 1000);
             updateTime();
             restCommand();
 
@@ -119,7 +119,7 @@
             });
 
             // Check the time
-            SpeechService.addCommand('time_show', function (task) {
+            SpeechService.addCommand('time_show', function () {
                 console.debug("It is", moment().format('h:mm:ss a'));
             });
 

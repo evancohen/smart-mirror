@@ -1,4 +1,4 @@
-function Rss($scope, $http, $q, $interval, CalendarService) {
+function Rss($scope, $http, $q, $interval) {
 
     $scope.currentIndex = 0;
     var rss = {};

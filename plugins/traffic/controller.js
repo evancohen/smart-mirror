@@ -1,7 +1,7 @@
 function Traffic($scope, $http, $interval, $q, TimeboxService) {
 var BING_MAPS = "http://dev.virtualearth.net/REST/V1/Routes/"
 
-    getDurationForTrips = function () {
+    var getDurationForTrips = function () {
         var deferred = $q.defer();
         var promises = [];
 

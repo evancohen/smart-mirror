@@ -37,7 +37,7 @@ const {ipcRenderer} = require('electron');
                 }
             }
 
-            ipcRenderer.on('hotword', (event, spotted) => {
+            ipcRenderer.on('hotword', () => {
                 callbacks.listening(true)
             })
 
@@ -66,8 +66,6 @@ const {ipcRenderer} = require('electron');
             var textId = 'commands.' + commandId + '.text';
             var descId = 'commands.' + commandId + '.description';
             $translate([voiceId, textId, descId]).then(function (translations) {
-                var phrase = translations[voiceId];
-                var description = translations[textId]
                 service.addRawCommand(translations[voiceId], callback, translations[descId], translations[textId])
             });
         };

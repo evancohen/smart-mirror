@@ -97,6 +97,10 @@
                                     "type": "selectfieldset",
                                     "key": "light.setup[].targets[].lightType",
                                     "legend":"Item {{idx}}",
+                                    "titleMap":{
+                                        "hue":"Hue",
+                                        "hyperion":"Hyperion"
+                                    },
                                     "items": [
                                       {
                                         "type": "section",
