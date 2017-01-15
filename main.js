@@ -18,11 +18,13 @@ const DevelopmentMode = process.argv[2] === "dev"
 
 // Load the smart mirror config
 let config
+let firstRun = false
 try {
   config = require("./config.json")
 } catch (e) {
   let error = "Unknown Error"
   config = require("./config.default.json")
+  firstRun = true
   if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
     error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
       "in the root of your smart-mirror directory."
@@ -78,7 +80,7 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-if (config && config.speech) {
+if (config && config.speech && !firstRun) {
   var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
   // Handel messages from node
   kwsProcess.stderr.on('data', function (data) {
@@ -100,7 +102,7 @@ if (config && config.speech) {
   })
 }
 
-if (config.remote && config.remote.enabled) {
+if (config.remote && config.remote.enabled || firstRun) {
   remote.start()
 
   // Deturmine the local IP address
