@@ -1,9 +1,11 @@
+/* global $, io */
+
 $(function () {
 
   var socket = io()
 
-  $connectionBar = $('#connection-bar')
-  $connectionText = $('#connection-text')
+  var $connectionBar = $('#connection-bar')
+  var $connectionText = $('#connection-text')
   socket.on('connected', function () {
     socket.emit('getForm',true)
     $connectionBar.removeClass('disconnected').addClass('connected')
@@ -34,11 +36,11 @@ $(function () {
         $('#outMsg').html("<p><strong>Your Configuration has saved.</strong></p>")
         showElm('#out',1)
       };
-      data.configJSON.onSubmit = function (errors, values) {
+      data.configJSON.onSubmit = function (errors) {
         if (errors) {
           console.log('Validation errors', errors);
           let buildInner=""
-          errors.forEach(function(errItem,errIdx) {
+          errors.forEach(function(errItem) {
             let errSchemaUri = errItem.schemaUri.replace(/.+\/properties\//, "").replace("/"," >> ")  
             buildInner += `<p><strong style="font-color:red">Error: ` + errItem.message + 
             "</strong></br>Location: " +
@@ -71,7 +73,7 @@ var timeoutID
     $(element).fadeOut("fast")
   }
   function showElm(element,timeOutMins=1){
-    timeOutMillis = timeOutMins*60000
+    var timeOutMillis = timeOutMins*60000
     $(element).fadeIn() 
     timeoutID=setTimeout(function(){
       hideElm(element);

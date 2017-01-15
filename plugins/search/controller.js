@@ -1,5 +1,5 @@
 function Search($scope, $http, SpeechService, $rootScope, Focus) {
-    searchYouTube = function (query) {
+    var searchYouTube = function (query) {
         return $http({
             url: 'https://www.googleapis.com/youtube/v3/search',
             method: 'GET',
@@ -16,7 +16,7 @@ function Search($scope, $http, SpeechService, $rootScope, Focus) {
         });
     }
 
-    function stopVideo() {
+    var stopVideo = function() {
         var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
         iframe.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
     }

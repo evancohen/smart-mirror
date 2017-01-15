@@ -1,3 +1,4 @@
+/* global SC:true */
 (function () {
   'use strict';
 
@@ -50,7 +51,6 @@
   }
 
   var SoundCloudAudioSource = function (audio) {
-    var self = this;
     var audioCtx = new (window.AudioContext || window.webkitAudioContext);
     var source = audioCtx.createMediaElementSource(audio);
 

@@ -12,7 +12,7 @@ function Maker($http, SpeechService) {
                 } catch(e){
                     // no data - that's fine
                 }
-                $http(req).then(function successCallback(response) {
+                $http(req).then(function successCallback() {
                     console.log('Executed custom command:', command.utterance)
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs

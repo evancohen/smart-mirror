@@ -13,7 +13,7 @@
         var service = {};
         var geoloc = null;
 
-        service.getLocation = function (opts) {
+        service.getLocation = function () {
             var deferred = $q.defer();
 
             // Use geo postion from config file if it is defined
@@ -40,7 +40,7 @@
                         deferred.resolve({ 'coords': { 'latitude': location.lat, 'longitude': location.lng } })
                     },
                     function (err) {
-                        console.debug("Failed to retrieve geolocation.")
+                        console.debug("Failed to retrieve geolocation.", err)
                         deferred.reject("Failed to retrieve geolocation.")
                     });
             }

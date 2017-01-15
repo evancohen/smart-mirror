@@ -1,7 +1,6 @@
 function Soundcloud($scope, $http, SoundCloudService, SpeechService, Focus) {
     
     //Initialize SoundCloud
-    var playing = false, sound;
     SoundCloudService.init();
 
     //SoundCloud search and play

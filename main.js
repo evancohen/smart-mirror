@@ -14,23 +14,25 @@ const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
-const DevelopmentMode = process.argv[2] == "dev"
+const DevelopmentMode = process.argv[2] === "dev"
 
 // Load the smart mirror config
 let config
+let firstRun = false
 try {
   config = require("./config.json")
 } catch (e) {
   let error = "Unknown Error"
   config = require("./config.default.json")
-  if (typeof e.code != 'undefined' && e.code == 'MODULE_NOT_FOUND') {
-    error = "'config.js' not found. \nPlease ensure that you have created 'config.js' " +
-      "in the root of your smart-mirror directory."
-  } else if (typeof e.message != 'undefined') {
+  firstRun = true
+  if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
+    error = "'config.js' not found. \nYou can configure your mirror at the remote address below..."
+  } else if (typeof e.message !== 'undefined') {
     console.log(e)
     error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
       'Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/'
   }
+  console.log(error)
 }
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -50,7 +52,7 @@ function createWindow() {
     }
   }
 
-  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: true, autoHideMenuBar: true, darkTheme: true }
+  var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: !DevelopmentMode, autoHideMenuBar: true, darkTheme: true }
   if (externalDisplay) {
     browserWindowOptions.x = externalDisplay.bounds.x + 50
     browserWindowOptions.y = externalDisplay.bounds.y + 50
@@ -77,7 +79,7 @@ function createWindow() {
 }
 
 // Initilize the keyword spotter
-if (config && config.speech) {
+if (config && config.speech && !firstRun) {
   var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
   // Handel messages from node
   kwsProcess.stderr.on('data', function (data) {
@@ -98,37 +100,8 @@ if (config && config.speech) {
     }
   })
 }
-// Motion detection
-if (config && config.motion && config.motion.enabled) {
-  var mtnProcess = spawn('npm', ['run', 'motion'], { detached: false })
-  // Handel messages from node
-  mtnProcess.stderr.on('data', function (data) {
-    var message = data.toString()
-    console.error("ERROR", message.substring(4))
-  })
 
-  mtnProcess.stdout.on('data', function (data) {
-    var message = data.toString()
-    if (message.startsWith('!s:')) {
-      console.log(message.substring(3))
-      mainWindow.webContents.send('motionstart', true)
-    } else if (message.startsWith('!e:')) {
-      console.log(message.substring(3))
-      mainWindow.webContents.send('motionend', true)
-    } else if (message.startsWith('!c:')) {
-      console.log(message.substring(3))
-      mainWindow.webContents.send('calibrated', true)
-    } else if (message.startsWith('!E:')) {
-      console.log(message.substring(3))
-      mainWindow.webContents.send('Error', message.substring(3))
-      mtnProcess.kill();
-    } else {
-      console.error(message)
-    }
-  })
-}
-
-if (config.remote && config.remote.enabled) {
+if (config.remote && config.remote.enabled || firstRun) {
   remote.start()
 
   // Deturmine the local IP address
@@ -240,7 +213,7 @@ app.on('will-quit', function () {
   if (mtnProcess) {
     mtnProcess.kill()
   }
-  if (config.autoTimer && config.autoTimer.wakeCmd) {
+  if (config.autoTimer && config.autoTimer.mode !== "disabled" && config.autoTimer.wakeCmd) {
     exec(config.autoTimer.wakeCmd).kill()
   }
 })

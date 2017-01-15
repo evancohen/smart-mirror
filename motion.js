@@ -1,7 +1,6 @@
 'use strict'
-const fs = require('fs')
 // Load in smart mirror config
-var config = require(__dirname + "/config-index.js")
+var config = require("./config.json")
 if(!config || !config.motion || !config.motion.enabled || !config.motion.pin || !config.general.language){
   console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
 }

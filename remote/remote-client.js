@@ -1,9 +1,11 @@
+/* global $, io */
+
 $(function () {
 
   var socket = io()
 
-  $connectionBar = $('#connection-bar')
-  $connectionText = $('#connection-text')
+  var $connectionBar = $('#connection-bar')
+  var $connectionText = $('#connection-text')
   socket.on('connected', function () {
     $connectionBar.removeClass('disconnected').addClass('connected')
     $connectionText.html('Connected!')
