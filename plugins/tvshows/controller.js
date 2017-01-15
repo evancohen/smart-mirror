@@ -1,7 +1,7 @@
 function TVShows($scope, $http, $interval) {
 
     getTVShows()
-    $interval(getTVShows, (!!config.tvshows ? config.tvshows.refreshInterval * 60000 : 7200000));
+    $interval(getTVShows, (config.tvshows ? config.tvshows.refreshInterval * 60000 : 7200000));
 
     function getTVShows() {
         $scope.tvshows = [];
