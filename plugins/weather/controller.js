@@ -1,12 +1,12 @@
 function Weather($scope, $interval, $http, GeolocationService) {
 
-    var language = (typeof config.language !== 'undefined') ? config.language.substr(0, 2) : "en"
+    var language = (typeof config.general.language !== 'undefined') ? config.language.substr(0, 2) : "en"
     var geoposition = {}
     var weather = {}
 
     weather.get = function () {
         geoloc = geoposition;
-        var language = (typeof config.language !== 'undefined') ? config.language.substr(0, 2) : "en"
+        var language = (typeof config.general.language !== 'undefined') ? config.language.substr(0, 2) : "en"
         return $http.jsonp('https://api.forecast.io/forecast/' + config.forecast.key + '/' +
             geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
             config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
