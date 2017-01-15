@@ -25,19 +25,22 @@
         Focus.change("default");
 
         //set lang
-        moment.locale(
-            (typeof config.general.language !== 'undefined') ? config.general.language : 'en-US',
-            {
-                calendar: {
-                    lastWeek: '[Last] dddd',
-                    lastDay: '[Yesterday]',
-                    sameDay: '[Today]',
-                    nextDay: '[Tomorrow]',
-                    nextWeek: 'dddd',
-                    sameElse: 'L'
+        if (config.general.language.substr(0, 2) == 'en') {
+            moment.locale(config.general.language,
+                {
+                    calendar: {
+                        lastWeek: '[Last] dddd',
+                        lastDay: '[Yesterday]',
+                        sameDay: '[Today]',
+                        nextDay: '[Tomorrow]',
+                        nextWeek: 'dddd',
+                        sameElse: 'L'
+                    }
                 }
-            }
-        );
+            )
+        } else {
+                moment.locale(config.general.language)
+        }
         //Initialize the speech service
 
         var resetCommandTimeout;

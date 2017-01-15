@@ -1,6 +1,6 @@
 function Weather($scope, $interval, $http, GeolocationService) {
 
-    var language = (typeof config.language !== 'undefined') ? config.language.substr(0, 2) : "en"
+    var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
     var geoposition = {}
     var weather = {}
 
