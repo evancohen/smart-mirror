@@ -27,7 +27,7 @@
                 "wakeCmd": {
                     "type": "string",
                     "title": "Command used to wake up Smart Mirror",
-                    "default": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
+                    "default": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1"
                 },
                 "sleepCmd": {
                     "type": "string",
