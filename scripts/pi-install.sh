@@ -149,6 +149,12 @@ if ! grep -q '(smart-mirror)' ~/.config/lxsession/LXDE-pi/autostart; then
 @xset dpms 0 0 0' ~/.config/lxsession/LXDE-pi/autostart
 fi
 
+# Add start commands in the user's bashrc.
+echo "export MIRROR_HOME=\"~/smart-mirror\"" >> ~/.bashrc
+echo "alias start-mirror='cd \$MIRROR_HOME && npm start'" >> ~/.bashrc
+echo "alias dev-mirror='cd \$MIRROR_HOME && npm start dev'" >> ~/.bashrc
+echo "alias ssh-start-mirror='cd \$MIRROR_HOME && DISPLAY=:0 npm start'" >> ~/.bashrc
+echo "alias ssh-dev-mirror='cd \$MIRROR_HOME && DISPLAY=:0 npm start dev'" >> ~/.bashrc
 
 # The mirror is now installed, yay!
 cat << "EOF"
@@ -159,9 +165,9 @@ cat << "EOF"
      |.o '.|     http://docs.smart-mirror.io
      |'._.'|     
      |     |     To start your mirror you can run:
-   ,'|  |  |`.   > npm start
+   ,'|  |  |`.   > start-mirror
   /  |  |  |  \  Or if you are running over SSH:
-  |,-'--|--'-.|  > DISPLAY=:0 npm start
+  |,-'--|--'-.|  > ssh-start-mirror
   
 EOF
 # ASCII art found on http://textart.io/
