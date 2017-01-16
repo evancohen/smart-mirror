@@ -151,6 +151,7 @@ fi
 
 # Add start commands in the user's bashrc.
 echo "export MIRROR_HOME=\"~/smart-mirror\"" >> ~/.bashrc
+echo "alias update-mirror='cd \$MIRROR_HOME && git pull && npm install'" >> ~/.bashrc
 echo "alias start-mirror='cd \$MIRROR_HOME && npm start'" >> ~/.bashrc
 echo "alias dev-mirror='cd \$MIRROR_HOME && npm start dev'" >> ~/.bashrc
 echo "alias ssh-start-mirror='cd \$MIRROR_HOME && DISPLAY=:0 npm start'" >> ~/.bashrc
