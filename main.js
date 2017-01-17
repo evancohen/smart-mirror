@@ -12,7 +12,7 @@ try {
   config = require("./config.default.json")
   firstRun = true
   if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
-    error = "'config.js' not found. \nYou can configure your mirror at the remote address below..."
+    error = "'config.json' not found. \nYou can configure your mirror at the remote address below..."
   } else if (typeof e.message !== 'undefined') {
     console.log(e)
     error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + '\n' +
