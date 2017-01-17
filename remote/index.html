@@ -33,13 +33,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <div class="form-group hidden" id="command">
-                <input type="text" id="command-box" class="input-lg form-control" placeholder="Type command...">
+            <div class="form-group" id="command">
+                    <div class="input-group">
+                        <input type="text" id="command-box" class="input-lg form-control" placeholder="Type command...">
+                        <span id="no-speak" class="input-group-addon">
+                            <i class="fa fa-microphone-slash"></i>
+                        </span>
+                        <span id="speak" class="input-group-addon">
+                            <i class="fa fa-microphone hidden"></i>
+                        </span>
+                    </div>
                 </br>
                 <button id="command-bttn" type="button" class="btn btn-primary btn-lg btn-block glyphicons">Send Command!</button>
             </div>
         </div>
-        <div class="col-md-6 col-md-offset-3"><button id="speak" type="button" class="btn btn-primary btn-lg btn-block glyphicons hidden">Speak!</button></div>
         <div class="col-md-6 col-md-offset-3">
             <p id="speech-error" class="alert alert-danger" style="display:none"></p>
         </div>
@@ -92,6 +99,7 @@
     crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://use.fontawesome.com/741cbe0233.js"></script>
 
 <script src="/remote-client.js"></script>
 
