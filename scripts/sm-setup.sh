@@ -327,7 +327,6 @@ if [ "$INTERACTIVE" = True ]; then
 	whiptail --title "Unsupported device!" --msgbox "The Smart-Mirror Setup Script only works on the Pi 2 and 3" 20 60 1
 	exit 1;
   fi
-  calc_wt_size
   do_splash
   do_noobsCheck
   do_liteCheck
