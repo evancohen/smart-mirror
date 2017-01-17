@@ -115,14 +115,14 @@ if [ -d "$HOME/smart-mirror" ]; then
   echo "   smart-mirror folder found.">>$INSTALL_LOG
 	if ( whiptail --title "Installing Smart-Mirror Code" --yesno "Looks like the smart mirror is already installed.
 Please rename or remove the ${mag}smart-mirror${end} folder and re-run the installer.
-Do you want to upgrade your smart mirror by running ${cyn}git pull${end} from the ~/smart-mirror directory?" 20 60 ) then
+Do you want to upgrade your smart mirror by running ${cyn}git pull${end} from the ~/smart-mirror directory?" 20 60 ); then
       echo "=== Pull Smart-Mirror ===">>$INSTALL_LOG
       if cd $MIRROR_HOME && git pull>>$INSTALL_LOG; then
         PULL_MIRROR=true
       fi
   else
       echo "=== Do Not Pull Smart-Mirror ===">>$INSTALL_LOG
-    if ( whiptail --title "Installing Smart-Mirror Code" --yesno "Do you want to rename the ~/smart-mirror directory and install Smart-Mirror Fresh?" 20 60 ) then
+    if ( whiptail --title "Installing Smart-Mirror Code" --yesno "Do you want to rename the ~/smart-mirror directory and install Smart-Mirror Fresh?" 20 60 ); then
       newFolder=$(whiptail --inputbox "What do you want to rename the smart-mirror folder to? 20 60 smart-mirror" --title "Installing Smart-Mirror Code" 3>&1 1>&2 2>&3)
       echo "=== rename smart-mirror to $newFolder ===">>$INSTALL_LOG
       if mv ~/smart-mirror $newFolder; then
@@ -148,7 +148,7 @@ if $CLONE_MIRROR; then
       echo "=== Cloning Smart-Mirror Failed ===">>$INSTALL_LOG
   fi
 else
-  if $PULL_MIRROR then
+  if $PULL_MIRROR; then
     whiptail --msgbox "${red}Git Pull Failed!${end}" 20 80 --title "Installing Smart-Mirror Code"  
     echo "=== Pulling Smart-Mirror Failed ===">>$INSTALL_LOG
   else
