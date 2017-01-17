@@ -136,7 +136,7 @@ Do you want to upgrade your smart mirror by running ${cyn}git pull${end} from th
 else
   CLONE_MIRROR=true
 fi
-if $CLONE_MIRROR then
+if $CLONE_MIRROR; then
   # Getting the code
   echo "=== Cloning Smart-Mirror ===">>$INSTALL_LOG
   whiptail --msgbox "${blu}Cloning smart-mirror Git Repo${end}" 20 80 --title "Installing Smart-Mirror Code"

@@ -46,10 +46,10 @@ function getCard {
 		fi
 	
 	done
-    echo "recDev: ${recDev[@]}"
-    echo "recMenu: ${recMenu[@]}"
+    #echo "recDev: ${recDev[@]}"
+    #echo "recMenu: ${recMenu[@]}"
 	choice=$(whiptail --title "List of $2 Devices" --menu "choose a $2 device:" 20 78 ${#recDev[@]} "${recMenu[@]}" 3>&2 2>&1 1>&3)
-    echo "choice: $choice"
+    #echo "choice: $choice"
 			test=`echo "$choice" | grep -oE "[0-9]:"`
 			test=`echo "$test" | tr -d '\n'`
 			test=`echo "$test" | tr : ,`
