@@ -163,10 +163,10 @@ cat << "EOF"
       / _ \      For configuration instructions, check out the documentation at:
      |.o '.|     http://docs.smart-mirror.io
      |'._.'|     
-     |     |     To start your mirror you can run:
+     |     |     To start your mirror you can run both on the pi or via SSH:
    ,'|  |  |`.   > start-mirror
-  /  |  |  |  \  Or if you are running over SSH:
-  |,-'--|--'-.|  > ssh-start-mirror
+  /  |  |  |  \
+  |,-'--|--'-.|
   
 EOF
 # ASCII art found on http://textart.io/
