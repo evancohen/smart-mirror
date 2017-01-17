@@ -237,9 +237,9 @@ Smart-Mirror functions properly.
 
 Did you use NOOBS to install RASPBIAN?\
     " $DEFAULT 20 70 2
-    RET=$?
+    RET=1
   else
-    RET=$1
+    RET=0
   fi
   if [ $RET -eq 1 ] ; then
     echo === ERROR: YOU MUST NOT INSTALL RASPBIAN USING NOOBS! === >> $INSTALL_LOG
@@ -263,11 +263,9 @@ to the docs to see the proper way to install
 RASPBIAN W/ PIXEL so that Smart-Mirror functions properly. 
 
 Did you install RASPBIAN LITE?\
-    " $DEFAULT 20 70 2
-    RET=$?
-  else
-    RET=$1
-  fi
+    "  20 70 2
+RET=$?
+echo "$RET"
   if [ $RET -eq 1 ] ; then
     echo === ERROR: YOU MUST NOT INSTALL RASPBIAN LITE! === >> $INSTALL_LOG
     whiptail --msgbox "\
@@ -276,14 +274,13 @@ Installation has failed. You MUST NOT install RASPBIAN LITE!
 See https://docs.smart-mirror.io/docs/installing_raspbian.html for more info.
 \
     " 20 70 1
-    exit 1;
-  else
-    return $RET
   fi
+fi
 }
+
 function do_splash() {
 
-    cat << "EOF"
+cat << "EOF"
  ________  _____ ______   ________  ________  _________         
 |\   ____\|\   _ \  _   \|\   __  \|\   __  \|\___   ___\       
 \ \  \___|\ \  \\\__\ \  \ \  \|\  \ \  \|\  \|___ \  \_|       
