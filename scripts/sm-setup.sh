@@ -5,8 +5,22 @@ NODE_MINIMUM_VERSION="v4.0.0"
 NODE_STABLE_VERSION="6.x"
 INTERACTIVE=True
 ASK_TO_REBOOT=0
-CONFIG=/boot/config.txt
+CONFIG=$HOME/config.txt
+#lx2=~/.config/lxsession/LXDE-pi/autostart
+lx2=$HOME/autostart.config
+#lx1=/etc/xdg/lxsession/LXDE/autostart
+lx1=$HOME/autostart.etc
 INSTALL_LOG=$HOME/sm-setup.log
+
+# Terminal Colors
+red=$'\e[1;31m'
+grn=$'\e[1;32m'
+yel=$'\e[1;33m'
+blu=$'\e[1;34m'
+mag=$'\e[1;35m'
+cyn=$'\e[1;36m'
+end=$'\e[0m'
+
 set_config_var() {
   lua - "$1" "$2" "$3" <<EOF > "$3.bak"
 local key=assert(arg[1])
@@ -32,7 +46,7 @@ mv "$3.bak" "$3"
 function check_version() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
 
 # Get the password from user for sudo
-function do_getSudoPW() { sudoPass=$(whiptail --passwordbox "please enter your secret password" 8 78 --title "password dialog" 3>&1 1>&2 2>&3) }
+function do_getSudoPW() { sudoPass=$(whiptail --passwordbox "please enter your secret password" 8 78 --title "password dialog" 3>&1 1>&2 2>&3); }
 
 # Check to see if a command exists (if something is installed)
 function command_exists () { type "$1" &> /dev/null ; }
@@ -61,22 +75,22 @@ if [ "$INTERACTIVE" = True ]; then
 function do_5_configKiosk() {
 
 # Apply LXDE unclutter autostart (if we haven't already)
-if ! sudo grep -q '(smart-mirror)' /etc/xdg/lxsession/LXDE/autostart; then
+if ! sudo grep -q '(smart-mirror)' $lx1; then
     sudo sed -i -e '$a\
 \
 #Hide the mouse when inactive (smart-mirror)\
-unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
+unclutter -idle 0.1 -root' $lx1
 fi
 
 # Disable the screensaver (if we haven't already)
-if ! grep -q '(smart-mirror)' ~/.config/lxsession/LXDE-pi/autostart; then
+if ! grep -q '(smart-mirror)' $lx2; then
     sed -i -e '$a\
 \
 #Disable screen saver (smart-mirror)\
 @xset s 0 0\
 @xset s noblank\
 @xset s noexpose\
-@xset dpms 0 0 0' ~/.config/lxsession/LXDE-pi/autostart
+@xset dpms 0 0 0' $lx2
 fi
 }
 
@@ -310,7 +324,7 @@ if [ "$INTERACTIVE" = True ]; then
   ARCH=$(uname -m) 
   # Check processor archetecture.
   if [ "$ARCH" != "armv7l" ]; then
-	whiptail --title "Unsupported device!" --msgbox " The Smart-Mirror Setup Script only works on the Pi 2 and 3" 20 60 1
+	whiptail --title "Unsupported device!" --msgbox "The Smart-Mirror Setup Script only works on the Pi 2 and 3" 20 60 1
 	exit 1;
   fi
   calc_wt_size
@@ -324,4 +338,4 @@ if [ "$INTERACTIVE" = True ]; then
   do_4_npmInstall
   do_5_configKiosk
   do_6_rotateScreen
-
+fi
