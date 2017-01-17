@@ -14,19 +14,19 @@ $(function () {
     })
   }
 
-  $connectionBar = $('#connection-bar')
-  $connectionText = $('#connection-text')
-  $speak = $('#speak')
-  $nospeak = $('#no-speak')
-  $commandBox = $('#command-box')
-  $commandBttn = $('#command-bttn')
+  var $connectionBar = $('#connection-bar')
+  var $connectionText = $('#connection-text')
+  var $speak = $('#speak')
+  var $nospeak = $('#no-speak')
+  var $commandBox = $('#command-box')
+  var $commandBttn = $('#command-bttn')
   
   socket.on('connected', function () {
     $connectionBar.removeClass('disconnected').addClass('connected')
     $connectionText.html('Connected!')
     if (isIosDevice()){
       $speak.addClass('hidden')
-      $no-speak.removeClass('hidden')
+      $nospeak.removeClass('hidden')
     } 
     if (annyang) {
       socket.emit('getAnnyAng')
