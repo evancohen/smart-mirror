@@ -75,6 +75,10 @@ remote.start = function () {
       remote.emit('sleep')
     })
 
+    socket.on('getAnnyAng', function () {
+      socket.emit('loadAnnyAng', (typeof config.general.language != 'undefined') ? config.general.language : 'en-US')
+    })
+
     socket.on('saveConfig', function (data) { // used to save the form JSON
       fs.writeFile(configPath, JSON.stringify(data, null, 2), "utf8", function (err) {
         if (err) {

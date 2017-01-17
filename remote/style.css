@@ -61,10 +61,23 @@ p.lead {
   margin-top: 15px;
   padding: 5px;
 }
+#speak{
+  cursor: pointer;
+}
+.redMic {
+  color: darkred;
+}
+.blackMic {
+  color: black;
+}
+.greyMic {
+  color: grey;
+}
 
 code {
   font-size: 80%;
 }
+
 
 .connected {
   background-color: #5cb85c;
