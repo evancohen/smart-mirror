@@ -19,7 +19,6 @@ $(function () {
   var $speak = $('#speak')
   var $nospeak = $('#no-speak')
   var $commandBox = $('#command-box')
-  var $commandBttn = $('#command-bttn')
   
   socket.on('connected', function () {
     $connectionBar.removeClass('disconnected').addClass('connected')
