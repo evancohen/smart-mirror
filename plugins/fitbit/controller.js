@@ -19,8 +19,10 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
     };
 
     if (typeof config.fitbit !== 'undefined') {
-        refreshFitbitData()
-        $interval(refreshFitbitData, config.fitbit.refreshInterval * 60000 || 3600000)
+        FitbitService.init(function(){
+            refreshFitbitData()
+            $interval(refreshFitbitData, config.fitbit.refreshInterval * 60000 || 3600000)
+        })
     }
 
     SpeechService.addCommand('show_my_walking', function () {
