@@ -160,10 +160,10 @@ cat << "EOF"
 
         |        The smart-mirror is now installed!
        / \       
-      / _ \      For configuration instructions, check out the documentation at:
+      / _ \      Now you'll want to configure audio input, speech, and the mirror itself:
      |.o '.|     http://docs.smart-mirror.io
      |'._.'|     
-     |     |     To start your mirror you can run both on the pi or via SSH:
+     |     |     To start your mirror:
    ,'|  |  |`.   > mirror start
   /  |  |  |  \
   |,-'--|--'-.|
