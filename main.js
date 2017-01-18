@@ -1,6 +1,6 @@
 
 // Launching the mirror in dev mode
-const DevelopmentMode = process.argv[2] === "dev"
+const DevelopmentMode = (process.argv.indexOf("dev") > -1)
 
 // Load the smart mirror config
 let config
