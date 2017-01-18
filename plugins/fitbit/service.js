@@ -49,13 +49,12 @@
         //
         var fitbit = {};
         if (typeof config.fitbit != 'undefined') {
-            fitbit = new Fitbit(config.fitbit);
-
             var express = require('express');
             var app = express();
             var fs = require('fs');
             var Fitbit = require('fitbit-oauth2');
 
+            fitbit = new Fitbit(config.fitbit);
             // In a browser, http://localhost:4000/fitbit to authorize a user for the first time.
             //
             app.get('/fitbit', function (req, res) {
@@ -104,7 +103,7 @@
         }
 
         // Only start up express and enable the fitbit service to start making API calls if the fitbit config is present in config.js.
-        if (typeof config.fitbit != 'undefined') {
+        service.init = function(cb) {
             // do express and Fitbit things
             var port = process.env.PORT || 4000;
             console.log('express is listening on port: ', port);
@@ -122,6 +121,7 @@
 
                         // Set the client's token
                         fitbit.setToken(token);
+                        cb()
                     });
                 } else if (err.code == 'ENOENT') {
                     console.log('Error reading Fitbit token file! This might be the first time you are running the app, if so, make sure you browse to http://yourappurl:yourport/fitbit - this will redirect you to the auth page.', err);
