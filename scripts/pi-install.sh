@@ -160,7 +160,7 @@ cat << "EOF"
 
         |        The smart-mirror is now installed!
        / \       
-      / _ \      Now you'll want to configure audio input, speech, and the mirror itself:
+      / _ \      To configure audio input, speech, and the mirror itself, please visit:
      |.o '.|     http://docs.smart-mirror.io
      |'._.'|     
      |     |     To start your mirror:
