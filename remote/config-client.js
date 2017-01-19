@@ -1,5 +1,5 @@
 /* global $, io */
-
+'use strict'
 $(function () {
 
 	var socket = io()
