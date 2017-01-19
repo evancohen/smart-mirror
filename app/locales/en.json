@@ -190,5 +190,22 @@
             "voice": "Show remote (QR code) (QR) (link)",
             "description": "Show the local IP of the Remote App URL"
         }
+    },
+    "fitbit": {
+        "user": "User: ",
+        "averageSteps": "Average Steps: ",
+        "batteryStatus": "Battery Status: ",
+        "today": "Today",
+        "steps": "steps",
+        "caloriesBurned": "calories burned",
+        "lastSync": "Last Sync",
+        "weekAverage": "7-Day Average",
+        "activeMinutes": "active minutes",
+        "topBadges": "Top Badges",
+        "sleep": "Sleep",
+        "lastNight": "Last Night",
+        "awakeMins": "Awake",
+        "restlessMins": "Restless",
+        "hours": "hrs"
     }
 }

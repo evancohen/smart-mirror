@@ -1,25 +1,46 @@
 <div class="fitbit" ng-controller="Fitbit">
-    <div><span class="fitbit-title">{{'fitbit.statsFor' | translate}} {{fbDailyAverage.fullName}}</span></div>
-    <div><span class="fitbit-item">{{'fitbit.averageSteps' | translate}}: {{fbDailyAverage.averageDailySteps}}</span></div>
-    <div><span class="fitbit-item">{{'fitbit.todaysSteps' | translate}}: {{fbToday.summary.steps}}</span></div>
-    <div><span class="fitbit-item">{{'fitbit.todaysDistance' | translate}}: {{fbToday.summary.distances[0].distance}} km</span></div>
-    <div><span class="fitbit-item">{{'fitbit.todaysActiveMinutes' | translate}}: {{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}} min</span></div>
-    <div><span class="fitbit-item">{{'fitbit.caloriesBurned' | translate}}: {{fbToday.summary.caloriesOut}} kcal</span></div>
-    <p></p>
-    <div><span class="fitbit-subtitle" ng-show="fbSleep.sleep[0]">{{'fitbit.sleepLastNight' | translate}}</span></div>
-    <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{(fbSleep.sleep[0].minutesAsleep/60 | number:2 )}} {{'fitbit.hours' | translate}} / {{fbSleep.sleep[0].minutesAwake  }} min {{'fitbit.awake' | translate}} // {{(fbSleep.sleep[0].efficiency)}} % {{'fitbit.efficient' | translate}}</span></div>
-    <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{'fitbit.awake' | translate}}/{{'fitbit.restless' | translate}}: {{fbSleep.sleep[0].awakeCount}} / {{fbSleep.sleep[0].restlessCount}}</span></div>
-    <p></p>
-    <div><span class="fitbit-subtitle">{{'fitbit.deviceStatus' | translate}}</span></div>
+
     <div class="" ng-repeat="device in fbDevices">
-        <div>
-            <span class="fitbit-item" ng-show="device.deviceVersion">{{device.deviceVersion}}</span><br>
-            <span class="fitbit-item" ng-show="device.battery">{{'fitbit.battery' | translate}}: {{device.battery}}<br>
-              <span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.synched' | translate}}: {{device.lastSyncTime | date: 'dd.MM.yyyy HH:mm:ss'}}</span>
-        </div>
+        <p>
+            <span class="fitbit-title" ng-show="device.deviceVersion">{{device.deviceVersion}}</span><br>
+            <span class="fitbit-item" ng-show="device.battery">{{'fitbit.batteryStatus' | translate}}: {{device.battery}}<br>
+
+            <!-- Make changes to only display the mins or hours or days, notthe date. -->
+              <span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.lastSync' | translate}}: {{device.lastSyncTime | date: 'dd.MM.yyyy HH:mm:ss'}}</span>
+        </p>
     </div>
+
+    <p>
+    <div><span class="fitbit-subtitle">{{'fitbit.today' | translate}}</span></div>
+    <div><span class="fitbit-item">{{fbToday.summary.steps}}/{{fbToday.goals.steps}} {{'fitbit.steps' | translate}}</span></div>
+
+    <!-- TODO: Add localized distance. -->
+    <div><span class="fitbit-item">{{fbToday.summary.distances[0].distance}}/{{fbToday.goals.distance}} km</span></div>
+    <div><span class="fitbit-item">{{fbToday.summary.caloriesOut}}/{{fbToday.goals.caloriesOut}} {{'fitbit.caloriesBurned' | translate}}</span></div>
+    <div><span class="fitbit-item">{{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}/{{fbToday.goals.activeMinutes}} {{'fitbit.activeMinutes' | translate}}</span></div>
+    </p>
+
+    <!-- 7 Day Average -->
+    <p>
+        <div><span class="fitbit-subtitle">{{'fitbit.weekAverage' | translate}}</span></div>
+        <div><span class="fitbit-item">{{fbDailyAverage.averageDailySteps}} {{'fitbit.steps' | translate}}</span></div>
+    </p>
+
+    <p>
+        <div><span class="fitbit-subtitle">{{'fitbit.weekAverage' | translate}}</span></div>
+        <div><span class="fitbit-item">{{fbDailyAverage.averageDailySteps}} {{'fitbit.steps' | translate}}</span></div>
+    </p>
+    
     <p></p>
-    <div><span class="fitbit-subtitle">{{'fitbit.latestBadges' | translate}}</span></div>
+    <div><span class="fitbit-subtitle" ng-show="fbSleep.sleep[0]">{{'fitbit.sleep' | translate}}</span></div>
+    <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{'fitbit.lastNight' | translate}} {{(fbSleep.sleep[0].minutesAsleep/60 | number:2 )}} {{'fitbit.hours' | translate}}</span></div>
+     <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{'fitbit.awakeMins' | translate}} {{fbSleep.sleep[0].minutesAwake  }} min</span></div>
+     <!-- // {{(fbSleep.sleep[0].efficiency)}} % {{'fitbit.efficient' | translate}} -->
+    <div><span class="fitbit-item" ng-show="fbSleep.sleep[0]">{{'fitbit.restlessMins' | translate}} {{fbSleep.sleep[0].minutesRestless}}</span></div>
+    <p></p>
+    
+    <p></p>
+    <div><span class="fitbit-subtitle">{{'fitbit.topBadges' | translate}}</span></div>
     <div class="" ng-repeat="badge in fbDailyAverage.topBadges">
         <div>
             <span class="fitbit-item"><img class="fitbit-badge" ng-src="{{badge.image50px}}"/></span>
