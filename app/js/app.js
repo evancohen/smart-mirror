@@ -1,35 +1,35 @@
 // Bootstrap Angular
 (function (angular) {
-    'use strict';
+	'use strict';
 
-    var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2).toLowerCase() : 'en';
+	var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2).toLowerCase() : 'en';
 
-    angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
+	angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
         .config(function (tmhDynamicLocaleProvider) {
-            console.log(config)
-            tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_' + language + '.js');
-        })
+	console.log(config)
+	tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_' + language + '.js');
+})
 
         .config(['$translateProvider', function ($translateProvider) {
-            $translateProvider
+	$translateProvider
                 .uniformLanguageTag('bcp47')
                 .useStaticFilesLoader({
-                    prefix: 'app/locales/',
-                    suffix: '.json'
-                });
-            $translateProvider.useSanitizeValueStrategy(null);
+	prefix: 'app/locales/',
+	suffix: '.json'
+});
+	$translateProvider.useSanitizeValueStrategy(null);
             // Avoiding the duplicity of the locale for the default language, xx-YY -> xx
             // We are considering only the language
             // Please refer https://github.com/evancohen/smart-mirror/pull/179 for further discussion
-            var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2) : 'en';
-            $translateProvider.preferredLanguage(language);
-        }])
+	var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2) : 'en';
+	$translateProvider.preferredLanguage(language);
+}])
 
         .config(["$sceDelegateProvider", function ($sceDelegateProvider) {
-            $sceDelegateProvider.resourceUrlWhitelist([
-                'self',
-                "https://www.youtube.com/embed/**"
-            ]);
-        }]);
+	$sceDelegateProvider.resourceUrlWhitelist([
+		'self',
+		"https://www.youtube.com/embed/**"
+	]);
+}]);
 
 } (window.angular));
