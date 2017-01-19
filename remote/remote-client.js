@@ -2,42 +2,98 @@
 
 $(function () {
 
-
+// global vars
+	var pos = window.location.href.substr(window.location.href.lastIndexOf("/")+1)
 	var socket = io()
-	function isIosDevice(){
-		var iosDeviceList = [
-			"iPhone", "iPod", "iPad", "iPhone Simulator", "iPod Simulator",
-			"iPad Simulator", "Pike v7.6 release 92", "Pike v7.8 release 517"
-		]
-		return iosDeviceList.some(function(device){
-			return device == navigator.platform
-		})
-	}
-
 	var $connectionBar = $('#connection-bar')
 	var $connectionText = $('#connection-text')
+// index vars	
 	var $speak = $('#speak')
 	var $nospeak = $('#no-speak')
 	var $commandBox = $('#command-box')
+// config vars
+	var timeoutID
+
+/*
+
+   _____ _ _      _         _______ _                            
+  / ____| (_)    | |       / / ____| |                           
+ | |    | |_  ___| | __   / / |    | |__   __ _ _ __   __ _  ___ 
+ | |    | | |/ __| |/ /  / /| |    | '_ \ / _` | '_ \ / _` |/ _ \
+ | |____| | | (__|   <  / / | |____| | | | (_| | | | | (_| |  __/
+  \_____|_|_|\___|_|\_\/_/   \_____|_| |_|\__,_|_| |_|\__, |\___|
+                                                       __/ |     
+                                                      |___/      
+
+*/
+
+// index clicks
+	$('#command-bttn').click(function () {
+		$('#speech-error').hide()
+		var x = $commandBox.val();
+		$commandBox.val('')
+		socket.emit('clickWakeUp')
+		socket.emit('command', x)
+	})
   
+	$('#devtools').change(function () {
+		socket.emit('devtools', $(this).is(":checked"))
+	});
+
+	$('#kiosk').click(function () {
+		socket.emit('kiosk')
+	});
+
+	$('#reload').click(function () {
+		socket.emit('reload')
+	})
+  
+	$('#wakeUp').click(function () {
+		socket.emit('clickWakeUp')
+	})
+  
+	$('#sleep').click(function () {
+		socket.emit('clickSleep')
+	})
+
+// config clicks
+	$('#outClose').click(function () {
+		clearTimeout(timeoutID)
+		hideElm('#out')
+	});
+
+/*
+
+   _____            _        _     ______               _       
+  / ____|          | |      | |   |  ____|             | |      
+ | (___   ___   ___| | _____| |_  | |____   _____ _ __ | |_ ___ 
+  \___ \ / _ \ / __| |/ / _ \ __| |  __\ \ / / _ \ '_ \| __/ __|
+  ____) | (_) | (__|   <  __/ |_  | |___\ V /  __/ | | | |_\__ \
+ |_____/ \___/ \___|_|\_\___|\__| |______\_/ \___|_| |_|\__|___/
+                                                                
+                                                                
+
+*/
+
+// global socket events
 	socket.on('connected', function () {
 		$connectionBar.removeClass('disconnected').addClass('connected')
 		$connectionText.html('Connected!')
-		if (isIosDevice()){
-			$speak.addClass('hidden')
-			$nospeak.removeClass('hidden')
-		} 
-		if (annyang) {
-			socket.emit('getAnnyAng')
-		}  
+		switch (pos) {
+		case "config.html":
+			config_init()
+			break;
+		default:
+			index_init()
+		}
 	})
 
 	socket.on('disconnect', function () {
-    
 		$connectionBar.removeClass('connected').addClass('disconnected')
 		$connectionText.html('Disconnected :(')
 	})
 
+// index socket events
 	socket.on('loadAnnyAng', function(data){
 		annyang.setLanguage(data)
 		annyang.debug(false)
@@ -70,38 +126,106 @@ $(function () {
 		})
 	})
 
+// config socket events
+	socket.on('json', function(data){
+		data.configJSON.value = $.extend({},data.configDefault,data.config)
+		console.log(data);
+		data.configJSON.form.push({"type":"button","title":"Submit","order":10000})
+		console.log(data);
 
-  
-	$('#command-bttn').click(function () {
-		$('#speech-error').hide()
-		var x = $commandBox.val();
-		$commandBox.val('')
-		socket.emit('clickWakeUp')
-		socket.emit('command', x)
+		try {
+			data.configJSON.onSubmitValid = function (values) {
+				if (console && console.log) {
+					console.log('Values extracted from submitted form', values);
+					console.log(JSON.stringify(values, null, 2))
+
+				}
+				socket.emit('saveConfig', values)
+				$('#outMsg').html("<p><strong>Your Configuration has saved.</strong></p>")
+				showElm('#out',1)
+			};
+			data.configJSON.onSubmit = function (errors) {
+				if (errors) {
+					console.log('Validation errors', errors);
+					let buildInner=""
+					errors.forEach(function(errItem) {
+						let errSchemaUri = errItem.schemaUri.replace(/.+\/properties\//, "").replace("/"," >> ")  
+						buildInner += `<p><strong style="font-color:red">Error: ` + errItem.message + 
+            "</strong></br>Location: " +
+            errSchemaUri +
+            "</p>"
+					})
+					$('#outMsg').html(buildInner)
+					showElm('#out',1)
+					console.log('Validation errors', errors);
+					return false;
+				}
+				return true;
+			};
+			console.log('items in data.configJSON',data.configJSON)
+			$('#result').html('<form id="result-form" class="form-vertical"></form>');
+			$('#result-form').jsonForm(data.configJSON);
+		}
+		catch (e) {
+			$('#result').html('<pre>Entered content is not yet a valid' +
+        ' JSON Form object.\n\nThe JSON Form library returned:\n' +
+        e.stack + '</pre>');
+			console.error("error stack",e.stack)
+			return;
+		}
 	})
 
-  
-	$('#devtools').change(function () {
-		socket.emit('devtools', $(this).is(":checked"))
-	});
+/*
 
-	$('#kiosk').click(function () {
-		socket.emit('kiosk')
-	});
+  ______                _   _                 
+ |  ____|              | | (_)                
+ | |__ _   _ _ __   ___| |_ _  ___  _ __  ___ 
+ |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+ | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+ |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+                                              
+                                              
 
-	$('#reload').click(function () {
-		socket.emit('reload')
-	})
-  
-	$('#wakeUp').click(function () {
-		socket.emit('clickWakeUp')
-	})
-  
-	$('#sleep').click(function () {
-		socket.emit('clickSleep')
-	})
+*/
 
-  
+// global functions
+	function isIosDevice(){
+		var iosDeviceList = [
+			"iPhone", "iPod", "iPad", "iPhone Simulator", "iPod Simulator",
+			"iPad Simulator", "Pike v7.6 release 92", "Pike v7.8 release 517"
+		]
+		return iosDeviceList.some(function(device){
+			return device == navigator.platform
+		})
+	}
+
+	function index_init () {
+		if (isIosDevice()){
+			$speak.addClass('hidden')
+			$nospeak.removeClass('hidden')
+		} 
+		if (annyang) {
+			socket.emit('getAnnyAng')
+		}  
+	}
+
+	function config_init () {				
+		socket.emit('getForm',true)
+	}
+
+// config functions
+	function hideElm(element){
+		$(element).fadeOut("fast")
+	}
+	function showElm(element,timeOutMins=1){
+		var timeOutMillis = timeOutMins*60000
+		$(element).fadeIn() 
+		timeoutID=setTimeout(function(){
+			hideElm(element);
+		},timeOutMillis)
+	}
+
+
 
 
 })
