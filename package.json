@@ -44,7 +44,7 @@
     "fitbit-oauth2": "0.0.1",
     "hyperion-client": "1.0.3",
     "socket.io": "^1.6.0",
-    "sonus": "^0.1.4"
+    "sonus": "^0.1.5"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
