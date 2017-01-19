@@ -54,6 +54,7 @@
       "browser": true
     },
     "rules": {
+      "indent": [2, "tab"],
       "no-console": 0
     },
     "globals": {
