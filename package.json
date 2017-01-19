@@ -12,7 +12,8 @@
     "motion": "sudo node motion.js",
     "update": "git pull && npm install",
     "wiredep": "wiredep -s index.html",
-    "test": "eslint ."
+    "test": "eslint . --ignore-path .gitignore",
+    "test-fix": "eslint . --ignore-path .gitignore --fix"
   },
   "repository": {
     "type": "git",
