@@ -1,5 +1,6 @@
 'use strict'
 // Load in smart mirror config
+const os = require('os');
 const fs = require('fs')
 const path = require('path')
 var config = require("./config.json")
@@ -36,7 +37,8 @@ for (let i = 0; i < config.speech.hotwords.length; i++) {
 
 
 const language = config.general.language
-const sonus = Sonus.init({ hotwords, language }, speech)
+const recordProgram = (os.arch() == 'arm') ? "arecord" : "rec"
+const sonus = Sonus.init({ hotwords, language, recordProgram }, speech)
 
 // Start Recognition
 Sonus.start(sonus)
