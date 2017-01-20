@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "train-model": "electron scripts/train-model.js",
     "sonus": "node sonus.js",
     "motion": "sudo node motion.js",
+    "enable-motion": "npm install johnny-five && npm install raspi-io",
     "update": "git pull && npm install",
     "wiredep": "wiredep -s index.html",
     "test": "eslint . --ignore-path .gitignore",
