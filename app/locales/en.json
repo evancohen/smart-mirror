@@ -201,6 +201,8 @@
         "lastSync": "Last Sync",
         "weekAverage": "7-Day Average",
         "activeMinutes": "active minutes",
+        "distance": "km",
+        "floors": "floors",
         "topBadges": "Top Badges",
         "sleep": "Sleep",
         "lastNight": "Last Night",
