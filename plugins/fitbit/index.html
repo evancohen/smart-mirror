@@ -1,16 +1,5 @@
 <div class="fitbit" ng-controller="Fitbit">
 
-	<!-- List of Fitbit Devices -->
-	<div class="" ng-repeat="device in fbDevices">
-		<p>
-			<span class="fitbit-title" ng-show="device.deviceVersion">{{device.deviceVersion}}</span><br>
-			<span class="fitbit-item" ng-show="device.battery">{{'fitbit.batteryStatus' | translate}}: {{device.battery}}<br>
-
-            <!-- Make changes to only display the mins or hours or days, not the date. -->
-            <span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.lastSync' | translate}}: {{device.lastSyncTime | date: 'dd.MM.yyyy HH:mm:ss'}}</span>
-		</p>
-	</div>
-
 	<div ng-switch="currentStatGroup">
 		<p>
 			<!-- Today's Statistics -->
@@ -19,15 +8,15 @@
 				<div><span class="fitbit-item">{{fbToday.summary.steps}}/{{fbToday.goals.steps}} {{'fitbit.steps' | translate}}</span></div>
 
 				<!-- TODO: Add localized distance. -->
-				<div><span class="fitbit-item" ng-if "fitbit.test">{{fbToday.summary.distances[0].distance}}/{{fbToday.goals.distance}} km</span></div>
+				<div><span class="fitbit-item">{{fbToday.summary.distances[0].distance}}/ km      {{fbToday.goals.distance}}</span></div>
 				<div><span class="fitbit-item">{{fbToday.summary.caloriesOut}}/{{fbToday.goals.caloriesOut}} {{'fitbit.caloriesBurned' | translate}}</span></div>
 				<div><span class="fitbit-item">{{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}/{{fbToday.goals.activeMinutes}} {{'fitbit.activeMinutes' | translate}}</span></div>
 			</div>
 
-			<!-- 7 Day Average -->
+			<!-- Weekly Average -->
 			<div ng-switch-when="1">
 				<div><span class="fitbit-subtitle">{{'fitbit.weekAverage' | translate}}</span></div>
-				<div><span class="fitbit-item">{{fbDailyAverage.averageDailySteps}} {{'fitbit.steps' | translate}}</span></div>
+				<div><span class="fitbit-item">{{profile.averageDailySteps}} {{'fitbit.steps' | translate}}</span></div>
 			</div>
 
 			<!-- Last Night's Sleeping Statistics -->
@@ -42,7 +31,7 @@
 			<!-- Top Badges Earned -->
 			<div ng-switch-when="3">
 				<div><span class="fitbit-subtitle">{{'fitbit.topBadges' | translate}}</span></div>
-				<div class="" ng-repeat="badge in fbDailyAverage.topBadges">
+				<div class="" ng-repeat="badge in profile.topBadges">
 					<div>
 						<span class="fitbit-item"><img class="fitbit-badge" ng-src="{{badge.image50px}}"/></span>
 						<span class="fitbit-item">{{badge.description}}</span>
@@ -53,6 +42,17 @@
 			<div ng-switch-when="4">
 
 			</div>
+		</p>
+	</div>
+
+	<!-- List of Fitbit Devices -->
+	<div class="" ng-repeat="device in fbDevices">
+		<p>
+			<span class="fitbit-title" ng-show="device.deviceVersion">{{device.deviceVersion}}</span><br>
+			<span class="fitbit-item" ng-show="device.battery">{{'fitbit.batteryStatus' | translate}}: {{device.battery}}<br>
+
+      <!-- Make changes to only display the mins or hours or days, not the date. -->
+    	<span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.lastSync' | translate}}: {{device.lastSyncTime | date: 'dd.MM.yyyy HH:mm:ss'}}</span>
 		</p>
 	</div>
 

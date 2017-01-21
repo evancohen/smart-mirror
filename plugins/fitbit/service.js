@@ -1,255 +1,270 @@
 (function () {
-    'use strict';
+	'use strict';
 
-    function FitbitService() {
+	function FitbitService() {
 
-        var service = {};
-        var today = null;
+		var service = {};
+		var today = null;
+		var fitbit = {};
+		var tokenFile = 'fb-token.json';
 
-        // Simple token persist functions.
-        //
-        var tfile = 'fb-token.json';
-        var persist = {
-            read: function (filename, cb) {
-                fs.readFile(filename, { encoding: 'utf8', flag: 'r' }, function (err, data) {
-                    if (err) return cb(err);
-                    try {
-                        var token = JSON.parse(data);
-                        cb(null, token);
-                    } catch (err) {
-                        cb(err);
-                    }
-                });
-            },
-            write: function (filename, token, cb) {
-                console.log('persisting new token:', JSON.stringify(token));
-                fs.writeFile(filename, JSON.stringify(token), cb);
-            }
-        };
+        /**
+         * Persist the fitbit token.
+         */
+		var persist = {
+			read: function (filename, cb) {
+				fs.readFile(filename, { encoding: 'utf8', flag: 'r' }, function (err, data) {
+					if (err) return cb(err);
+					try {
+						var token = JSON.parse(data);
+						cb(null, token);
+					} catch (err) {
+						cb(err);
+					}
+				});
+			},
 
-        service.getToday = function () {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear();
+			write: function (filename, token, cb) {
+				console.debug('Persisting new token: ' + JSON.stringify(token));
+				fs.writeFile(filename, JSON.stringify(token), cb);
+			}
+		};
 
-            // Add padding for the date, (we want 0x where x is the day or month number if its less than 10)
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
+        /**
+         * Get today's date in the format YYYY-MM-DD. The date is used to 
+         */
+		service.getToday = function () {
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1; //January is 0!
+			var yyyy = today.getFullYear();
 
-            if (mm < 10) {
-                mm = '0' + mm
-            }
+			if (dd < 10) {
+				dd = '0' + dd;
+			}
 
-            return yyyy + '-' + mm + '-' + dd;
-        }
+			if (mm < 10) {
+				mm = '0' + mm;
+			}
+			// Add padding for the date, (we want 0x where x is the day or month number if its less than 10)
+			return yyyy + '-' + mm + '-' + dd;
+		}
 
-        // Instantiate a fitbit client.
-        //
-        var fitbit = {};
-        if (typeof config.fitbit != 'undefined') {
-            var express = require('express');
-            var app = express();
-            var fs = require('fs');
-            var Fitbit = require('fitbit-oauth2');
+        /**
+         * Instantiate the fitbit client.
+         */
+		if (typeof config.fitbit != 'undefined') {
+			var express = require('express');
+			var app = express();
+			var fs = require('fs');
+			var Fitbit = require('fitbit-oauth2');
 
-            fitbit = new Fitbit(config.fitbit);
-            // In a browser, http://localhost:4000/fitbit to authorize a user for the first time.
-            //
-            app.get('/fitbit', function (req, res) {
-                res.redirect(fitbit.authorizeURL());
-            });
+			fitbit = new Fitbit(config.fitbit);
+			// In a browser, visit http://localhost:4000/fitbit to authorize a user for the first time.
+			app.get('/fitbit', function (req, res) {
+				res.redirect(fitbit.authorizeURL());
+			});
 
-            // Callback service parsing the authorization token and asking for the access token.  This
-            // endpoint is refered to in config.fitbit.authorization_uri.redirect_uri.  See example
-            // config below.
-            //
-            app.get('/fitbit_auth_callback', function (req, res, next) {
-                var code = req.query.code;
-                fitbit.fetchToken(code, function (err, token) {
-                    if (err) return next(err);
+            /*
+                Callback service parsing the authorization token and asking for the access token. 
+                This endpoint is refered to in config.fitbit.authorization_uri.redirect_uri.
+             */
+			app.get('/fitbit_auth_callback', function (req, res, next) {
+				var code = req.query.code;
+				fitbit.fetchToken(code, function (err, token) {
+					if (err) return next(err);
 
-                    // persist the token
-                    persist.write(tfile, token, function (err) {
-                        if (err) return next(err);
-                        res.redirect('/fb-profile');
-                    });
-                });
-            });
+					// persist the token
+					persist.write(tokenFile, token, function (err) {
+						if (err) return next(err);
+						res.redirect('/fb-profile');
+					});
+				});
+			});
 
-            // Call an API. fitbit.request() mimics nodejs request() library, automatically
-            // adding the required oauth2 headers.  The callback is a bit different, called
-            // with ( err, body, token ).  If token is non-null, this means a refresh has happened
-            // and you should persist the new token.
-            //
-            app.get('/fb-profile', function (req, res, next) {
-                fitbit.request({
-                    uri: "https://api.fitbit.com/1/user/-/profile.json",
-                    method: 'GET',
-                }, function (err, body, token) {
-                    if (err) return next(err);
-                    var profile = JSON.parse(body);
-                    // if token is not null, a refesh has happened and we need to persist the new token
-                    if (token)
-                        persist.write(tfile, token, function (err) {
-                            if (err) return next(err);
-                            res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
-                        });
-                    else
-                        res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
-                });
-            });
-        }
+            /*
+                Call an API. fitbit.request() mimics nodejs request() library, 
+                automatically adding the required oauth2 header. The callback 
+                is a bit different, called with (err, body, token). If token is 
+                non-null, this means a refresh has happened and you should 
+                persist the new token.
+            */
+			app.get('/fb-profile', function (req, res, next) {
+				fitbit.request({
+					uri: "https://api.fitbit.com/1/user/-/profile.json",
+					method: 'GET',
+				}, function (err, body, token) {
+					if (err) {
+						return next(err);
+					}
 
-        // Only start up express and enable the fitbit service to start making API calls if the fitbit config is present in config.js.
-        service.init = function(cb) {
-            // do express and Fitbit things
-            var port = process.env.PORT || 4000;
-            console.log('express is listening on port: ', port);
-            app.listen(port);
-            // Read the persisted token, initially captured by a webapp.
-            //
-            fs.stat(tfile, function (err) {
-                if (err == null) {
-                    console.log('Fitbit token File exists');
+					var profile = JSON.parse(body);
 
-                    persist.read(tfile, function (err, token) {
-                        if (err) {
-                            console.log('persist read error: ', err);
-                        }
+					// If token is present, refresh.
+					if (token)
+						persist.write(tokenFile, token, function (err) {
+							if (err) return next(err);
+							res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+						});
+					else
+						res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+				});
+			});
+		}
 
-                        // Set the client's token
-                        fitbit.setToken(token);
-                        cb()
-                    });
-                } else if (err.code == 'ENOENT') {
-                    console.log('Error reading Fitbit token file! This might be the first time you are running the app, if so, make sure you browse to http://yourappurl:yourport/fitbit - this will redirect you to the auth page.', err);
-                } else {
-                    console.log(err);
-                }
-            });
-        }
+        /**
+         * Init function
+         * If the fitbit configuration is present in the config.json, then express along with the fitbit service will be enabled.
+         */
+		service.init = function (cb) {
+			var port = process.env.PORT || 4000;
+			console.debug('Express is listening on port: ' + port);
+			app.listen(port);
 
-        service.profileSummary = function (callback) {
-            if (service.summary === null) {
-                return null;
-            }
+			// Read the persisted token, initially captured by a webapp.
+			fs.stat(tokenFile, function (err) {
+				if (err == null) {
+					persist.read(tokenFile, function (err, token) {
+						if (err) {
+							console.error('Persist read error!', err);
+						}
 
-            // Make an API call to get the fitbit user's profile data
-            fitbit.request({
-                uri: "https://api.fitbit.com/1/user/-/profile.json",
-                method: 'GET',
-            }, function (err, body, token) {
-                if (err) {
-                    console.log(err);
+						fitbit.setToken(token); // Set the client token
+						cb()
+					});
+				} else if (err.code == 'ENOENT') {
+					console.error('Fitbit authentication required, please visit the following link: http://localhost:4000/fitbit to authenticate your credentials.', err);
+				} else {
+					console.error(err);
+				}
+			});
+		}
 
-                }
-                var result = JSON.parse(body);
+        /**
+         * Profile Summary
+         * - Makes an API call to fitibt requesting the users profile summary.
+         */
+		service.profileSummary = function (callback) {
+			if (service.summary === null) {
+				return null;
+			}
 
-                // If the token arg is not null, then a refresh has occured and
-                // we must persist the new token.
-                if (token) {
-                    persist.write(tfile, token, function (err) {
-                        if (err) console.log(err);
-                    });
-                }
-                return callback(result.user);
-            });
-        }
+			fitbit.request({
+				uri: "https://api.fitbit.com/1/user/-/profile.json",
+				method: 'GET',
+			}, function (err, body, token) {
+				if (err) {
+					console.log(err);
 
-        service.todaySummary = function (callback) {
-            if (service.today === null) {
-                return null;
-            }
+				}
+				var result = JSON.parse(body);
 
-            today = service.getToday();
+				// If token is present, refresh.
+				if (token) {
+					persist.write(tokenFile, token, function (err) {
+						if (err) console.log(err);
+					});
+				}
+				return callback(result.user);
+			});
+		}
 
-            // Make an API call to get the users activities for today
-            fitbit.request({
-                uri: "https://api.fitbit.com/1/user/-/activities/date/" + today + ".json",
-                method: 'GET',
-            }, function (err, body, token) {
-                if (err) {
-                    console.log(err);
-                }
-                var result = JSON.parse(body);
-                console.log(result);
-                // If the token arg is not null, then a refresh has occured and
-                // we must persist the new token.
-                if (token) {
-                    persist.write(tfile, token, function (err) {
-                        if (err) console.log(err);
-                    });
-                }
-                return callback(result);
-            });
+        /**
+         * Today's Summary
+         * - Makes a call to the fitbit API, requesting the summary of activities for today's date.
+         */
+		service.todaySummary = function (callback) {
+			if (service.today === null) {
+				return null;
+			}
 
+			today = service.getToday();
 
-        }
+			fitbit.request({
+				uri: "https://api.fitbit.com/1/user/-/activities/date/" + today + ".json",
+				method: 'GET',
+			}, function (err, body, token) {
+				if (err) {
+					console.log(err);
+				}
+				var result = JSON.parse(body);
 
-        service.sleepSummary = function (callback) {
-            if (service.today === null) {
-                return null;
-            }
-
-            today = service.getToday();
-
-            // Make an API call to get the users sleep summary for today
-            fitbit.request({
-                uri: "https://api.fitbit.com/1/user/-/sleep/date/" + today + ".json",
-                method: 'GET',
-            }, function (err, body, token) {
-                if (err) {
-                    console.log(err);
-                }
-                var result = JSON.parse(body);
-                console.log(result);
-                // If the token arg is not null, then a refresh has occured and
-                // we must persist the new token.
-                if (token) {
-                    persist.write(tfile, token, function (err) {
-                        if (err) console.log(err);
-                    });
-                }
-                return callback(result);
-            });
+				// If token is present, refresh.
+				if (token) {
+					persist.write(tokenFile, token, function (err) {
+						if (err) console.log(err);
+					});
+				}
+				return callback(result);
+			});
 
 
-        }
+		}
 
-        service.deviceSummary = function (callback) {
-            if (service.today === null) {
-                return null;
-            }
+        /**
+         * Sleep Summary
+         * - Makes a call to the fitbit API, requesting the summary of user's sleep from last night.
+         */
+		service.sleepSummary = function (callback) {
+			if (service.today === null) {
+				return null;
+			}
 
-            // Make an API call to get the users device status
-            fitbit.request({
-                uri: "https://api.fitbit.com/1/user/-/devices.json",
-                method: 'GET',
-            }, function (err, body, token) {
-                if (err) {
-                    console.log(err);
-                }
-                var result = JSON.parse(body);
-                console.log(result);
-                // If the token arg is not null, then a refresh has occured and
-                // we must persist the new token.
-                if (token) {
-                    persist.write(tfile, token, function (err) {
-                        if (err) console.log(err);
-                    });
-                }
-                return callback(result);
-            });
+			today = service.getToday();
 
+			fitbit.request({
+				uri: "https://api.fitbit.com/1/user/-/sleep/date/" + today + ".json",
+				method: 'GET',
+			}, function (err, body, token) {
+				if (err) {
+					console.log(err);
+				}
+				var result = JSON.parse(body);
 
-        }
+				// If token is present, refresh.
+				if (token) {
+					persist.write(tokenFile, token, function (err) {
+						if (err) console.log(err);
+					});
+				}
+				return callback(result);
+			});
+		}
 
-        return service;
-    }
+        /**
+         * Device summary
+         * - Makes an API call to gather the infrmation on the devices.
+         */
+		service.deviceSummary = function (callback) {
+			if (service.today === null) {
+				return null;
+			}
 
-    angular.module('SmartMirror')
-        .factory('FitbitService', FitbitService);
+			// Make an API call to get the users device status
+			fitbit.request({
+				uri: "https://api.fitbit.com/1/user/-/devices.json",
+				method: 'GET',
+			}, function (err, body, token) {
+				if (err) {
+					console.log(err);
+				}
+				var result = JSON.parse(body);
+				console.log(result);
+				// If the token arg is not null, then a refresh has occured and
+				// we must persist the new token.
+				if (token) {
+					persist.write(tokenFile, token, function (err) {
+						if (err) console.log(err);
+					});
+				}
+				return callback(result);
+			});
+		}
+
+		return service;
+	}
+
+	angular.module('SmartMirror')
+		.factory('FitbitService', FitbitService);
 
 } ());
