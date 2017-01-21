@@ -2,79 +2,81 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../favicon.ico">
 
-    <title>Smart Mirror Remote</title>
+	<title>Smart Mirror Remote</title>
 
-    <style>
+	<style>
       @import url("https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/bootstrap.css");
     </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+	crossorigin="anonymous">
 <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Smart Mirror Remote</a>
-            </div>
-            <a class="navbar-text navbar-config" href="/config.html"><span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="settings"></span></a>
-        </div>
-    </nav>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Smart Mirror Remote</a>
+			</div>
+			<a id="audioSettings" class="navbar-text navbar-config hidden" href="/config.html?p=audio"><span class="glyphicon glyphicon-volume-up" aria-hidden="true" aria-label="audio settings"></span></a>
+			<a class="navbar-text navbar-config" href="/config.html?p=mirror"><span class="glyphicon glyphicon-cog" aria-hidden="true" aria-label="mirror settings"></span></a>
+		</div>
+	</nav>
 
-    <!-- Begin page content -->
-    <div class="container">
-        <div class="row">
-            <div id="result" class="col-xs-12">
-                <h1 class="text-center">Loading...</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="alert" id="out">
-                    <div id="outClose" class="top-left">
-                        <i class="fa fa-window-close" aria-hidden="true"></i>
-                    </div>
-                    <div id="outMsg"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Begin config page content -->
+	<div class="container">
+		<div class="row">
+			<div id="result" class="col-xs-12">
+				<h1 class="text-center">Loading...</h1>
+				<p>If this is loading for more than a few minutes. Something is wrong. Please consult the <a href="https://docs.smart-mirror.io/docs/issues-with-remote-and-configui.html">Docs.</a></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alert" id="out">
+					<div id="outClose" class="top-left">
+						<i class="fa fa-window-close" aria-hidden="true"></i>
+					</div>
+					<div id="outMsg"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <footer class="footer">
-        <div id="connection-bar" class="container">
-            <p id="connection-text" class="text-muted">Connecting...</p>
-        </div>
-    </footer>
+	<footer class="footer">
+		<div id="connection-bar" class="container">
+			<p id="connection-text" class="text-muted">Connecting...</p>
+		</div>
+	</footer>
 
 
-    <!-- Smart Mirror remote JavaScript
+	<!-- Smart Mirror remote JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document for profit -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+	<!-- Placed at the end of the document for profit -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/underscore.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jsv.js"></script>
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-        crossorigin="anonymous"></script>
-    <script src="https://assets.transloadit.com/js/jquery.transloadit2-latest.js"></script>
-    <script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/lib/jsonform.js"></script>
-    <script src="https://use.fontawesome.com/741cbe0233.js"></script>
+	<script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/underscore.js"></script>
+	<script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/deps/opt/jsv.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+		crossorigin="anonymous"></script>
+	<script src="https://assets.transloadit.com/js/jquery.transloadit2-latest.js"></script>
+	<script src="https://gitcdn.xyz/repo/joshfire/jsonform/master/lib/jsonform.js"></script>
+	<script src="https://use.fontawesome.com/741cbe0233.js"></script>
 
-    <script src="/remote-client.js"></script>
+	<script src="/remote-client.js"></script>
 
 </body>
 
