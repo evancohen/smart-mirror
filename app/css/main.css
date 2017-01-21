@@ -260,12 +260,12 @@ ul.calendar {
 
 .fitbit-goals {
     float: right;
-    width: 50%;
+    width: 60%;
 }
 
 .fitbit-progress-bar {
     position: relative;
-    width: 60%;
+    width: 50%;
     height: 5px;
     background-color: grey;
 }
