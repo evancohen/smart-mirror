@@ -1,13 +1,11 @@
 function Fitbit($scope, $interval, FitbitService, SpeechService) {
-    var totalStatGroups = 4;
+    var totalStatGroups = 1;
     $scope.currentStatGroup = 0;
 
     // Check if the fitbit configuration exists before initializing the service.
     if (typeof config.fitbit !== 'undefined') {
         FitbitService.init(function () {
-            refreshFitbitData();
-            cycleFitbitStats();
-            
+            refreshFitbitData();            
             $interval(cycleFitbitStats, 10000); // 10 secs
             $interval(refreshTodaySummary, 1800000); // 30 mins
             $interval(refreshDeviceSummary, 3600000); // 1 hour
