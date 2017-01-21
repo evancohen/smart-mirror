@@ -1,4 +1,7 @@
 function Fitbit($scope, $interval, FitbitService, SpeechService) {
+    var totalStatGroups = 4;
+    $scope.currentStatGroup = 0;
+    
     var refreshFitbitData = function () {
         console.log('refreshing fitbit data');
         FitbitService.profileSummary(function (response) {
@@ -18,10 +21,17 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
         });
     };
 
+    var cycleFitbitData = function () {
+        $scope.currentStatGroup = ($scope.currentStatGroup + 1) % totalStatGroups; 
+    }
+
     if (typeof config.fitbit !== 'undefined') {
         FitbitService.init(function(){
-            refreshFitbitData()
-            $interval(refreshFitbitData, config.fitbit.refreshInterval * 60000 || 3600000)
+            refreshFitbitData();
+            cycleFitbitData();
+            $interval(cycleFitbitData, 10000); // Cycle the fitibt groups every 10 seconds.
+            $interval(refreshFitbitData, config.fitbit.refreshInterval * 60000 || 3600000);
+            
         })
     }
 
