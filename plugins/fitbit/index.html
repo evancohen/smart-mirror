@@ -5,12 +5,48 @@
 			<!-- Today's Statistics -->
 			<div ng-switch-when="0">
 				<div><span class="fitbit-subtitle">{{'fitbit.today' | translate}}</span></div>
-				<div><span class="fitbit-item">{{fbToday.summary.steps}}/{{fbToday.goals.steps}} {{'fitbit.steps' | translate}}</span></div>
+				<div>
+					<span class="fitbit-item">{{fbToday.summary.steps}} {{'fitbit.steps' | translate}} 
+						<span class="fitbit-goals">{{fbToday.goals.steps}}</span>
+					</span>
+					<div class="fitbit-progress-bar">
+						<div class="fitbit-progress"></div>
+					</div>
+				</div>
 
 				<!-- TODO: Add localized distance. -->
-				<div><span class="fitbit-item">{{fbToday.summary.distances[0].distance}}/ km      {{fbToday.goals.distance}}</span></div>
-				<div><span class="fitbit-item">{{fbToday.summary.caloriesOut}}/{{fbToday.goals.caloriesOut}} {{'fitbit.caloriesBurned' | translate}}</span></div>
-				<div><span class="fitbit-item">{{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}}/{{fbToday.goals.activeMinutes}} {{'fitbit.activeMinutes' | translate}}</span></div>
+				<div>
+					<span class="fitbit-item">{{fbToday.summary.distances[0].distance}} {{'fitbit.distance' | translate}} 
+						<span class="fitbit-goals">{{fbToday.goals.distance}}</span>
+					</span>
+					<div class="fitbit-progress-bar">
+						<div class="fitbit-progress"></div>
+					</div>
+				</div>
+
+				<div><span class="fitbit-item">{{fbToday.summary.caloriesOut}} {{'fitbit.caloriesBurned' | translate}} 
+					<span class="fitbit-goals">{{fbToday.goals.caloriesOut}}</span>
+					</span>
+					<div class="fitbit-progress-bar">
+						<div class="fitbit-progress"></div>
+					</div>
+				</div>
+
+				<div><span class="fitbit-item">{{(fbToday.summary.veryActiveMinutes) + (fbToday.summary.fairlyActiveMinutes)}} {{'fitbit.activeMinutes' | translate}}
+					<span class="fitbit-goals">{{fbToday.goals.activeMinutes}} </span>
+					</span>
+					<div class="fitbit-progress-bar">
+						<div class="fitbit-progress"></div>
+					</div>
+				</div>
+
+				<div><span class="fitbit-item">{{fbToday.summary.floors}} {{'fitbit.floors' | translate}}
+					<span class="fitbit-goals">{{fbToday.goals.floors}} </span>
+					</span>
+					<div class="fitbit-progress-bar">
+						<div class="fitbit-progress"></div>
+					</div>
+				</div>
 			</div>
 
 			<!-- Weekly Average -->
@@ -55,5 +91,4 @@
     	<span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.lastSync' | translate}}: {{device.lastSyncTime | date: 'dd.MM.yyyy HH:mm:ss'}}</span>
 		</p>
 	</div>
-
 </div>
