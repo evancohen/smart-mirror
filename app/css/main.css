@@ -233,12 +233,12 @@ ul.calendar {
 
 .fitbit-title {
     margin-right: 10px;
-    font-size: 30px;
+    font-size: 28px;
 }
 
 .fitbit-subtitle {
     margin-right: 10px;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .fitbit-item {
@@ -256,6 +256,25 @@ ul.calendar {
     display: inline-block;
     margin-right: 10px;
     width: 450px;
+}
+
+.fitbit-goals {
+    float: right;
+    width: 50%;
+}
+
+.fitbit-progress-bar {
+    position: relative;
+    width: 60%;
+    height: 5px;
+    background-color: grey;
+}
+
+.fitbit-progress {
+    position: absolute;
+    width: 1%;
+    height: 100%;
+    background-color: white;
 }
 
 .playing-track img {
