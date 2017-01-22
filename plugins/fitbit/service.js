@@ -195,6 +195,7 @@
 						if (err) console.log(err);
 					});
 				}
+
 				return callback(result);
 			});
 
@@ -227,6 +228,7 @@
 						if (err) console.log(err);
 					});
 				}
+
 				return callback(result);
 			});
 		}
@@ -257,6 +259,7 @@
 						if (err) console.log(err);
 					});
 				}
+
 				return callback(result);
 			});
 		}

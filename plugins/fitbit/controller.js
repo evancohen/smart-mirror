@@ -24,21 +24,21 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
     // Today
     var refreshTodaySummary = function () {
         FitbitService.todaySummary(function (response) {
-            $scope.fbToday = response;
+            $scope.todaySummary = response;
         });
     };
 
     // Sleep
     var refreshSleepSummary = function () {
          FitbitService.sleepSummary(function (response) {
-            $scope.fbSleep = response;
+            $scope.sleep = response;
         });
     };
 
     // Device
     var refreshDeviceSummary = function () {
         FitbitService.deviceSummary(function (response) {
-            $scope.fbDevices = response;
+            $scope.devices = response;
         });
     };
 
