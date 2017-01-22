@@ -11,7 +11,7 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{width: (todaySummary.summary.steps > todaySummary.goals.steps) ? '100%' : (100 * todaySummary.summary.steps / todaySummary.goals.steps) + '%'}"></div>
+                         ng-style="{'width': (todaySummary.summary.steps > todaySummary.goals.steps) ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.steps / todaySummary.goals.steps) + '%'}"></div>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{width: (todaySummary.summary.distances[0].distance > todaySummary.goals.distance)  ? '100%' : (100 * todaySummary.summary.distances[0].distance / todaySummary.goals.distance) + '%'}"></div>
+                         ng-style="{'width': (todaySummary.summary.distances[0].distance > todaySummary.goals.distance)  ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.distances[0].distance / todaySummary.goals.distance) + '%'}"></div>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{width: (todaySummary.summary.caloriesOut > todaySummary.goals.caloriesOut) ? '100%' : (100 * todaySummary.summary.caloriesOut / todaySummary.goals.caloriesOut) + '%'}"></div>
+                         ng-style="{'width': (todaySummary.summary.caloriesOut > todaySummary.goals.caloriesOut) ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.caloriesOut / todaySummary.goals.caloriesOut) + '%'}"></div>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{width: (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes > todaySummary.goals.activeMinutes ? '100%' : (100 * (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes) / todaySummary.goals.activeMinutes) + '%' )}"></div>
+                         ng-style="{'width': (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes > todaySummary.goals.activeMinutes ? '100%', 'background-color': 'lime' : (100 * (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes) / todaySummary.goals.activeMinutes) + '%' )}"></div>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{width: (todaySummary.summary.floors > todaySummary.goals.floors ? '100%' : (100 * todaySummary.summary.floors / todaySummary.goals.floors ) + '%')}"></div>
+                         ng-style="{'width': (todaySummary.summary.floors > todaySummary.goals.floors ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.floors / todaySummary.goals.floors ) + '%')}"></div>
                 </div>
             </div>
         </div>
