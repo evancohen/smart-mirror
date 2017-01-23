@@ -264,6 +264,21 @@
 			});
 		}
 
+		//Get Lifetime Stats
+		// GET https://api.fitbit.com/1/user/[user-id]/activities.json
+
+		//Add Alarm
+		//POST https://api.fitbit.com/1/user/[user-id]/devices/tracker/[tracker-id]/alarms.json
+
+		//Update Alarm
+		//POST https://api.fitbit.com/1/user/[user-id]/devices/tracker/[tracker-id]/alarms/[alarm-id].json
+
+		//Delete Alarm
+		//DELETE https://api.fitbit.com/1/user/[user-id]/devices/tracker/[tracker-id]/alarms/[alarm-id].json
+
+		//Heart Rate
+		//https://api.fitbit.com/1/user/-/activities/heart/date/today/1d.json
+
 		return service;
 	}
 
