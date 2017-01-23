@@ -11,7 +11,9 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{'width': (todaySummary.summary.steps > todaySummary.goals.steps) ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.steps / todaySummary.goals.steps) + '%'}"></div>
+                         ng-style="{
+                         'width': todaySummary.summary.steps > todaySummary.goals.steps ? '100%' : (100 * todaySummary.summary.steps / todaySummary.goals.steps) + '%',
+                         'background-color': todaySummary.summary.steps > todaySummary.goals.steps ? 'lime' : 'white'}"></div>
                 </div>
             </div>
 
@@ -22,7 +24,9 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{'width': (todaySummary.summary.distances[0].distance > todaySummary.goals.distance)  ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.distances[0].distance / todaySummary.goals.distance) + '%'}"></div>
+                         ng-style="{
+                         'width': todaySummary.summary.distances[0].distance > todaySummary.goals.distance ? '100%' : (100 * todaySummary.summary.distances[0].distance / todaySummary.goals.distance) + '%',
+                         'background-color': todaySummary.summary.distances[0].distance > todaySummary.goals.distance ? 'lime' : 'white'}"></div>
                 </div>
             </div>
 
@@ -31,7 +35,9 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{'width': (todaySummary.summary.caloriesOut > todaySummary.goals.caloriesOut) ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.caloriesOut / todaySummary.goals.caloriesOut) + '%'}"></div>
+                         ng-style="{
+                         'width': (todaySummary.summary.caloriesOut > todaySummary.goals.caloriesOut) ? '100%' : (100 * todaySummary.summary.caloriesOut / todaySummary.goals.caloriesOut) + '%',
+                         'background-color': todaySummary.summary.caloriesOut > todaySummary.goals.caloriesOut ? 'lime' : 'white'}"></div>
                 </div>
             </div>
 
@@ -40,7 +46,9 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{'width': (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes > todaySummary.goals.activeMinutes ? '100%', 'background-color': 'lime' : (100 * (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes) / todaySummary.goals.activeMinutes) + '%' )}"></div>
+                         ng-style="{
+                         'width': todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes > todaySummary.goals.activeMinutes ? '100%' : (100 * (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes) / todaySummary.goals.activeMinutes) + '%',
+                          'background-color': todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes > todaySummary.goals.activeMinutes ? 'lime' : 'white'}"></div>
                 </div>
             </div>
 
@@ -49,7 +57,9 @@
 					</span>
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
-                         ng-style="{'width': (todaySummary.summary.floors > todaySummary.goals.floors ? '100%', 'background-color': 'lime' : (100 * todaySummary.summary.floors / todaySummary.goals.floors ) + '%')}"></div>
+                         ng-style="{
+                         'width': todaySummary.summary.floors > todaySummary.goals.floors ? '100%' : (100 * todaySummary.summary.floors / todaySummary.goals.floors ) + '%',
+                         'background-color': todaySummary.summary.floors > todaySummary.goals.floors ? 'lime' : 'white'}"></div>
                 </div>
             </div>
         </div>
