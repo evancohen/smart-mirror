@@ -208,6 +208,8 @@
         "lastNight": "Last Night",
         "awakeMins": "Awake",
         "restlessMins": "Restless",
-        "hours": "hrs"
+        "hours": "hrs",
+        "km": "km",
+        "miles": "mi"
     }
 }
