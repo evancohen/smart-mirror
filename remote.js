@@ -95,7 +95,9 @@ remote.start = function () {
 
 		socket.on('saveAudio', function (data) {
 			fs.readFile(resolve("./remote/.audio/asound.temp"), "utf8", function (err, fileData) {
-				if (err) console.error(err);
+				if (err) {
+					console.error(err);
+				}
 				var newData= fileData.toString()
 				newData = newData.replace("Playback_DevID", data.play).replace("Capture_DevID", data.record)
 				if (!newData.includes("DevID")){
