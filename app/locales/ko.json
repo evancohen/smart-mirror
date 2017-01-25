@@ -1,0 +1,189 @@
+{
+    "home" : {
+        "commands" : "Say \"사용가능한 질문\" to see a list of commands..."
+    },
+    "traffic" : {
+        "time_to" : "{{name}} 에 시간: "
+    },
+    "reminders": {
+        "empty": "더 리콜 없습니다."
+    },
+    "timer": {
+      "one": "일",
+      "minute": "분",
+      "second": "초"
+    },
+    "lights": {
+        "colors": {
+            "red": "빨간",
+            "dark_green": "짙은 녹색",
+            "green": "녹색",
+            "blue": "푸른",
+            "yellow": "황색",
+            "orange":  "오렌지",
+            "pink": "핑크",
+            "purple": "보라색",
+            "white": "화이트",
+            "movie": "영화",
+            "colorloop": "색",
+            "stop": "중지"
+        },
+        "intensity": {
+            "increase": "증가",
+            "decrease": "감소",
+            "max": "최대"
+        },
+        "action": {
+            "on": "조명",
+            "off": "끄다"
+        }
+    },
+    "commands": {
+        "title" : "사용 가능한 명령",
+        "list": {
+            "text": "사용가능한 질문",
+            "voice": "사용가능한 질문",
+            "description": "사용 가능한 질문\" 이라 말해 보세요\""
+        },
+        "home": {
+            "text": "집",
+            "voice": "(집)(메인 화면)",
+            "description": "메인 화면으로 돌아갑니다."
+        },
+        "sleep": {
+            "text": "잠자러가",
+            "voice": "잠자러가",
+            "description": "잠자러가."
+        },
+        "wake_up": {
+            "text": "일어나",
+            "voice": "일어나",
+            "description": "일어나."
+        },
+        "debug": {
+            "text": "디버그 정보 보여 줘",
+            "voice": "디버그 정보 보여 줘",
+            "description": "디버그 정보 보여 줘."
+        },
+        "map_show": {
+            "text": "지도 보여 줘",
+            "voice": "지도 보여 줘",
+            "description": "현재 도시의 지도를 보여 줍니다."
+        },
+        "map_location": {
+            "text": "___ 지도 보여 줘",
+            "voice": "*location지도 보여 줘",
+            "description": "주어진 위치의 지도를 보여 줍니다."
+        },
+        "map_zoom_in": {
+            "text": "지도 확대",
+            "voice": "(지도) 확대",
+            "description": "현재 지도를 확대 합니다."
+        },
+        "map_zoom_out": {
+            "text": "지도 축소",
+            "voice": "(지도) 축소",
+            "description": "현재 지도를 축소 합니다."
+        },
+        "map_zoom_point": {
+            "text": " ________값으로 지도 설정",
+            "voice": "*value값으로지도 설정",
+            "description": "원하는 값으로 지도를 설정합니다."
+        },
+        "map_zoom_reset": {
+            "text": "지도 리셋",
+            "voice": "(지도) 리셋",
+            "description": "지도를 이전 값으로 되돌립니다."
+        },
+        "video_search": {
+            "text": "________ 보여 줘",
+            "voice": "*term 보여 줘",
+            "description": "요청한 것의 사진을 보여 줍니다."
+        },
+        "video_stop": {
+            "text": "Stop video",
+            "voice": "stop (the) video",
+            "description": "Stops the playback of video content."
+        },
+        "image_giphy": {
+            "text": "________ 짤",
+            "voice": "*img짤",
+            "description": "gif 이미지를 보여줍니다."
+        },
+        "image_comic": {
+            "text": "카툰 보고 싶어",
+            "voice": "카툰 보고 싶어",
+            "description": "카툰을 보여줍니다."
+        },
+        "image_comic_dilbert": {
+            "text": "Comic Dilbert",
+            "voice": "Comic Dilbert",
+            "description": "Muestra el comic Dilbert."
+        },
+        "reminder_insert": {
+            "text": " ________상기 시켜 줘 ",
+            "voice": "*task 상기 시켜 줘",
+            "description": "미리 알림 리스트에 추가 합니다."
+        },
+        "reminder_clear": {
+            "text": "미리 알림 삭제 해 줘",
+            "voice": "미리 알림 삭제 해 줘",
+            "description": "미리 알림리스트를 삭제 합니다."
+        },
+        "reminder_show": {
+            "text": "나에게 리콜 목록을 표시",
+            "voice": "나에게 리콜 목록을 표시",
+            "description": "리콜 목록을 표시합니다."
+        },
+        "time_show": {
+            "text": "지금 몇 시",
+            "voice": "지금 몇 시",
+            "description": "지금 몇 시."
+        },
+        "timer_start": {
+            "text": "______ 타이머 (설정)",
+            "voice": "*duration 타이머 (설정)",
+            "description": "*duration 타이머 (설정)."
+        },
+        "timer_show": {
+            "text": "타이머 보여줄래",
+            "voice": "타이머 보여줄래",
+            "description": "타이머 보여줄래."
+        },
+        "timer_stop": {
+            "text": "타이머 정지",
+            "voice": "타이머 정지",
+            "description": "타이머 정지."
+        },
+        "timer_resume": {
+            "text": "타이머 재시작",
+            "voice": "타이머 재시작",
+            "description": "타이머 재시작."
+        },
+        "sc_play": {
+            "text": "SoundCloud play ________",
+            "voice": "SoundCloud play *query",
+            "description": "Play a song on SoundCloud."
+        },
+        "sc_pause": {
+            "text": "SoundCloud pause/stop",
+            "voice": "SoundCloud (pause)(post)(stop)(stock)",
+            "description": "Stop/pause SoundCoud playback."
+        },
+        "sc_resume": {
+            "text": "SoundCloud play",
+            "voice": "SoundCloud (play)(resume)",
+            "description": "Resumes playback."
+        },
+        "sc_replay": {
+            "text": "SoundCloud replay",
+            "voice": "SoundCloud replay",
+            "description": "Replays the current song on SoundCloud."
+        },
+        "light_action": {
+            "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
+            "voice": "불 :state *action (해)줘",
+            "description": "불 :state *action (해)줘."
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "schema": {
+        "speech": {
+            "type": "object",
+            "title": "Speech Settings",
+            "properties": {
+                "keyFilename": {
+                    "type": "string",
+                    "title": "Google Cloud Speech Keyfile",
+                    "required": true,
+                    "default": "keyfile.json"
+                },
+                "hotwords": {
+                    "type": "array",
+                    "title": "Keyword Spotter Hotwords",
+                    "required": true,
+                    "items": {
+                        "title": "keyword {{idx}}",
+                        "type": "object",
+                        "properties": {
+                            "keyword": {
+                                "type": "string",
+                                "Title": "Keyword Name"
+                            },
+                            "model": {
+                                "type": "string",
+                                "title": "Model Filename"
+                            }
+                        }
+                    }
+                },
+                "sensitivity": {
+                    "type": "string",
+                    "title": "Microphone Sensitivity",
+                    "default": "0.5",
+                    "required": true
+                },
+                "continuous": {
+                    "type": "boolean",
+                    "title": "Continuous Enabled",
+                    "default": "false"
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "title": "Speech Settings",
+            "expandable": false,
+            "order":-75,
+            "items":[
+              "speech.keyFilename",
+              {
+                "type":"tabarray",
+                "title":"Keyword Spotter Hotwords",
+                "items":[
+                    {
+                      "type":"section",
+                      "legend":"{{value}}",
+                      "items": [
+                        {
+                          "key":"speech.hotwords[].keyword",
+                          "valueInLegend":true,
+                          "title":"Keyword Name"
+                        },
+                        "speech.hotwords[].model"
+                      ]
+                    }  
+                ]
+              },
+              "speech.sensitivity",
+              "speech.continuous"
+            ]
+        }
+    ]
+}

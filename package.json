@@ -1,13 +1,20 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.2",
+  "version": "0.0.11",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
     "install": "bower install",
     "start": "electron main.js ",
-    "microphone-debug" : "electron scripts/microphone-debug/main.js",
-    "wiredep": "wiredep -s index.html"
+    "microphone-debug": "electron scripts/microphone-debug/main.js",
+    "train-model": "electron scripts/train-model.js",
+    "sonus": "node sonus.js",
+    "motion": "sudo node motion.js",
+    "enable-motion": "npm install johnny-five raspi-io",
+    "update": "git pull && npm install",
+    "wiredep": "wiredep -s index.html",
+    "test": "eslint . --ignore-path .gitignore",
+    "test-fix": "eslint . --ignore-path .gitignore --fix"
   },
   "repository": {
     "type": "git",
@@ -26,17 +33,38 @@
   },
   "homepage": "https://github.com/evancohen/smart-mirror",
   "devDependencies": {
-    "wiredep-cli": "^0.1.0",
-    "bower": "^1.7.9",
-    "install": "^0.8.1",
     "angular-i18n": "^1.5.5",
-    "electron-prebuilt": "^1.0.0",
-    "npm": "^3.8.8"
+    "bower": "^1.7.9",
+    "electron": "^1.4.4",
+    "eslint": "^3.13.1",
+    "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
-    "express": "^4.13.4",
+    "annyang": "^2.6.0",
+    "electron-json-storage": "2.0.0",
+    "express": "^4.14.0",
     "fitbit-oauth2": "0.0.1",
-    "fs": "0.0.2",
-    "electron-json-storage": "2.0.0"
+    "hyperion-client": "1.0.3",
+    "socket.io": "^1.6.0",
+    "sonus": "^0.1.5"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true,
+      "es6": true,
+      "browser": true
+    },
+    "rules": {
+      "indent": [2, "tab"],
+      "no-console": 0
+    },
+    "globals": {
+        "angular": false,
+        "annyang": false,
+        "moment": false,
+        "config": false,
+        "RRule": false
+    }
   }
 }

@@ -1,0 +1,132 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+nav {
+  height:20px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left:0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+  background-color: #f5f5f5;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.navbar-header {
+  display: inline-block;
+}
+
+.navbar-config {
+  font-size: x-large;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  float: right;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 15px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+p.lead {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+#speech-error {
+  margin-top: 15px;
+  padding: 5px;
+}
+#speak{
+  cursor: pointer;
+}
+.redMic {
+  color: darkred;
+}
+.blackMic {
+  color: black;
+}
+.greyMic {
+  color: grey;
+}
+
+code {
+  font-size: 80%;
+}
+
+
+.connected {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.disconnected {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.connected .text-muted, .disconnected .text-muted {
+    color: #fff;
+}
+.expandable > legend:before {
+  content: '\25B8';
+  padding-right: 5px;
+}
+.expanded > legend:before {
+  content: '\25BE';
+}
+
+._jsonform-array-buttons {
+  margin-left: 25px;
+}
+
+.jsonform-required > label:after {
+  content: ' *';
+  color: red;
+}
+
+form.jsonform-hasrequired:after {
+  content: '* Required field';
+  display: block;
+  color: red;
+  padding-top: 1em;
+}
+#out {
+  display:none;
+}
+.top-left {
+  top: 10px;
+  left: 10px;
+}
+#outMsg {
+  padding-left: 20px;
+}
+#form select { width: auto; }
+#form .add-on {
+  border: none;
+  background-color: inherit;
+}

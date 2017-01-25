@@ -1,0 +1,10 @@
+<div ng-controller="Remote">
+    <div class="qrImage-container animate-grow" ng-show="focus == 'remote'">
+        <img class="qrImage animate-grow" src={{remoteImage}} />
+        <div ng-show="firstRun" class="first-run">
+            <h1>Welcome to the Smart Mirror</h1>
+            <h3>Scan the QR code or visit the IP below</h3>
+        </div>
+        <H2>{{remoteText}}</H2>
+    </div>
+</div>

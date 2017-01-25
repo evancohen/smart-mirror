@@ -1,0 +1,194 @@
+{
+    "home" : {
+        "commands" : "Say \"What can I say?\" to see a list of commands..."
+    },
+    "traffic" : {
+        "time_to" : "Time to {{name}}: "
+    },
+    "reminders": {
+        "empty": "Empty list."
+    },
+    "timer": {
+      "one": "One",
+      "minute": "Minute(s)?",
+      "second": "Second(s)?"
+    },
+    "lights": {
+        "colors": {
+            "red": "red",
+            "dark_green": "dark green",
+            "green": "green",
+            "blue": "blue",
+            "yellow": "yellow",
+            "orange":  "orange",
+            "pink": "pink",
+            "purple": "purple",
+            "white": "white",
+            "movie": "movie",
+            "colorloop": "colorloop",
+            "stop": "stop"
+        },
+        "intensity": {
+            "increase": "increase",
+            "decrease": "decrease",
+            "max": "max",
+            "half": "half",
+            "quarter": "quarter",
+            "threequarter": ["three-quarter", "three-fourth"]
+        },
+        "action": {
+            "on": "on",
+            "off": "off",
+            "nightmode": "nightmode",
+            "reset": "reset"
+        }
+    },
+    "commands": {
+        "title" : "Available Commands",
+        "list": {
+            "text": "What can I say?",
+            "voice": "What can I say",
+            "description": "Shows a list of voice commands available to you."
+        },
+        "home": {
+            "text": "Go home",
+            "voice": "Go home",
+            "description": "Takes you back to the home screen."
+        },
+        "sleep": {
+            "text": "Go to sleep",
+            "voice": "Go to sleep",
+            "description": "Go to sleep."
+        },
+        "debug": {
+            "text": "Show debug information",
+            "voice": "Show debug information",
+            "description": "Show debug information."
+        },
+        "map_show": {
+            "text": "Show map",
+            "voice": "Show map",
+            "description": "Shows a map of your current city."
+        },
+        "map_location": {
+            "text": "Show map of ________",
+            "voice": "Show (me a) map of *location",
+            "description": "Shows a map of the given location."
+        },
+        "map_zoom_in": {
+            "text": "Zoom in",
+            "voice": "(map) zoom in",
+            "description": "Zooms in the current map."
+        },
+        "map_zoom_out": {
+            "text": "Zoom out",
+            "voice": "(map) zoom out",
+            "description": "Zooms out the current map."
+        },
+        "map_zoom_point": {
+            "text": "Zoom to ________",
+            "voice": "(map) zoom (to) *value",
+            "description": "Zooms to indicated point."
+        },
+        "map_zoom_reset": {
+            "text": "Reset zoom",
+            "voice": "(map) reset zoom",
+            "description": "Resets zoom."
+        },
+        "video_search": {
+            "text": "Show me ________",
+            "voice": "show me (a video)(of)(about) *query",
+            "description": "Will show you a video of the requested item."
+        },
+        "video_stop": {
+            "text": "Stop video",
+            "voice": "stop (the) video",
+            "description": "Stops the playback of video content."
+        },
+        "image_giphy": {
+            "text": "Giphy ________",
+            "voice": "giphy *img",
+            "description": "Shows a Giphy image."
+        },
+        "image_comic": {
+            "text": "Show xkcd",
+            "voice": "Show xkcd",
+            "description": "Shows the most recent xkcd comic."
+        },
+        "image_comic_dilbert": {
+            "text": "Show Dilbert comic",
+            "voice": "Show Dilbert (comic)",
+            "description": "Show the most recent Dilbert comic."
+        },
+        "reminder_insert": {
+            "text": "Remind me to ________",
+            "voice": "(set) (a) Remind(er) (for) (me) (to) *task",
+            "description": "Add something to the reminders list."
+        },
+        "reminder_clear": {
+            "text": "Clear reminders",
+            "voice": "Clear reminders",
+            "description": "Clears out your reminders list."
+        },
+        "reminder_show": {
+            "text": "Show me reminders",
+            "voice": "(show) (me) (my) reminders",
+            "description": "Display the reminders list."
+        },
+        "time_show": {
+            "text": "what time is it",
+            "voice": "what time is it",
+            "description": "Shows the current time."
+        },
+        "timer_start": {
+            "text": "Timer for ________",
+            "voice": "(set) (a) (start) (a) timer (for) *duration",
+            "description": "Starts a timer."
+        },
+        "timer_show": {
+            "text": "Show timer",
+            "voice": "show (the) timer",
+            "description": "Show the timer."
+        },
+        "timer_stop": {
+            "text": "Stop timer",
+            "voice": "stop (the) timer",
+            "description": "Stop the timer."
+        },
+        "timer_resume": {
+            "text": "Resume timer",
+            "voice": "resume (the) timer",
+            "description": "Resume timer."
+        },
+        "sc_play": {
+            "text": "SoundCloud play ________",
+            "voice": "SoundCloud play *query",
+            "description": "Play a song on SoundCloud."
+        },
+        "sc_pause": {
+            "text": "SoundCloud pause/stop",
+            "voice": "SoundCloud (pause)(post)(stop)(stock)",
+            "description": "Stop/pause SoundCoud playback."
+        },
+        "sc_resume": {
+            "text": "SoundCloud play",
+            "voice": "SoundCloud (play)(resume)",
+            "description": "Resumes playback."
+        },
+        "sc_replay": {
+            "text": "SoundCloud replay",
+            "voice": "SoundCloud replay",
+            "description": "Replays the current song on SoundCloud."
+        },
+        "light_action": {
+            "text": "Turn (state) light(s) (action)",
+            "voice": "(turn) (the) :state (the) light(s) *action",
+            "description": "Control color and brightness of lights."
+        },
+        "show_remoteQR":{
+            "text": "Show Remote Link",
+            "voice": "Show remote (QR code) (QR) (link)",
+            "description": "Show the local IP of the Remote App URL"
+        }
+    }
+}

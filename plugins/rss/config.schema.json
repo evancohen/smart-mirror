@@ -1,0 +1,30 @@
+{
+    "schema": {
+        "rss": {
+            "type": "object",
+            "title": "RSS Settings",
+            "properties": {
+                "feeds": {
+                    "type": "tabarray",
+                    "title": "RSS Feeds URL",
+                    "items": {
+                        "type": "url"
+                    }
+                },
+                "refreshInterval": {
+                    "type": "integer",
+                    "title": "Refresh Interval for RSS Feeds (minutes)",
+                    "default": 9
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "rss",
+            "expandable": true,
+            "order":0
+        }
+    ]
+}

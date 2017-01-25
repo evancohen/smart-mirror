@@ -1,0 +1,22 @@
+{
+    "schema": {
+        "youtube": {
+            "type": "object",
+            "title":"YouTube Settings",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "YouTube API Key"
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "youtube",
+            "expandable": true,
+            "order":0
+        }
+    ]
+}

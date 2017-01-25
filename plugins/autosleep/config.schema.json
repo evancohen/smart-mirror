@@ -1,0 +1,157 @@
+{
+    "schema": {
+        "autoTimer": {
+            "type": "object",
+            "title": "AutoTimer Settings",
+            "properties": {
+                "mode":{
+                    "type":"string",
+                    "title":"Display Mode:",
+                    "default":"disabled",
+                    "enum":[
+                      "monitor",
+                      "tv",
+                      "disabled"
+                    ]
+                },
+                "autoSleep": {
+                    "type": "number",
+                    "title": "AutoSleep Wait Time (minutes)",
+                    "default":40
+                },
+                "autoWake": {
+                    "type": "string",
+                    "title": "Wake up time (24 hr format)",
+                    "default": "07:00:00"
+                },
+                "wakeCmd": {
+                    "type": "string",
+                    "title": "Command used to wake up Smart Mirror",
+                    "default": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1"
+                },
+                "sleepCmd": {
+                    "type": "string",
+                    "title": "Command used put Smart Mirror to sleep",
+                    "default": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
+                }
+            }
+        },
+        "motion": {
+            "type": "object",
+            "title": "Motion Settings",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "title": "Check to Enable Motion Detection",
+                    "default":false
+                },
+                "pin": {
+                    "type": "string",
+                    "title": "PIN the for output on PIR module.",
+                    "description": "based on <a href=\"https://github.com/nebrius/raspi-io/\">raspio-io</a>",
+                    "default":"GPIO26"
+                }
+            }
+        }
+    },
+    "form":[
+        {
+          "type":"fieldset",
+          "title":"AutoTimer Settings",
+          "expandable":true,
+          "order":0,
+          "items":[
+            {
+              "key":"autoTimer.mode",
+              "type":"selectfieldset",
+              "titleMap":{
+                "monitor":"Monitor",
+                "tv":"TV",
+                "disabled":"Disabled"
+              },
+              "items":[
+                {
+                  "type":"section",
+                  "items": [
+                    {
+                      "key": "autoTimer.autoWake"
+                    },
+                    {
+                      "key": "autoTimer.autoSleep"
+                    },
+                    {
+                      "key": "autoTimer.wakeCmd"
+                    },
+                    {
+                      "key": "autoTimer.sleepCmd"
+                    },
+                    {
+                      "key":"motion",
+                      "expandable":true
+                    }
+                  ]
+                },
+                {
+                  "type":"section",
+                  "items":[
+                    {
+                      "key": "autoTimer.autoWake"
+                    },
+                    {
+                      "key": "autoTimer.autoSleep"
+                    },
+                    {
+                      "key": "autoTimer.wakeCmd",
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.sleepCmd",
+                      "type":"hidden"
+                    },
+                    {
+                      "key":"motion",
+                      "expandable":true
+                    }
+                  ]
+                },
+                {
+                  "type":"section",
+                  "items":[
+                    {
+                      "key": "autoTimer.autoWake",
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.autoSleep",
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.wakeCmd",
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.sleepCmd",
+                      "type":"hidden"
+                    }
+                  ]
+                }
+              ]
+            }
+              
+          ]
+        }
+    ],
+    "value":{
+      "autoTimer": {
+          "mode":"disabled",
+          "autoSleep": 40,
+          "autoWake": "07:00:00",
+          "wakeCmd": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1",
+          "sleepCmd": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
+      },
+      "motion": {
+        "enabled": false,
+        "pin": "GPIO26"
+      }
+    }
+}

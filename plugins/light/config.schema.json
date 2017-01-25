@@ -1,0 +1,165 @@
+{
+    "schema": {
+        "light": {
+            "type": "object",
+            "title": "Lights Settings",
+            "properties": {
+                "settings": {
+                    "type": "object",
+                    "properties": {
+                        "hueIp": {
+                            "type": "string",
+                            "title": "Hue Light IP Address"
+                        },
+                        "hueUsername": {
+                            "type": "string",
+                            "title": "Hue Light Username"
+                        }
+                    }
+                },
+                "setup": {
+                    "type": "array",
+                    "title": "Setup",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "title": "name"
+                            },
+                            "targets": {
+                                "type": "array",
+                                "title": "targets",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "desc":{
+                                          "type":"string",
+                                          "title":"Description"
+                                        },
+                                        "lightType": {
+                                            "type": "string",
+                                            "title": "type",
+                                            "enum": [
+                                                "hyperion",
+                                                "hue"
+                                            ]
+                                        },
+                                        "ip": {
+                                            "type": "string",
+                                            "title": "ip"
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "title": "id"
+                                        },
+                                        "port": {
+                                            "type": "string",
+                                            "title": "port"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form":[
+        {
+          "type":"fieldset",
+          "expandable":true,
+          "title":"Light Settings",
+          "order":0,
+          "items":[
+            "light.settings",
+            {
+              "type": "fieldset",
+              "title": "Setup",
+              "items": [
+                {
+                  "type":"tabarray",
+                  "items": [
+                    {
+                      "type":"section",
+                      "legend":"{{value}}",
+                      "items":[   
+                          {
+                            "key":"light.setup[].name",
+                            "valueInLegend":true
+                          },
+                          {
+                            "type":"tabarray",
+                            "title":"Targets",
+                            "items":[
+                              {
+                                    "type": "selectfieldset",
+                                    "key": "light.setup[].targets[].lightType",
+                                    "legend":"Item {{idx}}",
+                                    "titleMap":{
+                                        "hue":"Hue",
+                                        "hyperion":"Hyperion"
+                                    },
+                                    "items": [
+                                      {
+                                        "type": "section",
+                                        "items":[
+                                          "light.setup[].targets[].id"
+                                        ]
+                                      },
+                                      {
+                                        "type": "section",
+                                        "items":[
+                                          "light.setup[].targets[].ip",
+                                          "light.setup[].targets[].port"
+                                        ]
+                                      }
+                                  ]
+                                  
+                              }
+                            ]
+                          }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "value":{
+        "light" : {
+        "settings" : {
+            "hueIp" : "",
+            "hueUsername" : ""
+        },
+        "setup" : [
+            {
+                "name" : "parlor",
+                "targets" : [
+                    {
+                        "lightType" : "hyperion",
+                        "ip" : "",
+                        "port" : "19444"
+                    },
+                    {
+                        "lightType" : "hue",
+                        "id" : 1
+                    }
+                ]
+            },
+            {
+                "name" : "bath",
+                "targets" : [
+                    {
+                        "lightType" : "hue",
+                        "id" : 3
+                    }
+                ]
+            }
+        ]
+    }
+  }
+}

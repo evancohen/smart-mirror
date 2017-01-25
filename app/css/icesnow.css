@@ -1,0 +1,329 @@
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,400,500);
+@font-face {
+  font-family: "HelveticaNeue-UltraLight";
+  src: url("../fonts/HelveticaNeue-UltraLight.ttf");
+  /* EOT file for IE */ }
+body {
+  background-color: black;
+  color: #fff;
+  font-family: 'HelveticaNeue-UltraLight', 'Open Sans', sans-serif;
+  font-weight: 300;
+  position: relative; }
+
+h1, h2, h3, h4, h5 {
+  font-weight: 300; }
+
+h1 {
+  font-size: 120px; }
+
+dt {
+  font-weight: 600; }
+
+/* Colors */
+.light-grey {
+  color: #ccc; }
+
+.grey {
+  color: #999; }
+
+/* Displays */
+.sleep-cover {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999; }
+
+.container {
+  z-index: -1;
+  /* so things are still selectable */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; }
+
+.listening, .interim-result {
+  font-family: 'Open Sans', sans-serif; }
+
+.top-left {
+  float: left; }
+
+.date {
+  font-size: 42px; }
+
+.time {
+  font-size: 110px; }
+
+.top-right {
+  float: right; }
+
+.middle-center {
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+  align-self: flex-start;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  justify-content: center; }
+
+.bottom-center {
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px; }
+
+.commands {
+  width: 450px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto; }
+
+ul.calendar {
+  list-style: none;
+  font-size: 22px;
+  margin-left: 10px;
+  padding: 0; }
+
+.calendar .event {
+  margin-bottom: 10px; }
+.calendar span {
+  display: inline-block; }
+  .calendar span.day {
+    font-weight: bold;
+    width: 128px;
+    vertical-align: top; }
+  .calendar span.summary {
+    max-width: 400px; }
+.calendar .event-details .details {
+  font-size: 12px;
+  padding-left: 135px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter; }
+
+.weather {
+  margin-left: auto;
+  display: inline-block;
+  text-align: right;
+  width: 230px; }
+
+.weather-today .temperature {
+  font-size: 60px; }
+
+.weather-week-descriptor {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin-left: auto;
+  margin-bottom: 10px;
+  text-align: justify; }
+
+.weather-week {
+  margin-right: 10px;
+  font-size: 22px; }
+  .weather-week .day {
+    display: inline-block;
+    margin-right: 10px;
+    width: 40px; }
+  .weather-week .temperature {
+    display: inline-block;
+    width: 60px; }
+
+.weather .weather-today canvas, .weather .weather-week-day canvas {
+  display: none; }
+
+.traffic-information {
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 10px; }
+
+.time-to {
+  font-weight: bold; }
+
+.contents {
+  max-width: 100%; }
+
+.gif {
+  height: 100%; }
+
+.map {
+  height: 1080px; }
+
+.contents-box {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  overflow: hidden; }
+  .contents-box:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow: inset 0 0 10px 10px #000;
+    -moz-box-shadow: inset 0 0 10px 10px #000;
+    box-shadow: inset 0 0 10px 10px #000;
+    overflow: hidden; }
+
+.color-block {
+  height: 200px;
+  width: 200px;
+  display: inline-block;
+  margin: 10px;
+  margin-bottom: 20px; }
+
+.debug-info {
+  width: 500px; }
+
+/* Animations */
+.fade.ng-hide {
+  opacity: 0; }
+.fade.ng-hide-remove, .fade.ng-hide-add {
+  display: block !important; }
+.fade.ng-hide-remove {
+  transition: all ease 1500ms; }
+.fade.ng-hide-add {
+  transition: all ease 500ms; }
+
+.animate-grow {
+  max-height: 1280px !important; }
+  .animate-grow.ng-hide-add, .animate-grow.ng-hide-remove {
+    transition: all linear 500ms; }
+  .animate-grow.ng-hide {
+    max-height: 0 !important; }
+
+.dimmed {
+  color: #aaa; }
+
+.xxsmall, .xsmall, .small {
+  font-family: "HelveticaNeue-Medium", sans-serif;
+  letter-spacing: 0; }
+
+.xxsmall {
+  font-size: 15px; }
+  .xxsmall .wi {
+    line-height: 15px; }
+
+.xsmall {
+  font-size: 20px; }
+
+.small {
+  font-size: 25px; }
+
+.icon {
+  position: relative;
+  top: -10px;
+  display: inline-block;
+  font-size: 45px;
+  padding-right: 5px;
+  font-weight: 100;
+  margin-right: 10px; }
+
+.icon-small {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  padding-left: 0px;
+  padding-right: -10px;
+  font-weight: 100;
+  width: 20px; }
+
+.xkcd {
+  -webkit-filter: invert(100%);
+  max-width: 100%; }
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 300; }
+
+.top-left {
+  float: right;
+  text-align: right;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  float: right;
+  width: 420px; }
+  .top-left .date {
+    -webkit-flex: 2;
+    flex: 2;
+    -webkit-order: 2;
+    order: 2;
+    width: 220px;
+    position: relative;
+    left: 200px; }
+  .top-left ul.calendar {
+    -webkit-flex: 3;
+    flex: 3;
+    -webkit-order: 3;
+    order: 3; }
+  .top-left .time {
+    -webkit-flex: 1;
+    flex: 1;
+    -webkit-order: 1;
+    order: 1; }
+
+.top-right {
+  float: left;
+  text-align: left;
+  width: 265px; }
+  .top-right .weather {
+    text-align: left;
+    width: 100%; }
+
+/*
+
+Weather
+
+*/
+.weather-today .temperature {
+  font-size: 80px; }
+
+.weather-week-descriptor span.ng-binding {
+  text-align: left;
+  word-spacing: normal;
+  display: inline-block; }
+  .weather-week-descriptor span.ng-binding:first-child {
+    font-size: 21px; }
+
+.weather-week-day {
+  margin-bottom: 5px; }
+
+.weather .weather-today .icon, .weather .weather-week-day .icon-small {
+  display: none; }
+.weather .weather-today canvas, .weather .weather-week-day canvas {
+  display: inline-block; }
+.weather .weather-week-descriptor span {
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+  display: block;
+  border-bottom: 2px solid #aaa; }
+  .weather .weather-week-descriptor span:last-child {
+    border-bottom: 0; }
+
+/*
+Calc
+*/
+.top-left ul.calendar {
+  font-size: 17px;
+  margin-top: 80px; }
+  .top-left ul.calendar .day {
+    display: none; }
+  .top-left ul.calendar .event-details .details {
+    color: #999; }
+
+/* middle */
+.middle-center {
+  justify-content: flex-end; }
+  .middle-center h1 {
+    font-size: 90px; }
+
+/*# sourceMappingURL=icesnow.css.map */

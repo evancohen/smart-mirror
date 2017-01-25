@@ -1,0 +1,37 @@
+{
+    "schema": {
+        "general": {
+            "type": "object",
+            "title": "General Settings",
+            "properties": {
+                "language": {
+                    "default": "en-US",
+                    "type": "string",
+                    "title": "Language",
+                    "required": true
+                },
+                "layout": {
+                    "default": "main",
+                    "type": "string",
+                    "title": "Layout",
+                    "required": true
+                }
+            }
+        }
+    },
+    "form":[
+      {
+        "key":"general",
+        "type":"fieldset",
+        "title":"General Settings",
+        "expandable":false,
+        "order":-100
+      }
+    ],
+    "value":{
+        "general":{
+            "language": "en-US",
+            "layout":"main"
+        }
+    }
+}

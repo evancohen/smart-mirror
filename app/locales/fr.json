@@ -1,0 +1,189 @@
+{
+    "home" : {
+        "commands" : "Dis: \"Que puis-je dire?\" pour voir une liste de commandes..."
+    },
+    "traffic" : {
+        "time_to" : "Temps de {{name}}: "
+    },
+    "reminders": {
+        "empty": "Aucun rappel."
+    },
+    "timer": {
+      "one": "Une",
+      "minute": "Minute(s)?",
+      "second": "Seconde(s)?"
+    },
+    "lights": {
+        "colors": {
+            "red": "rouge",
+            "dark_green": "verre foncé",
+            "green": "verre",
+            "blue": "bleu",
+            "yellow": "jaune",
+            "orange":  "orange",
+            "pink": "rose",
+            "purple": "violet",
+            "white": "blanc",
+            "movie": "cinéma",
+            "colorloop": "couleur",
+            "stop": "stop"
+        },
+        "intensity": {
+            "increase": "augmente",
+            "decrease": "baisse",
+            "max": "max"
+        },
+        "action": {
+            "on": "allume",
+            "off": "éteins"
+        }
+    },
+    "commands": {
+        "title" : "Commandes disponibles",
+        "list": {
+            "text": "Que puis-je dire?",
+            "voice": "Que puis-je dire",
+            "description": "Affiche une liste des commandes vocales disponibles."
+        },
+        "home": {
+            "text": "Accueil",
+            "voice": "Accueil",
+            "description": "Vous ramène à l'écran d'accueil."
+        },
+        "sleep": {
+            "text": "Bonne nuit",
+            "voice": "Bonne nuit",
+            "description": "Va te coucher."
+        },
+        "wake_up": {
+            "text": "Réveille toi",
+            "voice": "Réveille toi",
+            "description": "Réveille Toi."
+        },
+        "debug": {
+            "text": "Débogage",
+            "voice": "Débogage",
+            "description": "Afficher les informations de débogage."
+        },
+        "map_show": {
+            "text": "Affiche carte",
+            "voice": "Affiche la carte",
+            "description": "Affiche la carte de votre ville."
+        },
+        "map_location": {
+            "text": "Affiche carte de ________",
+            "voice": "Affiche la carte de *location",
+            "description": "Affiche une carte de la position indiquée."
+        },
+        "map_zoom_in": {
+            "text": "Zoom avant",
+            "voice": "Zoom (avant) (sur la carte)",
+            "description": "Zoom avant sur la carte actuelle."
+        },
+        "map_zoom_out": {
+            "text": "Zoom arrière",
+            "voice": "Zoom arrière (sur la carte)",
+            "description": "Zoom arrière sur la carte actuelle."
+        },
+        "map_zoom_point": {
+            "text": "Zoom vers ________",
+            "voice": "Zoom (vers) *value",
+            "description": "Zoom vers le point indiqué."
+        },
+        "map_zoom_reset": {
+            "text": "Réinitialise zoom",
+            "voice": "Réinitialise le zoom",
+            "description": "Réinitilalise la fonction zoom."
+        },
+        "video_search": {
+            "text": "(Re)cherche une image de ________",
+            "voice": "(Re)cherche une image de *term",
+            "description": "Affiche une image recherchée."
+        },
+        "video_stop": {
+            "text": "Stop video",
+            "voice": "stop (the) video",
+            "description": "Stops the playback of video content."
+        },
+        "image_giphy": {
+            "text": "(Re)cherche une image animée de ________",
+            "voice": "(Re)cherche une image animée de *img",
+            "description": "Affiche une image de giphy."
+        },
+        "image_comic": {
+            "text": "Montre(-moi) le dernier xkcd ",
+            "voice": "Montre(-moi) le dernier xkcd",
+            "description": "Affiche la plus récente bande dessinée de xkcd."
+        },
+        "image_comic_dilbert": {
+            "text": "Montre(-moi) le dernier Dilbert",
+            "voice": "Montre(-moi) le dernier Gilbert",
+            "description": "Affiche le dernier comic de Diblert."
+        },
+        "reminder_insert": {
+            "text": "Rappelle-moi de ________",
+            "voice": "Rappelle-moi (de) (d') *task",
+            "description": "Ajouter quelque chose à la liste des rappels."
+        },
+        "reminder_clear": {
+            "text": "Efface (les) (mes) rappels",
+            "voice": "Efface (les) (mes) rappels",
+            "description": "Supprimer la liste des rappels."
+        },
+        "reminder_show": {
+            "text": "Montre-moi (les) (mes) rappels",
+            "voice": "Montre-moi (les) (mes) rappels",
+            "description": "Montre la liste des rappels."
+        },
+        "time_show": {
+            "text": "Quel heure est-il",
+            "voice": "Quel heure est-il",
+            "description": "Quel heure est-il?"
+        },
+        "timer_start": {
+            "text": "(Mets le) minuteur (pour) ________",
+            "voice": "(Mets le) minuteur (pour) *duration",
+            "description": "Démarre un timer."
+        },
+        "timer_show": {
+            "text": "Montre(-moi) (le) minuteur",
+            "voice": "Montre(-moi) (le) minuteur",
+            "description": "Affiche le timer."
+        },
+        "timer_stop": {
+            "text": "Arrête (le) minuteur",
+            "voice": "Arrête (le) minuteur",
+            "description": "Arrête le timer."
+        },
+        "timer_resume": {
+            "text": "Reprend (le) minuteur",
+            "voice": "Reprend (le) minuteur",
+            "description": "Reprendre le timer."
+        },
+        "sc_play": {
+            "text": "SoundCloud play ________",
+            "voice": "SoundCloud play *query",
+            "description": "Play a song on SoundCloud."
+        },
+        "sc_pause": {
+            "text": "SoundCloud pause/stop",
+            "voice": "SoundCloud (pause)(post)(stop)(stock)",
+            "description": "Stop/pause SoundCoud playback."
+        },
+        "sc_resume": {
+            "text": "SoundCloud play",
+            "voice": "SoundCloud (play)(resume)",
+            "description": "Resumes playback."
+        },
+        "sc_replay": {
+            "text": "SoundCloud replay",
+            "voice": "SoundCloud replay",
+            "description": "Replays the current song on SoundCloud."
+        },
+        "light_action": {
+            "text": "(Allume|Éteins) (la|les) lumières (action)",
+            "voice": ":state (les) (la) lumière(s) (*action)",
+            "description": ":state (les) (la) lumière(s) (*action)."
+        }
+    }
+}
