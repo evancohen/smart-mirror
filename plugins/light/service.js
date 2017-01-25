@@ -61,29 +61,29 @@
 				}
 
                 // Adjust brightness
-				if (spokenWords[i] == '100%' || $translate.instant('lights.intensity.max').includes(spokenWords[w])) {
+				if ((spokenWords[w] == '100' && spokenWords[w+1] && spokenWords[w+1] == "%") || $translate.instant('lights.intensity.max').includes(spokenWords[w])) {
 					SaidParameter['brightness'] = 1.0;
-				} else if (spokenWords[i] == '10%') {
+				} else if (spokenWords[w] == '10' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.1;
-				} else if (spokenWords[i] == '20%') {
+				} else if (spokenWords[w] == '20' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.2;
-				} else if (spokenWords[i] == '25%' || $translate.instant('lights.intensity.quarter').includes(spokenWords[w])) {
+				} else if ((spokenWords[w] == '25' && spokenWords[w+1] && spokenWords[w+1] == "%") || $translate.instant('lights.intensity.quarter').includes(spokenWords[w])) {
 					SaidParameter['brightness'] = 0.25;
-				} else if (spokenWords[i] == '30%') {
+				} else if (spokenWords[w] == '30' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.3;
-				} else if (spokenWords[i] == '40%') {
+				} else if (spokenWords[w] == '40' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.3;
-				} else if (spokenWords[i] == '50%' || $translate.instant('lights.intensity.half').includes(spokenWords[w])) {
+				} else if ((spokenWords[w] == '50' && spokenWords[w+1] && spokenWords[w+1] == "%") || $translate.instant('lights.intensity.half').includes(spokenWords[w])) {
 					SaidParameter['brightness'] = 0.5;
-				} else if (spokenWords[i] == '60%') {
+				} else if (spokenWords[w] == '60' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.6;
-				} else if (spokenWords[i] == '70%') {
+				} else if (spokenWords[w] == '70' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.7;
-				} else if (spokenWords[i] == '75%' || $translate.instant('lights.intensity.threequarter').includes(spokenWords[w])) {
+				} else if ((spokenWords[w] == '75' && spokenWords[w+1] && spokenWords[w+1] == "%") || $translate.instant('lights.intensity.threequarter').includes(spokenWords[w])) {
 					SaidParameter['brightness'] = 0.75;
-				} else if (spokenWords[i] == '80%') {
+				} else if (spokenWords[w] == '80' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.8;
-				} else if (spokenWords[i] == '90%') {
+				} else if (spokenWords[w] == '90' && spokenWords[w+1] && spokenWords[w+1] == "%") {
 					SaidParameter['brightness'] = 0.9;
 				}
 
