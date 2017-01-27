@@ -12,8 +12,8 @@
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
                          ng-style="{
-                         'width': todaySummary.summary.steps > todaySummary.goals.steps ? '100%' : (100 * todaySummary.summary.steps / todaySummary.goals.steps) + '%',
-                         'background-color': todaySummary.summary.steps > todaySummary.goals.steps ? 'lime' : 'white'}"></div>
+                         'width': calculatePercent(todaySummary.summary.steps, todaySummary.goals.steps),
+                         'background-color': barColour(todaySummary.summary.steps, todaySummary.goals.steps)}"></div>
                 </div>
             </div>
 
@@ -25,8 +25,8 @@
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
                          ng-style="{
-                         'width': todaySummary.summary.distances[0].distance > todaySummary.goals.distance ? '100%' : (100 * todaySummary.summary.distances[0].distance / todaySummary.goals.distance) + '%',
-                         'background-color': todaySummary.summary.distances[0].distance > todaySummary.goals.distance ? 'lime' : 'white'}"></div>
+                         'width': calculatePercent(todaySummary.summary.distances[0].distance, todaySummary.goals.distance),
+                         'background-color': barColour(todaySummary.summary.distances[0].distance, todaySummary.goals.distance)}"></div>
                 </div>
             </div>
 
@@ -36,8 +36,8 @@
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
                          ng-style="{
-                         'width': (todaySummary.summary.caloriesOut > todaySummary.goals.caloriesOut) ? '100%' : (100 * todaySummary.summary.caloriesOut / todaySummary.goals.caloriesOut) + '%',
-                         'background-color': todaySummary.summary.caloriesOut > todaySummary.goals.caloriesOut ? 'lime' : 'white'}"></div>
+                         'width': calculatePercent(todaySummary.summary.caloriesOut, todaySummary.goals.caloriesOut),
+                         'background-color': barColour(todaySummary.summary.caloriesOut, todaySummary.goals.caloriesOut)}"></div>
                 </div>
             </div>
 
@@ -47,8 +47,8 @@
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
                          ng-style="{
-                         'width': todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes > todaySummary.goals.activeMinutes ? '100%' : (100 * (todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes) / todaySummary.goals.activeMinutes) + '%',
-                          'background-color': todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes > todaySummary.goals.activeMinutes ? 'lime' : 'white'}"></div>
+                         'width': calculatePercent(todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes, todaySummary.goals.activeMinutes),
+                          'background-color': barColour((todaySummary.summary.veryActiveMinutes + todaySummary.summary.fairlyActiveMinutes), todaySummary.goals.activeMinutes)}"></div>
                 </div>
             </div>
 
@@ -58,27 +58,29 @@
                 <div class="fitbit-progress-bar">
                     <div class="fitbit-progress"
                          ng-style="{
-                         'width': todaySummary.summary.floors > todaySummary.goals.floors ? '100%' : (100 * todaySummary.summary.floors / todaySummary.goals.floors ) + '%',
-                         'background-color': todaySummary.summary.floors > todaySummary.goals.floors ? 'lime' : 'white'}"></div>
+                         'width': calculatePercent(todaySummary.summary.floors, todaySummary.goals.floors),
+                         'background-color': barColour(todaySummary.summary.floors, todaySummary.goals.floors)}"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Weekly Average -->
+        <!-- Average Statistics-->
         <div ng-switch-when="1">
-            <div><span class="fitbit-subtitle">{{'fitbit.weekAverage' | translate}}</span></div>
-            <div><span class="fitbit-item">{{profile.averageDailySteps}} {{'fitbit.steps' | translate}}</span></div>
+            <div><span class="fitbit-subtitle">{{'fitbit.average' | translate}}</span></div>
+            <!-- Average daily steps -->
+            <div><span class="fitbit-item">{{profile.averageDailySteps}} {{'fitbit.averageSteps' | translate}}</span></div>
+            <!-- Add average heart rate -->
+            <div><span class="fitbit-item">{{ heartRate['activities-heart'] }} </span></div>
         </div>
 
         <!-- Last Night's Sleeping Statistics -->
         <div ng-switch-when="2">
-            <div><span class="fitbit-subtitle" ng-show="sleep.sleep[0]">{{'fitbit.sleep' | translate}}</span></div>
+            <div><span class="fitbit-subtitle" ng-show="sleep.sleep[0]">{{'fitbit.sleep' | translate}} {{ sleep.sleep[0].startTime | date:'shortTime'}} - {{ (sleep.sleep[0].startTime + sleep.sleep[0].duration) | date:'shortTime'}}</span></div>
             <div><span class="fitbit-item" ng-show="sleep.sleep[0]">{{'fitbit.lastNight' | translate}} {{(sleep.sleep[0].minutesAsleep/60 | number:2 )}} {{'fitbit.hours' | translate}}</span>
             </div>
-            <div><span class="fitbit-item" ng-show="sleep.sleep[0]">{{'fitbit.awakeMins' | translate}} {{sleep.sleep[0].minutesAwake}} min</span>
+            <div><span class="fitbit-item" ng-show="sleep.sleep[0]">{{'fitbit.awake' | translate}} {{sleep.sleep[0].minutesAwake}} {{'fitbit.minutes' | translate}} ({{sleep.sleep[0].awakeCount}}{{'fitbit.times' | translate}})</span>
             </div>
-            <!-- // {{(sleep.sleep[0].efficiency)}} % {{'fitbit.efficient' | translate}} -->
-            <div><span class="fitbit-item" ng-show="sleep.sleep[0]">{{'fitbit.restlessMins' | translate}} {{sleep.sleep[0].restlessDuration}} min</span>
+            <div><span class="fitbit-item" ng-show="sleep.sleep[0]">{{'fitbit.restless' | translate}} {{sleep.sleep[0].restlessDuration}} {{'fitbit.minutes' | translate}} ({{sleep.sleep[0].restlessCount}}{{'fitbit.times' | translate}})</span>
             </div>
         </div>
 
