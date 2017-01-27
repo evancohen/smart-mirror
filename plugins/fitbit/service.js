@@ -165,6 +165,8 @@
 						if (err) console.log(err);
 					});
 				}
+
+				//console.log(JSON.stringify(result));
 				return callback(result.user);
 			});
 		}
@@ -196,6 +198,7 @@
 					});
 				}
 
+				//console.log(JSON.stringify(result));
 				return callback(result);
 			});
 
@@ -229,19 +232,16 @@
 					});
 				}
 
+				//console.log(JSON.stringify(result));
 				return callback(result);
 			});
 		}
 
         /**
          * Device summary
-         * - Makes an API call to gather the infrmation on the devices.
+         * - Makes an API call to gather the information on the devices.
          */
 		service.deviceSummary = function (callback) {
-			if (service.today === null) {
-				return null;
-			}
-
 			// Make an API call to get the users device status
 			fitbit.request({
 				uri: "https://api.fitbit.com/1/user/-/devices.json",
@@ -251,7 +251,7 @@
 					console.log(err);
 				}
 				var result = JSON.parse(body);
-				console.log(result);
+
 				// If the token arg is not null, then a refresh has occured and
 				// we must persist the new token.
 				if (token) {
@@ -264,9 +264,61 @@
 			});
 		}
 
-		//Get Lifetime Stats
-		// GET https://api.fitbit.com/1/user/[user-id]/activities.json
+		/**
+		 * Lifetime summary
+		 * - Makes an API call to gather the users lifetime statistics.
+		 */
+		service.lifetimeSummary = function (callback) {
+			// Make an API call to get the users device status
+			fitbit.request({
+				uri: "https://api.fitbit.com/1/user/-/activities.json",
+				method: 'GET',
+			}, function (err, body, token) {
+				if (err) {
+					console.log(err);
+				}
+				var result = JSON.parse(body);
 
+				// If the token arg is not null, then a refresh has occured and
+				// we must persist the new token.
+				if (token) {
+					persist.write(tokenFile, token, function (err) {
+						if (err) console.log(err);
+					});
+				}
+
+				//console.log(JSON.stringify(result));
+				return callback(result);
+			});
+		}
+
+
+		/**
+		 * Heart Rate
+		 */
+		service.heartRate = function (callback) {
+			// Make an API call to get the users device status
+			fitbit.request({
+				uri: "https://api.fitbit.com/1/user/-/activities/heart/date/today/1d.json",
+				method: 'GET',
+			}, function (err, body, token) {
+				if (err) {
+					console.log(err);
+				}
+				var result = JSON.parse(body);
+
+				// If the token arg is not null, then a refresh has occured and
+				// we must persist the new token.
+				if (token) {
+					persist.write(tokenFile, token, function (err) {
+						if (err) console.log(err);
+					});
+				}
+
+				//console.log(JSON.stringify(result));
+				return callback(result);
+			});
+		}
 		//Add Alarm
 		//POST https://api.fitbit.com/1/user/[user-id]/devices/tracker/[tracker-id]/alarms.json
 
