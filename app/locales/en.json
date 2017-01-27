@@ -197,19 +197,22 @@
         "batteryStatus": "Battery Status: ",
         "today": "Today",
         "steps": "steps",
+        "averageSteps": "steps a day",
         "caloriesBurned": "calories burned",
         "lastSync": "Last Sync",
-        "weekAverage": "7-Day Average",
+        "average": "Average",
         "activeMinutes": "active minutes",
         "distance": "km",
         "floors": "floors",
         "topBadges": "Top Badges",
         "sleep": "Sleep",
         "lastNight": "Last Night",
-        "awakeMins": "Awake",
-        "restlessMins": "Restless",
+        "awake": "Awake",
+        "restless": "Restless",
         "hours": "hrs",
         "km": "km",
-        "miles": "mi"
+        "miles": "mi",
+        "minutes": "min",
+        "times": "x"
     }
 }
