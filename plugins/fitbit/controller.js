@@ -1,5 +1,5 @@
 function Fitbit($scope, $interval, FitbitService, SpeechService) {
-    var totalStatGroups = 3;
+    var totalStatGroups = 4;
     $scope.currentStatGroup = 1;
 
     // Check if the fitbit configuration exists before initializing the service.

@@ -213,6 +213,8 @@
         "km": "km",
         "miles": "mi",
         "minutes": "min",
-        "times": "x"
+        "times": "x",
+        "restingHR": "resting heart rate",
+        "bpm": "bpm"
     }
 }
