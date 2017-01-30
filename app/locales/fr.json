@@ -5,6 +5,9 @@
     "traffic" : {
         "time_to" : "Temps de {{name}}: "
     },
+    "star" : {
+        "next_departure" : "Prochain départ du {{name}}: "
+    },
     "reminders": {
         "empty": "Aucun rappel."
     },
