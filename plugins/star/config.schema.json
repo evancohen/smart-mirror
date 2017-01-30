@@ -1,0 +1,80 @@
+{
+    "schema": {
+        "star": {
+            "type": "object",
+            "title": "Star Settings",
+            "properties": {
+                "refreshInterval": {
+                    "type": "integer",
+                    "title": "Refresh Star Interval (minutes)",
+                    "default": 5
+                },
+                "lines": {
+                    "type": "array",
+                    "title": "Lines",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "title": "Name of your the bus line",
+                                "required": true,
+                                "default": 4
+                            },
+                            "stop": {
+                                "type": "integer",
+                                "title": "Name of your bus stop",
+                                "required": true,
+                                "default": 1052
+                            },
+                            "line_number": {
+                                "type": "integer",
+                                "title": "Number of your the bus line",
+                                "required": true,
+                                "default": 4
+                            },
+                            "startTime": {
+                                "type": "string",
+                                "title": "Time to start displaying on Smart Mirror"
+                            },
+                            "endTime": {
+                                "type": "string",
+                                "title": "Time to stop displaying on Smart Mirror"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "form":[
+      {
+        "type": "fieldset",
+        "title": "Star Settings",
+        "expandable": false,
+        "order":0,
+        "items":[
+          "star.refreshInterval",
+          {
+            "type":"tabarray",
+            "items": [
+              {
+                "type":"section",
+                "legend":"{{value}}",
+                "items": [
+                  {
+                    "key":"star.lines[].line_number",
+                    "valueInLegend":true
+                  },
+                  "star.lines[].name",
+                  "star.lines[].stop",
+                  "star.lines[].startTime",
+                  "star.lines[].endTime"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+}

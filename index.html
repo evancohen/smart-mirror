@@ -15,7 +15,7 @@
     }
     // Error logging
     window.onerror = function (errorMsg, url, lineNumber) {
-        fs.appendFileSync('./smart-mirror.log', '['+ new Date().toString() + '] ' 
+        fs.appendFileSync('./smart-mirror.log', '['+ new Date().toString() + '] '
         + errorMsg + '| Script: ' + url + ' Line: ' + lineNumber + '\n');
     }
   </script>
@@ -39,6 +39,7 @@
     <div class="top-right">
       <div ng-include="'plugins/weather/index.html'"></div>
       <div ng-include="'plugins/traffic/index.html'"></div>
+      <div ng-include="'plugins/star/index.html'"></div>
       <div ng-include="'plugins/stock/index.html'"></div>
       <div ng-include="'plugins/tvshows/index.html'"></div>
     </div>
@@ -77,7 +78,7 @@
   <div ng-controller="AutoSleep"></div>
   <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
 
-  <!-- Smart Mirror JS 
+  <!-- Smart Mirror JS
   ==========================================================================
   The good stuff. -->
 
@@ -132,6 +133,7 @@
   <script src="plugins/calendar/controller.js"></script>
   <script src="plugins/remote/controller.js"></script>
   <script src="plugins/maker/controller.js"></script>
+  <script src="plugins/star/controller.js"></script>
 
 </body>
 

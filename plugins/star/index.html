@@ -1,0 +1,8 @@
+<div ng-controller="Star">
+    <div class="star" ng-repeat="star in lines">
+        <div ng-show="!star.error" class="star-information">
+            <span class="time-to" ng-bind="'star.next_departure' | translate:star"></span>
+            <span ng-bind="star.departures"></span>
+        </div>
+    </div>
+</div>
