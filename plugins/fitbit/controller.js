@@ -1,6 +1,6 @@
 function Fitbit($scope, $interval, FitbitService, SpeechService) {
     var totalStatGroups = 4;
-    $scope.currentStatGroup = 1;
+    $scope.currentStatGroup = 0;
 
     // Check if the fitbit configuration exists before initializing the service.
     if (typeof config.fitbit !== 'undefined') {
@@ -70,7 +70,7 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
 
     // Cycle Through
     var cycleFitbitStats = function () {
-        //$scope.currentStatGroup = ($scope.currentStatGroup + 1) % totalStatGroups;
+        $scope.currentStatGroup = ($scope.currentStatGroup + 1) % totalStatGroups;
     };
 
     // Refresh all stats
