@@ -6,7 +6,7 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
     if (typeof config.fitbit !== 'undefined') {
         FitbitService.init(function () {
             refreshFitbitData();            
-            $interval(cycleFitbitStats, 5000); // 10 secs
+            $interval(cycleFitbitStats, 10000); // 10 secs
             $interval(refreshTodaySummary, 1800000); // 30 mins
             $interval(refreshDeviceSummary, 3600000); // 1 hour
             $interval(refreshProfileSummary, 3600000 * 6); // 6 hours

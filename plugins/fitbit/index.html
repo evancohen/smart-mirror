@@ -116,8 +116,7 @@
             <span class="fitbit-item" ng-show="device.battery">{{'fitbit.batteryStatus' | translate}}: {{device.battery}}<br>
 
             <!-- Make changes to only display the mins or hours or days, not the date. -->
-    	    <span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.lastSync' | translate}}: {{device.lastSyncTime | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}</span>
-                <time am-time-ago="device.lastSyncTime"></time>
+    	    <span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.lastSync' | translate}}: {{device.lastSyncTime | date:'shortTime' }}</span>
         </p>
     </div>
 </div>
