@@ -79,6 +79,12 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
         refreshFitbitData();
     });
 
+    var sleepEndDate = function(sleepStartDate, duration) {
+        var date = new Date(sleepStartDate);
+        date.setMilliseconds(date.getMilliseconds() + duration);
+        return date;
+    };
+
     var barColour = function(current, goal) {
         if (current < goal) {
             return 'white';
@@ -95,6 +101,7 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
 
     $scope.calculatePercent = calculatePercent;
     $scope.barColour = barColour;
+    $scope.sleepEndDate = sleepEndDate;
 
 }
 

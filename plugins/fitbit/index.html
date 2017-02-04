@@ -64,18 +64,10 @@
             </div>
         </div>
 
-        <!-- Average Statistics-->
-        <div ng-switch-when="1">
-            <div><span class="fitbit-subtitle">{{'fitbit.average' | translate}}</span></div>
-            <!-- Average daily steps -->
-            <div><span class="fitbit-item">{{profile.averageDailySteps}} {{'fitbit.averageSteps' | translate}}</span></div>
-            <!-- Add average heart rate -->
-            <div><span class="fitbit-item">{{ heartRate['activities-heart'][0].value.restingHeartRate }} {{ 'fitbit.bpm' | translate }} {{ 'fitbit.restingHR' | translate}}</span></div>
-        </div>
 
         <!-- Last Night's Sleeping Statistics -->
-        <div ng-switch-when="2">
-            <div><span class="fitbit-subtitle" ng-show="sleep.sleep[0]">{{'fitbit.sleep' | translate}} {{ sleep.sleep[0].startTime | date:'shortTime'}} - {{ (sleep.sleep[0].startTime + sleep.sleep[0].duration) | date:'shortTime'}}</span></div>
+        <div ng-switch-when="1">
+            <div><span class="fitbit-subtitle" ng-show="sleep.sleep[0]">{{'fitbit.sleep' | translate}} {{ sleep.sleep[0].startTime | date:'shortTime'}} - {{ sleepEndDate(sleep.sleep[0].startTime, sleep.sleep[0].duration) | date:'shortTime' : 'UTC'}}</span></div>
             <div><span class="fitbit-item" ng-show="sleep.sleep[0]">{{'fitbit.lastNight' | translate}} {{(sleep.sleep[0].minutesAsleep/60 | number:2 )}} {{'fitbit.hours' | translate}}</span>
             </div>
             <div><span class="fitbit-item" ng-show="sleep.sleep[0]">{{'fitbit.awake' | translate}} {{sleep.sleep[0].minutesAwake}} {{'fitbit.minutes' | translate}} ({{sleep.sleep[0].awakeCount}}{{'fitbit.times' | translate}})</span>
@@ -86,18 +78,13 @@
 
 
         <!-- Heart Rate Statistics -->
-        <div ng-switch-when="3">
+        <div ng-switch-when="2">
             <div><span class="fitbit-subtitle">{{heartRate['activities-heart'][0].value.restingHeartRate }} {{ 'fitbit.bpm' | translate }}</span></div>
             <div><span class="fitbit-item">{{'fitbit.restingHR' | translate}}</span></div>
         </div>
 
-        <!-- Total Lifetime Statistics -->
-        <div ng-switch-when="4">
-
-        </div>
-
         <!-- Top Badges Earned -->
-        <div ng-switch-when="5">
+        <div ng-switch-when="3">
             <div><span class="fitbit-subtitle">{{'fitbit.topBadges' | translate}}</span></div>
             <div class="" ng-repeat="badge in profile.topBadges">
                 <div>
@@ -107,6 +94,25 @@
             </div>
         </div>
         </p>
+
+        <!-- Total Lifetime Statistics -->
+        <!-- TODO: Add lifetime statistics -->
+        <!--<div ng-switch-when="4">
+
+        </div>-->
+
+        <!-- Average Statistics--
+        TODO: Figure out what to do with this.... -->
+        <!--
+        <div ng-switch-when="1">
+            <div><span class="fitbit-subtitle">{{'fitbit.average' | translate}}</span></div>
+            <!-- Average daily steps --
+            <div><span class="fitbit-item">{{profile.averageDailySteps}} {{'fitbit.averageSteps' | translate}}</span></div>
+            <!-- Add average heart rate --
+            <div><span class="fitbit-item">{{ heartRate['activities-heart'][0].value.restingHeartRate }} {{ 'fitbit.bpm' | translate }} {{ 'fitbit.restingHR' | translate}}</span></div>
+        </div>
+        -->
+
     </div>
 
     <!-- List of Fitbit Devices -->
@@ -115,7 +121,7 @@
             <span class="fitbit-title" ng-show="device.deviceVersion">{{device.deviceVersion}}</span><br>
             <span class="fitbit-item" ng-show="device.battery">{{'fitbit.batteryStatus' | translate}}: {{device.battery}}<br>
 
-            <!-- Make changes to only display the mins or hours or days, not the date. -->
+            <!-- TODO: Make changes to only display the relative time. -->
     	    <span class="fitbit-item" ng-show="device.lastSyncTime">{{'fitbit.lastSync' | translate}}: {{device.lastSyncTime | date:'shortTime' }}</span>
         </p>
     </div>
