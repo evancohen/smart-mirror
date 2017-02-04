@@ -1,23 +1,23 @@
 (function () {
-    'use strict';
+	'use strict';
 
-    function Focus($rootScope) {
-        var service = {};
-        var currentFocus = "default"
+	function Focus($rootScope) {
+		var service = {};
+		var currentFocus = "default"
         
-        service.change = function(newFocus){
-            $rootScope.$broadcast('focus', newFocus, currentFocus)
-            currentFocus = newFocus
-        }
+		service.change = function(newFocus){
+			$rootScope.$broadcast('focus', newFocus, currentFocus)
+			currentFocus = newFocus
+		}
 
-        service.get = function(){
-            return currentFocus;
-        }
+		service.get = function(){
+			return currentFocus;
+		}
 
-        return service
-    }
+		return service
+	}
 
-    angular.module('SmartMirror')
+	angular.module('SmartMirror')
         .factory('Focus', Focus)
 
 } (window.annyang));

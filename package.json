@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -10,9 +10,11 @@
     "train-model": "electron scripts/train-model.js",
     "sonus": "node sonus.js",
     "motion": "sudo node motion.js",
+    "enable-motion": "npm install johnny-five raspi-io",
     "update": "git pull && npm install",
     "wiredep": "wiredep -s index.html",
-    "test": "eslint ."
+    "test": "eslint . --ignore-path .gitignore",
+    "test-fix": "eslint . --ignore-path .gitignore --fix"
   },
   "repository": {
     "type": "git",
@@ -46,7 +48,7 @@
     "hyperion-client": "1.0.3",
     "moment": "^2.17.1",
     "socket.io": "^1.6.0",
-    "sonus": "^0.1.4"
+    "sonus": "^0.1.5"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
@@ -56,6 +58,7 @@
       "browser": true
     },
     "rules": {
+      "indent": [2, "tab"],
       "no-console": 0
     },
     "globals": {
