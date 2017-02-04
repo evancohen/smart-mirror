@@ -32,7 +32,7 @@ function Fitbit($scope, $interval, FitbitService, SpeechService) {
 
 	// Sleep
 	var refreshSleepSummary = function () {
-		 FitbitService.sleepSummary(function (response) {
+		FitbitService.sleepSummary(function (response) {
 			$scope.sleep = response;
 		});
 	};
