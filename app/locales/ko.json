@@ -185,5 +185,31 @@
             "voice": "불 :state *action (해)줘",
             "description": "불 :state *action (해)줘."
         }
+    },
+    "fitbit": {
+        "user": "KO_User: ",
+        "averageSteps": "KO_Average Steps: ",
+        "batteryStatus": "KO_Battery Status: ",
+        "today": "KO_Today",
+        "steps": "KO_steps",
+        "averageSteps": "KO_steps a day",
+        "caloriesBurned": "KO_calories burned",
+        "lastSync": "KO_Last Sync",
+        "average": "KO_Average",
+        "activeMinutes": "KO_active minutes",
+        "distance": "KO_km",
+        "floors": "KO_floors",
+        "topBadges": "KO_Top Badges",
+        "sleep": "KO_Sleep",
+        "lastNight": "KO_Last Night",
+        "awake": "KO_Awake",
+        "restless": "KO_Restless",
+        "hours": "KO_hrs",
+        "km": "KO_km",
+        "miles": "KO_mi",
+        "minutes": "KO_min",
+        "times": "KO_x",
+        "restingHR": "KO_resting heart rate",
+        "bpm": "KO_bpm"
     }
 }
