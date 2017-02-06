@@ -190,5 +190,31 @@
             "voice": "(alterar) :state (a) (as) luz(es) *action",
             "description": "Controlar cor e brilho das luzes Hue."
         }
+    },
+    "fitbit": {
+        "user": "PT_User: ",
+        "averageSteps": "PT_Average Steps: ",
+        "batteryStatus": "PT_Battery Status: ",
+        "today": "PT_Today",
+        "steps": "PT_steps",
+        "averageSteps": "PT_steps a day",
+        "caloriesBurned": "PT_calories burned",
+        "lastSync": "PT_Last Sync",
+        "average": "PT_Average",
+        "activeMinutes": "PT_active minutes",
+        "distance": "PT_km",
+        "floors": "PT_floors",
+        "topBadges": "PT_Top Badges",
+        "sleep": "PT_Sleep",
+        "lastNight": "PT_Last Night",
+        "awake": "PT_Awake",
+        "restless": "PT_Restless",
+        "hours": "PT_hrs",
+        "km": "PT_km",
+        "miles": "PT_mi",
+        "minutes": "PT_min",
+        "times": "PT_x",
+        "restingHR": "PT_resting heart rate",
+        "bpm": "PT_bpm"
     }
 }
