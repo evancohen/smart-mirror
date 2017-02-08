@@ -1,0 +1,10 @@
+<div ng-controller="Todoist" class="todoist-container animate-grow" ng-show="focus == 'todoist'">
+    <ul ng-show="todoist.length > 0" class="todoist">
+        <li ng-repeat="item in todoist">
+            <div ng-show="!todoist.error">
+                <span ng-bind="item.content"></span>
+            </div>
+        </li>
+    </ul>
+    <div class="todoist" ng-hide="todoist.length > 0" ng-bind="'reminders.empty' | translate">
+</div>

@@ -15,7 +15,7 @@
     }
     // Error logging
     window.onerror = function (errorMsg, url, lineNumber) {
-        fs.appendFileSync('./smart-mirror.log', '['+ new Date().toString() + '] ' 
+        fs.appendFileSync('./smart-mirror.log', '['+ new Date().toString() + '] '
         + errorMsg + '| Script: ' + url + ' Line: ' + lineNumber + '\n');
     }
   </script>
@@ -55,6 +55,7 @@
       <div ng-include="'plugins/giphy/index.html'"></div>
       <div ng-include="'plugins/reminder/index.html'"></div>
       <div ng-include="'plugins/timer/index.html'"></div>
+      <div ng-include="'plugins/todoist/index.html'"></div>
     </div>
     <div class="bottom-center">
       <!-- Command list -->
@@ -77,7 +78,7 @@
   <div ng-controller="AutoSleep"></div>
   <div ng-show="focus == 'sleep'" class="sleep-cover fade"></div>
 
-  <!-- Smart Mirror JS 
+  <!-- Smart Mirror JS
   ==========================================================================
   The good stuff. -->
 
@@ -109,6 +110,7 @@
   <script src="plugins/autosleep/service.js"></script>
   <script src="plugins/scrobbler/service.js"></script>
   <script src="plugins/timer/service.js"></script>
+  <script src="plugins/todoist/service.js"></script>
 
   <!-- Controllers -->
   <script src="app/js/controller.js"></script>
@@ -132,6 +134,7 @@
   <script src="plugins/calendar/controller.js"></script>
   <script src="plugins/remote/controller.js"></script>
   <script src="plugins/maker/controller.js"></script>
+  <script src="plugins/todoist/controller.js"></script>
 
 </body>
 
