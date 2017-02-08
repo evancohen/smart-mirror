@@ -345,11 +345,15 @@ ul.calendar {
     height: 1080px;
 }
 
-.reminders-container {
+.reminders-container, .todoist-container {
     width: 250px;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
+}
+
+.todoist {
+    padding: 10px 10px 10px 80px;
 }
 
 .contents-box {
@@ -496,7 +500,7 @@ ul.calendar {
 }
 
 .news {
-    height: 75px; 
+    height: 75px;
     margin-bottom: 5px;
 }
 

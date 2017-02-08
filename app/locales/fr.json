@@ -5,8 +5,11 @@
     "traffic" : {
         "time_to" : "Temps de {{name}}: "
     },
+    "star" : {
+        "next_departure" : "Prochain départ du {{name}}: "
+    },
     "reminders": {
-        "empty": "Aucun rappel."
+        "empty": "Aucun élément"
     },
     "timer": {
       "one": "Une",
@@ -66,13 +69,13 @@
             "description": "Afficher les informations de débogage."
         },
         "map_show": {
-            "text": "Affiche la carte",
-            "voice": "Affiche la carte",
+            "text": "(Montre-moi) (Affiche) la carte",
+            "voice": "(Montre-moi) (Affiche) la carte",
             "description": "Affiche la carte de votre ville."
         },
         "map_location": {
-            "text": "Affiche la carte de ________",
-            "voice": "Affiche la carte (de|d') *location",
+            "text": "(Montre-moi) (Affiche) la carte de ________",
+            "voice": "(Montre-moi) (Affiche) la carte (de|d') *location",
             "description": "Affiche une carte de la position indiquée."
         },
         "map_zoom_in": {
@@ -96,28 +99,28 @@
             "description": "Réinitilalise la fonction zoom."
         },
         "video_search": {
-            "text": "(Montre(-moi)|Affiche) une vidéo (de|d') ________",
-            "voice": "(Montre(-moi)|Affiche) une vidéo (de|d') *term",
+            "text": "(Montre-moi) (Affiche) une vidéo (de|d') ________",
+            "voice": "(Montre-moi) (Affiche) une vidéo (de|d') *term",
             "description": "Affiche la vidéo recherchée."
         },
         "video_stop": {
-            "text": "Arrête (la lecture de) la video",
-            "voice": "Arrête (la lecture de) la video",
+            "text": "Arrête (la lecture de) la vidéo",
+            "voice": "Arrête (la lecture de) la vidéo",
             "description": "Arrête la lecture de la vidéo."
         },
         "image_giphy": {
-            "text": "(Montre(-moi)|Affiche) une image animée de ________",
-            "voice": "(Montre(-moi)|Affiche) une image animée de *img",
+            "text": "(Montre-moi) (Affiche) une image animée de ________",
+            "voice": "(Montre-moi) (Affiche) une image animée de *img",
             "description": "Affiche gif animé."
         },
         "image_comic": {
-            "text": "(Montre(-moi)|Affiche) le dernier xkcd ",
-            "voice": "(Montre(-moi)|Affiche) le dernier xkcd",
+            "text": "(Montre-moi) (Affiche) le dernier xkcd ",
+            "voice": "(Montre-moi) (Affiche) le dernier xkcd",
             "description": "Affiche le dernier xkcd."
         },
         "image_comic_dilbert": {
-            "text": "(Montre(-moi)|Affiche) le dernier Dilbert",
-            "voice": "(Montre(-moi)|Affiche) le dernier Gilbert",
+            "text": "(Montre-moi) (Affiche) le dernier Dilbert",
+            "voice": "(Montre-moi) (Affiche) le dernier Gilbert",
             "description": "Affiche le dernier comic de Diblert."
         },
         "reminder_insert": {
@@ -131,8 +134,8 @@
             "description": "Supprimer la liste des rappels."
         },
         "reminder_show": {
-            "text": "(Montre(-moi)|Affiche) (les) (mes) rappels",
-            "voice": "(Montre(-moi)|Affiche) (les) (mes) rappels",
+            "text": "(Montre-moi) (Affiche) (les) (mes) rappels",
+            "voice": "(Montre-moi) (Affiche) (les) (mes) rappels",
             "description": "Affiche la liste des rappels."
         },
         "time_show": {
@@ -146,8 +149,8 @@
             "description": "Démarre le minuteur."
         },
         "timer_show": {
-            "text": "(Montre(-moi)|Affiche) le minuteur",
-            "voice": "(Montre(-moi)|Affiche) le minuteur",
+            "text": "(Montre-moi) (Affiche) le minuteur",
+            "voice": "(Montre-moi) (Affiche) le minuteur",
             "description": "Affiche le timer."
         },
         "timer_stop": {
@@ -186,9 +189,19 @@
             "description": ":state (les) (la) lumière(s) (*action)."
         },
         "show_remoteQR":{
-            "text": "(Montre(-moi)|Affiche) le lien du serveur",
-            "voice": "(Montre(-moi)|Affiche) le lien du serveur",
+            "text": "(Montre-moi) (Affiche) le lien du serveur",
+            "voice": "(Montre-moi) (Affiche) le lien du serveur",
             "description": "Affiche le lien de l'application"
+        },
+        "todoist_show": {
+            "text": "(Montre-moi) (Affiche) (la) (ma) liste (de) (d') ________",
+            "voice": "(Montre-moi) (Affiche) (la) (ma) liste (de) (d') *project",
+            "description": "Affiche la liste demandée."
+        },
+        "todoist_add": {
+            "text": "Ajoute (du) (de la) ________ à (la) (ma) liste (de) (des) (d') _______",
+            "voice": "Ajoute (du) (de la) *element à (la) (ma) liste (de) (des) (d') *project",
+            "description": "Ajoute l'élément à la liste demandée."
         }
     }
 }
