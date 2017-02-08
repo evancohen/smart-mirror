@@ -40,6 +40,23 @@
 			return deferred.promise;
 		}
 
+		service.requestProjects = function(){
+			var deferred = $q.defer();
+			var response = [];
+			var req = {
+				method: 'POST',
+				url: 'https://todoist.com/API/v7/sync',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				data: $httpParamSerializer({token: config.todoist.key, sync_token: '*', resource_types: '["projects"]'})
+			};
+			$http(req).then(function(response) {
+				deferred.resolve(response.data);
+			});
+			return deferred.promise;
+		}
+
 		service.getItemsOfProject = function(response, chosen_project){
 			var result = [];
 			var project_id = service.getProjectId(chosen_project, response);
@@ -60,23 +77,6 @@
 				}
 			}
 			return project_id;
-		}
-
-		service.requestProjects = function(){
-			var deferred = $q.defer();
-			var response = [];
-			var req = {
-				method: 'POST',
-				url: 'https://todoist.com/API/v7/sync',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				data: $httpParamSerializer({token: config.todoist.key, sync_token: '*', resource_types: '["projects"]'})
-			};
-			$http(req).then(function(response) {
-				deferred.resolve(response.data);
-			});
-			return deferred.promise;
 		}
 
 		service.generateUUID = function(){
