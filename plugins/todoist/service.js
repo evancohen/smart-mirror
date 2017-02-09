@@ -3,35 +3,26 @@
 	function TodoistService($http, $httpParamSerializer, $q){
 		var service = {};
 
-		service.renderTasks = function(project) {
+		service.getItemsFromProject = function(project) {
 			var deferred = $q.defer();
-			var req = {
-				method: 'POST',
-				url: 'https://todoist.com/API/v7/sync',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				data: $httpParamSerializer({token: config.todoist.key, sync_token: '*', resource_types: '["items", "projects"]'})
-			};
-			$http(req).then(function(response) {
-		    	deferred.resolve(service.getItemsOfProject(response.data, project));
+			service.requestProjectsWithItems().then(function (response) {
+				console.log(response)
+				deferred.resolve(service.getItemsOfProject(response, project));
 			});
 			return deferred.promise;
 		}
 
-		service.addTask = function(element, project) {
+		service.addTask = function(item, project) {
 			var deferred = $q.defer();
-			service.requestProjects().then(function (projects) {
-				console.log(projects);
-				var project_id = service.getProjectId(project, projects);
-				console.log(project_id)
+			service.requestProjectsWithItems().then(function (response) {
+				var project_id = service.getProjectId(project, response);
 				var req = {
 					method: 'POST',
 					url: 'https://todoist.com/API/v7/sync',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
-					data: $httpParamSerializer({token: config.todoist.key, commands: '[{"type": "item_add", "temp_id": "", "uuid":"' + service.generateUUID() + '", "args": {"content": "' + element + '", "project_id": "' + project_id + '"}}]'})
+					data: $httpParamSerializer({token: config.todoist.key, commands: '[{"type": "item_add", "temp_id": "", "uuid":"' + service.generateUUID() + '", "args": {"content": "' + item + '", "project_id": "' + project_id + '"}}]'})
 				};
 				$http(req).then(function() {
 			    	deferred.resolve();
@@ -40,7 +31,26 @@
 			return deferred.promise;
 		}
 
-		service.requestProjects = function(){
+		service.completeTask = function(item, project) {
+			var deferred = $q.defer();
+			service.requestProjectsWithItems().then(function (response) {
+				var item_ids = service.getItemIds(item, response);
+				var req = {
+					method: 'POST',
+					url: 'https://todoist.com/API/v7/sync',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					data: $httpParamSerializer({token: config.todoist.key, commands: '[{"type": "item_complete", "uuid":"' + service.generateUUID() + '", "args": {"ids": [' + item_ids + ']}}]'})
+				};
+				$http(req).then(function() {
+			    	deferred.resolve();
+				});
+			});
+			return deferred.promise;
+		}
+
+		service.requestProjectsWithItems = function(){
 			var deferred = $q.defer();
 			var response = [];
 			var req = {
@@ -49,7 +59,7 @@
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
-				data: $httpParamSerializer({token: config.todoist.key, sync_token: '*', resource_types: '["projects"]'})
+				data: $httpParamSerializer({token: config.todoist.key, sync_token: '*', resource_types: '["projects", "items"]'})
 			};
 			$http(req).then(function(response) {
 				deferred.resolve(response.data);
@@ -70,13 +80,27 @@
 
 		service.getProjectId = function(project, response){
 			var project_id = -1;
+			console.debug("Looking for " + project + " in the list " + response.projects);
 			for (var i=0; i < response.projects.length; i++){
 				if (response.projects[i].name.toLowerCase() === project.toLowerCase()){
 					project_id = response.projects[i].id;
+					console.debug("Found " + project + " : " + project_id);
 					break;
 				}
 			}
 			return project_id;
+		}
+
+		service.getItemIds = function(item, response){
+			var item_ids = "";
+			console.debug("Looking for " + item + " in the list " + response.items);
+			for (var i=0; i < response.items.length; i++){
+				if (response.items[i].content.toLowerCase() === item.toLowerCase()){
+					item_ids = item_ids + '"' + response.items[i].id + '",';
+				}
+			}
+			console.debug("Found " + item + " in list -> " + item_ids);
+			return item_ids.substring(0, item_ids.length - 1);;
 		}
 
 		service.generateUUID = function(){
