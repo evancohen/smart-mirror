@@ -189,6 +189,21 @@
             "text": "Show Remote Link",
             "voice": "Show remote (QR code) (QR) (link)",
             "description": "Show the local IP of the Remote App URL"
+        },
+        "todoist_show": {
+            "text": "Show (my) ________ list",
+            "voice": "Show (my) *project list",
+            "description": "Show requested list."
+        },
+        "todoist_add": {
+            "text": "Add ________ to (my) ________ list",
+            "voice": "Add *element to (my) *project list",
+            "description": "Add item to requested list."
+        },
+        "todoist_remove": {
+            "text": "Remove ________ from (my) ________ list",
+            "voice": "Remove *element from (my) *project list",
+            "description": "Remove item from requested list."
         }
     }
 }
