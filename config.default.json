@@ -42,22 +42,22 @@
         },
         "setup" : []
     },
-   
+
     "calendar": {
       "icals" : [""],
       "maxResults": 9,
       "maxDays": 9,
       "showCalendarNames": true
     },
-   
+
     "giphy": {
       "key" : "dc6zaTOxFJmzC"
     },
-   
+
     "youtube": {
       "key" : ""
     },
-   
+
     "soundcloud": {
         "key" : ""
     },
@@ -65,11 +65,11 @@
       "key" : "",
 
       "refreshInterval" : 5,
-     
+
       "trips" : []
     },
     "rss": {
-        "feeds" : [], 
+        "feeds" : [],
         "refreshInterval" : 120
     },
     "stock": {
@@ -79,5 +79,8 @@
       "key": "",
       "user": "",
       "refreshInterval" : 0.6
+    },
+    "todoist": {
+        "key": ""
     }
 }
