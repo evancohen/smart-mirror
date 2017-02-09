@@ -184,9 +184,9 @@
             "description": "Rejoue la chanson en cours."
         },
         "light_action": {
-            "text": "(Allume|Éteins) (la|les) lumières (action)",
+            "text": "(Allume) (Éteins) (les) (la) lumières (action)",
             "voice": ":state (les) (la) lumière(s) (*action)",
-            "description": ":state (les) (la) lumière(s) (*action)."
+            "description": "Allume/Éteins (les) (la) lumière(s) (*action)."
         },
         "show_remoteQR":{
             "text": "(Montre-moi) (Affiche) le lien du serveur",
@@ -194,14 +194,19 @@
             "description": "Affiche le lien de l'application"
         },
         "todoist_show": {
-            "text": "(Montre-moi) (Affiche) (la) (ma) liste (de) (d') ________",
-            "voice": "(Montre-moi) (Affiche) (la) (ma) liste (de) (d') *project",
+            "text": "(Montre-moi) (Affiche) (la) (ma) liste (des) (de) (d') ________",
+            "voice": "(Montre-moi) (Affiche) (la) (ma) liste (des) (de) (d') *project",
             "description": "Affiche la liste demandée."
         },
         "todoist_add": {
-            "text": "Ajoute (du) (de la) ________ à (la) (ma) liste (de) (des) (d') _______",
-            "voice": "Ajoute (du) (de la) *element à (la) (ma) liste (de) (des) (d') *project",
+            "text": "Ajoute (du) (de la) (des) ________ à (la) (ma) liste (des) (de) (d') _______",
+            "voice": "Ajoute (du) (de la) (des) *element à (la) (ma) liste (des) (de) (d') *project",
             "description": "Ajoute l'élément à la liste demandée."
+        },
+        "todoist_remove": {
+            "text": "Supprime (les) (le) (la) ________ de (la) (ma) liste (des) (de) (d') _______",
+            "voice": "Supprime (les) (le) (la) *element de (la) (ma) liste (des) (de) (d') *project",
+            "description": "Supprime l'élément de la liste demandée."
         }
     }
 }
