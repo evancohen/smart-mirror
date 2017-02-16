@@ -189,6 +189,11 @@
             "text": "Altera (liga/desliga) a(s) luz(es) (action)",
             "voice": "(altera) :state (a) (as) luz(es) *action",
             "description": "Controla a cor e o brilho das luzes Hue."
+        }, 
+        "show_remoteQR":{
+            "text": "Mostrar o link remoto",
+            "voice": "Mostrar o (codigo QR) (QR) (link) remoto",
+            "description": "Mostra o IP/Código QR da página remota."
         }
     },
     "fitbit": {
