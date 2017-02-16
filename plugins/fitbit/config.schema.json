@@ -1,0 +1,91 @@
+{
+  "schema": {
+    "general": {
+      "type": "object",
+      "title": "Fitbit Settings",
+      "properties": {
+        "timeout": {
+          "type": "number",
+          "title": "Default time to cycle between fitbit statistics",
+          "default":10000
+        },
+        "credentials": {
+          "type": "object",
+          "properties": {
+            "clientId": {
+              "default": "",
+              "type": "string",
+              "title": "OAuth 2.0 Client ID",
+              "required": true
+            },
+            "layout": {
+              "default": "main",
+              "type": "string",
+              "title": "Layout",
+              "required": true
+            }
+          }
+        },
+        "uris": {
+          "authorizationUri": {
+            "default": "https://www.fitbit.com",
+            "type": "string",
+            "title": "Authorization URI"
+          },
+          "authorizationPath": {
+            "default": "/oauth2/authorize",
+            "type": "string",
+            "title": "Authorization Path"
+          },
+          "tokenUri": {
+            "default": "https://api.fitbit.com",
+            "type": "string",
+            "title": "Token URI"
+          },
+          "tokenPath": {
+            "default": "/oauth2/token",
+            "type": "string",
+            "title": "Token Path"
+          }
+        },
+        "authorization_uri": {
+          "redirect_uri": {
+            "default": "http://localhost:4000/fitbit_auth_callback/",
+            "type": "string",
+            "title": "Redirect URI"
+          },
+          "response_type": {
+            "default": "code",
+            "type": "string",
+            "title": "Response Type"
+          },
+          "scope": {
+            "default": "activity nutrition profile settings sleep social weight heartrate",
+            "type": "string",
+            "title": "Scope"
+          },
+          "state": {
+            "default": "3(#0/!~",
+            "type": "string",
+            "title": "State"
+          }
+        }
+      }
+    }
+  },
+  "form":[
+    {
+      "key":"general",
+      "type":"fieldset",
+      "title":"Fitbit Settings",
+      "expandable":false,
+      "order":-100
+    }
+  ],
+  "value":{
+    "general":{
+      "clientId": "",
+      "layout":"main"
+    }
+  }
+}
