@@ -44,10 +44,10 @@
 			}
 
 			if(!type.endsWith('VALUE=DATE')){
-					return moment(ical_date, 'YYYYMMDDTHHmmss');
-				} else {
-					return moment(ical_date, 'YYYYMMDD');
-				}
+				return moment(ical_date, 'YYYYMMDDTHHmmss');
+			} else {
+				return moment(ical_date, 'YYYYMMDD');
+			}
 		}
 
 		var parseICAL = function(data) {
