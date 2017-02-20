@@ -10,7 +10,7 @@
 			var deferred = $q.defer();
 			if( calendars === null)// && typeof config.calendar.icals != 'undefined')
 			{
-	calendars = config.calendar.icals;
+				calendars = config.calendar.icals;
 			}	
 			if(typeof calendars != 'undefined'){ // && typeof config.calendar.icals != 'undefined'){
 				loadFile(calendars,events).then(function(){
@@ -39,14 +39,14 @@
 		}
 
 		var makeDate = function(type, ical_date) {
-				if(ical_date.endsWith('Z')){
-						return moment(ical_date, 'YYYYMMDDTHHmmssZ');
-				}
+			if(ical_date.endsWith('Z')){
+					return moment(ical_date, 'YYYYMMDDTHHmmssZ');
+			}
 
 				if(!type.endsWith('VALUE=DATE')){
-						return moment(ical_date, 'YYYYMMDDTHHmmss');
+					return moment(ical_date, 'YYYYMMDDTHHmmss');
 				} else {
-						return moment(ical_date, 'YYYYMMDD');
+					return moment(ical_date, 'YYYYMMDD');
 				}
 		}
 
@@ -140,25 +140,25 @@
 						oneYear.setFullYear(oneYear.getFullYear() + 1);
 						var dates = rule.between(new Date(), oneYear, true, function (date, i){return i < 10});
 						for (var date in dates) {
-								var recuring_event = {};
-								recuring_event.SUMMARY = cur_event.SUMMARY;
-								var dt = new Date(dates[date]);
-								var startDate = moment(dt);
-								var endDate = moment(dt);
-								endDate.add(event_duration, 'minutes');
-								recuring_event.calendarName = calendarName;
-								recuring_event.start = startDate;
-								recuring_event.startName = startDate.calendar().toUpperCase();
-								recuring_event.end = endDate;
-								recuring_event.endName = endDate.subtract(1, 'seconds').calendar().toUpperCase();
-								if(!contains(events, recuring_event)) {
+							var recuring_event = {};
+							recuring_event.SUMMARY = cur_event.SUMMARY;
+							var dt = new Date(dates[date]);
+							var startDate = moment(dt);
+							var endDate = moment(dt);
+							endDate.add(event_duration, 'minutes');
+							recuring_event.calendarName = calendarName;
+							recuring_event.start = startDate;
+							recuring_event.startName = startDate.calendar().toUpperCase();
+							recuring_event.end = endDate;
+							recuring_event.endName = endDate.subtract(1, 'seconds').calendar().toUpperCase();
+							if(!contains(events, recuring_event)) {
 									events.push(recuring_event);
 								}
 						}
 					}
 				}
 			}
-	return events;
+			return events;
 		}
 
 		var contains = function(input, obj) {
@@ -175,13 +175,13 @@
 		}
 
 		Array.prototype.contains = function(obj) {
-				var i = this.length;
-				while (i--) {
-						if (this[i] === obj) {
-								return true;
+			var i = this.length;
+			while (i--) {
+					if (this[i] === obj) {
+							return true;
 						}
 				}
-				return false;
+			return false;
 		}
 
 		service.getEvents = function(events) {
@@ -197,7 +197,7 @@
 				//If the event started before current time but ends after the current time or
 				// if there is no end time and the event starts between today and the max number of days add it.
 				if ((itm.end != undefined && (itm.end.isAfter(current_date) && itm.start.isBefore(current_date))) || itm.start.isBetween(current_date, end_date)){
-						future_events.push(itm);
+					future_events.push(itm);
 				}
 			});
 			future_events = sortAscending(future_events);
@@ -226,7 +226,7 @@
 			events.forEach(function(itm) {
 				//If the event ended before the current time, add it to the array to return.
 				if (itm.end != undefined && itm.end.isBefore(current_date)){
-						past_events.push(itm);
+					past_events.push(itm);
 				}
 			});
 			return past_events.reverse();
