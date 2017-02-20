@@ -40,10 +40,10 @@
 
 		var makeDate = function(type, ical_date) {
 			if(ical_date.endsWith('Z')){
-					return moment(ical_date, 'YYYYMMDDTHHmmssZ');
+				return moment(ical_date, 'YYYYMMDDTHHmmssZ');
 			}
 
-				if(!type.endsWith('VALUE=DATE')){
+			if(!type.endsWith('VALUE=DATE')){
 					return moment(ical_date, 'YYYYMMDDTHHmmss');
 				} else {
 					return moment(ical_date, 'YYYYMMDD');
@@ -152,8 +152,8 @@
 							recuring_event.end = endDate;
 							recuring_event.endName = endDate.subtract(1, 'seconds').calendar().toUpperCase();
 							if(!contains(events, recuring_event)) {
-									events.push(recuring_event);
-								}
+								events.push(recuring_event);
+							}
 						}
 					}
 				}
@@ -177,10 +177,10 @@
 		Array.prototype.contains = function(obj) {
 			var i = this.length;
 			while (i--) {
-					if (this[i] === obj) {
-							return true;
-						}
+				if (this[i] === obj) {
+					return true;
 				}
+			}
 			return false;
 		}
 
