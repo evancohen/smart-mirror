@@ -32,8 +32,8 @@
       return $q.all(promises).then(function(data) {
         for (var i = 0; i < promises.length; i++) {
           var events=parseICAL(data[i].data);
-	  //Add all of the extracted events to the CalendarService
-	  eventlist.push.apply(eventlist, events);
+          //Add all of the extracted events to the CalendarService
+          eventlist.push.apply(eventlist, events);
         }
       });
     }
@@ -71,8 +71,8 @@
 
         //If we encounted a new Event, create a blank event object + set in event options.
         if (!in_event && ln == 'BEGIN:VEVENT') {
-          var in_event = true;
-          var cur_event = {};
+          in_event = true;
+          cur_event = {};
         }
         //If we encounter end event, complete the object and add it to our events array then clear it for reuse.
         if (in_event && ln == 'END:VEVENT') {
@@ -133,28 +133,28 @@
               (keys.some(function(k){ return ~k.indexOf("DTSTART") })) &&
                 keys.some(function(k){ return ~k.indexOf("DTEND") })) {
             var options = new RRule.parseString(cur_event['RRULE']);
-      			options.dtstart = cur_event.start.toDate();
-      			var event_duration = cur_event.end.diff(cur_event.start,'minutes');
-      			var rule = new RRule(options);
+            options.dtstart = cur_event.start.toDate();
+            var event_duration = cur_event.end.diff(cur_event.start,'minutes');
+            var rule = new RRule(options);
             var oneYear = new Date();
-      			oneYear.setFullYear(oneYear.getFullYear() + 1);
-      			var dates = rule.between(new Date(), oneYear, true, function (date, i){return i < 10});
-      			for (var date in dates) {
-              var recuring_event = {};
-              recuring_event.SUMMARY = cur_event.SUMMARY;
-      				var dt = new Date(dates[date]);
-      				var startDate = moment(dt);
-      				var endDate = moment(dt);
-              endDate.add(event_duration, 'minutes');
-              recuring_event.calendarName = calendarName;
-              recuring_event.start = startDate;
-              recuring_event.startName = startDate.calendar().toUpperCase();
-              recuring_event.end = endDate;
-              recuring_event.endName = endDate.subtract(1, 'seconds').calendar().toUpperCase();
-              if(!contains(events, recuring_event)) {
-                events.push(recuring_event);
-              }
-      			}
+            oneYear.setFullYear(oneYear.getFullYear() + 1);
+            var dates = rule.between(new Date(), oneYear, true, function (date, i){return i < 10});
+            for (var date in dates) {
+                var recuring_event = {};
+                recuring_event.SUMMARY = cur_event.SUMMARY;
+                var dt = new Date(dates[date]);
+                var startDate = moment(dt);
+                var endDate = moment(dt);
+                endDate.add(event_duration, 'minutes');
+                recuring_event.calendarName = calendarName;
+                recuring_event.start = startDate;
+                recuring_event.startName = startDate.calendar().toUpperCase();
+                recuring_event.end = endDate;
+                recuring_event.endName = endDate.subtract(1, 'seconds').calendar().toUpperCase();
+                if(!contains(events, recuring_event)) {
+                   events.push(recuring_event);
+                }
+            }
           }
         }
       }
