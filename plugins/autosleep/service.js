@@ -21,8 +21,8 @@
 					milliConversion = 1
 					console.info('ProTip: Change your config so that config.autoTimer.autoSleep is in minutes not milliseconds.');
 				}
-			autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep * milliConversion);
-			if(config.motion.enabled == true && config.motion.external == true){
+				autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep * milliConversion);
+				if(config.motion.enabled == true && config.motion.external == true){
 					// check to see if the external motion event folder exists
 					fs.access(DetectionDir, function(err) {
 						// if not
@@ -54,79 +54,78 @@
 					// remove the file
 					fs.unlinkSync(DetectionFile);
 					// wake up now
-				service.wake();
+					service.wake();
 				}		
 			});
 		};
 
 		service.stopAutoSleepTimer = function () {
-				console.debug('Stopping auto-sleep timer');
-				$interval.cancel(autoSleepTimer);
-				//$interval.cancel(externalMotionTimer);
+			console.debug('Stopping auto-sleep timer');
+			$interval.cancel(autoSleepTimer);
+			//$interval.cancel(externalMotionTimer);
 		};
 
 		service.wake = function () {
-				service.woke = true;
-				if (config.autoTimer.mode == "monitor") {
-						service.exec(config.autoTimer.wakeCmd, service.puts);
-				}
-				Focus.change("default");
+			service.woke = true;
+			if (config.autoTimer.mode == "monitor") {
+					service.exec(config.autoTimer.wakeCmd, service.puts);
+			}
+			Focus.change("default");
 		};
 
 		service.sleep = function () {
-				service.woke = false;
-				if (config.autoTimer.mode == "monitor") {
-						service.exec(config.autoTimer.sleepCmd, service.puts);
-						Focus.change("sleep");
-				} else if (config.autoTimer.mode == "tv") {
-						Focus.change("sleep");
-				} else {
-						Focus.change("default");
-				}
-
+			service.woke = false;
+			if (config.autoTimer.mode == "monitor") {
+					service.exec(config.autoTimer.sleepCmd, service.puts);
+					Focus.change("sleep");
+			} else if (config.autoTimer.mode == "tv") {
+					Focus.change("sleep");
+			} else {
+					Focus.change("default");
+			}
 		};
 
 		service.puts = function (error, stdout, stderr) {
-				if (error) {
-						console.debug('auto-sleep error', error);
-				}
-				console.debug('autosleep stdout:', stdout)
-				console.debug('autosleep stderr:', stderr)
+			if (error) {
+					console.debug('auto-sleep error', error);
+			}
+			console.debug('autosleep stdout:', stdout)
+			console.debug('autosleep stderr:', stderr)
 		};
 
 
 		ipcRenderer.on('motionstart', () => {
-				service.wake()
-				console.debug('motion start detected');
+			service.wake()
+			console.debug('motion start detected');
 		});
 
 		ipcRenderer.on('remoteWakeUp', () => {
-				service.wake()
-				console.debug('remote wakeUp detected');
+			service.wake()
+			console.debug('remote wakeUp detected');
 		});
 
 		ipcRenderer.on('remoteSleep', () => {
-				service.sleep()
-				console.debug('remote sleep detected');
+			service.sleep()
+			console.debug('remote sleep detected');
 		});
 
 		ipcRenderer.on('motionend', () => {
-				console.debug('motion end detected');
-				service.startAutoSleepTimer();
+			console.debug('motion end detected');
+			service.startAutoSleepTimer();
 		});
 
 		ipcRenderer.on('calibrated', () => {
-				console.debug('motion.js Calibrated');
+			console.debug('motion.js Calibrated');
 		});
 
 		ipcRenderer.on('Error', (event, error) => {
-				console.debug("Motion", error);
+			console.debug("Motion", error);
 		});
 
 		return service;
 }
 
-angular.module('SmartMirror')
+	angular.module('SmartMirror')
 		.factory('AutoSleepService', AutoSleepService);
 
 } ());
