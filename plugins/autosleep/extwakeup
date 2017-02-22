@@ -1,0 +1,3 @@
+#!/bin/bash
+fn=/home/pi/smart-mirror/motion/detected
+(umask 000; touch $fn)
