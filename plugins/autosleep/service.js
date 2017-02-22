@@ -68,7 +68,7 @@
 		service.wake = function () {
 			service.woke = true;
 			if (config.autoTimer.mode == "monitor") {
-					service.exec(config.autoTimer.wakeCmd, service.puts);
+				service.exec(config.autoTimer.wakeCmd, service.puts);
 			}
 			Focus.change("default");
 		};
@@ -76,18 +76,18 @@
 		service.sleep = function () {
 			service.woke = false;
 			if (config.autoTimer.mode == "monitor") {
-					service.exec(config.autoTimer.sleepCmd, service.puts);
-					Focus.change("sleep");
+				service.exec(config.autoTimer.sleepCmd, service.puts);
+				Focus.change("sleep");
 			} else if (config.autoTimer.mode == "tv") {
-					Focus.change("sleep");
+				Focus.change("sleep");
 			} else {
-					Focus.change("default");
+				Focus.change("default");
 			}
 		};
 
 		service.puts = function (error, stdout, stderr) {
 			if (error) {
-					console.debug('auto-sleep error', error);
+				console.debug('auto-sleep error', error);
 			}
 			console.debug('autosleep stdout:', stdout)
 			console.debug('autosleep stderr:', stderr)
@@ -123,7 +123,7 @@
 		});
 
 		return service;
-}
+	}
 
 	angular.module('SmartMirror')
 		.factory('AutoSleepService', AutoSleepService);
