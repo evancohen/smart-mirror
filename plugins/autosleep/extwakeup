@@ -1,3 +1,4 @@
 #!/bin/bash
 fn=/home/pi/smart-mirror/motion/detected
-(umask 000; touch $fn)
+user=(ps -ef | grep npm | grep -m auto | awk '{ print $1 }')
+(umask 000; touch $fn; chown $user $fn)
