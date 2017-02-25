@@ -41,9 +41,7 @@
 						}
 						fs.watch(DetectionDir, (eventType, filename) => {
 							if (filename) {
-								//if(eventType === 'rename') {	
-									service.CheckExternalMotion();
-								//}
+								service.CheckExternalMotion();
 							} else {
 								console.log('filename not provided');
 							}
@@ -54,16 +52,16 @@
 		};
 
 		// external motion detected
-		service.CheckExternalMotion = function () {			
-		// remove the file
-		fs.unlink(DetectionFile, function(error) { 
-			// consume the enonet error
-			if(error == null){
-				// only need to wake up if asleep
-				if(Focus.get() === 'sleep') {
-					console.debug('motion detected from external source');
-					// wake up now
-					service.wake(true);
+		service.CheckExternalMotion = function () {
+			// remove the file
+			fs.unlink(DetectionFile, function(error) { 
+				// consume the enonet error
+				if(error == null){
+					// only need to wake up if asleep
+					if(Focus.get() === 'sleep') {
+						console.debug('motion detected from external source');
+						// wake up now
+						service.wake(true);
 					}
 				}
 			});
