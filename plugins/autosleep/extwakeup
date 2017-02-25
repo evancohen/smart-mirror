@@ -1,4 +1,7 @@
 #!/bin/bash
+# where is the file supposed to go, and filename
 fn=/home/pi/smart-mirror/motion/detected
+# what user should have access permissions 
 user=(ps -ef | grep npm | grep -m auto | awk '{ print $1 }')
+# create the event notification file
 (umask 000; touch $fn; chown $user $fn)

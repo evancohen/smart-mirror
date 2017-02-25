@@ -11,6 +11,12 @@
 		service.exec = require('child_process').exec;
 		var DetectionDir='./motion';
 		var DetectionFile=DetectionDir+'/detected';	
+		var EneryStarTimer = null;
+		var EneryStarTimerStop = null;
+			// 14.5 minutes in milliseconds
+		var EnergyStarDelay=14.5 * 60 * 1000;
+			// forced wakeup to defeat TV energystar power off
+		var EnergyStarWakeupDelay=4 * 1000;
 
 		service.startAutoSleepTimer = function () {
 			var milliConversion = 60000
@@ -22,6 +28,8 @@
 					console.info('ProTip: Change your config so that config.autoTimer.autoSleep is in minutes not milliseconds.');
 				}
 				autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep * milliConversion);
+
+				// if external motion detection is enabled
 				if(config.motion.enabled == true && config.motion.external == true){
 					// check to see if the external motion event folder exists
 					fs.access(DetectionDir, function(err) {
@@ -31,31 +39,33 @@
 							fs.mkdir(DetectionDir);
 							console.debug('created motion directory', DetectionDir);
 						}
-					});
-					fs.watch(DetectionDir, (eventType, filename) => {
-						if (filename) {
-							if(eventType === 'rename') {	
-								service.CheckExternalMotion();
+						fs.watch(DetectionDir, (eventType, filename) => {
+							if (filename) {
+								//if(eventType === 'rename') {	
+									service.CheckExternalMotion();
+								//}
+							} else {
+								console.log('filename not provided');
 							}
-						} else {
-							console.log('filename not provided');
-						}
+						});
 					});
 				}
 			}
 		};
 
-		service.CheckExternalMotion = function () {
-			fs.access(DetectionFile, function(err) {
-				// check if motion detected file exists
-				// if no error, then exists
-				if (err == null) {
+		// external motion detected
+		service.CheckExternalMotion = function () {			
+		// remove the file
+		fs.unlink(DetectionFile, function(error) { 
+			// consume the enonet error
+			if(error == null){
+				// only need to wake up if asleep
+				if(Focus.get() === 'sleep') {
 					console.debug('motion detected from external source');
-					// remove the file
-					fs.unlinkSync(DetectionFile);
 					// wake up now
-					service.wake();
-				}		
+					service.wake(true);
+					}
+				}
 			});
 		};
 
@@ -65,13 +75,49 @@
 			//$interval.cancel(externalMotionTimer);
 		};
 
-		service.wake = function () {
+		service.wake = function (actual) {
 			service.woke = true;
 			if (config.autoTimer.mode == "monitor") {
 				service.exec(config.autoTimer.wakeCmd, service.puts);
+			} else if (config.autoTimer.mode == "tv") {
+				// is this a real wakeup, or the fake one to handle the enerystar power off problem
+				if(actual == true){
+					// if the timer was running
+					if(EneryStarTimer !=null){
+						// stop it
+						$interval.cancel(EneryStarTimer)
+						EneryStarTimer = null;
+					}
+					// if the dummy wake up delay is running, stop it too
+					if(EneryStarTimerStop !=null){
+						$interval.cancel(EneryStarTimerStop)
+					}
+				}
 			}
 			Focus.change("default");
+			if(actual == true)	{
+				console.log("!f:", "")
+			}
 		};
+
+		// used by the energystar override function
+		// done being awake, go back to sleep again
+		service.done= function () {
+			// go back to sleep
+			service.sleep();
+			// stop the short term delay timer
+			$interval.cancel(EneryStarTimerStop)
+			// cancel to long timer
+			$interval.cancel(EneryStarTimer)
+			// restart it, so we don't drift towards 0 delay 
+			EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
+		}
+		// do the fake, short term wakeup
+		service.bleep = function(){
+			service.wake(false);
+			// start the timer for returning to sleep
+			EneryStarTimerStop = $interval(service.done, EnergyStarWakeupDelay);
+		}
 
 		service.sleep = function () {
 			service.woke = false;
@@ -80,6 +126,9 @@
 				Focus.change("sleep");
 			} else if (config.autoTimer.mode == "tv") {
 				Focus.change("sleep");
+				if(EneryStarTimer == null) {
+					EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
+				}
 			} else {
 				Focus.change("default");
 			}
@@ -95,12 +144,12 @@
 
 
 		ipcRenderer.on('motionstart', () => {
-			service.wake()
+			service.wake(true)
 			console.debug('motion start detected');
 		});
 
 		ipcRenderer.on('remoteWakeUp', () => {
-			service.wake()
+			service.wake(true)
 			console.debug('remote wakeUp detected');
 		});
 
