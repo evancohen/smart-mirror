@@ -1,8 +1,8 @@
 'use strict'
-var sleep = require('sleep-async')();
 		var fs = require('fs')
+		const path = require('path');
 		var DetectionDir='./motion';
-		var DetectionFile=DetectionDir+'/detected';	
+		var DetectionFile='detected';	
 // Load in smart mirror config
 var config = require("./config.json")
 if(!config || !config.motion || !config.motion.enabled || (!config.motion.external && !config.motion.pin) || !config.general.language ){
@@ -19,21 +19,25 @@ if (config.motion.enabled == true){
 				fs.mkdir(DetectionDir);
 				console.debug('created motion directory', DetectionDir);
 			}
+			else{
+				// make sure the directory is empty
+				rmDir(DetectionDir,false);
+			}
+			
 			fs.watch(DetectionDir, (eventType, filename) => {
 				if (filename) {
 					// remove the file
-					fs.unlink(DetectionFile, function(error) { 
+					fs.unlink(path.join(DetectionDir,filename), function(error) { 
 						// consume the enonet error
 						if(error == null){
-							// only need to wake up if asleep
-							//if(Focus.get() === 'sleep') {
-								//console.debug('motion detected from external source');
-								// wake up now
+							//console.debug('motion detected from external source');
+							// wake up now
+							if(filename === DetectionFile) {
 								console.log("!s:","motionstart");
-								sleep.sleep(2000,function(){
-									console.log("!e:","motionend");
-								});
-							//}
+							}
+							else {
+								console.log("!e:","motionend");
+							}
 						}
 					});
 				} else {
@@ -75,4 +79,20 @@ if (config.motion.enabled == true){
 	} else {
 		console.error("!E:","Motion Dependencies are missing! Therefore despite my best efforts I'll have to disable motion, Dave. This is most embarrassing for us both.")
 	}
+  var  rmDir = function(dirPath, removeSelf) {
+      if (removeSelf === undefined)
+        removeSelf = true;
+      try { var files = fs.readdirSync(dirPath); }
+      catch(e) { return; }
+      if (files.length > 0)
+        for (var i = 0; i < files.length; i++) {
+          var filePath = dirPath + '/' + files[i];
+          if (fs.statSync(filePath).isFile())
+            fs.unlinkSync(filePath);
+          else
+            rmDir(filePath);
+        }
+      if (removeSelf)
+        fs.rmdirSync(dirPath);
+    };
 }
