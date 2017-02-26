@@ -2,15 +2,13 @@
 (function () {
 	'use strict';
 
-	function AutoSleepService($interval, Focus) {
+	function AutoSleepService($interval, Focus, SpeechService) {
 		var service = {};
 		var autoSleepTimer;
-		var fs = require('fs')
 		service.woke = true;
 		service.scope = "default";
 		service.exec = require('child_process').exec;
-		var DetectionDir='./motion';
-		var DetectionFile=DetectionDir+'/detected';	
+
 		var EneryStarTimer = null;
 		var EneryStarTimerStop = null;
 			// 14.5 minutes in milliseconds
@@ -27,48 +25,12 @@
 					milliConversion = 1
 					console.info('ProTip: Change your config so that config.autoTimer.autoSleep is in minutes not milliseconds.');
 				}
-				autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep * milliConversion);
-
-				// if external motion detection is enabled
-				if(config.motion.enabled == true && config.motion.external == true){
-					// check to see if the external motion event folder exists
-					fs.access(DetectionDir, function(err) {
-						// if not
-						if (err && err.code === 'ENOENT') {
-							// create it
-							fs.mkdir(DetectionDir);
-							console.debug('created motion directory', DetectionDir);
-						}
-						fs.watch(DetectionDir, (eventType, filename) => {
-							if (filename) {
-								service.CheckExternalMotion();
-							} else {
-								console.log('filename not provided');
-							}
-						});
-					});
-				}
+				autoSleepTimer = $interval(service.sleep, config.autoTimer.autoSleep * milliConversion);	
 			}
 		};
 
-		// external motion detected
-		service.CheckExternalMotion = function () {
-			// remove the file
-			fs.unlink(DetectionFile, function(error) { 
-				// consume the enonet error
-				if(error == null){
-					// only need to wake up if asleep
-					if(Focus.get() === 'sleep') {
-						console.debug('motion detected from external source');
-						// wake up now
-						service.wake(true);
-					}
-				}
-			});
-		};
-
 		service.stopAutoSleepTimer = function () {
-			console.debug('Stopping auto-sleep timer');
+			//console.debug('Stopping auto-sleep timer');
 			$interval.cancel(autoSleepTimer);
 			//$interval.cancel(externalMotionTimer);
 		};
@@ -93,9 +55,7 @@
 				}
 			}
 			Focus.change("default");
-			if(actual == true)	{
-				console.log("!f:", "")
-			}
+			SpeechService.cleanup();
 		};
 
 		// used by the energystar override function
@@ -109,6 +69,8 @@
 			$interval.cancel(EneryStarTimer)
 			// restart it, so we don't drift towards 0 delay 
 			EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
+			// restart the main sleep timer
+			service.service.startAutoSleepTimer();
 		}
 		// do the fake, short term wakeup
 		service.bleep = function(){

@@ -1,6 +1,13 @@
 #!/bin/bash
+# set the default parm
+f=detected
+# if a parm specified
+if [ "$#" -ne 0 ]; then
+	# lowercase it
+	f=${1,,}
+fi
 # where is the file supposed to go, and filename
-fn=/home/pi/smart-mirror/motion/detected
+fn=/home/pi/smart-mirror/motion/${f}
 # what user should have access permissions 
 user=(ps -ef | grep npm | grep -m auto | awk '{ print $1 }')
 # create the event notification file
