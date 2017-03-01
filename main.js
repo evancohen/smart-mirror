@@ -161,6 +161,7 @@ if (config.remote && config.remote.enabled || firstRun) {
 		app.relaunch()
 		app.quit()
 	})
+  
 }
 
 // Motion detection

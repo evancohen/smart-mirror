@@ -1,0 +1,11 @@
+pcm.!default {
+  type asym
+   playback.pcm {
+     type plug
+     slave.pcm "hw:Playback_DevID"
+   }
+   capture.pcm {
+     type plug
+     slave.pcm "hw:Capture_DevID"
+   }
+}

@@ -12,3 +12,5 @@ speech/snowboydetect.pyc
 .vscode
 keyfile.json
 smart-mirror.log
+remote/.audio/aplay.temp
+remote/.audio/arec.temp
