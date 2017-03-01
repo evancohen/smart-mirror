@@ -8,6 +8,9 @@
     "reminders": {
         "empty": "Keine Erinnerungen."
     },
+    "reminders": {
+        "empty": "Kein Rückruf"
+    },
     "timer": {
       "one": "Eine",
       "minute": "Minute(n)?",
