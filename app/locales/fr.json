@@ -190,5 +190,31 @@
             "voice": "(Montre(-moi)|Affiche) le lien du serveur",
             "description": "Affiche le lien de l'application"
         }
+    },
+    "fitbit": {
+        "user": "FR_User: ",
+        "averageSteps": "FR_Average Steps: ",
+        "batteryStatus": "FR_Battery Status: ",
+        "today": "FR_Today",
+        "steps": "FR_steps",
+        "averageSteps": "FR_steps a day",
+        "caloriesBurned": "FR_calories burned",
+        "lastSync": "FR_Last Sync",
+        "average": "FR_Average",
+        "activeMinutes": "FR_active minutes",
+        "distance": "FR_km",
+        "floors": "FR_floors",
+        "topBadges": "FR_Top Badges",
+        "sleep": "FR_Sleep",
+        "lastNight": "FR_Last Night",
+        "awake": "FR_Awake",
+        "restless": "FR_Restless",
+        "hours": "FR_hrs",
+        "km": "FR_km",
+        "miles": "FR_mi",
+        "minutes": "FR_min",
+        "times": "FR_x",
+        "restingHR": "FR_resting heart rate",
+        "bpm": "FR_bpm"
     }
 }

@@ -151,7 +151,7 @@ fi
 
 # Add start commands in the user's bashrc.
 echo "export MIRROR_HOME=~/smart-mirror" >> ~/.bashrc
-echo "run_mirror () { ( cd \$MIRROR_HOME && DISPLAY=:0 npm run \"\$@\" ); }" >> ~/.bashrc
+echo "run_mirror () { ( cd \$MIRROR_HOME && DISPLAY=:0 npm \"\$@\" ); }" >> ~/.bashrc
 echo "alias mirror=run_mirror" >> ~/.bashrc
 cd ~ && source .bashrc
 
@@ -160,11 +160,11 @@ cat << "EOF"
 
         |        The smart-mirror is now installed!
        / \       
-      / _ \      To configure audio input, speech, and the mirror itself, please visit:
+      / _ \      For configuration instructions, check out the documentation at:
      |.o '.|     http://docs.smart-mirror.io
      |'._.'|     
-     |     |     To start your mirror:
-   ,'|  |  |`.   > mirror start
+     |     |     To start your mirror you can run both on the pi or via SSH:
+   ,'|  |  |`.   > start-mirror
   /  |  |  |  \
   |,-'--|--'-.|
   
