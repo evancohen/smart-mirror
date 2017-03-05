@@ -39,13 +39,12 @@
         "motion": {
             "type": "object",
             "title": "Motion Settings",
-            "properties": {
-			              "mode":{
+            "properties": 
+		"mode":{
                     "type":"string",
                     "title":"Event Mode:",
                     "default":"disabled",
                     "enum":[
-                      "external",
                       "pin",
                       "disabled"
                     ]
@@ -141,8 +140,7 @@
                   ]
                 }
               ]
-            }
-              
+            }              
           ]
         }
     ],
@@ -155,7 +153,7 @@
           "sleepCmd": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
       },
       "motion": {
-				"mode": "disabled",
+      	"mode": "disabled",
         "pin": "GPIO26"
       }
     }
