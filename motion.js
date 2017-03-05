@@ -1,14 +1,22 @@
 'use strict'
-		var fs = require('fs');
-		const path = require('path');
-		var DetectionDir='./motion';
-		var DetectionFile='detected';	
+var fs = require('fs');
+var ts=require('./timeStamp.js')
+var fd=null;
+const path = require('path');
+var DetectionDir='./motion';
+var DetectionFile='detected';	
 // Load in smart mirror config
 var config = require("./config.json")
 if(!config || !config.motion || !config.motion.mode || (config.motion.mode ==='pin' && !config.motion.pin) || !config.general.language ){
-  console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
+	console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
 }
 
+var writelog = function(string){
+	if(fd == null){
+		fd=fs.openSync('/home/pi/sonus.log','a',fs.O_APPEND)
+	}
+	fs.writeFileSync(fd,ts.timeStamp()+" "+string+"\n")
+}
 if (config.motion.mode !== 'disabled'){
 	if(config.motion.mode === 'external'){
 		// check to see if the external motion event folder exists
@@ -23,8 +31,7 @@ if (config.motion.mode !== 'disabled'){
 				// make sure the directory is empty
 				rmDir(DetectionDir,false);
 			}
-			// change detector function
-			// watch for a file to appear in the folder
+			
 			fs.watch(DetectionDir, (eventType, filename) => {
 				if (filename) {
 					// remove the file
@@ -32,13 +39,13 @@ if (config.motion.mode !== 'disabled'){
 						// consume the enonet error
 						if(error == null){
 							//console.debug('motion detected from external source');
-							// if the start motion file
+							// wake up now
 							if(filename === DetectionFile) {
-								// signal motion started
+								writelog('task motion started')
 								console.log("!s:","motionstart");
 							}
 							else {
-								// signal motion ended 
+								writelog('task motion ended')
 								console.log("!e:","motionend");
 							}
 						}
@@ -82,20 +89,20 @@ if (config.motion.mode !== 'disabled'){
 	} else {
 		console.error("!E:","Motion Dependencies are missing! Therefore despite my best efforts I'll have to disable motion, Dave. This is most embarrassing for us both.")
 	}
-  var  rmDir = function(dirPath, removeSelf) {
-      if (removeSelf === undefined)
-        removeSelf = true;
-      try { var files = fs.readdirSync(dirPath); }
-      catch(e) { return; }
-      if (files.length > 0)
-        for (var i = 0; i < files.length; i++) {
-          var filePath = dirPath + '/' + files[i];
-          if (fs.statSync(filePath).isFile())
-            fs.unlinkSync(filePath);
-          else
-            rmDir(filePath);
-        }
-      if (removeSelf)
-        fs.rmdirSync(dirPath);
-    };
+	var  rmDir = function(dirPath, removeSelf) {
+		if (removeSelf === undefined)
+			removeSelf = true;
+		try { var files = fs.readdirSync(dirPath); }
+		catch(e) { return; }
+		if (files.length > 0)
+			for (var i = 0; i < files.length; i++) {
+				var filePath = dirPath + '/' + files[i];
+				if (fs.statSync(filePath).isFile())
+					fs.unlinkSync(filePath);
+				else
+					rmDir(filePath);
+			}
+		if (removeSelf)
+			fs.rmdirSync(dirPath);
+	};
 }
