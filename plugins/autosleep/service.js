@@ -2,7 +2,7 @@
 (function () {
 
 
-	function AutoSleepService($interval, Focus, SpeechService) {
+	function AutoSleepService($interval, Focus) {
 		var service = {};
 		var autoSleepTimer;
 		service.woke = true;
@@ -54,7 +54,7 @@
 						}
 					}
 				}
-			Focus.change("default");
+				Focus.change("default");
 			}
 		};
 
