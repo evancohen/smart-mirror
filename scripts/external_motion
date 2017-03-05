@@ -1,0 +1,45 @@
+#!/bin/bash
+# 
+#  use this script to signal external motion events to smart-mirror
+#  an example using a webcam, is the github motion addon 
+#  https://motion-project.github.io/
+#
+#
+#  configure its event start to be extwakeup start 
+#  and its event end to be extwakeup end
+#
+#
+#
+# set the default parm, if nothing provided
+f=detected
+
+# if a parm specified
+if [ "$#" -ne 0 ]; then
+	# lowercase it
+	f=${1,,}
+	if [ "${f:0:5}" == "start" ]; then
+			f='detected'
+	else
+			f='ended'
+	fi
+fi
+
+# user that started smart-mirror should have access permissions 
+user=(ps -ef | grep npm | grep -m auto | awk '{ print $1 }')
+
+# where is this script located?
+SCRIPT="$(readlink --canonicalize-existing "$0")"
+SCRIPTPATH="$(dirname "$SCRIPT")"
+
+# this script is in the scripts folder, the motion folder is back up the tree 1 level.
+motiondir=${SCRIPTPATH}/../motion
+# if the folder doesn't exist, create it 
+if [ ! -d $motiondir ]; then
+	mkdir $motiondir >/dev/null 2>&1
+fi
+# event notification file name
+fn=${motiondir}/${f}
+
+# create the event notification file with the right user permissions
+# assumes this script is run as a root user..(deamon started at boot)
+(umask 000; touch $fn; chown $user $fn)
