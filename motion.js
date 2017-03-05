@@ -2,7 +2,7 @@
 // Load in smart mirror config
 var config = require("./config.json")
 if(!config || !config.motion || !config.motion.mode || (config.motion.mode ==='pin' && !config.motion.pin) || !config.general.language ){
-  console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
+	console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
 }
 
 if (config.motion.mode !== 'disabled'){
