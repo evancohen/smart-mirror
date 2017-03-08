@@ -1,0 +1,22 @@
+{
+    "schema": {
+        "todoist": {
+            "type": "object",
+            "title": "Todoist Settings",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "Todoist api key"
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "todoist",
+            "expandable": true,
+            "order":0
+        }
+    ]
+}

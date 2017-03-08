@@ -48,7 +48,7 @@
     "hyperion-client": "1.0.3",
     "moment": "^2.17.1",
     "socket.io": "^1.6.0",
-    "sonus": "^0.1.5"
+    "sonus": "^0.1.7"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
