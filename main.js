@@ -164,7 +164,7 @@ if (config.remote && config.remote.enabled || firstRun) {
 }
 
 // Motion detection
-if(config.motion && config.motion.enabled){
+if(config.motion && config.motion.mode !== 'disabled'){
 	var mtnProcess = spawn('npm', ['run','motion'], {detached: false})
     // Handel messages from node
 	mtnProcess.stderr.on('data', function (data) {
