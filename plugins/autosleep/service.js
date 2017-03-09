@@ -22,7 +22,7 @@
 			var milliConversion = 60000
 			if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined') {
 				service.stopAutoSleepTimer();
-                // assume if autoSleep is greater than 1 minute in milliseconds the value is already converted. if not convert
+				// assume if autoSleep is greater than 1 minute in milliseconds the value is already converted. if not convert
 				if (config.autoTimer.autoSleep > 60000) {
 					milliConversion = 1
 					console.info('ProTip: Change your config so that config.autoTimer.autoSleep is in minutes not milliseconds.');
@@ -39,7 +39,7 @@
 
 		service.wake = function (actual) {
 			// only wake up if sleeping
-   		if(Focus.get() === 'sleep'){
+			if(Focus.get() === 'sleep'){
 				service.woke = true;
 				if (config.autoTimer.mode == "monitor") {
 					service.exec(config.autoTimer.wakeCmd, service.puts);
@@ -50,7 +50,7 @@
 						if(EneryStarTimer !=null){
 							// stop it
 							$interval.cancel(EneryStarTimer)
-						EneryStarTimer = null;
+							EneryStarTimer = null;
 						}
 						// if the dummy wake up delay is running, stop it too
 						if(EneryStarTimerStop !=null){
@@ -76,6 +76,7 @@
 			// restart the main sleep timer
 			service.startAutoSleepTimer();
 		}
+
 		// do the fake, short term wakeup
 		service.bleep = function(){
 			service.wake(false);
@@ -96,7 +97,6 @@
 			} else {
 				Focus.change("default");
 			}
-
 		};
 
 		service.puts = function (error, stdout, stderr) {
