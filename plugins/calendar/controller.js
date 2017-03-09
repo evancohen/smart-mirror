@@ -3,7 +3,7 @@ function Calendar($scope, $http, $interval, CalendarService) {
 	var getCalendar = function() {
 		if(typeof config.calendar.icals != 'undefined') {
 			// clear the events list
-			events = [];
+			var events = [];
 			// get the events from the calendars
 			CalendarService.getCalendarEvents(config.calendar.icals,events).then(function() {
 				// get the ones in scope (date range, and number of entries)	

@@ -6,7 +6,6 @@
 
 		service.getCalendarEvents = function(calendars, events) {
 			var deferred = $q.defer();
-			events = []
 			if( calendars === null)// && typeof config.calendar.icals != 'undefined')
 			{
 				calendars = config.calendar.icals;
@@ -159,7 +158,7 @@
 								}
 							}
 
-							if(!contains(events, recuring_event)) {
+							if (!contains(events, recuring_event)) {
 								events.push(recuring_event);
 							}
 						}
