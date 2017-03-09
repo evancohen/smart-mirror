@@ -1,6 +1,6 @@
 /* global ipcRenderer */
 (function () {
-
+	'use strict';
 
 	function AutoSleepService($interval, Focus) {
 		var service = {};
@@ -11,16 +11,18 @@
 
 		var EneryStarTimer = null;
 		var EneryStarTimerStop = null;
-			// 14.5 minutes in milliseconds
+			// EnergyStar timeout is 15 minutes
+			// we will wait 14.5 minutes in milliseconds
 		var EnergyStarDelay=14.5 * 60 * 1000;
 			// forced wakeup to defeat TV energystar power off
-		var EnergyStarWakeupDelay=4 * 1000;
+		var EnergyStarWakeupDelay=2 * 1000;
 
 		service.startAutoSleepTimer = function () {
+
 			var milliConversion = 60000
 			if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined') {
 				service.stopAutoSleepTimer();
-				// assume if autoSleep is greater than 1 minute in milliseconds the value is already converted. if not convert
+                // assume if autoSleep is greater than 1 minute in milliseconds the value is already converted. if not convert
 				if (config.autoTimer.autoSleep > 60000) {
 					milliConversion = 1
 					console.info('ProTip: Change your config so that config.autoTimer.autoSleep is in minutes not milliseconds.');
@@ -36,12 +38,13 @@
 		};
 
 		service.wake = function (actual) {
-			if(Focus.get() === 'sleep'){
+			// only wake up if sleeping
+   		if(Focus.get() === 'sleep'){
 				service.woke = true;
 				if (config.autoTimer.mode == "monitor") {
 					service.exec(config.autoTimer.wakeCmd, service.puts);
 				} else if (config.autoTimer.mode == "tv") {
-					// is this a real wakeup, or the fake one to handle the enerystar power off problem
+					// is this a real wakeup, not the fake one to handle the enerystar power off problem
 					if(actual == true){
 						// if the timer was running
 						if(EneryStarTimer !=null){
@@ -55,7 +58,7 @@
 						}
 					}
 				}
-			Focus.change("default");
+				Focus.change("default");
 			}
 		};
 
@@ -93,6 +96,7 @@
 			} else {
 				Focus.change("default");
 			}
+
 		};
 
 		service.puts = function (error, stdout, stderr) {
@@ -136,6 +140,6 @@
 	}
 
 	angular.module('SmartMirror')
-		.factory('AutoSleepService', AutoSleepService);
+        .factory('AutoSleepService', AutoSleepService);
 
 } ());
