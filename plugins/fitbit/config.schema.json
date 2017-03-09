@@ -15,14 +15,12 @@
             "clientID": {
               "default": "",
               "type": "string",
-              "title": "OAuth 2.0 Client ID",
-              "required": true
+              "title": "OAuth 2.0 Client ID"
             },
             "clientSecret": {
               "default": "",
               "type": "string",
-              "title": "Client Secret",
-              "required": true
+              "title": "Client Secret"
             }
           }
         },
