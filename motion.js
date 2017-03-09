@@ -1,12 +1,12 @@
 'use strict'
-		var fs = require('fs');
-		const path = require('path');
-		var DetectionDir='./motion';
-		var DetectionFile='detected';	
+var fs = require('fs');
+const path = require('path');
+var DetectionDir='./motion';
+var DetectionFile='detected';	
 // Load in smart mirror config
 var config = require("./config.json")
 if(!config || !config.motion || !config.motion.mode || (config.motion.mode ==='pin' && !config.motion.pin) || !config.general.language ){
-  console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
+	console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
 }
 
 if (config.motion.mode !== 'disabled'){
@@ -82,20 +82,20 @@ if (config.motion.mode !== 'disabled'){
 	} else {
 		console.error("!E:","Motion Dependencies are missing! Therefore despite my best efforts I'll have to disable motion, Dave. This is most embarrassing for us both.")
 	}
-  var  rmDir = function(dirPath, removeSelf) {
-      if (removeSelf === undefined)
-        removeSelf = true;
-      try { var files = fs.readdirSync(dirPath); }
-      catch(e) { return; }
-      if (files.length > 0)
-        for (var i = 0; i < files.length; i++) {
-          var filePath = dirPath + '/' + files[i];
-          if (fs.statSync(filePath).isFile())
-            fs.unlinkSync(filePath);
-          else
-            rmDir(filePath);
-        }
-      if (removeSelf)
-        fs.rmdirSync(dirPath);
-    };
+	var  rmDir = function(dirPath, removeSelf) {
+		if (removeSelf === undefined)
+			removeSelf = true;
+		try { var files = fs.readdirSync(dirPath); }
+		catch(e) { return; }
+		if (files.length > 0)
+			for (var i = 0; i < files.length; i++) {
+				var filePath = dirPath + '/' + files[i];
+				if (fs.statSync(filePath).isFile())
+					fs.unlinkSync(filePath);
+				else
+					rmDir(filePath);
+			}
+		if (removeSelf)
+			fs.rmdirSync(dirPath);
+	};
 }
