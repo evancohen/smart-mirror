@@ -3,6 +3,11 @@
     "language": "en-US",
     "layout": "main"
   },
+	"screen" : {
+			"width":800,
+			"height":600,
+			"kioskMode": false
+	},
   "remote": {
     "enabled": true,
     "firstRun": true,

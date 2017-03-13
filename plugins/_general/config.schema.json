@@ -1,37 +1,73 @@
 {
-    "schema": {
-        "general": {
-            "type": "object",
-            "title": "General Settings",
-            "properties": {
-                "language": {
-                    "default": "en-US",
-                    "type": "string",
-                    "title": "Language",
-                    "required": true
-                },
-                "layout": {
-                    "default": "main",
-                    "type": "string",
-                    "title": "Layout",
-                    "required": true
-                }
-            }
-        }
-    },
-    "form":[
-      {
-        "key":"general",
-        "type":"fieldset",
-        "title":"General Settings",
-        "expandable":false,
-        "order":-100
-      }
-    ],
-    "value":{
-        "general":{
-            "language": "en-US",
-            "layout":"main"
-        }
-    }
+	"schema": {
+		"general": {
+			"type": "object",
+			"title": "Base Settings",
+			"properties": {
+				"language": {
+					"default": "en-US",
+					"type": "string",
+					"title": "Language",
+					"required": true
+				},
+				"layout": {
+					"default": "main",
+					"type": "string",
+					"title": "Layout",
+					"required": true
+				}
+			}
+		},
+		"screen": {
+			"type": "object",
+			"title": "Screen size Settings",
+			"properties": {
+				"width": {
+					"default": "800",
+					"type": "integer",
+					"title": "Width",
+					"required": true
+				},
+				"height": {
+					"default": "600",
+					"type": "integer",
+					"title": "Height",
+					"required": true
+				},
+				"kioskMode": {
+					"default": false,
+					"type": "boolean",
+					"title": "Kiosk Mode",
+					"required": true
+				}
+			}
+		}
+	},
+	"form": [
+		{
+			"type": "fieldset",
+			"title": "General Settings",
+			"expandable": false,
+			"order": -100,
+			"items": [
+				{
+					"key": "general"
+				},
+				{
+					"key": "screen"
+				}
+			]
+		}
+	],
+	"value": {
+		"general": {
+			"language": "en-US",
+			"layout": "main"
+		},
+		"screen": {
+			"width": 800,
+			"height": 600,
+			"kioskMode": false
+		}
+	}
 }

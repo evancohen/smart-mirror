@@ -52,7 +52,16 @@ function createWindow() {
 		}
 	}
 
-	var browserWindowOptions = { width: 800, height: 600, icon: 'favicon.ico', kiosk: !DevelopmentMode, autoHideMenuBar: true, darkTheme: true }
+	if(typeof config.screen == 'undefined'){
+		var mainScreen =atomScreen.getPrimaryDisplay();
+		var dimensions = mainScreen.size;
+		config.screen = {};
+		config.screen.width=dimensions.width; // 800;
+  	config.screen.height=dimensions.height; // 600;
+	  config.screen.kioskMode=true;
+	} 
+
+	var browserWindowOptions = { width: config.screen.width, height:config.screen.height, icon: 'favicon.ico', kiosk: config.screen.kioskMode, autoHideMenuBar: true, darkTheme: true }
 	if (externalDisplay) {
 		browserWindowOptions.x = externalDisplay.bounds.x + 50
 		browserWindowOptions.y = externalDisplay.bounds.y + 50
