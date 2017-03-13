@@ -57,8 +57,8 @@ function createWindow() {
 		var dimensions = mainScreen.size;
 		config.screen = {};
 		config.screen.width=dimensions.width; // 800;
-  	config.screen.height=dimensions.height; // 600;
-	  config.screen.kioskMode=true;
+		config.screen.height=dimensions.height; // 600;
+		config.screen.kioskMode=true;
 	} 
 
 	var browserWindowOptions = { width: config.screen.width, height:config.screen.height, icon: 'favicon.ico', kiosk: config.screen.kioskMode, autoHideMenuBar: true, darkTheme: true }
