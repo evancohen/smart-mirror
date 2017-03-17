@@ -9,7 +9,7 @@ try {
 	config = require("./config.json")
 } catch (e) {
 	let error = "Unknown Error"
-	config = require("./config.default.json")
+	config = require("./remote/.config.default.json")
 	firstRun = true
 	if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
 		error = "'config.json' not found. \nYou can configure your mirror at the remote address below..."

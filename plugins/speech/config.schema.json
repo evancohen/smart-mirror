@@ -6,9 +6,13 @@
             "properties": {
                 "device": {
                     "type": "string",
-                    "title": "Recording Device",
+                    "title": "Select <em><strong>Recording</strong></em> Device",
                     "required": true,
-                    "default": "hw"
+                    "default": "default",
+                    "enum": [
+                        "default",
+                        "hw:0,0"
+                    ]
                 },
                 "keyFilename": {
                     "type": "string",
@@ -26,25 +30,24 @@
                         "properties": {
                             "keyword": {
                                 "type": "string",
-                                "Title": "Keyword Name"
+                                "Title": "Keyword Name",
+                                "required": true
                             },
                             "model": {
                                 "type": "string",
-                                "title": "Model Filename"
+                                "title": "Model Filename",
+                                "required": true
                             }
                         }
                     }
                 },
                 "sensitivity": {
-                    "type": "string",
+                    "type": "number",
                     "title": "Microphone Sensitivity",
-                    "default": "0.5",
+                    "default": 0.5,
+                    "minimum": 0,
+                    "maximum": 1,
                     "required": true
-                },
-                "continuous": {
-                    "type": "boolean",
-                    "title": "Continuous Enabled",
-                    "default": "false"
                 }
             }
         }
@@ -54,31 +57,51 @@
             "type": "fieldset",
             "title": "Speech Settings",
             "expandable": false,
-            "order":-75,
-            "items":[
-              "speech.device",
-              "speech.keyFilename",
-              {
-                "type":"tabarray",
-                "title":"Keyword Spotter Hotwords",
-                "items":[
-                    {
-                      "type":"section",
-                      "legend":"{{value}}",
-                      "items": [
+            "order": -75,
+            "items": [
+                {
+                    "type": "help",
+                    "helpvalue": "<p>For help please refer to <a href='https://docs.smart-mirror.io'>the docs.</a></BR>Also, we're available on <a href='https://discord.gg/EMb4ynW'>Discord Chat with <img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt='people online'/></a> to help assist you in real time.</p>"
+                },
+                {
+                    "key":"speech.device",
+                    "titleMap": {
+                        "default":"Default Device",
+                        "hw:0,0":"Recording Device"
+                    }
+                },
+                "speech.keyFilename",
+                {
+                    "type": "tabarray",
+                    "title": "Keyword Spotter Hotwords",
+                    "items": [
                         {
-                          "key":"speech.hotwords[].keyword",
-                          "valueInLegend":true,
-                          "title":"Keyword Name"
-                        },
-                        "speech.hotwords[].model"
-                      ]
-                    }  
-                ]
-              },
-              "speech.sensitivity",
-              "speech.continuous"
+                            "type": "section",
+                            "legend": "{{value}}",
+                            "items": [
+                                {
+                                    "key": "speech.hotwords[].keyword",
+                                    "valueInLegend": true,
+                                    "title": "Keyword Name"
+                                },
+                                "speech.hotwords[].model"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "range",
+                    "step": 0.1,
+                    "key": "speech.sensitivity",
+                    "description":"<p id='sensitivityHelper'>Move above bar to see value here.</p>",
+                    "onChange": function (evt) {
+                        $('#sensitivityHelper').html($(evt.target).val());
+                    },
+                    "onInput": function (evt) {
+                        $('#sensitivityHelper').html($(evt.target).val());
+                    }
+                }
             ]
         }
-    ]
+    ],
 }

@@ -7,13 +7,13 @@ remote.start = function () {
 	const express = require('express')
 	const app = express()
 	const fs = require('fs')
-	const getConfigSchema = require('./config.schema.js')
+	const getConfigSchema = require('./remote/config.schema.js')
 
 	let config = ""
 	let configDefault = ""
 	let configJSON = ""
 	let configPath = __dirname + "/config.json"
-	let configDefaultPath = __dirname + "/config.default.json"
+	let configDefaultPath = __dirname + "/remote/.config.default.json"
  
 	function getFiles() {
 		configDefault = JSON.parse(fs.readFileSync(configDefaultPath, "utf8"))

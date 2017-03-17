@@ -7,6 +7,7 @@ $(function () {
 	var socket = io()
 	var $connectionBar = $('#connection-bar')
 	var $connectionText = $('#connection-text')
+	var $navBar = $('navbar-placeHolder')
 // index vars	
 	var $speak = $('#speak')
 	var $nospeak = $('#no-speak')
@@ -79,6 +80,9 @@ $(function () {
 	socket.on('connected', function () {
 		$connectionBar.removeClass('disconnected').addClass('connected')
 		$connectionText.html('Connected!')
+		$.get('nav.html', function (data) {
+			$navBar.html(data)
+		})
 		switch (pos) {
 		case "config.html":
 			config_init()
@@ -173,6 +177,14 @@ $(function () {
 			console.error("error stack",e.stack)
 			return;
 		}
+	})
+
+	socket.on("saved", function (msg) {
+		if (!msg) {
+			msg = "I Could not save your configuration. Don't give me that look, I'm just as sad about it as you are."
+		}
+		$('#outMsg').html("<p><strong>"+msg+"</strong></p>")
+		showElm('#out', 1)
 	})
 
 /*
