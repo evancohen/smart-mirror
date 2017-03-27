@@ -39,11 +39,15 @@
         "motion": {
             "type": "object",
             "title": "Motion Settings",
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "title": "Check to Enable Motion Detection",
-                    "default":false
+            "properties": 
+		"mode":{
+                    "type":"string",
+                    "title":"Event Mode:",
+                    "default":"disabled",
+                    "enum":[
+                      "pin",
+                      "disabled"
+                    ]
                 },
                 "pin": {
                     "type": "string",
@@ -136,8 +140,7 @@
                   ]
                 }
               ]
-            }
-              
+            }              
           ]
         }
     ],
@@ -150,7 +153,7 @@
           "sleepCmd": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
       },
       "motion": {
-        "enabled": false,
+      	"mode": "disabled",
         "pin": "GPIO26"
       }
     }

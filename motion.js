@@ -1,11 +1,11 @@
 'use strict'
 // Load in smart mirror config
 var config = require("./config.json")
-if(!config || !config.motion || !config.motion.enabled || !config.motion.pin || !config.general.language){
+if(!config || !config.motion || !config.motion.enabled || (config.motion.mode ==='pin' && !config.motion.pin) || !config.general.language){
 	console.log("!E:","Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#motion")
 }
 
-if (config.motion.enabled == true && require.resolve('johnny-five').length > 0 && require.resolve('raspi-io').length > 0 ) {
+if (config.motion.mode === 'pin' && require.resolve('johnny-five').length > 0 && require.resolve('raspi-io').length > 0 ) {
 
 	// Configure johnny-five
 	var five = require('johnny-five');
@@ -35,6 +35,6 @@ if (config.motion.enabled == true && require.resolve('johnny-five').length > 0 &
 			console.log("!e:","motionend");
 		});
 	});
-} else if ( config.motion.enabled == true){
+} else if ( config.motion.enabled !== 'disabled'){
 	console.error("!E:","Motion Dependencies are missing! Therefore despite my best efforts I'll have to disable motion, Dave. This is most embarrassing for us both.")
 }
