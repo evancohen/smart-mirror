@@ -45,6 +45,11 @@
                     "title": "Check to Enable Motion Detection",
                     "default":false
                 },
+                "external": {
+                    "type": "boolean",
+                    "title": "Check for external Motion Detection",
+                    "default":false
+                },
                 "pin": {
                     "type": "string",
                     "title": "PIN the for output on PIR module.",
@@ -151,6 +156,7 @@
       },
       "motion": {
         "enabled": false,
+				"external": false,
         "pin": "GPIO26"
       }
     }
