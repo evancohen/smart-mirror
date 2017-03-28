@@ -3,7 +3,7 @@
 set -e
 
 # Supported versions of node: v4.x, v5.x
-NODE_MINIMUM_VERSION="v4.0.0"
+NODE_MINIMUM_VERSION="v6.0.0"
 NODE_STABLE_VERSION="6.x"
 
 # Compare node versions.

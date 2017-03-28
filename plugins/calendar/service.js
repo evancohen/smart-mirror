@@ -1,8 +1,9 @@
-(function() {
+(function () {
 	'use strict';
 
 	function CalendarService($window, $http, $q) {
 		var service = {};
+
 
 		service.getCalendarEvents = function(calendars, events) {
 			var deferred = $q.defer();
@@ -11,11 +12,13 @@
 				calendars = config.calendar.icals;
 			}	
 			if(typeof calendars != 'undefined'){ // && typeof config.calendar.icals != 'undefined'){
-				loadFile(calendars,events).then(function(){
+				loadFile(calendars,events).then(function () {
+
 					deferred.resolve();
 				});
 			} else {
 				deferred.reject("No iCals defined");
+
 			}	
 			return deferred.promise;
 		}
@@ -35,6 +38,7 @@
 				}
 			});
 		}
+
 
 		var makeDate = function(type, ical_date) {
 			if(ical_date.endsWith('Z')){
@@ -72,6 +76,7 @@
 					in_event = true;
 					cur_event = {};
 				}
+
 				//If we encounter end event, complete the object and add it to our events array then clear it for reuse.
 				if (in_event && ln == 'END:VEVENT') {
 					in_event = false;
@@ -81,6 +86,7 @@
 					}
 					cur_event = null;
 				}
+
 				//If we are in an event
 				else if (in_event) {
 					//var lntrim = ln.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
@@ -124,10 +130,12 @@
 
 					//Add the value to our event object.
 					if ( type !== 'SUMMARY' || (type=='SUMMARY' && cur_event['SUMMARY'] == undefined)) {
+
 						cur_event[type] = val;
 					}
 					var keys = Object.keys(cur_event);
 					if (cur_event['SUMMARY'] !== undefined && cur_event['RRULE'] !== undefined &&
+
 							(keys.some(function(k){ return ~k.indexOf("DTSTART") })) &&
 								keys.some(function(k){ return ~k.indexOf("DTEND") })) {
 						var options = new RRule.parseString(cur_event['RRULE']);
@@ -137,6 +145,7 @@
 						var oneYear = new Date();
 						oneYear.setFullYear(oneYear.getFullYear() + 1);
 						var dates = rule.between(new Date(), oneYear, true, function (date, i){return i < 10});
+
 						for (var date in dates) {
 							var recuring_event = {};
 							recuring_event.SUMMARY = cur_event.SUMMARY;
@@ -165,6 +174,7 @@
 					}
 				}
 			}
+
 			return events;
 		}
 
@@ -181,7 +191,9 @@
 			return false;
 		}
 
+
 		Array.prototype.contains = function(obj) {
+
 			var i = this.length;
 			while (i--) {
 				if (this[i] === obj) {
@@ -190,6 +202,7 @@
 			}
 			return false;
 		}
+
 
 		service.getEvents = function(events) {
 			return events;
@@ -204,15 +217,18 @@
 				//If the event started before current time but ends after the current time or
 				// if there is no end time and the event starts between today and the max number of days add it.
 				if ((itm.end != undefined && (itm.end.isAfter(current_date) && itm.start.isBefore(current_date))) || itm.start.isBetween(current_date, end_date)){
+
 					future_events.push(itm);
 				}
 			});
 			future_events = sortAscending(future_events);
+
 			return future_events.slice(0, maxResults);
 		}
 
 		var sortAscending = function(events) {
 			return events.sort(function(a, b) {
+
 				var key1 = a.start;
 				var key2 = b.start;
 
@@ -233,6 +249,7 @@
 			events.forEach(function(itm) {
 				//If the event ended before the current time, add it to the array to return.
 				if (itm.end != undefined && itm.end.isBefore(current_date)){
+
 					past_events.push(itm);
 				}
 			});
@@ -243,5 +260,6 @@
 	}
 
 	angular.module('SmartMirror')
+
 		.factory('CalendarService', CalendarService);
 }());

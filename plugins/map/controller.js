@@ -26,6 +26,7 @@ function Map($scope, $http, GeolocationService, SpeechService, Focus) {
     // Show map
 	SpeechService.addCommand('map_show', function () {
 		$scope.map = generateMap();
+		Focus.change("map");
 	});
 
     // Hide everything and "sleep"
