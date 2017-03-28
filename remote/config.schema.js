@@ -2,53 +2,58 @@ const fs = require('fs');
 const {resolve} = require('path')
 const {exec} = require('child_process')
 const pluginDir = resolve('./plugins');
+var gotAudio = false;
 
 //TODO get general schema, then plugin schema
 
 function getConfigSchema(cb) {
 	let configSchema = { schema: {}, form: [], value: {} };
-	fs.readdir(pluginDir, function (err, files) {
-		let l = files.length - 1;
-		for (var index = 0; index < files.length; ++index) {
-			var file = files[index];
-			if (file[0] !== '.') {
-				var filePath = pluginDir + '/' + file + '/config.schema.json';
-				fs.readFile(filePath, 'utf8', function(err, data) {
-					--l;
-					if (!err) {
-						let pluginConfigSchema = JSON.parse(data);
-						if (file="speech") {
-							getAudioDevices (pluginConfigSchema)
-						}
-						Object.assign(configSchema.schema, pluginConfigSchema.schema)
-						if (pluginConfigSchema.form){configSchema.form = configSchema.form.concat(pluginConfigSchema.form)}
-						if (pluginConfigSchema.value){Object.assign(configSchema.value,pluginConfigSchema.value)}
+	exec("arecord -l | grep -w 'card'", function (err, stdout) {
+		if (!err) {
+			fs.readdir(pluginDir, function (err, files) {
+				let l = files.length - 1;
+				for (var index = 0; index < files.length; ++index) {
+					var file = files[index];
+					if (file[0] !== '.') {
+						var filePath = pluginDir + '/' + file + '/config.schema.json';
+						fs.readFile(filePath, 'utf8', function (err, data) {
+							--l;
+							if (!err) {
+								let pluginConfigSchema = JSON.parse(data);
+								if (pluginConfigSchema.schema.speech) {
+									getAudioDevices(pluginConfigSchema, stdout)
+								}
+								Object.assign(configSchema.schema, pluginConfigSchema.schema)
+								if (pluginConfigSchema.form) { configSchema.form = configSchema.form.concat(pluginConfigSchema.form) }
+								if (pluginConfigSchema.value) { Object.assign(configSchema.value, pluginConfigSchema.value) }
+							}
+							!l && cb(configSchema)
+						});
 					}
-					!l && cb (configSchema)
-				});
-			}
+				}
+			});
 		}
 	});
 }
-function getAudioDevices(obj) {
-	exec("arecord -l | grep -w 'card'", function (err, stdout) {
-		if (!err) {
-			var devOut = []
-			stdout.split("\n").forEach(function (option) {
-				let hwID = 'hw:'+ option.match(/\d+(?=\:)/g).join(',')
-				let desc = option.match(/(?:\:)[a-zA-Z\[\]\d ]+/g).join(' ').replace(": ", "")
-				devOut.push({ hwID, desc })
-			})
-			devOut.forEach(function (dataItm) {
-				formObject.schema.speech.properties.device.enum = []
-				formObject.schema.speech.properties.device.enum.push(dataItm.hwID)
-				formObject.form.forEach(function (formItm) {
-					if (formItm.key == 'speech') {
-						formItm.titleMap[dataItm.hwID]=dataItm.desc
-					}
-				})
-			})
+function getAudioDevices(obj, stdO) {
+	var devOut = []
+	stdO.split("\n").forEach(function (option) {
+		if (option != "") {
+			let hwID = 'hw:' + option.match(/\d+(?=\:)/g).join(',')
+			let desc = option.match(/[^(?!\d\: )][a-zA-Z\[\]\d \,]+(?=\, device)/g).join(' ').replace(": ", "")
+			devOut.push({ hwID, desc })
 		}
+	})
+	devOut.forEach(function (dataItm) {
+		obj.schema.speech.properties.device.enum = ["default"]
+		obj.schema.speech.properties.device.enum.push(dataItm.hwID)
+		obj.form[0].items.forEach(function (formItm, formIdx) {
+			if (formItm.key == 'speech.device') {
+				formItm.titleMap = { default: "Default Device" }
+				formItm.titleMap[dataItm.hwID] = dataItm.desc
+				obj.form[0].items[formIdx] = formItm
+			} 
+		})
 	})
 }
 
