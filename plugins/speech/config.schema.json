@@ -10,8 +10,7 @@
                     "required": true,
                     "default": "default",
                     "enum": [
-                        "default",
-                        "hw:0,0"
+                        "default"
                     ]
                 },
                 "keyFilename": {
@@ -66,8 +65,7 @@
                 {
                     "key":"speech.device",
                     "titleMap": {
-                        "default":"Default Device",
-                        "hw:0,0":"Recording Device"
+                        "default":"Default Device"
                     }
                 },
                 "speech.keyFilename",
@@ -93,15 +91,9 @@
                     "type": "range",
                     "step": 0.1,
                     "key": "speech.sensitivity",
-                    "description":"<p id='sensitivityHelper'>Move above bar to see value here.</p>",
-                    "onChange": function (evt) {
-                        $('#sensitivityHelper').html($(evt.target).val());
-                    },
-                    "onInput": function (evt) {
-                        $('#sensitivityHelper').html($(evt.target).val());
-                    }
+                    "description":"<p id='sensitivityHelper'>Move above bar to see value here.</p>"
                 }
             ]
         }
-    ],
+    ]
 }
