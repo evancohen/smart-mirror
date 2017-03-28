@@ -145,7 +145,7 @@ $(function () {
 
 				}
 				socket.emit('saveConfig', values)
-				$('#outMsg').html("<p><strong>Your Configuration has saved.</strong></p>")
+				$('#outMsg').html("<p><strong>Your Configuration has submitted.</strong></p>")
 				showElm('#out',1)
 			};
 			data.configJSON.onSubmit = function (errors) {
