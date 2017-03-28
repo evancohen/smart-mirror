@@ -40,9 +40,10 @@ function getAudioDevices(obj) {
 				devOut.push({ hwID, desc })
 			})
 			devOut.forEach(function (dataItm) {
+				formObject.schema.speech.properties.device.enum = []
 				formObject.schema.speech.properties.device.enum.push(dataItm.hwID)
 				formObject.form.forEach(function (formItm) {
-					if (formItm.key == mode) {
+					if (formItm.key == 'speech') {
 						formItm.titleMap[dataItm.hwID]=dataItm.desc
 					}
 				})
