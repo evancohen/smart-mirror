@@ -2,7 +2,7 @@ const fs = require('fs');
 const {resolve} = require('path')
 const {exec} = require('child_process')
 const pluginDir = resolve('./plugins');
-var gotAudio = false;
+
 
 //TODO get general schema, then plugin schema
 

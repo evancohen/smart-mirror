@@ -84,11 +84,11 @@ $(function () {
 			$navBar.html(data)
 		})
 		switch (pos) {
-			case "config.html":
-				config_init()
-				break;
-			default:
-				index_init()
+		case "config.html":
+			config_init()
+			break;
+		default:
+			index_init()
 		}
 	})
 
