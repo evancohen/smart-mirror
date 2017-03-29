@@ -1,6 +1,20 @@
+/* global __dirname */
+/* global process */
+const electron = require('electron')
+// Child Process for keyword spotter
+const {spawn, exec} = require('child_process')
+// Smart mirror remote
+const remote = require('./remote.js')
+// Module to control application life.
+const app = electron.app
+// Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow
+// Prevent the monitor from going to sleep.
+const powerSaveBlocker = electron.powerSaveBlocker
+powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
-const DevelopmentMode = (process.argv.indexOf("dev") > -1)
+const DevelopmentMode = process.argv[2] === "dev"
 
 // Load the smart mirror config
 let config
@@ -9,7 +23,7 @@ try {
 	config = require("./config.json")
 } catch (e) {
 	let error = "Unknown Error"
-	config = require("./remote/.config.default.json")
+	config = require("./config.default.json")
 	firstRun = true
 	if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
 		error = "'config.json' not found. \nYou can configure your mirror at the remote address below..."
