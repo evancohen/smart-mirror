@@ -11,7 +11,7 @@ function getConfigSchema(cb) {
 	exec("arecord -l | grep -w 'card'", function (err, stdout) {
 		if (!err) {
 			fs.readdir(pluginDir, function (err, files) {
-				let l = files.length - 1;
+				let l = files.length;
 				for (var index = 0; index < files.length; ++index) {
 					var file = files[index];
 					if (file[0] !== '.') {
