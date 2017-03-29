@@ -5,9 +5,9 @@ function Weather($scope, $interval, $http, GeolocationService) {
 	var weather = {}
 
 	weather.get = function () {
-		return $http.get('https://api.darksky.net/forecast/' + config.forecast.key + '/' +
+		return $http.JSONP('https://api.darksky.net/forecast/' + config.forecast.key + '/' +
             geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
-            config.forecast.units + "&lang=" + language)
+            config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
             .then(function (response) {
 	return weather.forecast = response;
 });
