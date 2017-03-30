@@ -9,13 +9,13 @@
 		service.scope = "default";
 		service.exec = require('child_process').exec;
 
-		var EneryStarTimer = null;
-		var EneryStarTimerStop = null;
-			// EnergyStar timeout is 15 minutes
-			// we will wait 14.5 minutes in milliseconds
-		var EnergyStarDelay=14.5 * 60 * 1000;
-			// forced wakeup to defeat TV energystar power off
-		var EnergyStarWakeupDelay=2 * 1000;
+		var energyStarTimer = null;
+		var energyStarTimerStop = null;
+		// energyStar timeout is 15 minutes
+		// we will wait 14.5 minutes in milliseconds
+		var energyStarDelay = 14.5 * 60 * 1000;
+		// forced wakeup to defeat TV energystar power off
+		var energyStarWakeupDelay = 2 * 1000;
 
 		service.startAutoSleepTimer = function () {
 
@@ -37,62 +37,66 @@
 			$interval.cancel(autoSleepTimer);
 		};
 
-		service.wake = function (actual) {
+		service.wake = function () {
 			// only wake up if sleeping
-			if(Focus.get() === 'sleep'){
+			if (Focus.get() === 'sleep') {
 				service.woke = true;
 				if (config.autoTimer.mode == "monitor") {
 					service.exec(config.autoTimer.wakeCmd, service.puts);
-				} else if (config.autoTimer.mode == "tv" || config.autoTimer.mode == "energy") {
-					// is this a real wakeup, not the fake one to handle the enerystar power off problem
-					if(actual == true){
-						// if the timer was running
-						if(EneryStarTimer !=null){
-							// stop it
-							$interval.cancel(EneryStarTimer)
-							EneryStarTimer = null;
-						}
-						// if the dummy wake up delay is running, stop it too
-						if(EneryStarTimerStop !=null){
-							$interval.cancel(EneryStarTimerStop)
-						}
+				} else if (config.autoTimer.mode == "tv") {
+					Focus.change('default');
+				} else if (config.autoTimer.mode == "energy") {
+					focus.change('default')
+					// if the timer was running
+					if (energyStarTimer != null) {
+						// stop it
+						$interval.cancel(energyStarTimer)
+						energyStarTimer = null;
+					}
+					// if the dummy wake up delay is running, stop it too
+					if (energyStarTimerStop != null) {
+						$interval.cancel(energyStarTimerStop)
 					}
 				}
-				Focus.change("default");
 			}
 		};
 
 		// used by the energystar override function
 		// done being awake, go back to sleep again
-		service.done= function () {
+		var done = function () {
 			// go back to sleep
-			service.sleep();
+			Focus.change('sleep')
 			// stop the short term delay timer
-			$interval.cancel(EneryStarTimerStop)
+			$interval.cancel(energyStarTimerStop)
 			// cancel to long timer
-			$interval.cancel(EneryStarTimer)
+			$interval.cancel(energyStarTimer)
 			// restart it, so we don't drift towards 0 delay 
-			EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
+			energyStarTimer = $interval(bleep, energyStarDelay);
 			// restart the main sleep timer
 			service.startAutoSleepTimer();
 		}
 
 		// do the fake, short term wakeup
-		service.bleep = function(){
-			service.wake(false);
+		var bleep = function () {
+			Focus.change('default')
 			// start the timer for returning to sleep
-			EneryStarTimerStop = $interval(service.done, EnergyStarWakeupDelay);
+			energyStarTimerStop = $interval(done, energyStarWakeupDelay);
 		}
 
 		service.sleep = function () {
 			service.woke = false;
 			if (config.autoTimer.mode == "monitor") {
 				service.exec(config.autoTimer.sleepCmd, service.puts);
+				Focus.change("sleep")
+			} else if (config.autoTimer.mode == "tv") {
+				Focus.change('sleep')
+			} else if (config.autoTimer.mode == "energy") {
 				Focus.change("sleep");
-			} else if (config.autoTimer.mode == "tv" || config.autoTimer.mode == "energy") {
-				Focus.change("sleep");
-				if(EneryStarTimer == null && config.autoTimer.mode == "energy") {
-					EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
+				if (energyStarTimer == null) {
+					energyStarTimer = $interval(bleep, energyStarDelay);
+				} else {
+					$interval.cancel(energyStarTimer)
+					energyStarTimer = $interval(bleep, energyStarDelay);
 				}
 			} else {
 				Focus.change("default");
@@ -140,6 +144,6 @@
 	}
 
 	angular.module('SmartMirror')
-        .factory('AutoSleepService', AutoSleepService);
+		.factory('AutoSleepService', AutoSleepService);
 
 } ());
