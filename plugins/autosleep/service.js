@@ -9,12 +9,20 @@
 		service.scope = "default";
 		service.exec = require('child_process').exec;
 
+		var EneryStarTimer = null;
+		var EneryStarTimerStop = null;
+			// EnergyStar timeout is 15 minutes
+			// we will wait 14.5 minutes in milliseconds
+		var EnergyStarDelay=14.5 * 60 * 1000;
+			// forced wakeup to defeat TV energystar power off
+		var EnergyStarWakeupDelay=2 * 1000;
+
 		service.startAutoSleepTimer = function () {
 
 			var milliConversion = 60000
 			if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined') {
 				service.stopAutoSleepTimer();
-                // assume if autoSleep is greater than 1 minute in milliseconds the value is already converted. if not convert
+				// assume if autoSleep is greater than 1 minute in milliseconds the value is already converted. if not convert
 				if (config.autoTimer.autoSleep > 60000) {
 					milliConversion = 1
 					console.info('ProTip: Change your config so that config.autoTimer.autoSleep is in minutes not milliseconds.');
@@ -29,25 +37,66 @@
 			$interval.cancel(autoSleepTimer);
 		};
 
-		service.wake = function () {
-			service.woke = true;
-			if (config.autoTimer.mode == "monitor") {
-				service.exec(config.autoTimer.wakeCmd, service.puts);
+		service.wake = function (actual) {
+			// only wake up if sleeping
+			if(Focus.get() === 'sleep'){
+				service.woke = true;
+				if (config.autoTimer.mode == "monitor") {
+					service.exec(config.autoTimer.wakeCmd, service.puts);
+				} else if (config.autoTimer.mode == "tv" || config.autoTimer.mode == "energy") {
+					// is this a real wakeup, not the fake one to handle the enerystar power off problem
+					if(actual == true){
+						// if the timer was running
+						if(EneryStarTimer !=null){
+							// stop it
+							$interval.cancel(EneryStarTimer)
+							EneryStarTimer = null;
+						}
+						// if the dummy wake up delay is running, stop it too
+						if(EneryStarTimerStop !=null){
+							$interval.cancel(EneryStarTimerStop)
+						}
+					}
+				}
+				Focus.change("default");
 			}
-			Focus.change("default");
 		};
+
+		// used by the energystar override function
+		// done being awake, go back to sleep again
+		service.done= function () {
+			// go back to sleep
+			service.sleep();
+			// stop the short term delay timer
+			$interval.cancel(EneryStarTimerStop)
+			// cancel to long timer
+			$interval.cancel(EneryStarTimer)
+			// restart it, so we don't drift towards 0 delay 
+			EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
+			// restart the main sleep timer
+			service.startAutoSleepTimer();
+		}
+
+		// do the fake, short term wakeup
+		service.bleep = function(){
+			service.wake(false);
+			// start the timer for returning to sleep
+			EneryStarTimerStop = $interval(service.done, EnergyStarWakeupDelay);
+		}
 
 		service.sleep = function () {
 			service.woke = false;
 			if (config.autoTimer.mode == "monitor") {
 				service.exec(config.autoTimer.sleepCmd, service.puts);
 				Focus.change("sleep");
-			} else if (config.autoTimer.mode == "tv") {
+			} else if (config.autoTimer.mode == "tv" || config.autoTimer.mode == "energy") {
 				Focus.change("sleep");
+				if(EneryStarTimer == null && config.autoTimer.mode == "energy") {
+					EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
+				}
 			} else {
 				Focus.change("default");
 			}
-
 		};
 
 		service.puts = function (error, stdout, stderr) {
@@ -60,12 +109,12 @@
 
 
 		ipcRenderer.on('motionstart', () => {
-			service.wake()
+			service.wake(true)
 			console.debug('motion start detected');
 		});
 
 		ipcRenderer.on('remoteWakeUp', () => {
-			service.wake()
+			service.wake(true)
 			console.debug('remote wakeUp detected');
 		});
 
