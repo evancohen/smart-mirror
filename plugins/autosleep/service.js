@@ -43,7 +43,7 @@
 				service.woke = true;
 				if (config.autoTimer.mode == "monitor") {
 					service.exec(config.autoTimer.wakeCmd, service.puts);
-				} else if (config.autoTimer.mode == "tv") {
+				} else if (config.autoTimer.mode == "tv" || config.autoTimer.mode == "energy") {
 					// is this a real wakeup, not the fake one to handle the enerystar power off problem
 					if(actual == true){
 						// if the timer was running
@@ -89,9 +89,9 @@
 			if (config.autoTimer.mode == "monitor") {
 				service.exec(config.autoTimer.sleepCmd, service.puts);
 				Focus.change("sleep");
-			} else if (config.autoTimer.mode == "tv") {
+			} else if (config.autoTimer.mode == "tv" || config.autoTimer.mode == "energy") {
 				Focus.change("sleep");
-				if(EneryStarTimer == null) {
+				if(EneryStarTimer == null && config.autoTimer.mode == "energy") {
 					EneryStarTimer = $interval(service.bleep, EnergyStarDelay);
 				}
 			} else {
