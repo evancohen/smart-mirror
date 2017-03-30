@@ -2,16 +2,17 @@
     "schema": {
         "forecast": {
             "type": "object",
-            "title": "<a href='http://Forecast.io'>Forecast.io API Settings</a>",
+            "title": "Weather Settings",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "API Key"
+                    "title": "API Key",
+                    "description": "(see <a href='http://darksky.net'>darksky.net</a> documentation to obtain the API Key)"
                 },
                 "units": {
                     "type": "string",
                     "title": "Units",
-                    "description": "(see forecast.io documentation if you're getting the wrong units)",
+                    "description": "(see <a href='http://darksky.net'>darksky.net</a> documentation if you're getting the wrong units)",
                     "default": "auto"
                 },
                 "refreshInterval": {
