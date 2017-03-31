@@ -17,14 +17,14 @@
     },
     "form":[
         {
-          "title": "<a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Geo-Position Settings</a>",
+          "title": "Geo-Position Settings",
           "type":"fieldset",
           "expandable":true,
           "order":0,
           "items":[
             {
               "type":"help",
-              "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br></br>"
+              "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"
             },
             "geoPosition.latitude",
             "geoPosition.longitude"
