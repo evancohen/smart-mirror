@@ -11,6 +11,7 @@
                     "enum":[
                       "monitor",
                       "tv",
+                      "energy",
                       "disabled"
                     ]
                 },
@@ -72,6 +73,7 @@
               "titleMap":{
                 "monitor":"Monitor",
                 "tv":"TV",
+                "energy":"Energy Star TV",
                 "disabled":"Disabled"
               },
               "items":[
@@ -89,6 +91,29 @@
                     },
                     {
                       "key": "autoTimer.sleepCmd"
+                    },
+                    {
+                      "key":"motion",
+                      "expandable":true
+                    }
+                  ]
+                },
+                {
+                  "type":"section",
+                  "items":[
+                    {
+                      "key": "autoTimer.autoWake"
+                    },
+                    {
+                      "key": "autoTimer.autoSleep"
+                    },
+                    {
+                      "key": "autoTimer.wakeCmd",
+                      "type":"hidden"
+                    },
+                    {
+                      "key": "autoTimer.sleepCmd",
+                      "type":"hidden"
                     },
                     {
                       "key":"motion",

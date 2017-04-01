@@ -11,7 +11,7 @@
     try{
       config = require('./config.json')
     } catch (e){
-      config = require('./config.default.json')
+      config = require('./remote/.config.default.json')
     }
     // Error logging
     window.onerror = function (errorMsg, url, lineNumber) {
