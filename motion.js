@@ -1,8 +1,8 @@
 'use strict'
 var fs = require('fs');
 const path = require('path');
-var DetectionDir='./motion';
-var DetectionFile='detected';	
+var detectionDir='./motion';
+var detectionFile='detected';	
 // Load in smart mirror config
 var config = require("./config.json")
 if(!config || !config.motion || !config.motion.mode || (config.motion.mode ==='pin' && !config.motion.pin) || !config.general.language ){
@@ -12,28 +12,28 @@ if(!config || !config.motion || !config.motion.mode || (config.motion.mode ==='p
 if (config.motion.mode !== 'disabled'){
 	if(config.motion.mode === 'external'){
 		// check to see if the external motion event folder exists
-		fs.access(DetectionDir, function(err) {
+		fs.access(detectionDir, function(err) {
 			// if not
 			if (err && err.code === 'ENOENT') {
 				// create it
-				fs.mkdir(DetectionDir);
-				console.debug('created motion directory', DetectionDir);
+				fs.mkdir(detectionDir);
+				console.debug('created motion directory', detectionDir);
 			}
 			else{
 				// make sure the directory is empty
-				rmDir(DetectionDir,false);
+				rmDir(detectionDir,false);
 			}
 			// change detector function
 			// watch for a file to appear in the folder
-			fs.watch(DetectionDir, (eventType, filename) => {
+			fs.watch(detectionDir, (eventType, filename) => {
 				if (filename) {
 					// remove the file
-					fs.unlink(path.join(DetectionDir,filename), function(error) { 
+					fs.unlink(path.join(detectionDir,filename), function(error) { 
 						// consume the enonet error
 						if(error == null){
 							//console.debug('motion detected from external source');
 							// if the start motion file
-							if(filename === DetectionFile) {
+							if(filename === detectionFile) {
 								// signal motion started
 								console.log("!s:","motionstart");
 							}
