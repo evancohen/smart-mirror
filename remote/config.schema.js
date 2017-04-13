@@ -8,7 +8,7 @@ const pluginDir = resolve('./plugins');
 
 function getConfigSchema(cb) {
 	let configSchema = { schema: {}, form: [], value: {} };
-	exec("arecord -l | grep -w 'card'", function (err, stdout) {
+	exec("arecord -l | grep -w 'card'", function (arecerr, stdout) {
 		fs.readdir(pluginDir, function (err, files) {
 			let l = files.length;
 			for (var index = 0; index < files.length; ++index) {
@@ -19,7 +19,7 @@ function getConfigSchema(cb) {
 						--l;
 						if (!err) {
 							let pluginConfigSchema = JSON.parse(data);
-							if (pluginConfigSchema.schema.speech) {
+							if (pluginConfigSchema.schema.speech && !arecerr) {
 								getAudioDevices(pluginConfigSchema, stdout)
 							}
 							Object.assign(configSchema.schema, pluginConfigSchema.schema)
