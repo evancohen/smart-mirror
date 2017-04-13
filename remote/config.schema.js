@@ -38,7 +38,7 @@ function getAudioDevices(obj, stdO) {
 	stdO.split("\n").forEach(function (option) {
 		if (option != "") {
 			let hwID = 'hw:' + option.match(/\d+(?=\:)/g).join(',')
-			let desc = option.match(/[^(?!\d\: )][a-zA-Z\[\]\d \,]+(?=\, device)/g).join(' ').replace(": ", "")
+			let desc = option.match(/\[(.*?)\]/g).join(' ').replace(": ", "")
 			devOut.push({ hwID, desc })
 		}
 	})
