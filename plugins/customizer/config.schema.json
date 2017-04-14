@@ -26,12 +26,9 @@
                                             "title": "Tag",
                                             "enum":[
                                                 "h1",
-                                                "10",
-                                                "12",
-                                                "16",
-                                                "10b",
-                                                "12b",
-                                                "16b"
+                                                "h2",
+                                                "h3",
+                                                "h4"
                                             ]
                                         },
                                         "text": {
@@ -52,7 +49,7 @@
       {
         "type": "fieldset",
         "title": "HTML Customizer Settings",
-        "expandable":true,
+        "expandable":false,
         "order":0,
         "items": [
              {
@@ -71,7 +68,34 @@
                       "key": "customizer.commands[].utterance",
                       "valueInLegend": true
                     },
-                    "customizer.commands[].body[]"
+                    {
+                      "type":"tabarray",
+                      "title":"Create Body Here:",
+                      "items":[
+                        {
+                          "type":"section",
+                          "legend": "{{(value.length>=8) ? value.slice(0,7)+'...' : value}}",
+                          "items":[
+                            {
+                              "key":"customizer.commands[].body[].tag",
+                              "titleMap":{
+                                "h1":"Heading 1",
+                                "h2":"Heading 2",
+                                "h3":"Heading 3",
+                                "h4":"Heading 4",
+                                "p": "Paragraph",
+                                "em":"Italics",
+                                "strong":"Bold"
+                              }
+                            },
+                            {
+                              "key":"customizer.commands[].body[].text",
+                              "valueInLegend": true
+                            }
+                          ]
+                        }
+                      ]
+                    }
                   ]
               }
             ]

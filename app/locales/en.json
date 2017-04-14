@@ -1,6 +1,6 @@
 {
     "home" : {
-        "commands" : "Say \"What can I say?\" to see a list of commands..."
+        "commands" : ""
     },
     "traffic" : {
         "time_to" : "Time to {{name}}: "
@@ -45,11 +45,6 @@
     },
     "commands": {
         "title" : "Available Commands",
-        "list": {
-            "text": "What can I say?",
-            "voice": "What can I say",
-            "description": "Shows a list of voice commands available to you."
-        },
         "home": {
             "text": "Go home",
             "voice": "Go home",
