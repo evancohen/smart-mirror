@@ -3,7 +3,12 @@
 const os = require('os');
 const fs = require('fs')
 const path = require('path')
-var config = require("./config.json")
+let config
+try {
+	config = require("./config.json")
+} catch (e) {
+	config = false
+}
 
 if (!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords || !config.general.language) {
 	throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech"
