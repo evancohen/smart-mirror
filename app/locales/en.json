@@ -50,6 +50,16 @@
             "voice": "What can I say",
             "description": "Shows a list of voice commands available to you."
         },
+        "list-next": {
+            "text": "Next page",
+            "voice": "next (command) (page)",
+            "description": "Shows next page of voice commands available to you."
+        },
+        "list-prev": {
+            "text": "Previous Page",
+            "voice": "What can I say",
+            "description": "Shows previous page of voice commands available to you."
+        },
         "home": {
             "text": "Go home",
             "voice": "Go home",
@@ -212,7 +222,6 @@
         "batteryStatus": "Battery Status: ",
         "today": "Today",
         "steps": "steps",
-        "averageSteps": "steps a day",
         "caloriesBurned": "calories burned",
         "lastSync": "Last Sync",
         "average": "Average",

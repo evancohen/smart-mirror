@@ -102,14 +102,6 @@
 				Focus.change("default");
 			}
 
-            // List commands
-			SpeechService.addCommand('list', function () {
-				console.debug("Here is a list of commands...");
-				console.log(SpeechService.commands);
-				$scope.commands = SpeechService.getCommands();
-				Focus.change("commands");
-			});
-
             // Go back to default view
 			SpeechService.addCommand('home', defaultView);
 

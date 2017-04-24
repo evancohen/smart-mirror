@@ -7,6 +7,7 @@ const {ipcRenderer} = require('electron');
 		var service = {}
 		var callbacks = {}
 		var commandList = []
+		var commandPage = []
 
 		service.init = function (cb) {
             // workaround so we can trigger requests at any time 
@@ -86,8 +87,12 @@ const {ipcRenderer} = require('electron');
 			console.debug('added command "' + phrase + '"', service.commands)
 		}
 
+
 		service.getCommands = function () {
-			return commandList;
+			for (var i=0; i < Math.ceil(commandList.length/(config.speech.commandsPerPage || 10)); i++) {
+				commandPage.push(commandList.splice(i, i+9))
+			}
+			return commandPage
 		}
 
 		return service;
