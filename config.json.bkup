@@ -1,0 +1,90 @@
+{
+  "general": {
+    "language": "en-US",
+    "layout": "main"
+  },
+  "remote": {
+    "enabled": true,
+    "port": 8080
+  },
+  "calendar": {
+    "icals": [
+      "https://calendar.google.com/calendar/ical/t61t5rc5p7gqq8j90s81gg8fek%40group.calendar.google.com/private-e410059cae1c82d48b2a50029c09aaea/basic.ics",
+      "https://calendar.google.com/calendar/ical/al4h4luj53o83m0k24v63ipe38%40group.calendar.google.com/private-970d28dfda8b566faa6419ebd7438728/basic.ics"
+    ],
+    "maxResults": 5,
+    "maxDays": 9,
+    "showCalendarNames": true
+  },
+  "geoPosition": {
+    "latitude": "41.547188",
+    "longitude": "-87.72968600000002"
+  },
+  "giphy": {
+    "key": "dc6zaTOxFJmzC"
+  },
+  "greeting": {
+    "option": "allDay"
+  },
+  "rss": {
+    "refreshInterval": 120
+  },
+  "autoTimer": {
+    "mode": "tv",
+    "autoWake": "07:00:00",
+    "autoSleep": 2,
+    "wakeCmd": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1",
+    "sleepCmd": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
+  },
+  "motion": {
+    "pin": "GPIO26",
+    "enabled": false
+  },
+  "fitbit": {
+    "timeout": 10000,
+    "uris": {
+      "authorizationUri": "https://www.fitbit.com",
+      "authorizationPath": "/oauth2/authorize",
+      "tokenUri": "https://api.fitbit.com",
+      "tokenPath": "/oauth2/token"
+    },
+    "authorization_uri": {
+      "redirect_uri": "http://localhost:4000/fitbit_auth_callback/",
+      "response_type": "code",
+      "scope": "activity nutrition profile settings sleep social weight heartrate",
+      "state": "3(#0/!~"
+    }
+  },
+  "lastfm": {
+    "key": "d7861936a2d92da3e3aebaa2bc3e77ec",
+    "user": "justbill2020",
+    "refreshInterval": 0.2
+  },
+  "stock": {
+    "names": [
+      "ELNK",
+      "GOOG"
+    ]
+  },
+  "traffic": {
+    "key": "AnsC-GK0VRN780HMmqOnBX83HtgpRgi-TMcoCKye0oMS_IiADw0f3lFMuIlGZiIS",
+    "refreshInterval": "5"
+  },
+  "tvshows": {
+    "shows": [
+      "This is Us",
+      "Game of Thrones",
+      "The Walking Dead",
+      "Supergirl",
+      "The Flash",
+      "Arrow",
+      "Legends of Tomorrow"
+    ],
+    "refreshInterval": 1440
+  },
+  "forecast": {
+    "key": "30f4ff4dd45f4364eb8d5fb73c5401d6",
+    "units": "auto",
+    "refreshInterval": 2
+  }
+}

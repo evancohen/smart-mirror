@@ -1,7 +1,8 @@
 {
   "general": {
     "language": "en-US",
-    "layout": "main"
+    "layout": "main",
+    "commandsPerPage":10
   },
   "remote": {
     "enabled": true,

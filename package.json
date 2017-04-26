@@ -1,12 +1,11 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
     "install": "bower install",
     "start": "electron main.js ",
-    "microphone-debug": "electron scripts/microphone-debug/main.js",
     "train-model": "electron scripts/train-model.js",
     "sonus": "node sonus.js",
     "motion": "sudo node motion.js",
