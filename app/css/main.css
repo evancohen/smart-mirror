@@ -136,6 +136,14 @@ dt {
     margin-right: auto;
 }
 
+span.command-prev {
+    float:left;
+}
+
+span.command-next {
+    float:right;
+}
+
 ul.calendar {
     list-style: none;
     font-size: 22px;

@@ -7,14 +7,14 @@ remote.start = function () {
 	const express = require('express')
 	const app = express()
 	const fs = require('fs')
-	const getConfigSchema = require('./config.schema.js')
+	const getConfigSchema = require('./remote/config.schema.js')
 
 	let config = ""
 	let configDefault = ""
 	let configJSON = ""
 	let configPath = __dirname + "/config.json"
-	let configDefaultPath = __dirname + "/config.default.json"
- 
+	let configDefaultPath = __dirname + "/remote/.config.default.json"
+
 	function getFiles() {
 		configDefault = JSON.parse(fs.readFileSync(configDefaultPath, "utf8"))
 
@@ -28,20 +28,16 @@ remote.start = function () {
 			config = configDefault
 		}
 		configDefault = JSON.parse(fs.readFileSync(configDefaultPath, "utf8"))
-    //TODO this is async, all of the remote should be async too
-		getConfigSchema(function (configSchema) {
-      //configSchema.form.push({"type":"button","title":"Submit","order":10000})
-			configSchema.form.sort(function (a, b) { return a.order - b.order })
-			configJSON = configSchema
-		})
+		//TODO this is async, all of the remote should be async too
+
 	}
 	getFiles()
 
 	const server = require('http').createServer(app)
 
-  // Start the server
+	// Start the server
 	server.listen(config.remote.port)
-  // Use the remote directory and initilize socket connection
+	// Use the remote directory and initilize socket connection
 	app.use(express.static(__dirname + '/remote'))
 	remote.io = require('socket.io')(server)
 
@@ -51,7 +47,7 @@ remote.start = function () {
 	remote.io.on('connection', function (socket) {
 		socket.emit('connected')
 
-    // When the mirror recieves a remote command
+		// When the mirror recieves a remote command
 		socket.on('command', function (command) {
 			remote.emit('command', command)
 		})
@@ -90,8 +86,11 @@ remote.start = function () {
 		})
 
 		socket.on('getForm', function () {
-			getFiles()
-			socket.emit("json", { "configJSON": configJSON, "configDefault": configDefault, "config": config })
+			getConfigSchema(function (configSchema) {
+				configSchema.form.sort(function (a, b) { return a.order - b.order })
+				configJSON = configSchema
+				socket.emit("json", { "configJSON": configJSON, "configDefault": configDefault, "config": config })
+			})
 		})
 
 	}) // end - connection

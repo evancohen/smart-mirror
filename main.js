@@ -14,7 +14,7 @@ const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start('prevent-display-sleep')
 
 // Launching the mirror in dev mode
-const DevelopmentMode = process.argv[2] === "dev"
+const DevelopmentMode = process.argv.includes("dev")
 
 // Load the smart mirror config
 let config
@@ -23,7 +23,7 @@ try {
 	config = require("./config.json")
 } catch (e) {
 	let error = "Unknown Error"
-	config = require("./config.default.json")
+	config = require("./remote/.config.default.json")
 	firstRun = true
 	if (typeof e.code !== 'undefined' && e.code === 'MODULE_NOT_FOUND') {
 		error = "'config.json' not found. \nYou can configure your mirror at the remote address below..."

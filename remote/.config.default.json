@@ -1,0 +1,98 @@
+{
+  "general": {
+    "language": "en-US",
+    "layout": "main",
+    "commandsPerPage":10
+  },
+  "remote": {
+    "enabled": true,
+    "firstRun": true,
+    "port": 8080
+  },
+  "autoTimer": {
+    "mode": "disabled",
+    "autoSleep": 40,
+    "autoWake": "07:00:00",
+    "wakeCmd": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1",
+    "sleepCmd": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
+  },
+  "motion": {
+    "enabled": false,
+    "pin": "GPIO26"
+  },
+  "speech": {
+    "device": "default",
+    "keyFilename": "./keyfile.json",
+    "hotwords": [
+      {
+        "keyword": "smart mirror",
+        "model": "smart_mirror.pmdl"
+      }
+    ],
+    "sensitivity": "0.5"
+  },
+  "forecast": {
+    "key": "",
+    "units": "auto",
+    "refreshInterval": 2
+  },
+  "light": {
+    "settings": {
+      "hueIp": "",
+      "hueUsername": ""
+    },
+    "setup": []
+  },
+  "calendar": {
+    "icals": [
+      ""
+    ],
+    "maxResults": 9,
+    "maxDays": 9,
+    "showCalendarNames": true
+  },
+  "giphy": {
+    "key": "dc6zaTOxFJmzC"
+  },
+  "youtube": {
+    "key": ""
+  },
+  "soundcloud": {
+    "key": ""
+  },
+  "traffic": {
+    "key": "",
+    "refreshInterval": 5,
+    "trips": []
+  },
+  "rss": {
+    "feeds": [],
+    "refreshInterval": 120
+  },
+  "stock": {
+    "names": []
+  },
+  "lastfm": {
+    "key": "",
+    "user": "",
+    "refreshInterval": 0.6
+  },
+  "todoist": {
+    "key": ""
+  },
+  "fitbit": {
+    "timeout": 10000,
+    "uris": {
+      "authorizationUri": "https://www.fitbit.com",
+      "authorizationPath": "/oauth2/authorize",
+      "tokenUri": "https://api.fitbit.com",
+      "tokenPath": "/oauth2/token"
+    },
+    "authorization_uri": {
+      "redirect_uri": "http://localhost:4000/fitbit_auth_callback/",
+      "response_type": "code",
+      "scope": "activity nutrition profile settings sleep social weight heartrate",
+      "state": "3(#0/!~"
+    }
+  }
+}

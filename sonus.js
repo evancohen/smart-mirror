@@ -3,8 +3,12 @@
 const os = require('os');
 const fs = require('fs')
 const path = require('path')
-var config = require("./config.json")
-
+let config
+try {
+	config = require("./config.json")
+} catch (e) {
+	config = false
+}
 
 if (!config || !config.speech || !config.speech.keyFilename || !config.speech.hotwords || !config.general.language) {
 	throw "Configuration Error! See: https://docs.smart-mirror.io/docs/configure_the_mirror.html#speech"
@@ -38,7 +42,8 @@ for (let i = 0; i < config.speech.hotwords.length; i++) {
 
 const language = config.general.language
 const recordProgram = (os.arch() == 'arm') ? "arecord" : "rec"
-const sonus = Sonus.init({ hotwords, language, recordProgram }, speech)
+const device = (config.speech.device != "") ? config.speech.device : 'default'
+const sonus = Sonus.init({ hotwords, language, recordProgram, device }, speech)
 
 // Start Recognition
 Sonus.start(sonus)
