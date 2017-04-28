@@ -2,6 +2,6 @@
     <div class="stock-information" ng-repeat="quote in stock">
         <span><i class="fa fa-rss fade" style="margin-right: 5px";></i></span>
         <span fade ng-bind="quote.Name"></span>: $<span fade ng-bind="quote.LastTradePriceOnly  | number : 3"></span>
-        <span ng-bind="quote.Change"></span>
+        <span ng-bind="quote.Change" ng-class="{'stock-change-positive': quote.Change>0, 'stock-change-negative': quote.Change<0}"></span>
     </div>
 </div>
