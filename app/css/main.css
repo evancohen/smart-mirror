@@ -294,6 +294,14 @@ ul.calendar {
     margin-right: 10px;
 }
 
+.stock-change-positive {
+    color: green;
+}
+
+.stock-change-negative {
+    color: red;
+}
+
 .time-to {
     font-weight: bold;
 }
