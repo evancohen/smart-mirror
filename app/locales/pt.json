@@ -142,7 +142,7 @@
         },
         "reminder_clear": {
             "text": "Limpa os lembretes",
-            "voice": "Limpa (os) lembretes",
+            "voice": "Limpa (os) (meus) lembretes",
             "description": "Limpa a lista de lembretes."
         },
         "reminder_show": {
