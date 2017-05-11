@@ -1,12 +1,12 @@
 {
     "home" : {
-        "commands" : "Say \"사용가능한 질문\" to see a list of commands..."
+        "commands" : "\"사용가능한 질문\" 이라고 말해보세요.."
     },
     "traffic" : {
-        "time_to" : "{{name}} 에 시간: "
+        "time_to" : "Time to {{name}}: "
     },
     "reminders": {
-        "empty": "더 리콜 없습니다."
+        "empty": "리스트가 비었습니다."
     },
     "timer": {
       "one": "일",
@@ -15,201 +15,265 @@
     },
     "lights": {
         "colors": {
-            "red": "빨간",
-            "dark_green": "짙은 녹색",
-            "green": "녹색",
-            "blue": "푸른",
-            "yellow": "황색",
-            "orange":  "오렌지",
-            "pink": "핑크",
-            "purple": "보라색",
-            "white": "화이트",
+            "red": "빨강",
+            "dark_green": "군청",
+            "green": "초록",
+            "blue": "파랑",
+            "yellow": "노랑",
+            "orange":  "주황",
+            "pink": "분홍",
+            "purple": "보라",
+            "white": "하양",
             "movie": "영화",
-            "colorloop": "색",
-            "stop": "중지"
+            "colorloop": "랜덤",
+            "stop": "정지"
         },
         "intensity": {
             "increase": "증가",
             "decrease": "감소",
-            "max": "최대"
+            "max": "최대",
+            "half": "반절",
+            "quarter": "4분의1",
+            "threequarter": "3분의1"
         },
         "action": {
-            "on": "조명",
-            "off": "끄다"
+            "on": "켜",
+            "off": "꺼",
+            "nightmode": "야간모드",
+            "reset": "리셋"
         }
     },
     "commands": {
-        "title" : "사용 가능한 명령",
+        "title" : "사용가능한 질문",
         "list": {
             "text": "사용가능한 질문",
             "voice": "사용가능한 질문",
-            "description": "사용 가능한 질문\" 이라 말해 보세요\""
+            "description": "음성인식으로 사용 가능한 질문을 보여줍니다."
+        },
+        "list-next": {
+            "text": "다음 페이지",
+            "voice": "다음 페이지",
+            "description": "다음 페이지를 보여줍니다(사용가능한 질문등 넘길 수 있는 페이지에서만 작동합니다.)"
+        },
+        "list-prev": {
+            "text": "이전 페이지",
+            "voice": "이전 페이지",
+            "description": "이전 페이지를 보여줍니다(사용가능한 질문등 넘길 수 있는 페이지에서만 작동합니다.)"
+        },
+        "list-page": {
+            "text": "_______(으)로 이동",
+            "voice": "*pageNum(으)로 이동",
+            "description": "지정한 페이지를 이동합니다(사용가능한 질문등 넘길 수 있는 페이지에서만 작동합니다.)"
         },
         "home": {
-            "text": "집",
-            "voice": "(집)(메인 화면)",
-            "description": "메인 화면으로 돌아갑니다."
+            "text": "홈",
+            "voice": "홈",
+            "description": "홈 화면으로 돌아갑니다."
         },
         "sleep": {
-            "text": "잠자러가",
-            "voice": "잠자러가",
-            "description": "잠자러가."
-        },
-        "wake_up": {
-            "text": "일어나",
-            "voice": "일어나",
-            "description": "일어나."
+            "text": "잠자러 가",
+            "voice": "잠자러 가",
+            "description": "거울이 잠을 잡니다."
         },
         "debug": {
-            "text": "디버그 정보 보여 줘",
-            "voice": "디버그 정보 보여 줘",
-            "description": "디버그 정보 보여 줘."
+            "text": "디버그 정보 보여줘",
+            "voice": "디버그 정보 보여줘",
+            "description": "디버그 정보를 보여줍니다."
         },
         "map_show": {
-            "text": "지도 보여 줘",
-            "voice": "지도 보여 줘",
-            "description": "현재 도시의 지도를 보여 줍니다."
+            "text": "지도 켜",
+            "voice": "지도 켜",
+            "description": "설정에서 지정한 도시를 보여줍니다."
         },
         "map_location": {
-            "text": "___ 지도 보여 줘",
-            "voice": "*location지도 보여 줘",
-            "description": "주어진 위치의 지도를 보여 줍니다."
+            "text": "________ 보여줘",
+            "voice": "*location 보여줘",
+            "description": "음성인식한 지도를 보여줍니다."
         },
         "map_zoom_in": {
-            "text": "지도 확대",
-            "voice": "(지도) 확대",
-            "description": "현재 지도를 확대 합니다."
+            "text": "확대",
+            "voice": "확대",
+            "description": "지도를 확대합니다."
         },
         "map_zoom_out": {
-            "text": "지도 축소",
-            "voice": "(지도) 축소",
-            "description": "현재 지도를 축소 합니다."
+            "text": "축소",
+            "voice": "축소",
+            "description": "지도를 축소합니다."
         },
         "map_zoom_point": {
-            "text": " ________값으로 지도 설정",
-            "voice": "*value값으로지도 설정",
-            "description": "원하는 값으로 지도를 설정합니다."
+            "text": "________로 확대",
+            "voice": "*value로 확대",
+            "description": "지정한 지점으로 확대합니다."
         },
         "map_zoom_reset": {
-            "text": "지도 리셋",
-            "voice": "(지도) 리셋",
-            "description": "지도를 이전 값으로 되돌립니다."
+            "text": "줌리셋",
+            "voice": "줌리셋",
+            "description": "줌을 해제합니다."
         },
         "video_search": {
-            "text": "________ 보여 줘",
-            "voice": "*term 보여 줘",
-            "description": "요청한 것의 사진을 보여 줍니다."
+            "text": "________보여줘",
+            "voice": "*query보여줘",
+            "description": "음성인식을 한걸 보여줍니다."
         },
         "video_stop": {
-            "text": "Stop video",
-            "voice": "stop (the) video",
-            "description": "Stops the playback of video content."
+            "text": "비디오 멈춰",
+            "voice": "비디오 멈춰",
+            "description": "현재 재생중인 비디오를 정지합니다."
         },
         "image_giphy": {
-            "text": "________ 짤",
-            "voice": "*img짤",
-            "description": "gif 이미지를 보여줍니다."
+            "text": "________ giphy 검색",
+            "voice": "*img giphy 검색",
+            "description": "giphy에서 이미지를 검색합니다."
         },
         "image_comic": {
-            "text": "카툰 보고 싶어",
-            "voice": "카툰 보고 싶어",
-            "description": "카툰을 보여줍니다."
+            "text": "xkcd 보여줘",
+            "voice": "xkcd 보여줘",
+            "description": "xkcd를 보여줍니다."
         },
         "image_comic_dilbert": {
-            "text": "Comic Dilbert",
-            "voice": "Comic Dilbert",
-            "description": "Muestra el comic Dilbert."
+            "text": "dilbert 보여줘",
+            "voice": "dilbert 보여줘",
+            "description": "Dilbert를 보여줍니다."
         },
         "reminder_insert": {
-            "text": " ________상기 시켜 줘 ",
-            "voice": "*task 상기 시켜 줘",
-            "description": "미리 알림 리스트에 추가 합니다."
+            "text": "________상기시켜줘",
+            "voice": "*task 상기시켜줘",
+            "description": "할 일에 등록합니다."
         },
         "reminder_clear": {
-            "text": "미리 알림 삭제 해 줘",
-            "voice": "미리 알림 삭제 해 줘",
-            "description": "미리 알림리스트를 삭제 합니다."
+            "text": "할 일 지워",
+            "voice": "할 일 지워",
+            "description": "할 일 목록을 지웁니다"
         },
         "reminder_show": {
-            "text": "나에게 리콜 목록을 표시",
-            "voice": "나에게 리콜 목록을 표시",
-            "description": "리콜 목록을 표시합니다."
+            "text": "할 일 목록 보여줘",
+            "voice": "할 일 목록 보여줘",
+            "description": "할 일 목록을 보여줍니다."
         },
         "time_show": {
-            "text": "지금 몇 시",
-            "voice": "지금 몇 시",
-            "description": "지금 몇 시."
+            "text": "지금 몇시야?",
+            "voice": "지금 몇시야?",
+            "description": "현재 시간을 표시합니다."
         },
         "timer_start": {
-            "text": "______ 타이머 (설정)",
-            "voice": "*duration 타이머 (설정)",
-            "description": "*duration 타이머 (설정)."
+            "text": "________(으로)타이머 설정",
+            "voice": "*duration(으로)타이머 설정",
+            "description": "음성인식된 시간으로 타이머를 설정합니다."
         },
         "timer_show": {
-            "text": "타이머 보여줄래",
-            "voice": "타이머 보여줄래",
-            "description": "타이머 보여줄래."
+            "text": "타이머 보여줘",
+            "voice": "타이머 보여줘",
+            "description": "설정된 타이머를 보여줍니다"
         },
         "timer_stop": {
-            "text": "타이머 정지",
-            "voice": "타이머 정지",
-            "description": "타이머 정지."
+            "text": "타이머 멈춰",
+            "voice": "타이머 멈춰",
+            "description": "설정된 타이머를 멈춥니다."
         },
         "timer_resume": {
-            "text": "타이머 재시작",
-            "voice": "타이머 재시작",
-            "description": "타이머 재시작."
+            "text": "타이머 다시시작",
+            "voice": "타이머 다시시작",
+            "description": "설정된 타이머를 다시 시작합니다."
         },
         "sc_play": {
-            "text": "SoundCloud play ________",
-            "voice": "SoundCloud play *query",
-            "description": "Play a song on SoundCloud."
+            "text": "________(을)(를)사운드클라우드 제생",
+            "voice": "*query(을)(를)사운드클라우드 제생",
+            "description": "음성인식된 곡을 사운드클라우드에서 제생합니다."
         },
         "sc_pause": {
-            "text": "SoundCloud pause/stop",
-            "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stop/pause SoundCoud playback."
+            "text": "사운드클라우드 (멈춰)(정지)",
+            "voice": "사운드클라우드 (멈춰)(정지)",
+            "description": "사운드클라우드를 정지합니다."
         },
         "sc_resume": {
-            "text": "SoundCloud play",
-            "voice": "SoundCloud (play)(resume)",
-            "description": "Resumes playback."
+            "text": "사운드클라우드 시작",
+            "voice": "사운드클라우드 시작",
+            "description": "사운드클라우드로 다시 돌아갑니다."
         },
         "sc_replay": {
-            "text": "SoundCloud replay",
-            "voice": "SoundCloud replay",
-            "description": "Replays the current song on SoundCloud."
+            "text": "(그 곡)다시 플레이 해줘",
+            "voice": "(그 곡)다시 플레이 해줘",
+            "description": "현재 제생중인 곡은 다시 제생합니다."
         },
         "light_action": {
-            "text": "불 (흰/빨간/파란)색으로 (켜/꺼)줘",
-            "voice": "불 :state *action (해)줘",
-            "description": "불 :state *action (해)줘."
+            "text": "_______으로 전등 바꿔줘",
+            "voice": "*action으로 전등 바꿔줘",
+            "description": "음성인식된 색으로 전등 색을 전환합니다."
+        },
+        "show_remoteQR":{
+            "text": "원격제어 링크 보여줘",
+            "voice": "원격제어 링크 보여줘",
+            "description": "원격제어 링크(IP)나 QR코드를 보여줍니다."
+        },
+        "todoist_show": {
+            "text": "________리스트 보여줘",
+            "voice": "*project리스트 보여줘",
+            "description": "TODO리스트를 보여줍니다."
+        },
+        "todoist_add": {
+            "text": "________항목________에 추가해줘",
+            "voice": "*element항목*project에 추가해줘",
+            "description": "음성인식된 항목을 TODO리스트에 추가합니다."
+        },
+        "todoist_remove": {
+            "text": "________항목________에서 제거해줘",
+            "voice": "*element항목*project에서 제거해줘",
+            "description": "음성인식된 항목을 TODO리스트에서 제거합니다."
         }
     },
     "fitbit": {
         "user": "사용자: ",
-        "averageSteps": "평균 단계: ",
-        "batteryStatus": "배터리 상태: ",
+        "averageSteps": "평균 걸음: ",
+        "batteryStatus": "베터리 상태: ",
         "today": "오늘",
-        "steps": "계단",
-        "averageSteps": "하루 만에",
-        "caloriesBurned": "칼로리 구운",
+        "steps": "걸음수",
+        "caloriesBurned": "소모 칼로리",
         "lastSync": "마지막 동기화",
         "average": "평균",
-        "activeMinutes": "활성 분",
-        "distance": "킬로미터",
+        "activeMinutes": "활동 시간",
+        "distance": "km",
         "floors": "바닥",
-        "topBadges": "탑 배지",
-        "sleep": "자다",
-        "lastNight": "지난 밤",
-        "awake": "깨다",
-        "restless": "불안한",
-        "hours": "시",
-        "km": "킬로미터",
+        "topBadges": "최상위 뱃지",
+        "sleep": "수면",
+        "lastNight": "마지막 수면",
+        "awake": "기상",
+        "restless": "불안감",
+        "hours": "시간",
+        "km": "km",
         "miles": "마일",
-        "minutes": "의사록",
-        "times": "x",
-        "restingHR": "휴식 심박수",
+        "minutes": "분",
+        "times": "시간",
+        "restingHR": "휴식을 취해서 심장 박동수를 낮추세요.",
         "bpm": "bpm"
-    }
+    },
+    "units": {
+    "zero": 0,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "eleven": 11,
+    "twelve": 12,
+    "thirteen": 13,
+    "fourteen": 14,
+    "fifteen": 15,
+    "sixteen": 16,
+    "seventeen": 17,
+    "eighteen": 18,
+    "nineteen": 19,
+    "twenty": 20,
+    "thirty": 30,
+    "forty": 40,
+    "fifty": 50,
+    "sixty": 60,
+    "seventy": 70,
+    "eighty": 80,
+    "ninety": 90
+  }
 }
