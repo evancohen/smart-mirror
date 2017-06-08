@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -57,7 +57,10 @@
       "browser": true
     },
     "rules": {
-      "indent": [2, "tab"],
+      "indent": [
+        2,
+        "tab"
+      ],
       "no-console": 0
     },
     "globals": {
