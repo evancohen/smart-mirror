@@ -1,6 +1,6 @@
 {
     "home" : {
-        "commands" : ""
+        "commands" : "Say \"What can I say?\" to see a list of commands..."
     },
     "traffic" : {
         "time_to" : "Time to {{name}}: "

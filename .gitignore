@@ -2,7 +2,6 @@ node_modules
 config.json
 config.js
 config.old.js
-*.bkup
 .idea
 npm-debug.log
 .DS_Store
