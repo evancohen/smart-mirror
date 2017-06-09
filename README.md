@@ -10,11 +10,11 @@ A voice controlled life automation hub, most commonly powered by the Raspberry P
 </p>
 
 ## Current Release: v0.0.14
-### Known Issues
-#650 The "say next", "say previous" and the pages text do not works with others languages **`OPEN`**  
-#647 Reminder plugin issue **`OPEN`**  
-#642 @justbill2020 TODO List **`OPEN`**  
-#561 Error in saving greetings **`OPEN`**  
+#### Known Issues
+[#650](https://github.com/evancohen/smart-mirror/issues/650) The "say next", "say previous" and the pages text do not works with others languages **`OPEN`**  
+[#647](https://github.com/evancohen/smart-mirror/issues/647) Reminder plugin issue **`OPEN`**  
+[#642](https://github.com/evancohen/smart-mirror/issues/642) @justbill2020 TODO List **`OPEN`**  
+[#561](https://github.com/evancohen/smart-mirror/issues/561) Error in saving greetings **`OPEN`**  
 
 ## Installation
 Quick installation for the Raspberry Pi 2+
