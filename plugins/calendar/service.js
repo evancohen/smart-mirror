@@ -130,7 +130,6 @@
 
 					//Add the value to our event object.
 					if ( type !== 'SUMMARY' || (type=='SUMMARY' && cur_event['SUMMARY'] == undefined)) {
-
 						cur_event[type] = val;
 					}
 					var keys = Object.keys(cur_event);

@@ -82,11 +82,7 @@
       "type":"fieldset",
       "title":"Fitbit Settings",
       "expandable":true,
-<<<<<<< HEAD
-      "order":-100,
-=======
       "order":0,
->>>>>>> 35776bee0018078ea5a9a4dd3480750e2c4fcd7e
       "items": [
         "fitbit.timeout",
         "fitbit.creds",
