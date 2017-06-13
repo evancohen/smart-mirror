@@ -11,13 +11,13 @@ A voice controlled life automation hub, most commonly powered by the Raspberry P
 
 ## Current Release: v0.0.14
 #### Known Issues
-[![#650](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/650.svg?maxAge=3600)](https://github.com/evancohen/smart-mirror/issues/650) The "say next", "say previous" and the pages text do not works with others languages
+[![#650](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/650.svg)](https://github.com/evancohen/smart-mirror/issues/650) The "say next", "say previous" and the pages text do not works with others languages
 
-[![#647](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/647.svg?maxAge=3600)](https://github.com/evancohen/smart-mirror/issues/647) Reminder plugin issue
+[![#647](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/647.svg)](https://github.com/evancohen/smart-mirror/issues/647) Reminder plugin issue
 
-[![#642](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/642.svg?maxAge=3600)](https://github.com/evancohen/smart-mirror/issues/642) @justbill2020 TODO List
+[![#642](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/642.svg)](https://github.com/evancohen/smart-mirror/issues/642) @justbill2020 TODO List
 
-[![#561](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/561.svg?maxAge=3600)](https://github.com/evancohen/smart-mirror/issues/561) Error in saving greetings
+[![#561](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/561.svg)](https://github.com/evancohen/smart-mirror/issues/561) Error in saving greetings
 
 
 ## Installation
