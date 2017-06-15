@@ -19,6 +19,7 @@ A voice controlled life automation hub, most commonly powered by the Raspberry P
 
 [![#561](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/561.svg)](https://github.com/evancohen/smart-mirror/issues/561)
 
+[![#560](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/560.svg)](https://github.com/evancohen/smart-mirror/issues/560)
 
 ## Installation
 Quick installation for the Raspberry Pi 2+
