@@ -46,7 +46,7 @@
 				} else if (config.autoTimer.mode == "tv") {
 					Focus.change('default');
 				} else if (config.autoTimer.mode == "energy") {
-					focus.change('default')
+					Focus.change('default')
 					// if the timer was running
 					if (energyStarTimer != null) {
 						// stop it
