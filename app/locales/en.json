@@ -135,6 +135,11 @@
             "voice": "Show Dilbert (comic)",
             "description": "Show the most recent Dilbert comic."
         },
+        "image_comic_commitstrip": {
+            "text": "Show Commit Strip",
+            "voice": "Show commit strip",
+            "description": "Shows the most recent Commit Strip comic."
+        },
         "reminder_insert": {
             "text": "Remind me to ________",
             "voice": "(set) (a) Remind(er) (for) (me) (to) *task",
