@@ -136,6 +136,14 @@ dt {
     margin-right: auto;
 }
 
+span.command-prev {
+    float:left;
+}
+
+span.command-next {
+    float:right;
+}
+
 ul.calendar {
     list-style: none;
     font-size: 22px;
@@ -284,6 +292,14 @@ ul.calendar {
     text-align: right;
     margin-top: 10px;
     margin-right: 10px;
+}
+
+.stock-change-positive {
+    color: green;
+}
+
+.stock-change-negative {
+    color: red;
 }
 
 .time-to {

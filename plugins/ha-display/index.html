@@ -1,0 +1,7 @@
+<br/>
+<div ng-controller="HADisplay" class="hadisplay">
+    <div class="hadisplay" ng-repeat="had in hadisplay">
+        <div fade ng-bind="had.result.heading" style="font-weight:bold; align=center"></div>
+        <div fade ng-bind="had.result.data"></div>
+    </div>
+</div>

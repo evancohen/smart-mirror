@@ -2,13 +2,13 @@
 	'use strict';
 
 	function MirrorCtrl(
-        Focus,
-        SpeechService,
-        AutoSleepService,
-        LightService,
-        $rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
+		Focus,
+		SpeechService,
+		AutoSleepService,
+		LightService,
+		$rootScope, $scope, $timeout, $interval, tmhDynamicLocale, $translate) {
 
-        // Local Scope Vars
+		// Local Scope Vars
 		var _this = this;
 		$scope.listening = false;
 		$scope.debug = false;
@@ -17,14 +17,14 @@
 		$scope.layoutName = 'main';
 		$scope.config = config;
 
-        // Set up our Focus
-		$rootScope.$on('focus', function(targetScope, newFocus){
+		// Set up our Focus
+		$rootScope.$on('focus', function (targetScope, newFocus) {
 			$scope.focus = newFocus;
 		})
 
 		Focus.change("default");
 
-        //set lang
+		//set lang
 		if (config.general.language.substr(0, 2) == 'en') {
 			moment.locale(config.general.language,
 				{
@@ -37,11 +37,11 @@
 						sameElse: 'L'
 					}
 				}
-            )
+			)
 		} else {
 			moment.locale(config.general.language)
 		}
-        //Initialize the speech service
+		//Initialize the speech service
 
 		var resetCommandTimeout;
 		SpeechService.init({
@@ -70,11 +70,11 @@
 			}
 		});
 
-        //Update the time
+		//Update the time
 		function updateTime() {
 			$scope.date = new moment();
 
-            // Auto wake at a specific time
+			// Auto wake at a specific time
 			if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined' && config.autoTimer.autoWake == moment().format('HH:mm:ss')) {
 				console.debug('Auto-wake', config.autoTimer.autoWake);
 				AutoSleepService.wake()
@@ -83,7 +83,7 @@
 			}
 		}
 
-        // Reset the command text
+		// Reset the command text
 		var restCommand = function () {
 			$translate('home.commands').then(function (translation) {
 				$scope.partialResult = translation;
@@ -101,16 +101,56 @@
 				console.debug("Ok, going to default view...");
 				Focus.change("default");
 			}
-
-            // List commands
+			// List commands
 			SpeechService.addCommand('list', function () {
 				console.debug("Here is a list of commands...");
 				console.log(SpeechService.commands);
-				$scope.commands = SpeechService.getCommands();
+				$scope.commands.commandPage = []
+				$scope.commands.commandPage = SpeechService.getCommands();
+				$scope.commands.index = 0
+				$scope.commands.totalPages = $scope.commands.commandPage.length
 				Focus.change("commands");
 			});
 
-            // Go back to default view
+			SpeechService.addCommand('list-page', function (pageNum) {
+				if (Focus.get() == 'commands') {
+					$scope.commands.commandPage = []
+					$scope.commands.commandPage = SpeechService.getCommands();
+					$scope.commands.totalPages = $scope.commands.commandPage.length
+					if (isNaN(pageNum)) {
+						pageNum = $scope.units[pageNum]
+					}
+					if ( pageNum >= 1 && pageNum <= ($scope.commands.totalPages)) {
+						$scope.commands.index = pageNum-1
+					}
+				}
+			})
+
+			// Next Page
+			SpeechService.addCommand('list-next', function () {
+				if (Focus.get() == 'commands') {
+					$scope.commands.commandPage = []
+					$scope.commands.commandPage = SpeechService.getCommands();
+					$scope.commands.totalPages = $scope.commands.commandPage.length
+					if ($scope.commands.index < ($scope.commands.totalPages - 1)) {
+						$scope.commands.index++
+					}
+				}
+			})
+
+			// Prev Page
+			SpeechService.addCommand('list-prev', function () {
+				if (Focus.get() == 'commands') {
+					$scope.commands.commandPage = []
+					$scope.commands.commandPage = SpeechService.getCommands();
+					$scope.commands.totalPages = $scope.commands.commandPage.length
+					if ($scope.commands.index > 0) {
+						$scope.commands.index--
+					}
+				}
+			})
+
+			// Go back to default view
 			SpeechService.addCommand('home', defaultView);
 
 			SpeechService.addCommand('debug', function () {
@@ -118,12 +158,12 @@
 				$scope.debug = true;
 			});
 
-            // Check the time
+			// Check the time
 			SpeechService.addCommand('time_show', function () {
 				console.debug("It is", moment().format('h:mm:ss a'));
 			});
 
-            // Control light
+			// Control light
 			SpeechService.addCommand('light_action', function (state, action) {
 				LightService.performUpdate(state + " " + action);
 			});
@@ -133,13 +173,13 @@
 	}
 
 	angular.module('SmartMirror')
-        .controller('MirrorCtrl', MirrorCtrl);
+		.controller('MirrorCtrl', MirrorCtrl);
 
 	function themeController($scope) {
 		$scope.layoutName = (typeof config.layout !== 'undefined' && config.layout) ? config.layout : 'main';
 	}
 
 	angular.module('SmartMirror')
-        .controller('Theme', themeController);
+		.controller('Theme', themeController);
 
 } (window.angular));

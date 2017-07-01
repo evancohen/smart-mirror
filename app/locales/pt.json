@@ -50,6 +50,21 @@
             "voice": "(O) que posso dizer",
             "description": "Mostra uma lista de comandos de voz disponíveis."
         },
+		"list-next": {
+            "text": "Página seguinte",
+            "voice": "(-page) seguinte (página)",
+            "description": "Mostra a página seguinte de comandos disponíveis para si. (apenas disponivel quando a lista de comandos está presente)"
+        },
+        "list-prev": {
+            "text": "Página anterior",
+            "voice": "(-page) anterior (página)",
+            "description": "Mostra a página anterior de comandos disponíveis para si (apenas disponivel quando a lista de comandos está presente)"
+        },
+        "list-page": {
+            "text": "Saltar para a página _______",
+            "voice": "(saltar) (para) pagina *pageNum",
+            "description": "Mostra uma página específica de comandos disponíveis para si. (apenas disponivel quando a lista de comandos está presente)"
+        },
         "home": {
             "text": "Volta para trás",
             "voice": "Volta para tras",
@@ -59,11 +74,6 @@
             "text": "Hiberna",
             "voice": "Hiberna",
             "description": "Hiberna o sistema."
-        },
-        "wake_up": {
-            "text": "Acorda",
-            "voice": "Acorda",
-            "description": "Acorda o sistema."
         },
         "debug": {
             "text": "Mostra detalhes",
@@ -112,7 +122,7 @@
         },
         "image_giphy": {
             "text": "Mostra a animação ________",
-            "voice": "Mostra a animação de *img",
+            "voice": "Mostra a animacao de *img",
             "description": "Mostra uma imagem animada."
         },
         "image_comic": {
@@ -132,7 +142,7 @@
         },
         "reminder_clear": {
             "text": "Limpa os lembretes",
-            "voice": "Limpa (os) lembretes",
+            "voice": "Limpa (os) (meus) lembretes",
             "description": "Limpa a lista de lembretes."
         },
         "reminder_show": {
@@ -191,9 +201,24 @@
             "description": "Controla a cor e o brilho das luzes Hue."
         }, 
         "show_remoteQR":{
-            "text": "Mostrar o link remoto",
-            "voice": "Mostrar o (codigo QR) (QR) (link) remoto",
+            "text": "Mostra o link remoto",
+            "voice": "Mostra o (codigo QR) (QR) (link) remoto",
             "description": "Mostra o IP/Código QR da página remota."
+        },
+		"todoist_show": {
+            "text": "Mostrar a (minha) lista ________",
+            "voice": "Mostrar a (minha) lista *project",
+            "description": "Apresenta a lista escolhida."
+        },
+        "todoist_add": {
+            "text": "Adiciona ________ (à) (a) (minha) lista ________",
+            "voice": "Adiciona *element a (minha) lista *project list",
+            "description": "Adiciona o elemento à lista escolhida."
+        },
+        "todoist_remove": {
+            "text": "Retira ________ da (minha) lista ________",
+            "voice": "Retira *element da (minha) lista *project",
+            "description": "Retira o elemento da lista escolhida."
         }
     },
     "fitbit": {
@@ -202,7 +227,6 @@
         "batteryStatus": "Estado da bateria: ",
         "today": "Hoje",
         "steps": "passos",
-        "averageSteps": "passos por dia",
         "caloriesBurned": "calorias queimadas",
         "lastSync": "Última sincronização",
         "average": "Média",
@@ -221,5 +245,35 @@
         "times": "x",
         "restingHR": "Frequência cardíaca em repouso",
         "bpm": "bpm"
-    }
+    },
+	"units": {
+    "zero": 0,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "eleven": 11,
+    "twelve": 12,
+    "thirteen": 13,
+    "fourteen": 14,
+    "fifteen": 15,
+    "sixteen": 16,
+    "seventeen": 17,
+    "eighteen": 18,
+    "nineteen": 19,
+    "twenty": 20,
+    "thirty": 30,
+    "forty": 40,
+    "fifty": 50,
+    "sixty": 60,
+    "seventy": 70,
+    "eighty": 80,
+    "ninety": 90
+  }
 }

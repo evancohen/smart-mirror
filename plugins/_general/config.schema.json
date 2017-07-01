@@ -15,6 +15,12 @@
                     "type": "string",
                     "title": "Layout",
                     "required": true
+                },
+                "commandsPerPage":{
+                    "default":10,
+                    "type":"number",
+                    "title": "Commands Per Page",
+                    "required": true
                 }
             }
         }
@@ -31,7 +37,8 @@
     "value":{
         "general":{
             "language": "en-US",
-            "layout":"main"
+            "layout":"main",
+            "commandsPerPage":10
         }
     }
 }
