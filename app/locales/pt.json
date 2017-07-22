@@ -52,22 +52,22 @@
         },
 		"list-next": {
             "text": "Página seguinte",
-            "voice": "(-page) seguinte (página)",
+            "voice": "(-page) (proxima)(página)(pagina)(seguinte)",
             "description": "Mostra a página seguinte de comandos disponíveis para si. (apenas disponivel quando a lista de comandos está presente)"
         },
         "list-prev": {
             "text": "Página anterior",
-            "voice": "(-page) anterior (página)",
+            "voice": "(-page) (página) anterior",
             "description": "Mostra a página anterior de comandos disponíveis para si (apenas disponivel quando a lista de comandos está presente)"
         },
         "list-page": {
-            "text": "Saltar para a página _______",
-            "voice": "(saltar) (para) pagina *pageNum",
+            "text": "Ir para a página _______",
+            "voice": "(ir)(pular) (na)(para) pagina *pageNum",
             "description": "Mostra uma página específica de comandos disponíveis para si. (apenas disponivel quando a lista de comandos está presente)"
         },
         "home": {
-            "text": "Volta para trás",
-            "voice": "Volta para tras",
+            "text": "Voltar para trás",
+            "voice": "Voltar (a)(para) tras",
             "description": "Voltar para a tela inicial."
         },
         "sleep": {
