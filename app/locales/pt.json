@@ -15,7 +15,7 @@
     },
     "lights": {
         "colors": {
-            "red": "vermemlho",
+            "red": "vermelho",
             "dark_green": "verde escuro",
             "green": "verde",
             "blue": "azul",
@@ -33,7 +33,7 @@
             "decrease": "diminuir",
             "max": "máximo",
             "half": "metade",
-            "quarter": "quarto",
+            "quarter": ["um-quarto", "quarto"],
             "threequarter": ["três-quartos", "três-quartos"]
         },
         "action": {
@@ -71,18 +71,18 @@
             "description": "Voltar para a tela inicial."
         },
         "sleep": {
-            "text": "Hiberna",
-            "voice": "Hiberna",
+            "text": "Hibernar",
+            "voice": "Hibernar",
             "description": "Hiberna o sistema."
         },
         "debug": {
-            "text": "Mostra detalhes",
-            "voice": "Mostra detalhes",
+            "text": "Mostrar detalhes",
+            "voice": "Mostrar detalhes",
             "description": "Mostra os detalhes de debugging."
         },
         "map_show": {
-            "text": "Mostra o mapa",
-            "voice": "Mostra o mapa",
+            "text": "Mostrar o mapa",
+            "voice": "Mostrar o mapa",
             "description": "Mostra o mapa da sua cidade."
         },
         "map_location": {
@@ -91,63 +91,63 @@
             "description": "Mostra o mapa de um local."
         },
         "map_zoom_in": {
-            "text": "Amplia",
-            "voice": "Amplia (mapa)",
+            "text": "Ampliar",
+            "voice": "Ampliar (o) (mapa)",
             "description": "Amplia o mapa atual."
         },
         "map_zoom_out": {
-            "text": "Diminui",
-            "voice": "Diminui (mapa)",
+            "text": "Diminuir",
+            "voice": "Diminuir (o) (mapa)",
             "description": "Diminui o mapa atual."
         },
         "map_zoom_point": {
-            "text": "Amplia para ________",
-            "voice": "Amplia (mapa) (para) *value",
+            "text": "Ampliar para ________",
+            "voice": "Ampliar (o) (mapa) (para) *value",
             "description": "Amplia o mapa para o ponto indicado."
         },
         "map_zoom_reset": {
-            "text": "Diminui o zoom",
-            "voice": "Diminui o zoom (mapa)",
+            "text": "Diminuir o zoom",
+            "voice": "Diminuir (o) zoom (do) (mapa)",
             "description": "Retorna o zoom."
         },
         "video_search": {
-            "text": "Reproduz ________",
-            "voice": "Reproduz (um video)(de)(sobre) *query",
+            "text": "Reproduzir ________",
+            "voice": "Reproduzir (um video)(video)(de)(sobre) *query",
             "description": "Reproduz um vídeo sobre o que indicou."
         },
         "video_stop": {
-            "text": "Para o vídeo",
-            "voice": "Para (o) video",
+            "text": "Parar o vídeo",
+            "voice": "Parar (o) video",
             "description": "Para o conteúdo do vídeo."
         },
         "image_giphy": {
-            "text": "Mostra a animação ________",
-            "voice": "Mostra a animacao de *img",
+            "text": "Mostrar a animação ________",
+            "voice": "Mostrar (a) animacao (de)(do) *img",
             "description": "Mostra uma imagem animada."
         },
         "image_comic": {
-            "text": "Mostra um cómico do xkcd",
-            "voice": "Mostra um (comico) (do) xkcd",
+            "text": "Mostrar um cómico do xkcd",
+            "voice": "Mostrar um (comico) (do) xkcd",
             "description": "Mostra o cómico mais recente do xkcd."
         },
         "image_comic_dilbert": {
-            "text": "Mostra um cómico do Dilbert",
-            "voice": "Mostra um (comico) (do) Dilbert",
+            "text": "Mostrar um cómico do Dilbert",
+            "voice": "Mostrar um (comico) (do) Dilbert",
             "description": "Mostra o cómico mais recente do Dilbert."
         },
         "reminder_insert": {
-            "text": "Lembra-me de ________",
-            "voice": "Lembra me (de) *task",
+            "text": "Lembrar-me de ________",
+            "voice": "(Lembrar) (Lembre) me (de) *task",
             "description": "Adiciona um lembrete à lista."
         },
         "reminder_clear": {
-            "text": "Limpa os lembretes",
-            "voice": "Limpa (os) (meus) lembretes",
+            "text": "Limpar os lembretes",
+            "voice": "Limpar (os) (meus) lembretes",
             "description": "Limpa a lista de lembretes."
         },
         "reminder_show": {
-            "text": "Mostra os lembretes",
-            "voice": "(Mostra) (os) (meus) lembretes",
+            "text": "Mostrar os lembretes",
+            "voice": "Mostrar (os) (meus) lembretes",
             "description": "Mostra a lista de lembretes."
         },
         "time_show": {
@@ -156,43 +156,43 @@
             "description": "Mostra a hora atual."
         },
         "timer_start": {
-            "text": "Ativa um alarme para ________",
-            "voice": "(ativar) alarme (para) *duration",
+            "text": "Ativar um alarme para ________",
+            "voice": "(ativar) alarme para *duration",
             "description": "Ativa um alarme para as horas indicadas."
         },
         "timer_show": {
-            "text": "Mostra o alarme",
-            "voice": "mostra (o) alarme",
+            "text": "Mostrar o alarme",
+            "voice": "Mostrar (o) alarme",
             "description": "Mostra o alarme."
         },
         "timer_stop": {
-            "text": "Para o alarme",
-            "voice": "para (o) alarme",
+            "text": "Parar o alarme",
+            "voice": "parar (o) alarme",
             "description": "Para o alarme."
         },
         "timer_resume": {
-            "text": "Reativa o alarme",
-            "voice": "reativa (o) alarme",
+            "text": "Reativar o alarme",
+            "voice": "reativar (o) alarme",
             "description": "Reativa o alarme."
         },
         "sc_play": {
-            "text": "SoundCloud toca ________",
-            "voice": "SoundCloud toca *query",
+            "text": "SoundCloud, toque ________",
+            "voice": "SoundCloud (toque)(tocar) *query",
             "description": "Toca uma música do SoundCloud."
         },
         "sc_pause": {
-            "text": "SoundCloud pausa/para",
-            "voice": "SoundCloud (pausar)(post)(parar)(stock)",
-            "description": "Para/pausa a música do SoundCoud."
+            "text": "SoundCloud pausar/parar",
+            "voice": "SoundCloud (pausar)(parar)(musica)",
+            "description": "Para parar/pausar a música do SoundCoud."
         },
         "sc_resume": {
-            "text": "SoundCloud continua",
-            "voice": "SoundCloud (continua)(resume)",
+            "text": "SoundCloud continuar música",
+            "voice": "SoundCloud (continuar)(resume)(musica) (solta o som)",
             "description": "Continua a música."
         },
         "sc_replay": {
-            "text": "SoundCloud repete",
-            "voice": "SoundCloud repete",
+            "text": "SoundCloud repetir música",
+            "voice": "SoundCloud repetir (a) musica",
             "description": "Repete a música do SoundCloud."
         },
         "light_action": {
@@ -202,27 +202,27 @@
         }, 
         "show_remoteQR":{
             "text": "Mostra o link remoto",
-            "voice": "Mostra o (codigo QR) (QR) (link) remoto",
+            "voice": "Mostra (o) (codigo QR) (QR) (link) remoto",
             "description": "Mostra o IP/Código QR da página remota."
         },
 		"todoist_show": {
             "text": "Mostrar a (minha) lista ________",
-            "voice": "Mostrar a (minha) lista *project",
+            "voice": "Mostrar (a) (minha) lista *project",
             "description": "Apresenta a lista escolhida."
         },
         "todoist_add": {
             "text": "Adiciona ________ (à) (a) (minha) lista ________",
-            "voice": "Adiciona *element a (minha) lista *project list",
+            "voice": "Adiciona *element (a)(na) (minha) lista *project list",
             "description": "Adiciona o elemento à lista escolhida."
         },
         "todoist_remove": {
             "text": "Retira ________ da (minha) lista ________",
-            "voice": "Retira *element da (minha) lista *project",
+            "voice": "Retira *element (da)(na) (minha) lista *project",
             "description": "Retira o elemento da lista escolhida."
         }
     },
     "fitbit": {
-        "user": "Utilizador: ",
+        "user": "Usuário: ",
         "averageSteps": "Média de passos: ",
         "batteryStatus": "Estado da bateria: ",
         "today": "Hoje",
@@ -232,7 +232,7 @@
         "average": "Média",
         "activeMinutes": "minutos ativos",
         "distance": "km",
-        "floors": "pisos",
+        "floors": "passos",
         "topBadges": "Emblemas principais",
         "sleep": "Dormir",
         "lastNight": "Última noite",
