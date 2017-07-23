@@ -1,0 +1,279 @@
+ {
+    "home" : {
+        "commands" : "Pronuncia \"Cosa posso dire?\" per vedere la lista dei comandi..."
+    },
+    "traffic" : {
+        "time_to" : "Tempo per arrivare {{name}}: "
+    },
+    "reminders": {
+        "empty": "Lista vuota."
+    },
+    "timer": {
+      "one": "Uno",
+      "minute": "Minuti?",
+      "second": "Secondi?"
+    },
+    "lights": {
+        "colors": {
+            "red": "rosso",
+            "dark_green": "verde scuro",
+            "green": "verde",
+            "blue": "blu",
+            "yellow": "giallo",
+            "orange":  "arancione",
+            "pink": "rosa",
+            "purple": "viola",
+            "white": "bianco",
+            "movie": "film",
+            "colorloop": "colorloop",
+            "stop": ["stop", "fermare"]
+        },
+        "intensity": {
+            "increase": "aumenta",
+            "decrease": "diminuisci",
+            "max": "massimo",
+            "half": "metà",
+            "quarter": "un quarto",
+            "threequarter": "tre quarti"
+        },
+        "action": {
+            "on": "accendi",
+            "off": "spegni",
+            "nightmode": "modo notturno",
+            "reset": "reset"
+        }
+    },
+    "commands": {
+        "title" : "Lista dei comandi",
+        "list": {
+            "text": "Cosa posso dire?",
+            "voice": "Cosa posso dire",
+            "description": "Mostra la lista dei comandi vocali disponibili."
+        },
+        "list-next": {
+            "text": "Pagina successiva",
+            "voice": "successiva (command)",
+            "description": "Mostrare la pagina dei comandi successiva. (solo disponibile quando la lista è attiva)"
+        },
+        "list-prev": {
+            "text": "Pagina precedente",
+            "voice": "precedente (command)",
+            "description": "Mostrare la pagina dei comandi precedente. (solo disponibile quando la lista è attiva)"
+        },
+        "list-page": {
+            "text": "Salta alla pagina _______",
+            "voice": "(salta alla) (vai alla) (comandi) pagina *pageNum",
+            "description": "Mostrare una pagina specifica della list dei comandi. (solo disponibile quando la lista è attiva)"
+        },
+        "home": {
+            "text": "Torna a casa (home page)",
+            "voice": "(vai) (torna) (a) casa",
+            "description": "Ti riporta alla pagina iniziale."
+        },
+        "sleep": {
+            "text": "Modalità riposo",
+            "voice": "(modalità) riposo",
+            "description": "Metti lo specchio a riposo. (sleep mode)"
+        },
+        "debug": {
+            "text": "Mostra le informazioni di debug",
+            "voice": "mostra le informazioni di debug",
+            "description": "Mostra le informazioni di debug per sviluppatori."
+        },
+        "map_show": {
+            "text": "Visualizza mappa locale",
+            "voice": "visualizza mappa",
+            "description": "Mostra la mappa della tua città."
+        },
+        "map_location": {
+            "text": "(visualizza) mappa di ________",
+            "voice": "(visualizza) mappa (di) *location",
+            "description": "Mostra la mappa di un luogo in concreto."
+        },
+        "map_zoom_in": {
+            "text": "Zoom avanti",
+            "voice": "(mappa) zoom avanti",
+            "description": "Zoom in avanti nella mappa corrente"
+        },
+        "map_zoom_out": {
+            "text": "Zoom fuori",
+            "voice": "(mappa) zoom fuori",
+            "description": "Zooms in fuori nella mappa corrente"
+        },
+        "map_zoom_point": {
+            "text": "Zoom a ________",
+            "voice": "(mappa) zoom (a) *value",
+            "description": "Zooms a un punto indicato."
+        },
+        "map_zoom_reset": {
+            "text": "Reset zoom",
+            "voice": "(mappa) reset zoom",
+            "description": "Resets zoom."
+        },
+        "video_search": {
+            "text": "Mostrami ________",
+            "voice": "mostrami (un video)(di)(dei) *query",
+            "description": "Mostrera un video a vostra richiesta"
+        },
+        "video_stop": {
+            "text": "Ferma video",
+            "voice": "ferma (il) video",
+            "description": "Ferma il video playback of video content."
+        },
+        "image_giphy": {
+            "text": "Gif ________",
+            "voice": "gif *img",
+            "description": "Mostra una immagine da Giphy."
+        },
+        "image_comic": {
+            "text": "Mostra xkcd",
+            "voice": "mostra xkcd",
+            "description": "Mostra il più recente xkcd comic."
+        },
+        "image_comic_dilbert": {
+            "text": "Mostra Dilbert comic",
+            "voice": "mostra Dilbert (comic)",
+            "description": "Mostra il più recente Dilbert comic."
+        },
+        "reminder_insert": {
+            "text": "Ricordami di ________",
+            "voice": "ricorda(mi) (di) (fare) *task",
+            "description": "Aggiungi un appunto alla lista promemoria (note)"
+        },
+        "reminder_clear": {
+            "text": "Pulisci promemoria",
+            "voice": "pulisci promemoria",
+            "description": "Pulisci la lista di promemoria."
+        },
+        "reminder_show": {
+            "text": "Mostrami i promemoria",
+            "voice": "(mostra) (i) (miei) promemoria",
+            "description": "Mostra la lista dei promemoria."
+        },
+        "time_show": {
+            "text": "Che ore sono?",
+            "voice": "che ore sono",
+            "description": "Mostra l'ora attuale"
+        },
+        "timer_start": {
+            "text": "Timer per ________",
+            "voice": "(imposta) (la) (durata) (del) timer (per) *duration",
+            "description": "Starts a timer."
+        },
+        "timer_show": {
+            "text": "Mostra timer",
+            "voice": "show (the) timer",
+            "description": "Show the timer."
+        },
+        "timer_stop": {
+            "text": "Ferma timer",
+            "voice": "ferma (il) timer",
+            "description": "Ferma il timer."
+        },
+        "timer_resume": {
+            "text": "Riattiva timer",
+            "voice": "riattiva (il) timer",
+            "description": "Riattiva il timer."
+        },
+        "sc_play": {
+            "text": "SoundCloud Suona ________",
+            "voice": "(SoundCloud) suona *query",
+            "description": "Suona una canzone su SoundCloud."
+        },
+        "sc_pause": {
+            "text": "SoundCloud pausa/stop",
+            "voice": "(SoundCloud) musica (pausa)(stop)",
+            "description": "Stop/pausa esecuzione di SoundCoud."
+        },
+        "sc_resume": {
+            "text": "SoundCloud Riprendi",
+            "voice": "SoundCloud (suona)(riprendi)",
+            "description": "riavvia playback."
+        },
+        "sc_replay": {
+            "text": "SoundCloud Riavvia",
+            "voice": "SoundCloud riavvia",
+            "description": "Riavvia la corrente canzone su SoundCloud."
+        },
+        "light_action": {
+            "text": "Turn (state) light(s) (action)",
+            "voice": "(turn) (the) :state (the) light(s) *action",
+            "description": "Control color and brightness of lights."
+        },
+        "show_remoteQR":{
+            "text": "Mostra Link",
+            "voice": "mostra link (QR codice) (QR) (link)",
+            "description": "mostra l' IP di una App URL"
+        },
+        "todoist_show": {
+            "text": "Mostra (la) (mia) lista ________",
+            "voice": "mostra (la) (mia) lista *project",
+            "description": "Mostra la lista richiesta."
+        },
+        "todoist_add": {
+            "text": "Aggiungi ________ alla (mia) lista ________",
+            "voice": "aggiungi *element alla (mia) lista *project",
+            "description": "Aggiungi la nota alla lista richiesta."
+        },
+        "todoist_remove": {
+            "text": "Rimuovi ________ dalla (mia) lista  ________",
+            "voice": "rimuovi *element dalla (mia) lista *project",
+            "description": "Aggiungi la nota alla lista richiesta."
+        }
+    },
+    "fitbit": {
+        "user": "User: ",
+        "averageSteps": "Average Steps: ",
+        "batteryStatus": "Battery Status: ",
+        "today": "Today",
+        "steps": "steps",
+        "caloriesBurned": "calories burned",
+        "lastSync": "Last Sync",
+        "average": "Average",
+        "activeMinutes": "active minutes",
+        "distance": "km",
+        "floors": "floors",
+        "topBadges": "Top Badges",
+        "sleep": "Sleep",
+        "lastNight": "Last Night",
+        "awake": "Awake",
+        "restless": "Restless",
+        "hours": "hrs",
+        "km": "km",
+        "miles": "mi",
+        "minutes": "min",
+        "times": "x",
+        "restingHR": "resting heart rate",
+        "bpm": "bpm"
+    },
+    "units": {
+    "zero": 0,
+    "uno": 1,
+    "due": 2,
+    "tre": 3,
+    "quattro": 4,
+    "cinque": 5,
+    "sei": 6,
+    "sette": 7,
+    "otto": 8,
+    "nove": 9,
+    "dieci": 10,
+    "undici": 11,
+    "dodici": 12,
+    "tredici": 13,
+    "quattordici": 14,
+    "quindici": 15,
+    "sedici": 16,
+    "diciasette": 17,
+    "diciotto": 18,
+    "dicianove": 19,
+    "venti": 20,
+    "trenta": 30,
+    "quaranta": 40,
+    "cincuata": 50,
+    "sessanta": 60,
+    "settanta": 70,
+    "ottanta": 80,
+    "novanta": 90
+  }
+}
