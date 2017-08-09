@@ -26,7 +26,7 @@
     "hotwords": [
       {
         "keyword": "smart mirror",
-        "model": "smart_mirror.pmdl"
+        "model": "smart_mirror.umdl"
       }
     ],
     "sensitivity": "0.5"
