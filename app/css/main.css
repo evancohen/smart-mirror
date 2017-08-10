@@ -235,6 +235,11 @@ ul.calendar {
     display: none;
 }
 
+.stock, .tvshows, .hadisplay, .traffic {
+    font-family: 'Open Sans', sans-serif;
+    font-size: small;
+}
+
 .fitbit {
     height: 100%;
 }
@@ -300,10 +305,6 @@ ul.calendar {
 
 .stock-change-negative {
     color: red;
-}
-
-.time-to {
-    font-weight: bold;
 }
 
 @keyframes reduce-dashoffset {
