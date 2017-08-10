@@ -202,7 +202,7 @@
         },
         "light_action": {
             "text": "Turn (state) light(s) (action)",
-            "voice": "(turn) (the) :state (the) light(s) *action",
+            "voice": "(turn) (the) :state (the) *entity light(s) *action",
             "description": "Control color and brightness of lights."
         },
         "show_remoteQR":{

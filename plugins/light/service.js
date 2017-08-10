@@ -7,27 +7,26 @@
 		var service = {};
 
         // update lights
-		service.performUpdate = function (spokenWords) {
+		service.performUpdate = function (utterance) {
             // split string into separate words and remove empty ones
-			spokenWords = spokenWords.toLowerCase().split(" ").filter(Boolean);
-
-            // what locations are defined in the config
-			var definedLocations = [];
-			for (var i = 0; i < config.light.setup.length; i++) {
-				definedLocations.push(config.light.setup[i].name.toLowerCase());
-			}
+			var spokenWords = utterance.toLowerCase().split(" ").filter(Boolean);
 
 			var SaidParameter = {};
 			SaidParameter['locations'] = [];
 			SaidParameter['on'] = true;
 
+            // what locations are defined in the config
+			var definedLocations = [];
+			for (var i = 0; i < config.light.setup.length; i++) {
+				definedLocations.push(config.light.setup[i].name.toLowerCase());
+				if(utterance.includes(config.light.setup[i].name.toLowerCase())){
+					SaidParameter['locations'].push(i)
+				}
+			}
+
             // what has been said
 			for (var w = 0; w < spokenWords.length; w++) {
-				var index = definedLocations.indexOf(spokenWords[w]);
-				if (index > -1) {
-					SaidParameter['locations'].push(index);
-				}
-
+				
                 // turn lights on or off?
 				if ($translate.instant('lights.action.off') == spokenWords[w]) {
 					SaidParameter['on'] = false;
@@ -187,7 +186,7 @@
 				update['bri'] = Math.round(setting['colorHSV'][2] * setting['brightness']);
 			}
 
-			$http.put('http://' + config.light.settings.hueIp + '/api/' + config.light.settings.hueUsername + "/groups/" + config.light.setup[index].targets[i].id + "/action", update)
+			$http.put('http://' + config.light.settings.hueIp + '/api/' + config.light.settings.hueUsername + "/lights/" + config.light.setup[index].targets[i].id + "/state", update)
                 .success(function (data, status) {
 	console.log(status, data);
 })
