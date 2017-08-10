@@ -164,8 +164,8 @@
 			});
 
 			// Control light
-			SpeechService.addCommand('light_action', function (state, action) {
-				LightService.performUpdate(state + " " + action);
+			SpeechService.addCommand('light_action', function (state, target, action) {
+				LightService.performUpdate([state, target, action].join(" "));
 			});
 		};
 
