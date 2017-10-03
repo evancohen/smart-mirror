@@ -1,5 +1,10 @@
 function Traffic($scope, $http, $interval, $q, TimeboxService) {
-	var BING_MAPS = "http://dev.virtualearth.net/REST/V1/Routes/"
+	var BING_MAPS = "http://dev.virtualearth.net/REST/V1/Routes/";
+	var durationHumanizer = require('humanize-duration').humanizer({
+		language: config.general.language,
+		units: ['h', 'm'],
+		round: true
+	});
 
 	var getDurationForTrips = function () {
 		var deferred = $q.defer();
@@ -29,9 +34,9 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 		$http.get(getEndpoint(trip)).then(function (response) {
             // Walking and Transit are "not effected" by traffic so we don't use their traffic duration
 			if (trip.mode == "Transit" || trip.mode == "Walking") {
-				trip.duration = moment.duration(response.data.resourceSets[0].resources[0].travelDuration, 'seconds');
+				trip.duration = durationHumanizer(response.data.resourceSets[0].resources[0].travelDuration * 1000);
 			} else {
-				trip.duration = moment.duration(response.data.resourceSets[0].resources[0].travelDurationTraffic, 'seconds')
+				trip.duration = durationHumanizer(response.data.resourceSets[0].resources[0].travelDurationTraffic * 1000);
 			}
 
 			deferred.resolve(trip);
