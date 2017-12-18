@@ -89,7 +89,7 @@ function recycle_recorder(){
 				if(emptybufferCounter>20){
 					// stop reco, this will force kill the pcm application
 					Sonus.stop()
-  				// and clear the consecutive buffer counter
+					// and clear the consecutive buffer counter
 					emptybufferCounter=0;
 					// setup the restart timer, as we are on a callback now
 					timer=setInterval(recycle_recorder, 100);
