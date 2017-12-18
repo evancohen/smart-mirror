@@ -65,7 +65,7 @@ function recycle_recorder(){
 	}
 
 	// do all the setup over again
-  sonus = Sonus.init({ hotwords, language, recordProgram, device }, speech)
+	sonus = Sonus.init({ hotwords, language, recordProgram, device }, speech)
 	// set the Event IPC handlers
 	sonus.on('hotword', (index) => console.log("!h:", index))
 	sonus.on('partial-result', result => console.log("!p:", result))
@@ -77,7 +77,7 @@ function recycle_recorder(){
 	sonus.on('sound',function(dataSize) 
 	{
 		// only process sound events if we are not in recovery mode, otherwise we get a random segment fault
-    if(timer==null){
+		if(timer==null){
 			// the arecord process has a bug, where it will start sending empty wav 'files' over and over.
 			// the only recovery is to kill that process, and start a new one
 			// so we are looking for a set of consecutive empty 
@@ -89,8 +89,6 @@ function recycle_recorder(){
 				if(emptybufferCounter>20){
 					// stop reco, this will force kill the pcm application
 					Sonus.stop()
-					// indicate not processing for reco
-					record_started=false;
   				// and clear the consecutive buffer counter
 					emptybufferCounter=0;
 					// setup the restart timer, as we are on a callback now
