@@ -47,10 +47,12 @@ for (let i = 0; i < config.speech.hotwords.length; i++) {
 const language = config.general.language
 const recordProgram = (os.arch() == 'arm') ? "arecord" : "rec"
 const device = (config.speech.device != "") ? config.speech.device : 'default'
+
 let sonus=0;
 
 // call worker routine to do the reco setup, routine may be called again to recover from hung pcm reader
 recycle_recorder()
+
 // startup the reco handler
 // note we might call this again if the pcm reader gets hung
 function recycle_recorder(){
@@ -61,10 +63,7 @@ function recycle_recorder(){
 		// clear the timer handle
 		timer=null;
 	}
-	// if we are recording
-  if(record_started)
-		// stop  this will kill the stuck arecord process
-	  Sonus.stop()
+
 	// do all the setup over again
   sonus = Sonus.init({ hotwords, language, recordProgram, device }, speech)
 	// set the Event IPC handlers
@@ -72,22 +71,33 @@ function recycle_recorder(){
 	sonus.on('partial-result', result => console.log("!p:", result))
 	sonus.on('final-result', result => console.log("!f:", result))
 	sonus.on('error', error => console.error("!e:", error))
+	// if silence, reset the consecutive empty data buffer counter
+	sonus.on('silence',() =>{emptybufferCounter=0;});
 	// get size of sound data captured
 	sonus.on('sound',function(dataSize) 
 	{
-		// the arecord process has a bug, where it will start sending empty wav 'files' over and over.
-		// the only recovery is to kill that process, and start a new onerror
-		// so we are looking for a bunch of consecutive empty pcm data buffers as the indicator that arecord is stuck
-		// if there is no data, count it
-		if(dataSize==0 && ++emptybufferCounter){
-			// if we have 50 consecutive no data packets, then arecord is stuck
-			if(emptybufferCounter>50){
-				// setup the restart timer, as we are on a callback now
-				timer=setInterval(recycle_recorder, 250);
-				// and clear the consecutive counter
-				emptybufferCounter=0;
-			}	else{	
-				// no data actually
+		// only process sound events if we are not in recovery mode, otherwise we get a random segment fault
+    if(timer==null){
+			// the arecord process has a bug, where it will start sending empty wav 'files' over and over.
+			// the only recovery is to kill that process, and start a new one
+			// so we are looking for a set of consecutive empty 
+			//	(or very small data, testing shows 8, 12, and 44 byte buffers) 
+			// pcm data buffers as the indicator that arecord is stuck
+			// if there is no data, count it
+			if((dataSize<100) && (++emptybufferCounter)){
+				// if we have 20 consecutive no data packets, then arecord is stuck
+				if(emptybufferCounter>20){
+					// stop reco, this will force kill the pcm application
+					Sonus.stop()
+					// indicate not processing for reco
+					record_started=false;
+  				// and clear the consecutive buffer counter
+					emptybufferCounter=0;
+					// setup the restart timer, as we are on a callback now
+					timer=setInterval(recycle_recorder, 100);
+				}	
+			} else{
+				// have data
 				// reset the consecutive empty counter 
 				emptybufferCounter=0;
 			}
@@ -96,5 +106,4 @@ function recycle_recorder(){
 
 	// Start Recognition
 	Sonus.start(sonus)
-  record_started=true;
 }
