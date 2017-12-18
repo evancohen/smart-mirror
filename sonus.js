@@ -26,6 +26,10 @@ const speech = require('@google-cloud/speech')({
 // Hotword helpers
 let sensitivity = config.speech.sensitivity || '0.5'
 let hotwords = []
+// used for arecord bug workaround
+let emptybufferCounter=0;
+let timer=null
+//
 let addHotword = function (modelFile, hotword, sensitivity) {
 	let file = path.resolve(modelFile)
 	if (fs.existsSync(file)) {
@@ -43,13 +47,61 @@ for (let i = 0; i < config.speech.hotwords.length; i++) {
 const language = config.general.language
 const recordProgram = (os.arch() == 'arm') ? "arecord" : "rec"
 const device = (config.speech.device != "") ? config.speech.device : 'default'
-const sonus = Sonus.init({ hotwords, language, recordProgram, device }, speech)
 
-// Start Recognition
-Sonus.start(sonus)
+let sonus=0;
 
-// Event IPC
-sonus.on('hotword', (index) => console.log("!h:", index))
-sonus.on('partial-result', result => console.log("!p:", result))
-sonus.on('final-result', result => console.log("!f:", result))
-sonus.on('error', error => console.error("!e:", error))
+// call worker routine to do the reco setup, routine may be called again to recover from hung pcm reader
+recycle_recorder()
+
+// startup the reco handler
+// note we might call this again if the pcm reader gets hung
+function recycle_recorder(){
+	// if we have a timer running which caused this entry
+	if(timer!=null){
+		// stop the timer
+		clearInterval(timer);
+		// clear the timer handle
+		timer=null;
+	}
+
+	// do all the setup over again
+	sonus = Sonus.init({ hotwords, language, recordProgram, device }, speech)
+	// set the Event IPC handlers
+	sonus.on('hotword', (index) => console.log("!h:", index))
+	sonus.on('partial-result', result => console.log("!p:", result))
+	sonus.on('final-result', result => console.log("!f:", result))
+	sonus.on('error', error => console.error("!e:", error))
+	// if silence, reset the consecutive empty data buffer counter
+	sonus.on('silence',() =>{emptybufferCounter=0;});
+	// get size of sound data captured
+	sonus.on('sound',function(dataSize) 
+	{
+		// only process sound events if we are not in recovery mode, otherwise we get a random segment fault
+		if(timer==null){
+			// the arecord process has a bug, where it will start sending empty wav 'files' over and over.
+			// the only recovery is to kill that process, and start a new one
+			// so we are looking for a set of consecutive empty 
+			//	(or very small data, testing shows 8, 12, and 44 byte buffers) 
+			// pcm data buffers as the indicator that arecord is stuck
+			// if there is no data, count it
+			if((dataSize<100) && (++emptybufferCounter)){
+				// if we have 20 consecutive no data packets, then arecord is stuck
+				if(emptybufferCounter>20){
+					// stop reco, this will force kill the pcm application
+					Sonus.stop()
+					// and clear the consecutive buffer counter
+					emptybufferCounter=0;
+					// setup the restart timer, as we are on a callback now
+					timer=setInterval(recycle_recorder, 100);
+				}	
+			} else{
+				// have data
+				// reset the consecutive empty counter 
+				emptybufferCounter=0;
+			}
+		}
+	})
+
+	// Start Recognition
+	Sonus.start(sonus)
+}
