@@ -1,11 +1,11 @@
-function Weather($scope, $interval, $http, GeolocationService) {
+function Weather($scope, $interval, $http, $translate, GeolocationService) {
 
 	var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
 	var geoposition = {}
 	var weather = {}
 
 	weather.get = function () {
-		return $http.jsonp('https://api.darksky.net/forecast/' + config.forecast.key + '/' +
+		return $http.jsonp('https://api.forecast.io/forecast/' + config.forecast.key + '/' +
             geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
             config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
             .then(function (response) {
@@ -21,9 +21,9 @@ function Weather($scope, $interval, $http, GeolocationService) {
 	}
 
     //Returns the current forecast along with high and low tempratures for the current day
-	weather.currentForecast = function () {
-		if (weather.forecast === null) {
-			return null;
+		weather.currentForecast = function () {
+			if (weather.forecast === null) {
+				return null;
 		}
 		weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
 		weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.temperature).toFixed(0);
@@ -38,7 +38,7 @@ function Weather($scope, $interval, $http, GeolocationService) {
 		}
         // Add human readable info to info
 		for (var i = 0; i < weather.forecast.data.daily.data.length; i++) {
-			weather.forecast.data.daily.data[i].day = moment.unix(weather.forecast.data.daily.data[i].time).format('ddd');
+			weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
 			weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
 			weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
 			weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
