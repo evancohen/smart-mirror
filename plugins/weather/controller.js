@@ -20,10 +20,10 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 		return weather.forecast.data.minutely;
 	}
 
-    //Returns the current forecast along with high and low tempratures for the current day
-		weather.currentForecast = function () {
-			if (weather.forecast === null) {
-				return null;
+	//Returns the current forecast along with high and low tempratures for the current day
+	weather.currentForecast = function () {
+		if (weather.forecast === null) {
+			return null;
 		}
 		weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
 		weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.temperature).toFixed(0);
