@@ -75,7 +75,7 @@ function recycle_recorder(){
 	})
 
 	// if the reco engine closes on its own
-	sonus.on('close', /*close*/) => {
+	sonus.on('close', /*close*/ => {
 		// if we are not already in recovery mode
 		if(timer==null){
 			// the process has ended 
