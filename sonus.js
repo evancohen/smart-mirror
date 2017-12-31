@@ -75,7 +75,7 @@ function recycle_recorder(){
 	})
 
 	// if the reco engine closes on its own
-	sonus.on('close', close => {
+	sonus.on('close', /*close*/) => {
 		// if we are not already in recovery mode
 		if(timer==null){
 			// the process has ended 
@@ -88,7 +88,7 @@ function recycle_recorder(){
 			timer=setInterval(recycle_recorder, 200);
 		}
 	})
-	sonus.on('end', end => {
+	sonus.on('end', /*end*/ => {
 		// place holder for end notification
 	})
 	// if silence, reset the consecutive empty data buffer counter
