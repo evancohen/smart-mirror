@@ -75,9 +75,10 @@ function recycle_recorder(){
 	})
 
 	// if the reco engine closes on its own
-	sonus.on('close', /*close*/ => {
+	sonus.on('close', close_msg => {
 		// if we are not already in recovery mode
 		if(timer==null){
+			console.error("!e:", close_msg)
 			// the process has ended 
 			// set value to prevent recursion
 			timer=1
@@ -85,11 +86,12 @@ function recycle_recorder(){
 			Sonus.stop()
 			emptybufferCounter=0;
 			// setup to restart reco
-			timer=setInterval(recycle_recorder, 200);
+			timer=setInterval(recycle_recorder, 200);			
 		}
 	})
-	sonus.on('end', /*end*/ => {
+	sonus.on('end', end_msg => {
 		// place holder for end notification
+		console.error("!e:", end_msg)
 	})
 	// if silence, reset the consecutive empty data buffer counter
 	sonus.on('silence',() =>{emptybufferCounter=0;});
