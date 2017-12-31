@@ -70,7 +70,27 @@ function recycle_recorder(){
 	sonus.on('hotword', (index) => console.log("!h:", index))
 	sonus.on('partial-result', result => console.log("!p:", result))
 	sonus.on('final-result', result => console.log("!f:", result))
-	sonus.on('error', error => console.error("!e:", error))
+	sonus.on('error', error => {
+		console.error("!e:", error)
+	})
+
+	// if the reco engine closes on its own
+	sonus.on('close', close => {
+		// if we are not already in recovery mode
+		if(timer==null){
+			// the process has ended 
+			// set value to prevent recursion
+			timer=1
+			// stop the reco processing, clean up
+			Sonus.stop()
+			emptybufferCounter=0;
+			// setup to restart reco
+			timer=setInterval(recycle_recorder, 200);
+		}
+	})
+	sonus.on('end', end => {
+		// place holder for end notification
+	})
 	// if silence, reset the consecutive empty data buffer counter
 	sonus.on('silence',() =>{emptybufferCounter=0;});
 	// get size of sound data captured
@@ -101,7 +121,8 @@ function recycle_recorder(){
 			}
 		}
 	})
-
+	// clear counter
+	emptybufferCounter=0;
 	// Start Recognition
 	Sonus.start(sonus)
 }
