@@ -1,0 +1,11 @@
+<div ng-controller="Soundcloud">
+    <div class="contents-box sc-container animate-grow" ng-show="focus == 'sc'">
+        <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>
+        <div>
+            <canvas id="visualizer" width="300" height="150"></canvas>
+        </div>
+        <img class="sc" ng-src="{{scThumb}}" />
+        <img class="scWaveform" ng-src="{{scWaveform}}" />
+        <h2 class="sc" ng-bind="scTrack"></h2>
+    </div>
+</div>

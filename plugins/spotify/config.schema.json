@@ -1,0 +1,22 @@
+{
+    "schema": {
+        "soundcloud": {
+            "type": "object",
+            "title":"SoundCloud Settings",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "SoundCloud API Key"
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "key": "soundcloud",
+            "expandable": true,
+            "order":0
+        }
+    ]
+}
