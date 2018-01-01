@@ -1,12 +1,16 @@
 <div ng-controller="Spotify">
-    <div class="contents-box sc-container animate-grow" ng-show="focus == 'spotify'">
+    <div class="contents-box sc-container animate-grow" ng-show="focus == 'spotify'" style="display: flex;">
         <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>
+<!--
         <div>
             <canvas id="visualizer" width="300" height="150"></canvas>
         </div>
-        <img class="sc" ng-src="{{scThumb}}" width="128" />
+-->
 <!--        <img class="scWaveform" ng-src="{{scWaveform}}" />-->
-        <h2 class="sc" ng-bind="scTrack"></h2>
-        <h3 class="sc" ng-bind="scArtist"></h3>
+        <span style="text-align: right margin-right: 10px;">
+            <h2 class="sc" ng-bind="scTrack" style="font-family: 'Open Sans', sans-serif;"></h2>
+            <h3 class="sc" ng-bind="scArtist" style="font-family: 'Open Sans', sans-serif;"></h3>
+        </span>
+        <img class="sc" ng-src="{{scThumb}}" width="128" height="128" style="border: 3px solid white;" />
     </div>
 </div>
