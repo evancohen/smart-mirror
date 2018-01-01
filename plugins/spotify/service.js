@@ -5,16 +5,16 @@
 	function SpotifyService($http) {
 		var service = {};
         var SpotifyWebApi = require('spotify-web-api-node');
-        var spotify = {};
+        var spotify = new SpotifyWebApi();
         
 		service.spotifyResponse = null;
 
+            console.log(spotify);
 		service.init = function () {
       // If the spotify key is defined and not empty
 //			if (typeof config.spotify != 'undefined' && config.spotify.length) {
                 
 
-            var spotify = new SpotifyWebApi();
             spotify.setAccessToken('BQAgbDD_4H801NTJ2aH5d7ZtWsRs4feE7ZYySCtjmycJwzURjsOIkdyTNHFlhkS3BwGsssfEedXRbS-CWA1l_5E1rcN5rQHBU4a5R1g5T1UXlWxK4yn3o-pc1gHpANH_cbzDxEDB6LJr0UEOUGnBolYDF3PldPrLIA');
             
             console.log(spotify);
