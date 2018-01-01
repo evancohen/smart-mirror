@@ -9,16 +9,36 @@
         
 		service.spotifyResponse = null;
 
-            console.log(spotify);
 		service.init = function () {
       // If the spotify key is defined and not empty
 //			if (typeof config.spotify != 'undefined' && config.spotify.length) {
                 
 
+            
+            
+            var clientId = config.spotify.id,
+                clientSecret = config.spotify.secret;
+
+            // Create the api object with the credentials
+            var spotifyApi = new SpotifyWebApi({
+              clientId : clientId,
+              clientSecret : clientSecret
+            });
+            
             spotify.setAccessToken('BQAgbDD_4H801NTJ2aH5d7ZtWsRs4feE7ZYySCtjmycJwzURjsOIkdyTNHFlhkS3BwGsssfEedXRbS-CWA1l_5E1rcN5rQHBU4a5R1g5T1UXlWxK4yn3o-pc1gHpANH_cbzDxEDB6LJr0UEOUGnBolYDF3PldPrLIA');
-            
             console.log(spotify);
-            
+
+            // Retrieve an access token.
+            spotify.clientCredentialsGrant()
+              .then(function(data) {
+                console.log('The access token expires in ' + data.body['expires_in']);
+                console.log('The access token is ' + data.body['access_token']);
+
+                // Save the access token so that it's used in future calls
+                spotifyApi.setAccessToken(data.body['access_token']);
+              }, function(err) {
+                    console.log('Something went wrong when retrieving an access token', err);
+              });
                 
 //                //PART1
 //                var scopes = ['user-read-private', 'user-read-email'],
