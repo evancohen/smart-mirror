@@ -1,12 +1,12 @@
 {
     "schema": {
-        "soundcloud": {
+        "spotify": {
             "type": "object",
-            "title":"SoundCloud Settings",
+            "title":"Spotify Settings",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "SoundCloud API Key"
+                    "title": "Spotify API Key"
                 }
             }
         }
@@ -14,7 +14,7 @@
     "form": [
         {
             "type": "fieldset",
-            "key": "soundcloud",
+            "key": "spotify",
             "expandable": true,
             "order":0
         }
