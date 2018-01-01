@@ -12,35 +12,24 @@
 		service.init = function () {
       // If the spotify key is defined and not empty
 //			if (typeof config.spotify != 'undefined' && config.spotify.length) {
-                // RETRIEVE AUTH TOKEN
-                var scopes = ['user-read-private', 'user-read-email'],
-                    redirectUri = 'http://localhost:8888',
-                    clientId = config.spotify.id,
-                    auth_token = config.spotify.auth,
-                    state = (new Date().getMilliseconds()).toString();
-
-                // Setting credentials can be done in the wrapper's constructor, or using the API object's setters.
-                var spotify = new SpotifyWebApi({
-                  redirectUri : redirectUri,
-                  clientId : clientId
-                });
 
             
-                if (auth_token) {
-                    var clientId = config.spotify.id,
-                        clientSecret = config.spotify.secret;
-
+                if (config.spotify.auth) {
                     // Create the api object with the credentials
                     var spotifyApi = new SpotifyWebApi({
-                      clientId : clientId,
-                      clientSecret : clientSecret
+                        clientId : config.spotify.id,
+                        clientSecret : config.spotify.secret
                     });
                     
-                    spotify.setAccessToken(auth_token);
+                    spotify.setAccessToken(config.spotify.auth);
                 } else {
-                    // Create the authorization URL
-                    var authorizeURL = spotify.createAuthorizeURL(scopes, state);
-                    // https://accounts.spotify.com:443/authorize?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https://example.com/callback&scope=user-read-private%20user-read-email&state=some-state-of-my-choice
+                    // RETRIEVE AUTH TOKEN
+                    var spotify = new SpotifyWebApi({
+                        redirectUri : 'http://localhost:8888',
+                        clientId : config.spotify.id
+                    });
+                    
+                    var authorizeURL = spotify.createAuthorizeURL(['user-read-private', 'user-read-email'], (new Date().getMilliseconds()).toString());
                     console.log(authorizeURL);
                 }
 //                var test = $http.get(authorizeURL)
