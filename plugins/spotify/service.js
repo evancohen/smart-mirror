@@ -48,8 +48,8 @@
             // Search tracks whose name contains the query
             return spotify.searchTracks('track:' + query)
               .then(function(data) {
-                console.log('Search tracks matching "' + query + '"', data.body);
-                service.spotifyResponse = data.body;
+                console.log('Search tracks matching "' + query + '"');
+                service.spotifyResponse = data.body.tracks || null;
                 return service.spotifyResponse;
               }, function(err) {
                 console.log('Something went wrong!', err);
