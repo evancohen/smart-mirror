@@ -16,7 +16,7 @@
             
                 if (config.spotify.auth) {
                     // Create the api object with the credentials
-                    var spotifyApi = new SpotifyWebApi({
+                    var spotify = new SpotifyWebApi({
                         clientId : config.spotify.id,
                         clientSecret : config.spotify.secret
                     });
