@@ -4,9 +4,17 @@
             "type": "object",
             "title":"Spotify Settings",
             "properties": {
-                "key": {
+                "id": {
                     "type": "string",
-                    "title": "Spotify API Key"
+                    "title": "Spotify API key ID"
+                },
+                "secret": {
+                    "type": "string",
+                    "title": "Spotify API Secret key"
+                },
+                "redirect": {
+                    "type": "string",
+                    "title": "Authentication Redirect URI"
                 }
             }
         }
