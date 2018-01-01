@@ -49,7 +49,7 @@
             return spotify.searchTracks('track:' + query)
               .then(function(data) {
                 console.log('Search tracks matching "' + query + '"', data.body);
-                service.spotifyResponse = data;
+                service.spotifyResponse = data.body;
                 return service.spotifyResponse;
               }, function(err) {
                 console.log('Something went wrong!', err);
