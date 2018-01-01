@@ -17,7 +17,7 @@
                     redirectUri = 'http://localhost:8888',
                     clientId = config.spotify.id,
                     auth_token = config.spotify.auth,
-                    state = '123';
+                    state = (new Date().getMilliseconds()).toString();
 
                 // Setting credentials can be done in the wrapper's constructor, or using the API object's setters.
                 var spotify = new SpotifyWebApi({
