@@ -7,6 +7,10 @@
                 "id": {
                     "type": "string",
                     "title": "Spotify API key ID"
+                },
+                "auth": {
+                    "type": "string",
+                    "title": "Spotify response authorization key"
                 }
             }
         }

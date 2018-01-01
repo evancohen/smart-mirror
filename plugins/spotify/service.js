@@ -16,6 +16,7 @@
                 var scopes = ['user-read-private', 'user-read-email'],
                     redirectUri = 'http://localhost:8888',
                     clientId = config.spotify.id,
+                    auth_token = config.spotify.auth,
                     state = '123';
 
                 // Setting credentials can be done in the wrapper's constructor, or using the API object's setters.
@@ -43,8 +44,9 @@
 //                  clientId : clientId,
 //                  clientSecret : clientSecret
 //                });
-
-                spotify.setAccessToken('BQAgbDD_4H801NTJ2aH5d7ZtWsRs4feE7ZYySCtjmycJwzURjsOIkdyTNHFlhkS3BwGsssfEedXRbS-CWA1l_5E1rcN5rQHBU4a5R1g5T1UXlWxK4yn3o-pc1gHpANH_cbzDxEDB6LJr0UEOUGnBolYDF3PldPrLIA');
+                if (auth_token) {
+                    spotify.setAccessToken(auth_token || 'BQAgbDD_4H801NTJ2aH5d7ZtWsRs4feE7ZYySCtjmycJwzURjsOIkdyTNHFlhkS3BwGsssfEedXRbS-CWA1l_5E1rcN5rQHBU4a5R1g5T1UXlWxK4yn3o-pc1gHpANH_cbzDxEDB6LJr0UEOUGnBolYDF3PldPrLIA');
+                }
 		}
 
         service.searchSpotify = function (query) {
