@@ -27,7 +27,16 @@
 
             
                 if (auth_token) {
-                    spotify.setAccessToken(auth_token || 'BQAgbDD_4H801NTJ2aH5d7ZtWsRs4feE7ZYySCtjmycJwzURjsOIkdyTNHFlhkS3BwGsssfEedXRbS-CWA1l_5E1rcN5rQHBU4a5R1g5T1UXlWxK4yn3o-pc1gHpANH_cbzDxEDB6LJr0UEOUGnBolYDF3PldPrLIA');
+                    var clientId = config.spotify.id,
+                        clientSecret = config.spotify.secret;
+
+                    // Create the api object with the credentials
+                    var spotifyApi = new SpotifyWebApi({
+                      clientId : clientId,
+                      clientSecret : clientSecret
+                    });
+                    
+                    spotify.setAccessToken(auth_token);
                 } else {
                     // Create the authorization URL
                     var authorizeURL = spotify.createAuthorizeURL(scopes, state);
@@ -39,15 +48,6 @@
 //                    .then(function(response) {
 //                        console.log(response);
 //                    });
-            
-//                var clientId = config.spotify.id,
-//                    clientSecret = config.spotify.secret;
-//
-//                // Create the api object with the credentials
-//                var spotifyApi = new SpotifyWebApi({
-//                  clientId : clientId,
-//                  clientSecret : clientSecret
-//                });
 		}
 
         service.searchSpotify = function (query) {
