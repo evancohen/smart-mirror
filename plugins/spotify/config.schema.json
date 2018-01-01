@@ -7,14 +7,6 @@
                 "id": {
                     "type": "string",
                     "title": "Spotify API key ID"
-                },
-                "secret": {
-                    "type": "string",
-                    "title": "Spotify API Secret key"
-                },
-                "redirect": {
-                    "type": "string",
-                    "title": "Authentication Redirect URI"
                 }
             }
         }
