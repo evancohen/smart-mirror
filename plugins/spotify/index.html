@@ -1,5 +1,5 @@
 <div ng-controller="Spotify">
-    <div class="contents-box sc-container animate-grow" ng-show="focus == 'spotify'" style="display: flex;">
+    <div class="contents-box sc-container animate-grow" ng-show="focus == 'spotify'" style="display: flex;padding: 10px;">
         <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>
 <!--
         <div>
@@ -7,9 +7,9 @@
         </div>
 -->
 <!--        <img class="scWaveform" ng-src="{{scWaveform}}" />-->
-        <span style="text-align: right margin-right: 10px;">
-            <h2 class="sc" ng-bind="scTrack" style="font-family: 'Open Sans', sans-serif;"></h2>
-            <h3 class="sc" ng-bind="scArtist" style="font-family: 'Open Sans', sans-serif;"></h3>
+        <span style="text-align: right;margin-right: 15px;padding-top: 3px;">
+            <h2 class="sc" ng-bind="scTrack" style="font-family: 'Open Sans', sans-serif;margin: auto;"></h2>
+            <h3 class="sc" ng-bind="scArtist" style="font-family: 'Open Sans', sans-serif;margin: auto;"></h3>
         </span>
         <img class="sc" ng-src="{{scThumb}}" width="128" height="128" style="border: 3px solid white;" />
     </div>
