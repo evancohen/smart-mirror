@@ -29,19 +29,21 @@
 
                 // https://accounts.spotify.com:443/authorize?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https://example.com/callback&scope=user-read-private%20user-read-email&state=some-state-of-my-choice
                 console.log(authorizeURL);
-                $http.get(authorizeURL)
-                    .then(function(response) {
+                var test = $http.get(authorizeURL)
+                    .success(function()) {
+//                    .then(function(response) {
                         console.log(response);
                     });
+        console.log(test);
             
-                var clientId = config.spotify.id,
-                    clientSecret = config.spotify.secret;
-
-                // Create the api object with the credentials
-                var spotifyApi = new SpotifyWebApi({
-                  clientId : clientId,
-                  clientSecret : clientSecret
-                });
+//                var clientId = config.spotify.id,
+//                    clientSecret = config.spotify.secret;
+//
+//                // Create the api object with the credentials
+//                var spotifyApi = new SpotifyWebApi({
+//                  clientId : clientId,
+//                  clientSecret : clientSecret
+//                });
 
                 spotify.setAccessToken('BQAgbDD_4H801NTJ2aH5d7ZtWsRs4feE7ZYySCtjmycJwzURjsOIkdyTNHFlhkS3BwGsssfEedXRbS-CWA1l_5E1rcN5rQHBU4a5R1g5T1UXlWxK4yn3o-pc1gHpANH_cbzDxEDB6LJr0UEOUGnBolYDF3PldPrLIA');
 		}
