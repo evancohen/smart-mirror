@@ -16,7 +16,7 @@
                 var scopes = ['user-read-private', 'user-read-email'],
                     redirectUri = 'http://localhost:8888',
                     clientId = config.spotify.id,
-                    state = 'some-state-of-my-choice';
+                    state = '123';
 
                 // Setting credentials can be done in the wrapper's constructor, or using the API object's setters.
                 var spotify = new SpotifyWebApi({
@@ -29,6 +29,10 @@
 
                 // https://accounts.spotify.com:443/authorize?client_id=5fe01282e44241328a84e7c5cc169165&response_type=code&redirect_uri=https://example.com/callback&scope=user-read-private%20user-read-email&state=some-state-of-my-choice
                 console.log(authorizeURL);
+                $http.get(authorizeURL)
+                    .then(function(response) {
+                        console.log(response);
+                    });
             
                 var clientId = config.spotify.id,
                     clientSecret = config.spotify.secret;
