@@ -4,17 +4,13 @@
             "type": "object",
             "title": "Spotify",
             "properties": {
-                "id": {
+                "access_token": {
                     "type": "string",
-                    "title": "Spotify API key ID"
+                    "title": "Spotify token returned from oauth"
                 },
-                "secret": {
+                "refresh_token": {
                     "type": "string",
-                    "title": "Spotify API secret key"
-                },
-                "auth": {
-                    "type": "string",
-                    "title": "Spotify response authorization key"
+                    "title": "Spotify refresh token returned from oauth"
                 }
             }
         }
@@ -26,13 +22,12 @@
           "expandable":true,
           "order":0,
           "items":[
-            "spotify.id",
-            "spotify.secret",
             {
               "type":"help",
-              "helpvalue": "<strong><em>(used to oath the api use for this application)</em></strong></br><a href=\"https://accounts.spotify.com/authorize?client_id=6dd65f03f3464a1ea32fcbc2ad906d72&response_type=code&redirect_uri=http://localhost:8888&scope=user-read-private%20user-read-email&state=610\" target=\"_blank\">Click here to authorize the keys above</a></br>"
+              "helpvalue": "<strong><em>(used to authorize the api for use with this application)</em> found in plugins/spotify/oauth/</strong>"
             },
-            "spotify.auth"
+            "spotify.access_token",
+            "spotify.refresh_token"
           ]
         }
     ]
