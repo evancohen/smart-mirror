@@ -17,7 +17,7 @@
 
                 spotify.setAccessToken(config.spotify.access_token);
                 spotify.setRefreshToken(config.spotify.refresh_token);
-            
+            console.log(spotify);
 //                spotifyApi.refreshAccessToken()
 //                  .then(function(data) {
 //                    console.log('The access token has been refreshed!');
