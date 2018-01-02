@@ -27,9 +27,8 @@
           "order":0,
           "items":[
             {
-              "type": "template",
-              "template": '<h1>Yo!</h1>',
-              "name": 'Ninja',
+              "type":"help",
+              "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"
             },
             "spotify.id",
             "spotify.secret",
