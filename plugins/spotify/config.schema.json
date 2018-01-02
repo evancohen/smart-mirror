@@ -26,12 +26,6 @@
                     "type":"help",
                     "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"
                 },
-                {
-                    type: "template",
-                    template: '<h1 ng-click="form.foo()">Yo {{form.key}}!</h1>',
-                    name: 'Ninja',
-                    foo: function() { console.log('oh noes!'); }
-                }
                 "spotify.id",
                 "spotify.auth"
             ]
