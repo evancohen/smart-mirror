@@ -26,12 +26,12 @@
           "expandable":true,
           "order":0,
           "items":[
-            {
-              "type":"help",
-              "helpvalue": "<strong>{{form.title}}<em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"
-            },
             "spotify.id",
             "spotify.secret",
+            {
+              "type":"help",
+              "helpvalue": "<strong><em>(used to oath the api use for this application)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here to authorize the keys above</a></br>"
+            },
             "spotify.auth"
           ]
         }
