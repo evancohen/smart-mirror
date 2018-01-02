@@ -54,8 +54,6 @@
     <script id="oauth-template" type="text/x-handlebars-template">
       <h2>oAuth info</h2>
       <dl class="dl-horizontal">
-<!--          TODO: add copy text click button here-->
-<!--          https://www.w3schools.com/howto/howto_js_copy_clipboard.asp-->
         <dt>Access token</dt><dd class="text-overflow" id="access_token">{{access_token}}</dd>
           <button onclick="copy('access_token')">Copy</button>
         <dt>Refresh token</dt><dd class="text-overflow" id="refresh_token">{{refresh_token}}></dd>
@@ -68,6 +66,7 @@
     <script>
       (function() {
         function copy(id) {
+            //https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
             var copyText = document.getElementById(id);
             copyText.select();
             document.execCommand("Copy");
