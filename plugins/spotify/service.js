@@ -11,7 +11,7 @@
 
 		service.init = function () {
       // If the spotify key is defined and not empty
-			if (typeof config.spotify != 'undefined' && config.spotify.length) {
+//			if (typeof config.spotify != 'undefined' && config.spotify.length) {
                 spotify.setAccessToken(config.spotify.access_token);
                 spotify.setRefreshToken(config.spotify.refresh_token);
             console.log(spotify);
@@ -25,7 +25,7 @@
 //                    console.log('Could not refresh access token', err);
 //                  });
                 
-            }
+//            }
 		}
 
         service.searchSpotify = function (query) {
