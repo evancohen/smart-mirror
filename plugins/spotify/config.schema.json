@@ -8,6 +8,10 @@
                     "type": "string",
                     "title": "Spotify API key ID"
                 },
+                "secret": {
+                    "type": "string",
+                    "title": "Spotify API secret key"
+                },
                 "auth": {
                     "type": "string",
                     "title": "Spotify response authorization key"
@@ -24,9 +28,12 @@
             "items":[
                 {
                     "type":"help",
-                    "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"
+                    "helpvalue": "<strong><em>(used to allow api access using developer key)</em></strong>" +
+                        "</br>" +
+                        "<a href=\"https://accounts.spotify.com/authorize?client_id={{spotify.id}}&response_type=code&redirect_uri=http://localhost:8888&scope=user-read-private%20user-read-email&state=610\" target=\"_blank\">Click here to authorize your api key entered below</a></br>"
                 },
                 "spotify.id",
+                "spotify.secret",
                 "spotify.auth"
             ]
         }
