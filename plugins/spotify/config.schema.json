@@ -2,7 +2,7 @@
     "schema": {
         "spotify": {
             "type": "object",
-            "title":"Spotify",
+            "title":"Spotify Settings",
             "properties": {
                 "id": {
                     "type": "string",
@@ -22,14 +22,9 @@
     "form": [
         {
             "type": "fieldset",
-            "title":"Spotify Settings",
+            "key":"Spotify",
             "expandable": true,
-            "order":0,
-            "items":[
-                "spotify.id",
-                "spotify.secret",
-                "spotify.auth"
-            ]
+            "order":0
         },
     ]
 }
