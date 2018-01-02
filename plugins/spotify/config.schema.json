@@ -32,11 +32,14 @@
                 },
                 "spotify.id",
                 "spotify.secret",
-                "spotify.auth",
-                { 
-                    type: 'button',
-                    title: 'Authorize my developer account',
-                },
+                "spotify.auth"
+            ]
+        },
+        {
+            type: "actions",
+            items: [
+                { type: 'submit', title: 'Ok' },
+                { type: 'button', title: 'Cancel', onClick: "cancel()" }
             ]
         }
     ]
