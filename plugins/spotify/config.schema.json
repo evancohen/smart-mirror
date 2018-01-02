@@ -28,9 +28,8 @@
           "items":[
             {
               "type": "template",
-              "template": '<h1 ng-click="form.foo()">Yo {{form.name}}!</h1>',
+              "template": '<h1 ng-click="alert(\'dfsfs\')">Yo!</h1>',
               "name": 'Ninja',
-              "foo": function() { console.log('oh noes!'); }
             },
             "spotify.id",
             "spotify.secret",
