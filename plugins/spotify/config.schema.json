@@ -36,9 +36,6 @@
                 { 
                     type: 'button',
                     title: 'Authorize my developer account',
-                    onClick: function() {
-                        console.log('hello');
-                    }
                 },
             ]
         }
