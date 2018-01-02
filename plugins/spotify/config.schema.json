@@ -28,7 +28,7 @@
           "items":[
             {
               "type": "template",
-              "template": '<h1 ng-click="alert(\'dfsfs\')">Yo!</h1>',
+              "template": '<h1>Yo!</h1>',
               "name": 'Ninja',
             },
             "spotify.id",
