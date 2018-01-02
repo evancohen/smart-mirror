@@ -5,7 +5,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus) {
 
     //Spotify search and play
 	SpeechService.addCommand('spotify_search_track', function (query) {
-		SpotifyService.searchSpotify(query).then(function (response) {
+		SpotifyService.searchTrack(query).then(function (response) {
             if (response) {
                 if (response.items[0].album.images[0].url) {
                     $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
