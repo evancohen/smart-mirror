@@ -2,7 +2,7 @@
     "schema": {
         "spotify": {
             "type": "object",
-            "title":"Spotify Settings",
+            "title": "Spotify",
             "properties": {
                 "id": {
                     "type": "string",
@@ -19,12 +19,21 @@
             }
         }
     },
-    "form": [
+    "form":[
         {
-            "type": "fieldset",
-            "key":"Spotify",
-            "expandable": true,
-            "order":0
-        },
+          "title": "Spotify Settings",
+          "type":"fieldset",
+          "expandable":true,
+          "order":0,
+          "items":[
+            {
+              "type":"help",
+              "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"
+            },
+            "spotify.id",
+            "spotify.secret",
+            "spotify.auth"
+          ]
+        }
     ]
 }
