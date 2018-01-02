@@ -21,22 +21,8 @@
     },
     "form": [
         {
-            "type": "fieldset",
-            "title":"Spotify Settings",
-            "expandable": true,
-            "order":0,
-            "items":[
-                {
-                    "type":"help",
-                    "helpvalue": "<strong><em>(used to allow api access using developer key)</em></strong></br><a href=\"https://accounts.spotify.com/authorize?client_id=spotify.id&response_type=code&redirect_uri=http://localhost:8888&scope=user-read-private%20user-read-email&state=610\" target=\"_blank\">Click here to authorize your api</a></br>"
-                },
-                "spotify.id",
-                "spotify.secret",
-                "spotify.auth"
-            ]
-        },
-        {
             type: "actions",
+            key: "spotify",
             items: [
                 { type: 'submit', title: 'Ok' },
                 { type: 'button', title: 'Cancel', onClick: "cancel()" }
