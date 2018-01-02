@@ -56,8 +56,10 @@
       <dl class="dl-horizontal">
 <!--          TODO: add copy text click button here-->
 <!--          https://www.w3schools.com/howto/howto_js_copy_clipboard.asp-->
-        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-        <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}></dd>
+        <dt>Access token</dt><dd class="text-overflow" id="access_token">{{access_token}}</dd>
+          <button onclick="copy('access_token')">Copy</button>
+        <dt>Refresh token</dt><dd class="text-overflow" id="refresh_token">{{refresh_token}}></dd>
+          <button onclick="copy('refresh_token')">Copy</button>
       </dl>
     </script>
 
@@ -65,6 +67,12 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
       (function() {
+        function copy(id) {
+            var copyText = document.getElementById(id);
+            copyText.select();
+            document.execCommand("Copy");
+            alert("Copied the text: " + copyText.value);
+        }
 
         /**
          * Obtains parameters from the hash of the URL
