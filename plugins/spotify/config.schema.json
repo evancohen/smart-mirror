@@ -28,12 +28,12 @@
                 },
                 {
                     type: "template",
-                    template: '<h1 ng-click="form.foo()">Yo {{form.name}}!</h1>',
+                    template: '<h1 ng-click="form.foo()">Yo {{form.key}}!</h1>',
                     name: 'Ninja',
                     foo: function() { console.log('oh noes!'); }
                 }
-                "geoPosition.latitude",
-                "geoPosition.longitude"
+                "spotify.id",
+                "spotify.auth"
             ]
         }
     ]
