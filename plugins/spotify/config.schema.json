@@ -32,7 +32,7 @@
                 },
                 "spotify.id",
                 "spotify.secret",
-                "spotify.auth",
+                "spotify.auth"
             ]
         },
     ]
