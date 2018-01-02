@@ -30,7 +30,7 @@
             "spotify.secret",
             {
               "type":"help",
-              "helpvalue": "<strong><em>(used to oath the api use for this application)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here to authorize the keys above</a></br>"
+              "helpvalue": "<strong><em>(used to oath the api use for this application)</em></strong></br><a href=\"https://accounts.spotify.com/authorize?client_id=6dd65f03f3464a1ea32fcbc2ad906d72&response_type=code&redirect_uri=http://localhost:8888&scope=user-read-private%20user-read-email&state=610\" target=\"_blank\">Click here to authorize the keys above</a></br>"
             },
             "spotify.auth"
           ]
