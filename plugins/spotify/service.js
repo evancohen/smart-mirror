@@ -43,6 +43,7 @@
             return spotifyApi.searchTracks('track:' + query)
               .then(function(data) {
                 console.log('Search tracks matching "' + query + '"');
+                console.log(data);
                 service.spotifyResponse = data.body.tracks || null;
                 return service.spotifyResponse;
               }, function(err) {
