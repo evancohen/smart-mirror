@@ -23,40 +23,40 @@
                     console.log('Something went wrong!', err);
                   });
             
-                spotifyApi.getMyRecentlyPlayedTracks()
-                  .then(function(data) {
-                    console.log('recent tracks:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.getMyRecentlyPlayedTracks()
+//                  .then(function(data) {
+//                    console.log('recent tracks:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
-                spotifyApi.getMyDevices()
-                  .then(function(data) {
-                    console.log('user devices:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.getMyDevices()
+//                  .then(function(data) {
+//                    console.log('user devices:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
-                spotifyApi.getMyCurrentPlayingTrack()
-                  .then(function(data) {
-                    console.log('current track:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.getMyCurrentPlayingTrack()
+//                  .then(function(data) {
+//                    console.log('current track:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
-                spotifyApi.getMyCurrentPlaybackState()
-                  .then(function(data) {
-                    console.log('current playback:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.getMyCurrentPlaybackState()
+//                  .then(function(data) {
+//                    console.log('current playback:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
-                spotifyApi.transferMyPlayback()
-                  .then(function(data) {
-                    console.log('current playback:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.transferMyPlayback()
+//                  .then(function(data) {
+//                    console.log('current playback:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
                 spotifyApi.play()
                   .then(function(data) {
