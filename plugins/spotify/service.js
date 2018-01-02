@@ -10,7 +10,6 @@
 		service.spotifyResponse = null;
 
 		service.init = function () {
-      // If the spotify key is defined and not empty
 //			if (typeof config.spotify != 'undefined' && config.spotify.length) {
                 spotifyApi.setAccessToken(config.spotify.access_token);
                 spotifyApi.setRefreshToken(config.spotify.refresh_token);
