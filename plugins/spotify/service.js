@@ -18,12 +18,9 @@
                 // Get the credentials one by one
                 console.log('The access token is ' + spotifyApi.getAccessToken());
                 console.log('The refresh token is ' + spotifyApi.getRefreshToken());
-                console.log('The redirectURI is ' + spotifyApi.getRedirectURI());
-                console.log('The client ID is ' + spotifyApi.getClientId());
-                console.log('The client secret is ' + spotifyApi.getClientSecret());
 
                 // Get all credentials
-                console.log('The credentials are ' + spotifyApi.getCredentials());
+                console.log('The credentials are ', spotifyApi.getCredentials());
             
 //                spotifyApi.refreshAccessToken()
 //                  .then(function(data) {
