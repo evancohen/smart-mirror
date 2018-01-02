@@ -50,7 +50,17 @@
                 console.log('Search tracks matching "' + query + '"');
                 console.log(data);
                 service.spotifyResponse = data.body.tracks || null;
-                return service.spotifyResponse;
+                
+                /* Get Audio Features for a Track */
+                spotifyApi.getAudioFeaturesForTrack(data.body.tracks.items[0].id)
+                  .then(function(data) {
+                    console.log(data.body);
+                    return service.spotifyResponse;
+                  }, function(err) {
+                    done(err);
+                  });
+                
+//                return service.spotifyResponse;
               }, function(err) {
                 console.log('Something went wrong!', err);
               });
