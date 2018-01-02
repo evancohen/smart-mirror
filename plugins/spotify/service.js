@@ -50,12 +50,12 @@
                     console.log('Something went wrong!', err);
                   });
             
-                spotifyApi.transferMyPlayback()
-                  .then(function(data) {
-                    console.log('current playback:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.transferMyPlayback()
+//                  .then(function(data) {
+//                    console.log('current playback:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
                 spotifyApi.play()
                   .then(function(data) {
