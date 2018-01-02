@@ -32,7 +32,14 @@
                 },
                 "spotify.id",
                 "spotify.secret",
-                "spotify.auth"
+                "spotify.auth",
+                { 
+                    type: 'button',
+                    title: 'Authorize my developer account',
+                    onClick: function(){
+                        console.log(this);
+                    }
+                },
             ]
         }
     ]
