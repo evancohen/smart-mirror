@@ -22,12 +22,12 @@
                     console.log('Something went wrong!', err);
                   });
             
-                spotifyApi.getMyRecentlyPlayedTracks()
-                  .then(function(data) {
-                    console.log('recent tracks:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.getMyRecentlyPlayedTracks()
+//                  .then(function(data) {
+//                    console.log('recent tracks:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
                 spotifyApi.getMyDevices()
                   .then(function(data) {
@@ -57,12 +57,12 @@
 //                    console.log('Something went wrong!', err);
 //                  });
             
-                spotifyApi.play()
-                  .then(function(data) {
-                    console.log('current playback:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
+//                spotifyApi.play()
+//                  .then(function(data) {
+//                    console.log('current playback:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
             
 //                // Get the credentials one by one
 //                console.log('The access token is ' + spotifyApi.getAccessToken());
@@ -91,17 +91,7 @@
                 console.log('Search tracks matching "' + query + '"');
                 console.log(data);
                 service.spotifyResponse = data.body.tracks || null;
-                
-                /* Get Audio Features for a Track */
-                spotifyApi.getAudioFeaturesForTrack(data.body.tracks.items[0].id)
-                  .then(function(data) {
-                    console.log(data.body);
-                    return service.spotifyResponse;
-                  }, function(err) {
-                    done(err);
-                  });
-                
-//                return service.spotifyResponse;
+                return service.spotifyResponse;
               }, function(err) {
                 console.log('Something went wrong!', err);
               });
