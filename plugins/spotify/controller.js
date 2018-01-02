@@ -13,6 +13,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus) {
                     $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
                 }
 //                $scope.scWaveform = response[0].waveform_url;
+                
                 $scope.scTrack = response.items[0].name;
                 $scope.scArtist = response.items[0].artists[0].name;
 

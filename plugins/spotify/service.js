@@ -15,7 +15,6 @@
                 spotifyApi.setAccessToken(config.spotify.access_token);
                 spotifyApi.setRefreshToken(config.spotify.refresh_token);
             
-            
                 // Get the authenticated user
                 spotifyApi.getMe()
                   .then(function(data) {
