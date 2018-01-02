@@ -57,12 +57,12 @@
 //                    console.log('Something went wrong!', err);
 //                  });
             
-//                spotifyApi.play()
-//                  .then(function(data) {
-//                    console.log('current playback:', data.body);
-//                  }, function(err) {
-//                    console.log('Something went wrong!', err);
-//                  });
+                spotifyApi.play()
+                  .then(function(data) {
+                    console.log('current playback:', data.body);
+                  }, function(err) {
+                    console.log('Something went wrong!', err);
+                  });
             
 //                // Get the credentials one by one
 //                console.log('The access token is ' + spotifyApi.getAccessToken());
