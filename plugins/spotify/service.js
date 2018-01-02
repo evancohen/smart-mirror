@@ -11,32 +11,24 @@
 
 		service.init = function () {
       // If the spotify key is defined and not empty
-//			if (typeof config.spotify != 'undefined' && config.spotify.length) {
+			if (typeof config.spotify != 'undefined' && config.spotify.length) {
+                
+                var spotify = new SpotifyWebApi();
 
+                spotify.setAccessToken(config.spotify.access_token);
+                spotify.setRefreshToken(config.spotify.refresh_token);
             
-                if (config.spotify.auth) {
-                    // Create the api object with the credentials
-                    var spotify = new SpotifyWebApi({
-                        clientId : config.spotify.id,
-                        clientSecret : config.spotify.secret
-                    });
-                    
-                    spotify.setAccessToken(config.spotify.auth);
-                } else {
-                    // RETRIEVE AUTH TOKEN
-                    var spotify = new SpotifyWebApi({
-                        redirectUri : 'http://localhost:8888',
-                        clientId : config.spotify.id
-                    });
-                    
-                    var authorizeURL = spotify.createAuthorizeURL(['user-read-private', 'user-read-email'], (new Date().getMilliseconds()).toString());
-                    console.log(authorizeURL);
-                }
-//                var test = $http.get(authorizeURL)
-////                    .success(function() {
-//                    .then(function(response) {
-//                        console.log(response);
-//                    });
+//                spotifyApi.refreshAccessToken()
+//                  .then(function(data) {
+//                    console.log('The access token has been refreshed!');
+//
+//                    // Save the access token so that it's used in future calls
+//                    spotifyApi.setAccessToken(data.body['access_token']);
+//                  }, function(err) {
+//                    console.log('Could not refresh access token', err);
+//                  });
+                
+            }
 		}
 
         service.searchSpotify = function (query) {
