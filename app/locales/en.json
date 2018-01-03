@@ -206,7 +206,7 @@
             "description": "Play song on Spotify."
         },
         "spotify_activate": {
-            "text": "Activate spotify“,
+            "text": "Activate spotify",
             "voice": "Activate spotify",
             "description": "Set Spotify player as active."
         },
