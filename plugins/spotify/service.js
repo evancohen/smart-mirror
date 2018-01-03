@@ -86,10 +86,9 @@
                 service.spotifyResponse = data.body.tracks || null;
                 
                 var options = {
-                    "context_uri": data.body.tracks.items[0].uri,
-                    "offset": {
-                        "position": 5
-                    }
+                    "uris": [
+                        data.body.tracks.items[0].uri
+                    ]
                 };
                 console.log(options);
                 
