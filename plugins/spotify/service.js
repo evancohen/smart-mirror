@@ -57,13 +57,6 @@
 //                    console.log('Something went wrong!', err);
 //                  });
             
-                spotifyApi.play()
-                  .then(function(data) {
-                    console.log('current playback:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
-            
 //                // Get the credentials one by one
 //                console.log('The access token is ' + spotifyApi.getAccessToken());
 //                console.log('The refresh token is ' + spotifyApi.getRefreshToken());
@@ -83,6 +76,29 @@
                 
 //            }
 		}
+        
+        service.playTrack = function (query) {
+            // Search tracks whose name contains the query
+            return spotifyApi.searchTracks('track:' + query)
+              .then(function(data) {
+                console.log('Search tracks matching "' + query + '"');
+                console.log(data);
+                service.spotifyResponse = data.body.tracks || null;
+                return spotifyApi.play({
+                      context_uri: data.body.tracks.items[0].uri
+                })
+                  .then(function(data) {
+                    console.log('current playback: "' + query + '"');
+                    console.log(data);
+                    service.spotifyResponse = data.body.tracks || null;
+                    return service.spotifyResponse;
+                  }, function(err) {
+                    console.log('Something went wrong!', err);
+                  });
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
 
         service.searchTrack = function (query) {
             // Search tracks whose name contains the query
