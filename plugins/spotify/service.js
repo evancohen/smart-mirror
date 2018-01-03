@@ -84,9 +84,16 @@
                 console.log('Search tracks matching "' + query + '"');
                 console.log(data);
                 service.spotifyResponse = data.body.tracks || null;
-                return spotifyApi.play({
-                      context_uri: data.body.tracks.items[0].uri
-                })
+                
+                var options = {
+                    "context_uri": data.body.tracks.items[0].uri,
+                    "offset": {
+                        "position": 5
+                    }
+                };
+                console.log(options);
+                
+                return spotifyApi.play(options)
                   .then(function(data) {
                     console.log('current playback: "' + query + '"');
                     console.log(data);
