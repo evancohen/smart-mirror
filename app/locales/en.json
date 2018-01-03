@@ -180,9 +180,39 @@
             "voice": "resume (the) timer",
             "description": "Resume timer."
         },
+        "spotify_previous": {
+            "text": "play previous track",
+            "voice": "play previous (track) (song)",
+            "description": "Play previous song on Spotify."
+        },
+        "spotify_next": {
+            "text": "play next track",
+            "voice": "play next (track) (song)",
+            "description": "Play next song on Spotify."
+        },
+        "spotify_play": {
+            "text": "play ________",
+            "voice": "play (music) (song) (*query)",
+            "description": "Play song on Spotify."
+        },
+        "spotify_shuffle": {
+            "text": "shuffle music",
+            "voice": "shuffle (playlist) (music) (songs)",
+            "description": "Play song on Spotify."
+        },
+        "spotify_pause": {
+            "text": "pause music",
+            "voice": "pause (music) (song)",
+            "description": "Play song on Spotify."
+        },
+        "spotify_activate": {
+            "text": "Activate spotify“,
+            "voice": "Activate spotify",
+            "description": "Set Spotify player as active."
+        },
         "spotify_search_track": {
             "text": "Spotify find track ________",
-            "voice": "Spotify find track *query",
+            "voice": "Spotify find (track) (song) *query",
             "description": "Find songs on Spotify."
         },
         "sc_play": {
