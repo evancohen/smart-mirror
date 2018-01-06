@@ -19,6 +19,7 @@ const DevelopmentMode = process.argv.includes("dev")
 // Load the smart mirror config
 let config
 let firstRun = false
+let kwsProcess = null
 try {
 	config = require("./config.json")
 } catch (e) {
@@ -80,7 +81,7 @@ function createWindow() {
 
 function startSonus()
 {
-	var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
+	kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
   // Handel messages from node
 	kwsProcess.stderr.on('data', function (data) {
 		var message = data.toString()
@@ -101,7 +102,7 @@ function startSonus()
 	})
 	// if we receive a closed event from the keyword spotter
 	kwsProcess.on('close', function(data) {
-	  console.log("sonus closed message="+data)
+		console.log("sonus closed message="+data)
 		// restart it
 		startSonus();
 	})
