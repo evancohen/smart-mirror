@@ -78,8 +78,8 @@ function createWindow() {
 	})
 }
 
-// Initilize the keyword spotter
-if (config && config.speech && !firstRun) {
+function startSonus()
+{
 	var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
   // Handel messages from node
 	kwsProcess.stderr.on('data', function (data) {
@@ -99,6 +99,17 @@ if (config && config.speech && !firstRun) {
 			console.error(message.substring(3))
 		}
 	})
+	// if we receive a closed event from the keyword spotter
+	kwsProcess.on('close', function(data) {
+	  console.log("sonus closed message="+data)
+		// restart it
+		startSonus();
+	})
+	
+}
+// Initilize the keyword spotter
+if (config && config.speech && !firstRun) {
+	startSonus();
 }
 
 if (config.remote && config.remote.enabled || firstRun) {
