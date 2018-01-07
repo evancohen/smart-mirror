@@ -4,15 +4,12 @@
 
 	function SpotifyService($http) {
 		var service = {};
-        var angularjsOauth2 = require("angularjs-oauth2");
         var SpotifyWebApi = require('spotify-web-api-node');
         var spotifyApi = new SpotifyWebApi();
-//        var spotifyOauth = new angularjsOauth2();
         
 		service.spotifyResponse = null;
 
 		service.init = function () {
-            console.log(spotifyOauth);
 //            Spotify.config.spotify.auth_url = 'https://accounts.spotify.com/authorize?' +
 //                querystring.stringify({
 //                  response_type: 'code',
