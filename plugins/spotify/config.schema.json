@@ -11,6 +11,14 @@
                 "refresh_token": {
                     "type": "string",
                     "title": "Spotify refresh token returned from oauth"
+                },
+                "client_id": {
+                    "type": "string",
+                    "title": "Spotify client id string"
+                },
+                "secret_token": {
+                    "type": "string",
+                    "title": "Spotify secret token to auth app"
                 }
             }
         }
@@ -26,6 +34,8 @@
               "type":"help",
               "helpvalue": "<strong><em>(used to authorize the api for use with this application)</em> found in plugins/spotify/oauth/</strong>"
             },
+            "spotify.client_id",
+            "spotify.secret_token",
             "spotify.access_token",
             "spotify.refresh_token"
           ]
