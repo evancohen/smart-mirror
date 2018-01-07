@@ -5,7 +5,7 @@
 	function SpotifyService($http) {
 		var service = {};
         var spotify = {};
-		var tokenFile = 'fb-token.json';
+		var tokenFile = 'spotify-token.json';
 
         /**
          * Persist the fitbit token.
@@ -79,11 +79,11 @@
                     spotify.setAccessToken(data.body['access_token']);
                     spotify.setRefreshToken(data.body['refresh_token']);
                     
-//                    // persist the token
-//					persist.write(tokenFile, token, function (err) {
-//						if (err) return next(err);
-						res.redirect('/fb-profile');
-//					});
+                    // persist the token
+					persist.write(tokenFile, token, function (err) {
+						if (err) return next(err);
+						res.redirect('/spotify-profile');
+					});
                   }, function(err) {
                     console.log('Something went wrong!', err);
                   });
