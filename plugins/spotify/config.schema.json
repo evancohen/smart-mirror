@@ -63,7 +63,7 @@
               "title": "Response Type"
             },
             "scope": {
-              "default": "activity nutrition profile settings sleep social weight heartrate",
+              "default": "user-read-private user-read-email streaming user-read-currently-playing user-modify-playback-state user-read-playback-state",
               "type": "string",
               "title": "Scope"
             },
