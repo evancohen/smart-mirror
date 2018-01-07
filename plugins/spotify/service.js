@@ -69,13 +69,7 @@
                 
 
                 // Retrieve an access token and a refresh token
-                spotify.authorizationCodeGrant(code, function(response) {
-                    // persist the token
-					persist.write(tokenFile, token, function (err) {
-						if (err) return next(err);
-						res.redirect('/fb-profile');
-					});
-                })
+                spotify.authorizationCodeGrant(code)
                   .then(function(data) {
                     console.log('The token expires in ' + data.body['expires_in']);
                     console.log('The access token is ' + data.body['access_token']);
@@ -84,6 +78,12 @@
                     // Set the access token on the API object to use it in later calls
                     spotify.setAccessToken(data.body['access_token']);
                     spotify.setRefreshToken(data.body['refresh_token']);
+                    
+                    // persist the token
+					persist.write(tokenFile, token, function (err) {
+						if (err) return next(err);
+						res.redirect('/fb-profile');
+					});
                   }, function(err) {
                     console.log('Something went wrong!', err);
                   });
