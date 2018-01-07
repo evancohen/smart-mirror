@@ -9,7 +9,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	// Profile
 	var refreshProfileSummary = function () {
-		SpotifyService.profileSummary(function (response) {
+		SpotifyService.profileSummary().then(function (response) {
 			$scope.profile = response;
             console.log($scope.profile);
 		});
@@ -17,7 +17,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	// Profile
 	var refreshCurrentPlaying = function () {
-		SpotifyService.currentActive(function (response) {
+		SpotifyService.currentActive().then(function (response) {
             console.log(response);
             if (response.album.images[0].url) {
                 $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
