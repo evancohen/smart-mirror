@@ -200,9 +200,29 @@
             "voice": "resume (playback on) spotify",
             "description": "Play song on Spotify."
         },
+        "spotify_pause": {
+            "text": "play ________",
+            "voice": "pause (playback on) spotify",
+            "description": "Play song on Spotify."
+        },
+        "spotify_forward": {
+            "text": "play ________",
+            "voice": "(play) (skip to) next song on spotify",
+            "description": "Play song on Spotify."
+        },
+        "spotify_back": {
+            "text": "play ________",
+            "voice": "(play) (skip to) previous song on spotify",
+            "description": "Play song on Spotify."
+        },
         "spotify_shuffle": {
             "text": "shuffle music",
-            "voice": "shuffle (playlist) (music) (songs)",
+            "voice": "shuffle (playlist) (music) (songs) on spotify",
+            "description": "Play song on Spotify."
+        },
+        "spotify_repeat": {
+            "text": "shuffle music",
+            "voice": "repeat (playlist) (music) (song) on spotify",
             "description": "Play song on Spotify."
         },
         "spotify_pause": {

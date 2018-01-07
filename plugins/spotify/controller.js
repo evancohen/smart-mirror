@@ -90,6 +90,26 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		SpotifyService.play();
 	});
     
+    SpeechService.addCommand('spotify_pause', function () {
+		SpotifyService.pause();
+	});
+    
+    SpeechService.addCommand('spotify_forward', function () {
+		SpotifyService.skipNext();
+	});
+    
+    SpeechService.addCommand('spotify_back', function () {
+		SpotifyService.skipBack();
+	});
+    
+    SpeechService.addCommand('spotify_repeat', function () {
+		SpotifyService.setRepeat();
+	});
+    
+    SpeechService.addCommand('spotify_shuffle', function () {
+		SpotifyService.setShuffle();
+	});
+    
     SpeechService.addCommand('spotify_play', function (query) {
 		SpotifyService.playTrack(query).then(function (response) {
             if (response) {

@@ -228,6 +228,33 @@
               });
         };
         
+        service.pause = function () {
+            return spotify.pause()
+              .then(function(data) {
+                console.log(data);
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
+        
+        service.skipBack = function () {
+            return spotify.skipToPrevious()
+              .then(function(data) {
+                console.log(data);
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
+        
+        service.skipNext = function () {
+            return spotify.skipToNext()
+              .then(function(data) {
+                console.log(data);
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
+        
         service.playTrack = function (query) {
             return spotify.searchTracks('track:' + query)
               .then(function(data) {
