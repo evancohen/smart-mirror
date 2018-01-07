@@ -2,59 +2,44 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
     
 	SpotifyService.init(function () {
         refreshAllData();
-        $interval(refreshProfileSummary, 3600000 * 0.5); // hours
-        $interval(refreshCurrentPlaying, 1000 * 10); // secs
-        $interval(refreshCurrentDevice, 1000 * 10); // secs
-        
-        $scope.isActive = function() {
-            return SpotifyService.isActive();
-        };
+        $interval(currentProfile, 3600000 * 0.5); // hours
+        $interval(currentPlaying, 1000 * 10); // secs
+        $interval(currentDevice, 1000 * 10); // secs
     });
 
-	var refreshProfileSummary = function () {
+	var currentProfile = function () {
 		SpotifyService.profileSummary().then(function (response) {
 			$scope.profile = response;
             console.log($scope.profile);
 		});
 	};
 
-	var isPlaying = function () {
-		SpotifyService.profileSummary().then(function (response) {
-			$scope.profile = response;
-            console.log($scope.profile);
-		});
-	};
-
-	var refreshCurrentDevice = function () {
+	var currentDevice = function () {
 		SpotifyService.activeDevice().then(function (response) {
-            if (response.is_playing) {
-                $scope.scDevice = "Playing on " + response.device.name;
-            } else {
-                $scope.scDevice = response.device.name + " Standby";
-            }
-            console.log(response);
+            console.debug("current device:", response);
+            $scope.isPlaying = response.is_playing;
+            $scope.scDevice = response.device.name;
 		});
 	};
 
-	var refreshCurrentPlaying = function () {
+	var currentPlaying = function () {
 		SpotifyService.whatIsPlaying().then(function (response) {
-            console.log(response);
+            console.debug("current playing:", response);
             if (response.album.images[0].url) {
                 $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
             } else {
                 $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
             }
     //                $scope.scWaveform = response[0].waveform_url;
-
             $scope.scTrack = response.name;
             $scope.scArtist = response.artists[0].name;
 		});
 	};
 
 	var refreshAllData = function () {
-		refreshProfileSummary();
-		refreshCurrentPlaying();
-		refreshCurrentDevice();
+		currentProfile();
+		currentPlaying();
+		currentDevice();
 	};
     
     SpeechService.addCommand('spotify_resume', function () {
