@@ -69,8 +69,7 @@
                 
 
                 // Retrieve an access token and a refresh token
-                spotify.authorizationCodeGrant(code)
-                  .then(function(data) {
+                spotify.authorizationCodeGrant(code, function(data) {
                     console.log('The token expires in ' + data.body['expires_in']);
                     console.log('The access token is ' + data.body['access_token']);
                     console.log('The refresh token is ' + data.body['refresh_token']);
@@ -84,8 +83,8 @@
 						if (err) return next(err);
 						res.redirect('/fb-profile');
 					});
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
                   });
                 
                 
