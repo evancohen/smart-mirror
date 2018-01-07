@@ -1,0 +1,39 @@
+{
+    "schema": {
+        "spotify": {
+            "type": "object",
+            "title": "Spotify",
+            "properties": {
+                "oauth_scope": {
+                    "type": "string",
+                    "title": "Spotify scope of authorization for oauth"
+                },
+                "client_id": {
+                    "type": "string",
+                    "title": "Spotify client id string"
+                },
+                "secret_token": {
+                    "type": "string",
+                    "title": "Spotify secret token to auth app"
+                }
+            }
+        }
+    },
+    "form":[
+        {
+          "title": "Spotify Settings",
+          "type":"fieldset",
+          "expandable":true,
+          "order":0,
+          "items":[
+            {
+              "type":"help",
+              "helpvalue": "<strong><em>(used to authorize the api for use with this application)</em> found in plugins/spotify/oauth/</strong>"
+            },
+            "spotify.client_id",
+            "spotify.secret_token",
+            "spotify.oauth_scope"
+          ]
+        }
+    ]
+}
