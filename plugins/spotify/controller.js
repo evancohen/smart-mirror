@@ -4,7 +4,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	SpotifyService.init(function () {
         refreshAllData();
         $interval(refreshProfileSummary, 3600000 * 0.5); // 1/2 hour
-        $interval(refreshCurrentPlaying, 1000 * 3); // 3 secs
+        $interval(refreshCurrentPlaying, 1000 * 5); // 3 secs
     });
 
 	// Profile
