@@ -11,6 +11,7 @@
 		service.spotifyResponse = null;
 
 		service.init = function () {
+            console.log(angularjsOauth2);
 //            Spotify.config.spotify.auth_url = 'https://accounts.spotify.com/authorize?' +
 //                querystring.stringify({
 //                  response_type: 'code',
