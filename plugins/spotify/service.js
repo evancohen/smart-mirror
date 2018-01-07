@@ -39,11 +39,13 @@
 			var app = express();
 			var fs = require('fs');
 			var Spotify = require('spotify-web-api-node');
+            console.log(config);
             var options = {
                 clientId : config.spotify.creds.clientID,
                 clientSecret : config.spotify.creds.clientSecret,
                 redirectUri : config.spotify.authorization_uri.redirect_uri
             };
+            console.log(options);
 
 			spotify = new Spotify(options);
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
