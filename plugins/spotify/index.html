@@ -1,15 +1,9 @@
 <div ng-controller="Spotify" ng-if="config.spotify.client_id">
-    <oauth2 authorization-url="https://localhost:44300/identity/connect/authorize"
-        sign-out-url="https://localhost:44300/identity/connect/endsession"
-        sign-out-append-token="true"
-        sign-out-redirect-url="http://localhost:9000/#/landing"
-        client-id="portal"
-        redirect-url="http://localhost:9000"
-        silent-token-redirect-url="http://localhost:9000/#/silent-renew"
-        response-type="id_token token"
-        scope="openid portaldashboard"
-        template='views/templates/signInButton.html'
-        auto-generate-nonce="true">
+    <oauth2 authorization-url="https://accounts.spotify.com/authorize"
+            client-id="{{config.spotify.client_id}}"
+            redirect-url="http://localhost:8888/callback"
+            response-type="code"
+            scope="user-read-private user-read-email">
     </oauth2> 
     <div class="contents-box sc-container animate-grow" ng-show="focus == 'spotify'" style="display: flex;padding: 10px;">
         <audio id="player" controls="" autoplay="" preload autobuffer style="display: none"></audio>

@@ -10,6 +10,16 @@
 		service.spotifyResponse = null;
 
 		service.init = function () {
+//            Spotify.config.spotify.auth_url = 'https://accounts.spotify.com/authorize?' +
+//                querystring.stringify({
+//                  response_type: 'code',
+//                  client_id: client_id,
+//                  scope: scope,
+//                  redirect_uri: redirect_uri,
+//                  state: state
+//                }));
+            
+            
 //			if (typeof config.spotify != 'undefined' && config.spotify.length) {
                 spotifyApi.setAccessToken(config.spotify.access_token);
                 spotifyApi.setRefreshToken(config.spotify.refresh_token);
