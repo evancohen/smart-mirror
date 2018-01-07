@@ -23,7 +23,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	// Profile
 	var refreshCurrentDevice = function () {
 		SpotifyService.activeDevice().then(function (response) {
-            if (response.is_palying) {
+            if (response.is_playing) {
                 $scope.scDevice = "Playing on " + response.device.name;
             } else {
                 $scope.scDevice = response.device.name + " Standby";
