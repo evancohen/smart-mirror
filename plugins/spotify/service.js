@@ -91,7 +91,7 @@
 			});
 		}
 
-		service.init = function () {
+		service.init = function (cb) {
 			var port = process.env.PORT || 4000;
 			console.debug('Express is listening on port: ' + port);
 			app.listen(port);
@@ -109,14 +109,7 @@
 
 						spotify.setAccessToken(access_token); // Set the client token
 						spotify.setRefreshToken(refresh_token); // Set the client token
-                        
-                        // Get the authenticated user
-                        spotify.getMe()
-                          .then(function(data) {
-                            console.log('Current authenticated user:', data.body);
-                          }, function(err) {
-                            console.log('Something went wrong!', err);
-                          });
+                        cb();
 					});
 				} else if (err.code == 'ENOENT') {
 					console.error('Spotify authentication required, please visit the following link: http://localhost:4000/spotify to authenticate your credentials.', err);
@@ -124,7 +117,6 @@
 					console.error(err);
 				}
 			});
-            
             
 ////            Spotify.config.spotify.auth_url = 'https://accounts.spotify.com/authorize?' +
 ////                querystring.stringify({
@@ -189,7 +181,17 @@
 ////            }
 		}
         
-        service.update = function () {
+        service.profileSummary = function () {            
+            return spotify.getMe()
+              .then(function(data) {
+                console.log('Current authenticated user:', data.body);
+                return data.body;
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
+        
+        service.currentActive = function () {
             return spotify.getMyCurrentPlayingTrack()
               .then(function(data) {
                 console.log('current track:', data);

@@ -1,10 +1,23 @@
-function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $timeout) {
+function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval) {
     
     //Initialize Spotify
-	SpotifyService.init();
-	
-    SpotifyService.update(function (response) {
-        var promise = function() {
+	SpotifyService.init(function () {
+        refreshAllData();
+        $interval(refreshProfileSummary, 3600000 * 0.5); // 1/2 hour
+        $interval(refreshCurrentPlaying, 1000 * 3); // 3 secs
+    });
+
+	// Profile
+	var refreshProfileSummary = function () {
+		SpotifyService.profileSummary(function (response) {
+			$scope.profile = response;
+            console.log($scope.profile);
+		});
+	};
+
+	// Profile
+	var refreshCurrentPlaying = function () {
+		SpotifyService.currentActive(function (response) {
             if (response.items[0].album.images[0].url) {
                 $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
             } else {
@@ -14,15 +27,14 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $timeout) 
 
             $scope.scTrack = response.items[0].name;
             $scope.scArtist = response.items[0].artists[0].name;
-            
-            SpotifyService.update();
-        };
-        
-        $timeout(function() {
-            promise();
-            SpotifyService.update();
-        }, 5000);
-    });
+		});
+	};
+
+	// All Data
+	var refreshAllData = function () {
+		refreshProfileSummary();
+		refreshCurrentPlaying();
+	};
 
     //Spotify search and play
 	SpeechService.addCommand('spotify_search_track', function (query) {
