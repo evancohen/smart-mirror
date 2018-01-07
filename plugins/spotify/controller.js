@@ -1,6 +1,5 @@
 function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval) {
     
-    //Initialize Spotify
 	SpotifyService.init(function () {
         refreshAllData();
         $interval(refreshProfileSummary, 3600000 * 0.5); // hours
@@ -12,7 +11,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
         };
     });
 
-	// Profile
 	var refreshProfileSummary = function () {
 		SpotifyService.profileSummary().then(function (response) {
 			$scope.profile = response;
@@ -20,7 +18,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		});
 	};
 
-	// Profile
 	var isPlaying = function () {
 		SpotifyService.profileSummary().then(function (response) {
 			$scope.profile = response;
@@ -28,7 +25,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		});
 	};
 
-	// Profile
 	var refreshCurrentDevice = function () {
 		SpotifyService.activeDevice().then(function (response) {
             if (response.is_playing) {
@@ -40,7 +36,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		});
 	};
 
-	// Profile
 	var refreshCurrentPlaying = function () {
 		SpotifyService.whatIsPlaying().then(function (response) {
             console.log(response);
@@ -56,7 +51,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		});
 	};
 
-	// All Data
 	var refreshAllData = function () {
 		refreshProfileSummary();
 		refreshCurrentPlaying();
@@ -88,11 +82,11 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	});
     
     SpeechService.addCommand('spotify_play', function (query) {
-		SpotifyService.searchTracks(query).then(function (response) {
+		SpotifyService.playTrack(query).then(function (response) {
             if (response) {
                 console.log("search", response);
                 return;
-                SpotifyService.playTrack(query).then(function (response) {
+                SpotifyService.play(query).then(function (response) {
                         if (response.items[0].album.images[0].url) {
                             $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
                         } else {
