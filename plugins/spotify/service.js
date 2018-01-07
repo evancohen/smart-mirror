@@ -30,7 +30,6 @@
 		};
         
 		service.spotifyResponse = null;
-        service.spotifyAuthenticated = false;
 
         /**
          * Instantiate the spotify client.
@@ -142,8 +141,15 @@
                         spotify.getMe()
                           .then(function(data) {
                             console.log('Current authenticated user:', data.body);
-                            
-                            service.spotifyAuthenticated = true;
+                          }, function(err) {
+                            console.log('Something went wrong!', err);
+                          });
+                        
+                        spotify.getMyCurrentPlayingTrack()
+                          .then(function(data) {
+                            console.log('current track:', data);
+                            service.spotifyResponse = data.body.tracks || null;
+                            return service.spotifyResponse;
                           }, function(err) {
                             console.log('Something went wrong!', err);
                           });
@@ -181,13 +187,6 @@
 //                spotify.getMyDevices()
 //                  .then(function(data) {
 //                    console.log('user devices:', data.body);
-//                  }, function(err) {
-//                    console.log('Something went wrong!', err);
-//                  });
-//            
-//                spotify.getMyCurrentPlayingTrack()
-//                  .then(function(data) {
-//                    console.log('current track:', data.body);
 //                  }, function(err) {
 //                    console.log('Something went wrong!', err);
 //                  });
