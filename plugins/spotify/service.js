@@ -148,7 +148,7 @@
                         spotify.getMyCurrentPlayingTrack()
                           .then(function(data) {
                             console.log('current track:', data);
-                            service.spotifyResponse = data.body.tracks || null;
+                            service.spotifyResponse = data.body.item || null;
                             return service.spotifyResponse;
                           }, function(err) {
                             console.log('Something went wrong!', err);
