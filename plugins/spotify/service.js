@@ -42,8 +42,8 @@
             
             var client_id = config.spotify.creds.clientID;
             var client_secret = config.spotify.creds.clientSecret;
-            var redirect_uri =  config.spotify.authorization_uri.redirect_uri;
-            var auth_scope =  config.spotify.authorization_uri.scope.split(' ');
+            var redirect_uri = config.spotify.authorization_uri.redirect_uri;
+            var auth_scope = config.spotify.authorization_uri.scope.split(' ');
             var auth_state = config.spotify.authorization_uri.state;
 
 			spotify = new Spotify({
@@ -131,7 +131,6 @@
 							console.error('Persist read error!', err);
 						}
                         
-                        console.log(token);
                         var access_token = token['access_token'];
                         var refresh_token = token['refresh_token'];
 
@@ -160,13 +159,13 @@
 //                spotify.setAccessToken(config.spotify.access_token);
 //                spotify.setRefreshToken(config.spotify.refresh_token);
 //            
-//                // Get the authenticated user
-//                spotify.getMe()
-//                  .then(function(data) {
-//                    console.log('Current authenticated user:', data.body);
-//                  }, function(err) {
-//                    console.log('Something went wrong!', err);
-//                  });
+                // Get the authenticated user
+                spotify.getMe()
+                  .then(function(data) {
+                    console.log('Current authenticated user:', data.body);
+                  }, function(err) {
+                    console.log('Something went wrong!', err);
+                  });
 //            
 ////                spotify.getMyRecentlyPlayedTracks()
 ////                  .then(function(data) {
