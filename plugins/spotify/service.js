@@ -30,6 +30,7 @@
 		};
         
 		service.spotifyResponse = null;
+        service.spotifyAuthenticated = false;
 
         /**
          * Instantiate the spotify client.
@@ -141,6 +142,8 @@
                         spotify.getMe()
                           .then(function(data) {
                             console.log('Current authenticated user:', data.body);
+                            
+                            service.spotifyAuthenticated = true;
                           }, function(err) {
                             console.log('Something went wrong!', err);
                           });
