@@ -49,7 +49,7 @@
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
 			app.get('/spotify', function (req, res) {
-				res.redirect(spotify.createAuthorizeURL());
+				res.redirect(spotify.createAuthorizeURL(config.spotify.authorization_uri.scope, config.spotify.authorization_uri.state));
 			});
 
             /*
