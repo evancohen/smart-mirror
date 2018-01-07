@@ -136,6 +136,14 @@
 
 						spotify.setAccessToken(access_token); // Set the client token
 						spotify.setRefreshToken(refresh_token); // Set the client token
+                        
+                        // Get the authenticated user
+                        spotify.getMe()
+                          .then(function(data) {
+                            console.log('Current authenticated user:', data.body);
+                          }, function(err) {
+                            console.log('Something went wrong!', err);
+                          });
 					});
 				} else if (err.code == 'ENOENT') {
 					console.error('Spotify authentication required, please visit the following link: http://localhost:4000/spotify to authenticate your credentials.', err);
@@ -159,13 +167,6 @@
 //                spotify.setAccessToken(config.spotify.access_token);
 //                spotify.setRefreshToken(config.spotify.refresh_token);
 //            
-                // Get the authenticated user
-                spotify.getMe()
-                  .then(function(data) {
-                    console.log('Current authenticated user:', data.body);
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
 //            
 ////                spotify.getMyRecentlyPlayedTracks()
 ////                  .then(function(data) {
