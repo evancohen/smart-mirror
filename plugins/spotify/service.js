@@ -51,7 +51,6 @@
                 clientSecret : client_secret,
                 redirectUri : redirect_uri
             });
-            console.log(config.spotify);
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
 			app.get('/spotify', function (req, res) {
@@ -66,42 +65,29 @@
 				// The code that's returned as a query parameter to the redirect URI
                 var code = req.query.code;
                 
-                
-
                 // Retrieve an access token and a refresh token
                 spotify.authorizationCodeGrant(code)
                   .then(function(data) {
-                    console.log('The token expires in ' + data.body['expires_in']);
-                    console.log('The access token is ' + data.body['access_token']);
-                    console.log('The refresh token is ' + data.body['refresh_token']);
-
-                    // Set the access token on the API object to use it in later calls
-                    spotify.setAccessToken(data.body['access_token']);
-                    spotify.setRefreshToken(data.body['refresh_token']);
-                    
                     // persist the token
-					persist.write(tokenFile, token, function (err) {
+					persist.write(tokenFile, data.body, function (err) {
 						if (err) return next(err);
 						res.redirect('/spotify-profile');
 					});
                   }, function(err) {
-                    console.log('Something went wrong!', err);
+                    console.debug('Something went wrong!', err);
+					if (err) return next(err);
                   });
-                
-                
-                
-                
-//				spotify.fetchToken(code, function (err, token) {
-//					if (err) return next(err);
-//
-//					// persist the token
-//					persist.write(tokenFile, token, function (err) {
-//						if (err) return next(err);
-//						res.redirect('/fb-profile');
-//					});
-//				});
 			});
 
+
+//                    console.log('The token expires in ' + data.body['expires_in']);
+//                    console.log('The access token is ' + data.body['access_token']);
+//                    console.log('The refresh token is ' + data.body['refresh_token']);
+//
+//                    // Set the access token on the API object to use it in later calls
+//                    spotify.setAccessToken(data.body['access_token']);
+//                    spotify.setRefreshToken(data.body['refresh_token']);
+            
             /*
                 Call an API. spotify.request() mimics nodejs request() library, 
                 automatically adding the required oauth2 header. The callback 
