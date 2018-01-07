@@ -4,13 +4,9 @@
             "type": "object",
             "title": "Spotify",
             "properties": {
-                "access_token": {
+                "oauth_scope": {
                     "type": "string",
-                    "title": "Spotify token returned from oauth"
-                },
-                "refresh_token": {
-                    "type": "string",
-                    "title": "Spotify refresh token returned from oauth"
+                    "title": "Spotify scope of authorization for oauth"
                 },
                 "client_id": {
                     "type": "string",
@@ -36,8 +32,7 @@
             },
             "spotify.client_id",
             "spotify.secret_token",
-            "spotify.access_token",
-            "spotify.refresh_token"
+            "spotify.oauth_scope"
           ]
         }
     ]
