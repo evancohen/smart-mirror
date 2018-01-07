@@ -4,7 +4,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $timeout) 
 	SpotifyService.init();
 	
     SpotifyService.update(function (response) {
-        $timeout(function() {
+        var promise = function() {
             if (response.items[0].album.images[0].url) {
                 $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
             } else {
@@ -14,6 +14,13 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $timeout) 
 
             $scope.scTrack = response.items[0].name;
             $scope.scArtist = response.items[0].artists[0].name;
+            
+            SpotifyService.update();
+        };
+        
+        $timeout(function() {
+            promise();
+            SpotifyService.update();
         }, 5000);
     });
 
