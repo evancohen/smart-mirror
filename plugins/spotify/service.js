@@ -39,7 +39,9 @@
 			var app = express();
 			var fs = require('fs');
 			var Spotify = require('spotify-web-api-node');
+            console.log(config);
             console.log(config.spotify);
+            console.log(config.fitbit);
             var options = {
                 clientId : config.spotify.creds.clientID,
                 clientSecret : config.spotify.creds.clientSecret,
