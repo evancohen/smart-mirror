@@ -62,29 +62,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		refreshCurrentPlaying();
 		refreshCurrentDevice();
 	};
-
-    //Spotify search and play
-	SpeechService.addCommand('spotify_search_track', function (query) {
-		SpotifyService.searchTrack(query).then(function (response) {
-            if (response) {
-                if (response.items[0].album.images[0].url) {
-                    $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
-                } else {
-                    $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
-                }
-//                $scope.scWaveform = response[0].waveform_url;
-                
-                $scope.scTrack = response.items[0].name;
-                $scope.scArtist = response.items[0].artists[0].name;
-
-
-                Focus.change("spotify");
-    //			SpotifyService.play();
-            } else {
-                console.log('no results found');
-            }
-		});
-    });
     
     SpeechService.addCommand('spotify_resume', function () {
 		SpotifyService.play();
@@ -111,21 +88,25 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	});
     
     SpeechService.addCommand('spotify_play', function (query) {
-		SpotifyService.playTrack(query).then(function (response) {
+		SpotifyService.searchTracks(query).then(function (response) {
             if (response) {
-                if (response.items[0].album.images[0].url) {
-                    $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
-                } else {
-                    $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
-                }
-//                $scope.scWaveform = response[0].waveform_url;
-                
-                $scope.scTrack = response.items[0].name;
-                $scope.scArtist = response.items[0].artists[0].name;
+                console.log("search", response);
+                return;
+                SpotifyService.playTrack(query).then(function (response) {
+                        if (response.items[0].album.images[0].url) {
+                            $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
+                        } else {
+                            $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+                        }
+        //                $scope.scWaveform = response[0].waveform_url;
+
+                        $scope.scTrack = response.items[0].name;
+                        $scope.scArtist = response.items[0].artists[0].name;
 
 
-                Focus.change("spotify");
-    //			SpotifyService.play();
+                        Focus.change("spotify");
+            //			SpotifyService.play();
+                });
             } else {
                 console.log('no results found');
             }

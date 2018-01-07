@@ -221,7 +221,9 @@
         
         service.play = function () {
             return spotify.play()
-              .error(function(err) {
+              .then(function(data) {
+                console.log(data);
+              }, function(err) {
                 console.log('Something went wrong!', err);
               });
         };

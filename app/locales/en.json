@@ -235,11 +235,6 @@
             "voice": "Activate spotify",
             "description": "Set Spotify player as active."
         },
-        "spotify_search_track": {
-            "text": "Spotify find track ________",
-            "voice": "Spotify find (track) (song) *query",
-            "description": "Find songs on Spotify."
-        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",
