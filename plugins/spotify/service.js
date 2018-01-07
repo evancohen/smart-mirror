@@ -167,46 +167,46 @@
 //            
 //            
 ////			if (typeof config.spotify != 'undefined' && config.spotify.length) {
-//                spotifyApi.setAccessToken(config.spotify.access_token);
-//                spotifyApi.setRefreshToken(config.spotify.refresh_token);
+//                spotify.setAccessToken(config.spotify.access_token);
+//                spotify.setRefreshToken(config.spotify.refresh_token);
 //            
 //                // Get the authenticated user
-//                spotifyApi.getMe()
+//                spotify.getMe()
 //                  .then(function(data) {
 //                    console.log('Current authenticated user:', data.body);
 //                  }, function(err) {
 //                    console.log('Something went wrong!', err);
 //                  });
 //            
-////                spotifyApi.getMyRecentlyPlayedTracks()
+////                spotify.getMyRecentlyPlayedTracks()
 ////                  .then(function(data) {
 ////                    console.log('recent tracks:', data.body);
 ////                  }, function(err) {
 ////                    console.log('Something went wrong!', err);
 ////                  });
 //            
-//                spotifyApi.getMyDevices()
+//                spotify.getMyDevices()
 //                  .then(function(data) {
 //                    console.log('user devices:', data.body);
 //                  }, function(err) {
 //                    console.log('Something went wrong!', err);
 //                  });
 //            
-//                spotifyApi.getMyCurrentPlayingTrack()
+//                spotify.getMyCurrentPlayingTrack()
 //                  .then(function(data) {
 //                    console.log('current track:', data.body);
 //                  }, function(err) {
 //                    console.log('Something went wrong!', err);
 //                  });
 //            
-//                spotifyApi.getMyCurrentPlaybackState()
+//                spotify.getMyCurrentPlaybackState()
 //                  .then(function(data) {
 //                    console.log('current playback:', data.body);
 //                  }, function(err) {
 //                    console.log('Something went wrong!', err);
 //                  });
 //            
-////                spotifyApi.transferMyPlayback()
+////                spotify.transferMyPlayback()
 ////                  .then(function(data) {
 ////                    console.log('current playback:', data.body);
 ////                  }, function(err) {
@@ -214,18 +214,18 @@
 ////                  });
 //            
 ////                // Get the credentials one by one
-////                console.log('The access token is ' + spotifyApi.getAccessToken());
-////                console.log('The refresh token is ' + spotifyApi.getRefreshToken());
+////                console.log('The access token is ' + spotify.getAccessToken());
+////                console.log('The refresh token is ' + spotify.getRefreshToken());
 ////
 ////                // Get all credentials
-////                console.log('The credentials are ', spotifyApi.getCredentials());
+////                console.log('The credentials are ', spotify.getCredentials());
 //            
-////                spotifyApi.refreshAccessToken()
+////                spotify.refreshAccessToken()
 ////                  .then(function(data) {
 ////                    console.log('The access token has been refreshed!');
 ////
 ////                    // Save the access token so that it's used in future calls
-////                    spotifyApi.setAccessToken(data.body['access_token']);
+////                    spotify.setAccessToken(data.body['access_token']);
 ////                  }, function(err) {
 ////                    console.log('Could not refresh access token', err);
 ////                  });
@@ -235,7 +235,7 @@
         
         service.playTrack = function (query) {
             // Search tracks whose name contains the query
-            return spotifyApi.searchTracks('track:' + query)
+            return spotify.searchTracks('track:' + query)
               .then(function(data) {
                 console.log('Search tracks matching "' + query + '"');
                 console.log(data);
@@ -248,7 +248,7 @@
                 };
                 console.log(options);
                 
-                return spotifyApi.play(options)
+                return spotify.play(options)
                   .then(function(data) {
                     console.log('current playback: "' + query + '"');
                     console.log(data);
@@ -264,7 +264,7 @@
 
         service.searchTrack = function (query) {
             // Search tracks whose name contains the query
-            return spotifyApi.searchTracks('track:' + query)
+            return spotify.searchTracks('track:' + query)
               .then(function(data) {
                 console.log('Search tracks matching "' + query + '"');
                 console.log(data);
@@ -277,7 +277,7 @@
 
         service.getPlaylist = function (query) {
             // Search tracks whose name contains the query
-            return spotifyApi.getUserPlaylists(query)
+            return spotify.getUserPlaylists(query)
               .then(function(data) {
                 console.log('Playlist matching "' + query + '"');
                 console.log(data);
