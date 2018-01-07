@@ -26,6 +26,7 @@
 		};
         
 		service.spotifyResponse = null;
+		service.active = null;
 
 		if (typeof config.spotify != 'undefined') {
 			var express = require('express');
@@ -181,12 +182,18 @@
 ////            }
 		}
         
-        service.profileSummary = function () {            
+        service.isActive = function () {
+            return service.active;
+        };
+        
+        service.profileSummary = function () {
             return spotify.getMe()
               .then(function(data) {
-                console.log('Current authenticated user:', data.body);
+                service.active = true;
+//                console.log('Current authenticated user:', data.body);
                 return data.body;
               }, function(err) {
+                service.active = false;
                 console.log('Something went wrong!', err);
               });
         };
@@ -194,10 +201,11 @@
         service.currentActive = function () {
             return spotify.getMyCurrentPlayingTrack()
               .then(function(data) {
-                console.log('current track:', data);
+//                console.log('current track:', data);
                 service.spotifyResponse = data.body.item || null;
                 return service.spotifyResponse;
               }, function(err) {
+                service.active = false;
                 console.log('Something went wrong!', err);
               });
         };

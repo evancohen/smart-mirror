@@ -5,6 +5,10 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
         refreshAllData();
         $interval(refreshProfileSummary, 3600000 * 0.5); // hours
         $interval(refreshCurrentPlaying, 1000 * 10); // secs
+        
+        $scope.isActive = function() = {
+            return SpotifyService.isActive();
+        };
     });
 
 	// Profile
