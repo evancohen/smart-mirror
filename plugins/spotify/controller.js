@@ -19,6 +19,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
             console.debug("current device:", response);
             $scope.isPlaying = response.is_playing;
             $scope.scDevice = response.device.name || null;
+            $scope.scStatus = $scope.scDevice.toLowerCase() + ($scope.isPlaying)? " playing": " paused";
 		});
 	};
 
