@@ -43,7 +43,7 @@
 			spotify = new Spotify(config.spotify);
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
 			app.get('/spotify', function (req, res) {
-				res.redirect(spotify.authorizeURL());
+				res.redirect(spotify.createAuthorizeURL());
 			});
 
             /*
