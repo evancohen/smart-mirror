@@ -19,14 +19,14 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	var refreshCurrentPlaying = function () {
 		SpotifyService.currentActive(function (response) {
             if (response.items[0].album.images[0].url) {
-                $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
+                $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
             } else {
                 $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
             }
     //                $scope.scWaveform = response[0].waveform_url;
 
-            $scope.scTrack = response.items[0].name;
-            $scope.scArtist = response.items[0].artists[0].name;
+            $scope.scTrack = response.name;
+            $scope.scArtist = response.artists[0].name;
 		});
 	};
 
