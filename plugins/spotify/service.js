@@ -127,14 +127,16 @@
 			fs.stat(tokenFile, function (err) {
 				if (err == null) {
 					persist.read(tokenFile, function (err, token) {
-                        console.log(token);
 						if (err) {
 							console.error('Persist read error!', err);
 						}
+                        
+                        console.log(token);
+                        var access_token = token['access_token'];
+                        var refresh_token = token['refresh_token'];
 
-						spotify.setAccessToken(token['access_token']); // Set the client token
-						spotify.setRefreshToken(token['refresh_token']); // Set the client token
-						cb()
+						spotify.setAccessToken(access_token); // Set the client token
+						spotify.setRefreshToken(refresh_token); // Set the client token
 					});
 				} else if (err.code == 'ENOENT') {
 					console.error('Spotify authentication required, please visit the following link: http://localhost:4000/spotify to authenticate your credentials.', err);
