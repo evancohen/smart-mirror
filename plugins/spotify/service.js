@@ -39,17 +39,23 @@
 			var app = express();
 			var fs = require('fs');
 			var Spotify = require('spotify-web-api-node');
+            
+            var client_id = config.spotify.creds.clientID;
+            var client_secret = config.spotify.creds.clientSecret;
+            var redirect_uri =  config.spotify.authorization_uri.redirect_uri;
+            var auth_scope =  config.spotify.authorization_uri.scope.split(' ');
+            var auth_state = config.spotify.authorization_uri.state;
 
 			spotify = new Spotify({
-                clientId : config.spotify.creds.clientID,
-                clientSecret : config.spotify.creds.clientSecret,
-                redirectUri : config.spotify.authorization_uri.redirect_uri
+                clientId : client_id,
+                clientSecret : client_secret,
+                redirectUri : redirect_uri
             });
             console.log(config.spotify);
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
 			app.get('/spotify', function (req, res) {
-				res.redirect(spotify.createAuthorizeURL(config.spotify.authorization_uri.scope, config.spotify.authorization_uri.state));
+				res.redirect(spotify.createAuthorizeURL(auth_scope, auth_state));
 			});
 
             /*
