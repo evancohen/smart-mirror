@@ -5,8 +5,29 @@
 	function SpotifyService($http) {
 		var service = {};
         var spotify = {};
-//        var SpotifyWebApi = require('spotify-web-api-node');
-//        var spotifyApi = new SpotifyWebApi();
+		var tokenFile = 'fb-token.json';
+
+        /**
+         * Persist the fitbit token.
+         */
+		var persist = {
+			read: function (filename, cb) {
+				fs.readFile(filename, { encoding: 'utf8', flag: 'r' }, function (err, data) {
+					if (err) return cb(err);
+					try {
+						var token = JSON.parse(data);
+						cb(null, token);
+					} catch (err) {
+						cb(err);
+					}
+				});
+			},
+
+			write: function (filename, token, cb) {
+				console.debug('Persisting new token: ' + JSON.stringify(token));
+				fs.writeFile(filename, JSON.stringify(token), cb);
+			}
+		};
         
 		service.spotifyResponse = null;
 
