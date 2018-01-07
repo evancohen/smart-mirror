@@ -7,7 +7,7 @@
         var angularjsOauth2 = require("angularjs-oauth2");
         var SpotifyWebApi = require('spotify-web-api-node');
         var spotifyApi = new SpotifyWebApi();
-        var spotifyOauth = new angularjsOauth2();
+//        var spotifyOauth = new angularjsOauth2();
         
 		service.spotifyResponse = null;
 
