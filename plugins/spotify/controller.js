@@ -21,6 +21,14 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	};
 
 	// Profile
+	var isPlaying = function () {
+		SpotifyService.profileSummary().then(function (response) {
+			$scope.profile = response;
+            console.log($scope.profile);
+		});
+	};
+
+	// Profile
 	var refreshCurrentDevice = function () {
 		SpotifyService.activeDevice().then(function (response) {
             if (response.is_playing) {
@@ -34,7 +42,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	// Profile
 	var refreshCurrentPlaying = function () {
-		SpotifyService.currentActive().then(function (response) {
+		SpotifyService.whatIsPlaying().then(function (response) {
             console.log(response);
             if (response.album.images[0].url) {
                 $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
@@ -77,6 +85,11 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
             }
 		});
     });
+    
+    SpeechService.addCommand('spotify_resume', function () {
+		SpotifyService.play();
+	});
+    
     SpeechService.addCommand('spotify_play', function (query) {
 		SpotifyService.playTrack(query).then(function (response) {
             if (response) {

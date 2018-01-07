@@ -192,7 +192,12 @@
         },
         "spotify_play": {
             "text": "play ________",
-            "voice": "play (music) (song) (*query)",
+            "voice": "play (music) (song) (*query) on spotify",
+            "description": "Play song on Spotify."
+        },
+        "spotify_resume": {
+            "text": "play ________",
+            "voice": "resume (playback on) spotify",
             "description": "Play song on Spotify."
         },
         "spotify_shuffle": {

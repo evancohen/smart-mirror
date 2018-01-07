@@ -190,7 +190,6 @@
             return spotify.getMe()
               .then(function(data) {
                 service.active = true;
-//                console.log('Current authenticated user:', data.body);
                 return data.body;
               }, function(err) {
                 service.active = false;
@@ -199,13 +198,6 @@
         };
         
         service.activeDevice = function () {
-//                spotify.getMyDevices()
-//                  .then(function(data) {
-//                    console.log('user devices:', data.body);
-//                  }, function(err) {
-//                    console.log('Something went wrong!', err);
-//                  });
-//            
             return spotify.getMyCurrentPlaybackState()
               .then(function(data) {
                 service.active = true;
@@ -216,10 +208,9 @@
               });
         };
         
-        service.currentActive = function () {
+        service.whatIsPlaying = function () {
             return spotify.getMyCurrentPlayingTrack()
               .then(function(data) {
-//                console.log('current track:', data);
                 service.spotifyResponse = data.body.item || null;
                 return service.spotifyResponse;
               }, function(err) {
@@ -228,8 +219,16 @@
               });
         };
         
+        service.play = function () {
+            return spotify.play()
+              .then(function(data) {
+                console.log(data);
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
+        
         service.playTrack = function (query) {
-            // Search tracks whose name contains the query
             return spotify.searchTracks('track:' + query)
               .then(function(data) {
                 console.log('Search tracks matching "' + query + '"');
