@@ -127,11 +127,12 @@
 			fs.stat(tokenFile, function (err) {
 				if (err == null) {
 					persist.read(tokenFile, function (err, token) {
+                        token = JSON.parse(token);
 						if (err) {
 							console.error('Persist read error!', err);
 						}
 
-						spotify.setToken(token); // Set the client token
+						spotify.setAccessToken(token['access_token']); // Set the client token
 						cb()
 					});
 				} else if (err.code == 'ENOENT') {
