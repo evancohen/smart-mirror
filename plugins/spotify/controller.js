@@ -1,7 +1,21 @@
-function Spotify($scope, $http, SpotifyService, SpeechService, Focus) {
+function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $timeout) {
     
     //Initialize Spotify
 	SpotifyService.init();
+	
+    SpotifyService.update(function (response) {
+        $timeout(function() {
+            if (response.items[0].album.images[0].url) {
+                $scope.scThumb = response.items[0].album.images[0].url.replace("-large.", "-t500x500.");
+            } else {
+                $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+            }
+    //                $scope.scWaveform = response[0].waveform_url;
+
+            $scope.scTrack = response.items[0].name;
+            $scope.scArtist = response.items[0].artists[0].name;
+        }, 5000);
+    });
 
     //Spotify search and play
 	SpeechService.addCommand('spotify_search_track', function (query) {

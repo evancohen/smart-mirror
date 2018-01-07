@@ -6,10 +6,6 @@
 		var service = {};
         var spotify = {};
 		var tokenFile = 'spotify-token.json';
-
-        /**
-         * Persist the fitbit token.
-         */
 		var persist = {
 			read: function (filename, cb) {
 				fs.readFile(filename, { encoding: 'utf8', flag: 'r' }, function (err, data) {
@@ -31,9 +27,6 @@
         
 		service.spotifyResponse = null;
 
-        /**
-         * Instantiate the spotify client.
-         */
 		if (typeof config.spotify != 'undefined') {
 			var express = require('express');
 			var app = express();
@@ -57,10 +50,6 @@
 				res.redirect(spotify.createAuthorizeURL(auth_scope, auth_state));
 			});
 
-            /*
-                Callback service parsing the authorization token and asking for the access token. 
-                This endpoint is refered to in config.spotify.authorization_uri.redirect_uri.
-             */
 			app.get('/spotify_auth_callback', function (req, res, next) {
 				// The code that's returned as a query parameter to the redirect URI
                 var code = req.query.code;
@@ -79,22 +68,6 @@
                   });
 			});
 
-
-//                    console.log('The token expires in ' + data.body['expires_in']);
-//                    console.log('The access token is ' + data.body['access_token']);
-//                    console.log('The refresh token is ' + data.body['refresh_token']);
-//
-//                    // Set the access token on the API object to use it in later calls
-//                    spotify.setAccessToken(data.body['access_token']);
-//                    spotify.setRefreshToken(data.body['refresh_token']);
-            
-            /*
-                Call an API. spotify.request() mimics nodejs request() library, 
-                automatically adding the required oauth2 header. The callback 
-                is a bit different, called with (err, body, token). If token is 
-                non-null, this means a refresh has happened and you should 
-                persist the new token.
-            */
 			app.get('/spotify-profile', function (req, res, next) {
 				spotify.request({
 					uri: "https://api.spotify.com/1/user/-/profile.json",
@@ -141,15 +114,6 @@
                         spotify.getMe()
                           .then(function(data) {
                             console.log('Current authenticated user:', data.body);
-                          }, function(err) {
-                            console.log('Something went wrong!', err);
-                          });
-                        
-                        spotify.getMyCurrentPlayingTrack()
-                          .then(function(data) {
-                            console.log('current track:', data);
-                            service.spotifyResponse = data.body.item || null;
-                            return service.spotifyResponse;
                           }, function(err) {
                             console.log('Something went wrong!', err);
                           });
@@ -224,6 +188,17 @@
 //                
 ////            }
 		}
+        
+        service.update = function () {
+            return spotify.getMyCurrentPlayingTrack()
+              .then(function(data) {
+                console.log('current track:', data);
+                service.spotifyResponse = data.body.item || null;
+                return service.spotifyResponse;
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
         
         service.playTrack = function (query) {
             // Search tracks whose name contains the query
