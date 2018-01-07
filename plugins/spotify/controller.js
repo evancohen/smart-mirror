@@ -3,8 +3,8 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
     //Initialize Spotify
 	SpotifyService.init(function () {
         refreshAllData();
-        $interval(refreshProfileSummary, 3600000 * 0.5); // 1/2 hour
-        $interval(refreshCurrentPlaying, 1000 * 5); // 3 secs
+        $interval(refreshProfileSummary, 3600000 * 0.5); // hours
+        $interval(refreshCurrentPlaying, 1000 * 10); // secs
     });
 
 	// Profile
@@ -18,7 +18,8 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	// Profile
 	var refreshCurrentPlaying = function () {
 		SpotifyService.currentActive(function (response) {
-            if (response.items[0].album.images[0].url) {
+            console.log(response);
+            if (response.album.images[0].url) {
                 $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
             } else {
                 $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
