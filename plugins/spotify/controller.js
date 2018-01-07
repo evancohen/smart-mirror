@@ -18,7 +18,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		SpotifyService.activeDevice().then(function (response) {
             console.debug("current device:", response);
             $scope.isPlaying = response.is_playing;
-            $scope.scDevice = response.device.name;
+            $scope.scDevice = response.device.name || null;
 		});
 	};
 
