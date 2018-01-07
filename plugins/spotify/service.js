@@ -45,7 +45,7 @@
                 clientSecret : config.spotify.creds.clientSecret,
                 redirectUri : config.spotify.authorization_uri.redirect_uri
             });
-            console.log(spotify);
+            console.log(config.spotify);
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
 			app.get('/spotify', function (req, res) {
