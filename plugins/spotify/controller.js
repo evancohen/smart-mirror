@@ -5,6 +5,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
         refreshAllData();
         $interval(refreshProfileSummary, 3600000 * 0.5); // hours
         $interval(refreshCurrentPlaying, 1000 * 10); // secs
+        $interval(refreshCurrentDevice, 1000 * 10); // secs
         
         $scope.isActive = function() {
             return SpotifyService.isActive();
@@ -16,6 +17,14 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		SpotifyService.profileSummary().then(function (response) {
 			$scope.profile = response;
             console.log($scope.profile);
+		});
+	};
+
+	// Profile
+	var refreshCurrentDevice = function () {
+		SpotifyService.activeDevice().then(function (response) {
+//			$scope.profile = response;
+            console.log(response);
 		});
 	};
 
@@ -39,6 +48,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	var refreshAllData = function () {
 		refreshProfileSummary();
 		refreshCurrentPlaying();
+		refreshCurrentDevice();
 	};
 
     //Spotify search and play

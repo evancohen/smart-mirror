@@ -198,6 +198,24 @@
               });
         };
         
+        service.activeDevice = function () {
+//                spotify.getMyDevices()
+//                  .then(function(data) {
+//                    console.log('user devices:', data.body);
+//                  }, function(err) {
+//                    console.log('Something went wrong!', err);
+//                  });
+//            
+            return spotify.getMyCurrentPlaybackState()
+              .then(function(data) {
+                service.active = true;
+                return data.body;
+              }, function(err) {
+                service.active = false;
+                console.log('Something went wrong!', err);
+              });
+        };
+        
         service.currentActive = function () {
             return spotify.getMyCurrentPlayingTrack()
               .then(function(data) {
