@@ -118,6 +118,7 @@
 					console.error(err);
 				}
 			});
+        }
             
 ////            Spotify.config.spotify.auth_url = 'https://accounts.spotify.com/authorize?' +
 ////                querystring.stringify({
@@ -180,10 +181,8 @@
 ////                  });
 //                
 ////            }
-		}
-        
-        service.isActive = function () {
-            return service.active;
+        service.refreshToken = function () {
+            spotify.refreshAccessToken();
         };
         
         service.profileSummary = function () {

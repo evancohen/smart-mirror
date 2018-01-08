@@ -50,6 +50,10 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		currentDevice();
 	};
     
+    SpeechService.addCommand('spotify_reauthorize', function () {
+		SpotifyService.refreshToken();
+	});
+    
     SpeechService.addCommand('spotify_resume', function () {
 		SpotifyService.play();
 	});
