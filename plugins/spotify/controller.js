@@ -2,10 +2,17 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
     
 	SpotifyService.init(function () {
         refreshAllData();
+        $interval(refreshAuth, 3600000 * 0.5); // hours
         $interval(currentProfile, 3600000 * 0.5); // hours
         $interval(currentPlaying, 1000 * 10); // secs
         $interval(currentDevice, 1000 * 10); // secs
     });
+
+	var refreshAuth = function () {
+		SpotifyService.refreshToken().then(function (response) {
+            console.log(response);
+		});
+	};
 
 	var currentProfile = function () {
 		SpotifyService.profileSummary().then(function (response) {
