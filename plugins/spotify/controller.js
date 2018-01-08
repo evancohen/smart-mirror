@@ -26,7 +26,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
             $scope.scDevice = device.toLowerCase();
 //            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
 //            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
-            console.debug("current device:", $scope.scMessage);
+            console.debug("current device:", $scope.scDevice);
 		});
 	};
 
