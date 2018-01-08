@@ -52,6 +52,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	};
 
 	var refreshAllData = function () {
+        refreshAuth();
 		currentProfile();
 		currentPlaying();
 		currentDevice();
