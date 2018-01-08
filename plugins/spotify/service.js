@@ -182,7 +182,7 @@
 //                
 ////            }
         service.refreshToken = function () {
-            spotify.refreshAccessToken().then(function (data) {
+            return spotify.refreshAccessToken().then(function (data) {
                 return data.body;
             });
         };
