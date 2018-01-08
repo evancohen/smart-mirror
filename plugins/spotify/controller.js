@@ -17,9 +17,10 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	var currentDevice = function () {
 		SpotifyService.activeDevice().then(function (response) {
             console.debug("current device:", response);
-            $scope.isPlaying = response.is_playing;
+            $scope.isPlaying = response.is_playing || false;
             $scope.scDevice = response.device.name || null;
             $scope.scStatus = $scope.scDevice.toLowerCase() + ($scope.isPlaying)? " playing": " paused";
+            $scope.$apply();
 		});
 	};
 
@@ -34,6 +35,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
     //                $scope.scWaveform = response[0].waveform_url;
             $scope.scTrack = response.name;
             $scope.scArtist = response.artists[0].name;
+            $scope.$apply();
 		});
 	};
 
