@@ -17,11 +17,14 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	var currentDevice = function () {
 		SpotifyService.activeDevice().then(function (response) {
             console.debug("current device:", response);
-            console.debug("current device:", response.is_playing);
-            console.debug("current device:", response.device.name);
-            $scope.isPlaying = response.is_playing || false;
-            $scope.scDevice = response.device.name || null;
-            $scope.scStatus = $scope.scDevice.toLowerCase() + ($scope.isPlaying)? " playing": " paused";
+            
+            var status = response.is_playing || false;
+            var device = response.device.name || "UNKNOWN";
+            
+            $scope.scStatus = (status)? "playing": "paused";
+            $scope.scDevice = device.toLowerCase();
+            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
+            console.debug("current device:", $scope.scMessage);
 		});
 	};
 
