@@ -21,9 +21,11 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
             var status = response.is_playing || false;
             var device = response.device.name || "UNKNOWN";
             
-            $scope.scStatus = (status)? "playing": "paused";
+            $scope.scPlaying = (status)? true: false;
+//            $scope.scStatus = (status)? "playing": "paused";
             $scope.scDevice = device.toLowerCase();
-            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
+//            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
+//            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
             console.debug("current device:", $scope.scMessage);
 		});
 	};
