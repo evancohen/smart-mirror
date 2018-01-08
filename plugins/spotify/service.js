@@ -182,7 +182,9 @@
 //                
 ////            }
         service.refreshToken = function () {
-            spotify.refreshAccessToken();
+            spotify.refreshAccessToken().then(function (data) {
+                return data.body;
+            });
         };
         
         service.profileSummary = function () {

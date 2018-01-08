@@ -10,7 +10,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var refreshAuth = function () {
 		SpotifyService.refreshToken().then(function (response) {
-            console.debug("session authorization renewed");
+            console.debug("session authorization renewed", response);
 		});
 	};
 
