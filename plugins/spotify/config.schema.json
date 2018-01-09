@@ -56,11 +56,11 @@
       "items": [
         "spotify.timeout",
         "spotify.creds",
-        "spotify.authorization_uri",
         {
             "type": "help",
             "helpvalue": "<p>To authorize your API, please navigate to <a href='http://localhost:4000/spotify/'>spotify-oauth2</a> from your mirror browser.</p>"
-        }
+        },
+        "spotify.authorization_uri"
       ]
     }
   ],
