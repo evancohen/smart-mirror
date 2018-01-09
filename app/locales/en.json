@@ -180,14 +180,14 @@
             "voice": "resume (the) timer",
             "description": "Resume timer."
         },
-        "spotify_play_track": {
-            "text": "play ________",
-            "voice": "play (music) (song) (*query) on spotify",
-            "description": "Play song on Spotify."
-        },
         "spotify_play_artist_track": {
             "text": "play ________",
             "voice": "play (music) (song) (*query) (by) (from) (*query) on spotify",
+            "description": "Play song on Spotify."
+        },
+        "spotify_play_track": {
+            "text": "play ________",
+            "voice": "play (music) (song) (*query) on spotify",
             "description": "Play song on Spotify."
         },
         "spotify_resume": {
