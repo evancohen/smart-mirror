@@ -45,7 +45,7 @@
                 clientSecret : client_secret,
                 redirectUri : 'http://localhost:4000/spotify_auth_callback/'
             });
-            
+            console.log(spotify);
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
 			app.get('/authorize_spotify', function (req, res) {
 				res.redirect(spotify.createAuthorizeURL(auth_scope, auth_state));
