@@ -108,9 +108,6 @@
 
                             spotify.setAccessToken(access_token); // Set the client token
                             spotify.setRefreshToken(refresh_token); // Set the client token
-                            app.close(function() {
-                                console.log('Express ' + port + ' is has been closed'); 
-                            });
                             cb();
                         }
 					});
