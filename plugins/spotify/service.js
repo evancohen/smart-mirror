@@ -57,12 +57,7 @@
                 // Retrieve an access token and a refresh token
                 spotify.authorizationCodeGrant(code)
                   .then(function(data) {
-                    var token = data.body;
-                    var today = new Date();
-                    
-                    token['expiration'] = today.setTime(today.getTime() + 3600000);
-                    
-					persist.write(tokenFile, token, function (err) {
+					persist.write(tokenFile, data.body, function (err) {
 						if (err) return next(err);
 //						res.redirect('/spotify-profile');
                         res.send('Authorization complete.');
@@ -126,6 +121,13 @@
 
         service.refreshToken = function () {
             return spotify.refreshAccessToken().then(function (data) {
+                return data.body;
+            });
+        };
+
+        service.requestToken = function () {
+            return $http.get('http://localhost:4000/authorize_spotify').then(function (data) {
+                console.log(data);
                 return data.body;
             });
         };

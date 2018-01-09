@@ -2,7 +2,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
     
 	SpotifyService.init(function () {
         refreshAllData();
-        $interval(refreshAuth, 1000 * config.spotify.timeout); // seconds
+        $interval(refreshAuth, 60000 * 30); // minutes
         $interval(currentPlaying, 1000 * config.spotify.timeout); // seconds
         $interval(currentDevice, 1000 * config.spotify.timeout); // seconds
     });
@@ -10,6 +10,12 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	var refreshAuth = function () {
 		SpotifyService.refreshToken().then(function (response) {
             console.debug("session authorization renewed", response);
+		});
+	};
+
+	var renewAuth = function () {
+		SpotifyService.requestToken().then(function (response) {
+//            console.debug("session authorization renewed", response);
 		});
 	};
 
@@ -48,7 +54,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	};
 
 	var refreshAllData = function () {
-        refreshAuth();
+        renewAuth();
 		currentPlaying();
 		currentDevice();
 	};
