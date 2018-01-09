@@ -56,7 +56,6 @@
       "items": [
         "spotify.timeout",
         "spotify.creds",
-        "spotify.uris",
         "spotify.authorization_uri"
       ]
     }
@@ -64,12 +63,6 @@
   "value":{
     "spotify":{
       "timeout": 10000,
-      "uris": {
-        "authorizationUri": "https://www.spotify.com",
-        "authorizationPath": "/oauth2/authorize",
-        "tokenUri": "https://api.spotify.com",
-        "tokenPath": "/oauth2/token"
-      },
       "authorization_uri": {
         "redirect_uri": "http://localhost:4000/spotify_auth_callback/",
         "response_type": "code",
