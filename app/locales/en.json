@@ -182,12 +182,12 @@
         },
         "spotify_play_artist_track": {
             "text": "play ________",
-            "voice": "play :query1 (by) (from) :query2 on spotify",
+            "voice": "play *query (by) (from) *query on spotify",
             "description": "Play song on Spotify."
         },
         "spotify_play_track": {
             "text": "play ________",
-            "voice": "play (music) (song) :query on spotify",
+            "voice": "play (music) (song) *query on spotify",
             "description": "Play song on Spotify."
         },
         "spotify_resume": {
