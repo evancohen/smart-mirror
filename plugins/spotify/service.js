@@ -62,7 +62,7 @@
 					persist.write(tokenFile, data.body, function (err) {
 						if (err) return next(err);
 //						res.redirect('/spotify-profile');
-                        res.send(JSON.stringify({});
+                        res.send('Authorization complete.');
 					});
                   }, function(err) {
                     console.debug('Something went wrong!', err);
