@@ -56,7 +56,15 @@
       "items": [
         "spotify.timeout",
         "spotify.creds",
-        "spotify.authorization_uri"
+        "spotify.authorization_uri",
+        {
+            "type": "help",
+            "helpvalue": "<em>(goto the following link to authorize your spotify api)</em><h1>http://localhost:4000/spotify_auth_callback/</h1>"
+        },
+        {
+            "type": "help",
+            "helpvalue": "<p>For help please refer to <a href='https://docs.smart-mirror.io'>the docs.</a></BR>Also, we're available on <a href='https://discord.gg/EMb4ynW'>Discord Chat with <img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt='people online'/></a> to help assist you in real time.</p>"
+        },
       ]
     }
   ],
