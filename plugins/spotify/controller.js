@@ -22,7 +22,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var currentDevice = function () {
 		SpotifyService.activeDevice().then(function (response) {
-            console.debug("current device:", response);
+//            console.debug("current device:", response);
             
             var status = response.is_playing || false;
             var device = response.device.name || "UNKNOWN";
@@ -35,13 +35,14 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var currentPlaying = function () {
 		SpotifyService.whatIsPlaying().then(function (response) {
-            console.debug("current playing:", response);
+//            console.debug("current playing:", response);
             if (response.album.images[0].url) {
                 $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
             } else {
                 $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
             }
     //                $scope.scWaveform = response[0].waveform_url;
+            console.debug("current track:", response.name);
             $scope.scTrack = response.name;
             $scope.scArtist = response.artists[0].name;
 		});
