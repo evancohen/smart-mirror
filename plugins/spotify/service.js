@@ -28,7 +28,7 @@
 		service.spotifyResponse = null;
 		service.active = null;
 
-		if (typeof config.spotify != 'undefined') {
+		if (typeof config.spotify !== 'undefined' && config.spotify.creds.clientSecret !== '') {
 			var express = require('express');
 			var app = express();
 			var fs = require('fs');
@@ -101,18 +101,21 @@
 				if (err == null) {
 					persist.read(tokenFile, function (err, token) {
 						if (err) {
-							console.error('Persist read error!', err);
-						}
-                        
-                        var access_token = token['access_token'];
-                        var refresh_token = token['refresh_token'];
+                            console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
+						} else {
+                            var access_token = token['access_token'];
+                            var refresh_token = token['refresh_token'];
 
-						spotify.setAccessToken(access_token); // Set the client token
-						spotify.setRefreshToken(refresh_token); // Set the client token
-                        cb();
+                            spotify.setAccessToken(access_token); // Set the client token
+                            spotify.setRefreshToken(refresh_token); // Set the client token
+                            app.close(function() {
+                                console.log('Express ' + port + ' is has been closed'); 
+                            });
+                            cb();
+                        }
 					});
 				} else if (err.code == 'ENOENT') {
-					console.error('Spotify authentication required, please visit the following link: http://localhost:4000/spotify to authenticate your credentials.', err);
+					console.error('Spotify authentication required, please see the config screen for the authorization instructions.', err);
 				} else {
 					console.error(err);
 				}
