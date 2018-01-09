@@ -43,7 +43,7 @@
 			spotify = new Spotify({
                 clientId : client_id,
                 clientSecret : client_secret,
-                redirectUri : 'http://localhost:4000/spotify_auth_callback/'
+                redirectUri : 'http://localhost:4000/spotify_auth_callback'
             });
             console.log(spotify);
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
