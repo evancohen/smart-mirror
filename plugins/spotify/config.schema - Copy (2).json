@@ -24,6 +24,31 @@
             }
           }
         },
+        "uris": {
+          "type": "object",
+          "properties": {
+            "authorizationUri": {
+              "default": "https://www.spotify.com",
+              "type": "string",
+              "title": "Authorization URI"
+            },
+            "authorizationPath": {
+              "default": "/oauth2/authorize",
+              "type": "string",
+              "title": "Authorization Path"
+            },
+            "tokenUri": {
+              "default": "https://api.spotify.com",
+              "type": "string",
+              "title": "Token URI"
+            },
+            "tokenPath": {
+              "default": "/oauth2/token",
+              "type": "string",
+              "title": "Token Path"
+            }
+          }
+        },
         "authorization_uri": {
           "type": "object",
           "properties": {
@@ -31,6 +56,11 @@
               "default": "http://localhost:4000/spotify_auth_callback/",
               "type": "string",
               "title": "Redirect URI"
+            },
+            "response_type": {
+              "default": "code",
+              "type": "string",
+              "title": "Response Type"
             },
             "scope": {
               "default": "user-read-private user-read-email streaming user-read-currently-playing user-modify-playback-state user-read-playback-state",

@@ -2,11 +2,9 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
     
 	SpotifyService.init(function () {
         refreshAllData();
-        $interval(refreshAuth, 3600000 * 0.5); // hours
-        $interval(currentProfile, 3600000 * 0.5); // hours
-        $interval(currentPlaying, 1000 * 10); // secs
-        $interval(currentDevice, 1000 * 10); // secs
-        console.log(config.spotify);
+        $interval(refreshAuth, 1000 * config.spotify.timeout); // seconds
+        $interval(currentPlaying, 1000 * config.spotify.timeout); // seconds
+        $interval(currentDevice, 1000 * config.spotify.timeout); // seconds
     });
 
 	var refreshAuth = function () {
@@ -30,10 +28,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
             var device = response.device.name || "UNKNOWN";
             
             $scope.scPlaying = (status)? true: false;
-//            $scope.scStatus = (status)? "playing": "paused";
             $scope.scDevice = device.toLowerCase();
-//            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
-//            $scope.scMessage = $scope.scStatus + " on " + $scope.scDevice;
             console.debug("current device:", $scope.scDevice);
 		});
 	};
@@ -54,7 +49,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var refreshAllData = function () {
         refreshAuth();
-		currentProfile();
 		currentPlaying();
 		currentDevice();
 	};
