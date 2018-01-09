@@ -27,11 +27,6 @@
         "authorization_uri": {
           "type": "object",
           "properties": {
-            "redirect_uri": {
-              "default": "spotify_auth_callback/",
-              "type": "string",
-              "title": "Redirect URI"
-            },
             "scope": {
               "default": "user-read-private user-read-email streaming user-read-currently-playing user-modify-playback-state user-read-playback-state",
               "type": "string",
@@ -68,7 +63,6 @@
     "spotify":{
       "timeout": 10000,
       "authorization_uri": {
-        "redirect_uri": "hspotify_auth_callback/",
         "response_type": "code",
         "scope": "activity nutrition profile settings sleep social weight heartrate",
         "state": "3(#0/!~"
