@@ -86,8 +86,19 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		SpotifyService.setShuffle();
 	});
     
-    SpeechService.addCommand('spotify_play', function (query) {
+    SpeechService.addCommand('spotify_play_track', function (query) {
 		SpotifyService.playTrack(query).then(function (response) {
+            if (response) {
+                console.log("search", response);
+            } else {
+                console.log('no results found');
+            }
+		});
+	});
+    
+    SpeechService.addCommand('spotify_play_artist_track', function (query1, query2) {
+        console.log(query1, query2);
+		SpotifyService.playArtistTrack("track:" + query1 + "&artist:" + query2).then(function (response) {
             if (response) {
                 console.log("search", response);
             } else {

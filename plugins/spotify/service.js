@@ -283,6 +283,34 @@
                 console.log('Something went wrong!', err);
               });
         };
+        
+        service.playArtistTrack = function (query) {
+            return spotify.searchTracks('track:' + query)
+              .then(function(data) {
+                console.log('Search tracks matching "' + query + '"');
+                console.log(data);
+                service.spotifyResponse = data.body.tracks || null;
+                
+                var options = {
+                    "uris": [
+                        data.body.tracks.items[0].uri
+                    ]
+                };
+                console.log(options);
+                
+                return spotify.play(options)
+                  .then(function(data) {
+                    console.log('current playback: "' + query + '"');
+                    console.log(data);
+                    service.spotifyResponse = data.body.tracks || null;
+                    return service.spotifyResponse;
+                  }, function(err) {
+                    console.log('Something went wrong!', err);
+                  });
+              }, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
 
         service.searchTrack = function (query) {
             // Search tracks whose name contains the query
