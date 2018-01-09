@@ -27,11 +27,6 @@
         "authorization_uri": {
           "type": "object",
           "properties": {
-            "redirect_uri": {
-              "default": "spotify_auth/callback",
-              "type": "string",
-              "title": "Redirect URI (http://localhost:4000/<uri goes here>/)<BR><i>Ensure that your authorized redirect in your spotify app settings allows this uri</i>"
-            },
             "scope": {
               "default": "user-read-private user-read-email streaming user-read-currently-playing user-modify-playback-state user-read-playback-state",
               "type": "string",
@@ -58,7 +53,7 @@
         "spotify.authorization_uri",
         {
             "type": "help",
-            "helpvalue": "<p>To authorize your API for the first time, please navigate to 'http://localhost:4000/authorize_spotify/' from your mirror browser.</p>"
+            "helpvalue": "<p>To authorize your API for the first time, please navigate to 'http://localhost:4000/authorize_spotify/' from your mirror browser.</p><BR><i>Ensure that your authorized redirect in your spotify app settings allows 'http://localhost:4000/spotify_auth_callback/'"
         },
         "spotify.timeout"
       ]

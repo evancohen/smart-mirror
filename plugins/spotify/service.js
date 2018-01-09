@@ -36,14 +36,14 @@
             
             var client_id = config.spotify.creds.clientID;
             var client_secret = config.spotify.creds.clientSecret;
-            var redirect_uri = config.spotify.authorization_uri.redirect_uri;
+//            var redirect_uri = config.spotify.authorization_uri.redirect_uri;
             var auth_scope = config.spotify.authorization_uri.scope.split(' ');
             var auth_state = config.spotify.authorization_uri.state;
 
 			spotify = new Spotify({
                 clientId : client_id,
                 clientSecret : client_secret,
-                redirectUri : 'http://localhost:4000/' + redirect_uri + '/'
+                redirectUri : 'http://localhost:4000/spotify_auth_callback/'
             });
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
@@ -51,7 +51,7 @@
 				res.redirect(spotify.createAuthorizeURL(auth_scope, auth_state));
 			});
 
-			app.get('/' + redirect_uri, function (req, res, next) {
+			app.get('/spotify_auth_callback', function (req, res, next) {
 				// The code that's returned as a query parameter to the redirect URI
                 var code = req.query.code;
                 
