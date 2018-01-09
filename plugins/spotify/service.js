@@ -57,8 +57,12 @@
                 // Retrieve an access token and a refresh token
                 spotify.authorizationCodeGrant(code)
                   .then(function(data) {
-                    // persist the token
-					persist.write(tokenFile, data.body, function (err) {
+                    var token = data.body;
+                    var today = new Date();
+                    
+                    token['expiration'] = today.setTime(today.getTime() + 3600);
+                    
+					persist.write(tokenFile, token, function (err) {
 						if (err) return next(err);
 //						res.redirect('/spotify-profile');
                         res.send('Authorization complete.');
