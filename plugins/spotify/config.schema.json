@@ -28,9 +28,9 @@
           "type": "object",
           "properties": {
             "redirect_uri": {
-              "default": "spotify_auth_callback/",
+              "default": "spotify_auth/callback",
               "type": "string",
-              "title": "Redirect URI<BR><i>Ensure that your authorized redirect in your spotify app settings allows <b>'http://localhost:4000/spotify_auth_callback'</b></i>"
+              "title": "Redirect URI (http://localhost:4000/<uri goes here>/)<BR><i>Ensure that your authorized redirect in your spotify app settings allows this uri</i>"
             },
             "scope": {
               "default": "user-read-private user-read-email streaming user-read-currently-playing user-modify-playback-state user-read-playback-state",

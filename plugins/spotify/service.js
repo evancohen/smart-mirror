@@ -43,7 +43,7 @@
 			spotify = new Spotify({
                 clientId : client_id,
                 clientSecret : client_secret,
-                redirectUri : 'http://localhost:4000/' + redirect_uri
+                redirectUri : 'http://localhost:4000/' + redirect_uri + '/'
             });
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
@@ -51,7 +51,7 @@
 				res.redirect(spotify.createAuthorizeURL(auth_scope, auth_state));
 			});
 
-			app.get(redirect_uri, function (req, res, next) {
+			app.get('/' + redirect_uri, function (req, res, next) {
 				// The code that's returned as a query parameter to the redirect URI
                 var code = req.query.code;
                 
