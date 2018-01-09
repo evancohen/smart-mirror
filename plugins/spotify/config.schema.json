@@ -58,7 +58,7 @@
         "spotify.creds",
         {
             "type": "help",
-            "helpvalue": "<p>To authorize your API, please navigate to <a href='http://localhost:4000/spotify/'>spotify-oauth2</a> from your mirror browser.</p>"
+            "helpvalue": "<p>To authorize your API, please navigate to <a href='http://localhost:4000/spotify/'>spotify-oauth2</a> from your mirror browser.</p><BR><i>Ensure that your authorized redirect in your spotify app settings allows <b>'http://localhost:4000/spotify_auth_callback'</b></i>"
         },
         "spotify.authorization_uri"
       ]

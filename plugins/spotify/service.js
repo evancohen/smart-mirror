@@ -47,7 +47,7 @@
             });
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
-			app.get('/spotify', function (req, res) {
+			app.get('/authorize_spotify', function (req, res) {
 				res.redirect(spotify.createAuthorizeURL(auth_scope, auth_state));
 			});
 
@@ -61,7 +61,8 @@
                     // persist the token
 					persist.write(tokenFile, data.body, function (err) {
 						if (err) return next(err);
-						res.redirect('/spotify-profile');
+//						res.redirect('/spotify-profile');
+                        res.send(JSON.stringify({});
 					});
                   }, function(err) {
                     console.debug('Something went wrong!', err);
@@ -69,27 +70,27 @@
                   });
 			});
 
-			app.get('/spotify-profile', function (req, res, next) {
-				spotify.request({
-					uri: "https://api.spotify.com/1/user/-/profile.json",
-					method: 'GET',
-				}, function (err, body, token) {
-					if (err) {
-						return next(err);
-					}
-
-					var profile = JSON.parse(body);
-
-					// If token is present, refresh.
-					if (token)
-						persist.write(tokenFile, token, function (err) {
-							if (err) return next(err);
-							res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
-						});
-					else
-						res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
-				});
-			});
+//			app.get('/spotify-profile', function (req, res, next) {
+//				spotify.request({
+//					uri: "https://api.spotify.com/1/user/-/profile.json",
+//					method: 'GET',
+//				}, function (err, body, token) {
+//					if (err) {
+//						return next(err);
+//					}
+//
+//					var profile = JSON.parse(body);
+//
+//					// If token is present, refresh.
+//					if (token)
+//						persist.write(tokenFile, token, function (err) {
+//							if (err) return next(err);
+//							res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+//						});
+//					else
+//						res.send('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+//				});
+//			});
 		}
 
 		service.init = function (cb) {
