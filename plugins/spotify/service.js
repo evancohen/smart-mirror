@@ -60,7 +60,7 @@
                     var token = data.body;
                     var today = new Date();
                     
-                    token['expiration'] = today.setTime(today.getTime() + 3600);
+                    token['expiration'] = today.setTime(today.getTime() + 3600000);
                     
 					persist.write(tokenFile, token, function (err) {
 						if (err) return next(err);
