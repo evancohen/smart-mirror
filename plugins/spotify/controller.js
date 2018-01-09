@@ -6,6 +6,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
         $interval(currentProfile, 3600000 * 0.5); // hours
         $interval(currentPlaying, 1000 * 10); // secs
         $interval(currentDevice, 1000 * 10); // secs
+        console.log(config.spotify);
     });
 
 	var refreshAuth = function () {
