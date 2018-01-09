@@ -43,7 +43,7 @@
 			spotify = new Spotify({
                 clientId : client_id,
                 clientSecret : client_secret,
-                redirectUri : redirect_uri
+                redirectUri : 'http://localhost:4000/' + redirect_uri
             });
             
 			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
@@ -51,7 +51,7 @@
 				res.redirect(spotify.createAuthorizeURL(auth_scope, auth_state));
 			});
 
-			app.get('/spotify_auth_callback', function (req, res, next) {
+			app.get(redirect_uri, function (req, res, next) {
 				// The code that's returned as a query parameter to the redirect URI
                 var code = req.query.code;
                 
@@ -120,68 +120,7 @@
 				}
 			});
         }
-            
-////            Spotify.config.spotify.auth_url = 'https://accounts.spotify.com/authorize?' +
-////                querystring.stringify({
-////                  response_type: 'code',
-////                  client_id: client_id,
-////                  scope: scope,
-////                  redirect_uri: redirect_uri,
-////                  state: state
-////                }));
-//            
-//            
-////			if (typeof config.spotify != 'undefined' && config.spotify.length) {
-//                spotify.setAccessToken(config.spotify.access_token);
-//                spotify.setRefreshToken(config.spotify.refresh_token);
-//            
-//            
-////                spotify.getMyRecentlyPlayedTracks()
-////                  .then(function(data) {
-////                    console.log('recent tracks:', data.body);
-////                  }, function(err) {
-////                    console.log('Something went wrong!', err);
-////                  });
-//            
-//                spotify.getMyDevices()
-//                  .then(function(data) {
-//                    console.log('user devices:', data.body);
-//                  }, function(err) {
-//                    console.log('Something went wrong!', err);
-//                  });
-//            
-//                spotify.getMyCurrentPlaybackState()
-//                  .then(function(data) {
-//                    console.log('current playback:', data.body);
-//                  }, function(err) {
-//                    console.log('Something went wrong!', err);
-//                  });
-//            
-////                spotify.transferMyPlayback()
-////                  .then(function(data) {
-////                    console.log('current playback:', data.body);
-////                  }, function(err) {
-////                    console.log('Something went wrong!', err);
-////                  });
-//            
-////                // Get the credentials one by one
-////                console.log('The access token is ' + spotify.getAccessToken());
-////                console.log('The refresh token is ' + spotify.getRefreshToken());
-////
-////                // Get all credentials
-////                console.log('The credentials are ', spotify.getCredentials());
-//            
-////                spotify.refreshAccessToken()
-////                  .then(function(data) {
-////                    console.log('The access token has been refreshed!');
-////
-////                    // Save the access token so that it's used in future calls
-////                    spotify.setAccessToken(data.body['access_token']);
-////                  }, function(err) {
-////                    console.log('Could not refresh access token', err);
-////                  });
-//                
-////            }
+
         service.refreshToken = function () {
             return spotify.refreshAccessToken().then(function (data) {
                 return data.body;
