@@ -13,12 +13,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		});
 	};
 
-	var renewAuth = function () {
-		SpotifyService.requestToken().then(function (response) {
-//            console.debug("session authorization renewed", response);
-		});
-	};
-
 	var currentProfile = function () {
 		SpotifyService.profileSummary().then(function (response) {
 			$scope.profile = response;
@@ -54,7 +48,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	};
 
 	var refreshAllData = function () {
-        renewAuth();
+        refreshAuth();
 		currentPlaying();
 		currentDevice();
 	};
