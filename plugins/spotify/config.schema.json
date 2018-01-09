@@ -59,7 +59,7 @@
         "spotify.authorization_uri",
         {
             "type": "help",
-            "helpvalue": "<p>To authorize your API, please refer to <a href='http://localhost:4000/spotify_auth_callback/'>the docs.</a></BR>Also, we're available on <a href='https://discord.gg/EMb4ynW'>Discord Chat with <img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt='people online'/></a></p>"
+            "helpvalue": "<p>To authorize your API, please navigate to <a href='http://localhost:4000/spotify/'>spotify-oauth2</a> from your mirror browser.</p>"
         }
       ]
     }
