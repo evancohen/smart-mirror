@@ -158,6 +158,17 @@
               });
         };
         
+        service.currentState = function () {
+            return spotify.getMyCurrentPlaybackState()
+              .then(function(data) {
+                service.spotifyResponse = data.body || null;
+                return service.spotifyResponse;
+              }, function(err) {
+                service.active = false;
+                console.log('Something went wrong!', err);
+              });
+        };
+        
         service.play = function () {
             return spotify.play()
               .then(function(data) {

@@ -3,10 +3,11 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	SpotifyService.init(function () {
         refreshAllData();
         $interval(refreshAuth, 60000 * 30); // minutes
-        $interval(currentPlaying, 1000 * config.spotify.timeout); // seconds
-        $interval(currentDevice, 1000 * config.spotify.timeout); // seconds
+//        $interval(currentPlaying, 1000 * config.spotify.timeout); // seconds
+//        $interval(currentDevice, 1000 * config.spotify.timeout); // seconds
+        $interval(currentStateInfo, 1000 * config.spotify.timeout); // seconds
     });
-
+//TODO: make all parts on return from init
 	var refreshAuth = function () {
 		SpotifyService.refreshToken().then(function (response) {
             console.debug("session authorization renewed", response);
@@ -48,10 +49,35 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		});
 	};
 
+	var currentStateInfo = function () {
+		SpotifyService.currentState().then(function (response) {
+            console.debug("current state:", response);
+            
+            var status = response.is_playing || false;
+            var device = response.device.name || "UNKNOWN";
+            
+            $scope.scPlaying = (status)? true: false;
+            $scope.scDevice = device.toLowerCase();
+            console.debug("current device:", $scope.scDevice);
+		
+//            console.debug("current playing:", response);
+            if (response.album.images[0].url) {
+                $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
+            } else {
+                $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+            }
+    //                $scope.scWaveform = response[0].waveform_url;
+            console.debug("current track:", response.name);
+            $scope.scTrack = response.name;
+            $scope.scArtist = response.artists[0].name;
+		});
+	};
+
 	var refreshAllData = function () {
         refreshAuth();
-		currentPlaying();
-		currentDevice();
+//		currentPlaying();
+//		currentDevice();
+		currentStateInfo();
 	};
     
     SpeechService.addCommand('spotify_reauthorize', function () {
