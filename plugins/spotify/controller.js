@@ -51,25 +51,24 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var currentStateInfo = function () {
 		SpotifyService.currentState().then(function (response) {
-            console.debug("current state:", response);
-            
-            var status = response.is_playing || false;
-            var device = response.device.name || "UNKNOWN";
-            
-            $scope.scPlaying = (status)? true: false;
-            $scope.scDevice = device.toLowerCase();
-            console.debug("current device:", $scope.scDevice);
-		
-//            console.debug("current playing:", response);
-            if (response.album.images[0].url) {
-                $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
+            if (response) {
+                console.debug("current state:", response);
+                
+                if (response.album.images[0].url) {
+                    $scope.spThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
+                } else {
+                    $scope.spThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+                }
+                
+                $scope.spPlaying = response.is_playing || false;
+                $scope.spDevice = (response.device.name || "UNKNOWN").toLowerCase();
+                $scope.spTrack = response.name;
+                $scope.spArtist = response.artists[0].name;
+                
+                $scope.spActive = true;
             } else {
-                $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
+                $scope.spActive = false;
             }
-    //                $scope.scWaveform = response[0].waveform_url;
-            console.debug("current track:", response.name);
-            $scope.scTrack = response.name;
-            $scope.scArtist = response.artists[0].name;
 		});
 	};
 
