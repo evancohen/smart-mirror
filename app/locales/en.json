@@ -180,19 +180,9 @@
             "voice": "resume (the) timer",
             "description": "Resume timer."
         },
-        "spotify_play_artist_track": {
+        "spotify_play": {
             "text": "play ________",
-            "voice": "play *query (by) (from) *query on spotify",
-            "description": "Play song on Spotify."
-        },
-        "spotify_play_track": {
-            "text": "play ________",
-            "voice": "play (music) (song) *query on spotify",
-            "description": "Play song on Spotify."
-        },
-        "spotify_resume": {
-            "text": "play ________",
-            "voice": "resume (playback on) spotify",
+            "voice": "tell spotify to play (*query)",
             "description": "Play song on Spotify."
         },
         "spotify_pause": {
@@ -219,16 +209,6 @@
             "text": "shuffle music",
             "voice": "repeat (playlist) (music) (song) on spotify",
             "description": "Play song on Spotify."
-        },
-        "spotify_reauthorize": {
-            "text": "pause music",
-            "voice": "reauthorize spotify",
-            "description": "Play song on Spotify."
-        },
-        "spotify_activate": {
-            "text": "Activate spotify",
-            "voice": "Activate spotify",
-            "description": "Set Spotify player as active."
         },
         "sc_play": {
             "text": "SoundCloud play ________",
