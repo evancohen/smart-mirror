@@ -95,27 +95,31 @@
 			console.debug('Express is listening on port: ' + port);
 			app.listen(port);
 
-			// Read the persisted token, initially captured by a webapp.
-			fs.stat(tokenFile, function (err) {
-				if (err == null) {
-					persist.read(tokenFile, function (err, token) {
-						if (err) {
-                            console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
-						} else {
-                            var access_token = token['access_token'];
-                            var refresh_token = token['refresh_token'];
+            $http.get('http://localhost:4000/authorize_spotify').then(function (response) {
+                console.log(response);
+                
+                // Read the persisted token, initially captured by a webapp.
+                fs.stat(tokenFile, function (err) {
+                    if (err == null) {
+                        persist.read(tokenFile, function (err, token) {
+                            if (err) {
+                                console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
+                            } else {
+                                var access_token = token['access_token'];
+                                var refresh_token = token['refresh_token'];
 
-                            spotify.setAccessToken(access_token); // Set the client token
-                            spotify.setRefreshToken(refresh_token); // Set the client token
-                            cb();
-                        }
-					});
-				} else if (err.code == 'ENOENT') {
-					console.error('Spotify authentication required, please see the config screen for the authorization instructions.', err);
-				} else {
-					console.error(err);
-				}
-			});
+                                spotify.setAccessToken(access_token); // Set the client token
+                                spotify.setRefreshToken(refresh_token); // Set the client token
+                                cb();
+                            }
+                        });
+                    } else if (err.code == 'ENOENT') {
+                        console.error('Spotify authentication required, please see the config screen for the authorization instructions.', err);
+                    } else {
+                        console.error(err);
+                    }
+                });
+            });
         }
 
         service.refreshToken = function () {
