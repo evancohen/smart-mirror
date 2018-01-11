@@ -281,13 +281,18 @@
                             if (err) {
                                 console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
                             } else {
+                                var code = data.code;
+                                console.log(code);
+                                
                                 // Retrieve an access token and a refresh token
-                                spotify.authorizationCodeGrant(data.code)
+                                spotify.authorizationCodeGrant(code)
                                   .then(function(data) {
-                                    console.log(data);
-                                    
-                                    spotify.setAccessToken(data.body.access_token); // Set the client token
-                                    spotify.setRefreshToken(data.body.refresh_token); // Set the client token
+                                    var access_token = data.body.access_token;
+                                    var refresh_token = data.body.refresh_token;
+                                    console.log(access_token, refresh_token);
+
+                                    spotify.setAccessToken(access_token); // Set the client token
+                                    spotify.setRefreshToken(refresh_token); // Set the client token
                                     cb();
                                   }, function(err) {
                                     console.debug('Something went wrong!', err);
