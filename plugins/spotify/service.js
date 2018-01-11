@@ -125,39 +125,6 @@
             });
         };
         
-        service.profileSummary = function () {
-            return spotify.getMe()
-              .then(function(data) {
-                service.active = true;
-                return data.body;
-              }, function(err) {
-                service.active = false;
-                console.log('Something went wrong!', err);
-              });
-        };
-        
-        service.activeDevice = function () {
-            return spotify.getMyCurrentPlaybackState()
-              .then(function(data) {
-                service.active = true;
-                return data.body;
-              }, function(err) {
-                service.active = false;
-                console.log('Something went wrong!', err);
-              });
-        };
-        
-        service.whatIsPlaying = function () {
-            return spotify.getMyCurrentPlayingTrack()
-              .then(function(data) {
-                service.spotifyResponse = data.body.item || null;
-                return service.spotifyResponse;
-              }, function(err) {
-                service.active = false;
-                console.log('Something went wrong!', err);
-              });
-        };
-        
         service.currentState = function () {
             return spotify.getMyCurrentPlaybackState()
               .then(function(data) {
@@ -169,26 +136,29 @@
               });
         };
         
-        service.play = function () {
-            return spotify.play()
-              .then(function(data) {
-                console.log(data);
-              }, function(err) {
-                console.log('Something went wrong!', err);
-              });
-        };
-        
         service.pause = function () {
             return spotify.pause()
-              .then(function(data) {
-                console.log(data);
-              }, function(err) {
+              .then(function(data) {}, function(err) {
                 console.log('Something went wrong!', err);
               });
         };
         
         service.skipBack = function () {
             return spotify.skipToPrevious()
+              .then(function(data) {}, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
+        
+        service.skipNext = function () {
+            return spotify.skipToNext()
+              .then(function(data) {}, function(err) {
+                console.log('Something went wrong!', err);
+              });
+        };
+        
+        service.toggleShuffle = function (state) {
+            return spotify.setShuffle({ "state": state })
               .then(function(data) {
                 console.log(data);
               }, function(err) {
@@ -196,8 +166,8 @@
               });
         };
         
-        service.skipNext = function () {
-            return spotify.skipToNext()
+        service.setRepeat = function (state) {
+            return spotify.setShuffle({ "state": state })
               .then(function(data) {
                 console.log(data);
               }, function(err) {
@@ -236,49 +206,8 @@
                   });
             }
         };
-        
-        service.playArtistTrack = function (query) {
-            return spotify.searchTracks('track:' + query)
-              .then(function(data) {
-                console.log('Search tracks matching "' + query + '"');
-                console.log(data);
-                service.spotifyResponse = data.body.tracks || null;
-                
-                var options = {
-                    "uris": [
-                        data.body.tracks.items[0].uri
-                    ]
-                };
-                console.log(options);
-                
-                return spotify.play(options)
-                  .then(function(data) {
-                    console.log('current playback: "' + query + '"');
-                    console.log(data);
-                    service.spotifyResponse = data.body.tracks || null;
-                    return service.spotifyResponse;
-                  }, function(err) {
-                    console.log('Something went wrong!', err);
-                  });
-              }, function(err) {
-                console.log('Something went wrong!', err);
-              });
-        };
 
-        service.searchTrack = function (query) {
-            // Search tracks whose name contains the query
-            return spotify.searchTracks('track:' + query)
-              .then(function(data) {
-                console.log('Search tracks matching "' + query + '"');
-                console.log(data);
-                service.spotifyResponse = data.body.tracks || null;
-                return service.spotifyResponse;
-              }, function(err) {
-                console.log('Something went wrong!', err);
-              });
-        };
-
-        service.getPlaylist = function (query) {
+        service.playPlaylist = function (query) {
             // Search tracks whose name contains the query
             return spotify.getUserPlaylists(query)
               .then(function(data) {

@@ -181,34 +181,34 @@
             "description": "Resume timer."
         },
         "spotify_play": {
-            "text": "play ________",
-            "voice": "tell spotify to play (*query)",
-            "description": "Play song on Spotify."
+            "text": "play ________ on Spotify",
+            "voice": "play (*query) (on) spotify",
+            "description": "Resume/Play song on Spotify."
         },
         "spotify_pause": {
-            "text": "play ________",
+            "text": "pause ________ spotify",
             "voice": "pause (playback on) spotify",
-            "description": "Play song on Spotify."
+            "description": "Pause current song on Spotify."
         },
         "spotify_forward": {
-            "text": "play ________",
-            "voice": "(play) (skip to) next song on spotify",
-            "description": "Play song on Spotify."
+            "text": "play next song on spotify",
+            "voice": "(play) (skip to) next (song on) spotify (song)",
+            "description": "Play next song on Spotify."
         },
         "spotify_back": {
-            "text": "play ________",
-            "voice": "(play) (skip to) previous song on spotify",
-            "description": "Play song on Spotify."
+            "text": "play previous song on spotify",
+            "voice": "(play) (skip to) previous (song on) spotify (song)",
+            "description": "Play previous song on Spotify."
         },
         "spotify_shuffle": {
             "text": "shuffle music",
-            "voice": "shuffle (playlist) (music) (songs) on spotify",
-            "description": "Play song on Spotify."
+            "voice": "(turn on) (turn off) shuffle (playlist) (album) (artist) (music) (songs) (on) spotify",
+            "description": "Toggle shuffle on Spotify."
         },
         "spotify_repeat": {
             "text": "shuffle music",
-            "voice": "repeat (playlist) (music) (song) on spotify",
-            "description": "Play song on Spotify."
+            "voice": "(turn on) (turn off) repeat (playlist) (music) (song) (on) spotify",
+            "description": "Toggle repeat on Spotify."
         },
         "sc_play": {
             "text": "SoundCloud play ________",

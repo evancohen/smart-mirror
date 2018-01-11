@@ -14,41 +14,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 		});
 	};
 
-	var currentProfile = function () {
-		SpotifyService.profileSummary().then(function (response) {
-			$scope.profile = response;
-            console.debug($scope.profile);
-		});
-	};
-
-	var currentDevice = function () {
-		SpotifyService.activeDevice().then(function (response) {
-//            console.debug("current device:", response);
-            
-            var status = response.is_playing || false;
-            var device = response.device.name || "UNKNOWN";
-            
-            $scope.scPlaying = (status)? true: false;
-            $scope.scDevice = device.toLowerCase();
-            console.debug("current device:", $scope.scDevice);
-		});
-	};
-
-	var currentPlaying = function () {
-		SpotifyService.whatIsPlaying().then(function (response) {
-//            console.debug("current playing:", response);
-            if (response.album.images[0].url) {
-                $scope.scThumb = response.album.images[0].url.replace("-large.", "-t500x500.");
-            } else {
-                $scope.scThumb = 'http://i.imgur.com/8Jqd33w.jpg?1';
-            }
-    //                $scope.scWaveform = response[0].waveform_url;
-            console.debug("current track:", response.name);
-            $scope.scTrack = response.name;
-            $scope.scArtist = response.artists[0].name;
-		});
-	};
-
 	var currentStateInfo = function () {
 		SpotifyService.currentState().then(function (response) {
             if (response) {
@@ -56,8 +21,8 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
                 $scope.spTrack = response.item.name;
                 $scope.spArtist = response.item.artists[0].name;
                 $scope.spPlaying = response.is_playing || false;
-//                var repeat = response.repeat_state;
-//                var shuffle = response.shuffle_state;
+                $scope.spRepeat = response.repeat_state;
+                $scope.spShuffle = response.shuffle_state;
                 $scope.spThumb = response.item.album.images[0].url || 'http://i.imgur.com/8Jqd33w.jpg?1';
                 
                 $scope.spActive = true;
@@ -95,11 +60,12 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	});
     
     SpeechService.addCommand('spotify_repeat', function () {
-		SpotifyService.setRepeat();
+        var state = ($scope.spRepeat === 'track')? 'off': 'track';
+		SpotifyService.toggleRepeat(state);
 	});
     
     SpeechService.addCommand('spotify_shuffle', function () {
-		SpotifyService.setShuffle();
+		SpotifyService.toggleShuffle(!$scope.shuffle);
 	});
 }
 
