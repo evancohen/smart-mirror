@@ -51,7 +51,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var currentStateInfo = function () {
 		SpotifyService.currentState().then(function (response) {
-            console.debug("current state:", response, $scope);
             if (response) {
                 $scope.spDevice = response.device.name || 'unknown';
                 $scope.spTrack = response.item.name;
@@ -59,15 +58,14 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
                 $scope.spPlaying = response.is_playing || false;
 //                var repeat = response.repeat_state;
 //                var shuffle = response.shuffle_state;
-                $scope.spThumb = response.album.images[0].url || 'http://i.imgur.com/8Jqd33w.jpg?1';
+                $scope.spThumb = response.item.album.images[0].url || 'http://i.imgur.com/8Jqd33w.jpg?1';
                 
                 $scope.spActive = true;
             } else {
                 $scope.spActive = false;
             }
             
-            
-            console.debug("current state:", response, $scope);
+//            console.debug("current state:", response, $scope);
 		});
 	};
 
