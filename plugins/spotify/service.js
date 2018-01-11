@@ -284,7 +284,7 @@
                                 var code_key = data['code'];
                                 var access_token = null;
                                 var refresh_token = null;
-                                
+                                console.log(code_key);
                                 // Retrieve an access token and a refresh token
                                 spotify.authorizationCodeGrant(code_key)
                                   .then(function(data) {
