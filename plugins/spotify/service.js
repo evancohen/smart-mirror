@@ -262,6 +262,10 @@
 ////            $http.get('http://localhost:4000/authorize_spotify').success(function (response, headers) {
 //                console.log(response);
                 
+            
+			request.get('http://localhost:4000/authorize_spotify', function(error, response, body) {
+                console.log(error, response, body);
+//            var code = req.query.code;
                 // Read the persisted token, initially captured by a webapp.
                 fs.stat(tokenFile, function (err) {
                     if (err == null) {
@@ -282,14 +286,14 @@
                                 console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
                             } else {
                                 var code = data.code;
-                                console.log(code);
+//                                console.log(code);
                                 
                                 // Retrieve an access token and a refresh token
                                 spotify.authorizationCodeGrant(code)
                                   .then(function(data) {
                                     var access_token = data.body.access_token;
                                     var refresh_token = data.body.refresh_token;
-                                    console.log(access_token, refresh_token);
+//                                    console.log(access_token, refresh_token);
 
                                     spotify.setAccessToken(access_token); // Set the client token
                                     spotify.setRefreshToken(refresh_token); // Set the client token
@@ -306,7 +310,7 @@
                         console.error(err);
                     }
                 });
-//            });
+            });
         }
 
         service.refreshToken = function () {
