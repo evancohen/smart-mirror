@@ -91,7 +91,7 @@
 		}
 
 		service.init = function (cb) {
-			var port = process.env.PORT || 8080;
+			var port = process.env.PORT || 4000;
 			console.debug('Express is listening on port: ' + port);
 			app.listen(port);
 
