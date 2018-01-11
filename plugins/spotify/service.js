@@ -59,8 +59,7 @@
                   .then(function(data) {
 					persist.write(tokenFile, data.body, function (err) {
 						if (err) return next(err);
-//						res.redirect('/spotify-profile');
-                        res.send('Authorization complete.');
+                        res.send('Authorization complete. Please relead your mirror to refresh authentication.');
 					});
                   }, function(err) {
                     console.debug('Something went wrong!', err);

@@ -49,15 +49,11 @@
       "expandable":true,
       "order":0,
       "items": [
-        {
-            "type": "help",
-            "helpvalue": "<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4000/spotify_auth_callback'</b></p>"
-        },
         "spotify.creds",
         "spotify.authorization_uri",
         {
             "type": "help",
-            "helpvalue": "<p>If your authorization is failing, please navigate to 'http://localhost:4000/authorize_spotify/' from your mirror browser then restart the application.</p></i>"
+            "helpvalue": "<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4000/spotify_auth_callback'</b> then navigate to <a href='http://localhost:4000/authorize_spotify/'>Authorize</a> from your mirror browser.</p>"
         },
         "spotify.timeout"
       ]

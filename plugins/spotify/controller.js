@@ -42,9 +42,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	};
     
     SpeechService.addCommand('spotify_play', function (query) {
-        SpotifyService.playTrack(query).then(function (response) {
-            console.log("play:", response);
-        });
+        SpotifyService.playTrack(query).then(function (response) {});
 	});
     
     SpeechService.addCommand('spotify_pause', function () {
