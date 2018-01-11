@@ -281,14 +281,12 @@
                             if (err) {
                                 console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
                             } else {
-                                console.log(data);
                                 var code_key = data['code'];
                                 var access_token = null;
                                 var refresh_token = null;
                                 
-                                
                                 // Retrieve an access token and a refresh token
-                                spotify.authorizationCodeGrant(code)
+                                spotify.authorizationCodeGrant(code_key)
                                   .then(function(data) {
                                     console.log(data);
                                     
