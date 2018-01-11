@@ -201,7 +201,7 @@
 			});
 
 			app.get('/spotify_auth_callback', function (req, res, next) {
-                var code = "AQCCtDhMPnSesdI9765ZtDlBXIWlUM1s3RqXg7Ab29Ob7vCXBMbE7HPWgPOruF5tTANcygfoxktzOCZDwR2_gtGcn5xcbXETmNRbZwgrleUig9dAyOwxUcQgtAG5LjX3wdq0YFkcovU5vp7eUSQPJmgnsPxNCe4xIREHjMO6VrmSHc-41o7okIYk6ZwuwuGD46frgra0VdyonpspT_shJG_pysLLv_9GvXfmXpoiN40VhpPd1lFFVSi_fjcysIA4FrMgp5k2eamweTTkBN2FyJQ06_c1uKg9psLF6JXFTSASS0kIO-dHUCGl3y6gt8eNgUVwql4s7vwV_3QRLplwqKFaHVTEW4WMfoQo_zZTnrXHWkPCvVbq0tJtRzbeuhVsnj65";
+                var code = req.query.code;
                 
                 persist.write(tokenFile, {
                     "code": code
