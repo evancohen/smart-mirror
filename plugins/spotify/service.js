@@ -251,7 +251,7 @@
               json: true
             }, function(error, response, body) {
 //            $http.get('http://localhost:4000/authorize_spotify').success(function (response, headers) {
-                console.log(error, response, body);
+                console.log(response);
                 
                 // Read the persisted token, initially captured by a webapp.
                 fs.stat(tokenFile, function (err) {
