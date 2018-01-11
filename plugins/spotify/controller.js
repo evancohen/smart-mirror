@@ -51,8 +51,6 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var currentStateInfo = function () {
 		SpotifyService.currentState().then(function (response) {
-            console.debug("current state:", response);
-            
             if (response) {
                 var device = response.device.name || 'unknown';
                 var track = response.item.name;
@@ -73,7 +71,8 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
                 $scope.spActive = false;
             }
             
-            console.log($scope);
+            
+            console.debug("current state:", response, $scope);
 		});
 	};
 
