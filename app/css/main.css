@@ -420,6 +420,8 @@ ul.calendar {
     */}
 
 .spotify-container {
+    display: flex;
+    padding: 10px;
     margin: auto;
     -webkit-filter: grayscale(70%);
     filter: grayscale(70%);
