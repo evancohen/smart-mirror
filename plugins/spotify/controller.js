@@ -77,17 +77,9 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	};
     
     SpeechService.addCommand('spotify_play', function (query) {
-        if (query === '') {
-            SpotifyService.play();
-        } else {
-            SpotifyService.playTrack(query).then(function (response) {
-                if (response) {
-                    console.log("search", response);
-                } else {
-                    console.log('no results found');
-                }
-            });
-        }
+        SpotifyService.playTrack(query).then(function (response) {
+            console.log("play:", response);
+        });
 	});
     
     SpeechService.addCommand('spotify_pause', function () {
