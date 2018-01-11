@@ -207,7 +207,7 @@
         
         service.playTrack = function (query) {
             console.log(query, typeof query);
-            if (typeof query !== 'undefined') {
+            if (typeof query === 'undefined') {
                 return spotify.play();
             } else {
                 return spotify.searchTracks('track:' + query)
