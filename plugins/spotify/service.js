@@ -216,11 +216,10 @@
                     console.log(data);
                     service.spotifyResponse = data.body.tracks || null;
 
-                    var options = {
-                        "uris": [
-                            data.body.tracks.items[0].uri
-                        ]
-                    };
+                    var options = {};
+                    data.body.tracks.items.forEach(function(item) {
+                        options.uris.push(item.uri);
+                    });
                     console.log(options);
 
                     return spotify.play(options)
