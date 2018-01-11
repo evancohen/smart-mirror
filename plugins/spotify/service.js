@@ -202,23 +202,23 @@
 
 			app.get('/spotify_auth_callback', function (req, res, next) {
 				// The code that's returned as a query parameter to the redirect URI
-                var code = req.query.code;
+//                var code = req.query.code;
+                var code = "AQCCtDhMPnSesdI9765ZtDlBXIWlUM1s3RqXg7Ab29Ob7vCXBMbE7HPWgPOruF5tTANcygfoxktzOCZDwR2_gtGcn5xcbXETmNRbZwgrleUig9dAyOwxUcQgtAG5LjX3wdq0YFkcovU5vp7eUSQPJmgnsPxNCe4xIREHjMO6VrmSHc-41o7okIYk6ZwuwuGD46frgra0VdyonpspT_shJG_pysLLv_9GvXfmXpoiN40VhpPd1lFFVSi_fjcysIA4FrMgp5k2eamweTTkBN2FyJQ06_c1uKg9psLF6JXFTSASS0kIO-dHUCGl3y6gt8eNgUVwql4s7vwV_3QRLplwqKFaHVTEW4WMfoQo_zZTnrXHWkPCvVbq0tJtRzbeuhVsnj65";
                 
-                persist.write(tokenFile, {
-                    "code": code
-                }, function (err) {
-                    if (err) return next(err);
-                    res.send('Authorization complete. Please relead your mirror to refresh authentication.');
-                });
+//                persist.write(tokenFile, {
+//                    "code": code
+//                }, function (err) {
+//                    if (err) return next(err);
+//                    res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+//                });
                 
-                return;
                 // Retrieve an access token and a refresh token
                 spotify.authorizationCodeGrant(code)
                   .then(function(data) {
-//					persist.write(tokenFile, data.body, function (err) {
-//						if (err) return next(err);
-//                        res.send('Authorization complete. Please relead your mirror to refresh authentication.');
-//					});
+					persist.write(tokenFile, data.body, function (err) {
+						if (err) return next(err);
+                        res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+					});
                   }, function(err) {
                     console.debug('Something went wrong!', err);
 					if (err) return next(err);
