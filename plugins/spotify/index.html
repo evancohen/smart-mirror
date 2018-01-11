@@ -1,12 +1,12 @@
 <div ng-controller="Spotify">
-    <div class="contents-box sc-container animate-grow" ng-show="spActive" style="display: flex;padding: 10px;">
-        <span style="text-align: right;margin-right: 15px;padding-top: 3px;">
-            <h2 class="sc" ng-bind="spTrack" style="font-family: 'Open Sans', sans-serif;margin: auto;"></h2>
-            <h3 class="sc" ng-bind="spArtist" style="font-family: 'Open Sans', sans-serif;margin: auto;"></h3>
-            <h3 class="sc" ng-bind="spDevice" style="font-family: 'Open Sans', sans-serif;margin: auto;"></h3>
+    <div class="contents-box spotify-container animate-grow">
+        <span class="spotify-info">
+            <h2 class="sp spotify-track" ng-bind="spTrack"></h2>
+            <h3 class="sp spotify-artist" ng-bind="spArtist"></h3>
+            <h3 class="sp spotify-device" ng-bind="spDevice"></h3>
         </span>
-        <i ng-show="spPlaying" class="fa fa-play-circle"></i>
-        <i ng-hide="spPlaying" class="fa fa-pause-circle"></i>
-        <img class="sc" ng-src="{{spThumb}}" width="128" height="128" style="border: 3px solid white;" />
+        <i ng-show="spPlaying" class="spotify-play-indicator fa fa-play-circle"></i>
+        <i ng-hide="spPlaying" class="spotify-play-indicator fa fa-pause-circle"></i>
+        <img class="spotify-art" ng-src="{{spThumb}}" width="128" height="128"/>
     </div>
 </div>

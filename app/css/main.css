@@ -419,7 +419,34 @@ ul.calendar {
     filter: grayscale(100%);
     */}
 
+.spotify-container {
+    margin: auto;
+    -webkit-filter: grayscale(70%);
+    filter: grayscale(70%);
+    font-family: bold;
+}
+
+.spotify-info {
+    text-align: right;
+    margin-right: 15px;
+    padding-top: 3px;
+}
+
+.spotify-info .sp {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.spotify-track, .spotify-artist, .spotify-device {
+    margin: auto;
+}
+
+.spotify-art {
+    border: 3px solid white;
+}
+
 .sc-container {
+    display: flex;
+    padding: 10px;
     margin: auto;
     -webkit-filter: grayscale(70%);
     filter: grayscale(70%);
