@@ -166,8 +166,8 @@
               });
         };
         
-        service.setRepeat = function (state) {
-            return spotify.setShuffle({ "state": state })
+        service.toggleRepeat = function (state) {
+            return spotify.setRepeat({ "state": state })
               .then(function(data) {
                 console.log(data);
               }, function(err) {

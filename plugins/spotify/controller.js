@@ -65,6 +65,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 	});
     
     SpeechService.addCommand('spotify_shuffle', function () {
+        var state = ($scope.spShuffle)? false: true;
 		SpotifyService.toggleShuffle(!$scope.shuffle);
 	});
 }
