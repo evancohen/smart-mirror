@@ -210,6 +210,7 @@
             if (typeof query === 'undefined') {
                 return spotify.play();
             } else {
+                query = (query.charAt(0) === ' ')? query.substring(1): query;
                 return spotify.searchTracks('track:' + query)
                   .then(function(data) {
                     console.log('Search tracks matching "' + query + '"');
