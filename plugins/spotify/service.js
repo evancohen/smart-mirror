@@ -201,28 +201,29 @@
 			});
 
 			app.get('/spotify_auth_callback', function (req, res, next) {
-				// The code that's returned as a query parameter to the redirect URI
-//                var code = req.query.code;
                 var code = "AQCCtDhMPnSesdI9765ZtDlBXIWlUM1s3RqXg7Ab29Ob7vCXBMbE7HPWgPOruF5tTANcygfoxktzOCZDwR2_gtGcn5xcbXETmNRbZwgrleUig9dAyOwxUcQgtAG5LjX3wdq0YFkcovU5vp7eUSQPJmgnsPxNCe4xIREHjMO6VrmSHc-41o7okIYk6ZwuwuGD46frgra0VdyonpspT_shJG_pysLLv_9GvXfmXpoiN40VhpPd1lFFVSi_fjcysIA4FrMgp5k2eamweTTkBN2FyJQ06_c1uKg9psLF6JXFTSASS0kIO-dHUCGl3y6gt8eNgUVwql4s7vwV_3QRLplwqKFaHVTEW4WMfoQo_zZTnrXHWkPCvVbq0tJtRzbeuhVsnj65";
                 
-//                persist.write(tokenFile, {
-//                    "code": code
-//                }, function (err) {
-//                    if (err) return next(err);
-//                    res.send('Authorization complete. Please relead your mirror to refresh authentication.');
-//                });
+                persist.write(tokenFile, {
+                    "code": code
+                }, function (err) {
+                    if (err) return next(err);
+                    res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+                });
                 
-                // Retrieve an access token and a refresh token
-                spotify.authorizationCodeGrant(code)
-                  .then(function(data) {
-					persist.write(tokenFile, data.body, function (err) {
-						if (err) return next(err);
-                        res.send('Authorization complete. Please relead your mirror to refresh authentication.');
-					});
-                  }, function(err) {
-                    console.debug('Something went wrong!', err);
-					if (err) return next(err);
-                  });
+//				// The code that's returned as a query parameter to the redirect URI
+//                var code = req.query.code;
+//                
+//                // Retrieve an access token and a refresh token
+//                spotify.authorizationCodeGrant(code)
+//                  .then(function(data) {
+//					persist.write(tokenFile, data.body, function (err) {
+//						if (err) return next(err);
+//                        res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+//					});
+//                  }, function(err) {
+//                    console.debug('Something went wrong!', err);
+//					if (err) return next(err);
+//                  });
 			});
 
 //			app.get('/spotify-profile', function (req, res, next) {
@@ -264,16 +265,39 @@
                 // Read the persisted token, initially captured by a webapp.
                 fs.stat(tokenFile, function (err) {
                     if (err == null) {
-                        persist.read(tokenFile, function (err, token) {
+//                        persist.read(tokenFile, function (err, token) {
+//                            if (err) {
+//                                console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
+//                            } else {
+//                                var access_token = token['access_token'];
+//                                var refresh_token = token['refresh_token'];
+//
+//                                spotify.setAccessToken(access_token); // Set the client token
+//                                spotify.setRefreshToken(refresh_token); // Set the client token
+//                                cb();
+//                            }
+//                        });
+                        persist.read(tokenFile, function (err, data) {
                             if (err) {
                                 console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
                             } else {
-                                var access_token = token['access_token'];
-                                var refresh_token = token['refresh_token'];
-
-                                spotify.setAccessToken(access_token); // Set the client token
-                                spotify.setRefreshToken(refresh_token); // Set the client token
-                                cb();
+                                var code_key = data['code'];
+                                var access_token = null;
+                                var refresh_token = null;
+                                
+                                
+                                // Retrieve an access token and a refresh token
+                                spotify.authorizationCodeGrant(code)
+                                  .then(function(data) {
+                                    console.log(data);
+                                    
+                                    spotify.setAccessToken(access_token); // Set the client token
+                                    spotify.setRefreshToken(refresh_token); // Set the client token
+                                    cb();
+                                  }, function(err) {
+                                    console.debug('Something went wrong!', err);
+                                    if (err) return next(err);
+                                  });
                             }
                         });
                     } else if (err.code == 'ENOENT') {
