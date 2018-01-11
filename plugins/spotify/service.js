@@ -215,15 +215,14 @@
                   .then(function(data) {
                     console.log('Search tracks matching "' + query + '"');
                     console.log(data);
-                    service.spotifyResponse = data.body.tracks || null;
 
-                    var options = {};
+                    var tracks = [];
                     data.body.tracks.items.forEach(function(item) {
-                        options.uris.push(item.uri);
+                        tracks.push(item.uri);
                     });
-                    console.log(options);
+                    console.log(tracks);
 
-                    return spotify.play(options)
+                    return spotify.play({ "uris": tracks })
                       .then(function(data) {
                         console.log('current playback: "' + query + '"');
                         console.log(data);
