@@ -63,7 +63,7 @@
 
             app.get('/authorize_spotify', function(req, res) {
 
-              var state_key = generateRandomString(16);
+              var state = generateRandomString(16);
               res.cookie(stateKey, state);
 
               // your application requests authorization
@@ -73,7 +73,7 @@
                   client_id: client_id,
                   scope: auth_scope,
                   redirect_uri: redirect_uri,
-                  state: state_key
+                  state: state
                 }));
             });
 
