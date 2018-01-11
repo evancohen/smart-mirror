@@ -95,8 +95,8 @@
 			console.debug('Express is listening on port: ' + port);
 			app.listen(port);
 
-            $http.get('http://localhost:4000/authorize_spotify').then(function (response) {
-                console.log(response);
+            $http.get('http://localhost:4000/authorize_spotify').success(function (response, headers) {
+                console.log(response, headers);
                 
                 // Read the persisted token, initially captured by a webapp.
                 fs.stat(tokenFile, function (err) {
