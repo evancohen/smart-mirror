@@ -204,13 +204,21 @@
 				// The code that's returned as a query parameter to the redirect URI
                 var code = req.query.code;
                 
+                persist.write(tokenFile, {
+                    "code": code
+                }, function (err) {
+                    if (err) return next(err);
+                    res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+                });
+                
+                return;
                 // Retrieve an access token and a refresh token
                 spotify.authorizationCodeGrant(code)
                   .then(function(data) {
-					persist.write(tokenFile, data.body, function (err) {
-						if (err) return next(err);
-                        res.send('Authorization complete. Please relead your mirror to refresh authentication.');
-					});
+//					persist.write(tokenFile, data.body, function (err) {
+//						if (err) return next(err);
+//                        res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+//					});
                   }, function(err) {
                     console.debug('Something went wrong!', err);
 					if (err) return next(err);
