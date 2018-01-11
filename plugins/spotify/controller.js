@@ -72,6 +72,8 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
             } else {
                 $scope.spActive = false;
             }
+            
+            console.log($scope);
 		});
 	};
 
