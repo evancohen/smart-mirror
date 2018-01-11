@@ -1,5 +1,6 @@
 <div ng-controller="Spotify">
     <div class="contents-box spotify-container animate-grow">
+        <img class="spotify-art" ng-src="{{spThumb}}" width="128" height="128"/>
         <span class="spotify-info">
             <h2 class="sp spotify-track" ng-bind="spTrack"></h2>
             <h3 class="sp spotify-artist" ng-bind="spArtist"></h3>
@@ -7,6 +8,5 @@
         </span>
         <i ng-show="spPlaying" class="spotify-play-indicator fa fa-play-circle"></i>
         <i ng-hide="spPlaying" class="spotify-play-indicator fa fa-pause-circle"></i>
-        <img class="spotify-art" ng-src="{{spThumb}}" width="128" height="128"/>
     </div>
 </div>
