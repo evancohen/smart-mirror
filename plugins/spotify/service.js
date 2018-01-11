@@ -255,12 +255,12 @@
 			app.listen(port);
 
             
-            request.get({
-              url: 'http://localhost:4000/authorize_spotify',
-              json: true
-            }, function(error, response, body) {
-//            $http.get('http://localhost:4000/authorize_spotify').success(function (response, headers) {
-                console.log(response);
+//            request.get({
+//              url: 'http://localhost:4000/authorize_spotify',
+//              json: true
+//            }, function(error, response, body) {
+////            $http.get('http://localhost:4000/authorize_spotify').success(function (response, headers) {
+//                console.log(response);
                 
                 // Read the persisted token, initially captured by a webapp.
                 fs.stat(tokenFile, function (err) {
@@ -281,6 +281,7 @@
                             if (err) {
                                 console.error('Spotify authentication invalid format, please see the config screen for the authorization instructions.', err);
                             } else {
+                                console.log(data);
                                 var code_key = data['code'];
                                 var access_token = null;
                                 var refresh_token = null;
@@ -306,7 +307,7 @@
                         console.error(err);
                     }
                 });
-            });
+//            });
         }
 
         service.refreshToken = function () {
