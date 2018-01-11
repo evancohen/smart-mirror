@@ -51,20 +51,15 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
 	var currentStateInfo = function () {
 		SpotifyService.currentState().then(function (response) {
+            console.debug("current state:", response, $scope);
             if (response) {
-                var device = response.device.name || 'unknown';
-                var track = response.item.name;
-                var artist = response.item.artists[0].name;
-                var playing = response.is_playing || false;
-                var repeat = response.repeat_state;
-                var shuffle = response.shuffle_state;
-                var art = response.album.images[0].url || 'http://i.imgur.com/8Jqd33w.jpg?1';
-                
-                $scope.spThumb = art;
-                $scope.spPlaying = playing;
-                $scope.spDevice = device;
-                $scope.spTrack = track;
-                $scope.spArtist = artist;
+                $scope.spDevice = response.device.name || 'unknown';
+                $scope.spTrack = response.item.name;
+                $scope.spArtist = response.item.artists[0].name;
+                $scope.spPlaying = response.is_playing || false;
+//                var repeat = response.repeat_state;
+//                var shuffle = response.shuffle_state;
+                $scope.spThumb = response.album.images[0].url || 'http://i.imgur.com/8Jqd33w.jpg?1';
                 
                 $scope.spActive = true;
             } else {
