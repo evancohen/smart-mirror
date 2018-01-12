@@ -161,7 +161,7 @@
         
         service.playTrack = function (query) {
             console.log(query, typeof query);
-            if (typeof query === 'undefined' || query === '') {
+            if (typeof query === 'undefined' || query === '' || query === ' ') {
                 return spotify.play();
             } else {
                 query = (query.charAt(0) === ' ')? query.substring(1): query;
