@@ -419,6 +419,13 @@ ul.calendar {
     filter: grayscale(100%);
     */}
 
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .spotify-container {
     display: flex;
     padding: 10px;

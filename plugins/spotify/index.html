@@ -2,14 +2,14 @@
     <div class="contents-box spotify-container animate-grow">
         <img class="spotify-art" ng-src="{{spThumb}}" width="96" height="96"/>
         <span class="spotify-info">
-            <h2 class="sp spotify-track" ng-bind="spTrack"></h2>
-            <h3 class="sp spotify-artist" ng-bind="spArtist"></h3>
-            <h3 class="sp spotify-device" ng-bind="spDevice"></h3>
+            <h2 class="sp spotify-track truncate" ng-bind="spTrack"></h2>
+            <h3 class="sp spotify-artist truncate" ng-bind="spArtist"></h3>
+            <h3 class="sp spotify-device truncate" ng-bind="spDevice"></h3>
             <span class="sp">
                 <i ng-show="spPlaying" class="spotify-status-indicator material-icons">play_circle_outline</i>
                 <i ng-hide="spPlaying" class="spotify-status-indicator material-icons">pause_circle_outline</i>
                 <i ng-show="spShuffle" class="spotify-status-indicator material-icons">shuffle</i>
-                <i ng-show="spRepeat" class="spotify-status-indicator material-icons">repeat</i>
+                <i ng-show="spRepeat === 'track'" class="spotify-status-indicator material-icons">repeat</i>
             </span>
         </span>
     </div>
