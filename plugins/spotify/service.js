@@ -88,6 +88,7 @@
 
                             spotify.setAccessToken(access_token); // Set the client token
                             spotify.setRefreshToken(refresh_token); // Set the client token
+//                            if (authorized_session) cb();
                             cb();
                         }
                     });
