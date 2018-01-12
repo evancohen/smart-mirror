@@ -104,8 +104,14 @@
             spotify.refreshAccessToken().then(function (data) {
                 data.body.refresh_token = spotify.getRefreshToken();
                 
+                var access_token = token['access_token'];
+                var refresh_token = token['refresh_token'];
+                
                 persist.write(tokenFile, data.body, function (err) {
                     if (err) console.error('authentication renewal write failed.', err);
+
+                    spotify.setAccessToken(access_token); // Set the client token
+                    spotify.setRefreshToken(refresh_token); // Set the client token
                 });
             });
         };
