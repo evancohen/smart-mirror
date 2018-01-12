@@ -440,6 +440,10 @@ ul.calendar {
     margin-left: 15px;
 }
 
+.spotify-info-left img {
+    float: left;
+}
+
 .spotify-info-right {
     text-align: right;
     margin-right: 15px;
