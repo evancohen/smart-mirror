@@ -192,12 +192,12 @@
         },
         "spotify_forward": {
             "text": "play next song on spotify",
-            "voice": "(play) (skip to) next (song on) spotify (song)",
+            "voice": "(skip to) next (song on) spotify (song)",
             "description": "Play next song on Spotify."
         },
         "spotify_back": {
             "text": "play previous song on spotify",
-            "voice": "(play) (skip to) previous (song on) spotify (song)",
+            "voice": "(skip to) previous (song on) spotify (song)",
             "description": "Play previous song on Spotify."
         },
         "spotify_shuffle": {

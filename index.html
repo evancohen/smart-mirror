@@ -71,7 +71,7 @@
     <div class="bottom-left">
       <div ng-include="'plugins/fitbit/index.html'" ng-if="config.fitbit.creds"></div>
       <div ng-include="'plugins/scrobbler/index.html'"></div>
-      <div ng-include="'plugins/spotify/index.html'"></div>
+      <div ng-include="'plugins/spotify/index.html'" ng-if="config.spotify.creds"></div>
     </div>
     <div class="bottom-right">
       <!-- Someday something will live here -->
