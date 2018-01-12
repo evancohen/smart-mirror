@@ -28,7 +28,7 @@
 		service.spotifyResponse = null;
 		service.active = null;
 
-		if (typeof config.spotify !== 'undefined' && config.spotify.creds.clientSecret !== '') {
+		if (typeof config.spotify !== 'undefined' && typeof config.spotify.creds.clientSecret !== 'undefined' && config.spotify.creds.clientSecret !== '') {
             var request = require('request');     
 			var express = require('express');
 			var app = express();
@@ -52,8 +52,6 @@
 			});
 
 			app.get('/spotify_auth_callback', function (req, res, next) {
-                var code = req.query.code;
-
 				// The code that's returned as a query parameter to the redirect URI
                 var code = req.query.code;
                 
