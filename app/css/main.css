@@ -439,8 +439,11 @@ ul.calendar {
     float: left;
 }
 
+.pull-left {
+    float: left;
+}
+
 .spotify-info {
-    text-align: right;
     margin-right: 15px;
     margin-top: -2px;
     font-family: 'Open Sans', sans-serif;

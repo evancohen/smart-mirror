@@ -1,6 +1,7 @@
 <div ng-controller="Spotify" ng-show="spActive">
     <div class="spotify-container animate-grow">
-        <span class="spotify-info pull-right">
+        <img class="spotify-art" ng-src="{{spThumb}}" width="96" height="96"/>
+        <span class="spotify-info">
             <h2 class="spotify-track truncate" ng-bind="spTrack"></h2>
             <h3 class="spotify-artist truncate em-85" ng-bind="spArtist"></h3>
             <h3 class="spotify-device truncate em-85" ng-bind="spDevice"></h3>
@@ -11,6 +12,5 @@
                 <i ng-hide="spPlaying" class="material-icons">pause_circle_outline</i>
             </span>
         </span>
-        <img class="spotify-art" ng-src="{{spThumb}}" width="96" height="96"/>
     </div>
 </div>
