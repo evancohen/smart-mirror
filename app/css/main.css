@@ -435,12 +435,14 @@ ul.calendar {
     font-family: bold;
 }
 
-.spotify-info-left {
+.spotify-info-right {
+    float: right;
     text-align: left;
     margin-left: 15px;
 }
 
-.spotify-info-right {
+.spotify-info-left {
+    float: left;
     text-align: right;
     margin-right: 15px;
 }
