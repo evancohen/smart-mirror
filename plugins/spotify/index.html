@@ -5,10 +5,10 @@
             <h2 class="sp spotify-track truncate" ng-bind="spTrack"></h2>
             <h3 class="sp spotify-artist truncate em-85" ng-bind="spArtist"></h3>
             <h3 class="sp spotify-device truncate em-85" ng-bind="spDevice"></h3>
-            <span class="sp">
-                <i ng-show="spPlaying" class="spotify-status-indicator material-icons">play_circle_outline</i>
-                <i ng-hide="spPlaying" class="spotify-status-indicator material-icons">pause_circle_outline</i>
-                <i ng-show="spShuffle" class="spotify-status-indicator material-icons">shuffle</i>
+            <span class="sp spotify-status-indicator">
+                <i ng-show="spPlaying" class="material-icons">play_circle_outline</i>
+                <i ng-hide="spPlaying" class="material-icons">pause_circle_outline</i>
+                <i ng-show="spShuffle" class="material-icons">shuffle</i>
                 <i ng-show="spRepeat === 'track'" class="spotify-status-indicator material-icons">repeat</i>
             </span>
         </span>
