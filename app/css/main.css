@@ -440,7 +440,7 @@ ul.calendar {
     margin-left: 15px;
 }
 
-.spotify-info-left img {
+.spotify-info-left + img {
     float: left;
 }
 
