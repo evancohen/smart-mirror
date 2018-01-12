@@ -104,8 +104,8 @@
             spotify.refreshAccessToken().then(function (data) {
                 data.body.refresh_token = spotify.getRefreshToken();
                 
-                var access_token = token['access_token'];
-                var refresh_token = token['refresh_token'];
+                var access_token = data.body.access_token;
+                var refresh_token = data.body.refresh_token;
                 
                 persist.write(tokenFile, data.body, function (err) {
                     if (err) console.error('authentication renewal write failed.', err);
