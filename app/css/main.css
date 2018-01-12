@@ -438,12 +438,12 @@ ul.calendar {
 .spotify-info {
     text-align: left;
     margin-left: 15px;
-    margin-top: -1px;
+    margin-top: -2px;
     font-family: 'Open Sans', sans-serif;
 }
 
 .spotify-status-indicator i {
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
 .spotify-info .em-85 {
