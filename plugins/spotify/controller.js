@@ -34,26 +34,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
     var addVoiceControl = function() {
         SpeechService.addCommand('spotify_play', function (query) {
-//            if ((query.indexOf('song') >= 0 && query.indexOf('song') < 5) && (query.indexOf('artist') >= 0) {
-//                SpotifyService.getUserPlaylists(query).then(function (response) {
-//                    console.log(response);
-//                });
-//            } else 
-             if (query.indexOf('playlist') >= 0 && query.indexOf('playlist') < 5) {
-                SpotifyService.playPlaylist(query).then(function (response) {});
-            } else if (query.indexOf('album') >= 0 && query.indexOf('album') < 5) {
-                SpotifyService.getAlbum(query).then(function (response) {
-                    console.log(response);
-                });
-            } else if (query.indexOf('artist') >= 0 && query.indexOf('artist') < 5) {
-                SpotifyService.getArtist(query).then(function (response) {
-                    console.log(response);
-                });
-            } else if (query.indexOf('track') >= 0 && query.indexOf('track') < 5) {
-                SpotifyService.playTrack(query).then(function (response) {});
-            } else {
-                SpotifyService.playTrack(query).then(function (response) {});
-            }
+            SpotifyService.playTrack(query).then(function (response) {});
         });
 
         SpeechService.addCommand('spotify_pause', function () {

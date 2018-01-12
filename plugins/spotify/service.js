@@ -198,7 +198,7 @@
 
         service.playPlaylist = function (query) {
             // Search tracks whose name contains the query
-            return spotify.searchPlaylists(query)
+            return spotify.getUserPlaylists(query)
               .then(function(data) {
                 console.log('Playlist matching "' + query + '"');
                 console.log(data);
