@@ -101,6 +101,15 @@
 
         service.refreshToken = function () {
             return spotify.refreshAccessToken().then(function (data) {
+                data.body.refresh_token = spotify.getRefreshToken();
+                
+                persist.write(tokenFile, data.body, function (err) {
+                    if (err) {
+                        console.error('authentication renewal write failed.', err);
+                    } else {
+                        console.error('authentication renewal persisted.');
+                    }
+                });
                 return data.body;
             });
         };
