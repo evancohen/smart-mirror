@@ -303,6 +303,7 @@
 
         service.refreshToken = function () {
             return spotify.refreshAccessToken().then(function (data) {
+                spotify.setAccessToken(data.access_token);
                 return data.body;
             });
         };
