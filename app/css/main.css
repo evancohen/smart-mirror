@@ -445,6 +445,10 @@ ul.calendar {
     font-family: 'Open Sans', sans-serif;
 }
 
+.sp.em-80 {
+    font-size: 0.8em;
+}
+
 .spotify-track, .spotify-artist, .spotify-device {
     margin: auto;
 }
