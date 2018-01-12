@@ -438,18 +438,14 @@ ul.calendar {
 .spotify-info {
     text-align: left;
     margin-left: 15px;
-/*    padding-top: 2px;*/
-}
-
-.spotify-info .sp {
     font-family: 'Open Sans', sans-serif;
 }
 
 .spotify-status-indicator {
-    padding-top: 4px;
+    margin-top: 4px !important;
 }
 
-.sp.em-85 {
+.spotify-info .em-85 {
     font-size: 0.85em;
 }
 
@@ -458,7 +454,7 @@ ul.calendar {
 }
 
 .spotify-art {
-    border: 3px solid white;
+    border: 2px solid white;
 }
 
 .sc-container {
