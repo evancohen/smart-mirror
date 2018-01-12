@@ -38,7 +38,6 @@
       <div ng-include="'plugins/calendar/index.html'"></div>
     </div>
     <div class="top-right">
-      <div ng-include="'plugins/spotify/index.html'" ng-if="config.spotify.creds"></div>
       <div ng-include="'plugins/weather/index.html'"></div>
       <div ng-include="'plugins/traffic/index.html'"></div>
       <div ng-include="'plugins/stock/index.html'"></div>
@@ -72,6 +71,7 @@
     <div class="bottom-left">
       <div ng-include="'plugins/fitbit/index.html'" ng-if="config.fitbit.creds"></div>
       <div ng-include="'plugins/scrobbler/index.html'"></div>
+      <div ng-include="'plugins/spotify/index.html'" ng-if="config.spotify.creds"></div>
     </div>
     <div class="bottom-right">
       <!-- Someday something will live here -->

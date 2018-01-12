@@ -435,9 +435,17 @@ ul.calendar {
     font-family: bold;
 }
 
-.spotify-info {
+.spotify-info-left {
+    text-align: left;
+    margin-left: 15px;
+}
+
+.spotify-info-right {
     text-align: right;
     margin-right: 15px;
+}
+
+.spotify-info-left, .spotify-info-right {
     margin-top: -2px;
     font-family: 'Open Sans', sans-serif;
 }
