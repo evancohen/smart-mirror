@@ -40,7 +40,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 //                });
 //            } else 
              if (query.indexOf('playlist') >= 0 && query.indexOf('playlist') < 5) {
-                SpotifyService.playPlaylists(query).then(function (response) {});
+                SpotifyService.playPlaylist(query).then(function (response) {});
             } else if (query.indexOf('album') >= 0 && query.indexOf('album') < 5) {
                 SpotifyService.getAlbum(query).then(function (response) {
                     console.log(response);
