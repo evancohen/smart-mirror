@@ -1,0 +1,72 @@
+{
+  "schema": {
+    "spotify": {
+      "type": "object",
+      "title": "Spotify Settings",
+      "properties": {
+        "timeout": {
+          "type": "number",
+          "title": "Default time in seconds to refresh spotify data",
+          "default":10000
+        },
+        "creds": {
+          "type": "object",
+          "properties": {
+            "clientID": {
+              "default": "",
+              "type": "string",
+              "title": "OAuth 2.0 Client ID"
+            },
+            "clientSecret": {
+              "default": "",
+              "type": "string",
+              "title": "Client Secret"
+            }
+          }
+        },
+        "authorization_uri": {
+          "type": "object",
+          "properties": {
+            "scope": {
+              "default": "user-read-private user-read-email streaming user-read-currently-playing user-modify-playback-state user-read-playback-state",
+              "type": "string",
+              "title": "Scope"
+            },
+            "state": {
+              "default": "3(#0/!~",
+              "type": "string",
+              "title": "State"
+            }
+          }
+        }
+      }
+    }
+  },
+  "form":[
+    {
+      "type":"fieldset",
+      "title":"Spotify Settings",
+      "expandable":true,
+      "order":0,
+      "items": [
+        "spotify.creds",
+        "spotify.authorization_uri",
+        {
+            "type": "help",
+            "helpvalue": "<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4000/spotify_auth_callback'</b> then navigate to <a href='http://localhost:4000/authorize_spotify/'>Authorize</a> from your mirror browser.</p>"
+        },
+        "spotify.timeout"
+      ]
+    }
+  ],
+  "value":{
+    "spotify":{
+      "timeout": 10000,
+      "authorization_uri": {
+        "response_type": "code",
+        "scope": "activity nutrition profile settings sleep social weight heartrate",
+        "state": "3(#0/!~"
+        }
+    }
+  }
+}
