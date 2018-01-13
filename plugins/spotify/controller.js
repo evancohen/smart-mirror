@@ -34,7 +34,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
     var addVoiceControl = function() {
         SpeechService.addCommand('spotify_play', function (query) {
-            SpotifyService.playTrack(query).then(function (response) {});
+            SpotifyService.playTrack(query);
         });
 
         SpeechService.addCommand('spotify_pause', function () {
@@ -56,7 +56,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 
         SpeechService.addCommand('spotify_shuffle', function () {
             var state = ($scope.spShuffle)? false: true;
-            SpotifyService.toggleShuffle(!$scope.shuffle);
+            SpotifyService.toggleShuffle(state);
         });
     };
 }

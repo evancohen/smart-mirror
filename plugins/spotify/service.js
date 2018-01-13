@@ -1,8 +1,7 @@
-/* global SC:true */
 (function () {
 	'use strict';
 
-	function SpotifyService($http) {
+	function SpotifyService() {
 		var service = {};
         var spotify = {};
 		var tokenFile = 'spotify-token.json';
@@ -29,7 +28,6 @@
 		service.active = null;
 
 		if (typeof config.spotify !== 'undefined' && typeof config.spotify.creds.clientSecret !== 'undefined' && config.spotify.creds.clientSecret !== '') {
-            var request = require('request');     
 			var express = require('express');
 			var app = express();
 			var fs = require('fs');
@@ -127,21 +125,21 @@
         
         service.pause = function () {
             return spotify.pause()
-              .then(function(data) {}, function(err) {
+              .then(function() {}, function(err) {
                 console.log('Something went wrong!', err);
               });
         };
         
         service.skipBack = function () {
             return spotify.skipToPrevious()
-              .then(function(data) {}, function(err) {
+              .then(function() {}, function(err) {
                 console.log('Something went wrong!', err);
               });
         };
         
         service.skipNext = function () {
             return spotify.skipToNext()
-              .then(function(data) {}, function(err) {
+              .then(function() {}, function(err) {
                 console.log('Something went wrong!', err);
               });
         };
