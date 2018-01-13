@@ -127,7 +127,10 @@
             spotify.getMyDevices().then(function (data) {
                 var devices = data.body.devices;
                 var id = null;
-                console.log(data.body);
+                
+                // Check for name kerword of <named_device> or 'this device'<default_device>
+                name = (name.toLowerCase() === 'this device')? config.spotify.default_device: name;
+                
                 devices.forEach(function (device) {
                     if (device.name.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
                         id = device.id;

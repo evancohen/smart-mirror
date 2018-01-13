@@ -9,6 +9,11 @@
           "title": "Default time in seconds to refresh spotify data",
           "default":10000
         },
+        "default_device": {
+          "type": "string",
+          "title": "Default device name to change playback route on request",
+          "default": "raspberry"
+        },
         "creds": {
           "type": "object",
           "properties": {
@@ -55,13 +60,15 @@
             "type": "help",
             "helpvalue": "<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4000/spotify_auth_callback'</b> then navigate to <a href='http://localhost:4000/authorize_spotify/' target='_blank'>Authorize</a> from your mirror browser.</p>"
         },
-        "spotify.timeout"
+        "spotify.timeout",
+        "spotify.default_device"
       ]
     }
   ],
   "value":{
     "spotify":{
       "timeout": 10000,
+      "default_device": "raspberry",
       "authorization_uri": {
         "response_type": "code",
         "scope": "activity nutrition profile settings sleep social weight heartrate",
