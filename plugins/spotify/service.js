@@ -37,6 +37,7 @@
             var client_secret = config.spotify.creds.clientSecret;
             var auth_scope = config.spotify.authorization_uri.scope.split(' ');
             var auth_state = config.spotify.authorization_uri.state;
+            var default_device = config.spotify.default_device || null;
 
 			spotify = new Spotify({
                 clientId : client_id,
@@ -82,6 +83,8 @@
                             var access_token = token['access_token'];
                             var refresh_token = token['refresh_token'];
 
+                            if (!default_device) console.debug('no default spotify device chosen');
+                            
                             spotify.setAccessToken(access_token); // Set the client token
                             spotify.setRefreshToken(refresh_token); // Set the client token
 //                            if (authorized_session) cb();
@@ -129,7 +132,7 @@
                 var id = null;
                 
                 // Check for name kerword of <named_device> or 'this device'<default_device>
-                name = (name.toLowerCase() === 'this device')? config.spotify.default_device: name;
+                name = (name.toLowerCase() === 'this device' && default_device)? default_device: name;
                 
                 devices.forEach(function (device) {
                     if (device.name.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
