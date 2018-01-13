@@ -212,7 +212,7 @@
         },
         "spotify_transfer": {
             "text": "transfer playback to my ________",
-            "voice": "(transfer) (send) (move) playback to *query on spotify",
+            "voice": "(transfer) (send) (move) to *query on spotify",
             "description": "Transfer playback to a device by the name of ..."
         },
         "sc_play": {
