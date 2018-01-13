@@ -129,7 +129,7 @@
                 var id = null;
                 console.log(data.body);
                 devices.forEach(function (device) {
-                    if (device.name.indexOf(name) >= 0) {
+                    if (device.name.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
                         id = device.id;
                     }
                 });
