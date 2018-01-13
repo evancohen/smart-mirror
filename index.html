@@ -23,6 +23,7 @@
   <!-- Styles and Resources -->
   <link rel="shortcut icon" href="favicon.ico" />
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" ng-href="app/css/{{ layoutName }}.css" />
   <link rel="stylesheet" href="app/css/weather-icons.css">
   <!-- bower:css -->
@@ -70,6 +71,7 @@
     <div class="bottom-left">
       <div ng-include="'plugins/fitbit/index.html'" ng-if="config.fitbit.creds"></div>
       <div ng-include="'plugins/scrobbler/index.html'"></div>
+      <div ng-include="'plugins/spotify/index.html'" ng-if="config.spotify.creds"></div>
     </div>
     <div class="bottom-right">
       <!-- Someday something will live here -->
@@ -105,6 +107,7 @@
   <script src="plugins/calendar/service.js"></script>
   <script src="plugins/timebox/service.js"></script>
   <script src="plugins/soundcloud/service.js"></script>
+  <script src="plugins/spotify/service.js"></script>
   <script src="plugins/speech/service.js"></script>
   <script src="plugins/light/service.js"></script>
   <script src="plugins/geolocation/service.js"></script>
@@ -117,6 +120,7 @@
   <!-- Controllers -->
   <script src="app/js/controller.js"></script>
   <script src="plugins/soundcloud/controller.js"></script>
+  <script src="plugins/spotify/controller.js"></script>
   <script src="plugins/search/controller.js"></script>
   <script src="plugins/xkcd/controller.js"></script>
   <script src="plugins/dilbert/controller.js"></script>
