@@ -134,8 +134,12 @@
                     }
                 });
                 if (id) {
-                    return spotify.transferMyPlayback({ "deviceIds": id })
-                      .then(function() {}, function(err) {
+                    console.log(id);
+                    return spotify.transferMyPlayback({ 
+                        "device_ids": [
+                            id
+                        ]
+                    }).then(function() {}, function(err) {
                         console.log('Something went wrong!', err);
                       });
                 } else {
