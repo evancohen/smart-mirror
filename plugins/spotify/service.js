@@ -139,7 +139,9 @@
                         "device_ids": [
                             id
                         ]
-                    }).then(function() {}, function(err) {
+                    }).then(function() {
+                        return spotify.play();
+                    }, function(err) {
                         console.log('Something went wrong!', err);
                       });
                 } else {
