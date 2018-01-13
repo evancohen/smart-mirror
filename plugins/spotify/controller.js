@@ -58,6 +58,10 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
             var state = ($scope.spShuffle)? false: true;
             SpotifyService.toggleShuffle(state);
         });
+
+        SpeechService.addCommand('spotify_transfer', function (name) {
+            SpotifyService.sendToDevice(name);
+        });
     };
 }
 

@@ -210,6 +210,11 @@
             "voice": "(turn on) (turn off) repeat (playlist) (music) (song) (on) spotify",
             "description": "Toggle repeat on Spotify."
         },
+        "spotify_transfer": {
+            "text": "transfer playback to my ________",
+            "voice": "(transfer) (send) (move) playback to *query on spotify",
+            "description": "Transfer playback to a device by the name of ..."
+        },
         "sc_play": {
             "text": "SoundCloud play ________",
             "voice": "SoundCloud play *query",

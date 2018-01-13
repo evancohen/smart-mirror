@@ -123,6 +123,27 @@
               });
         };
         
+        service.sendToDevice = function (name) {
+            spotify.getMyDevices().then(function (data) {
+                var devices = data.body.devices;
+                var id = null;
+                console.log(data.body);
+                devices.forEach(function (device) {
+                    if (device.name.indexOf(name) >= 0) {
+                        id = device.id;
+                    }
+                });
+                if (id) {
+                    return spotify.transferMyPlayback({ "deviceIds": id })
+                      .then(function() {}, function(err) {
+                        console.log('Something went wrong!', err);
+                      });
+                } else {
+                    return null;
+                }
+            });
+        };
+        
         service.pause = function () {
             return spotify.pause()
               .then(function() {}, function(err) {
