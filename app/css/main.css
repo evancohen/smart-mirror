@@ -426,6 +426,16 @@ ul.calendar {
   text-overflow: ellipsis;
 }
 
+.top-right div div div img {
+    float: right;
+}
+
+.top-right div div div .spotify-info {
+    float: left;
+    text-align: right;
+    margin-right: 15px;
+}
+
 .spotify-container {
     display: flex;
 /*    padding: 10px;*/
