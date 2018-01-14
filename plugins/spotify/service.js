@@ -227,19 +227,6 @@
             }
         };
 
-        service.playPlaylist = function (query) {
-            // Search tracks whose name contains the query
-            return spotify.getUserPlaylists(query)
-              .then(function(data) {
-                console.log('Playlist matching "' + query + '"');
-                console.log(data);
-//                service.spotifyResponse = data.body.tracks || null;
-//                return service.spotifyResponse;
-              }, function(err) {
-                console.log('Something went wrong!', err);
-              });
-        };
-
 		return service;
 	}
 

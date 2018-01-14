@@ -182,37 +182,37 @@
         },
         "spotify_play": {
             "text": "play ________ on Spotify",
-            "voice": "play (*query) (on) spotify",
+            "voice": "(tell) spotify (to) play (*query)",
             "description": "Resume/Play song on Spotify."
         },
         "spotify_pause": {
             "text": "pause ________ spotify",
-            "voice": "pause (playback on) spotify",
+            "voice": "(tell) spotify (to) pause (playback)",
             "description": "Pause current song on Spotify."
         },
         "spotify_forward": {
             "text": "play next song on spotify",
-            "voice": "(skip to) next (song on) spotify (song)",
+            "voice": "(tell) spotify (to) (skip) (goto) next (song on) (song)",
             "description": "Play next song on Spotify."
         },
         "spotify_back": {
             "text": "play previous song on spotify",
-            "voice": "(skip to) previous (song on) spotify (song)",
+            "voice": "(tell) spotify (to) (skip) (goto) previous (song on) (song)",
             "description": "Play previous song on Spotify."
         },
         "spotify_shuffle": {
             "text": "shuffle music",
-            "voice": "(turn on) (turn off) shuffle (playlist) (album) (artist) (music) (songs) (on) spotify",
+            "voice": "(tell) spotify (to) (turn on) (turn off) shuffle (songs)",
             "description": "Toggle shuffle on Spotify."
         },
         "spotify_repeat": {
             "text": "shuffle music",
-            "voice": "(turn on) (turn off) repeat (playlist) (music) (song) (on) spotify",
+            "voice": "(tell) spotify (to) (turn on) (turn off) repeat (song)",
             "description": "Toggle repeat on Spotify."
         },
         "spotify_transfer": {
             "text": "transfer playback to my ________",
-            "voice": "(transfer) (send) (move) to *query on spotify",
+            "voice": "(tell) spotify (to) (transfer) (send) (move) to *query",
             "description": "Transfer playback to a device by the name of ..."
         },
         "sc_play": {
