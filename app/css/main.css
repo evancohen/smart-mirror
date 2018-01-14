@@ -427,10 +427,11 @@ ul.calendar {
 }
 
 .top-right div div div img {
-    float: right;
+/*    float: right;*/
 }
 
 .top-right div div div .spotify-info {
+    float: left;
     text-align: right;
     margin-right: 15px;
 }
@@ -444,7 +445,7 @@ ul.calendar {
 }
 
 .pull-right {
-    float: left;
+    float: right;
 }
 
 .pull-left {
