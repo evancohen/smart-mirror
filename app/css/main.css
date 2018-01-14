@@ -438,6 +438,10 @@ ul.calendar {
     margin-left: 15px;
 }
 
+.bottom-left div div div img {
+    float: left;
+}
+
 .spotify-container {
 /*    display: flex;*/
     margin: auto;
