@@ -444,7 +444,8 @@ ul.calendar {
 }
 
 .spotify-info {
-    margin-left: 15px;
+    text-align: right;
+    margin-right: 15px;
     margin-top: -2px;
     font-family: 'Open Sans', sans-serif;
 }

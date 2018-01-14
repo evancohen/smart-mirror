@@ -1,6 +1,5 @@
 <div ng-controller="Spotify" ng-show="spActive">
     <div class="spotify-container animate-grow">
-        <img class="spotify-art" ng-src="{{spThumb}}" width="96" height="96"/>
         <span class="spotify-info">
             <h2 class="spotify-track truncate" ng-bind="spTrack"></h2>
             <h3 class="spotify-artist truncate em-85" ng-bind="spArtist"></h3>
@@ -12,5 +11,6 @@
                 <i ng-show="spRepeat === 'track'" class="material-icons">repeat</i>
             </span>
         </span>
+        <img class="spotify-art" ng-src="{{spThumb}}" width="96" height="96"/>
     </div>
 </div>
