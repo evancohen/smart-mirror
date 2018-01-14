@@ -438,7 +438,6 @@ ul.calendar {
 
 .spotify-container {
     display: flex;
-/*    padding: 10px;*/
     margin: auto;
     -webkit-filter: grayscale(70%);
     filter: grayscale(70%);
@@ -454,8 +453,6 @@ ul.calendar {
 }
 
 .spotify-info {
-    text-align: right;
-    margin-right: 15px;
     margin-top: -2px;
     font-family: 'Open Sans', sans-serif;
 }
