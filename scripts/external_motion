@@ -42,4 +42,4 @@ fn=${motiondir}/${f}
 
 # create the event notification file with the right user permissions
 # assumes this script is run as a root user..(deamon started at boot)
-(umask 000; touch $fn; chown $user $fn)
+sudo -u $user touch $fn 
