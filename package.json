@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -34,7 +34,7 @@
   "devDependencies": {
     "angular-i18n": "^1.5.5",
     "bower": "^1.7.9",
-    "electron": "<1.8.0",
+    "electron": "^2.0.8",
     "eslint": "^3.13.1",
     "wiredep-cli": "^0.1.0"
   },
