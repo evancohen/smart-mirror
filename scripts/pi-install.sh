@@ -2,9 +2,9 @@
 
 set -e
 
-# Supported versions of node: v4.x, v5.x
-NODE_MINIMUM_VERSION="v6.0.0"
-NODE_STABLE_VERSION="6.x"
+# Supported versions of node: v4.x, v5.x, v6.x, v7.x
+NODE_MINIMUM_VERSION="v8.0.0"
+NODE_STABLE_VERSION="8.x"
 
 # Compare node versions.
 function check_version() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
@@ -153,7 +153,7 @@ fi
 echo "export MIRROR_HOME=~/smart-mirror" >> ~/.bashrc
 echo "run_mirror () { ( cd \$MIRROR_HOME && DISPLAY=:0 npm run \"\$@\" ); }" >> ~/.bashrc
 echo "alias mirror=run_mirror" >> ~/.bashrc
-cd ~ && source .bashrc
+cd ~ && exec bash
 
 # The mirror is now installed, yay!
 cat << "EOF"
