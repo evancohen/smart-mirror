@@ -9,7 +9,6 @@
 A voice controlled life automation hub, most commonly powered by the Raspberry Pi.
 </p>
 
-## Current Release: v0.0.14
 #### Known Issues
 [![#650](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/650.svg)](https://github.com/evancohen/smart-mirror/issues/650)
 
