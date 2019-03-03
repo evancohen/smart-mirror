@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -39,6 +39,8 @@
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
+    "@google-cloud/speech": "^2.1.2",
+    "alphavantage": "^1.2.0",
     "angular-moment": "^1.0.1",
     "annyang": "^2.6.0",
     "electron-json-storage": "2.0.0",
@@ -47,9 +49,9 @@
     "humanize-duration": "^3.10.1",
     "hyperion-client": "1.0.3",
     "moment": "^2.17.1",
+    "rss-parser": "^3.6.3",
     "socket.io": "^1.6.0",
-    "sonus": "^1.0.0",
-    "@google-cloud/speech": "^2.1.2"
+    "sonus": "^1.0.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
