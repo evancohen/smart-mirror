@@ -20,6 +20,7 @@ function Greeting($scope, $http, $interval) {
 			}
 			else
 				console.log("no greeting message specified for time='"+greetingTime+"'")
+
 			$scope.greeting = nextGreeting;
 		} else if (config.greeting.allDay) {
 			$scope.greeting = config.greeting.allDay[Math.floor(Math.random() * config.greeting.allDay.length)];
