@@ -4,7 +4,7 @@ function MapController($scope, $http, GeolocationService, SpeechService, Focus) 
 	var map = {};
 	map.center = "Seattle, WA"; //default map locaiton
 	map.zoom = 13; //default zoom is 13
-    // Get the current location of the mirror
+	// Get the current location of the mirror
 	GeolocationService.getLocation({ enableHighAccuracy: true }).then(function (geoposition) {
 		map.center = geoposition.coords.latitude + ',' + geoposition.coords.longitude;
 	});
@@ -13,7 +13,7 @@ function MapController($scope, $http, GeolocationService, SpeechService, Focus) 
 		if (targetCenter === undefined) {
 			targetCenter = map.center;
 		} else {
-            //when we change the center of the map keep track of it
+			//when we change the center of the map keep track of it
 			map.center = targetCenter;
 		}
 		if (targetZoom === undefined) {
@@ -23,17 +23,17 @@ function MapController($scope, $http, GeolocationService, SpeechService, Focus) 
             "&format=png&sensor=false&scale=2&size=" + window.innerWidth +
             "x1200&maptype=roadmap&style=visibility:on|weight:1|invert_lightness:true|saturation:-100|lightness:1";
 	};
-    // Show map
+	// Show map
 	SpeechService.addCommand('map_show', function () {
 		$scope.map = generateMap();
 		Focus.change("map");
 	});
-    // Hide everything and "sleep"
+	// Hide everything and "sleep"
 	SpeechService.addCommand('map_location', function (location) {
 		$scope.map = generateMap(location);
 		Focus.change("map");
 	});
-    // Zoom in map
+	// Zoom in map
 	SpeechService.addCommand('map_zoom_in', function () {
 		map.zoom = map.zoom + 1;
 		$scope.map = generateMap();
@@ -57,4 +57,4 @@ function MapController($scope, $http, GeolocationService, SpeechService, Focus) 
 	});
 }
 angular.module('SmartMirror')
-    .controller('Map', MapController);
+	.controller('Map', MapController);
