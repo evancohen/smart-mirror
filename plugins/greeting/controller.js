@@ -14,8 +14,8 @@ function Greeting($scope, $http, $interval) {
 			}
 			var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
 			var nextGreeting=""
-			var nextGreeting = config.greeting[greetingTime][nextIndex]				if(config.greeting[greetingTime]!==undefined){
-				var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
+			if(config.greeting[greetingTime]!==undefined){
+				nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
 				nextGreeting = config.greeting[greetingTime][nextIndex]
 			}
 			else
@@ -33,4 +33,4 @@ function Greeting($scope, $http, $interval) {
 }
 
 angular.module('SmartMirror')
-    .controller('Greeting', Greeting);
+	.controller('Greeting', Greeting);
