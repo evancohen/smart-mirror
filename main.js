@@ -19,8 +19,6 @@ const DevelopmentMode = process.argv.includes("dev")
 // Load the smart mirror config
 let config
 let firstRun = false
-let kwsProcess = null
-let quiting = false
 try {
 	config = require("./config.json")
 } catch (e) {
@@ -80,9 +78,9 @@ function createWindow() {
 	})
 }
 
-function startSonus()
-{
-	kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
+// Initilize the keyword spotter
+if (config && config.speech && !firstRun) {
+	var kwsProcess = spawn('node', ['./sonus.js'], { detached: false })
   // Handel messages from node
 	kwsProcess.stderr.on('data', function (data) {
 		var message = data.toString()
@@ -101,20 +99,6 @@ function startSonus()
 			console.error(message.substring(3))
 		}
 	})
-	// if we receive a closed event from the keyword spotter
-	kwsProcess.on('close', function(data) {
-		console.log("sonus closed message="+data)
-		// if main process is not ending
-		if(quiting == false){
-			// restart it
-			startSonus();
-		}
-	})
-	
-}
-// Initilize the keyword spotter
-if (config && config.speech && !firstRun) {
-	startSonus();
 }
 
 if (config.remote && config.remote.enabled || firstRun) {
@@ -222,7 +206,6 @@ app.on('window-all-closed', function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on('will-quit', function () {
 	if (kwsProcess) {
-		quiting=true
 		kwsProcess.kill()
 	}
   // While cleaning up we should turn the screen back on in the event 
