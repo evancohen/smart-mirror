@@ -20,7 +20,8 @@
 		service.startAutoSleepTimer = function () {
 
 			var milliConversion = 60000
-			if (typeof config.autoTimer !== 'undefined' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined') {
+			// only start timer if enabled, and control values defined
+			if (typeof config.autoTimer !== 'undefined' && config.autoTimer.mode !== 'disabled' && typeof config.autoTimer.autoSleep !== 'undefined' && typeof config.autoTimer.autoWake !== 'undefined') {
 				service.stopAutoSleepTimer();
 				// assume if autoSleep is greater than 1 minute in milliseconds the value is already converted. if not convert
 				if (config.autoTimer.autoSleep > 60000) {
@@ -38,25 +39,27 @@
 		};
 
 		service.wake = function () {
-			// only wake up if sleeping
-			if (Focus.get() === 'sleep') {
-				service.woke = true;
-				if (config.autoTimer.mode == "monitor") {
-					service.exec(config.autoTimer.wakeCmd, service.puts);
-					Focus.change('default');
-				} else if (config.autoTimer.mode == "tv") {
-					Focus.change('default');
-				} else if (config.autoTimer.mode == "energy") {
-					Focus.change('default')
-					// if the timer was running
-					if (energyStarTimer != null) {
-						// stop it
-						$interval.cancel(energyStarTimer)
-						energyStarTimer = null;
-					}
-					// if the dummy wake up delay is running, stop it too
-					if (energyStarTimerStop != null) {
-						$interval.cancel(energyStarTimerStop)
+			if(config.autoTimer.mode!=='disabled'){  
+				// only wake up if sleeping
+				if (Focus.get() === 'sleep') {
+					service.woke = true;
+					if (config.autoTimer.mode == "monitor") {
+						service.exec(config.autoTimer.wakeCmd, service.puts);
+						Focus.change('default');
+					} else if (config.autoTimer.mode == "tv") {
+						Focus.change('default');
+					} else if (config.autoTimer.mode == "energy") {
+						Focus.change('default')
+						// if the timer was running
+						if (energyStarTimer != null) {
+							// stop it
+							$interval.cancel(energyStarTimer)
+							energyStarTimer = null;
+						}
+						// if the dummy wake up delay is running, stop it too
+						if (energyStarTimerStop != null) {
+							$interval.cancel(energyStarTimerStop)
+						}
 					}
 				}
 			}
@@ -85,19 +88,23 @@
 		}
 
 		service.sleep = function () {
-			service.woke = false;
-			if (config.autoTimer.mode == "monitor") {
-				service.exec(config.autoTimer.sleepCmd, service.puts);
-				Focus.change("sleep")
-			} else if (config.autoTimer.mode == "tv") {
-				Focus.change('sleep')
-			} else if (config.autoTimer.mode == "energy") {
-				Focus.change("sleep");
-				if (energyStarTimer == null) {
-					energyStarTimer = $interval(bleep, energyStarDelay);
+			if(config.autoTimer.mode!=='disabled'){        
+				service.woke = false;
+				if (config.autoTimer.mode == "monitor") {
+					service.exec(config.autoTimer.sleepCmd, service.puts);
+					Focus.change("sleep")
+				} else if (config.autoTimer.mode == "tv") {
+					Focus.change('sleep')
+				} else if (config.autoTimer.mode == "energy") {
+					Focus.change("sleep");
+					if (energyStarTimer == null) {
+						energyStarTimer = $interval(bleep, energyStarDelay);
+					} else {
+						$interval.cancel(energyStarTimer)
+						energyStarTimer = $interval(bleep, energyStarDelay);
+					}
 				} else {
-					$interval.cancel(energyStarTimer)
-					energyStarTimer = $interval(bleep, energyStarDelay);
+					Focus.change("default");
 				}
 			} else {
 				Focus.change("default");
