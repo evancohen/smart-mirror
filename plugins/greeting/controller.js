@@ -12,7 +12,6 @@ function Greeting($scope, $http, $interval) {
 			} else if (hour >= 23 || hour < 4) {
 				greetingTime = "night";
 			}
-			var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
 			var nextGreeting = config.greeting[greetingTime][nextIndex]
 			$scope.greeting = nextGreeting;
 		} else if (config.greeting.allDay) {
