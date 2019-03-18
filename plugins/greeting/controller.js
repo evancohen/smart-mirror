@@ -12,7 +12,13 @@ function Greeting($scope, $http, $interval) {
 			} else if (hour >= 23 || hour < 4) {
 				greetingTime = "night";
 			}
-			var nextGreeting = config.greeting[greetingTime][nextIndex]
+			var nextGreeting=""
+			if(config.greeting[greetingTime]!==undefined){
+				nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
+				nextGreeting = config.greeting[greetingTime][nextIndex]
+			}
+			else
+				console.log("no greeting message specified for time='"+greetingTime+"'")
 			$scope.greeting = nextGreeting;
 		} else if (config.greeting.allDay) {
 			$scope.greeting = config.greeting.allDay[Math.floor(Math.random() * config.greeting.allDay.length)];
@@ -26,4 +32,4 @@ function Greeting($scope, $http, $interval) {
 }
 
 angular.module('SmartMirror')
-    .controller('Greeting', Greeting);
+	.controller('Greeting', Greeting);
