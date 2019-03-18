@@ -14,7 +14,7 @@ function Greeting($scope, $http, $interval) {
 			}
 			var nextGreeting=""
 			if(config.greeting[greetingTime]!==undefined){
-				nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
+				var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
 				nextGreeting = config.greeting[greetingTime][nextIndex]
 			}
 			else
