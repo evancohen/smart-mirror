@@ -12,15 +12,13 @@ function Greeting($scope, $http, $interval) {
 			} else if (hour >= 23 || hour < 4) {
 				greetingTime = "night";
 			}
-			var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
 			var nextGreeting=""
 			if(config.greeting[greetingTime]!==undefined){
-				nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
+				var nextIndex = Math.floor(Math.random() * config.greeting[greetingTime].length);
 				nextGreeting = config.greeting[greetingTime][nextIndex]
 			}
 			else
 				console.log("no greeting message specified for time='"+greetingTime+"'")
-
 			$scope.greeting = nextGreeting;
 		} else if (config.greeting.allDay) {
 			$scope.greeting = config.greeting.allDay[Math.floor(Math.random() * config.greeting.allDay.length)];
