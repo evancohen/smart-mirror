@@ -4,6 +4,10 @@
             "type": "object",
             "title": "Geo-Position",
             "properties": {
+                "key":{
+                    "type": "string",
+                    "title": "Google api key, used for geolocation and maps"
+                },
                 "latitude": {
                     "type": "string",
                     "title": "latitude"
@@ -22,6 +26,7 @@
           "expandable":true,
           "order":0,
           "items":[
+            "geoPosition.key",
             {
               "type":"help",
               "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"

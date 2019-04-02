@@ -1,4 +1,5 @@
 function Rss($scope, $http, $q, $interval) {
+	let Parser = require('rss-parser');
 
 	$scope.currentIndex = 0;
 	var rss = {};
@@ -7,11 +8,11 @@ function Rss($scope, $http, $q, $interval) {
 	rss.get = function () {
 		rss.feed = [];
 		rss.updated = new moment().format('MMM DD, h:mm a');
-
+		let parser = new Parser();
 		if (typeof config.rss != 'undefined' && typeof config.rss.feeds != 'undefined') {
 			var promises = [];
 			angular.forEach(config.rss.feeds, function (url) {
-				promises.push($http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK'));
+				promises.push(parser.parseURL(url))
 			});
 
 			return $q.all(promises)
@@ -20,13 +21,14 @@ function Rss($scope, $http, $q, $interval) {
 
 	var refreshNews = function () {
 		$scope.news = null;
-		rss.get().then(function (response) {
-            //For each feed
+		rss.get().then(function (response) {     
+			//console.log("rss data="+JSON.stringify(response))
+			//For each feed
 			for (var i = 0; i < response.length; i++) {
-				for (var j = 0; j < response[i].data.query.results.rss.channel.item.length; j++) {
+				for (var j = 0; j < response[i].items.length; j++) {
 					var feedEntry = {
-						title: response[i].data.query.results.rss.channel.item[j].title,
-                        //content: response[i].data.query.results.rss.channel.item[j].description[0],
+						title: response[i].items[j].title,
+						//content: response[i].data.query.results.rss.channel.item[j].description[0],
 					};
 					rss.feed.push(feedEntry);
 				}
@@ -49,4 +51,4 @@ function Rss($scope, $http, $q, $interval) {
 
 
 angular.module('SmartMirror')
-    .controller('Rss', Rss);
+	.controller('Rss', Rss);

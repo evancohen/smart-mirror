@@ -9,7 +9,6 @@
 A voice controlled life automation hub, most commonly powered by the Raspberry Pi.
 </p>
 
-## Current Release: v0.0.14
 #### Known Issues
 [![#650](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/650.svg)](https://github.com/evancohen/smart-mirror/issues/650)
 
@@ -34,7 +33,7 @@ Check out the documentation for more information:
 - [Troubleshooting](https://docs.smart-mirror.io/docs/troubleshooting.html)
 
 ## Discord
-A live chat to get help and discuss mirror related issues: https://discord.gg/EMb4ynW. Usually there are a few folks hanging around in the lobby, but if there arent you are probubly better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
+A live chat to get help and discuss mirror related issues: https://discord.gg/EMb4ynW. Usually there are a few folks hanging around in the lobby, but if there arent you are probably better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
 
 ## Development and Contributing
 See the [dev](https://github.com/evancohen/smart-mirror/tree/dev) branch for features that are curently in development.

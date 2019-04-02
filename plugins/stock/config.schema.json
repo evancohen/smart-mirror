@@ -4,6 +4,10 @@
             "type": "object",
             "title": "Stock Settings",
             "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "Alpha Vantage API Key"
+                },
                 "names": {
                     "type": "array",
                     "title": "Stock Symbols",
@@ -21,6 +25,7 @@
             "expandable": true,
             "order":0,
             "items":[
+              "stock.key",
               {
                 "type":"tabarray",
                 "title":"Stock Symbols",

@@ -14,35 +14,35 @@
                   },
                 "allDay": {
                     "type": "array",
-                    "title": "Night Greeting",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "night": {
-                    "type": "array",
-                    "title": "Night Greeting",
+                    "title": "Night Greeting 11:00pm to 4:59am",
                     "items": {
                         "type": "string"
                     }
                 },
                 "morning": {
                     "type": "array",
-                    "title": "Morning Greeting",
+                    "title": "Morning Greeting 5:00am to 10:59am",
                     "items": {
                         "type": "string"
                     }
                 },
                 "midday": {
                     "type": "array",
-                    "title": "Midday Greeting",
+                    "title": "Midday Greeting 11:00am to 6:59pm",
                     "items": {
                         "type": "string"
                     }
                 },
                 "evening": {
                     "type": "array",
-                    "title": "Evening Greeting",
+                    "title": "Evening Greeting 7:00pm to 10:59pm",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "night": {
+                    "type": "array",
+                    "title": "Night Greeting 11:00pm to 4:59am",
                     "items": {
                         "type": "string"
                     }
@@ -86,7 +86,7 @@
                     "items":[
                           {
                               "type":"tabarray",
-                              "title":"Morning Greetings",
+                              "title":"Morning Greeting (5:00am to 10:59am)",
                               "items":[
                                   {
                                     "type":"section",
@@ -102,7 +102,7 @@
                           },
                           {
                                 "type":"tabarray",
-                                "title":"Midday Greetings",
+                                "title":"Midday Greeting (11:00am to 6:59pm)",
                                 "items":[
                                     {
                                       "type":"section",
@@ -118,7 +118,7 @@
                           },
                           {
                                 "type":"tabarray",
-                                "title":"Evening Greetings",
+                                "title":"Evening Greeting (7:00pm to 10:59pm)",
                                 "items":[
                                     {
                                       "type":"section",
@@ -134,7 +134,7 @@
                           },
                           {
                                 "type":"tabarray",
-                                "title":"Night Greetings",
+                                "title":"Night Greeting (11:00pm to 4:59am)",
                                 "items":[
                                     {
                                       "type":"section",

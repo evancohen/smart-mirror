@@ -1,12 +1,12 @@
 function CommitStrip($scope, $http, Focus, SpeechService) {
-
+	let Parser = require('rss-parser');
 	var url = 'http://www.commitstrip.com/en/feed/';
 	$scope.commitStrip = null;
 
-
-	$http.jsonp('https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20xml%20where%20url%20%3D%20\'' + encodeURIComponent(url) + '\'&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK')
+	let parser = new Parser();
+	parser.parseURL(url)
 		.then(function (response) {
-			var encoded = response.data.query.results.rss.channel.item[0].encoded;
+			var encoded = response.items[0]["content:encoded"];
 
 			var encodedElem = document.createElement('div');
 			encodedElem.innerHTML = encoded;
@@ -20,4 +20,4 @@ function CommitStrip($scope, $http, Focus, SpeechService) {
 }
 
 angular.module('SmartMirror')
-    .controller('CommitStrip', CommitStrip);
+	.controller('CommitStrip', CommitStrip);

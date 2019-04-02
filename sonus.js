@@ -18,7 +18,8 @@ var keyFile = JSON.parse(fs.readFileSync(path.resolve(config.speech.keyFilename)
 
 // Configure Sonus
 const Sonus = require('sonus')
-const speech = require('@google-cloud/speech')({
+const speech = require('@google-cloud/speech')
+const client = new speech.SpeechClient({
 	projectId: keyFile.project_id,
 	keyFilename: config.speech.keyFilename
 })
@@ -43,7 +44,7 @@ for (let i = 0; i < config.speech.hotwords.length; i++) {
 const language = config.general.language
 const recordProgram = (os.arch() == 'arm') ? "arecord" : "rec"
 const device = (config.speech.device != "") ? config.speech.device : 'default'
-const sonus = Sonus.init({ hotwords, language, recordProgram, device }, speech)
+const sonus = Sonus.init({ hotwords, language, recordProgram, device }, client)
 
 // Start Recognition
 Sonus.start(sonus)

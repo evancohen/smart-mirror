@@ -134,7 +134,7 @@ $(function () {
 	socket.on('json', function (data) {
 		data.configJSON.value = $.extend({}, data.configDefault, data.config)
 		console.log(data);
-		data.configJSON.form.push({ "type": "button", "title": "Submit", "order": 10000 })
+		data.configJSON.form.push({ "type": "submit", "title": "Submit", "order": 10000 })
 		console.log(data);
 
 		try {
