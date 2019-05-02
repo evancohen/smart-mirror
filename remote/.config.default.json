@@ -52,7 +52,8 @@
     "showCalendarNames": true
   },
   "giphy": {
-    "key": "dc6zaTOxFJmzC"
+    //"key": "dc6zaTOxFJmzC"
+    "key": "mcJIYIH9r5UkpKLFBE1etqlnxaCZHhPG"
   },
   "youtube": {
     "key": ""
