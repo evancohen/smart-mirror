@@ -6,7 +6,6 @@
                 "key": {
                     "type": "string",
                     "title": "Giphy API Key",
-                    //"default": "dc6zaTOxFJmzC"
                     "default": "mcJIYIH9r5UkpKLFBE1etqlnxaCZHhPG"
                 }
             }
