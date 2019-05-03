@@ -20,8 +20,9 @@ h5 {
     font-weight: 300;
 }
 
+/*Change font-size=120px to lower to reduce Greeting text size. */
 h1 {
-    font-size: 120px;
+    font-size: 80px;
 }
 
 dt {
