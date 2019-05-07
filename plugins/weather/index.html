@@ -1,21 +1,27 @@
 <div class="weather" ng-controller="Weather">
+    
+    <!-- This shows today's weather -->
     <div class="weather-today">
         <span class="icon dimmed wi {{currentForecast.wi}}"></span>
         <canvas id="icon_weather_current" width="90" height="70"></canvas>
         <span class="temperature" ng-show="currentForecast.temperature" ng-bind="currentForecast.temperature + '&deg;'"></span>
     </div>
+
+    <!-- This <div> is for the discription text under today's temp. It shows Min, Hourly, and weekly forcast in text -->
     <div class="weather-week-descriptor">
         <span ng-bind="minutelyForecast.summary"></span>
         <span ng-bind="hourlyForecast.summary"></span>
         <span ng-bind="weeklyForecast.summary"></span>
     </div>
+
+    <!-- This is the week's forcast -->
     <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
         <div class="weather-week-day">
             <span class="day light-grey" ng-bind="forecast.day"></span>
             <canvas id="icon_weather_{{forecast.counter}}" width="33" height="25"></canvas>
             <span class="icon-small dimmed wi wi-fw {{forecast.wi}}"></span>
-            <span class="temperature temperature-min" ng-bind="forecast.temperatureMin + '&deg;'"></span>
             <span class="temperature temperature-max" ng-bind="forecast.temperatureMax + '&deg;'"></span>
+            <span class="temperature temperature-min" ng-bind="forecast.temperatureMin + '&deg;'"></span>
         </div>
     </div>
     <!-- Workaround: -->
