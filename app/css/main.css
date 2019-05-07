@@ -153,7 +153,7 @@ ul.calendar {
 }
 
 .calendar .event {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .calendar span {
@@ -200,7 +200,7 @@ ul.calendar {
     margin-left: auto;
     display: block;
     text-align: right;
-    width: 230px;
+    width: 500px;
 }
 
 .weather-today .temperature {
