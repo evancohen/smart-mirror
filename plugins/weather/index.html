@@ -14,7 +14,7 @@
         <span ng-bind="weeklyForecast.summary"></span>
     </div>
 
-    <!-- This is the week's forcast -->
+    <!-- This is the week's forcast (I switch the Max and Min lines to show Max on left and Min on right) -->
     <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
         <div class="weather-week-day">
             <span class="day light-grey" ng-bind="forecast.day"></span>
@@ -24,6 +24,7 @@
             <span class="temperature temperature-min" ng-bind="forecast.temperatureMin + '&deg;'"></span>
         </div>
     </div>
+    
     <!-- Workaround: -->
     <div style="display: none;" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
         <span ng-init="iconLoad('icon_weather_'+forecast.counter, forecast.iconAnimation)"></span>
