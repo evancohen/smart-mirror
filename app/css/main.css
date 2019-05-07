@@ -200,7 +200,7 @@ ul.calendar {
     margin-left: auto;
     display: block;
     text-align: right;
-    width: 500px;
+    width: 230px;
 }
 
 .weather-today .temperature {
@@ -209,7 +209,7 @@ ul.calendar {
 
 .weather-week-descriptor {
     font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
+    font-size: 50px;
     margin-left: auto;
     margin-bottom: 10px;
     text-align: justify;
