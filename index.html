@@ -34,11 +34,15 @@
 <body ng-controller="MirrorCtrl" ng-cloak>
 
 
+
   <div class="top">
+
     <div class="top-left">
       <div ng-include="'plugins/datetime/index.html'"></div>
+      <p class="whiteSpace"></p>
       <div ng-include="'plugins/calendar/index.html'"></div>
     </div>
+
     <div class="top-right">
       <div ng-include="'plugins/weather/index.html'"></div>
       <p class="whiteSpace"></p>
@@ -51,6 +55,7 @@
       <div ng-include="'plugins/ha-display/index.html'"></div>
     </div>
   </div>
+
 
 
 
@@ -72,22 +77,18 @@
       <div ng-include="'plugins/todoist/index.html'"></div>
     </div>
 
-
     <div class="bottom-center">
       <!-- Command list -->
       <div ng-include="'plugins/commands/index.html'"></div>
       <div ng-include="'plugins/rss/index.html'"></div>
-
       <div class="error" ng-bind="speechError" ng-show="speechError"></div>
       <div class="partial-result" ng-bind="partialResult" ng-hide="speechError"></div>
     </div>
-
 
     <div class="bottom-left">
       <div ng-include="'plugins/fitbit/index.html'" ng-if="config.fitbit.creds"></div>
       <div ng-include="'plugins/scrobbler/index.html'"></div>
     </div>
-
 
     <div class="bottom-right">
       <!-- Someday something will live here -->

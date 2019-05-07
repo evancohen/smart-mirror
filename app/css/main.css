@@ -153,7 +153,7 @@ ul.calendar {
 }
 
 .calendar .event {
-    margin-bottom: 10px;
+    margin-bottom: 50px;
 }
 
 .calendar span {
@@ -557,5 +557,5 @@ ul.calendar {
 
 
 .whiteSpace{
-    margin-bottom: 50px;
+    margin-bottom: 35px;
 }
