@@ -13,6 +13,7 @@ function Weather($scope, $interval, $http, GeolocationService) {
 });
 	};
 
+	//From the response that goes into "weather.forecast", we take out the date that is in minutely.date (idk why it's the opposite here, data.minutley)
 	weather.minutelyForecast = function () {
 		if (weather.forecast === null) {
 			return null;
@@ -62,6 +63,7 @@ function Weather($scope, $interval, $http, GeolocationService) {
 		$interval(refreshWeatherData, config.forecast.refreshInterval * 60000 || 7200000)
 	});
 
+	//This is the main function that is called and all the 4 other functions are called within it. 
 	function refreshWeatherData() {
 		weather.get().then(function () {
 			$scope.currentForecast = weather.currentForecast();

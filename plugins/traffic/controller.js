@@ -66,6 +66,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 			intermediateGoal = "&wp.1=" + trip.via;
 		}
 		var endpoint = BING_MAPS + trip.mode + "?wp.0=" + trip.origin + intermediateGoal + "&wp." + waypoints + "=" + trip.destination;
+		console.log(endpoint);
 		if (trip.mode == "Driving") {
 			endpoint += "&avoid=minimizeTolls";
 		} else if (trip.mode == "Transit") {
