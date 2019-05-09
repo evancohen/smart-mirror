@@ -33,7 +33,7 @@ function Stock($scope, $http, $q, $interval) {
 	//$interval(getStocks, 1800000); //Original 30min refresh interval.
 	//$interval(getStocks, 5 * 60000); //New 5min refresh interval.
 	$interval(getStocks, config.stock.refreshInterval * 60000)
-	console.log("Stock Refresh Interval:" config.stock.refreshInterval) //Just to check if the stock Refresh Interval actually works
+	console.log("Stock Refresh Interval:" config.stock.refreshInterval); //Just to check if the stock Refresh Interval actually works
 
 
 }
