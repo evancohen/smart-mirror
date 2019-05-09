@@ -74,7 +74,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 			endpoint += "&optmz=distance";
 		}
 		endpoint += "&key=" + config.traffic.key;
-		console.log(endpoint); //REMOVE ME! Just for test to see the URL!
+		//console.log(endpoint); //REMOVE! Just for test to see the URL!
 		return endpoint;
 	}
 
@@ -89,7 +89,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 
 	refreshTrafficData()
 	$interval(refreshTrafficData, config.traffic.refreshInterval * 60000 || 900000)
-	console.log("Traffic Refresh Interval:", config.traffic.refreshInterval); //Just to check if the traffic Refresh Interval actually works
+	//console.log("Traffic Refresh Interval:", config.traffic.refreshInterval); //Just to check if the traffic Refresh Interval actually works
 
 }
 
