@@ -16,9 +16,9 @@
                     }
                 },
                 "refreshInterval": {
-                  "type": "integer",
-                  "title": "Refresh Interval (minutes)",
-                  "default": 5
+                    "type": "integer",
+                    "title": "Refresh Interval (minutes)",
+                    "default": 5
               }
             }
         }
@@ -31,6 +31,7 @@
             "order":0,
             "items":[
               "stock.key",
+              "stock.refreshInterval",
               {
                 "type":"tabarray",
                 "title":"Stock Symbols",
