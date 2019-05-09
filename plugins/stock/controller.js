@@ -31,9 +31,10 @@ function Stock($scope, $http, $q, $interval) {
 	//It appears that the "free" API key only provides up to 5 API calls per minute.
 
 	//$interval(getStocks, 1800000); //Original 30min refresh interval.
-	$interval(getStocks, 5 * 60000); //New 5min refresh interval.
-	//$interval(getStocks, config.stock.refreshInterval * 60000)
-	//EXAMPLE for config: $interval(refreshTrafficData, config.traffic.refreshInterval * 60000 || 900000)
+	//$interval(getStocks, 5 * 60000); //New 5min refresh interval.
+	$interval(getStocks, config.stock.refreshInterval * 60000)
+	console.log("Traffic Refresh Interval:" config.stock.refreshInterval) //Just to check if the stock Refresh Interval actually works
+
 
 }
 
