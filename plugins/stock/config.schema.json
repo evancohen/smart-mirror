@@ -14,7 +14,12 @@
                     "items": {
                         "type": "string"
                     }
-                }
+                },
+                "refreshInterval": {
+                  "type": "integer",
+                  "title": "Refresh Interval (minutes)",
+                  "default": 5
+              }
             }
         }
     },
