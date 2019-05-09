@@ -89,7 +89,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 
 	refreshTrafficData()
 	$interval(refreshTrafficData, config.traffic.refreshInterval * 60000 || 900000)
-	console.log("Traffic Refresh Interval:" config.traffic.refreshInterval); //Just to check if the traffic Refresh Interval actually works
+	console.log("Traffic Refresh Interval:", config.traffic.refreshInterval); //Just to check if the traffic Refresh Interval actually works
 
 }
 
