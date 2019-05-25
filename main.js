@@ -20,7 +20,7 @@ const DevelopmentMode = process.argv.includes("dev")
 let config
 let firstRun = false
 let kwsProcess = null
-let quiting = false
+let quitting = false
 try {
 	config = require("./config.json")
 } catch (e) {
@@ -106,7 +106,7 @@ function startSonus()
     // if we receive a closed event from the keyword spotter
 	kwsProcess.on("close", function() {
       // if main process is not ending
-		if(quiting == false){
+		if(quitting == false){
         // restart it
 			startSonus();
 		}
@@ -223,7 +223,7 @@ app.on("window-all-closed", function () {
 // No matter how the app is quit, we should clean up after ourselvs
 app.on("will-quit", function () {
 	if (kwsProcess) {
-		quiting=true
+		quitting=true
 		kwsProcess.kill()
 	}
   // While cleaning up we should turn the screen back on in the event 
