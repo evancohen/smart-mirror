@@ -104,8 +104,7 @@ function startSonus()
 	})
     
     // if we receive a closed event from the keyword spotter
-	kwsProcess.on("close", function(data) {
-      //console.log("sonus closed message="+data)
+	kwsProcess.on("close", function() {
       // if main process is not ending
 		if(quiting == false){
         // restart it
