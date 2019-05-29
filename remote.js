@@ -14,6 +14,8 @@ remote.start = function () {
 	let configJSON = ""
 	let configPath = __dirname + "/config.json"
 	let configDefaultPath = __dirname + "/remote/.config.default.json"
+	let pos = require(__dirname +'/app/js/plugin_positions.js')();
+ 
 
 	function getFiles() {
 		configDefault = JSON.parse(fs.readFileSync(configDefaultPath, "utf8"))
@@ -21,6 +23,11 @@ remote.start = function () {
 		if (fs.existsSync(configPath)) {
 			try {
 				config = JSON.parse(fs.readFileSync(configPath, "utf8")) //json'd config file
+        // if no positions are included in the config file yet
+				if(!config.plugins){
+          // use the defaults
+					config.plugins=pos;
+				}          
 			} catch (e) {
 				config = configDefault
 			}

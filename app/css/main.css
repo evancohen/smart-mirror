@@ -40,6 +40,22 @@ dt {
 .first-run h1{
     font-size: 48px;
 }
+.below {
+  z-index: -900;  
+}
+.above {
+  /* very high, but not above sleep */
+  z-index:900;
+}
+.fullscreen {
+  position: absolute;
+    top: -10px;
+    left: -10px;
+    width: -10px;
+    height: -10px;
+  pointer-events: none;
+    margin: auto auto;
+}
 
 /* Displays */
 .sleep-cover {
@@ -118,15 +134,17 @@ dt {
     font-family: 'Open Sans', sans-serif;
     position: absolute;
     bottom: 50px;
-    width: 50%;
+    width: 30%;
 }
 
 .bottom-left {
     left: 20px;
+    float: left;
 }
 
 .bottom-right {
     right: 20px;
+    float: right;
 }
 
 .commands {
@@ -196,7 +214,7 @@ ul.calendar {
 }
 
 .weather {
-    margin-left: auto;
+    /*margin-left: auto; */
     display: block;
     text-align: right;
     width: 230px;
@@ -238,10 +256,13 @@ ul.calendar {
 .stock, .tvshows, .hadisplay, .traffic {
     font-family: 'Open Sans', sans-serif;
     font-size: small;
+    /*text-align: float; */
+    float: inherit;
 }
 
 .fitbit {
     height: 100%;
+    float: inherit;
 }
 
 .fitbit-title {
@@ -294,7 +315,7 @@ ul.calendar {
 }
 
 .traffic-information, .stock-information, .tv-information {
-    text-align: right;
+    text-align: float;
     margin-top: 10px;
     margin-right: 10px;
 }

@@ -12,6 +12,8 @@ const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start("prevent-display-sleep")
+// process the plugin location info 
+const loader = require('./app/js/loader.js')
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev")
@@ -54,7 +56,7 @@ function createWindow() {
 		}
 	}
 
-	var browserWindowOptions = { width: 800, height: 600, icon: "favicon.ico", kiosk: !DevelopmentMode, autoHideMenuBar: true, darkTheme: true }
+	var browserWindowOptions = { width: 800, height: 600, icon: "favicon.ico", kiosk: true, autoHideMenuBar: true, darkTheme: true }
 	if (externalDisplay) {
 		browserWindowOptions.x = externalDisplay.bounds.x + 50
 		browserWindowOptions.y = externalDisplay.bounds.y + 50
@@ -63,8 +65,11 @@ function createWindow() {
   // Create the browser window.
 	mainWindow = new BrowserWindow(browserWindowOptions)
 
-  // and load the index.html of the app.
-	mainWindow.loadURL("file://" + __dirname + "/index.html")
+  // load the plugins found and customize the plugin layout
+	var fn= loader.loadPluginInfo(__dirname + '/index.html', config)
+  
+  // and load the updated index.html of the app.
+	mainWindow.loadURL('file://' + __dirname + fn)
 
   // Open the DevTools if run with "npm start dev"
 	if (DevelopmentMode) {
@@ -83,7 +88,7 @@ function createWindow() {
 function startSonus()
 {
   // Initilize the keyword spotter
-	var kwsProcess = spawn("node", ["./sonus.js"], { detached: false })
+	kwsProcess = spawn("node", ["./sonus.js"], { detached: false })
     // Handel messages from node
 	kwsProcess.stderr.on("data", function (data) {
 		var message = data.toString()
@@ -175,6 +180,8 @@ if (config.remote && config.remote.enabled || firstRun) {
 
 	remote.on("relaunch", function() {
 		console.log("Relaunching...")
+    // rebuild the html file plugin position info
+		loader.loadPluginInfo(__dirname + '/index.html', config)    
 		app.relaunch()
 		app.quit()
 	})

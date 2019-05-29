@@ -75,6 +75,15 @@ $(function () {
 																    
 	
 	*/
+	function printobj(obj){
+		for(var k of Object.keys(obj)){
+			var v = obj[k]
+			console.log("error key="+k+ " value="+v + " type="+ typeof v)
+			if(typeof v == 'object'){
+				printobj(v)
+			}
+		}
+	}
 
 	// global socket events
 	socket.on('connected', function () {
@@ -148,9 +157,9 @@ $(function () {
 				$('#outMsg').html("<p><strong>Your Configuration has submitted.</strong></p>")
 				showElm('#out', 1)
 			};
-			data.configJSON.onSubmit = function (errors) {
+			data.configJSON.onSubmit = function (errors,values) {
 				if (errors) {
-					console.log('Validation errors', errors);
+					console.log('Validation errors 1', errors, values);
 					let buildInner = ""
 					errors.forEach(function (errItem) {
 						let errSchemaUri = errItem.schemaUri.replace(/.+\/properties\//, "").replace("/", " >> ")
@@ -161,9 +170,9 @@ $(function () {
 					})
 					$('#outMsg').html(buildInner)
 					showElm('#out', 1)
-					console.log('Validation errors', errors);
+					console.log('Validation errors 2', values);
 					return false;
-				}
+				} 
 				return true;
 			};
 			data.configJSON.form.some(function (rootItm, rootIdx) {
