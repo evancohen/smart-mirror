@@ -1,7 +1,7 @@
 {
   "schema": {
     "plugins": {
-        "type": "array",
+       "type": "array",
         "items": {
           "type": "object",
           "title": "Plugin",
@@ -14,7 +14,7 @@
             "area": {
               "type": "string",
               "title": "Location",
-              "enum": [ "middle-center","top-left", "top-right" , "bottom-left","bottom-center","bottom-right","container","fullscreen"]
+              "enum": [ "middle-center","top-left", "top-right" , "bottom-left","bottom-center","bottom-right", "fullscreen"]
             },
             "order": {
               "type": "string",
