@@ -39,7 +39,10 @@ function getFilesMatch (dir,filters, files_){
 			let name = dir + '/' + f;
 			try {
 				if (fs.statSync(name).isDirectory()){
-					getFilesMatch(name, filters, files_);
+					// don't scan the plugin node_modules folder
+					if(name.indexOf("node_modules") == -1){
+						getFilesMatch(name, filters, files_);
+					}
 				} else {
 					// if not a nested node folder
 					if(name.indexOf("node_modules") == -1){
@@ -190,9 +193,6 @@ loader.loadPluginInfo = function(filename, config){
 				// locate the default location
 				let d=$("div."+page_location)
 				// put this module there
-				// if alresady something in this div
-				// put our stuff in front
-				// length is not updated while we are running
 				d.append(id_div)
 			}
 		}
