@@ -17,10 +17,8 @@ const css_name='plugin.css'
 var loader = {};
 var locations={};
 
-var plugin_html=[]
-var plugin_services=[]
-var plugin_controllers=[]
-var plugin_css=[]
+var filesList= [html_name,service_name,controller_name,css_name];
+var pluginFiles = {}
 
 if(debug) {console.log(" in plugin loader")}
 function NameinFilter(filters,name){
@@ -65,24 +63,20 @@ function getFilesMatch (dir,filters, files_){
 function loadInfo (){
 
 	// build hash table for results, single pass
-	let r= {}
-		r[html_name]=[]
-		r[service_name]=[]
-		r[controller_name]=[]
-		r[css_name]=[]
+  pluginFiles = {};
+  for( let f of filesList){
+    pluginFiles[f]=[]
+  }
 	if(debug) {console.log(" searching for plugin files")}
 	// only go thru drectory tree once	
-	let f1 = getFilesMatch (plugin_folder_name,[html_name,service_name,controller_name,css_name],r)
+	pluginFiles = getFilesMatch (plugin_folder_name,filesList,pluginFiles)
 	if(debug) {console.log("plugin files ="+JSON.stringify(f1));}
-	plugin_html=f1[html_name]; 
-	plugin_services=f1[service_name]; 
-	plugin_controllers=f1[controller_name]; 
-	plugin_css=f1[css_name]; 
+
 }
 function insert_services($){
 
 	$('body').append('\n<!--- Services -->\n');
-	for(let s of plugin_services){
+	for(let s of pluginFiles[service_name]){
 		let ss = "<script src=\""+s+"\"></script>\n"
 		$('body').append(ss)
 	}
@@ -92,13 +86,13 @@ function insert_controllers($){
 	$('body').append('\n<!--- Controllers -->\n');
 	let ss = "<script src=\"app/js/controller.js\"></script>\n"
 	$('body').append(ss)
-	for(let c of plugin_controllers){
+	for(let c of pluginFiles[controller_name]){
 		ss = "<script src=\""+c+"\"></script>\n"
 		$('body').append(ss)
 	}
 }
 function insert_css($){
-	for(let c of plugin_css){
+	for(let c of pluginFiles[css_name]){
 		ss = "<link rel=\"stylesheet\" href=\""+c+"\"/>\n"
 		$('head').append(ss)
 	}
@@ -129,7 +123,7 @@ loader.loadPluginInfo = function(filename, config){
 	 // order matters
 
 		// loop thru all the index.html files found
-		for(let h of plugin_html){
+		for(let h of pluginFiles[html_name]){
 			// get the plugin name
 			if(debug)	{console.log("looking for plugin="+h)}
 			// get the plugin name
@@ -200,7 +194,7 @@ loader.loadPluginInfo = function(filename, config){
 				// put our stuff in front
 				// length is not updated while we are running
 				d.append(id_div)
-				}
+			}
 		}
 		// defered adds because jquery caches the elements til this script ends
 		for(let v of Object.keys(locations)){
@@ -210,7 +204,7 @@ loader.loadPluginInfo = function(filename, config){
 					d.prepend(e)
 				}
 				else{
-				d.append(e)
+					d.append(e)
 				}
 			}
 			for(let e of locations[v].delayed){
@@ -218,7 +212,7 @@ loader.loadPluginInfo = function(filename, config){
 					d.prepend(e)
 				}
 				else{
-				d.append(e)
+					d.append(e)
 				}
 			}
 		}
@@ -226,15 +220,17 @@ loader.loadPluginInfo = function(filename, config){
 		let x = $.html();
 		//if(debug) console.log("new html = "+ x)
 		try {
-		// write it to the new file
-		fs.writeFileSync(new_file, x)
+			// write it to the new file
+			fs.writeFileSync(new_file, x)
 		}
-	catch(error) {
-		console.log(error)
-	}
-	$=''
+		catch(error) {
+			console.log(error)
+		}
+		// clear html object storage. no longer needed
+		$=''
+    pluginFiles={};
 		// pass back the new file to load
-	return '/'+ new_file;
+		return '/'+ new_file;
 }
 
 module.exports = loader
