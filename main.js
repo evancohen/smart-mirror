@@ -40,7 +40,12 @@ try {
 let mainWindow
 
 function createWindow() {
-
+ 
+  if(config.general.electrionOptions){
+    for(var item of config.general.electrionOptions){
+      app.commandLine.appendSwitch(item.key, item.value)
+    }
+  }
   // Get the displays and render the mirror on a secondary screen if it exists
 	var atomScreen = electron.screen
 	var displays = atomScreen.getAllDisplays()

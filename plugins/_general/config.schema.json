@@ -9,36 +9,82 @@
                     "type": "string",
                     "title": "Language",
                     "required": true
-                },
+                    },
                 "layout": {
                     "default": "main",
                     "type": "string",
                     "title": "Layout",
                     "required": true
-                },
+                    },
                 "commandsPerPage":{
                     "default":10,
                     "type":"number",
                     "title": "Commands Per Page",
                     "required": true
-                }
+                    },
+                "electronOptions":{
+                    "title": "Electron Options",
+                    "type": "array",
+                        "items":{
+                          "type":"object",
+                          "title": "Option",
+                            "properties": {
+                              "key": {
+                                "type": "string",
+                                "title": "key",
+                                "required": true
+                              },
+                              "value": {
+                                "type": "string",
+                                "title": "value"           
+                              }
+                            }
+                        }              
+                    }
             }
         }
     },
     "form":[
       {
-        "key":"general",
         "type":"fieldset",
         "title":"General Settings",
         "expandable":false,
-        "order":-100
+        "order":-100,
+        "items":[
+            { "key":"general.language","description":"Language"},
+            { "key":"general.layout","description":"CSS Layout"},
+            { "key":"general.commandsPerPage", "type":"number","description":"Commands Per Page"},
+            {
+              "type":"array",
+              "title":"Electron Options",
+              "expandable":true,              
+              "items":[
+                 {
+                  "type":"fieldset", 
+                  "title":"Option",
+                  "items":[
+                    {
+                    "key":"general.electronOptions[].key"
+                    },
+                    {
+                    "key":"general.electronOptions[].value"
+                    }
+                  ]
+                 }   
+               ]               
+            }              
+        ]
       }
     ],
     "value":{
         "general":{
             "language": "en-US",
             "layout":"main",
-            "commandsPerPage":10
+            "commandsPerPage":10,
+            "electronOptions":[
+               { "key": "autoplay-policy", "value": "no-user-gesture-required"},
+               { "key": "--disable-http-cache", "value": ""}
+            ]
         }
     }
 }
