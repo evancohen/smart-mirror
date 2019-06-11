@@ -40,10 +40,13 @@ try {
 let mainWindow
 
 function createWindow() {
- 
-	if(config.general.electrionOptions){
-		for(var item of config.general.electrionOptions){
-			app.commandLine.appendSwitch(item.key, item.value)
+  
+	if(config.general.electronOptions){
+		for(let option of config.general.electronOptions){
+			if(option.value == undefined)
+				app.commandLine.appendSwitch(option.key)
+			else
+				app.commandLine.appendSwitch(option.key, option.value )
 		}
 	}
   // Get the displays and render the mirror on a secondary screen if it exists
