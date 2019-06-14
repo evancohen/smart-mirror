@@ -81,15 +81,6 @@ $(function () {
 																    
 	
 	*/
-	function printobj(obj){
-		for(var k of Object.keys(obj)){
-			var v = obj[k]
-			console.log("error key="+k+ " value="+v + " type="+ typeof v)
-			if(typeof v == 'object'){
-				printobj(v)
-			}
-		}
-	}
 
 	// global socket events
 	socket.on('connected', function () {
@@ -271,8 +262,4 @@ $(function () {
 			hideElm(element);
 		}, timeOutMillis)
 	}
-
-
-
-
 })
