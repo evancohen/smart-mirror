@@ -262,4 +262,8 @@ $(function () {
 			hideElm(element);
 		}, timeOutMillis)
 	}
+
+
+
+
 })
