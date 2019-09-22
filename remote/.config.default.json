@@ -60,6 +60,9 @@
   "soundcloud": {
     "key": ""
   },
+  "spotify": {
+    "key": ""
+  },
   "traffic": {
     "key": "",
     "refreshInterval": 5,
