@@ -27,7 +27,13 @@ $(function () {
 														  |___/      
 	
 	*/
-
+  
+ // watch out in case the libraries don't load
+	if(typeof JSONForm !== 'object'){
+		$('#outMsg').html("Unable to load Required Libraries <br> Please try again in a few moments")
+		showElm('#out', 1)
+		return false;
+	}
 	// index clicks
 	$('#command-bttn').click(function () {
 		$('#speech-error').hide()
@@ -129,7 +135,6 @@ $(function () {
 			$speak.addClass('redMic')
 		})
 	})
-
 	// config socket events
 	socket.on('json', function (data) {
 		data.configJSON.value = $.extend({}, data.configDefault, data.config)
@@ -148,9 +153,9 @@ $(function () {
 				$('#outMsg').html("<p><strong>Your Configuration has submitted.</strong></p>")
 				showElm('#out', 1)
 			};
-			data.configJSON.onSubmit = function (errors) {
+			data.configJSON.onSubmit = function (errors,values) {
 				if (errors) {
-					console.log('Validation errors', errors);
+					console.log('Validation errors 1', errors, values);
 					let buildInner = ""
 					errors.forEach(function (errItem) {
 						let errSchemaUri = errItem.schemaUri.replace(/.+\/properties\//, "").replace("/", " >> ")
@@ -161,11 +166,11 @@ $(function () {
 					})
 					$('#outMsg').html(buildInner)
 					showElm('#out', 1)
-					console.log('Validation errors', errors);
+					console.log('Validation errors 2', values);
 					return false;
-				}
+				} 
 				return true;
-			};
+			};    
 			data.configJSON.form.some(function (rootItm, rootIdx) {
 				if (!rootItm.title) { return false }
 				if (rootItm.title.toLowerCase().includes("speech")) {
@@ -187,7 +192,6 @@ $(function () {
 				}
 			})
 
-			console.log('items in data.configJSON', data.configJSON)
 			$('#result').html('<form id="result-form" class="form-vertical"></form>');
 			$('#result-form').jsonForm(data.configJSON);
 
