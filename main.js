@@ -12,8 +12,11 @@ const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start("prevent-display-sleep")
+<<<<<<< HEAD
 // process the plugin location info 
 const loader = require('./app/js/loader.js')
+=======
+>>>>>>> e06c4e65ff2f55f1a68c6590ee597db454e85574
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev")
@@ -44,7 +47,8 @@ try {
 let mainWindow
 
 function createWindow() {
-
+	app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+	app.commandLine.appendSwitch('disable-http-cache');
   // Get the displays and render the mirror on a secondary screen if it exists
 	var atomScreen = electron.screen
 	var displays = atomScreen.getAllDisplays()
@@ -56,7 +60,7 @@ function createWindow() {
 		}
 	}
 
-	var browserWindowOptions = { width: 800, height: 600, icon: "favicon.ico", kiosk: true, autoHideMenuBar: true, darkTheme: true }
+	var browserWindowOptions = { width: 800, height: 600, icon: "favicon.ico", kiosk: !DevelopmentMode, autoHideMenuBar: true, darkTheme: true }
 	if (externalDisplay) {
 		browserWindowOptions.x = externalDisplay.bounds.x + 50
 		browserWindowOptions.y = externalDisplay.bounds.y + 50
