@@ -42,7 +42,8 @@ try {
 let mainWindow
 
 function createWindow() {
-
+	app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+	app.commandLine.appendSwitch('disable-http-cache');
   // Get the displays and render the mirror on a secondary screen if it exists
 	var atomScreen = electron.screen
 	var displays = atomScreen.getAllDisplays()
