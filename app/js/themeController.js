@@ -1,4 +1,4 @@
- 	function themeController($scope) {
+	function themeController($scope) {
 		$scope.layoutName = (typeof config.layout !== 'undefined' && config.layout) ? config.layout : 'main';
 	}
 
