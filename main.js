@@ -12,11 +12,9 @@ const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start("prevent-display-sleep")
-<<<<<<< HEAD
 // process the plugin location info 
 const loader = require('./app/js/loader.js')
-=======
->>>>>>> e06c4e65ff2f55f1a68c6590ee597db454e85574
+
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev")

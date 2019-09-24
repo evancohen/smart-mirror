@@ -3,7 +3,7 @@ const fs = require('fs');
 //var pos = require('./plugin_positions.js')()
 const cheerio = require('cheerio')
 
-const debug = false;
+const debug = false
 // new output html filename
 const new_file = 'main_index.html';
 // plugin folder name
@@ -154,47 +154,61 @@ loader.loadPluginInfo = function(filename, config){
 		for(let p of config.plugins){
 			// if the config name is the same as this module
 			if(debug) {console.log(" h entry="+h +	" name="+p.name)}
-			if(h.indexOf(p.name)>=0){
-				// get the area div location
-				page_location = p.area
-				// first time we've seen this area?
-				if(locations[page_location] == undefined){
-					// create object to hold items
-					locations[page_location]={items:[], delayed:[]}
-				}
-				if(debug) {console.log(page_location+" length="+locations[page_location].items.length)}
-				// if the position ordering is 'any'
-				if(p.order =='*') {
-					if(debug) {console.log(" place anywhere")}
-					// append it
-					locations[page_location].delayed.push(id_div)
-				}
-				// if needs to be first
-				else if(p.order == 1){
-					if(debug) {console.log(" place 1st")}
-					// prepend it
-					locations[page_location].items.unshift(id_div)
-				}
-				// has some other position, greater than 1
-				else{
-					// if there are already more than 1 entry
-					if(debug) {console.log(" place in position\n count = "+locations[page_location].items.length +" pos="+p.order)}
-					// if more already than this one
-					if(locations[page_location].items.length> p.order){
-						if(debug) {console.log(" more than 1")}
-						// splice it in where it belongs
-						locations[page_location].items.splice((p.order+0),id_div)
-					} else {
-						if(debug) {console.log(" adding to the end")}
-						// add it to the end
-						locations[page_location].items.push(id_div)
-					}
-				}
-				// indicate added
-				added=true;
-				break
-			}
+	    if(p.active == undefined ||
+				p.active == true){
+		if(debug) {
+			console.log("plugin "+ p.name+ " is active=" + p.active)
 		}
+		if(h.indexOf(p.name)>=0){
+							// get the area div location
+			page_location = p.area
+							// first time we've seen this area?
+			if(locations[page_location] == undefined){
+								// create object to hold items
+				locations[page_location]={items:[], delayed:[]}
+			}
+			if(debug) {console.log(page_location+" length="+locations[page_location].items.length)}
+							// if the position ordering is 'any'
+			if(p.order =='*') {
+				if(debug) {console.log(" place anywhere")}
+								// append it
+				locations[page_location].delayed.push(id_div)
+			}
+							// if needs to be first
+			else if(p.order == 1){
+				if(debug) {console.log(" place 1st")}
+								// prepend it
+				locations[page_location].items.unshift(id_div)
+			}
+							// has some other position, greater than 1
+			else{
+								// if there are already more than 1 entry
+				if(debug) {console.log(" place in position\n count = "+locations[page_location].items.length +" pos="+p.order)}
+								// if more already than this one
+				if(locations[page_location].items.length> p.order){
+					if(debug) {console.log(" more than 1")}
+									// splice it in where it belongs
+					locations[page_location].items.splice((p.order+0),id_div)
+				} else {
+					if(debug) {console.log(" adding to the end")}
+									// add it to the end
+					locations[page_location].items.push(id_div)
+				}
+			}
+							// indicate added
+			added=true;
+			break
+		}
+	}
+			else {
+		if(debug) {
+			console.log("plugin "+ p.name +" is NOT active=" + p.active)
+		}
+		added=true;
+			  break;
+	}			
+		}
+
 		// if not added (no position info)
 		if(added==false){
 			// locate the default location

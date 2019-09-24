@@ -20,7 +20,13 @@
               "type": "string",
               "title": "Order",
               "enum": [ "*", "1" ,"2", "3","4","5"]
-            }
+            },
+						"active": {						  
+						  "type": "boolean",							
+							"title": "Active",
+							"required": true
+						}
+						
           }
         }
     }            
@@ -52,7 +58,11 @@
                 {
                 "key":"plugins[].order",
                 "description":"if multiple in the same area, what position this plugin should be in, * means any"
-                }  
+                },
+                {
+                "key":"plugins[].active",
+                "description":"if false, this plugin will not be loaded"
+                }   
               ]
             }
           ]
