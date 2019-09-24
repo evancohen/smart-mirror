@@ -96,18 +96,18 @@ function insert_controllers($){
 }
 function insert_css($){
 	for(let c of pluginFiles[css_name]){
-		ss = "<link rel=\"stylesheet\" href=\""+c+"\"/>\n"
+		let ss = "<link rel=\"stylesheet\" href=\""+c+"\"/>\n"
 		$('head').append(ss)
 	}
 }
 
 // updates the app index.html with discovered plugin info
 loader.loadPluginInfo = function(filename, config){
-
+	let configDefault=null;
 	if(config.plugins === undefined){
 		try { 
 			let path=__dirname+'/../../remote/.config.default.json'
-			let configDefault = JSON.parse(fs.readFileSync(path, "utf8"))
+			configDefault = JSON.parse(fs.readFileSync(path, "utf8"))
 		}
 		catch(error){
 			console.log("unable to locate default config="+error)
@@ -130,7 +130,7 @@ loader.loadPluginInfo = function(filename, config){
 	insert_services($)
 	// add entries for controllers to body
 	insert_controllers($)
-	 // order matters
+	// order matters
 
 	// loop thru all the index.html files found
 	for(let h of pluginFiles[html_name]){
@@ -139,7 +139,7 @@ loader.loadPluginInfo = function(filename, config){
 		// get the plugin name
 		let plugin_name = h.substring(h.indexOf("/")+1, h.lastIndexOf("/"))
 		id_div="";
-		 if(debug){ console.log("plugin name="+plugin_name)}
+		if(debug){ console.log("plugin name="+plugin_name)}
 
 		// make the html to insert
 		id_div += "\n<div ng-include=\"'"+h+"'\"></div>"
@@ -154,59 +154,59 @@ loader.loadPluginInfo = function(filename, config){
 		for(let p of config.plugins){
 			// if the config name is the same as this module
 			if(debug) {console.log(" h entry="+h +	" name="+p.name)}
-	    if(p.active == undefined ||
+			if(p.active == undefined ||
 				p.active == true){
-		if(debug) {
-			console.log("plugin "+ p.name+ " is active=" + p.active)
-		}
-		if(h.indexOf(p.name)>=0){
+				if(debug) {
+					console.log("plugin "+ p.name+ " is active=" + p.active)
+				}
+				if(h.indexOf(p.name)>=0){
 							// get the area div location
-			page_location = p.area
+					page_location = p.area
 							// first time we've seen this area?
-			if(locations[page_location] == undefined){
+					if(locations[page_location] == undefined){
 								// create object to hold items
-				locations[page_location]={items:[], delayed:[]}
-			}
-			if(debug) {console.log(page_location+" length="+locations[page_location].items.length)}
+						locations[page_location]={items:[], delayed:[]}
+					}
+					if(debug) {console.log(page_location+" length="+locations[page_location].items.length)}
 							// if the position ordering is 'any'
-			if(p.order =='*') {
-				if(debug) {console.log(" place anywhere")}
+					if(p.order =='*') {
+						if(debug) {console.log(" place anywhere")}
 								// append it
-				locations[page_location].delayed.push(id_div)
-			}
+						locations[page_location].delayed.push(id_div)
+					}
 							// if needs to be first
-			else if(p.order == 1){
-				if(debug) {console.log(" place 1st")}
+					else if(p.order == 1){
+						if(debug) {console.log(" place 1st")}
 								// prepend it
-				locations[page_location].items.unshift(id_div)
-			}
+						locations[page_location].items.unshift(id_div)
+					}
 							// has some other position, greater than 1
-			else{
+					else{
 								// if there are already more than 1 entry
-				if(debug) {console.log(" place in position\n count = "+locations[page_location].items.length +" pos="+p.order)}
+						if(debug) {console.log(" place in position\n count = "+locations[page_location].items.length +" pos="+p.order)}
 								// if more already than this one
-				if(locations[page_location].items.length> p.order){
-					if(debug) {console.log(" more than 1")}
+						if(locations[page_location].items.length> p.order){
+							if(debug) {console.log(" more than 1")}
 									// splice it in where it belongs
-					locations[page_location].items.splice((p.order+0),id_div)
-				} else {
-					if(debug) {console.log(" adding to the end")}
+							locations[page_location].items.splice((p.order+0),id_div)
+						} else {
+							if(debug) {console.log(" adding to the end")}
 									// add it to the end
-					locations[page_location].items.push(id_div)
+							locations[page_location].items.push(id_div)
+						}
+					}
+							// indicate added
+					added=true;
+					break
 				}
 			}
-							// indicate added
-			added=true;
-			break
-		}
-	}
 			else {
-		if(debug) {
-			console.log("plugin "+ p.name +" is NOT active=" + p.active)
-		}
-		added=true;
-			  break;
-	}			
+				if(debug) {
+					console.log("plugin "+ p.name +" is NOT active=" + p.active)
+				}
+				added=true;
+				break;
+			}			
 		}
 
 		// if not added (no position info)
