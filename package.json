@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -13,7 +13,8 @@
     "update": "git pull && npm install",
     "wiredep": "wiredep -s index.html",
     "test": "eslint . --ignore-path .gitignore",
-    "test-fix": "eslint . --ignore-path .gitignore --fix"
+    "test-fix": "eslint . --ignore-path .gitignore --fix",
+    "postinstall":"bash scripts/copyjsonform"
   },
   "repository": {
     "type": "git",
@@ -43,11 +44,13 @@
     "alphavantage": "^1.2.0",
     "angular-moment": "^1.0.1",
     "annyang": "^2.6.0",
+    "cheerio": "^1.0.0-rc.3",
     "electron-json-storage": "2.0.0",
     "express": "^4.14.0",
     "fitbit-oauth2": "0.0.1",
     "humanize-duration": "^3.10.1",
     "hyperion-client": "1.0.3",
+    "jsonform": "git://github.com/jsonform/jsonform.git",
     "moment": "^2.17.1",
     "rss-parser": "^3.6.3",
     "socket.io": "^1.6.0",
