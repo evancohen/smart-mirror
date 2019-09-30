@@ -13,4 +13,4 @@ function Calendar($scope, $http, $interval, CalendarService) {
 }
 
 angular.module('SmartMirror')
-    .controller('Calendar', Calendar);
+	.controller('Calendar', Calendar);

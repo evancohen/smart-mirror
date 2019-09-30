@@ -10,13 +10,13 @@ const {ipcRenderer} = require('electron');
 		var commandPage = []
 
 		service.init = function (cb) {
-            // workaround so we can trigger requests at any time 
+			// workaround so we can trigger requests at any time 
 			annyang.isListening = () => { return true }
-            // Set lenguage and debug state
+			// Set lenguage and debug state
 			annyang.setLanguage((typeof config.general.language != 'undefined') ? config.general.language : 'en-US')
 			annyang.debug(false)
 
-            // add specified callback functions
+			// add specified callback functions
 			if (isCallback(cb.listening)) {
 				callbacks.listening = function (bool) {
 					$rootScope.$apply(cb.listening(bool))
@@ -54,12 +54,12 @@ const {ipcRenderer} = require('electron');
 
 		}
 
-        // Ensure callback is a valid function
+		// Ensure callback is a valid function
 		function isCallback(callback) {
 			return typeof (callback) == "function";
 		}
 
-        // COMMANDS
+		// COMMANDS
 		service.commands = {}
 
 		service.addCommand = function (commandId, callback) {
@@ -79,10 +79,10 @@ const {ipcRenderer} = require('electron');
 			var commandItem = { "text": commandText || phrase, "description": commandDescription };
 			commandList.push(commandItem);
 
-            // Extend our commands list
+			// Extend our commands list
 			angular.extend(service.commands, command)
 
-            // Add the commands to annyang
+			// Add the commands to annyang
 			annyang.addCommands(service.commands)
 			console.debug('added command "' + phrase + '"', service.commands)
 		}
@@ -99,6 +99,6 @@ const {ipcRenderer} = require('electron');
 	}
 
 	angular.module('SmartMirror')
-        .factory('SpeechService', SpeechService)
+		.factory('SpeechService', SpeechService)
 
 } (window.annyang));

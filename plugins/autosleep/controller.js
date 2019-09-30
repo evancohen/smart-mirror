@@ -1,7 +1,7 @@
 function AutoSleep($http, $q, SpeechService,AutoSleepService) {
 
 
-    // Hide everything and "sleep"
+	// Hide everything and "sleep"
 	SpeechService.addCommand('sleep', function () {
 		console.debug("Ok, going to sleep...");
 		AutoSleepService.sleep();
@@ -10,4 +10,4 @@ function AutoSleep($http, $q, SpeechService,AutoSleepService) {
 }
 
 angular.module('SmartMirror')
-    .controller('AutoSleep', AutoSleep);
+	.controller('AutoSleep', AutoSleep);

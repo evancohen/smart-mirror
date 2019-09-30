@@ -18,6 +18,6 @@
 	}
 
 	angular.module('SmartMirror')
-        .factory('Focus', Focus)
+		.factory('Focus', Focus)
 
 } (window.annyang));

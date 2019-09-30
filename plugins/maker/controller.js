@@ -10,13 +10,13 @@ function Maker($http, SpeechService) {
 				try{
 					req.data = JSON.parse(command.body)
 				} catch(e){
-                    // no data - that's fine
+					// no data - that's fine
 				}
 				$http(req).then(function successCallback() {
 					console.log('Executed custom command:', command.utterance)
 				}, function errorCallback(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
+					// called asynchronously if an error occurs
+					// or server returns response with an error status.
 					console.error('Custom command failed:', response)
 				});
 			});
@@ -25,4 +25,4 @@ function Maker($http, SpeechService) {
 }
 
 angular.module('SmartMirror')
-    .controller('Maker', Maker);
+	.controller('Maker', Maker);
