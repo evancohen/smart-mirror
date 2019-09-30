@@ -18,19 +18,19 @@ if (config.motion.enabled == true && require.resolve('johnny-five').length > 0 &
 		
 		var motion = new five.Motion(config.motion.pin);
 			
-			// "calibrated" occurs once, at the beginning of a session,
+		// "calibrated" occurs once, at the beginning of a session,
 		motion.on("calibrated", function() {
 			console.log("!c:","calibrated");
 		});
 
-			// "motionstart" events are fired when the "calibrated"
-			// proximal area is disrupted, generally by some form of movement
+		// "motionstart" events are fired when the "calibrated"
+		// proximal area is disrupted, generally by some form of movement
 		motion.on("motionstart", function() {
 			console.log("!s:","motionstart");
 		});
 
-			// "motionend" events are fired following a "motionstart" event
-			// when no movement has occurred in X ms
+		// "motionend" events are fired following a "motionstart" event
+		// when no movement has occurred in X ms
 		motion.on("motionend", function() {
 			console.log("!e:","motionend");
 		});
