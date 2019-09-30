@@ -15,7 +15,7 @@ powerSaveBlocker.start("prevent-display-sleep")
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev")
-
+//var atomScreen = null;
 // Load the smart mirror config
 let config
 let firstRun = false
@@ -45,7 +45,14 @@ function createWindow() {
 	app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 	app.commandLine.appendSwitch('disable-http-cache');
   // Get the displays and render the mirror on a secondary screen if it exists
-	var atomScreen = electron.screen
+	var atomScreen = null; 
+	   if( electron.screen == undefined){
+			 atomScreen=electron.remote.screen
+		 }
+		 else{
+			 atomScreen=electron.screen
+		 }
+			 
 	var displays = atomScreen.getAllDisplays()
 	var externalDisplay = null
 	for (var i in displays) {
@@ -54,8 +61,10 @@ function createWindow() {
 			break
 		}
 	}
-
-	var browserWindowOptions = { width: 800, height: 600, icon: "favicon.ico", kiosk: !DevelopmentMode, autoHideMenuBar: true, darkTheme: true }
+  const { width, height } = atomScreen.getPrimaryDisplay().workAreaSize
+	var browserWindowOptions = { width: 800, height: 600, icon: "favicon.ico", kiosk: true, autoHideMenuBar: true, darkTheme: true, webPreferences: {
+            nodeIntegration: true
+        } }
 	if (externalDisplay) {
 		browserWindowOptions.x = externalDisplay.bounds.x + 50
 		browserWindowOptions.y = externalDisplay.bounds.y + 50
