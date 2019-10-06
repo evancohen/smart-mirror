@@ -154,12 +154,13 @@ loader.loadPluginInfo = function(filename, config){
 		for(let p of config.plugins){
 			// if the config name is the same as this module
 			if(debug) {console.log(" h entry="+h +	" name="+p.name)}
-			if(p.active == undefined ||
-				p.active == true){
-				if(debug) {
-					console.log("plugin "+ p.name+ " is active=" + p.active)
-				}
-				if(h.indexOf(p.name)>=0){
+
+			if(debug) {
+				console.log("plugin "+ p.name+ " is active=" + p.active)
+			}
+			if(h.indexOf(p.name)>=0){
+				if(p.active == undefined ||
+					p.active == true){
 							// get the area div location
 					page_location = p.area
 							// first time we've seen this area?
@@ -199,13 +200,13 @@ loader.loadPluginInfo = function(filename, config){
 					added=true;
 					break
 				}
-			}
-			else {
-				if(debug) {
-					console.log("plugin "+ p.name +" is NOT active=" + p.active)
-				}
-				added=true;
-				break;
+				else {
+					if(debug) {
+						console.log("plugin "+ p.name +" is NOT active=" + p.active)
+					}
+					added=true;
+					break;
+				}	
 			}			
 		}
 
