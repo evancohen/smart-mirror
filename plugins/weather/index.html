@@ -9,7 +9,7 @@
         <span ng-bind="hourlyForecast.summary"></span>
         <span ng-bind="weeklyForecast.summary"></span>
     </div>
-    <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
+    <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ">
         <div class="weather-week-day">
             <span class="day light-grey" ng-bind="forecast.day"></span>
             <canvas id="icon_weather_{{forecast.counter}}" width="33" height="25"></canvas>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <!-- Workaround: -->
-    <div style="display: none;" ng-repeat="forecast in weeklyForecast.data" ng-if="$index > 0">
+    <div style="display: none;" ng-repeat="forecast in weeklyForecast.data" ">
         <span ng-init="iconLoad('icon_weather_'+forecast.counter, forecast.iconAnimation)"></span>
     </div>
 </div>

@@ -11,6 +11,9 @@
     "reminders": {
         "empty": "Aucun élément"
     },
+    "weather": {
+        "today": "Aujourd'hui"
+    }    
     "timer": {
       "one": "Une",
       "minute": "Minute(s)?",
