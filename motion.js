@@ -48,8 +48,9 @@ if (config.motion.enabled == "pin" && require.resolve('johnny-five').length > 0 
 		// if not
 		if (err && err.code === 'ENOENT') {
 			// create it
-			fs.mkdir(detectionDir);
-			console.debug('created motion directory', detectionDir);
+			fs.mkdir(detectionDir , function(){
+				console.debug('created motion directory', detectionDir);
+			});
 		}
 		else{
 			// make sure the directory is empty
