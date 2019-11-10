@@ -28,7 +28,7 @@ try {
 	config = require("./remote/.config.default.json")
 	firstRun = true
 	if (typeof e.code !== "undefined" && e.code === "MODULE_NOT_FOUND") {
-		error = "'config.json' not found. \nYou can configure your mirror at the remote address below..."
+		error = "Initial startup detected\nPlease configure your mirror by opening a browser with the remote address shown below..."
 	} else if (typeof e.message !== "undefined") {
 		console.log(e)
 		error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + "\n" +
