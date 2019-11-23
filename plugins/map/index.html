@@ -1,4 +1,4 @@
 <!-- Map -->
-<div class="contents-box map animate-grow" ng-show="focus == 'map'">
+<div class="contents-box map animate-grow" ng-show="focus == 'map'" ng-if="config.geoPosition">
     <img ng-controller="Map" class="contents map animate-grow" ng-src="{{map}}" />
 </div>
