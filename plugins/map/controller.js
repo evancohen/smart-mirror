@@ -5,9 +5,11 @@ function MapController($scope, $http, GeolocationService, SpeechService, Focus) 
 	map.center = "Seattle, WA"; //default map locaiton
 	map.zoom = 13; //default zoom is 13
 	// Get the current location of the mirror
-	GeolocationService.getLocation({ enableHighAccuracy: true }).then(function (geoposition) {
-		map.center = geoposition.coords.latitude + ',' + geoposition.coords.longitude;
+  if(config.geoPosition && config.geoPosition.key) {
+		GeolocationService.getLocation({ enableHighAccuracy: true }).then(function (geoposition) {
+			map.center = geoposition.coords.latitude + ',' + geoposition.coords.longitude;
 	});
+	}
 	var generateMap = function (targetCenter, targetZoom) {
     
 		if (targetCenter === undefined) {
@@ -19,9 +21,13 @@ function MapController($scope, $http, GeolocationService, SpeechService, Focus) 
 		if (targetZoom === undefined) {
 			targetZoom = map.zoom;
 		}
-		return "https://maps.googleapis.com/maps/api/staticmap?key="+config.geoPosition.key+"&center=" + targetCenter + "&zoom=" + targetZoom +
+		if(config.geoPosition && config.geoPosition.key) {
+			return "https://maps.googleapis.com/maps/api/staticmap?key="+config.geoPosition.key+"&center=" + targetCenter + "&zoom=" + targetZoom +
             "&format=png&sensor=false&scale=2&size=" + window.innerWidth +
             "x1200&maptype=roadmap&style=visibility:on|weight:1|invert_lightness:true|saturation:-100|lightness:1";
+		}
+		else  
+			return "no geolocatgion keys pecified"
 	};
 	// Show map
 	SpeechService.addCommand('map_show', function () {
