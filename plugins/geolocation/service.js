@@ -1,12 +1,12 @@
 (function () {
 	'use strict';
 	/*
-     var position = {
-     latitude: 78.23423423,
-     longitude: 13.123124142
-     }
-     deferred.resolve(position);
-     */
+		 var position = {
+		 latitude: 78.23423423,
+		 longitude: 13.123124142
+		 }
+		 deferred.resolve(position);
+		 */
 	function GeolocationService($q, $rootScope, $window, $http) {
 
 		var service = {};
@@ -16,8 +16,8 @@
 			var deferred = $q.defer();
 			// Use geo postion from config file if it is defined
 			if( config.geoPosition 
-			  && typeof config.geoPosition.latitude != 'undefined'
-        && typeof config.geoPosition.longitude != 'undefined') {
+				&& typeof config.geoPosition.latitude != 'undefined'
+				&& typeof config.geoPosition.longitude != 'undefined') {
 				deferred.resolve({
 					coords: {
 						latitude: config.geoPosition.latitude,
@@ -37,7 +37,7 @@
 						body.considerIp=true;
 						$http.post("https://www.googleapis.com/geolocation/v1/geolocate?key="+config.geoPosition.key, body).then(
 							function (result) {
-								var location = angular.fromJson(result).data.location                
+								var location = angular.fromJson(result).data.location								 
 								deferred.resolve({ 'coords': { 'latitude': location.lat, 'longitude': location.lng } })
 							},
 							function (err) {
