@@ -134,7 +134,7 @@ loader.loadPluginInfo = function(filename, config){
 	let plugin_hash ={}
 	// convert array to hash for quick lookup
 	config.plugins.forEach((entry)=>{
-		  plugin_hash[entry.name]=entry
+		plugin_hash[entry.name]=entry
 	})
 
 	// loop thru all the index.html files found
@@ -232,7 +232,7 @@ loader.loadPluginInfo = function(filename, config){
 		if(debug) {console.log("processing for location="+v +" d length="+d.children().length+" items="+JSON.stringify(locations[v].items))}
 		let existing_children=d.children().length
 		for(let e of locations[v].items){
-			 if(debug) {console.log("items ="+e)}
+			if(debug) {console.log("items ="+e)}
 			if(existing_children>=1){
 				d.prepend(e)
 			}
@@ -241,7 +241,7 @@ loader.loadPluginInfo = function(filename, config){
 			}
 		}
 		for(let e of locations[v].delayed){
-					 if(debug) {console.log("delayed ="+e)}
+			if(debug) {console.log("delayed ="+e)}
 			if(existing_children>0){
 				d.append(e)
 			}
