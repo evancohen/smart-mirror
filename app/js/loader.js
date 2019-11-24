@@ -3,7 +3,7 @@ const fs = require('fs');
 //var pos = require('./plugin_positions.js')()
 const cheerio = require('cheerio')
 
-const debug = false
+const debug = false;
 // new output html filename
 const new_file = 'main_index.html';
 // plugin folder name
@@ -26,7 +26,7 @@ function NameinFilter(filters,name){
 	for( let n of filters){
 		if(name.endsWith(n)){
 			v=n;
-			break; 
+			break;
 		}
 	}
 	return v;
@@ -71,7 +71,7 @@ function loadInfo (){
 		pluginFiles[f]=[]
 	}
 	if(debug) {console.log(" searching for plugin files")}
-	// only go thru drectory tree once	
+	// only go thru drectory tree once
 	pluginFiles = getFilesMatch (plugin_folder_name,filesList,pluginFiles)
 	if(debug) {console.log("plugin files ="+JSON.stringify(pluginFiles));}
 
@@ -105,7 +105,7 @@ function insert_css($){
 loader.loadPluginInfo = function(filename, config){
 	let configDefault=null;
 	if(config.plugins === undefined){
-		try { 
+		try {
 			let path=__dirname+'/../../remote/.config.default.json'
 			configDefault = JSON.parse(fs.readFileSync(path, "utf8"))
 		}
@@ -115,7 +115,7 @@ loader.loadPluginInfo = function(filename, config){
 		config.plugins=configDefault.plugins;
 		configDefault=null
 	}
-	if(debug) {console.log("in loadinfo, config.plugins="+JSON.stringify(config.plugins)); }		
+	if(debug) {console.log("in loadinfo, config.plugins="+JSON.stringify(config.plugins)); }
 	// find all the plugins and their files
 	loadInfo();
 	// read the index.html file template, as json object
@@ -131,11 +131,16 @@ loader.loadPluginInfo = function(filename, config){
 	// add entries for controllers to body
 	insert_controllers($)
 	// order matters
+	let plugin_hash ={}
+	// convert array to hash for quick lookup
+	config.plugins.forEach((entry)=>{
+		  plugin_hash[entry.name]=entry
+	})
 
 	// loop thru all the index.html files found
 	for(let h of pluginFiles[html_name]){
 		// get the plugin name
-		if(debug)	{console.log("looking for plugin="+h)}
+		if(debug)	{console.log("\nlooking for plugin="+h)}
 		// get the plugin name
 		let plugin_name = h.substring(h.indexOf("/")+1, h.lastIndexOf("/"))
 		id_div="";
@@ -144,85 +149,93 @@ loader.loadPluginInfo = function(filename, config){
 		// make the html to insert
 		id_div += "\n<div ng-include=\"'"+h+"'\"></div>"
 
-		if(debug){ console.log(" plugin info for "+plugin_name+"="+id_div)}
+		if(debug){ console.log(" plugin info for "+plugin_name+"="+id_div+"\n")}
 
 		// default position
 		let page_location = 'bottom-center'
 		// was this plugin added
 		let added = false;
-		// loop thru the module position info
-		for(let p of config.plugins){
-			// if the config name is the same as this module
+		// get the config info for this plugin,
+		let p = plugin_hash[plugin_name]
+		// if already set or default
+		if(p){
 			if(debug) {console.log(" h entry="+h +	" name="+p.name)}
 			if(p.active == undefined ||
 				p.active == true){
 				if(debug) {
 					console.log("plugin "+ p.name+ " is active=" + p.active)
 				}
-				if(h.indexOf(p.name)>=0){
 							// get the area div location
-					page_location = p.area
+				page_location = p.area
 							// first time we've seen this area?
-					if(locations[page_location] == undefined){
+				if(locations[page_location] == undefined){
 								// create object to hold items
-						locations[page_location]={items:[], delayed:[]}
-					}
-					if(debug) {console.log(page_location+" length="+locations[page_location].items.length)}
-							// if the position ordering is 'any'
-					if(p.order =='*') {
-						if(debug) {console.log(" place anywhere")}
-								// append it
-						locations[page_location].delayed.push(id_div)
-					}
-							// if needs to be first
-					else if(p.order == 1){
-						if(debug) {console.log(" place 1st")}
-								// prepend it
-						locations[page_location].items.unshift(id_div)
-					}
-							// has some other position, greater than 1
-					else{
-								// if there are already more than 1 entry
-						if(debug) {console.log(" place in position\n count = "+locations[page_location].items.length +" pos="+p.order)}
-								// if more already than this one
-						if(locations[page_location].items.length> p.order){
-							if(debug) {console.log(" more than 1")}
-									// splice it in where it belongs
-							locations[page_location].items.splice((p.order+0),id_div)
-						} else {
-							if(debug) {console.log(" adding to the end")}
-									// add it to the end
-							locations[page_location].items.push(id_div)
-						}
-					}
-							// indicate added
-					added=true;
-					break
+					locations[page_location]={items:[], delayed:[]}
 				}
+				if(debug) {console.log(page_location+" length="+locations[page_location].items.length)}
+							// if the position ordering is 'any'
+				if(p.order =='*') {
+					if(debug) {console.log(" place anywhere")}
+							// append it
+					locations[page_location].delayed.push(id_div)
+				}
+							// if needs to be first
+				else if(p.order == 1){
+					if(debug) {console.log(" place 1st")}
+						// prepend it
+					locations[page_location].items.unshift(id_div)
+				}
+							// has some other position, greater than 1
+				else{
+								// if there are already more than 1 entry
+					if(debug) {console.log(" place in position\n count = "+locations[page_location].items.length +" pos="+p.order)}
+						// if more already than this one
+					if(locations[page_location].items.length>= p.order){
+						if(debug) {console.log(" more than 1")}
+							// splice it in where it belongs
+						let insert_index = parseInt( p.order) -1;
+						locations[page_location].items.splice(insert_index,0,id_div)
+						if(debug) {console.log("insert_index="+insert_index+ " list="+JSON.stringify(locations[page_location].items))}
+					} else {
+						if(debug) {console.log(" adding to the end")}
+								// add it to the end
+						locations[page_location].items.push(id_div)
+					}
+				}
+							// indicate added
+				added=true;
+					//break
 			}
 			else {
 				if(debug) {
 					console.log("plugin "+ p.name +" is NOT active=" + p.active)
 				}
 				added=true;
-				break;
-			}			
+					//break;
+			}
 		}
 
 		// if not added (no position info)
 		if(added==false){
+			if(debug) {console.log("not yet added"+id_div)};
 			// locate the default location
 			let d=$("div."+page_location)
 			// put this module there
-			d.append(id_div)
+			if(d)
+				{d.append(id_div)}
+			else{
+				if(debug) {console.log("not yet added, location not found"+id_div)};
+			}
 		}
 	}
 	// defered adds because jquery caches the elements til this script ends
 	for(let v of Object.keys(locations)){
 		let d=$("div."+v)
-		if(debug) {console.log("processing for location="+v +" d length="+d.length)+" items="+JSON.stringify(locations[v].items)}
+		if(debug) {console.log("processing for location="+v +" d length="+d.children().length+" items="+JSON.stringify(locations[v].items))}
+		let existing_children=d.children().length
 		for(let e of locations[v].items){
-			if(d.length>1){
+			 if(debug) {console.log("items ="+e)}
+			if(existing_children>=1){
 				d.prepend(e)
 			}
 			else{
@@ -230,8 +243,9 @@ loader.loadPluginInfo = function(filename, config){
 			}
 		}
 		for(let e of locations[v].delayed){
-			if(d.length>0){
-				d.prepend(e)
+					 if(debug) {console.log("delayed ="+e)}
+			if(existing_children>0){
+				d.append(e)
 			}
 			else{
 				d.append(e)
