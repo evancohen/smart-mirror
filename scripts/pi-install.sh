@@ -3,8 +3,8 @@
 set -e
 
 # Supported versions of node: v4.x, v5.x, v6.x, v7.x
-NODE_MINIMUM_VERSION="v8.0.0"
-NODE_STABLE_VERSION="8.x"
+NODE_MINIMUM_VERSION="v10.0.0"
+NODE_STABLE_VERSION="10.x"
 
 # Compare node versions.
 function check_version() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
