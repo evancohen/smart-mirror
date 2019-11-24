@@ -165,7 +165,7 @@ loader.loadPluginInfo = function(filename, config){
 				if(debug) {
 					console.log("plugin "+ p.name+ " is active=" + p.active)
 				}
-							// get the area div location
+				// get the area div location
 				page_location = p.area
 							// first time we've seen this area?
 				if(locations[page_location] == undefined){
@@ -202,16 +202,14 @@ loader.loadPluginInfo = function(filename, config){
 						locations[page_location].items.push(id_div)
 					}
 				}
-							// indicate added
+				// indicate added
 				added=true;
-					//break
 			}
 			else {
 				if(debug) {
 					console.log("plugin "+ p.name +" is NOT active=" + p.active)
 				}
 				added=true;
-					//break;
 			}
 		}
 
