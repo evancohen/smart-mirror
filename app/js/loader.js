@@ -215,14 +215,14 @@ loader.loadPluginInfo = function(filename, config){
 
 		// if not added (no position info)
 		if(added==false){
-			if(debug) {console.log("not yet added"+id_div)};
+			if(debug) {console.log("not yet added"+id_div)}
 			// locate the default location
 			let d=$("div."+page_location)
 			// put this module there
 			if(d)
 				{d.append(id_div)}
 			else{
-				if(debug) {console.log("not yet added, location not found"+id_div)};
+				if(debug) {console.log("not yet added, location not found"+id_div)}
 			}
 		}
 	}
