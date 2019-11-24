@@ -8,7 +8,7 @@ function MapController($scope, $http, GeolocationService, SpeechService, Focus) 
 	if(config.geoPosition && config.geoPosition.key) {
 		GeolocationService.getLocation({ enableHighAccuracy: true }).then(function (geoposition) {
 			map.center = geoposition.coords.latitude + ',' + geoposition.coords.longitude;
-	});
+		});
 	}
 	var generateMap = function (targetCenter, targetZoom) {
 		if (targetCenter === undefined) {
