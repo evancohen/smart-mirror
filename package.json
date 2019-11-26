@@ -35,13 +35,13 @@
   "devDependencies": {
     "angular-i18n": "^1.5.5",
     "bower": "^1.7.9",
-    "electron": "6.0.10",
+    "electron": "6.0.12",
     "eslint": "^6.4.0",
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
     "@google-cloud/speech": "^3.3.0",
-    "alphavantage": "^1.2.0",
+    "alphavantage": "1.2.6",
     "angular-moment": "^1.0.1",
     "annyang": "^2.6.0",
     "cheerio": "^1.0.0-rc.3",
