@@ -27,12 +27,14 @@ $(function () {
 														  |___/      
 	
 	*/
-  
- // watch out in case the libraries don't load
-	if(typeof JSONForm !== 'object'){
-		$('#outMsg').html("Unable to load Required Libraries <br> Please try again in a few moments")
-		showElm('#out', 1)
-		return false;
+
+	// watch out in case the libraries don't load
+	if(location.href.split("/").slice(-1) =='config.html'){
+		if(typeof JSONForm !== 'object'){
+			$('#outMsg').html("Unable to load Required Libraries <br> Please try again in a few moments")
+			showElm('#out', 1)
+			return false;
+		}
 	}
 	// index clicks
 	$('#command-bttn').click(function () {
