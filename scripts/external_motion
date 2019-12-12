@@ -38,7 +38,7 @@ SCRIPT="$($cmd -f "$0")"
 SCRIPTPATH="$(dirname "$SCRIPT")"
 
 # this script is in the scripts folder, the motion folder is back up the tree 1 level.
-motiondir=${SCRIPTPATH}/motion
+motiondir=${SCRIPTPATH}/../motion
 # if the folder doesn't exist, create it 
 if [ ! -d $motiondir ]; then
 	mkdir $motiondir >/dev/null 2>&1
