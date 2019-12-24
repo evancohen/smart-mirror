@@ -500,17 +500,6 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 			    echo "please configure it manually" | tee -a $logfile
 			   ;;
 		  esac
-		elif [ -d "/etc/xdg/lxsession" ]; then
-		  currently_set=$(grep -m1 '\-dpms' /etc/xdg/lxsession/LXDE-pi/autostart)
-			if [ "$currently_set." == "." ]; then
-				echo disable screensaver via lxsession >> $logfile
-				# turn it off for the future
-				sudo su -c "echo -e '@xset s noblank\n@xset s off\n@xset -dpms' >> /etc/xdg/lxsession/LXDE-pi/autostart"
-				# turn it off now
-				export DISPLAY=:0; xset s noblank;xset s off;xset -dpms
-			else
-			  echo lxsession screen saver already disabled >> $logfile
-			fi
 		elif [ $(which gsettings | wc -l) == 1 ]; then
 			setting=$(gsettings get org.gnome.desktop.screensaver lock-enabled)
 			setting1=$(gsettings get org.gnome.desktop.session idle-delay)
@@ -532,6 +521,17 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 			else
 			  echo screensaver via lightdm already disabled >> $logfile
 			fi
+		elif [ -d "/etc/xdg/lxsession" ]; then
+		  currently_set=$(grep -m1 '\-dpms' /etc/xdg/lxsession/LXDE-pi/autostart)
+			if [ "$currently_set." == "." ]; then
+				echo disable screensaver via lxsession >> $logfile
+				# turn it off for the future
+				sudo su -c "echo -e '@xset s noblank\n@xset s off\n@xset -dpms' >> /etc/xdg/lxsession/LXDE-pi/autostart"
+				# turn it off now
+				export DISPLAY=:0; xset s noblank;xset s off;xset -dpms
+			else
+			  echo lxsession screen saver already disabled >> $logfile
+			fi			
 		else
 			echo " "
 			echo -e "unable to disable screen saver, /etc/xdg/lxsession does not exist" | tee -a $logfile
