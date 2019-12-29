@@ -1,5 +1,3 @@
-/* global __dirname */
-/* global process */
 const electron = require("electron")
 // Child Process for keyword spotter
 const {spawn, exec} = require("child_process")
@@ -15,7 +13,7 @@ powerSaveBlocker.start("prevent-display-sleep")
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev")
-
+//var atomScreen = null;
 // Load the smart mirror config
 let config
 let firstRun = false
@@ -44,8 +42,15 @@ let mainWindow
 function createWindow() {
 	app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 	app.commandLine.appendSwitch('disable-http-cache');
-  // Get the displays and render the mirror on a secondary screen if it exists
-	var atomScreen = electron.screen
+	// Get the displays and render the mirror on a secondary screen if it exists
+	var atomScreen = null; 
+	if( electron.screen == undefined){
+		atomScreen=electron.remote.screen
+	}
+	else{
+		atomScreen=electron.screen
+	}
+
 	var displays = atomScreen.getAllDisplays()
 	var externalDisplay = null
 	for (var i in displays) {
@@ -54,38 +59,40 @@ function createWindow() {
 			break
 		}
 	}
-
-	var browserWindowOptions = { width: 800, height: 600, icon: "favicon.ico", kiosk: !DevelopmentMode, autoHideMenuBar: true, darkTheme: true }
+	const { width, height } = atomScreen.getPrimaryDisplay().workAreaSize
+	var browserWindowOptions = { width: width, height: height, icon: "favicon.ico", kiosk: true, autoHideMenuBar: true, darkTheme: true, webPreferences: {
+		nodeIntegration: true
+	} }
 	if (externalDisplay) {
 		browserWindowOptions.x = externalDisplay.bounds.x + 50
 		browserWindowOptions.y = externalDisplay.bounds.y + 50
 	}
 
-  // Create the browser window.
+	// Create the browser window.
 	mainWindow = new BrowserWindow(browserWindowOptions)
 
-  // and load the index.html of the app.
+	// and load the index.html of the app.
 	mainWindow.loadURL("file://" + __dirname + "/index.html")
 
-  // Open the DevTools if run with "npm start dev"
+	// Open the DevTools if run with "npm start dev"
 	if (DevelopmentMode) {
 		mainWindow.webContents.openDevTools()
 	}
 
-  // Emitted when the window is closed.
+	// Emitted when the window is closed.
 	mainWindow.on("closed", function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
+		// Dereference the window object, usually you would store windows
+		// in an array if your app supports multi windows, this is the time
+		// when you should delete the corresponding element.
 		mainWindow = null
 	})
 }
 
 function startSonus()
 {
-  // Initilize the keyword spotter
+	// Initilize the keyword spotter
 	kwsProcess = spawn("node", ["./sonus.js"], { detached: false })
-    // Handel messages from node
+	// Handel messages from node
 	kwsProcess.stderr.on("data", function (data) {
 		var message = data.toString()
 		console.error("ERROR", message.substring(4))
@@ -104,11 +111,11 @@ function startSonus()
 		}
 	})
     
-    // if we receive a closed event from the keyword spotter
+	// if we receive a closed event from the keyword spotter
 	kwsProcess.on("close", function() {
-      // if main process is not ending
+		// if main process is not ending
 		if(quitting == false){
-        // restart it
+			// restart it
 			startSonus();
 		}
 	})
@@ -122,7 +129,7 @@ if (config && config.speech && !firstRun) {
 if (config.remote && config.remote.enabled || firstRun) {
 	remote.start()
 
-  // Deturmine the local IP address
+	// Deturmine the local IP address
 	const interfaces = require("os").networkInterfaces()
 	let addresses = []
 	for (let k in interfaces) {
@@ -184,7 +191,7 @@ if (config.remote && config.remote.enabled || firstRun) {
 // Motion detection
 if(config.motion && config.motion.enabled){
 	var mtnProcess = spawn("npm", ["run","motion"], {detached: false})
-    // Handel messages from node
+	// Handel messages from node
 	mtnProcess.stderr.on("data", function (data) {
 		var message = data.toString()
 		console.error("ERROR", message.substring(4))
@@ -227,8 +234,8 @@ app.on("will-quit", function () {
 		quitting=true
 		kwsProcess.kill()
 	}
-  // While cleaning up we should turn the screen back on in the event 
-  // the program exits before the screen is woken up
+	// While cleaning up we should turn the screen back on in the event 
+	// the program exits before the screen is woken up
 	if (mtnProcess) {
 		mtnProcess.kill()
 	}

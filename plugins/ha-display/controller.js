@@ -31,5 +31,5 @@ function HADisplay($scope, $http, $interval) {
 }
 
 angular.module('SmartMirror')
-    .controller('HADisplay', HADisplay);
+	.controller('HADisplay', HADisplay);
 

@@ -12,4 +12,4 @@ function Scrobbler($scope, $interval, ScrobblerService) {
 }
 
 angular.module('SmartMirror')
-    .controller('Scrobbler', Scrobbler);
+	.controller('Scrobbler', Scrobbler);

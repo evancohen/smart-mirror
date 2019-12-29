@@ -28,7 +28,7 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 				$scope.spActive = false;
 			}
             
-//            console.debug("current state:", response, $scope);
+			//            console.debug("current state:", response, $scope);
 		});
 	};
 
@@ -66,4 +66,4 @@ function Spotify($scope, $http, SpotifyService, SpeechService, Focus, $interval)
 }
 
 angular.module('SmartMirror')
-    .controller('Spotify', Spotify);
+	.controller('Spotify', Spotify);

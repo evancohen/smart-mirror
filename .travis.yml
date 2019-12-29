@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "10"
-  
+
 before_install:
   - npm i -g npm
 
