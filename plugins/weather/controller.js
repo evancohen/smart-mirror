@@ -1,4 +1,4 @@
-function Weather($scope, $interval, $http, GeolocationService) {
+function Weather($scope, $interval, $http, $translate,GeolocationService) {
 
 	var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
 	var geoposition = {}
@@ -38,7 +38,7 @@ function Weather($scope, $interval, $http, GeolocationService) {
 		}
 		// Add human readable info to info
 		for (var i = 0; i < weather.forecast.data.daily.data.length; i++) {
-			weather.forecast.data.daily.data[i].day = moment.unix(weather.forecast.data.daily.data[i].time).format('ddd');
+			weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
 			weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
 			weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
 			weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;

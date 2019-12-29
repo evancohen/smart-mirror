@@ -9,7 +9,8 @@ body {
     color: #fff;
     font-family: 'HelveticaNeue-UltraLight', 'Open Sans', sans-serif;
     font-weight: 300;
-    position: relative;
+    position: absolute;
+    overflow: hidden;
 }
 
 h1,
@@ -21,7 +22,7 @@ h5 {
 }
 
 h1 {
-    font-size: 120px;
+    font-size:  11.11vh;
 }
 
 dt {
@@ -38,9 +39,25 @@ dt {
 }
 
 .first-run h1{
-    font-size: 48px;
+    font-size:  4.44vh;
 }
-
+.below {
+  z-index: -900;
+}
+.above {
+  /* very high, but not above sleep */
+  z-index:900;
+}
+.fullscreen {
+  position: absolute;
+    top:  -0.92vh;
+    left:  -0.52vw;
+    width:  -0.52vw;
+    height:  -0.92vh;
+  pointer-events: none;
+    margin:  0.00vw 0.00vw;
+    border: none;
+}
 /* Displays */
 .sleep-cover {
     background-color: black;
@@ -59,7 +76,6 @@ dt {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,31 +85,42 @@ dt {
 }
 
 .listening {
-    box-shadow: inset 0px -40px 40px -40px #fff
+    box-shadow:  inset 0.00vw -2.09vw 2.09vw -2.09vw #fff;
 }
 
 .not-listening {
-    box-shadow: inset 0px 0px 0px 0px #fff
+    box-shadow:  inset 0.00vw 0.00vw 0.00vw 0.00vw #fff;
+		font-size:  1.50vh; 
 }
 
 .partial-result {
     font-family: 'Open Sans', sans-serif;
+		 font-size:  2.88vh;
 }
 
 .top-left {
     float: left;
+		width: 50vw;	
+		text-align: left;
 }
 
 .date {
-    font-size: 42px;
+    font-size:  3.88vh;
+		margin-left: auto;
+		text-align: inherit;
 }
 
 .time {
-    font-size: 110px;
+    font-size:  5.18vh;
+		margin-left:auto;
+		text-align:inherit;		
 }
 
 .top-right {
     float: right;
+		width: 49vw;
+		align-items: right;
+		text-align: right;
 }
 
 .middle-center {
@@ -111,26 +138,30 @@ dt {
     font-family: 'Open Sans', sans-serif;
     width: 100%;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom:  1.85vh;
 }
 
 .bottom-left, .bottom-right {
     font-family: 'Open Sans', sans-serif;
     position: absolute;
-    bottom: 50px;
+    bottom:  4.62vh;
     width: 50%;
 }
 
 .bottom-left {
-    left: 20px;
+    left:  1.04vw;
+		float: left;
+		text-align: left;
 }
 
 .bottom-right {
-    right: 20px;
+    right:  1.04vw;
+		float: right;
+		text-align: right;
 }
 
 .commands {
-    width: 450px;
+    width:  40.56vw;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
@@ -146,13 +177,13 @@ span.command-next {
 
 ul.calendar {
     list-style: none;
-    font-size: 22px;
-    margin-left: 10px;
+    font-size:  2.5vh;
+    margin-left:  0.52vw;
     padding: 0;
 }
 
 .calendar .event {
-    margin-bottom: 10px;
+    margin-bottom:  0.92vh;
 }
 
 .calendar span {
@@ -166,12 +197,13 @@ ul.calendar {
 }
 
 .calendar span.summary {
-  font-size: 25px;
-  max-width: 400px;
+  font-size:  1.8vh;
+  max-width:  20.94vw;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .calendar .event-details .details {
-    font-size: 12px;
+    font-size:  1.8vh;
     font-family: 'Open Sans', sans-serif;
     font-weight: lighter;
 }
@@ -185,49 +217,49 @@ ul.calendar {
 }
 
 .day-marker {
-	margin-top: 30px;
+	margin-top:  2.77vh;
 }
 
 .day-marker .day {
 	display: block;
-  font-size: 15px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
+  font-size:  1.38vh;
+  letter-spacing:  0.10vw;
+  margin-bottom:  0.92vh;
 }
 
 .weather {
     margin-left: auto;
     display: block;
     text-align: right;
-    width: 230px;
+    width:  12.04vw;
 }
 
 .weather-today .temperature {
-    font-size: 60px;
+    font-size:  5.55vh;
 }
 
 .weather-week-descriptor {
     font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
+    font-size:  1.11vh;
     margin-left: auto;
-    margin-bottom: 10px;
+    margin-bottom:  0.92vh;
     text-align: justify;
 }
 
 .weather-week {
-    margin-right: 10px;
-    font-size: 22px;
+    margin-right:  0.52vw;
+    font-size:  2.03vh;
 }
 
 .weather-week .day {
     display: inline-block;
-    margin-right: 10px;
-    width: 40px;
+    margin-right:  0.52vw;
+    width:  2.09vw;
 }
 
 .weather-week .temperature {
     display: inline-block;
-    width: 50px;
+    width:  2.61vw;
 }
 
 .weather .weather-today canvas,
@@ -237,7 +269,7 @@ ul.calendar {
 
 .stock, .tvshows, .hadisplay, .traffic {
     font-family: 'Open Sans', sans-serif;
-    font-size: small;
+   font-size:  2.03vh;
 }
 
 .fitbit {
@@ -245,30 +277,30 @@ ul.calendar {
 }
 
 .fitbit-title {
-    margin-right: 10px;
-    font-size: 28px;
+    margin-right:  0.52vw;
+    font-size:  2.59vh;
 }
 
 .fitbit-subtitle {
-    margin-right: 10px;
-    font-size: 20px;
+    margin-right:  0.52vw;
+    font-size:  1.85vh;
 }
 
 .fitbit-item {
     color: #ccc;
-    margin-right: 10px;
-    font-size: 16px;
+    margin-right:  0.52vw;
+    font-size:  1.48vh;
 }
 
 .fitbit-badge {
-    width: 16px;
-    height: 16px;
+    width:  0.83vw;
+    height:  1.48vh;
 }
 
 .fitbit-main {
     display: inline-block;
-    margin-right: 10px;
-    width: 450px;
+    margin-right:  0.52vw;
+    width:  23.56vw;
 }
 
 .fitbit-goals {
@@ -279,7 +311,7 @@ ul.calendar {
 .fitbit-progress-bar {
     position: relative;
     width: 50%;
-    height: 5px;
+    height:  0.46vh;
     background-color: grey;
 }
 
@@ -290,13 +322,13 @@ ul.calendar {
 
 .playing-track img {
     float: left;
-    margin-right: 5px;
+    margin-right:  0.26vw;
 }
 
 .traffic-information, .stock-information, .tv-information {
     text-align: right;
-    margin-top: 10px;
-    margin-right: 10px;
+    margin-top:  0.92vh;
+    margin-right:  0.52vw;
 }
 
 .stock-change-positive {
@@ -322,7 +354,7 @@ ul.calendar {
 }
 
 .timer {
-    font-size: 120px;
+    font-size:  11.11vh;
     position: relative;
 }
 
@@ -330,7 +362,7 @@ ul.calendar {
     width: 3.25em;
     height: 3.25em;
     transform: rotate(-90deg) scaleY(-1);
-    margin: 20px auto;
+    margin:  1.04vw auto;
     display: block;
 }
 
@@ -376,18 +408,18 @@ ul.calendar {
 }
 
 .map {
-    height: 1080px;
+      max-height: 90%; 
 }
 
 .reminders-container, .todoist-container {
-    width: 250px;
+    width:  13.08vw;
     text-align: left;
     margin-left: auto;
     margin-right: auto;
 }
 
 .todoist {
-    padding: 10px 10px 10px 80px;
+    padding:  0.92vh 0.52vw 0.92vh 4.18vw;
 }
 
 .contents-box {
@@ -404,15 +436,15 @@ ul.calendar {
     left: 0;
     width: 100%;
     height: 100%;
-    -webkit-box-shadow: inset 0 0 10px 10px #000;
-    -moz-box-shadow: inset 0 0 10px 10px #000;
-    box-shadow: inset 0 0 10px 10px #000;
+    -webkit-box-shadow:  inset 0 0 0.52vw 0.52vw #000;
+    -moz-box-shadow:  inset 0 0 0.52vw 0.52vw #000;
+    box-shadow:  inset 0 0 0.52vw 0.52vw #000;
     overflow: hidden;
 }
 
 .video {
     width: 100%;
-    height: 680px;
+    height:  62.96vh;
     border: none;
     /* If you want to make the video black and white
     -webkit-filter: grayscale(100%);
@@ -420,7 +452,7 @@ ul.calendar {
     */}
 
 .truncate {
-  width: 250px;
+  width:  13.08vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -429,12 +461,12 @@ ul.calendar {
 .top-right div div div .spotify-info {
     float: left;
     text-align: right;
-    margin-right: 15px;
+    margin-right:  0.78vw;
 }
 
 .bottom-left div div div .spotify-info {
     text-align: left;
-    margin-left: 15px;
+    margin-left:  0.78vw;
 }
 
 .bottom-left div div div {
@@ -457,12 +489,12 @@ ul.calendar {
 }
 
 .spotify-info {
-    margin-top: -2px;
+    margin-top:  -0.18vh;
     font-family: 'Open Sans', sans-serif;
 }
 
 .spotify-status-indicator i {
-    margin-top: 5px;
+    margin-top:  0.46vh;
 }
 
 .spotify-info .em-85 {
@@ -474,12 +506,12 @@ ul.calendar {
 }
 
 .spotify-art {
-    border: 3px solid white;
+    border:  0.15vw solid white;
 }
 
 .sc-container {
     display: flex;
-    padding: 10px;
+    padding:  0.92vh;
     margin: auto;
     -webkit-filter: grayscale(70%);
     filter: grayscale(70%);
@@ -488,21 +520,21 @@ ul.calendar {
 
 .scWaveform {
     background-color: #000000;
-    width: 500px;
+    width:  26.17vw;
     -webkit-filter: invert(100%);
     filter: invert(100%);
 }
 
 .color-block {
-    height: 200px;
-    width: 200px;
+    height:  18.51vh;
+    width:  10.47vw;
     display: inline-block;
-    margin: 10px;
-    margin-bottom: 20px;
+    margin:  0.52vw;
+    margin-bottom:  1.85vh;
 }
 
 .debug-info {
-    width: 500px;
+    width:  26.17vw;
 }
 
 /* Animations */
@@ -524,7 +556,7 @@ ul.calendar {
 }
 
 .animate-grow {
-    max-height: 1280px !important;
+    max-height:  67.01vw !important;
 }
 
 .animate-grow.ng-hide-add,
@@ -548,39 +580,39 @@ ul.calendar {
 }
 
 .xxsmall {
-    font-size: 15px;
+    font-size:  1.38vh;
 }
 
 .xxsmall .wi {
-    line-height: 15px;
+    line-height:  1.38vh;
 }
 
 .xsmall {
-    font-size: 20px;
+    font-size:  1.85vh;
 }
 
 .small {
-    font-size: 25px;
+    font-size:  2.31vh;
 }
 
 .icon {
     position: relative;
-    top: -10px;
+    top:  -0.92vh;
     display: inline-block;
-    font-size: 45px;
-    padding-right: 5px;
+    font-size:  4.16vh;
+    padding-right:  0.26vw;
     font-weight: 100;
-    margin-right: 10px;
+    margin-right:  0.52vw;
 }
 
 .icon-small {
     position: relative;
     display: inline-block;
-    font-size: 20px;
-    padding-left: 0px;
-    padding-right: -10px;
+    font-size:  1.85vh;
+    padding-left:  0.00vw;
+    padding-right:  -0.52vw;
     font-weight: 100;
-    width: 20px;
+    width:  1.04vw;
 }
 
 .xkcd {
@@ -598,18 +630,18 @@ ul.calendar {
 }
 
 .news {
-    height: 75px;
-    margin-bottom: 5px;
+    height:  6.94vh;
+    margin-bottom:  0.46vh;
 }
 
 .news-title {
     font-family: 'Open Sans', sans-serif;
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size:  1.11vh;
+    margin-bottom:  0.46vh;
 }
 
 .news-content {
     font-family: 'Open Sans', sans-serif;
-    font-size: 20px;
-    margin-bottom: 55px;
+    font-size:  1.85vh;
+    margin-bottom:  5.09vh;
 }
