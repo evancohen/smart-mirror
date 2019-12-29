@@ -1,4 +1,4 @@
-function Weather($scope, $interval, $http, GeolocationService) {
+function Weather($scope, $interval, $http, $translate,GeolocationService) {
 
 	var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
 	var geoposition = {}
@@ -8,9 +8,9 @@ function Weather($scope, $interval, $http, GeolocationService) {
 		return $http.jsonp('https://api.darksky.net/forecast/' + config.forecast.key + '/' +
             geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
             config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
-            .then(function (response) {
-	return weather.forecast = response;
-});
+			.then(function (response) {
+				return weather.forecast = response;
+			});
 	};
 
 	weather.minutelyForecast = function () {
@@ -20,7 +20,7 @@ function Weather($scope, $interval, $http, GeolocationService) {
 		return weather.forecast.data.minutely;
 	}
 
-    //Returns the current forecast along with high and low tempratures for the current day
+	//Returns the current forecast along with high and low tempratures for the current day
 	weather.currentForecast = function () {
 		if (weather.forecast === null) {
 			return null;
@@ -36,9 +36,9 @@ function Weather($scope, $interval, $http, GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
-        // Add human readable info to info
+		// Add human readable info to info
 		for (var i = 0; i < weather.forecast.data.daily.data.length; i++) {
-			weather.forecast.data.daily.data[i].day = moment.unix(weather.forecast.data.daily.data[i].time).format('ddd');
+			weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
 			weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
 			weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
 			weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
@@ -75,4 +75,4 @@ function Weather($scope, $interval, $http, GeolocationService) {
 }
 
 angular.module('SmartMirror')
-    .controller('Weather', Weather);
+	.controller('Weather', Weather);
