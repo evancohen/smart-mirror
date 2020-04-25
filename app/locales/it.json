@@ -8,6 +8,9 @@
     "reminders": {
         "empty": "Lista vuota."
     },
+    "weather": {
+        "today": "Oggi"
+    },    
     "timer": {
       "one": "Uno",
       "minute": "Minuti?",

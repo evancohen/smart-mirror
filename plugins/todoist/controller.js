@@ -47,4 +47,4 @@ function Todoist($scope, TodoistService, SpeechService, Focus) {
 }
 
 angular.module('SmartMirror')
-    .controller('Todoist', Todoist);
+	.controller('Todoist', Todoist);

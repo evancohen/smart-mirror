@@ -54,17 +54,17 @@
 				// The code that's returned as a query parameter to the redirect URI
 				var code = req.query.code;
                 
-                // Retrieve an access token and a refresh token
+				// Retrieve an access token and a refresh token
 				spotify.authorizationCodeGrant(code)
-                  .then(function(data) {
-	persist.write(tokenFile, data.body, function (err) {
-		if (err) return next(err);
-		res.send('Authorization complete. Please relead your mirror to refresh authentication.');
-	});
-}, function(err) {
-	console.debug('Something went wrong!', err);
-	if (err) return next(err);
-});
+					.then(function(data) {
+						persist.write(tokenFile, data.body, function (err) {
+							if (err) return next(err);
+							res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+						});
+					}, function(err) {
+						console.debug('Something went wrong!', err);
+						if (err) return next(err);
+					});
 			});
 		}
 
@@ -73,7 +73,7 @@
 			console.debug('Express is listening on port: ' + port);
 			app.listen(port);
 
-            // Read the persisted token, initially captured by a webapp.
+			// Read the persisted token, initially captured by a webapp.
 			fs.stat(tokenFile, function (err) {
 				if (err == null) {
 					persist.read(tokenFile, function (err, token) {
@@ -87,7 +87,7 @@
                             
 							spotify.setAccessToken(access_token); // Set the client token
 							spotify.setRefreshToken(refresh_token); // Set the client token
-//                            if (authorized_session) cb();
+							//                            if (authorized_session) cb();
 							cb();
 						}
 					});
@@ -117,13 +117,13 @@
         
 		service.currentState = function () {
 			return spotify.getMyCurrentPlaybackState()
-              .then(function(data) {
-	service.spotifyResponse = data.body || null;
-	return service.spotifyResponse;
-}, function(err) {
-	service.active = false;
-	console.log('Something went wrong!', err);
-});
+				.then(function(data) {
+					service.spotifyResponse = data.body || null;
+					return service.spotifyResponse;
+				}, function(err) {
+					service.active = false;
+					console.log('Something went wrong!', err);
+				});
 		};
         
 		service.sendToDevice = function (name) {
@@ -131,7 +131,7 @@
 				var devices = data.body.devices;
 				var id = null;
                 
-                // Check for name kerword of <named_device> or 'this device'<default_device>
+				// Check for name kerword of <named_device> or 'this device'<default_device>
 				name = (name.toLowerCase() === 'this device' && default_device)? default_device: name;
                 
 				devices.forEach(function (device) {
@@ -158,41 +158,41 @@
         
 		service.pause = function () {
 			return spotify.pause()
-              .then(function() {}, function(err) {
-	console.log('Something went wrong!', err);
-});
+				.then(function() {}, function(err) {
+					console.log('Something went wrong!', err);
+				});
 		};
         
 		service.skipBack = function () {
 			return spotify.skipToPrevious()
-              .then(function() {}, function(err) {
-	console.log('Something went wrong!', err);
-});
+				.then(function() {}, function(err) {
+					console.log('Something went wrong!', err);
+				});
 		};
         
 		service.skipNext = function () {
 			return spotify.skipToNext()
-              .then(function() {}, function(err) {
-	console.log('Something went wrong!', err);
-});
+				.then(function() {}, function(err) {
+					console.log('Something went wrong!', err);
+				});
 		};
         
 		service.toggleShuffle = function (state) {
 			return spotify.setShuffle({ "state": state })
-              .then(function(data) {
-	console.log(data);
-}, function(err) {
-	console.log('Something went wrong!', err);
-});
+				.then(function(data) {
+					console.log(data);
+				}, function(err) {
+					console.log('Something went wrong!', err);
+				});
 		};
         
 		service.toggleRepeat = function (state) {
 			return spotify.setRepeat({ "state": state })
-              .then(function(data) {
-	console.log(data);
-}, function(err) {
-	console.log('Something went wrong!', err);
-});
+				.then(function(data) {
+					console.log(data);
+				}, function(err) {
+					console.log('Something went wrong!', err);
+				});
 		};
         
 		service.playTrack = function (query) {
@@ -202,28 +202,28 @@
 			} else {
 				query = (query.charAt(0) === ' ')? query.substring(1): query;
 				return spotify.searchTracks('track:' + query)
-                  .then(function(data) {
-	console.log('Search tracks matching "' + query + '"');
-	console.log(data);
+					.then(function(data) {
+						console.log('Search tracks matching "' + query + '"');
+						console.log(data);
 
-	var tracks = [];
-	data.body.tracks.items.forEach(function(item) {
-		tracks.push(item.uri);
-	});
-	console.log(tracks);
+						var tracks = [];
+						data.body.tracks.items.forEach(function(item) {
+							tracks.push(item.uri);
+						});
+						console.log(tracks);
 
-	return spotify.play({ "uris": tracks })
-                      .then(function(data) {
-	console.log('current playback: "' + query + '"');
-	console.log(data);
-	service.spotifyResponse = data.body.tracks || null;
-	return service.spotifyResponse;
-}, function(err) {
-	console.log('Something went wrong!', err);
-});
-}, function(err) {
-	console.log('Something went wrong!', err);
-});
+						return spotify.play({ "uris": tracks })
+							.then(function(data) {
+								console.log('current playback: "' + query + '"');
+								console.log(data);
+								service.spotifyResponse = data.body.tracks || null;
+								return service.spotifyResponse;
+							}, function(err) {
+								console.log('Something went wrong!', err);
+							});
+					}, function(err) {
+						console.log('Something went wrong!', err);
+					});
 			}
 		};
 
@@ -231,6 +231,6 @@
 	}
 
 	angular.module('SmartMirror')
-    .factory('SpotifyService', SpotifyService);
+		.factory('SpotifyService', SpotifyService);
 
 } ());

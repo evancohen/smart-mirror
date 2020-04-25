@@ -26,6 +26,6 @@
 	}
 
 	angular.module('SmartMirror')
-    .factory('TimeboxService', TimeboxService);
+		.factory('TimeboxService', TimeboxService);
 
 } ());

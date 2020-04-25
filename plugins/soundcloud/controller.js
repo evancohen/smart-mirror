@@ -1,9 +1,9 @@
 function Soundcloud($scope, $http, SoundCloudService, SpeechService, Focus) {
     
-    //Initialize SoundCloud
+	//Initialize SoundCloud
 	SoundCloudService.init();
 
-    //SoundCloud search and play
+	//SoundCloud search and play
 	SpeechService.addCommand('sc_play', function (query) {
 		SoundCloudService.searchSoundCloud(query).then(function (response) {
 			if (response[0].artwork_url) {
@@ -18,17 +18,17 @@ function Soundcloud($scope, $http, SoundCloudService, SpeechService, Focus) {
 		});
 	});
 
-    //SoundCloud stop
+	//SoundCloud stop
 	SpeechService.addCommand('sc_pause', function () {
 		SoundCloudService.pause();
 		Focus.change("default");
 	});
-    //SoundCloud resume
+	//SoundCloud resume
 	SpeechService.addCommand('sc_resume', function () {
 		SoundCloudService.play();
 		Focus.change("sc");
 	});
-    //SoundCloud replay
+	//SoundCloud replay
 	SpeechService.addCommand('sc_replay', function () {
 		SoundCloudService.replay();
 		Focus.change("sc");
@@ -36,4 +36,4 @@ function Soundcloud($scope, $http, SoundCloudService, SpeechService, Focus) {
 }
 
 angular.module('SmartMirror')
-    .controller('Soundcloud', Soundcloud);
+	.controller('Soundcloud', Soundcloud);
