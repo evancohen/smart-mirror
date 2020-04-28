@@ -1,6 +1,6 @@
 function Weather($scope, $interval, $http, $translate,GeolocationService) {
 
-	var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
+	//var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
 	var geoposition = {}
 	var weather = {}
 
@@ -14,6 +14,9 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 						else		
 							config.forecast.units='si'	
 						resolve()					
+					}).catch((error)=>{
+						console.log("datasciencetoolkit country from geolocation failed ="+JSON.stringify(error))
+						reject();
 					})
 			}
 			else
@@ -30,23 +33,31 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			var currently=null				
 			// get realtime weather info (temp now)
 			plist.push($http.get('https://api.climacell.co/v3/weather/realtime?lat=' +
-	            geoposition.coords.latitude.toString().substring(0,10) + '&lon=' + geoposition.coords.longitude.toString().substring(0,11) + '&unit_system=' +
-	            config.forecast.units + '&fields=temp%2Cprecipitation%2Cweather_code%2Ccloud_cover%2Csunrise%2Csunset%2Cvisibility%2Cwind_gust%2Cwind_speed&apikey='+config.forecast.key 
-	            ).then(
-	            	(response)=>{
-	            		currently=response.data; 
-	            	}
-	            )
-	        )
-	        // get the 10 day forecast info
+				geoposition.coords.latitude.toString().substring(0,10) + '&lon=' + geoposition.coords.longitude.toString().substring(0,11) + '&unit_system=' +
+				config.forecast.units + '&fields=temp%2Cprecipitation%2Cweather_code%2Ccloud_cover%2Csunrise%2Csunset%2Cvisibility%2Cwind_gust%2Cwind_speed&apikey='+config.forecast.key 
+			).then(
+				(response)=>{
+					currently=response.data; 
+				}
+			).catch((error)=>{
+				console.log("climacell realltime failed ="+JSON.stringify(error))
+				reject();
+			}
+			)
+			)
+			// get the 10 day forecast info
 			plist.push($http.get('https://api.climacell.co/v3/weather/forecast/daily?lat=' +
-	            geoposition.coords.latitude.toString().substring(0,10) + '&lon=' + geoposition.coords.longitude.toString().substring(0,11) + '&unit_system=' +
-	            config.forecast.units + '&start_time=now&fields=temp%2Cprecipitation_probability%2Cweather_code&apikey='+config.forecast.key 
-	            ).then(
-	            	(response)=>{
-	            		forecast=response; 
-	            	}
-	            )
+				geoposition.coords.latitude.toString().substring(0,10) + '&lon=' + geoposition.coords.longitude.toString().substring(0,11) + '&unit_system=' +
+				config.forecast.units + '&start_time=now&fields=temp%2Cprecipitation_probability%2Cweather_code&apikey='+config.forecast.key 
+			).then(
+				(response)=>{
+					forecast=response; 
+				}
+			).catch( (error)=>{
+				console.log("climacell forecast failed ="+JSON.stringify(error))
+				reject();
+			}
+			)
 			)
 			// wait for both above apis to complete
 			Promise.all(plist).then(()=>{
@@ -67,7 +78,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		}
 		return weather.forecast.data.minutely;
 	}
-	min =function (a,b){
+	function min(a,b){
 		return a>b?b:a
 	}
 	//Returns the current forecast along with high and low tempratures for the current day
@@ -90,8 +101,8 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		// Add human readable info to info
 		var datalength=min(weather.forecast.data.length,8)
 
-			weather.forecast.data.daily={}
-			weather.forecast.data.daily.data=[]		
+		weather.forecast.data.daily={}
+		weather.forecast.data.daily.data=[]		
 		for (var i=0; i<datalength; i++) {
 			weather.forecast.data.daily.data[i]={}
 			weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
@@ -140,60 +151,60 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 	function convert_conditions_to_icon(data){
 		var icon_name=''
 		switch(data.weather_code.value){
-			case 'ice_pellets_heavy':
-					//wi-forecast-io-hail: hail	
-					icon_name='hail'
-					break;			
-			case 'freezing_rain_heavy': 
-			case 'freezing_rain':
-			case 'freezing_rain_light':
-			case 'freezing_drizzle':
-			case 'ice_pellets':
-			case 'ice_pellets_light':
-					// wi-forecast-io-sleet: sleet	
-					icon_name='sleet'		
-					break;
-			case 'snow_heavy':
-			case 'snow': 
-			case 'snow_light':			
-			case 'flurries':
-					//wi-forecast-io-snow: snow
-					icon_name='snow'
-					break;
-			case 'tstorm':
-					//wi-forecast-io-thunderstorm: thunderstorm
-					icon_name='thunderstorm'
-					break;
-			case 'rain_heavy':
-			case 'rain':
-			case 'rain_light':
+		case 'ice_pellets_heavy':
+			//wi-forecast-io-hail: hail	
+			icon_name='hail'
+			break;			
+		case 'freezing_rain_heavy': 
+		case 'freezing_rain':
+		case 'freezing_rain_light':
+		case 'freezing_drizzle':
+		case 'ice_pellets':
+		case 'ice_pellets_light':
+			// wi-forecast-io-sleet: sleet	
+			icon_name='sleet'		
+			break;
+		case 'snow_heavy':
+		case 'snow': 
+		case 'snow_light':			
+		case 'flurries':
+			//wi-forecast-io-snow: snow
+			icon_name='snow'
+			break;
+		case 'tstorm':
+			//wi-forecast-io-thunderstorm: thunderstorm
+			icon_name='thunderstorm'
+			break;
+		case 'rain_heavy':
+		case 'rain':
+		case 'rain_light':
 
-					// wi-forecast-io-rain: rain
-					icon_name='rain'
-					break;
-			case 'fog_light':
-			case 'fog':
-					//wi-forecast-io-fog: fog
-					icon_name='fog'
-					break;
-			case 'cloudy':
-					//wi-forecast-io-cloudy: cloudy
-					icon_name=data.weather_code.value
-					break
-			case 'mostly_cloudy':
-			case 'partly_cloudy':
-			case 'drizzle':			
-					//wi-forecast-io-partly-cloudy-day: day-cloudy
-					//wi-forecast-io-partly-cloudy-night: night-cloudy	
-					icon_name='partly-cloudy'
-					break;		
-			case 'mostly_clear':
-			case 'clear':
-					//wi-forecast-io-clear-day: day-sunny
-					//wi-forecast-io-clear-night: night-clear
-					icon_name='clear'
-					break;
-			default:
+			// wi-forecast-io-rain: rain
+			icon_name='rain'
+			break;
+		case 'fog_light':
+		case 'fog':
+			//wi-forecast-io-fog: fog
+			icon_name='fog'
+			break;
+		case 'cloudy':
+			//wi-forecast-io-cloudy: cloudy
+			icon_name=data.weather_code.value
+			break
+		case 'mostly_cloudy':
+		case 'partly_cloudy':
+		case 'drizzle':			
+			//wi-forecast-io-partly-cloudy-day: day-cloudy
+			//wi-forecast-io-partly-cloudy-night: night-cloudy	
+			icon_name='partly-cloudy'
+			break;		
+		case 'mostly_clear':
+		case 'clear':
+			//wi-forecast-io-clear-day: day-sunny
+			//wi-forecast-io-clear-night: night-clear
+			icon_name='clear'
+			break;
+		default:
 		}
 		if(icon_name == 'clear' || icon_name=='partly-cloudy'){
 			if(data.sunrise !== undefined) {
@@ -211,7 +222,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 
 		return icon_name;
 
-		 /* 
+		/* 
 			wi-forecast-io-wind: strong-wind
 			wi-forecast-io-tornado: tornado */		
 	}

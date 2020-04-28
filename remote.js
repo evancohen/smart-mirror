@@ -20,7 +20,7 @@ remote.start = function () {
 
 		if (fs.existsSync(configPath)) {
 			try {
-				config = JSON.parse(fs.readFileSync(configPath, "utf8")) //json'd config file
+				config = JSON.parse(fs.readFileSync(configPath, "utf8")) //json'd config file     
 			} catch (e) {
 				config = configDefault
 			}

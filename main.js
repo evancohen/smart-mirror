@@ -10,6 +10,9 @@ const BrowserWindow = electron.BrowserWindow
 // Prevent the monitor from going to sleep.
 const powerSaveBlocker = electron.powerSaveBlocker
 powerSaveBlocker.start("prevent-display-sleep")
+// process the plugin location info 
+const loader = require('./app/js/loader.js')
+
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev")
@@ -71,8 +74,11 @@ function createWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow(browserWindowOptions)
 
-	// and load the index.html of the app.
-	mainWindow.loadURL("file://" + __dirname + "/index.html")
+	// load the plugins found and customize the plugin layout
+	var fn= loader.loadPluginInfo(__dirname + '/index.html', config)
+  
+	// and load the updated index.html of the app.
+	mainWindow.loadURL('file://' + __dirname + fn)
 
 	// Open the DevTools if run with "npm start dev"
 	if (DevelopmentMode) {
@@ -183,6 +189,8 @@ if (config.remote && config.remote.enabled || firstRun) {
 
 	remote.on("relaunch", function() {
 		console.log("Relaunching...")
+		// rebuild the html file plugin position info
+		loader.loadPluginInfo(__dirname + '/index.html', config)    
 		app.relaunch()
 		app.quit()
 	})

@@ -1,5 +1,4 @@
-<div class="fitbit" ng-controller="Fitbit">
-
+<div class="fitbit" ng-controller="Fitbit" ng-if="config.fitbit.creds" >
     <div ng-switch="currentStatGroup">
         <p>
             <!-- Today's Statistics -->
