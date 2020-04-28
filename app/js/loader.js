@@ -167,38 +167,38 @@ loader.loadPluginInfo = function(filename, config){
 				}
 				// get the area div location
 				page_location = p.area
-							// first time we've seen this area?
+				// first time we've seen this area?
 				if(locations[page_location] == undefined){
-								// create object to hold items
+					// create object to hold items
 					locations[page_location]={items:[], delayed:[]}
 				}
 				if(debug) {console.log(page_location+" length="+locations[page_location].items.length)}
-							// if the position ordering is 'any'
+				// if the position ordering is 'any'
 				if(p.order =='*') {
 					if(debug) {console.log(" place anywhere")}
-							// append it
+					// append it
 					locations[page_location].delayed.push(id_div)
 				}
-							// if needs to be first
+				// if needs to be first
 				else if(p.order == 1){
 					if(debug) {console.log(" place 1st")}
-						// prepend it
+					// prepend it
 					locations[page_location].items.unshift(id_div)
 				}
-							// has some other position, greater than 1
+				// has some other position, greater than 1
 				else{
-								// if there are already more than 1 entry
+					// if there are already more than 1 entry
 					if(debug) {console.log(" place in position\n count = "+locations[page_location].items.length +" pos="+p.order)}
-						// if more already than this one
+					// if more already than this one
 					if(locations[page_location].items.length>= p.order){
 						if(debug) {console.log(" more than 1")}
-							// splice it in where it belongs
+						// splice it in where it belongs
 						let insert_index = parseInt( p.order) -1;
 						locations[page_location].items.splice(insert_index,0,id_div)
 						if(debug) {console.log("insert_index="+insert_index+ " list="+JSON.stringify(locations[page_location].items))}
 					} else {
 						if(debug) {console.log(" adding to the end")}
-								// add it to the end
+						// add it to the end
 						locations[page_location].items.push(id_div)
 					}
 				}
@@ -220,7 +220,7 @@ loader.loadPluginInfo = function(filename, config){
 			let d=$("div."+page_location)
 			// put this module there
 			if(d)
-				{d.append(id_div)}
+			{d.append(id_div)}
 			else{
 				if(debug) {console.log("not yet added, location not found"+id_div)}
 			}

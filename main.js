@@ -74,10 +74,10 @@ function createWindow() {
 	// Create the browser window.
 	mainWindow = new BrowserWindow(browserWindowOptions)
 
-  // load the plugins found and customize the plugin layout
+	// load the plugins found and customize the plugin layout
 	var fn= loader.loadPluginInfo(__dirname + '/index.html', config)
   
-  // and load the updated index.html of the app.
+	// and load the updated index.html of the app.
 	mainWindow.loadURL('file://' + __dirname + fn)
 
 	// Open the DevTools if run with "npm start dev"
@@ -189,7 +189,7 @@ if (config.remote && config.remote.enabled || firstRun) {
 
 	remote.on("relaunch", function() {
 		console.log("Relaunching...")
-    // rebuild the html file plugin position info
+		// rebuild the html file plugin position info
 		loader.loadPluginInfo(__dirname + '/index.html', config)    
 		app.relaunch()
 		app.quit()
