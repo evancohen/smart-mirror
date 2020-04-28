@@ -41,7 +41,7 @@ remote.start = function () {
 	app.use(express.static(__dirname + '/remote'))
 	remote.io = require('socket.io')(server)
 
-  /**
+	/**
    * When the connection begins
    */
 	remote.io.on('connection', function (socket) {
@@ -95,7 +95,7 @@ remote.start = function () {
 
 	}) // end - connection
 
-  /**
+	/**
    * When a remote disconnects
    */
 	remote.io.on('disconnect', function () {

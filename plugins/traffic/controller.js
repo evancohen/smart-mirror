@@ -13,8 +13,8 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 
 		if (typeof config.traffic != 'undefined' && config.traffic.key != '' && config.traffic.trips) {
 			angular.forEach(config.traffic.trips, function (trip) {
-				if (trip.hasOwnProperty('startTime') && TimeboxService.shouldDisplay(trip.startTime, trip.endTime)
-                    || !trip.hasOwnProperty('startTime')) {
+				if ((trip['startTime'] != undefined && TimeboxService.shouldDisplay(trip.startTime, trip.endTime))
+                    || (!trip['startTime'] == undefined)) {
 					promises.push(getTripDuration(trip));
 				}
 			});
@@ -29,11 +29,11 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 		return deferred.promise;
 	};
 
-    // Request traffic info for the configured mode of transport
+	// Request traffic info for the configured mode of transport
 	function getTripDuration(trip) {
 		var deferred = $q.defer();
 		$http.get(getEndpoint(trip)).then(function (response) {
-            // Walking and Transit are "not effected" by traffic so we don't use their traffic duration
+			// Walking and Transit are "not effected" by traffic so we don't use their traffic duration
 			if (trip.mode == "Transit" || trip.mode == "Walking") {
 				trip.duration = durationHumanizer(response.data.resourceSets[0].resources[0].travelDuration * 1000);
 			} else {
@@ -42,7 +42,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 
 			deferred.resolve(trip);
 		}, function (error) {
-            // Most of the time this is because an address can't be found
+			// Most of the time this is because an address can't be found
 			if (error.status === 404) {
 				console.error('No transit information available between start and end');
 				deferred.reject('Unavailable');
@@ -57,7 +57,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 		return deferred.promise;
 	}
 
-    // Depending on the mode of transport different paramaters are required.
+	// Depending on the mode of transport different paramaters are required.
 	function getEndpoint(trip) {
 		var waypoints = 1;
 		var intermediateGoal = "";
@@ -80,7 +80,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 
 	var refreshTrafficData = function () {
 		getDurationForTrips().then(function (tripsWithTraffic) {
-            //Todo this needs to be an array of traffic objects -> $trips[]
+			//Todo this needs to be an array of traffic objects -> $trips[]
 			$scope.trips = tripsWithTraffic;
 		}, function (error) {
 			$scope.traffic = { error: error };
@@ -93,4 +93,4 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 }
 
 angular.module('SmartMirror')
-    .controller('Traffic', Traffic);
+	.controller('Traffic', Traffic);

@@ -8,6 +8,9 @@
     "reminders": {
         "empty": "리스트가 비었습니다."
     },
+    "weather": {
+        "today": "오늘"
+    },    
     "timer": {
       "one": "일",
       "minute": "분",
