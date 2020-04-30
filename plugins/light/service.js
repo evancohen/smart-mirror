@@ -6,16 +6,16 @@
 	function LightService($http, $translate) {
 		var service = {};
 
-        // update lights
+		// update lights
 		service.performUpdate = function (utterance) {
-            // split string into separate words and remove empty ones
+			// split string into separate words and remove empty ones
 			var spokenWords = utterance.toLowerCase().split(" ").filter(Boolean);
 
 			var SaidParameter = {};
 			SaidParameter['locations'] = [];
 			SaidParameter['on'] = true;
 
-            // what locations are defined in the config
+			// what locations are defined in the config
 			var definedLocations = [];
 			for (var i = 0; i < config.light.setup.length; i++) {
 				definedLocations.push(config.light.setup[i].name.toLowerCase());
@@ -24,15 +24,15 @@
 				}
 			}
 
-            // what has been said
+			// what has been said
 			for (var w = 0; w < spokenWords.length; w++) {
 				
-                // turn lights on or off?
+				// turn lights on or off?
 				if ($translate.instant('lights.action.off') == spokenWords[w]) {
 					SaidParameter['on'] = false;
 				}
 
-                // Choose Color
+				// Choose Color
 				if ($translate.instant('lights.colors.red') == spokenWords[w]) {
 					SaidParameter['colorRGB'] = [255, 0, 0];
 					SaidParameter['colorHSV'] = [0, 255, 254];
@@ -59,7 +59,7 @@
 					SaidParameter['colorHSV'] = [0, 0, 254];
 				}
 
-                // Adjust brightness
+				// Adjust brightness
 				if ((spokenWords[w] == '100' && spokenWords[w+1] && spokenWords[w+1] == "%") || $translate.instant('lights.intensity.max').includes(spokenWords[w])) {
 					SaidParameter['brightness'] = 1.0;
 				} else if (spokenWords[w] == '10' && spokenWords[w+1] && spokenWords[w+1] == "%") {
@@ -86,21 +86,21 @@
 					SaidParameter['brightness'] = 0.9;
 				}
 
-                // special mode
+				// special mode
 				if ($translate.instant('lights.action.nightmode').includes(spokenWords[w])) {
 					SaidParameter['colorRGB'] = [255, 0, 0];
 					SaidParameter['colorHSV'] = [0, 255, 254];
 					SaidParameter['brightness'] = 0.1
 				}
 
-                // reset all LED
+				// reset all LED
 				if ($translate.instant('lights.action.reset').includes(spokenWords[w])) {
 					localStorage.clear()
 				}
 
 			}
 
-            // if spoken words contain no location, use all defined locations
+			// if spoken words contain no location, use all defined locations
 			if (SaidParameter['locations'].length == 0) {
 				for (var y = 0; y < definedLocations.length; y++) {
 					SaidParameter['locations'].push(y);
@@ -109,11 +109,11 @@
 
 			var SavedSettings = [];
 
-            // get remaining info from local storage
+			// get remaining info from local storage
 			for (var j = 0; j < SaidParameter['locations'].length; j++) {
 				var k = SaidParameter['locations'][j];
 				var SavedSetting = {};
-                // read settings from storage or use default
+				// read settings from storage or use default
 				if (localStorage.getItem('Light_Setup_' + k) == null) {
 					SavedSetting['colorRGB'] = [255, 255, 255];
 					SavedSetting['colorHSV'] = [0, 0, 254];
@@ -123,14 +123,14 @@
 					SavedSetting = JSON.parse(localStorage.getItem('Light_Setup_' + k));
 				}
 
-                // overwrite settings with spoken info
+				// overwrite settings with spoken info
 				for (var key in SaidParameter) {
-					if (SaidParameter.hasOwnProperty(key)) {
+					if (SavedSetting[key] !== undefined) {
 						SavedSetting[key] = SaidParameter[key];
 					}
 				}
 
-                // save new values in local storage
+				// save new values in local storage
 				localStorage.setItem('Light_Setup_' + k, JSON.stringify(SavedSetting));
 
 				SavedSetting['location'] = k;
@@ -154,11 +154,11 @@
 		}
 
 		function updateHyperion(i, index, setting) {
-            // Convert color and brightness
+			// Convert color and brightness
 			for (var j = 0; j < setting['colorRGB'].length; j++) {
 				setting['colorRGB'][j] = Math.round(setting['colorRGB'][j] * setting['brightness']);
 			}
-            // Connect to the configured Hyperion client
+			// Connect to the configured Hyperion client
 			var hyperion = new Hyperion(config.light.setup[index].targets[i].ip, config.light.setup[index].targets[i].port);
 
 			hyperion.on('connect', function () {
@@ -187,15 +187,15 @@
 			}
 
 			$http.put('http://' + config.light.settings.hueIp + '/api/' + config.light.settings.hueUsername + "/groups/" + config.light.setup[index].targets[i].id + "/action", update)
-                .success(function (data, status) {
-	console.log(status, data);
-})
+				.success(function (data, status) {
+					console.log(status, data);
+				})
 		}
 
 		return service;
 	}
 
 	angular.module('SmartMirror')
-        .factory('LightService', LightService);
+		.factory('LightService', LightService);
 
 } ());

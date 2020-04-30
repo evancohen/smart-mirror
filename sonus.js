@@ -42,7 +42,7 @@ for (let i = 0; i < config.speech.hotwords.length; i++) {
 
 
 const language = config.general.language
-const recordProgram = (os.arch() == 'arm') ? "arecord" : "rec"
+const recordProgram = (os.arch().startsWith('arm')| os.arch=='x64') ? "arecord" : "rec"
 const device = (config.speech.device != "") ? config.speech.device : 'default'
 const sonus = Sonus.init({ hotwords, language, recordProgram, device }, client)
 

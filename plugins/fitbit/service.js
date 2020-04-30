@@ -8,7 +8,7 @@
 		var fitbit = {};
 		var tokenFile = 'fb-token.json';
 
-        /**
+		/**
          * Persist the fitbit token.
          */
 		var persist = {
@@ -30,7 +30,7 @@
 			}
 		};
 
-        /**
+		/**
          * Get today's date in the format YYYY-MM-DD. The date is used to 
          */
 		service.getToday = function () {
@@ -50,7 +50,7 @@
 			return yyyy + '-' + mm + '-' + dd;
 		}
 
-        /**
+		/**
          * Instantiate the fitbit client.
          */
 		if (typeof config.fitbit != 'undefined') {
@@ -65,7 +65,7 @@
 				res.redirect(fitbit.authorizeURL());
 			});
 
-            /*
+			/*
                 Callback service parsing the authorization token and asking for the access token. 
                 This endpoint is refered to in config.fitbit.authorization_uri.redirect_uri.
              */
@@ -82,7 +82,7 @@
 				});
 			});
 
-            /*
+			/*
                 Call an API. fitbit.request() mimics nodejs request() library, 
                 automatically adding the required oauth2 header. The callback 
                 is a bit different, called with (err, body, token). If token is 
@@ -112,7 +112,7 @@
 			});
 		}
 
-        /**
+		/**
          * Init function
          * If the fitbit configuration is present in the config.json, then express along with the fitbit service will be enabled.
          */
@@ -140,7 +140,7 @@
 			});
 		}
 
-        /**
+		/**
          * Profile Summary
          * - Makes an API call to fitibt requesting the users profile summary.
          */
@@ -171,7 +171,7 @@
 			});
 		}
 
-        /**
+		/**
          * Today's Summary
          * - Makes a call to the fitbit API, requesting the summary of activities for today's date.
          */
@@ -205,7 +205,7 @@
 
 		}
 
-        /**
+		/**
          * Sleep Summary
          * - Makes a call to the fitbit API, requesting the summary of user's sleep from last night.
          */
@@ -237,7 +237,7 @@
 			});
 		}
 
-        /**
+		/**
          * Device summary
          * - Makes an API call to gather the information on the devices.
          */

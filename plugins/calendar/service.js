@@ -48,30 +48,30 @@
 		}
 
 		var parseICAL = function (data) {
-      //Ensure cal is empty
+			//Ensure cal is empty
 			var events = [];
 
-      //Clean string and split the file so we can handle it (line by line)
+			//Clean string and split the file so we can handle it (line by line)
 			var cal_array = data.replace(new RegExp("\\r", "g"), "").replace(/\n /g, "").split("\n");
 
-      //Keep track of when we are activly parsing an event
+			//Keep track of when we are activly parsing an event
 			var in_event = false;
-      //Use as a holder for the current event being proccessed.
+			//Use as a holder for the current event being proccessed.
 			var cur_event = null;
 			for (var i = 0; i < cal_array.length; i++) {
 				var ln = cal_array[i];
 
-        // Extract calendar name
+				// Extract calendar name
 				if (ln.startsWith('X-WR-CALNAME')) {
 					var calendarName = ln.split(':')[1];
 				}
 
-        //If we encounted a new Event, create a blank event object + set in event options.
+				//If we encounted a new Event, create a blank event object + set in event options.
 				if (!in_event && ln == 'BEGIN:VEVENT') {
 					in_event = true;
 					cur_event = {};
 				}
-        //If we encounter end event, complete the object and add it to our events array then clear it for reuse.
+				//If we encounter end event, complete the object and add it to our events array then clear it for reuse.
 				if (in_event && ln == 'END:VEVENT') {
 					in_event = false;
 					cur_event.calendarName = calendarName;
@@ -80,30 +80,30 @@
 					}
 					cur_event = null;
 				}
-        //If we are in an event
+				//If we are in an event
 				else if (in_event) {
-          //var lntrim = ln.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-          //var lnsplit = lntrim.split(':');
-          //type = lnsplit[0];
-          //val = lnsplit[1];
+					//var lntrim = ln.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+					//var lnsplit = lntrim.split(':');
+					//type = lnsplit[0];
+					//val = lnsplit[1];
 
-          //Split the item based on the first ":"
+					//Split the item based on the first ":"
 					var idx = ln.indexOf(':');
-          //Apply trimming to values to reduce risks of badly formatted ical files.
+					//Apply trimming to values to reduce risks of badly formatted ical files.
 					var type = ln.substr(0, idx).replace(/^\s\s*/, '').replace(/\s\s*$/, ''); //Trim
 					var val = ln.substr(idx + 1).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 
-          //If the type is a start date, proccess it and store details
+					//If the type is a start date, proccess it and store details
 					if (type.startsWith('DTSTART')) {
 						cur_event.start = makeDate(type, val);
 						cur_event.startName = makeDate(type, val).calendar().toUpperCase();
 					}
 
-          //If the type is an end date, do the same as above
+					//If the type is an end date, do the same as above
 					else if (type.startsWith('DTEND')) {
 						cur_event.end = makeDate(type, val);
 
-            // Subtract one second so that single-day events endon the same day
+						// Subtract one second so that single-day events endon the same day
 						cur_event.endName = makeDate(type, val).subtract(1, 'seconds').calendar().toUpperCase();
 					}
 
@@ -111,17 +111,17 @@
 						cur_event.label = cur_event.startName + " - " + cur_event.endName;
 					}
 
-          //Convert timestamp
+					//Convert timestamp
 					else if (type == 'DTSTAMP') {
-            //val = makeDate(type, val);
+						//val = makeDate(type, val);
 					} else {
 						val = val
-              .replace(/\\r\\n/g, '<br />')
-              .replace(/\\n/g, '<br />')
-              .replace(/\\,/g, ',');
+							.replace(/\\r\\n/g, '<br />')
+							.replace(/\\n/g, '<br />')
+							.replace(/\\,/g, ',');
 					}
 
-          //Add the value to our event object.
+					//Add the value to our event object.
 					if (type !== 'SUMMARY' || (type == 'SUMMARY' && cur_event['SUMMARY'] == undefined)) {
 						cur_event[type] = val;
 					}
@@ -164,7 +164,7 @@
 					}
 				}
 			}
-      //Add all of the extracted events to the CalendarService
+			//Add all of the extracted events to the CalendarService
 			service.events.push.apply(service.events, events);
 		}
 
@@ -201,8 +201,8 @@
 				end_date = new moment().add(config.calendar.maxDays, 'days');
 
 			service.events.forEach(function (itm) {
-        //If the event started before current time but ends after the current time or
-        // if there is no end time and the event starts between today and the max number of days add it.
+				//If the event started before current time but ends after the current time or
+				// if there is no end time and the event starts between today and the max number of days add it.
 				if ((itm.end != undefined && (itm.end.isAfter(current_date) && itm.start.isBefore(current_date))) || itm.start.isBetween(current_date, end_date)) {
 					future_events.push(itm);
 				}
@@ -231,7 +231,7 @@
 				current_date = new moment();
 
 			service.events.forEach(function (itm) {
-        //If the event ended before the current time, add it to the array to return.
+				//If the event ended before the current time, add it to the array to return.
 				if (itm.end != undefined && itm.end.isBefore(current_date)) {
 					past_events.push(itm);
 				}
@@ -243,5 +243,5 @@
 	}
 
 	angular.module('SmartMirror')
-    .factory('CalendarService', CalendarService);
+		.factory('CalendarService', CalendarService);
 } ());
