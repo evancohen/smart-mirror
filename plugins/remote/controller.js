@@ -22,7 +22,7 @@ function Remote($scope, SpeechService, Focus) {
 		});
 	} 
     
-    // First Run
+	// First Run
 	if (config.remote.firstRun) {
 		$scope.firstRun = true;
 		showRemote()
@@ -30,4 +30,4 @@ function Remote($scope, SpeechService, Focus) {
 }
 
 angular.module('SmartMirror')
-    .controller('Remote', Remote);
+	.controller('Remote', Remote);

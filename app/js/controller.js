@@ -176,7 +176,7 @@
 		.controller('MirrorCtrl', MirrorCtrl);
 
 	function themeController($scope) {
-		$scope.layoutName = (typeof config.layout !== 'undefined' && config.layout) ? config.layout : 'main';
+		$scope.layoutName = (typeof config.general.layout !== 'undefined' && config.general.layout) ? config.general.layout : 'main';
 	}
 
 	angular.module('SmartMirror')

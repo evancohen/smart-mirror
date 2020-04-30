@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - "6"
+  - "10"
+
+before_install:
+  - npm i -g npm
 
 # Cache node dependencies
 cache:

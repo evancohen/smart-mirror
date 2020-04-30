@@ -96,8 +96,6 @@ function createWindow() {
 
 function startSonus()
 {
-
-console.log("checking starting sonus");
 	// Initilize the keyword spotter
 	kwsProcess = spawn("node", ["./sonus.js"], { detached: false })
 	// Handel messages from node

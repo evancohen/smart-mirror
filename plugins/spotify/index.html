@@ -1,0 +1,16 @@
+<div ng-controller="Spotify" ng-if="config.spotify.position === 'top'" ng-show="spActive">
+    <div class="spotify-container animate-grow">
+        <img class="spotify-art" ng-src="{{spThumb}}" width="96" height="96"/>
+        <span class="spotify-info">
+            <h2 class="spotify-track truncate" ng-bind="spTrack"></h2>
+            <h3 class="spotify-artist truncate em-85" ng-bind="spArtist"></h3>
+            <h3 class="spotify-device truncate em-85" ng-bind="spDevice"></h3>
+            <span class="spotify-status-indicator">
+                <i ng-show="spPlaying" class="material-icons">play_circle_outline</i>
+                <i ng-hide="spPlaying" class="material-icons">pause_circle_outline</i>
+                <i ng-show="spShuffle" class="material-icons">shuffle</i>
+                <i ng-show="spRepeat === 'track'" class="material-icons">repeat</i>
+            </span>
+        </span>
+    </div>
+</div>
