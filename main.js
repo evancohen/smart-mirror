@@ -97,7 +97,7 @@ function createWindow() {
 function startSonus()
 {
 
-console.log("checking starting sonus");
+	console.log("checking starting sonus");
 	// Initilize the keyword spotter
 	kwsProcess = spawn("node", ["./sonus.js"], { detached: false })
 	// Handel messages from node
@@ -203,12 +203,12 @@ console.log("checking motion enabled motion="+config.motion+" modtion-enabled="+
 var mtnProcess=null;
 if(config.motion && config.motion.enabled){
 	if( config.motion.enabled == "pin") {
-	  // use npm to start for sudo needed by raspio
-	  mtnProcess= spawn("npm", ["run","motion"], {detached: false})
+		// use npm to start for sudo needed by raspio
+		mtnProcess= spawn("npm", ["run","motion"], {detached: false})
 	}
 	else
-	  // don't need npm, just launch script
-	  mtnProcess= spawn("node", ["./motion.js"], { detached: false })
+		// don't need npm, just launch script
+		mtnProcess= spawn("node", ["./motion.js"], { detached: false })
 	// Handel messages from node
 	mtnProcess.stderr.on("data", function (data) {
 		var message = data.toString()
