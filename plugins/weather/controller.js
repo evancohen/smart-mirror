@@ -1,29 +1,47 @@
 function Weather($scope, $interval, $http, $translate,GeolocationService) {
 
-	//var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
+	var language = (typeof config.general.language !== 'undefined') ? config.general.language.substr(0, 2) : "en"
 	var geoposition = {}
-	var weather = {}
+	var weather= {}
+	weather.get= {}
 
 	weather.getCountry= function (){
 		return new Promise((resolve,reject)=>{
-			if(config.forecast.units=='auto'){				
-				$http.get('http://www.datasciencetoolkit.org/coordinates2politics/'+geoposition.coords.latitude.toString().substring(0,10)+','+geoposition.coords.longitude.toString().substring(0,11))
-					.then ((info) =>{
-						if(info.data[0].politics[0].code =='usa')
-							config.forecast.units='us'
-						else		
-							config.forecast.units='si'	
-						resolve()					
-					}).catch((error)=>{
-						console.log("datasciencetoolkit country from geolocation failed ="+JSON.stringify(error))
-						reject();
-					})
+			if(config.forecast.keytype =='Climacell'){
+				if(config.forecast.units=='auto'){				
+					$http.get('http://www.datasciencetoolkit.org/coordinates2politics/'+geoposition.coords.latitude.toString().substring(0,10)+','+geoposition.coords.longitude.toString().substring(0,11))
+						.then ((info) =>{
+							if(info.data[0].politics[0].code =='usa')
+								config.forecast.units='us'
+							else		
+								config.forecast.units='si'	
+							resolve()					
+						}).catch((error)=>{
+							console.log("datasciencetoolkit country from geolocation failed ="+JSON.stringify(error))
+							reject();
+						})
+				}
+				else
+					resolve()	
+			}	
+			else { 
+				// darksky, nothign to do here
+				resolve()
 			}
-			else
-				resolve()	
 		})
 	}	
-	weather.get = function () {
+	weather.get.Darksky  = function () {
+		return new Promise((resolve,reject)=>{
+			$http.jsonp('https://api.darksky.net/forecast/' + config.forecast.key + '/' +
+          	    geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
+            	config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
+			.then(function (response) {
+				console.log("json="+JSON.stringify(response.data));
+				resolve(weather.forecast = response);
+			});
+		})
+	};
+	weather.get.Climacell = function () {
 
 		// return a promise, so the caller can wait
 		return new Promise((resolve,reject)=>{	
@@ -86,11 +104,18 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
-		//weather.forecast.data.currently={}
-		weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.currently.data.observation_time.value).format('ddd')
-		weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.data.temp.value).toFixed(0);
-		weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.currently.data) ;
-		//weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
+		if(config.forecast.keytype=='Darksky'){
+			weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
+			weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.temperature).toFixed(0);
+			weather.forecast.data.currently.wi = "wi-forecast-io-" + weather.forecast.data.currently.icon;
+			weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
+		} else{
+			weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.currently.data.observation_time.value).format('ddd')
+			weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.data.temp.value).toFixed(0);
+			weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.currently.data) ;
+			//weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
+		}
+
 		return weather.forecast.data.currently;
 	}
 
@@ -98,19 +123,31 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
-		// Add human readable info to info
-		var datalength=min(weather.forecast.data.length,8)
+		if(config.forecast.keytype=='Darksky'){
+			// Add human readable info to info
+			for (var i = 0; i < weather.forecast.data.daily.data.length; i++) {
+				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
+				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
+				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
+				weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
+				weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
+			}			
+		} else {
+			// Add human readable info to info
+			var datalength=min(weather.forecast.data.length,8)
 
-		weather.forecast.data.daily={}
-		weather.forecast.data.daily.data=[]		
-		for (var i=0; i<datalength; i++) {
-			weather.forecast.data.daily.data[i]={}
-			weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
-			weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data[i].temp[0].min.value).toFixed(0);
-			weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data[i].temp[1].max.value).toFixed(0);
-			weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data[i]) 
-			weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
-			//weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
+			weather.forecast.data.daily={}
+			weather.forecast.data.daily.data=[]		
+			for (var i=0; i<datalength; i++) {
+				weather.forecast.data.daily.data[i]={}
+				weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data[i].temp[0].min.value).toFixed(0);
+				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data[i].temp[1].max.value).toFixed(0);
+				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data[i]) 
+				weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
+				//weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
+			}
 		}
 		return weather.forecast.data.daily;
 	}
@@ -130,18 +167,22 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 	});
 
 	function refreshWeatherData() {
+		if(config.forecast.keytype.startsWith('Darksky'))
+			config.forecast.keytype='Darksky'
 		// map location to country for auto weather units (if needed)
 		weather.getCountry().then(()=>{
 			// get the weather info
-			weather.get().then(()=> {
+			weather.get[config.forecast.keytype]().then(()=> {
 				// set the current forecast info for index.html usage
 				$scope.currentForecast = weather.currentForecast();
 				// set the weekely forecast info for index.html usage				
 				$scope.weeklyForecast = weather.weeklyForecast();
-				// we don't have hourly 
-				//$scope.hourlyForecast = weather.hourlyForecast();
-				// or minutely anymore
-				//$scope.minutelyForecast = weather.minutelyForecast();
+				if(config.forecast.keytype =='Darksky'){
+					// we don't have hourly 
+					$scope.hourlyForecast = weather.hourlyForecast();
+					// or minutely anymore
+					$scope.minutelyForecast = weather.minutelyForecast();
+				}
 			}, function (err) {
 				console.error(err)
 			});

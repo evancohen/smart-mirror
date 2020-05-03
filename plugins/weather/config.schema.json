@@ -9,6 +9,11 @@
                     "title": "API Key",
                     "description": "(see <a href='https://www.climacell.co/weather-api/t'>climacell.co</a> documentation to obtain the weather API Key)"
                 },
+                "keytype": {
+                    "type": "string",
+                    "title": "API Key source",
+                    "enum": ["Darksky is no longer giving out keys, and the current ones will expire at the end of 2021, but can still be used if you have one","Climacell"]
+                },
                 "units": {
                     "type": "string",
                     "title": "Units",
