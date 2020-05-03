@@ -11,11 +11,11 @@
 
 				$http.get(url).then(function (response) {
 					if (response.data.error) {
-            // If there is an error with the request (excluding network errors)
+						// If there is an error with the request (excluding network errors)
 						console.log("Scrobbler Error: ", response.data.message);
 						deferred.reject(response);
 					} else if (typeof response.data.recenttracks.track[0]["@attr"] == "object") {
-            // If there is a track currently playing
+						// If there is a track currently playing
 						var track = response.data.recenttracks.track[0];
 						deferred.resolve({
 							title: track.name,
@@ -24,7 +24,7 @@
 							cover: track.image[1]["#text"],
 						});
 					} else {
-            // Either there was a network error or there is no song currently playing
+						// Either there was a network error or there is no song currently playing
 						deferred.reject(response);
 					}
 				});
@@ -36,5 +36,5 @@
 	}
 
 	angular.module('SmartMirror')
-    .factory('ScrobblerService', ScrobblerService);
+		.factory('ScrobblerService', ScrobblerService);
 } ());

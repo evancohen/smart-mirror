@@ -11,7 +11,7 @@
 		service.scResponse = null;
 
 		service.init = function () {
-      // If the soundcloud key is defined and not empty
+			// If the soundcloud key is defined and not empty
 			if (typeof config.soundcloud != 'undefined' && config.soundcloud.length) {
 				SC.initialize({
 					client_id: config.soundcloud.key
@@ -19,15 +19,15 @@
 			}
 		}
 
-    //Returns the soundcloud search results for the given query
+		//Returns the soundcloud search results for the given query
 		service.searchSoundCloud = function (query) {
 			return $http.get('https://api.soundcloud.com/tracks.json?client_id=' + config.soundcloud.key + '&q=' + query + '&limit=2').
-        then(function (response) {
-	service.scResponse = response.data;
-	var streamUrl = service.scResponse[0].stream_url + '?client_id=' + config.soundcloud.key;
-	audio.setAttribute('src', streamUrl);
-	return service.scResponse;
-});
+				then(function (response) {
+					service.scResponse = response.data;
+					var streamUrl = service.scResponse[0].stream_url + '?client_id=' + config.soundcloud.key;
+					audio.setAttribute('src', streamUrl);
+					return service.scResponse;
+				});
 		};
 
 		service.play = function () {
@@ -110,6 +110,6 @@
 	}
 
 	angular.module('SmartMirror')
-    .factory('SoundCloudService', SoundCloudService);
+		.factory('SoundCloudService', SoundCloudService);
 
 } ());

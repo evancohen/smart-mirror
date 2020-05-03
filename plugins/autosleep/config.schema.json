@@ -42,9 +42,14 @@
             "title": "Motion Settings",
             "properties": {
                 "enabled": {
-                    "type": "boolean",
-                    "title": "Check to Enable Motion Detection",
-                    "default":false
+                    "type": "string",
+                    "title": "Select type Motion Detection",
+                    "default":false,
+                    "enum":[
+                      "false",
+                      "pin",
+                      "external"
+                    ]
                 },
                 "pin": {
                     "type": "string",

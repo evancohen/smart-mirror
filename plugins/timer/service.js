@@ -1,7 +1,7 @@
 (function (angular) {
 	'use strict';
 
-  /**
+	/**
    * Factory function for the timer service
    */
 	var TimerService = function ($rootScope, $interval, $filter) {
@@ -11,7 +11,7 @@
 		service.duration = 0;
 		service.countdown = -1;
 
-    /**
+		/**
      * Parse spoken duration into seconds
      * @param  {String} string - e.g.: `1 minute` or `5 minutes and 10 seconds`
      * @return {Number}        - duration in seconds
@@ -19,9 +19,9 @@
 		var parseDuration = function (string) {
 
 			string = string
-        .replace(new RegExp($filter('translate')('timer.one'), 'ig'), '1')
-        .replace(new RegExp($filter('translate')('timer.minute'), 'i'), 'minutes')
-        .replace(new RegExp($filter('translate')('timer.second'), 'i'), 'seconds');
+				.replace(new RegExp($filter('translate')('timer.one'), 'ig'), '1')
+				.replace(new RegExp($filter('translate')('timer.minute'), 'i'), 'minutes')
+				.replace(new RegExp($filter('translate')('timer.second'), 'i'), 'seconds');
 
 			console.log(string);
 			var pattern = '([0-9]+) ?(minutes|seconds)';
@@ -87,7 +87,7 @@
 		return service;
 	}
 
-  /**
+	/**
    * Filter for parsing seconds to date
    */
 	var secondsToDateTime = function () {
@@ -96,7 +96,7 @@
 		};
 	};
 
-  /**
+	/**
    * Directive for the svg circle
    */
 	var TimerCircle = function () {
@@ -124,7 +124,7 @@
 						animationPlayState: 'running'
 					});
 
-          // trigger reflow to reset the animation
+					// trigger reflow to reset the animation
 					circle[0].getBoundingClientRect();
 
 					setTimeout(function () {
@@ -155,8 +155,8 @@
 	};
 
 	angular.module('SmartMirror')
-    .factory('TimerService', TimerService)
-    .filter('secondsToDateTime', secondsToDateTime)
-    .directive('timerCircle', TimerCircle);
+		.factory('TimerService', TimerService)
+		.filter('secondsToDateTime', secondsToDateTime)
+		.directive('timerCircle', TimerCircle);
 
 } (window.angular));

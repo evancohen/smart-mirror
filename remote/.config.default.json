@@ -97,5 +97,31 @@
       "scope": "activity nutrition profile settings sleep social weight heartrate",
       "state": "3(#0/!~"
     }
-  }
+  },
+  "plugins": [
+    {"name":"greeting","area":"middle-center", "order":"*", "active":true}, 
+    {"name":"remote","area":"middle-center", "order":"*", "active":true},
+    {"name":"soundcloud","area":"middle-center", "order":"*", "active":true},
+    {"name":"map","area":"middle-center", "order":"*", "active":true},
+    {"name":"xkcd","area":"middle-center", "order":"*", "active":true},
+    {"name":"dilbert","area":"middle-center", "order":"*", "active":true},
+    {"name":"commitstrip","area":"middle-center", "order":"*", "active":true},
+    {"name":"search","area":"middle-center", "order":"*", "active":true},
+    {"name":"giphy","area":"middle-center", "order":"*", "active":true},
+    {"name":"reminder","area":"middle-center", "order":"*", "active":true},
+    {"name":"timer","area":"middle-center", "order":"*", "active":true},
+    {"name":"todoist","area":"middle-center", "order":"*", "active":true}, 
+    {"name":"calendar","area":"top-left", "order":"2", "active":true},       
+    {"name":"weather","area":"top-right", "order":"1", "active":true},    
+    {"name":"datetime","area":"top-left", "order":"1", "active":true},  
+    {"name":"stock","area":"top-right", "order":"3", "active":true},    
+    {"name":"traffic","area":"top-right", "order":"2", "active":true},
+    {"name":"tvshows","area":"top-right", "order":"*", "active":true},
+    {"name":"ha-display","area":"top-right", "order":"*", "active":true},      
+    {"name":"commands","area":"bottom-center", "order":"*", "active":true},
+    {"name":"rss","area":"bottom-center", "order":"*", "active":true},   
+    {"name":"fitbit","area":"bottom-left", "order":"*", "active":true},
+    {"name":"scrobbler","area":"bottom-left", "order":"*", "active":true},  
+		{"name":"spotify","area":"bottom-left", "order":"*", "active":false}
+  ]
 }
