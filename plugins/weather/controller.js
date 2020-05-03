@@ -214,6 +214,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 
 	function refreshWeatherData() {
 		config.forecast.keytype=(config.forecast.keytype+' ').split(' ')[0]
+		config.forecast.key=config.forecast.key.trim()
 		// map location to country for auto weather units (if needed)
 		weather.getCountry().then(()=>{
 			// get the weather info
