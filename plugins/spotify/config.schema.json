@@ -17,7 +17,7 @@
         "position": {
           "type": "string",
           "title": "Default status indicator position ('top' or 'bottom')",
-          "enum": ["top", "bottom"]
+          "enum": ["bottom","top"]
         },
         "creds": {
           "type": "object",
