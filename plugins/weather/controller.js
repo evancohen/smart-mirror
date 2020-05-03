@@ -37,21 +37,27 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 					'&lon='+geoposition.coords.longitude.toString().substring(0,11)+
 					'&units='+((config.forecast.units=='us')?'imperial':'metric')+
 					'&appid='+config.forecast.key)
-			.then(function (response) {
-				console.log("json="+JSON.stringify(response.data));
-				resolve(weather.forecast = response);
-			});
+				.then(function (response) {
+					console.log("json="+JSON.stringify(response.data));
+					resolve(weather.forecast = response);
+				}).catch(()=>{
+					reject()
+				}
+				);
 		})
 	};
 	weather.get.Darksky  = function () {
 		return new Promise((resolve,reject)=>{
 			$http.jsonp('https://api.darksky.net/forecast/' + config.forecast.key + '/' +
-          	    geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
-            	config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
-			.then(function (response) {
-				console.log("json="+JSON.stringify(response.data));
-				resolve(weather.forecast = response);
-			});
+				geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
+				config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
+				.then(function (response) {
+					console.log("json="+JSON.stringify(response.data));
+					resolve(weather.forecast = response);
+				}).catch(()=>{
+					reject()
+				}
+				);
 		})
 	};	
 	weather.get.Climacell = function () {
@@ -118,22 +124,22 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			return null;
 		}
 		switch(config.forecast.keytype){
-			case 'Darksky':
-				weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
-				weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.temperature).toFixed(0);
-				weather.forecast.data.currently.wi = "wi-forecast-io-" + weather.forecast.data.currently.icon;
-				weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
+		case 'Darksky':
+			weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
+			weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.temperature).toFixed(0);
+			weather.forecast.data.currently.wi = "wi-forecast-io-" + weather.forecast.data.currently.icon;
+			weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
 			break;
-			case 'Climacell':
-				weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.currently.data.observation_time.value).format('ddd')
-				weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.data.temp.value).toFixed(0);
-				weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.currently.data.weather_code.value, weather.forecast.data.currently.data.sunrise.value, weather.forecast.data.currently.data.sunset.value, 'utc') ;
+		case 'Climacell':
+			weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.currently.data.observation_time.value).format('ddd')
+			weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.data.temp.value).toFixed(0);
+			weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.currently.data.weather_code.value, weather.forecast.data.currently.data.sunrise.value, weather.forecast.data.currently.data.sunset.value, 'utc') ;
 			break;
-			case 'Openweather':
-			    weather.forecast.data['currently']={}
-			    weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.current.dt).format('ddd')
-				weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.current.temp).toFixed(0);
-				weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.current.weather["0"].description,weather.forecast.data.current.sunrise, weather.forecast.data.current.sunset ,'unix') ;			
+		case 'Openweather':
+			weather.forecast.data['currently']={}
+			weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.current.dt).format('ddd')
+			weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.current.temp).toFixed(0);
+			weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.current.weather["0"].description,weather.forecast.data.current.sunrise, weather.forecast.data.current.sunset ,'unix') ;			
 			break;
 			//weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
 		}
@@ -145,48 +151,50 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
+		var i=0;
+		var datalength=0;
 		switch(config.forecast.keytype){
-			case 'Darksky':
-				// Add human readable info to info
-				for (var i = 0; i < weather.forecast.data.daily.data.length; i++) {
-					weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
-					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
-					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
-					weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
-					weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
-					weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
-				}		
+		case 'Darksky':
+			// Add human readable info to info
+			for (i = 0; i < weather.forecast.data.daily.data.length; i++) {
+				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
+				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
+				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
+				weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
+				weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
+			}		
 			break;	
-			case 'Climacell':
-				// Add human readable info to info
-				var datalength=min(weather.forecast.data.length,8)
+		case 'Climacell':
+			// Add human readable info to info
+			datalength=min(weather.forecast.data.length,8)
 
-				weather.forecast.data.daily={}
-				weather.forecast.data.daily.data=[]		
-				for (var i=0; i<datalength; i++) {
-					weather.forecast.data.daily.data[i]={}
-					weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
-					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data[i].temp[0].min.value).toFixed(0);
-					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data[i].temp[1].max.value).toFixed(0);
-					weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data[i].weather_code.value, weather.forecast.data[i].temp[0].observation_time, weather.forecast.data[i].temp[1].observation_time, 'utc') ;
-					weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
-					//weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
-				}
+			weather.forecast.data.daily={}
+			weather.forecast.data.daily.data=[]		
+			for (i=0; i<datalength; i++) {
+				weather.forecast.data.daily.data[i]={}
+				weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data[i].temp[0].min.value).toFixed(0);
+				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data[i].temp[1].max.value).toFixed(0);
+				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data[i].weather_code.value, weather.forecast.data[i].temp[0].observation_time, weather.forecast.data[i].temp[1].observation_time, 'utc') ;
+				weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
+				//weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
+			}
 			break;			
-			case 'Openweather':
-				var datalength=min(weather.forecast.data.daily.length,8)
+		case 'Openweather':
+			datalength=min(weather.forecast.data.daily.length,8)
 
-				//weather.forecast.data.daily={}
-				weather.forecast.data.daily.data=[]		
-				for (var i=0; i<datalength; i++) {
-					weather.forecast.data.daily.data[i]={}
-					weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily[i].dt).format('ddd'):$translate.instant('weather.today');
-					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily[i].temp.min).toFixed(0);
-					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily[i].temp.max).toFixed(0);
-					weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data.daily[i].weather[0].description,weather.forecast.data.daily[i].sunrise,
-																							weather.forecast.data.daily[i].sunset,'unix') 
-					weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);			
-				}
+			//weather.forecast.data.daily={}
+			weather.forecast.data.daily.data=[]		
+			for (i=0; i<datalength; i++) {
+				weather.forecast.data.daily.data[i]={}
+				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily[i].dt).format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily[i].temp.min).toFixed(0);
+				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily[i].temp.max).toFixed(0);
+				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data.daily[i].weather[0].description,weather.forecast.data.daily[i].sunrise,
+					weather.forecast.data.daily[i].sunset,'unix') 
+				weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);			
+			}
 			break;
 		}
 		return weather.forecast.data.daily;
@@ -197,11 +205,11 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			return null;
 		}
 		switch(config.forecast.keytype){
-			case 'Darksky':
-				weather.forecast.data.hourly.day = moment.unix(weather.forecast.data.hourly.data[0].time).format('ddd')
-				break;
-			default:		
-				weather.forecast.data.hourly.day = moment.unix(weather.forecast.data.hourly[0].dt).format('ddd')
+		case 'Darksky':
+			weather.forecast.data.hourly.day = moment.unix(weather.forecast.data.hourly.data[0].time).format('ddd')
+			break;
+		default:		
+			weather.forecast.data.hourly.day = moment.unix(weather.forecast.data.hourly[0].dt).format('ddd')
 		}
 		return weather.forecast.data.hourly;
 	}
@@ -307,13 +315,13 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 				var sunrise_moment=null;
 				var sunset_moment=null;
 				if(type=='unix'){
-				  sunrise_moment=moment.unix(sunrise)
-				  sunset_moment=moment.unix(sunset)
-			    }
-			    else{
-				  sunrise_moment=moment.utc(sunrise)
-				  sunset_moment=moment.utc(sunset)
-			    }
+					sunrise_moment=moment.unix(sunrise)
+					sunset_moment=moment.unix(sunset)
+				}
+				else{
+					sunrise_moment=moment.utc(sunrise)
+					sunset_moment=moment.utc(sunset)
+				}
 				if( m.isAfter(sunrise_moment) && m.isBefore(sunset_moment) )
 					icon_name+='-day'
 				else
