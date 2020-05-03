@@ -17,7 +17,7 @@
         "position": {
           "type": "string",
           "title": "Default status indicator position ('top' or 'bottom')",
-          "default": "top"
+          "enum": ["bottom","top"]
         },
         "creds": {
           "type": "object",
@@ -25,7 +25,8 @@
             "clientID": {
               "default": "",
               "type": "string",
-              "title": "OAuth 2.0 Client ID"
+              "title": "OAuth 2.0 Client ID",
+              "description":"You must define an application in your Spotify premium account, these two values will come from that definition you must also configure the autorization callback uri as described below "
             },
             "clientSecret": {
               "default": "",
