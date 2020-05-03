@@ -17,14 +17,19 @@ function getConfigSchema(cb) {
 					var filePath = pluginDir + '/' + file + '/config.schema.json';
 					fs.readFile(filePath, 'utf8', function (err, data) {
 						--l;
-						if (!err) {
-							let pluginConfigSchema = JSON.parse(data);
-							if (pluginConfigSchema.schema.speech && !arecerr) {
-								getAudioDevices(pluginConfigSchema, stdout)
+						if (!err) {              
+							try {
+								let pluginConfigSchema = JSON.parse(data);            
+								if (pluginConfigSchema.schema.speech && !arecerr) {
+									getAudioDevices(pluginConfigSchema, stdout)
+								}
+								Object.assign(configSchema.schema, pluginConfigSchema.schema)
+								if (pluginConfigSchema.form) { configSchema.form = configSchema.form.concat(pluginConfigSchema.form) }
+								if (pluginConfigSchema.value) { Object.assign(configSchema.value, pluginConfigSchema.value) }
 							}
-							Object.assign(configSchema.schema, pluginConfigSchema.schema)
-							if (pluginConfigSchema.form) { configSchema.form = configSchema.form.concat(pluginConfigSchema.form) }
-							if (pluginConfigSchema.value) { Object.assign(configSchema.value, pluginConfigSchema.value) }
+							catch (error) {
+								console.log("error ="+ error +" plugin="+file +"\n json ="+data)
+							}
 						}
 						!l && cb(configSchema)
 					});

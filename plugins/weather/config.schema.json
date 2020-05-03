@@ -7,18 +7,18 @@
                 "key": {
                     "type": "string",
                     "title": "API Key",
-                    "description": "(see <a href='http://darksky.net'>darksky.net</a> documentation to obtain the API Key)"
+                    "description": "(see <a href='https://www.climacell.co/weather-api/t'>climacell.co</a> documentation to obtain the weather API Key)"
                 },
                 "units": {
                     "type": "string",
                     "title": "Units",
-                    "description": "(see <a href='http://darksky.net'>darksky.net</a> documentation if you're getting the wrong units)",
-                    "default": "auto"
+                    "description": "(see <a href='https://developer.climacell.co/v3/reference#get-realtime'>climacell weather api</a> documentation if you're getting the wrong units)",
+                    "enum": [ "auto","us", "si" ]
                 },
                 "refreshInterval": {
                     "type": "integer",
                     "title": "Refresh Interval (minutes)",
-                    "default": 2
+                    "enum":[5,10,15,30,45,60]
                 }
             }
         }
