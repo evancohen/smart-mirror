@@ -1,6 +1,6 @@
 function Timer($scope, TimerService, SpeechService, Focus) {
 
-    // Start timer
+	// Start timer
 	SpeechService.addCommand('timer_start', function (duration) {
 		console.debug("Starting timer");
 		Focus.change("timer");
@@ -10,15 +10,15 @@ function Timer($scope, TimerService, SpeechService, Focus) {
 		$scope.$watch('timer.countdown', function (countdown) {
 			if (countdown === 0) {
 				TimerService.stop();
-                // defaultView();
+				// defaultView();
 			}
 		});
 	});
 
-    // Show timer
+	// Show timer
 	SpeechService.addCommand('timer_show', function () {
 		if (TimerService.running) {
-            // Update animation
+			// Update animation
 			if (TimerService.paused) {
 				TimerService.start();
 				TimerService.stop();
@@ -30,14 +30,14 @@ function Timer($scope, TimerService, SpeechService, Focus) {
 		}
 	});
 
-    // Stop timer
+	// Stop timer
 	SpeechService.addCommand('timer_stop', function () {
 		if (TimerService.running && !TimerService.paused) {
 			TimerService.stop();
 		}
 	});
 
-    // Resume timer
+	// Resume timer
 	SpeechService.addCommand('timer_resume', function () {
 		if (TimerService.running && TimerService.paused) {
 			TimerService.start();
@@ -49,5 +49,5 @@ function Timer($scope, TimerService, SpeechService, Focus) {
 
 
 angular.module('SmartMirror')
-    .controller('Timer', Timer);
+	.controller('Timer', Timer);
 

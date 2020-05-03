@@ -127,5 +127,5 @@
 	}
 
 	angular.module('SmartMirror')
-    .factory('TodoistService', TodoistService);
+		.factory('TodoistService', TodoistService);
 } ());

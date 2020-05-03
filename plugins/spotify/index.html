@@ -1,4 +1,4 @@
-<div ng-controller="Spotify" ng-show="spActive">
+<div ng-controller="Spotify" ng-if="config.spotify.position === 'top'" ng-show="spActive">
     <div class="spotify-container animate-grow">
         <img class="spotify-art" ng-src="{{spThumb}}" width="96" height="96"/>
         <span class="spotify-info">
