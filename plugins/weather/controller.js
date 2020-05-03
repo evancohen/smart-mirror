@@ -7,7 +7,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 
 	weather.getCountry= function (){
 		return new Promise((resolve,reject)=>{
-			if(config.forecast.keytype =='Climacell'){
+			if(config.forecast.keytype !='Darksky'){
 				if(config.forecast.units=='auto'){				
 					$http.get('http://www.datasciencetoolkit.org/coordinates2politics/'+geoposition.coords.latitude.toString().substring(0,10)+','+geoposition.coords.longitude.toString().substring(0,11))
 						.then ((info) =>{
@@ -30,6 +30,19 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			}
 		})
 	}	
+	weather.get.Openweather  = function () {
+		return new Promise((resolve,reject)=>{
+			//$http.get("https://api.openweathermap.org/data/2.5/onecall?lat=30.4548443&lon=-97.6222674&appid=a6bf9feaa86bc2677df1e5f46bd79d55")
+			$http.get('https://api.openweathermap.org/data/2.5/onecall?lat='+geoposition.coords.latitude.toString().substring(0,10)+
+					'&lon='+geoposition.coords.longitude.toString().substring(0,11)+
+					'&units='+((config.forecast.units=='us')?'imperial':'metric')+
+					'&appid='+config.forecast.key)
+			.then(function (response) {
+				console.log("json="+JSON.stringify(response.data));
+				resolve(weather.forecast = response);
+			});
+		})
+	};
 	weather.get.Darksky  = function () {
 		return new Promise((resolve,reject)=>{
 			$http.jsonp('https://api.darksky.net/forecast/' + config.forecast.key + '/' +
@@ -40,7 +53,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 				resolve(weather.forecast = response);
 			});
 		})
-	};
+	};	
 	weather.get.Climacell = function () {
 
 		// return a promise, so the caller can wait
@@ -104,15 +117,24 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
-		if(config.forecast.keytype=='Darksky'){
-			weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
-			weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.temperature).toFixed(0);
-			weather.forecast.data.currently.wi = "wi-forecast-io-" + weather.forecast.data.currently.icon;
-			weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
-		} else{
-			weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.currently.data.observation_time.value).format('ddd')
-			weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.data.temp.value).toFixed(0);
-			weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.currently.data) ;
+		switch(config.forecast.keytype){
+			case 'Darksky':
+				weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
+				weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.temperature).toFixed(0);
+				weather.forecast.data.currently.wi = "wi-forecast-io-" + weather.forecast.data.currently.icon;
+				weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
+			break;
+			case 'Climacell':
+				weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.currently.data.observation_time.value).format('ddd')
+				weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.currently.data.temp.value).toFixed(0);
+				weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.currently.data.weather_code.value, weather.forecast.data.currently.data.sunrise.value, weather.forecast.data.currently.data.sunset.value, 'utc') ;
+			break;
+			case 'Openweather':
+			    weather.forecast.data['currently']={}
+			    weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.current.dt).format('ddd')
+				weather.forecast.data.currently.temperature = parseFloat(weather.forecast.data.current.temp).toFixed(0);
+				weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.current.weather["0"].description,weather.forecast.data.current.sunrise, weather.forecast.data.current.sunset ,'unix') ;			
+			break;
 			//weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
 		}
 
@@ -123,31 +145,49 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
-		if(config.forecast.keytype=='Darksky'){
-			// Add human readable info to info
-			for (var i = 0; i < weather.forecast.data.daily.data.length; i++) {
-				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
-				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
-				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
-				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
-				weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
-				weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
-			}			
-		} else {
-			// Add human readable info to info
-			var datalength=min(weather.forecast.data.length,8)
+		switch(config.forecast.keytype){
+			case 'Darksky':
+				// Add human readable info to info
+				for (var i = 0; i < weather.forecast.data.daily.data.length; i++) {
+					weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
+					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
+					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
+					weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
+					weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
+					weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
+				}		
+			break;	
+			case 'Climacell':
+				// Add human readable info to info
+				var datalength=min(weather.forecast.data.length,8)
 
-			weather.forecast.data.daily={}
-			weather.forecast.data.daily.data=[]		
-			for (var i=0; i<datalength; i++) {
-				weather.forecast.data.daily.data[i]={}
-				weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
-				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data[i].temp[0].min.value).toFixed(0);
-				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data[i].temp[1].max.value).toFixed(0);
-				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data[i]) 
-				weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
-				//weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
-			}
+				weather.forecast.data.daily={}
+				weather.forecast.data.daily.data=[]		
+				for (var i=0; i<datalength; i++) {
+					weather.forecast.data.daily.data[i]={}
+					weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
+					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data[i].temp[0].min.value).toFixed(0);
+					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data[i].temp[1].max.value).toFixed(0);
+					weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data[i].weather_code.value, weather.forecast.data[i].temp[0].observation_time, weather.forecast.data[i].temp[1].observation_time, 'utc') ;
+					weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);
+					//weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
+				}
+			break;			
+			case 'Openweather':
+				var datalength=min(weather.forecast.data.daily.length,8)
+
+				//weather.forecast.data.daily={}
+				weather.forecast.data.daily.data=[]		
+				for (var i=0; i<datalength; i++) {
+					weather.forecast.data.daily.data[i]={}
+					weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily[i].dt).format('ddd'):$translate.instant('weather.today');
+					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily[i].temp.min).toFixed(0);
+					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily[i].temp.max).toFixed(0);
+					weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data.daily[i].weather[0].description,weather.forecast.data.daily[i].sunrise,
+																							weather.forecast.data.daily[i].sunset,'unix') 
+					weather.forecast.data.daily.data[i].counter = String.fromCharCode(97 + i);			
+				}
+			break;
 		}
 		return weather.forecast.data.daily;
 	}
@@ -156,7 +196,13 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
-		weather.forecast.data.hourly.day = moment.unix(weather.forecast.data.hourly.time).format('ddd')
+		switch(config.forecast.keytype){
+			case 'Darksky':
+				weather.forecast.data.hourly.day = moment.unix(weather.forecast.data.hourly.data[0].time).format('ddd')
+				break;
+			default:		
+				weather.forecast.data.hourly.day = moment.unix(weather.forecast.data.hourly[0].dt).format('ddd')
+		}
 		return weather.forecast.data.hourly;
 	}
 
@@ -167,8 +213,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 	});
 
 	function refreshWeatherData() {
-		if(config.forecast.keytype.startsWith('Darksky'))
-			config.forecast.keytype='Darksky'
+		config.forecast.keytype=(config.forecast.keytype+' ').split(' ')[0]
 		// map location to country for auto weather units (if needed)
 		weather.getCountry().then(()=>{
 			// get the weather info
@@ -177,11 +222,13 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 				$scope.currentForecast = weather.currentForecast();
 				// set the weekely forecast info for index.html usage				
 				$scope.weeklyForecast = weather.weeklyForecast();
-				if(config.forecast.keytype =='Darksky'){
+				if(config.forecast.keytype !='Climacell'){
 					// we don't have hourly 
 					$scope.hourlyForecast = weather.hourlyForecast();
-					// or minutely anymore
-					$scope.minutelyForecast = weather.minutelyForecast();
+					if(config.forecast.keytype =='Darksky'){
+						// or minutely anymore
+						$scope.minutelyForecast = weather.minutelyForecast();
+					}
 				}
 			}, function (err) {
 				console.error(err)
@@ -189,9 +236,9 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		});
 	}
 
-	function convert_conditions_to_icon(data){
+	function convert_conditions_to_icon(value, sunrise,sunset, type){
 		var icon_name=''
-		switch(data.weather_code.value){
+		switch(value){
 		case 'ice_pellets_heavy':
 			//wi-forecast-io-hail: hail	
 			icon_name='hail'
@@ -219,7 +266,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		case 'rain_heavy':
 		case 'rain':
 		case 'rain_light':
-
+		case 'moderate rain':
 			// wi-forecast-io-rain: rain
 			icon_name='rain'
 			break;
@@ -229,30 +276,44 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			icon_name='fog'
 			break;
 		case 'cloudy':
+		case 'overcast clouds':
 			//wi-forecast-io-cloudy: cloudy
-			icon_name=data.weather_code.value
+			icon_name='cloudy'
 			break
 		case 'mostly_cloudy':
 		case 'partly_cloudy':
+		case 'scattered clouds':
+		case 'broken clouds':
 		case 'drizzle':			
 			//wi-forecast-io-partly-cloudy-day: day-cloudy
 			//wi-forecast-io-partly-cloudy-night: night-cloudy	
 			icon_name='partly-cloudy'
 			break;		
 		case 'mostly_clear':
+		case 'clear sky':
+		case 'few clouds':
 		case 'clear':
 			//wi-forecast-io-clear-day: day-sunny
 			//wi-forecast-io-clear-night: night-clear
 			icon_name='clear'
 			break;
 		default:
+
 		}
 		if(icon_name == 'clear' || icon_name=='partly-cloudy'){
-			if(data.sunrise !== undefined) {
-				var m = moment()
-				var sunrise=moment.utc(data.sunrise.value)
-				var sunset=moment.utc(data.sunset.value)
-				if( m.isAfter(sunrise) && m.isBefore(sunset) )
+			if(sunrise !== undefined) {
+				var m = moment()	
+				var sunrise_moment=null;
+				var sunset_moment=null;
+				if(type=='unix'){
+				  sunrise_moment=moment.unix(sunrise)
+				  sunset_moment=moment.unix(sunset)
+			    }
+			    else{
+				  sunrise_moment=moment.utc(sunrise)
+				  sunset_moment=moment.utc(sunset)
+			    }
+				if( m.isAfter(sunrise_moment) && m.isBefore(sunset_moment) )
 					icon_name+='-day'
 				else
 					icon_name+="-night"
