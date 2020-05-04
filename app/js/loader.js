@@ -134,7 +134,9 @@ loader.loadPluginInfo = function(filename, config){
 	let plugin_hash ={}
 	// convert array to hash for quick lookup
 	config.plugins.forEach((entry)=>{
-		plugin_hash[entry.name]=entry
+		if(debug)
+			console.log("entry="+JSON.stringify(entry))
+		plugin_hash[entry.name.trim().toLowerCase()]=entry
 	})
 
 	// loop thru all the index.html files found
@@ -156,8 +158,10 @@ loader.loadPluginInfo = function(filename, config){
 		// was this plugin added
 		let added = false;
 		// get the config info for this plugin,
-		let p = plugin_hash[plugin_name]
+		let p = plugin_hash[plugin_name.trim().toLowerCase()]
 		// if already set or default
+		if(debug)
+			console.log(" p="+JSON.stringify(p))
 		if(p){
 			if(debug) {console.log(" h entry="+h +	" name="+p.name)}
 			if(p.active == undefined ||
