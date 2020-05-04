@@ -4,7 +4,7 @@
         <canvas id="icon_weather_current" width="4.68vw" height="6.48vh"></canvas>
         <span class="temperature" ng-show="currentForecast.temperature" ng-bind="currentForecast.temperature + '&deg;'"></span>
     </div>
-    <div class="weather-week-descriptor" ng-if="minutelyForecast.summary ng-if="minutelyForecast.summary!= "">
+    <div class="weather-week-descriptor" ng-if="minutelyForecast.summary">
         <span ng-bind="minutelyForecast.summary"></span>
         <span ng-bind="hourlyForecast.summary"></span>
         <span ng-bind="weeklyForecast.summary"></span>

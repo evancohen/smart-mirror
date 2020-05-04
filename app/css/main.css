@@ -153,12 +153,16 @@ dt {
     left:  1.04vw;
 		float: left;
 		text-align: left;
+        margin-right: auto;
 }
 
 .bottom-right {
     right:  1.04vw;
 		float: right;
 		text-align: right;
+          //  margin-right:auto;
+            margin-left:auto;
+
 }
 
 .commands {
@@ -229,8 +233,10 @@ ul.calendar {
 }
 
 .weather {
-    margin-left: auto;
-    display: block;
+  //  float: inherit;
+  //  margin-left: inherit;
+  //  margin-right: auto;
+    display: inline-block;
     text-align: right;
     width:  12.04vw;
 }

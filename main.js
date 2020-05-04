@@ -31,7 +31,7 @@ try {
 	if (typeof e.code !== "undefined" && e.code === "MODULE_NOT_FOUND") {
 		error = "Initial startup detected\nPlease configure your mirror by opening a browser with the remote address shown below..."
 	} else if (typeof e.message !== "undefined") {
-		console.log(e)
+		//console.log(e)
 		error = "Syntax Error. \nLooks like there's an error in your config file: " + e.message + "\n" +
       "Protip: You might want to paste your config file into a JavaScript validator like http://jshint.com/"
 	}
@@ -96,6 +96,7 @@ function createWindow() {
 
 function startSonus()
 {
+
 	// Initilize the keyword spotter
 	kwsProcess = spawn("node", ["./sonus.js"], { detached: false })
 	// Handel messages from node
@@ -197,8 +198,15 @@ if (config.remote && config.remote.enabled || firstRun) {
 }
 
 // Motion detection
+var mtnProcess=null;
 if(config.motion && config.motion.enabled){
-	var mtnProcess = spawn("npm", ["run","motion"], {detached: false})
+	if( config.motion.enabled == "pin") {
+		// use npm to start for sudo needed by raspio
+		mtnProcess= spawn("npm", ["run","motion"], {detached: false})
+	}
+	else
+		// don't need npm, just launch script
+		mtnProcess= spawn("node", ["./motion.js"], { detached: false })
 	// Handel messages from node
 	mtnProcess.stderr.on("data", function (data) {
 		var message = data.toString()
