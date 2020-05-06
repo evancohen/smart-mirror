@@ -1,8 +1,8 @@
 const p__auth = require('path')
 var fn=null
 try {
-fn=document.currentScript.src.split(p__auth.sep).slice(-3,-1).join(p__auth.sep)// .substring(7,document.currentScript.src.lastIndexOf(p__auth.sep))
-console.log("spotify service is "+fn)
+	fn=document.currentScript.src.split(p__auth.sep).slice(-3,-1).join(p__auth.sep)// .substring(7,document.currentScript.src.lastIndexOf(p__auth.sep))
+	console.log("spotify service is "+fn)
 }
 catch(error){
 	console.log("spotify error="+error)
@@ -130,8 +130,8 @@ catch(error){
 			return spotify.getMyCurrentPlaybackState()
 				.then(function(data) {
 					//if(data.statusCode == 200) {
-						service.spotifyResponse = data.body || null;
-						return service.spotifyResponse;
+					service.spotifyResponse = data.body || null;
+					return service.spotifyResponse;
 					//}
 					//else
 					//	return null;
@@ -145,7 +145,7 @@ catch(error){
 			spotify.getMyDevices().then(function (data) {
 				var devices = data.body.devices;
 				var id = null;
-                var regex=/[^a-zA-Z0-9 ]/g
+				var regex=/[^a-zA-Z0-9 ]/g
 				// Check for name kerword of <named_device> or 'this device'<default_device>
 
 				name = (name.toLowerCase() === 'this device' && default_device)? default_device: name;
@@ -162,17 +162,17 @@ catch(error){
 				if (id) {
 					console.log(id);
 					//return spotify.pause().then(function() {
-						return spotify.transferMyPlayback(
-							{ 
+					return spotify.transferMyPlayback(
+						{ 
 							"deviceIds": [						// nodjs library expected variable name
 								id
 							],
 							"device_ids":[						// spotify api spec variable name
-							    id
+								id
 							], 
 							play: true }
-						).then((status)=> {
-							// need to sleep 
+					).then(()=> {
+						// need to sleep 
 						/*	service.currentState().then(
 								(c)=>{ 
 									console.log("waiting to play")
@@ -184,10 +184,10 @@ catch(error){
 									spotify.play()									
 								}
 							*/
-							return null // spotify.play();
-						}, function(err) {
-							console.log('Something went wrong!', err);
-						});
+						return null // spotify.play();
+					}, function(err) {
+						console.log('Something went wrong!', err);
+					});
 					/*}, 
 					function(err){
 						console.log('Something went wrong!', err);		
