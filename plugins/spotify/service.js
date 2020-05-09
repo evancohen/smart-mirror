@@ -1,12 +1,3 @@
-const p__auth = require('path')
-var fn=null
-try {
-	fn=document.currentScript.src.split(p__auth.sep).slice(-3,-1).join(p__auth.sep)// .substring(7,document.currentScript.src.lastIndexOf(p__auth.sep))
-	console.log("spotify service is "+fn)
-}
-catch(error){
-	console.log("spotify error="+error)
-}
 (function () {
 	'use strict';
 
