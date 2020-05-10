@@ -100,6 +100,18 @@ function insert_css($){
 		$('head').append(ss)
 	}
 }
+// make sure to remove plugin controller, service and css entries too if disabled
+function cleanup(plugin_name){
+	var names= [service_name,controller_name,css_name];
+	for(var name of names){
+		for(var i in pluginFiles[name]){
+			if(pluginFiles[name][i].toLowerCase().includes(plugin_name.toLowerCase())){		
+				pluginFiles[name].splice(i,1)
+				break;
+			}
+		}
+	}
+}
 
 // updates the app index.html with discovered plugin info
 loader.loadPluginInfo = function(filename, config){
@@ -122,19 +134,11 @@ loader.loadPluginInfo = function(filename, config){
 	let $= cheerio.load(fs.readFileSync(filename));
 	let id_div = "";
 
-	// add entries for css to head
-	insert_css($)
-
-	// order matters, services must be first, as controllers will use them
-	// add entries for services to body
-	insert_services($)
-	// add entries for controllers to body
-	insert_controllers($)
 	// order matters
 	let plugin_hash ={}
 	// convert array to hash for quick lookup
 	config.plugins.forEach((entry)=>{
-		plugin_hash[entry.name]=entry
+		plugin_hash[entry.name.trim().toLowerCase()]=entry
 	})
 
 	// loop thru all the index.html files found
@@ -156,7 +160,7 @@ loader.loadPluginInfo = function(filename, config){
 		// was this plugin added
 		let added = false;
 		// get the config info for this plugin,
-		let p = plugin_hash[plugin_name]
+		let p = plugin_hash[plugin_name.trim().toLowerCase()]
 		// if already set or default
 		if(p){
 			if(debug) {console.log(" h entry="+h +	" name="+p.name)}
@@ -209,6 +213,8 @@ loader.loadPluginInfo = function(filename, config){
 				if(debug) {
 					console.log("plugin "+ p.name +" is NOT active=" + p.active)
 				}
+				// make sure not to load plugin's controller or service
+				cleanup(p.name)
 				added=true;
 			}
 		}
@@ -250,6 +256,14 @@ loader.loadPluginInfo = function(filename, config){
 			}
 		}
 	}
+	// add entries for css to head
+	insert_css($)
+
+	// order matters, services must be first, as controllers will use them
+	// add entries for services to body
+	insert_services($)
+	// add entries for controllers to body
+	insert_controllers($)	
 	// get the new html
 	let x = $.html();
 	//if(debug) console.log("new html = "+ x)
