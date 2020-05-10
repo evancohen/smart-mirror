@@ -1,7 +1,8 @@
 (function () {
 	'use strict';
 
-	function SpotifyService() {
+
+	function SpotifyService() {		
 		var service = {};
 		var spotify = {};
 		var tokenFile = 'spotify-token.json';
@@ -23,7 +24,8 @@
 				fs.writeFile(filename, JSON.stringify(token), cb);
 			}
 		};
-        
+
+		// use the path to the plugin node_modules        
 		service.spotifyResponse = null;
 		service.active = null;
 
@@ -59,7 +61,7 @@
 					.then(function(data) {
 						persist.write(tokenFile, data.body, function (err) {
 							if (err) return next(err);
-							res.send('Authorization complete. Please relead your mirror to refresh authentication.');
+							res.send('Authorization complete. Please reload your mirror to refresh authentication.');
 						});
 					}, function(err) {
 						console.debug('Something went wrong!', err);
@@ -118,8 +120,12 @@
 		service.currentState = function () {
 			return spotify.getMyCurrentPlaybackState()
 				.then(function(data) {
+					//if(data.statusCode == 200) {
 					service.spotifyResponse = data.body || null;
 					return service.spotifyResponse;
+					//}
+					//else
+					//	return null;
 				}, function(err) {
 					service.active = false;
 					console.log('Something went wrong!', err);
@@ -130,26 +136,53 @@
 			spotify.getMyDevices().then(function (data) {
 				var devices = data.body.devices;
 				var id = null;
-                
+				var regex=/[^a-zA-Z0-9 ]/g
 				// Check for name kerword of <named_device> or 'this device'<default_device>
+
 				name = (name.toLowerCase() === 'this device' && default_device)? default_device: name;
-                
+				// remove any special chars, impossible to add via voice
+				name = name.replace(regex, '').toLowerCase()
 				devices.forEach(function (device) {
-					if (device.name.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+					// remove any special chars from name
+					// impossible to compare to voice entered name with special chars present
+					// compare lower case 
+					if (device.name.toLowerCase().replace(regex, '').indexOf(name) >= 0) {
 						id = device.id;
 					}
 				});
 				if (id) {
 					console.log(id);
-					return spotify.transferMyPlayback({ 
-						"device_ids": [
-							id
-						]
-					}).then(function() {
-						return spotify.play();
+					//return spotify.pause().then(function() {
+					return spotify.transferMyPlayback(
+						{ 
+							"deviceIds": [						// nodjs library expected variable name
+								id
+							],
+							"device_ids":[						// spotify api spec variable name
+								id
+							], 
+							play: true }
+					).then(()=> {
+						// need to sleep 
+						/*	service.currentState().then(
+								(c)=>{ 
+									console.log("waiting to play")
+									setTimeout(()=>{
+									spotify.play(); console.log("requested play") }, 20000)
+							/*	})
+								if(status == 204){
+									console.log("completed transfer request")
+									spotify.play()									
+								}
+							*/
+						return null // spotify.play();
 					}, function(err) {
 						console.log('Something went wrong!', err);
 					});
+					/*}, 
+					function(err){
+						console.log('Something went wrong!', err);		
+					})	*/					
 				} else {
 					return null;
 				}
