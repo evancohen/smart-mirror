@@ -61,7 +61,17 @@
     "key": ""
   },
   "spotify": {
-    "key": ""
+    "creds": {    
+      "clientID":"",
+      "clientSecret":""
+    },
+    "authorization_uri":{
+      "scope": "activity nutrition profile settings sleep social weight heartrate",
+      "state": "3(#0/!~"
+    },        
+    "timeout":3600,
+    "default_device":"raspberry",
+    "position":"top"
   },
   "traffic": {
     "key": "",
