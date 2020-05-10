@@ -16,6 +16,7 @@ const loader = require('./app/js/loader.js')
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev")
+const usepm2 = process.argv.includes("usepm2")
 //var atomScreen = null;
 // Load the smart mirror config
 let config
@@ -192,7 +193,8 @@ if (config.remote && config.remote.enabled || firstRun) {
 		console.log("Relaunching...")
 		// rebuild the html file plugin position info
 		loader.loadPluginInfo(__dirname + '/index.html', config)    
-		app.relaunch()
+		if(!usepm2)
+			app.relaunch()
 		app.quit()
 	})
 }

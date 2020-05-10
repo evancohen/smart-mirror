@@ -14,7 +14,7 @@ function Traffic($scope, $http, $interval, $q, TimeboxService) {
 		if (typeof config.traffic != 'undefined' && config.traffic.key != '' && config.traffic.trips) {
 			angular.forEach(config.traffic.trips, function (trip) {
 				if ((trip['startTime'] != undefined && TimeboxService.shouldDisplay(trip.startTime, trip.endTime))
-                    || (!trip['startTime'] == undefined)) {
+                    || (trip['startTime'] == undefined)) {
 					promises.push(getTripDuration(trip));
 				}
 			});
