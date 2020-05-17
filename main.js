@@ -64,7 +64,7 @@ function createWindow() {
 		}
 	}
 	const { width, height } = atomScreen.getPrimaryDisplay().workAreaSize
-	var browserWindowOptions = { width: width, height: height, icon: "favicon.ico", kiosk: true, autoHideMenuBar: true, darkTheme: true, webPreferences: {
+	var browserWindowOptions = { width: width, height: height, icon: "favicon.ico", kiosk: true, autoHideMenuBar: true, darkTheme: true, backgroundColor:"#00000001", webPreferences: {
 		nodeIntegration: true
 	} }
 	if (externalDisplay) {
@@ -135,7 +135,7 @@ if (config && config.speech && !firstRun) {
 }
 
 if (config.remote && config.remote.enabled || firstRun) {
-	remote.start()
+	remote.start(config.general.language)
 
 	// Deturmine the local IP address
 	const interfaces = require("os").networkInterfaces()

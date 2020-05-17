@@ -1,0 +1,9 @@
+{
+	"commands":{
+       "image_giphy": {
+            "text": "Gif ________",
+            "voice": "gif *img",
+            "description": "Mostra una immagine da Giphy."
+        }
+	}
+}

@@ -1,0 +1,47 @@
+{
+   "lights": {
+        "colors": {
+            "red": "rojo",
+            "dark_green": "verde oscuro",
+            "green": "verde",
+            "blue": "azul",
+            "yellow": "amarillo",
+            "orange":  "naranja",
+            "pink": "rosa",
+            "purple": "púrpura",
+            "white": "blanco",
+            "movie": "película",
+            "colorloop": "color",
+            "stop": "detener"
+        },
+        "intensity": {
+            "increase": "aumentos",
+            "decrease": "disminuye",
+            "max": "max"
+        },
+        "action": {
+            "on": "enciende",
+            "off": "apagar"
+        },
+        "config":{
+            "title":"Light Settings",
+            "hub ip address":"Hue Light IP Address",
+            "hub user name":"Hue Light Username",
+            "Setup":"Setup",
+            "light name":"Name",
+            "light desc":"Description",
+            "light type":"type",
+            "ip":"ip",
+            "id":"id",
+            "port":"port",
+            "item and index":"Item {{idx}}"
+        }
+    },
+    "commands":{
+        "light_action": {
+            "text": "[estado] las luces a [acción]",
+            "voice": ":state las luces a *action",
+            "description": "Cambia el estado de las luces."
+        }
+    }
+}

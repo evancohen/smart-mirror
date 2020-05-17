@@ -1,0 +1,15 @@
+{
+	"pluginconfig":{
+		"config":{
+			"title":"Plugin Page location configuration",
+			"Name":"Name",
+			"Location":"Location",
+			"Order":"Order",
+			"Active":"Active",
+			"Plugin Name":"Plugin Name",
+			"plugin location desc":"Plugin location on smart-mirror screen",
+			"plugin order desc":"if multiple in the same area, what position this plugin should be in, * means any",
+			"plugin active desc":"if false, this plugin will not be loaded"
+		}
+	}
+}

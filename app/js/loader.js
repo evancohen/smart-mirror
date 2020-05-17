@@ -4,6 +4,8 @@ const fs = require('fs');
 const cheerio = require('cheerio')
 
 const debug = false;
+const _ = require('lodash')
+
 // new output html filename
 const new_file = 'main_index.html';
 // plugin folder name
@@ -13,18 +15,22 @@ const controller_name='controller.js'
 const html_name='index.html'
 const service_name='service.js'
 const css_name='plugin.css'
+const locale_name ='.json'
 
 var loader = {};
 var locations={};
 
-var filesList= [html_name,service_name,controller_name,css_name];
+var filesList= [html_name,service_name,controller_name,css_name,locale_name];
 var pluginFiles = {}
+var base_language_files = {}
+base_language_files[locale_name]=[]
 
 if(debug) {console.log(" in plugin loader")}
 function NameinFilter(filters,name){
 	let v=null;
 	for( let n of filters){
-		if(name.endsWith(n)){
+		if( (name.endsWith(n) && !name.endsWith("c"+n)) || ((name.endsWith(n) && !name.endsWith("c"+n)) && n ==locale_name && name.includes('locales/'))
+		  ){
 			v=n;
 			break;
 		}
@@ -40,16 +46,18 @@ function getFilesMatch (dir,filters, files_){
 		try {
 			if (fs.statSync(name).isDirectory()){
 				// don't scan the plugin node_modules folder
-				if(name.indexOf("node_modules") == -1){
+				if(name.indexOf("node_modules") == -1 && name.indexOf("bower_components")==-1 && name.indexOf("save")==-1){
 					getFilesMatch(name, filters, files_);
 				}
 			} else {
 				// if not a nested node folder
-				if(name.indexOf("node_modules") == -1){
+				if(name.indexOf("node_modules") == -1 && name.indexOf("schema") == -1){
 					// see if this file is one we are interested in
 					let key=NameinFilter(filters,name)
 					// if so
 					if(key){
+						if(debug)
+							console.log("saving file found for key="+key+" name="+name)
 						// save it
 						files_[key].push(name);
 					}
@@ -74,7 +82,7 @@ function loadInfo (){
 	// only go thru drectory tree once
 	pluginFiles = getFilesMatch (plugin_folder_name,filesList,pluginFiles)
 	if(debug) {console.log("plugin files ="+JSON.stringify(pluginFiles));}
-
+	base_language_files = getFilesMatch('app',[locale_name],base_language_files);
 }
 function insert_services($){
 
@@ -102,15 +110,35 @@ function insert_css($){
 }
 // make sure to remove plugin controller, service and css entries too if disabled
 function cleanup(plugin_name){
-	var names= [service_name,controller_name,css_name];
+	var names= [service_name,controller_name,css_name,locale_name];
+	var deletelist=[]
 	for(var name of names){
-		for(var i in pluginFiles[name]){
-			if(pluginFiles[name][i].toLowerCase().includes(plugin_name.toLowerCase())){		
-				pluginFiles[name].splice(i,1)
-				break;
+		for(var i=0 in pluginFiles[name]){
+			console.log("cleanup looking for "+plugin_name+" in "+pluginFiles[name][i])
+			if(pluginFiles[name][i].toLowerCase().includes(plugin_name.toLowerCase())){						
+				if(name!==locale_name){	
+					if(debug)
+						console.log("removing "+name+" entry for i="+i+" "+pluginFiles[name][i])
+					pluginFiles[name].splice(i,1)				
+					break;
+				}
+				else{
+					// can't delete from the list while we are searching it
+					// save index, in reverse order for delete later
+					deletelist.unshift(i)
+				}
 			}
 		}
 	}
+	// if we have stuff to delete
+	if(deletelist.length>0){
+		// do it, depends on changing later in the array before earlier
+		for(var i of deletelist){
+			console.log("deleteing "+ pluginFiles[locale_name][i])
+			pluginFiles[locale_name].splice(i,1)
+		}
+	}
+
 }
 
 // updates the app index.html with discovered plugin info
@@ -276,9 +304,86 @@ loader.loadPluginInfo = function(filename, config){
 	}
 	// clear html object storage. no longer needed
 	$=''
+	//
+	// loop thru the locale files found in app/locales
+	for(var base of base_language_files[locale_name]){		
+		// get the base as an object 
+		var bdata = JSON.parse(getfilecontents(base));
+		if(debug)
+ 			console.log("processing base locale file="+base)
+ 		// loop thru the plugin locale file segments
+		for( var la of pluginFiles[locale_name]){
+			// get the file name
+			var l = la.split('/').slice(-1).toString()
+			var r= base.split('/').slice(-1).toString()
+			if(debug)
+				console.log("comparing l='"+l+"' with '"+r+"'=r")
+			// if they match
+			if(l == r ){
+				if(debug)
+					console.log("matching language file="+ la)
+				// get its content, if any
+				var b =  getfilecontents(la)
+				// if the file is curently empty, skip it
+				if(b !=''){ 	
+					try {	// don't let a fragment parsing error kill file creation		
+						// parse the content
+						x =  JSON.parse(b);
+						// and merge it into combined result
+						// not Object.assign overlays existing, not merge
+						// use lodash
+						_.merge( bdata, x);
+					}
+					catch(error){
+						console.log(" unable to parse "+la+ " content="+b)
+					}
+				}				
+			}
+		}
+		// check for any commands to add to the end of the list, so they don't pollute the what can I say list
+		if(bdata.commandsend !==undefined){
+			// add then at the end of the commands list
+			for(var f of Object.keys(bdata.commandsend)){
+				bdata.commands[f]=bdata.commandsend[f]
+			}
+			// remove it from the runtime data
+			delete bdata.commandsend 
+		}
+		if(debug)
+			console.log("merged data for file="+base +"="+JSON.stringify(bdata))
+		// construct the filename for the constructed locale file
+		var basefn=base.split('/')
+		var basename = basefn.slice(-1).toString().split('.')
+		// add a 'c' to the lanugage d (en->enc)
+		basename[0]+='c'
+		basename=basename.join('.')
+		basefn.pop()
+		basefn.push(basename)
+		basefn=basefn.join('/')
+		if(debug)
+			console.log(" new base filename="+basefn)
+		// write out the constructed locale file
+		fs.writeFileSync(basefn,JSON.stringify(bdata))
+	}
+	// clear the data collected about files
 	pluginFiles={};
 	// pass back the new file to load
 	return '/'+ new_file;
+}
+function getfilecontents(file){
+	try {
+		var x = fs.readFileSync(file)
+		var y=x.toString()
+		//if(debug)
+			//console.log("file contents for file ="+file +" = '"+ y+"'")
+		if(y[0]!=='{')
+			return y.substring(1)
+		else
+			return y;
+	}
+	catch(error){
+		return '{}'
+	}
 }
 
 module.exports = loader

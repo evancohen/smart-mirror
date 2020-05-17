@@ -157,7 +157,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		case 'Darksky':
 			// Add human readable info to info
 			for (i = 0; i < weather.forecast.data.daily.data.length; i++) {
-				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily.data[i].time).format('ddd'):$translate.instant('forecast.today');
 				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily.data[i].temperatureMin).toFixed(0);
 				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily.data[i].temperatureMax).toFixed(0);
 				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
@@ -173,7 +173,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			weather.forecast.data.daily.data=[]		
 			for (i=0; i<datalength; i++) {
 				weather.forecast.data.daily.data[i]={}
-				weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].day = i>0?moment.utc(weather.forecast.data[i].observation_time.value, 'YYYY-MM-DD').format('ddd'):$translate.instant('forecast.today');
 				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data[i].temp[0].min.value).toFixed(0);
 				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data[i].temp[1].max.value).toFixed(0);
 				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data[i].weather_code.value, weather.forecast.data[i].temp[0].observation_time, weather.forecast.data[i].temp[1].observation_time, 'utc') ;
@@ -188,7 +188,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			weather.forecast.data.daily.data=[]		
 			for (i=0; i<datalength; i++) {
 				weather.forecast.data.daily.data[i]={}
-				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily[i].dt).format('ddd'):$translate.instant('weather.today');
+				weather.forecast.data.daily.data[i].day = i>0?moment.unix(weather.forecast.data.daily[i].dt).format('ddd'):$translate.instant('forecast.today');
 				weather.forecast.data.daily.data[i].temperatureMin = parseFloat(weather.forecast.data.daily[i].temp.min).toFixed(0);
 				weather.forecast.data.daily.data[i].temperatureMax = parseFloat(weather.forecast.data.daily[i].temp.max).toFixed(0);
 				weather.forecast.data.daily.data[i].wi = "wi-forecast-io-" + convert_conditions_to_icon(weather.forecast.data.daily[i].weather[0].description,weather.forecast.data.daily[i].sunrise,
@@ -275,6 +275,9 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		case 'rain_heavy':
 		case 'rain':
 		case 'rain_light':
+		case 'very heavy rain':
+		case 'heavy intensity rain':		
+		case 'light rain':
 		case 'moderate rain':
 			// wi-forecast-io-rain: rain
 			icon_name='rain'

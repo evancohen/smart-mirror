@@ -1,0 +1,18 @@
+{
+	"commands":{
+       "video_search": {
+            "text": "Reproduzir ________",
+            "voice": "Reproduzir (um video)(video)(de)(sobre) *query",
+            "description": "Reproduz um vídeo sobre o que indicou."
+        },
+        "video_stop": {
+            "text": "Parar o vídeo",
+            "voice": "Parar (o) video",
+            "description": "Para o conteúdo do vídeo."
+        }
+	},
+    "youtube":{
+        "title":"YouTube Settings",
+        "api key":"YouTube API Key"
+    }
+}

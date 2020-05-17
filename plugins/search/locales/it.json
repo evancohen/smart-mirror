@@ -1,0 +1,18 @@
+{
+	"commands":{
+       "video_search": {
+            "text": "Mostrami ________",
+            "voice": "mostrami (un video)(di)(dei) *query",
+            "description": "Mostrera un video a vostra richiesta"
+        },
+        "video_stop": {
+            "text": "Ferma video",
+            "voice": "ferma (il) video",
+            "description": "Ferma il video playback of video content."
+        }
+	},
+    "youtube":{
+        "title":"YouTube Settings",
+        "api key":"YouTube API Key"
+    }
+}

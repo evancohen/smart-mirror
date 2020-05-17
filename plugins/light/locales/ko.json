@@ -1,0 +1,52 @@
+{
+    "lights": {
+        "colors": {
+            "red": "빨강",
+            "dark_green": "군청",
+            "green": "초록",
+            "blue": "파랑",
+            "yellow": "노랑",
+            "orange":  "주황",
+            "pink": "분홍",
+            "purple": "보라",
+            "white": "하양",
+            "movie": "영화",
+            "colorloop": "랜덤",
+            "stop": "정지"
+        },
+        "intensity": {
+            "increase": "증가",
+            "decrease": "감소",
+            "max": "최대",
+            "half": "반절",
+            "quarter": "4분의1",
+            "threequarter": "3분의1"
+        },
+        "action": {
+            "on": "켜",
+            "off": "꺼",
+            "nightmode": "야간모드",
+            "reset": "리셋"
+        },
+        "config":{
+            "title":"Light Settings",
+            "hub ip address":"Hue Light IP Address",
+            "hub user name":"Hue Light Username",
+            "Setup":"Setup",
+            "light name":"Name",
+            "light desc":"Description",
+            "light type":"type",
+            "ip":"ip",
+            "id":"id",
+            "port":"port",
+            "item and index":"Item {{idx}}"
+        }
+    },
+    "commands":{
+       "light_action": {
+            "text": "_______으로 전등 바꿔줘",
+            "voice": "*action으로 전등 바꿔줘",
+            "description": "음성인식된 색으로 전등 색을 전환합니다."
+        }
+    }
+}

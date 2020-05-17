@@ -2,11 +2,11 @@
     "schema": {
         "speech": {
             "type": "object",
-            "title": "Speech Settings",
+            "title": "{{title}}",
             "properties": {
                 "device": {
                     "type": "string",
-                    "title": "Select <em><strong>Recording</strong></em> Device",
+                    "title": "{{dev name}}",
                     "required": true,
                     "default": "default",
                     "enum": [
@@ -15,13 +15,13 @@
                 },
                 "keyFilename": {
                     "type": "string",
-                    "title": "Google Cloud Speech Keyfile",
+                    "title": "{{keyfile}}",
                     "required": true,
                     "default": "keyfile.json"
                 },
                 "hotwords": {
                     "type": "array",
-                    "title": "Keyword Spotter Hotwords",
+                    "title": "{{hotwords}}",
                     "required": true,
                     "items": {
                         "title": "keyword {{idx}}",
@@ -29,12 +29,12 @@
                         "properties": {
                             "keyword": {
                                 "type": "string",
-                                "Title": "Keyword Name",
+                                "Title": "{{Keyword Name}}",
                                 "required": true
                             },
                             "model": {
                                 "type": "string",
-                                "title": "Model Filename",
+                                "title": "{{Model Filename}}",
                                 "required": true
                             }
                         }
@@ -42,7 +42,7 @@
                 },
                 "sensitivity": {
                     "type": "number",
-                    "title": "Microphone Sensitivity",
+                    "title": "{{mic sensitivity}}",
                     "default": 0.5,
                     "minimum": 0,
                     "maximum": 1,
@@ -54,13 +54,13 @@
     "form": [
         {
             "type": "fieldset",
-            "title": "Speech Settings",
+            "title": "{{form title}}",
             "expandable": false,
             "order": -75,
             "items": [
                 {
                     "type": "help",
-                    "helpvalue": "<p>For help please refer to <a href='https://docs.smart-mirror.io'>the docs.</a></BR>Also, we're available on <a href='https://discord.gg/EMb4ynW'>Discord Chat with <img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt='people online'/></a> to help assist you in real time.</p>"
+                    "helpvalue": "{{speech dev help}}"
                 },
                 {
                     "key":"speech.device",
@@ -71,7 +71,7 @@
                 "speech.keyFilename",
                 {
                     "type": "tabarray",
-                    "title": "Keyword Spotter Hotwords",
+                    "title": "{{hotwords}}",
                     "items": [
                         {
                             "type": "section",
@@ -80,7 +80,7 @@
                                 {
                                     "key": "speech.hotwords[].keyword",
                                     "valueInLegend": true,
-                                    "title": "Keyword Name"
+                                    "title": "{{Keyword Name}}"
                                 },
                                 "speech.hotwords[].model"
                             ]
@@ -91,7 +91,7 @@
                     "type": "range",
                     "step": 0.1,
                     "key": "speech.sensitivity",
-                    "description":"<p id='sensitivityHelper'>Move above bar to see value here.</p>"
+                    "description":"{{sensitivity help}}"
                 }
             ]
         }

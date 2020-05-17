@@ -1,0 +1,18 @@
+{
+	"commands":{
+       "video_search": {
+            "text": "________보여줘",
+            "voice": "*query보여줘",
+            "description": "음성인식을 한걸 보여줍니다."
+        },
+        "video_stop": {
+            "text": "비디오 멈춰",
+            "voice": "비디오 멈춰",
+            "description": "현재 재생중인 비디오를 정지합니다."
+        }
+	},
+    "youtube":{
+        "title":"YouTube Settings",
+        "api key":"YouTube API Key"
+    }
+}

@@ -1,0 +1,22 @@
+{
+	"reminders": {
+        "empty": "Empty list."
+    },
+    "commands":{
+    	"reminder_insert": {
+            "text": "Remind me to ________",
+            "voice": "(set) (a) Remind(er) (for) (me) (to) *task",
+            "description": "Add something to the reminders list."
+        },
+        "reminder_clear": {
+            "text": "Clear reminders",
+            "voice": "Clear reminders",
+            "description": "Clears out your reminders list."
+        },
+        "reminder_show": {
+            "text": "Show me reminders",
+            "voice": "(show) (me) (my) reminders",
+            "description": "Display the reminders list."
+        }
+    }
+}

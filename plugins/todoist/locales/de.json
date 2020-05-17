@@ -1,0 +1,25 @@
+{
+	"commands":{
+		"todoist_show": {
+            "text": "Zeige (meine) ________ Liste",
+            "voice": "Zeig(e) (meine) *project( )liste",
+            "description": "Zeigt eine Todoist-Liste."
+        },
+        "todoist_add": {
+            "text": "Füge ________ zu (meiner) ________ Liste (hinzu)",
+            "voice": "Füge *element zu (meiner) *project()liste (hinzu)",
+            "description": "Fügt ein Element zu der Todoist-Liste hinzu."
+        },
+        "todoist_remove": {
+            "text": "Entferne ________ von (meiner) ________ Liste",
+            "voice": "Entferne *element von (meiner) *project()liste",
+            "description": "Entfernt ein Element von der Todoist-Liste."
+        }
+	},
+    "todoist":{
+        "config":{
+            "title":"Todoist Settings",
+            "api key":"Todoist api key"
+        }
+    }
+}

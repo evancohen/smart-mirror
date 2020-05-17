@@ -1,0 +1,14 @@
+{
+	"commands":{
+		"image_comic_commitstrip": {
+          "text": "Zeige Commit Strip",
+          "voice": "(Zeige )commit strip",
+            "description": "Zeige den aktuellen Commit Strip Comic."
+        },
+        "image_comic_commitstrip1": {
+            "text": "Show Comic Strip",
+            "voice": "Show comic strip",
+            "description": "Shows the most recent Commit Strip comic."
+        }
+	}
+}

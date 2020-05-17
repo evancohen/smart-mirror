@@ -1,0 +1,18 @@
+{
+	"commands":{
+	    "video_search": {
+            "text": "Busca imagen de _______",
+            "voice": "Busca imagen de *term",
+            "description": "Busca una imagen."
+        },
+        "video_stop": {
+            "text": "Stop video",
+            "voice": "stop (the) video",
+            "description": "Stops the playback of video content."
+        }
+	},
+    "youtube":{
+        "title":"YouTube Settings",
+        "api key":"YouTube API Key"
+    }
+}

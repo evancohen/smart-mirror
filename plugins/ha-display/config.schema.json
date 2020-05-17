@@ -2,34 +2,34 @@
     "schema": {
         "hadisplay": {
             "type": "object",
-            "title": "Home-Assistant Display",
-            "description" : "Render Home-Assistance states using the template API",
+            "title": "{{title}}",
+            "description" : "{{title desc}}",
             "properties": {
                 "key": {
- 			"type": "string",
-			"title": "Home-Assistant API password"
-		},
-		"refreshInterval": {
-			"type": "string",
-                        "title": "Refresh Interval (minutes)"
-		},
-		"url": {
-			"type": "string",
-			"title": "Home-Assistant Server http(s)://yoursever:port"
-		},
+           			"type": "string",
+          			"title": "{{]asswprd}}"
+            		},
+            		"refreshInterval": {
+            			"type": "string",
+                  "title": "{{refresh cycle}}"
+            		},
+            		"url": {
+            			"type": "string",
+            			"title": "{{server}}"
+            		},
                 "commands": {
                     "type": "array",
-                    "title": "Templates",
+                    "title": "{{Templates}}",
                     "items": {
                         "type": "object",
                         "properties": {
                           "heading": {
                                 "type": "string",
-                                "title": "Heading"
+                                "title": "{{Heading}}"
                             },  
                             "template": {
                                 "type": "textarea",
-                                "title": "Template - see https://home-assistant.io/docs/configuration/templating/"
+                                "title": "{{template}}"
                             }
                         }
                     }
@@ -41,20 +41,20 @@
       
       {
         "type": "fieldset",
-        "title": "Home-Assistant Display Settings",
+        "title": "{{title}}",
         "expandable":true,
         "order":0,
         "items": [
              {
               "type":"help",
-              "helpvalue":"<h6>Render Home-Assistance states using the template API</h6>"
+              "helpvalue":"{{helpvalue}}"
             },
             "hadisplay.key",
             "hadisplay.refreshInterval",
             "hadisplay.url",
             {
               "type": "tabarray",
-              "title": "<h4>Templates</h4>",
+              "title": "{{tab title}}",
               "items": [
                 {
                   "type": "section",

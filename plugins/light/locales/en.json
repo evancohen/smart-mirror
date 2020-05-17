@@ -1,0 +1,52 @@
+{
+	"lights": {
+        "colors": {
+            "red": "red",
+            "dark_green": "dark green",
+            "green": "green",
+            "blue": "blue",
+            "yellow": "yellow",
+            "orange":  "orange",
+            "pink": "pink",
+            "purple": "purple",
+            "white": "white",
+            "movie": "movie",
+            "colorloop": "colorloop",
+            "stop": "stop"
+        },
+        "intensity": {
+            "increase": "increase",
+            "decrease": "decrease",
+            "max": "max",
+            "half": "half",
+            "quarter": "quarter",
+            "threequarter": ["three-quarter", "three-fourth"]
+        },
+        "action": {
+            "on": "on",
+            "off": "off",
+            "nightmode": "nightmode",
+            "reset": "reset"
+        },
+        "config":{
+            "title":"Light Settings",
+            "hub ip address":"Hue Light IP Address",
+            "hub user name":"Hue Light Username",
+            "Setup":"Setup",
+            "light name":"Name",
+            "light desc":"Description",
+            "light type":"type",
+            "ip":"ip",
+            "id":"id",
+            "port":"port",
+            "item and index":"Item {{idx}}"
+        }
+    },
+    "commands": {
+    	"light_action": {
+            "text": "Turn (state) light(s) (action)",
+            "voice": "(turn) (the) :state (the) *entity light(s) *action",
+            "description": "Control color and brightness of lights."
+        }
+    }
+}

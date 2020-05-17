@@ -3,7 +3,7 @@
  */
 const stream = require('stream')
 let remote = new stream.Writable()
-remote.start = function () {
+remote.start = function (language) {
 	const express = require('express')
 	const app = express()
 	const fs = require('fs')
@@ -86,7 +86,7 @@ remote.start = function () {
 		})
 
 		socket.on('getForm', function () {
-			getConfigSchema(function (configSchema) {
+			getConfigSchema(language, function (configSchema) {
 				configSchema.form.sort(function (a, b) { return a.order - b.order })
 				configJSON = configSchema
 				socket.emit("json", { "configJSON": configJSON, "configDefault": configDefault, "config": config })

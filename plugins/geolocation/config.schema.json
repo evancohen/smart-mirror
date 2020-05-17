@@ -2,26 +2,26 @@
     "schema": {
         "geoPosition": {
             "type": "object",
-            "title": "Geo-Position",
+            "title": "{{title}}",
             "properties": {
                 "key":{
                     "type": "string",
-                    "title": "Google api key, used for geolocation and maps"
+                    "title": "{{apikey}}"
                 },
                 "latitude": {
                     "type": "string",
-                    "title": "latitude"
+                    "title": "{{latitude}}"
                 },
                 "longitude": {
                     "type": "string",
-                    "title": "longitude"
+                    "title": "{{longitude}}"
                 }
             }
         }
     },
     "form":[
         {
-          "title": "Geo-Position Settings",
+          "title": "{{title}}",
           "type":"fieldset",
           "expandable":true,
           "order":0,
@@ -29,7 +29,7 @@
             "geoPosition.key",
             {
               "type":"help",
-              "helpvalue": "<strong><em>(used if Geo-Position is not accurately being detected)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Click here for more info</a></br>"
+              "helpvalue": "{{helpvalue}}"
             },
             "geoPosition.latitude",
             "geoPosition.longitude"

@@ -2,11 +2,11 @@
     "schema": {
         "greeting": {
             "type": "object",
-            "title": "Greetings",
+            "title": "{{title}}",
             "properties": {
                 "option":{
                   "type":"string",
-                  "title":"How would you like greetings displayed?",
+                  "title":"{{how displayed}}",
                   "enum":[
                     "allDay",
                     "time"
@@ -14,35 +14,35 @@
                   },
                 "allDay": {
                     "type": "array",
-                    "title": "Night Greeting 11:00pm to 4:59am",
+                    "title": "{{night}}",
                     "items": {
                         "type": "string"
                     }
                 },
                 "morning": {
                     "type": "array",
-                    "title": "Morning Greeting 5:00am to 10:59am",
+                    "title": "{{morning}}",
                     "items": {
                         "type": "string"
                     }
                 },
                 "midday": {
                     "type": "array",
-                    "title": "Midday Greeting 11:00am to 6:59pm",
+                    "title": "{{midday}}",
                     "items": {
                         "type": "string"
                     }
                 },
                 "evening": {
                     "type": "array",
-                    "title": "Evening Greeting 7:00pm to 10:59pm",
+                    "title": "{{evening}}",
                     "items": {
                         "type": "string"
                     }
                 },
                 "night": {
                     "type": "array",
-                    "title": "Night Greeting 11:00pm to 4:59am",
+                    "title": "{{night}}",
                     "items": {
                         "type": "string"
                     }
@@ -53,7 +53,7 @@
     "form":[
         {
           "type":"fieldset",
-          "title":"Greeting Settings",
+          "title":"{{settings title}}",
           "expandable":true,
           "order":0,
           "items":[
@@ -67,87 +67,87 @@
               "items": [
                   {
                     "type":"tabarray",
-                    "title":"Random Greetings",
+                    "title":"{{random}}",
                     "items":[
-                        {
-                          "type":"section",
-                          "legend":"{{value}}",
-                          "items":[
-                            {
-                              "key":"greeting.allDay[]",
-                              "valueInLegend": true
-                            }
-                          ]
-                        }
+                      {
+                        "type":"section",
+                        "legend":"{{value}}",
+                        "items":[
+                          {
+                            "key":"greeting.allDay[]",
+                            "valueInLegend": true
+                          }
+                        ]
+                      }
                     ]
                   },
                   { 
                     "type":"section",
                     "items":[
+                      {
+                        "type":"tabarray",
+                        "title":"{{morning}}",
+                        "items":[
                           {
-                              "type":"tabarray",
-                              "title":"Morning Greeting (5:00am to 10:59am)",
-                              "items":[
-                                  {
-                                    "type":"section",
-                                    "legend":"{{value}}",
-                                    "items":[
-                                      {
-                                        "key":"greeting.morning[]",
-                                        "valueInLegend": true
-                                      }
-                                    ]
-                                  }
-                                ]
-                          },
-                          {
-                                "type":"tabarray",
-                                "title":"Midday Greeting (11:00am to 6:59pm)",
-                                "items":[
-                                    {
-                                      "type":"section",
-                                      "legend":"{{value}}",
-                                      "items":[
-                                        {
-                                          "key":"greeting.midday[]",
-                                          "valueInLegend": true
-                                        }
-                                      ]
-                                    }
-                                  ]
-                          },
-                          {
-                                "type":"tabarray",
-                                "title":"Evening Greeting (7:00pm to 10:59pm)",
-                                "items":[
-                                    {
-                                      "type":"section",
-                                      "legend":"{{value}}",
-                                      "items":[
-                                        {
-                                          "key":"greeting.evening[]",
-                                          "valueInLegend": true
-                                        }
-                                      ]
-                                    }
-                                  ]
-                          },
-                          {
-                                "type":"tabarray",
-                                "title":"Night Greeting (11:00pm to 4:59am)",
-                                "items":[
-                                    {
-                                      "type":"section",
-                                      "legend":"{{value}}",
-                                      "items":[
-                                        {
-                                          "key":"greeting.night[]",
-                                          "valueInLegend": true
-                                        }
-                                      ]
-                                    }
-                                  ]
+                            "type":"section",
+                            "legend":"{{value}}",
+                            "items":[
+                              {
+                                "key":"greeting.morning[]",
+                                "valueInLegend": true
+                              }
+                            ]
                           }
+                        ]
+                      },
+                      {
+                        "type":"tabarray",
+                        "title":"{{midday}}",
+                        "items":[
+                          {
+                            "type":"section",
+                            "legend":"{{value}}",
+                            "items":[
+                              {
+                                "key":"greeting.midday[]",
+                                "valueInLegend": true
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type":"tabarray",
+                        "title":"{{evening}}",
+                        "items":[
+                          {
+                            "type":"section",
+                            "legend":"{{value}}",
+                            "items":[
+                              {
+                                "key":"greeting.evening[]",
+                                "valueInLegend": true
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type":"tabarray",
+                        "title":"{{night}}",
+                        "items":[
+                          {
+                            "type":"section",
+                            "legend":"{{value}}",
+                            "items":[
+                              {
+                                "key":"greeting.night[]",
+                                "valueInLegend": true
+                              }
+                            ]
+                          }
+                        ]
+                      }
                     ]
                   }
                 ]

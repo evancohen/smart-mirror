@@ -1,0 +1,34 @@
+{
+	"commands":{
+		"map_show": {
+            "text": "Zeige Karte",
+            "voice": "(Zeige )Karte( anzeigen)",
+            "description": "Zeigt eine Karte des aktuellen Ortes."
+        },
+        "map_location": {
+            "text": "(Zeige )Karte von ________",
+            "voice": "(Zeige)(Zeig) (mir eine) Karte von *location( anzeigen)",
+            "description": "Zeigt eine Karte der genannten Position."
+        },
+        "map_zoom_in": {
+            "text": "vergrößern",
+            "voice": "(Karte) vergrößern",
+            "description": "Vergrößert die aktuelle Karte."
+        },
+        "map_zoom_out": {
+            "text": "verkleinern",
+            "voice": "(Karte) verkleinern",
+            "description": "Verkleinert die aktuelle Karte."
+        },
+        "map_zoom_point": {
+            "text": "vergrößere ________",
+            "voice": "vergrößere (Karte) (bei) *value",
+            "description": "Vergrößert einen genannten Punkt auf der Karte"
+        },
+        "map_zoom_reset": {
+            "text": "Normalansicht",
+            "voice": "(Karte) Normalansicht",
+            "description": "Setzt die aktuelle Kartenansicht zurück."
+        }
+	}
+}

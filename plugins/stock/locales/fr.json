@@ -1,0 +1,9 @@
+{
+	"stock":{
+		"config":{
+			"title":"Stock Settings",
+			"api key":"Alpha Vantage API Key",
+			"Stock Symbols":"Stock Symbols"
+		}
+	}
+}

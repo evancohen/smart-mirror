@@ -1,0 +1,9 @@
+{
+	"commands":{
+        "image_giphy": {
+            "text": "(Montre-moi) (Affiche) une image animée de ________",
+            "voice": "(Montre-moi) (Affiche) une image animée de *img",
+            "description": "Affiche gif animé."
+        }
+	}
+}

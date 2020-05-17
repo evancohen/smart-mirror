@@ -1,0 +1,29 @@
+{
+	"commands":{
+		"sc_play": {
+            "text": "SoundCloud play ________",
+            "voice": "SoundCloud play *query",
+            "description": "Spielt einen Song auf SoundCloud."
+        },
+        "sc_pause": {
+            "text": "SoundCloud pause/stop",
+            "voice": "SoundCloud (pause)(post)(stop)(stock)",
+            "description": "Stoppt/Pausiert die SoundCoud Wiedergabe."
+        },
+        "sc_resume": {
+            "text": "SoundCloud play",
+            "voice": "SoundCloud (play)(resume)",
+            "description": "Setzt die Soundcloud Wiedergabe fort."
+        },
+        "sc_replay": {
+            "text": "SoundCloud replay",
+            "voice": "SoundCloud replay",
+            "description": "Spielt den aktuellen Song erneut auf Soundcloud."
+        }
+	},
+    "soundcloud":{
+        "title":"SoundCloud Settings",
+        "api key":"SoundCloud API Key"
+
+    }    
+}

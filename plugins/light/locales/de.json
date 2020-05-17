@@ -1,0 +1,52 @@
+{
+	"lights": {
+        "colors": {
+            "red": "rot",
+            "dark_green": "dunkelgrün",
+            "green": "grün",
+            "blue": "blau",
+            "yellow": "gelb",
+            "orange":  "orange",
+            "pink": "rosa",
+            "purple": "lila",
+            "white": "weiß",
+            "movie": "Kino",
+            "colorloop": "Farbe",
+            "stop": "stop"
+        },
+        "intensity": {
+            "increase": "heller",
+            "decrease": "dunkler",
+            "max": "maximal(e Helligkeit)",
+            "half": "halb(e Helligkeit)",
+            "quarter": "viertel( Helligkeit)",
+            "threequarter": "dreiviertel( Helligkeit)"
+        },
+        "action": {
+            "on": "an",
+            "off": "aus",
+            "nightmode": "nachtmodus",
+            "reset": "zurücksetzen"
+        },
+        "config":{
+            "title":"Light Settings",
+            "hub ip address":"Hue Light IP Address",
+            "hub user name":"Hue Light Username",
+            "Setup":"Setup",
+            "light name":"Name",
+            "light desc":"Description",
+            "light type":"type",
+            "ip":"ip",
+            "id":"id",
+            "port":"port",
+            "item and index":"Item {{idx}}"
+        }
+    },
+    "commands":{
+        "light_action": {
+            "text": "Schalte (das|die) Licht(er) (action)",
+            "voice": "(Schalte)(Mache)(Setze) (das)(die) Licht(er) *action",
+            "description": "Steuert Farbe und Helligkeit von Lichtern."
+        }
+    }
+}

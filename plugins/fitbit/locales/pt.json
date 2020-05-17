@@ -1,0 +1,41 @@
+{
+   "fitbit": {
+        "user": "Usuário: ",
+        "averageSteps": "Média de passos: ",
+        "batteryStatus": "Estado da bateria: ",
+        "today": "Hoje",
+        "steps": "passos",
+        "caloriesBurned": "calorias queimadas",
+        "lastSync": "Última sincronização",
+        "average": "Média",
+        "activeMinutes": "minutos ativos",
+        "distance": "km",
+        "floors": "passos",
+        "topBadges": "Emblemas principais",
+        "sleep": "Dormir",
+        "lastNight": "Última noite",
+        "awake": "Acordado",
+        "restless": "Inquieto",
+        "hours": "horas",
+        "km": "km",
+        "miles": "mi",
+        "minutes": "min",
+        "times": "x",
+        "restingHR": "Frequência cardíaca em repouso",
+        "bpm": "bpm",
+        "config":{
+            "title":"Fitbit Settings",
+            "cycle info time":"Default time to cycle between fitbit statistics",
+            "oauth client id":"OAuth 2.0 Client ID",
+            "Client Secret":"Client Secret",
+            "auth uri":"Authorization URI",
+            "auth path":"Authorization Path",
+            "Token URI":"Token URI",
+            "Token Path":"Token Path",
+            "Redirect URI":"Redirect URI",
+            "Response Type":"Response Type",
+            "Scope":"Scope",
+            "State":"State"
+        }
+    }
+}
