@@ -29,10 +29,10 @@ function getConfigSchema(language, cb) {
 									let pm = Object.keys(pluginConfigSchema.schema)[0]
 									translateForm(pm, pluginConfigSchema,currentLangInfo)
 									if(tdebug)
-									console.log("updated schema="+JSON.stringify(pluginConfigSchema))
+										console.log("updated schema="+JSON.stringify(pluginConfigSchema))
 								}
 								catch(error){
-
+									console.log("unable to translate form for plugin "+filePath)
 								}
 
 								if (pluginConfigSchema.schema.speech && !arecerr) {
@@ -43,7 +43,7 @@ function getConfigSchema(language, cb) {
 									console.log("output schema is "+JSON.stringify(configSchema))
 								if (pluginConfigSchema.form) { configSchema.form = configSchema.form.concat(pluginConfigSchema.form) }
 								if (pluginConfigSchema.value) { Object.assign(configSchema.value, pluginConfigSchema.value) }
-								}
+							}
 							catch (error) {
 								console.log("error ="+ error +" plugin="+file +"\n json ="+data)
 							}
@@ -88,13 +88,13 @@ function translateForm(pn, items, formdata){
 			translateForm(pn, value, formdata)
 		else{ 
 			if(tdebug)
-			console.log("checking "+key+" to be translatable")
+				console.log("checking "+key+" to be translatable")
 			switch(key){
-				// what fields will we translate?
-				case 'title':
-				case 'description':
-				case 'helpvalue':
-				case 'legend':
+			// what fields will we translate?
+			case 'title':
+			case 'description':
+			case 'helpvalue':
+			case 'legend':
 				// our value field is {{string}}
 				if(value.startsWith("{{") && value.endsWith("}}")) {
 					// extract the translation key string

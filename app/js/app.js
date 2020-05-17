@@ -3,7 +3,6 @@
 	'use strict';
 
 	var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2).toLowerCase() : 'en';
-console.log("language is "+language+" from "+config.general.language)
 	angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
 		.config(function (tmhDynamicLocaleProvider) {
 			console.log(config)

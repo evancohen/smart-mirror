@@ -29,8 +29,8 @@ if(debug) {console.log(" in plugin loader")}
 function NameinFilter(filters,name){
 	let v=null;
 	for( let n of filters){
-		if( (name.endsWith(n) && !name.endsWith("c"+n)) || ((name.endsWith(n) && !name.endsWith("c"+n)) && n ==locale_name && name.includes('locales/'))
-		  ){
+		if( (name.endsWith(n) && !name.endsWith("c"+n)) || ((name.endsWith(n) && !name.endsWith("c"+n)) && n ==locale_name && name.includes('locales/')))
+		{
 			v=n;
 			break;
 		}
@@ -113,7 +113,7 @@ function cleanup(plugin_name){
 	var names= [service_name,controller_name,css_name,locale_name];
 	var deletelist=[]
 	for(var name of names){
-		for(var i=0 in pluginFiles[name]){
+		for(var i in pluginFiles[name]){
 			console.log("cleanup looking for "+plugin_name+" in "+pluginFiles[name][i])
 			if(pluginFiles[name][i].toLowerCase().includes(plugin_name.toLowerCase())){						
 				if(name!==locale_name){	
@@ -133,9 +133,9 @@ function cleanup(plugin_name){
 	// if we have stuff to delete
 	if(deletelist.length>0){
 		// do it, depends on changing later in the array before earlier
-		for(var i of deletelist){
-			console.log("deleteing "+ pluginFiles[locale_name][i])
-			pluginFiles[locale_name].splice(i,1)
+		for(var d of deletelist){
+			console.log("deleteing "+ pluginFiles[locale_name][d])
+			pluginFiles[locale_name].splice(d,1)
 		}
 	}
 
@@ -310,8 +310,8 @@ loader.loadPluginInfo = function(filename, config){
 		// get the base as an object 
 		var bdata = JSON.parse(getfilecontents(base));
 		if(debug)
- 			console.log("processing base locale file="+base)
- 		// loop thru the plugin locale file segments
+			console.log("processing base locale file="+base)
+		// loop thru the plugin locale file segments
 		for( var la of pluginFiles[locale_name]){
 			// get the file name
 			var l = la.split('/').slice(-1).toString()
@@ -374,8 +374,6 @@ function getfilecontents(file){
 	try {
 		var x = fs.readFileSync(file)
 		var y=x.toString()
-		//if(debug)
-			//console.log("file contents for file ="+file +" = '"+ y+"'")
 		if(y[0]!=='{')
 			return y.substring(1)
 		else
