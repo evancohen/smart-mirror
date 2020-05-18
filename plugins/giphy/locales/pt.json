@@ -5,5 +5,11 @@
             "voice": "Mostrar (a) animacao (de)(do) *img",
             "description": "Mostra uma imagem animada."
         }
+	},
+	"giphy":{
+		"config":{
+			"title":"Giphy Settings",
+			"api key":"Giphy API Key"
+		}
 	}
 }

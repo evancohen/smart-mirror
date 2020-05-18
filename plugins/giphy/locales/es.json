@@ -5,5 +5,11 @@
             "voice": "Busca animacion de *img",
             "description": "Busca animacion de algún tema."
         }
+	},
+	"giphy":{
+		"config":{
+			"title":"Giphy Settings",
+			"api key":"Giphy API Key"
+		}
 	}
 }

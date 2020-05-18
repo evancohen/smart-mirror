@@ -1,5 +1,5 @@
 {
-	"pluginconfig":{
+	"plugins":{
 		"config":{
 			"title":"Plugin Page location configuration",
 			"Name":"Name",

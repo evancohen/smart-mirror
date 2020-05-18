@@ -22,8 +22,9 @@
         }
 	},
     "soundcloud":{
-        "title":"SoundCloud Settings",
-        "api key":"SoundCloud API Key"
-
+        "config":{
+            "title":"SoundCloud Settings",
+            "api key":"SoundCloud API Key"
+        }
     }
 }

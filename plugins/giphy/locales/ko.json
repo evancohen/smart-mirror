@@ -5,5 +5,11 @@
             "voice": "*img giphy 검색",
             "description": "giphy에서 이미지를 검색합니다."
         }
+	},
+	"giphy":{
+		"config":{
+			"title":"Giphy Settings",
+			"api key":"Giphy API Key"
+		}
 	}
 }

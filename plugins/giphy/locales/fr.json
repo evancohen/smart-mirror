@@ -5,5 +5,11 @@
             "voice": "(Montre-moi) (Affiche) une image animée de *img",
             "description": "Affiche gif animé."
         }
+	},
+	"giphy":{
+		"config":{
+			"title":"Giphy Settings",
+			"api key":"Giphy API Key"
+		}
 	}
 }

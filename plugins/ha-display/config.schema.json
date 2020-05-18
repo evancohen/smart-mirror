@@ -7,7 +7,7 @@
             "properties": {
                 "key": {
            			"type": "string",
-          			"title": "{{]asswprd}}"
+          			"title": "{{password}}"
             		},
             		"refreshInterval": {
             			"type": "string",

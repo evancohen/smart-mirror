@@ -29,7 +29,7 @@
             "geoPosition.key",
             {
               "type":"help",
-              "helpvalue": "{{helpvalue}}"
+              "helpvalue": "{{help value}}"
             },
             "geoPosition.latitude",
             "geoPosition.longitude"

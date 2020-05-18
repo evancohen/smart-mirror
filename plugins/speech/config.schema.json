@@ -29,7 +29,7 @@
                         "properties": {
                             "keyword": {
                                 "type": "string",
-                                "Title": "{{Keyword Name}}",
+                                "title": "{{Keyword Name}}",
                                 "required": true
                             },
                             "model": {

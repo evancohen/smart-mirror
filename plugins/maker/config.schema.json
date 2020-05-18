@@ -53,7 +53,7 @@
             },
             {
               "type": "tabarray",
-              "title": "{{tab ttitle}}",
+              "title": "{{tab title}}",
               "items": [
                 {
                   "type": "section",

@@ -98,18 +98,25 @@ function translateForm(pn, items, formdata){
 				// our value field is {{string}}
 				if(value.startsWith("{{") && value.endsWith("}}")) {
 					// extract the translation key string
-					let datakey=value.substring(2,value.length-2)
-					if(tdebug)
-						console.log("translating for plugin "+pn+" item="+key+ " for value="+datakey)	
-					try {
+					let datakey=value.substring(2,value.length-2)	
+					if(key == 'legend' && datakey=="value"){
 						if(tdebug)
-							console.log("pn language data ="+JSON.stringify(formdata[pn]['config'][datakey]))			
-						// save the translated value over the lookup
-						items[key]=formdata[pn]['config'][datakey]
+							console.log("NOT translating for legend value plugin"+pn+" item="+key+ " for value="+value)
 					}
-					catch(error){
-						console.log(" language file lookup error="+error)
-					}
+					else{			
+						if(tdebug)
+							console.log("translating for plugin "+pn+" item="+key+ " for value="+datakey)	
+						try {
+							if(tdebug)
+								console.log("pn language data ="+JSON.stringify(formdata[pn]['config'][datakey]))			
+							// save the translated value over the lookup
+							if(formdata[pn]['config'][datakey] !== undefined)
+								items[key]=formdata[pn]['config'][datakey]
+						}
+						catch(error){
+							console.log(" language file lookup error="+error)
+						}
+					}				
 				} 
 				else {
 					if(tdebug)
