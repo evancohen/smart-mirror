@@ -31,6 +31,7 @@ then
 	echo "Do not run this script with root permissions, try: ./${0##*/} "
 	exit 0
 fi
+ARCH=$(uname -m)
 mac=$(uname -s)
 if [ $mac == 'Darwin' ]; then
   echo this is a mac | tee -a $logfile
@@ -57,9 +58,9 @@ echo install log being saved to $logfile
 
 # Determine which Pi is running.
 date +"install starting  - %a %b %e %H:%M:%S %Z %Y" >>$logfile
-ARCH=$(uname -m)
+
 echo installing on $ARCH processor system >>$logfile
-mac=$(uname -s)
+
 if [ $mac != 'Darwin' ]; then
 	echo the os is $(lsb_release -a 2>/dev/null) >> $logfile
 fi
@@ -106,13 +107,13 @@ printf "%s${red}Please do not exit this script until it is complete.${end}\n"
 if [ $mac != 'Darwin' ]; then
 	echo -e "\e[96mUpdating packages ...\e[90m" | tee -a $logfile
 	upgrade=$false	
-	update=$(sudo apt-get update 2>&1)
+	update=$(sudo apt-get update -y 2>&1)
 	echo $update >> $logfile
 	update_rc=$?
 	if [ $update_rc -ne 0 ]; then
 	 echo -e "\e[91mUpdate failed, retrying installation ...\e[90m" | tee -a $logfile
 	 if [ $(echo $update | grep "apt-secure" | wc -l) -eq 1 ]; then
-			update=$(sudo apt-get update --allow-releaseinfo-change 2>&1)
+			update=$(sudo apt-get update -y --allow-releaseinfo-change 2>&1)
 			echo $update >> $logfile
 			update_rc=$?
 			if [ $update_rc -ne 0 ]; then
@@ -128,14 +129,14 @@ if [ $mac != 'Darwin' ]; then
 		upgrade=$true
 	fi
 	if [ $upgrade -eq $true ]; then 
-		upgrade_result=$(sudo apt-get upgrade 2>&1) 
+		upgrade_result=$(sudo apt-get upgrade -y 2>&1) 
 		upgrade_rc=$?
 		echo apt upgrade result ="rc=$upgrade_rc $upgrade_result" >> $logfile
 	fi 
 
 	# Installing helper tools
 	echo -e "\e[96mInstalling helper tools ...\e[90m" | tee -a $logfile
-	sudo apt-get --assume-yes install curl wget git build-essential unzip sox unclutter|| exit
+	sudo apt-get -y install curl wget git build-essential unzip sox unclutter libatlas-base-dev|| exit
 fi
 # Install native dependencies
 #printf "%s\n${blu}Installing native dependencies${end}\n"
@@ -427,6 +428,8 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 			# go back one cd level
 			cd - >/dev/null
 		fi
+		echo add usepm2 parm to npm start in bash-start.sh >> $logfile
+		sed -i 's/npm start/npm start usepm2/' scripts/bash-start.sh
 		echo start smart mirror via pm2 now >>$logfile
 		# tell pm2 to start the app defined in the config file
 		$pm2cmd start $HOME/smart-mirror/scripts/$PM2_FILE
