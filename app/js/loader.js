@@ -394,7 +394,7 @@ function writeTranslationFiles(){
 					if(b !=''){ 	
 						try {	// don't let a fragment parsing error kill file creation		
 							// parse the content
-							x =  JSON.parse(b);
+							var x =  JSON.parse(b);
 							// and merge it into combined result
 							// Object.assign overlays existing items of the same name, not merge
 							// use lodash
