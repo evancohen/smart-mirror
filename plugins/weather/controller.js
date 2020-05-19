@@ -38,7 +38,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 					'&units='+((config.forecast.units=='us')?'imperial':'metric')+
 					'&appid='+config.forecast.key)
 				.then(function (response) {
-					console.log("json="+JSON.stringify(response.data));
+					//console.log("json="+JSON.stringify(response.data));
 					resolve(weather.forecast = response);
 				}).catch(()=>{
 					reject()
@@ -52,7 +52,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 				geoposition.coords.latitude + ',' + geoposition.coords.longitude + '?units=' +
 				config.forecast.units + "&lang=" + language + "&callback=JSON_CALLBACK")
 				.then(function (response) {
-					console.log("json="+JSON.stringify(response.data));
+					//console.log("json="+JSON.stringify(response.data));
 					resolve(weather.forecast = response);
 				}).catch(()=>{
 					reject()

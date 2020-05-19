@@ -24,7 +24,7 @@ let firstRun = false
 let kwsProcess = null
 let quitting = false
 try {
-	config = require("./config.json")
+	config = require("./config.json")	
 } catch (e) {
 	let error = "Unknown Error"
 	config = require("./remote/.config.default.json")
@@ -135,7 +135,7 @@ if (config && config.speech && !firstRun) {
 }
 
 if (config.remote && config.remote.enabled || firstRun) {
-	remote.start(config.general.language)
+	remote.start(config)
 
 	// Deturmine the local IP address
 	const interfaces = require("os").networkInterfaces()
@@ -189,12 +189,13 @@ if (config.remote && config.remote.enabled || firstRun) {
 		mainWindow.webContents.send("remoteSleep", true)
 	})
 
-	remote.on("relaunch", function() {
+	remote.on("relaunch", function(newConfig) {
 		console.log("Relaunching...")
-		// rebuild the html file plugin position info
-		loader.loadPluginInfo(__dirname + '/index.html', config)    
-		if(!usepm2)
+		// rebuild the html file plugin position info, from the NEW config data
+		if(!usepm2){
+			loader.loadPluginInfo(__dirname + '/index.html', newConfig)    
 			app.relaunch()
+		}
 		app.quit()
 	})
 }
