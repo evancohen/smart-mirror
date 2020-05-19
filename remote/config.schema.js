@@ -56,8 +56,8 @@ function getConfigSchema(config, cb) {
 									console.log("error ="+ error +" plugin="+file +"\n json ="+data)
 								}
 							}
-							--l;	// this loop is running async, so many at once, 
-									// decrement the counter to indicate we have processed one loop of plugins
+							--l;	/* this loop is running async, so many at once, 
+									 decrement the counter to indicate we have processed one loop of plugins */
 							if(!l && tdebug)
 								console.log("completed schema="+JSON.stringify(configSchema))	
 							// if the counter has gone to zero invoke the callback
@@ -65,8 +65,8 @@ function getConfigSchema(config, cb) {
 						});
 					}
 					else{
-						--l 	// this plugin is not active, 
-								// but count it as processed so loop control above will finish
+						--l 	/* this plugin is not active, 
+								 but count it as processed so loop control above will finish */
 						if(tdebug)
 							console.log("plugin="+file+" is marked inactive")
 					}	
@@ -78,14 +78,14 @@ function getConfigSchema(config, cb) {
 function isActive(pluginName,config){
 	// assume result is true
 	// some plugins in folder are not respresented in control data
-   	let result=true
-   	// loop thru the plugin config data for the plugins
-   	// careful some plugins are not listed there, cause they are required 
-   	// (general, speech, plugin config, remote (this plugin), etc)
-   	// this is controlled by the default plugin config info in remote/.config.default.json
-   	// so assumption is we want a module, unless found otherwise
-    for(let entry of config.plugins){
-    	// if this config entry matches the passed in plugin, and the plugin is disabled
+	let result=true
+	// loop thru the plugin config data for the plugins
+	// careful some plugins are not listed there, cause they are required 
+	// (general, speech, plugin config, remote (this plugin), etc)
+	// this is controlled by the default plugin config info in remote/.config.default.json
+	// so assumption is we want a module, unless found otherwise
+	for(let entry of config.plugins){
+		// if this config entry matches the passed in plugin, and the plugin is disabled
 		if(entry.name===pluginName && entry.active==false ){
 			// indicate so
 			result=false;
