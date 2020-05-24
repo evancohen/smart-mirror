@@ -1,9 +1,9 @@
 {
 	"remote":{
 		"config":{
-			"title":"Remote Server Settings",
-			"server enabled":"Remote Server Enabled",
-			"remote port":"Remote Server Port"
+			"title":"원격 서버 설정",
+			"server enabled":"원격 서버 사용",
+			"remote port":"원격 서버 포트"
 		}
 	}
 }

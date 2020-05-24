@@ -1,14 +1,14 @@
 {
 	"greeting":{
 		"config":{
-			"title":"Greetings",
-			"how displayed":"How would you like greetings displayed?",
-			"morning":"Morning Greeting 5:00am to 10:59am",
-			"midday":"Midday Greeting 11:00am to 6:59pm",
-			"evening":"Evening Greeting 7:00pm to 10:59pm",
-			"night":"Night Greeting 11:00pm to 4:59am",			
-			"settings title":"Greeting Settings",
-			"random":"Random Greetings"
+			"title":"Schöne Grüße",
+			"how displayed":"Wie möchten Sie Grüße anzeigen?",
+			"morning":"Morgengruß 5:00 bis 10:59 Uhr",
+			"midday":"Mittagsgruß 11.00 bis 18.59 Uhr",
+			"evening":"Abendgruß 19.00 bis 22.59 Uhr",
+			"night":"Nachtgruß 23:00 bis 04:59 Uhr",			
+			"settings title":"Begrüßungseinstellungen",
+			"random":"Zufällige Grüße"
 		}
 	}
 }

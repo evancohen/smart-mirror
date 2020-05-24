@@ -13,8 +13,8 @@
 	},
     "youtube":{
         "config":{
-            "title":"YouTube Settings",
-            "api key":"YouTube API Key"
+            "title":"YouTube 설정",
+            "api key":"YouTube API 키"
         }
     }
 }

@@ -1,16 +1,16 @@
 {
 	"hadisplay":{
 		"config":{
-			"title":"Home-Assistant Display",
-			"title desc":"Render Home-Assistance states using the template API",
-			"password":"Home-Assistant API password",
-			"refresh cycle":"Refresh Interval (minutes)",
-			"server":"Home-Assistant Server http(s)://yoursever:port",
-			"Templates":"Templates",
-			"Heading":"Heading",
-			"template":"Template - see https://home-assistant.io/docs/configuration/templating/",
-			"helpvalue":"<h6>Render Home-Assistance states using the template API</h6>",
-			"tab title":"<h4>Templates</h4>"
+			"title":"Monitor de Assistente Doméstico",
+			"title desc":"Processar estados de Assistência Doméstica usando a API de modelo",
+			"password":"Senha da API do Home-Assistant",
+			"refresh cycle":"Intervalo de atualização (minutos)",
+			"server":"Servidor Assistente Doméstico http(s)://yoursever:port",
+			"Templates":"Modelos",
+			"Heading":"Título",
+			"template":"Modelo - veja https://home-assistant.io/docs/configuration/templating/",
+			"helpvalue":"<h6>Processar estados de Assistência Doméstica usando a API de modelo</h6>",
+			"tab title":"<h4>Modelos</h4>"
 		}
 	}
 }

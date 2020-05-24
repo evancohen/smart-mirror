@@ -6,15 +6,15 @@
             "description": "Zeigt ein Video von dem gewünschten Objekt."
         },
         "video_stop": {
-            "text": "Stop video",
-            "voice": "stop (the) video",
+            "text": "Video stoppen",
+            "voice": "Video stoppen",
             "description": "Stopt die Video Wiedergabe."
         }
 	},
     "youtube":{
         "config":{
-            "title":"YouTube Settings",
-            "api key":"YouTube API Key"
+            "title":"YouTube die Einstellungen",
+            "api key":"YouTube API-Schlüssel"
         }
     }
 }

@@ -1,14 +1,14 @@
 {
 	"commands":{
 		"image_comic_commitstrip": {
-            "text": "Show Commit Strip",
-            "voice": "Show commit strip",
-            "description": "Shows the most recent Commit Strip comic."
+            "text": "커밋 스트립 표시",
+            "voice": "커밋 스트립 표시",
+            "description": "가장 최근의 Commit Strip 만화를 보여줍니다."
         },
         "image_comic_commitstrip1": {
-            "text": "Show Comic Strip",
-            "voice": "Show comic strip",
-            "description": "Shows the most recent Commit Strip comic."
+            "text": "코믹 스트립 표시",
+            "voice": "코믹 스트립 표시",
+            "description": "가장 최근의 Commit Strip 만화를 보여줍니다."
         }
 	}
 }

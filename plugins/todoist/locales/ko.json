@@ -18,8 +18,8 @@
 	},
     "todoist":{
         "config":{
-            "title":"Todoist Settings",
-            "api key":"Todoist api key"
+            "title":"Todoist 설정",
+            "api key":"Todoist API 키"
         }
     }
 }

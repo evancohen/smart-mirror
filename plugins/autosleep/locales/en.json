@@ -5,7 +5,6 @@
             "Display Mode":"Display Mode",
             "wait time":"AutoSleep Wait Time (minutes)",
             "Wake up time":"Wake up time (24 hr format)",
-            "AutoSleep Wait Time":"AutoSleep Wait Time (minutes)",
             "Motion Settings":"Motion Settings",
             "type Motion Detection":"Select type Motion Detection",
             "PIR PIN":"PIN the for output on PIR module",

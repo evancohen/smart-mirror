@@ -6,15 +6,15 @@
             "description": "Busca una imagen."
         },
         "video_stop": {
-            "text": "Stop video",
-            "voice": "stop (the) video",
-            "description": "Stops the playback of video content."
+            "text": "Detener video",
+            "voice": "Detener video",
+            "description": "Detiene la reproducción de contenido de video."
         }
 	},
     "youtube":{
         "config":{
-            "title":"YouTube Settings",
-            "api key":"YouTube API Key"
+            "title":"YouTube Configuraciones",
+            "api key":"YouTube Clave API"
         }
     }
 }

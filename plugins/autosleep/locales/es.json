@@ -13,17 +13,16 @@
 	},
     "autoTimer":{
         "config":{
-            "title":"AutoTimer Settings",
-            "Display Mode":"Display Mode",
-            "wait time":"AutoSleep Wait Time (minutes)",
-            "Wake up time":"Wake up time (24 hr format)",
-            "AutoSleep Wait Time":"AutoSleep Wait Time (minutes)",
-            "Motion Settings":"Motion Settings",
-            "type Motion Detection":"Select type Motion Detection",
-            "PIR PIN":"PIN the for output on PIR module",
-            "wake up":"Command used to wake up Smart Mirror",
-            "sleep":"Command used put Smart Mirror to sleep",
-            "motion_title":"Motion"
+            "title":"Configuración del temporizador automático",
+            "Display Mode":"Modo de visualización",
+            "wait time":"AutoSleep Wait Time (minutos)",
+            "Wake up time":"Hora de despertarse (formato de 24 horas)",
+            "Motion Settings":"Configuraciones de movimiento",
+            "type Motion Detection":"Seleccione tipo Detección de movimiento",
+            "PIR PIN":"PIN para la salida en el módulo PIR",
+            "wake up":"Comando utilizado para activar la pantalla Smart Mirror",
+            "sleep":"El comando utilizado puso la pantalla Smart Mirror para dormir",
+            "motion_title":"Movimiento"
         }   
     }
 }

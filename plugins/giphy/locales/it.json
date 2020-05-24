@@ -8,8 +8,8 @@
 	},
 	"giphy":{
 		"config":{
-			"title":"Giphy Settings",
-			"api key":"Giphy API Key"
+			"title":"Impostazioni Giphy",
+			"api key":"Chiave API Giphy"
 		}
 	}
 }

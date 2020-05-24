@@ -6,24 +6,23 @@
             "description": "Geht in den Schlafmodus."
         },
         "wake_up": {
-            "text": "wake up",
-            "voice": "wake up",
-            "description": "wake up the system"
+            "text": "aufwachen",
+            "voice": "aufwachen",
+            "description": "Wecken Sie das System auf"
         }         
 	},
 	"autoTimer":{
         "config":{
-            "title":"AutoTimer Settings",
-            "Display Mode":"Display Mode",
-            "wait time":"AutoSleep Wait Time (minutes)",
-            "Wake up time":"Wake up time (24 hr format)",
-            "AutoSleep Wait Time":"AutoSleep Wait Time (minutes)",
-            "Motion Settings":"Motion Settings",
-            "type Motion Detection":"Select type Motion Detection",
-            "PIR PIN":"PIN the for output on PIR module",
-            "wake up":"Command used to wake up Smart Mirror",
-            "sleep":"Command used put Smart Mirror to sleep",
-            "motion_title":"Motion"
+            "title":"AutoTimer die Einstellungen",
+            "Display Mode":"Anzeigemodus",
+            "wait time":"AutoSleep-Wartezeit (Minuten)",
+            "Wake up time":"Weckzeit (24-Stunden-Format)",
+            "Motion Settings":"Bewegungseinstellungen",
+            "type Motion Detection":"Wählen Sie den Typ Bewegungserkennung",
+            "PIR PIN":"PIN die für die Ausgabe am PIR-Modul",
+            "wake up":"Befehl zum Aufwecken von Smart Mirror",
+            "sleep":"Befehl verwendet, um Smart Mirror in den Ruhezustand zu versetzen",
+            "motion_title":"Bewegung"
         }   
     }
 }

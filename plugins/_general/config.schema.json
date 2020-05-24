@@ -29,7 +29,7 @@
       {
         "key":"general",
         "type":"fieldset",
-        "title":"{{form title}}",
+        "title":"{{title}}",
         "expandable":false,
         "order":-100
       }

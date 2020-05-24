@@ -13,8 +13,8 @@
 	},
     "youtube":{
         "config":{
-            "title":"YouTube Settings",
-            "api key":"YouTube API Key"
+            "title":"YouTube Definições",
+            "api key":"YouTube Chave API"
         }
     }
 }

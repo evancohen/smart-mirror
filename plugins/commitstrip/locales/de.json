@@ -6,9 +6,9 @@
             "description": "Zeige den aktuellen Commit Strip Comic."
         },
         "image_comic_commitstrip1": {
-            "text": "Show Comic Strip",
-            "voice": "Show comic strip",
-            "description": "Shows the most recent Commit Strip comic."
+            "text": "Comic anzeigen",
+            "voice": "Comic anzeigen",
+            "description": "Zeige den aktuellen Commit Strip Comic."
         }
 	}
 }
