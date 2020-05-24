@@ -1,11 +1,11 @@
 {
-	"calendar":{
-		"config":{
-			"title":"Calendar Settings",
-			"URLs":"iCal URLs",
-			"maxevents":"Max Number of Events for all iCals",
-			"maxdays":"Max Number of Days to display",
-			"showCalendarNames":"Check to display Calendar Names"
-		}
-	}
+  "calendar": {
+    "config": {
+      "title": "Calendar Settings",
+      "URLs": "URLs do iCal",
+      "maxevents": "Número máximo de eventos para todos os iCals",
+      "maxdays": "Número máximo de dias para exibir",
+      "showCalendarNames": "Marque para exibir os nomes do calendário"
+    }
+  }
 }

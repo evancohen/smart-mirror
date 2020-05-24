@@ -1,17 +1,17 @@
 {
-   "traffic" : {
-        "time_to" : "Time to {{name}}: ",
-        "config":{
-        	"title":"Traffic Settings",
-        	"api key":"Bing Traffic API Key",
-        	"refresh cycle":"Refresh Traffic Interval (minutes)",
-        	"Trips":"Trips",
-        	"Mode":"Mode",
-        	"start":"Starting Location",
-        	"end":"Destination Location",
-        	"Trip Name":"Trip Name",
-        	"start display":"Time to start displaying on Smart Mirror",
-        	"end display":"Time to stop displaying on Smart Mirror"        	
-        }        
+  "traffic": {
+    "time_to": "Time to {{name}}: ",
+    "config": {
+      "title": "Traffic Settings",
+      "api key": "Bing Traffic API 키",
+      "refresh cycle": "트래픽 간격 새로 고침 (분)",
+      "Trips": "여행",
+      "Mode": "방법",
+      "start": "출발지",
+      "end": "목적지 위치",
+      "Trip Name": "여행 이름",
+      "start display": "Smart Mirror에서 표시를 시작하는 시간",
+      "end display": "Smart Mirror에서 표시를 중지하는 시간"
     }
+  }
 }

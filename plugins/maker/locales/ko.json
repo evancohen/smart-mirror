@@ -1,15 +1,15 @@
 {
-	"maker":{
-		"config":{
-			"title":"Maker Settings",
-			"title desc":"Codeless, custom commands",
-			"requests":"Custom Requests",
-			"Utterance":"Utterance",
-			"Method":"Method",
-			"Request URL":"Request URL",
-			"JSON Body":"JSON Body",
-			"helpvalue":"<h6>Codeless, custom commands</h6>",
-			"tab title":"<h4>Custom Requests</h4>"
-		}
-	}
+  "maker": {
+    "config": {
+      "title": "Maker Settings",
+      "title desc": "Codeless, custom commands",
+      "requests": "맞춤 요청",
+      "Utterance": "말",
+      "Method": "방법",
+      "Request URL": "요청 URL",
+      "JSON Body": "JSON 본문",
+      "helpvalue": "<h6> 코드가없는 맞춤형 명령 </h6>",
+      "tab title": "<h4>Custom Requests</h4>"
+    }
+  }
 }

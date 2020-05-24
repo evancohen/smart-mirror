@@ -33,16 +33,16 @@
     },
     "config": {
       "title": "Light Settings",
-      "hub ip address": "Hue Light IP Address",
-      "hub user name": "Hue Light Username",
-      "Setup": "Setup",
-      "light name": "Name",
-      "light desc": "Description",
-      "light type": "type",
+      "hub ip address": "Hue Light Indirizzo IP",
+      "hub user name": "Nome utente Hue Light",
+      "Setup": "Impostare",
+      "light name": "Nome",
+      "light desc": "Descrizione",
+      "light type": "genere",
       "ip": "ip",
       "id": "id",
-      "port": "port",
-      "item and index": "Item {{idx}}"
+      "port": "porta",
+      "item and index": "Articolo {{idx}}"
     }
   },
   "commands": {

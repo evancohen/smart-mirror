@@ -1,52 +1,53 @@
 {
-	"commands":{
-	    "spotify_play": {
-            "text": "play ________ on Spotify",
-            "voice": "(tell) spotify (to) play (*query)",
-            "description": "Resume/Play song on Spotify."
-        },
-        "spotify_pause": {
-            "text": "pause ________ spotify",
-            "voice": "(tell) spotify (to) pause (playback)",
-            "description": "Pause current song on Spotify."
-        },
-        "spotify_forward": {
-            "text": "play next song on spotify",
-            "voice": "(tell) spotify (to) (skip) (goto) next (song on) (song)",
-            "description": "Play next song on Spotify."
-        },
-        "spotify_back": {
-            "text": "play previous song on spotify",
-            "voice": "(tell) spotify (to) (skip) (goto) previous (song on) (song)",
-            "description": "Play previous song on Spotify."
-        },
-        "spotify_shuffle": {
-            "text": "shuffle music",
-            "voice": "(tell) spotify (to) (turn on) (turn off) shuffle (songs)",
-            "description": "Toggle shuffle on Spotify."
-        },
-        "spotify_repeat": {
-            "text": "shuffle music",
-            "voice": "(tell) spotify (to) (turn on) (turn off) repeat (song)",
-            "description": "Toggle repeat on Spotify."
-        },
-        "spotify_transfer": {
-            "text": "transfer playback to my ________",
-            "voice": "(tell) spotify (to) (transfer) (send) (move) to *query",
-            "description": "Transfer playback to a device by the name of ..."
-        }
+  "commands": {
+    "spotify_play": {
+      "text": "spiele ________ auf Spotify",
+      "voice": "(erzählen) spotify (to) play (* query)",
+      "description": "Song auf Spotify fortsetzen / abspielen."
     },
-    "spotify":{
-        "config":{
-            "title":"Spotify Settings",
-            "refresh cycle":"Default time in seconds to refresh spotify data",
-            "default device":"Default device name to change playback route on request",
-            "clientid":"OAuth 2.0 Client ID",
-            "clientid desc":"You must define an application in your Spotify premium account, these two values will come from that definition you must also configure the autorization callback uri as described below ",
-            "client secret":"Client Secret",
-            "Scope":"Scope",
-            "State":"State",
-            "auth help":"<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4000/spotify_auth_callback'</b> then navigate to <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> from your mirror browser.</p>"
-        }
+    "spotify_pause": {
+      "text": "Pause ________ Spotify",
+      "voice": "(erzählen) spotify (zu) pausieren (Wiedergabe)",
+      "description": "Unterbrechen Sie das aktuelle Lied auf Spotify."
+    },
+    "spotify_forward": {
+      "text": "spiele das nächste Lied auf spotify",
+      "voice": "(erzählen) spotify (to) (überspringen) (goto) next (song on) (song)",
+      "description": "Spielen Sie das nächste Lied auf Spotify."
+    },
+    "spotify_back": {
+      "text": "spielen Sie das vorherige Lied auf spotify",
+      "voice": "(erzählen) spotify (to) (überspringen) (goto) previous (song on) (song)",
+      "description": "Spielen Sie das vorherige Lied auf Spotify ab."
+    },
+    "spotify_shuffle": {
+      "text": "Musik mischen",
+      "voice": "(erzählen) spotify (to) (einschalten) (ausschalten) shuffle (songs)",
+      "description": "Schalten Sie Shuffle auf Spotify um."
+    },
+    "spotify_repeat": {
+      "text": "Musik mischen",
+      "voice": "(erzählen) spotify (to) (einschalten) (ausschalten) wiederholen (Lied)",
+      "description": "Schalten Sie die Wiederholung auf Spotify um."
+    },
+    "spotify_transfer": {
+      "text": "Übertragung auf mein ________ übertragen",
+      "voice": "(tell) spotify (to) (transfer) (send) (move) to * query",
+      "description": "Übertragen Sie die Wiedergabe auf ein Gerät mit dem Namen ..."
     }
+  },
+  "spotify": {
+    "config": {
+      "title": "Spotify Settings",
+      "refresh cycle": "Standardzeit in Sekunden zum Aktualisieren von Spotify-Daten",
+      "default device": "Standardgerätename zum Ändern der Wiedergaberoute auf Anfrage",
+      "clientid": "OAuth 2.0-Client-ID",
+      "clientid desc": "Sie müssen eine Anwendung in Ihrem Spotify-Premium-Konto definieren. Diese beiden Werte stammen aus dieser Definition. Sie müssen auch die Autorisierungs-Rückruf-URL wie unten beschrieben konfigurieren",
+      "client secret": "Kundengeheimnis",
+      "Scope": "Umfang",
+      "State": "Zustand",
+      "auth help": "<p> <b>Stellen Sie sicher, dass die Spotify-API-Einstellungen Weiterleitungen von 'http: // localhost: 4000 / spotify_auth_callback' zulassen,</b> und navigieren Sie dann von Ihrem Spiegelbrowser zu <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Autorisieren</a> . </p>",
+      "screen_status": "Standardposition der Statusanzeige ('oben' oder 'unten')"
+    }
+  }
 }

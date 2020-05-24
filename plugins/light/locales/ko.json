@@ -30,16 +30,16 @@
     },
     "config": {
       "title": "Light Settings",
-      "hub ip address": "Hue Light IP Address",
-      "hub user name": "Hue Light Username",
-      "Setup": "Setup",
-      "light name": "Name",
-      "light desc": "Description",
-      "light type": "type",
+      "hub ip address": "색조 라이트 IP 주소",
+      "hub user name": "색조 라이트 사용자 이름",
+      "Setup": "설정",
+      "light name": "이름",
+      "light desc": "기술",
+      "light type": "유형",
       "ip": "ip",
-      "id": "id",
-      "port": "port",
-      "item and index": "Item {{idx}}"
+      "id": "신분증",
+      "port": "포트",
+      "item and index": "항목 {{idx}}"
     }
   },
   "commands": {

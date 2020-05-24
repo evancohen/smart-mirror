@@ -1,15 +1,15 @@
 {
-	"maker":{
-		"config":{
-			"title":"Maker Settings",
-			"title desc":"Codeless, custom commands",
-			"requests":"Custom Requests",
-			"Utterance":"Utterance",
-			"Method":"Method",
-			"Request URL":"Request URL",
-			"JSON Body":"JSON Body",
-			"helpvalue":"<h6>Codeless, custom commands</h6>",
-			"tab title":"<h4>Custom Requests</h4>"
-		}
-	}
+  "maker": {
+    "config": {
+      "title": "Maker Settings",
+      "title desc": "Codeless, custom commands",
+      "requests": "Benutzerdefinierte Anfragen",
+      "Utterance": "Äußerung",
+      "Method": "Methode",
+      "Request URL": "URL anfordern",
+      "JSON Body": "JSON-Körper",
+      "helpvalue": "<h6> Codlose, benutzerdefinierte Befehle </h6>",
+      "tab title": "<h4>Custom Requests</h4>"
+    }
+  }
 }

@@ -16,7 +16,7 @@
         },
         "position": {
           "type": "string",
-          "title": "Default status indicator position ('top' or 'bottom')",
+          "title": "{{screen_status}}",
           "enum": ["bottom","top"]
         },
         "creds": {

@@ -16,7 +16,7 @@
       "title": "AutoTimer Settings",
       "Display Mode": "Modo de exibição",
       "wait time": "Tempo de espera para suspensão automática (minutos)",
-      "Wake up time": "Hora de acordar (formato 24 horas)",
+      "Wake up time": "Hora de concordar (formato 24 horas)",
       "Motion Settings": "Configurações de movimento",
       "type Motion Detection": "Selecione o tipo Detecção de movimento",
       "PIR PIN": "PIN para saída no módulo PIR",

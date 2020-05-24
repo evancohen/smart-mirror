@@ -1,52 +1,53 @@
 {
-	"commands":{
-		"spotify_play": {
-            "text": "play ________ on Spotify",
-            "voice": "(tell) spotify (to) play (*query)",
-            "description": "Resume/Play song on Spotify."
-        },
-        "spotify_pause": {
-            "text": "pause ________ spotify",
-            "voice": "(tell) spotify (to) pause (playback)",
-            "description": "Pause current song on Spotify."
-        },
-        "spotify_forward": {
-            "text": "play next song on spotify",
-            "voice": "(tell) spotify (to) (skip) (goto) next (song on) (song)",
-            "description": "Play next song on Spotify."
-        },
-        "spotify_back": {
-            "text": "play previous song on spotify",
-            "voice": "(tell) spotify (to) (skip) (goto) previous (song on) (song)",
-            "description": "Play previous song on Spotify."
-        },
-        "spotify_shuffle": {
-            "text": "shuffle music",
-            "voice": "(tell) spotify (to) (turn on) (turn off) shuffle (songs)",
-            "description": "Toggle shuffle on Spotify."
-        },
-        "spotify_repeat": {
-            "text": "shuffle music",
-            "voice": "(tell) spotify (to) (turn on) (turn off) repeat (song)",
-            "description": "Toggle repeat on Spotify."
-        },
-        "spotify_transfer": {
-            "text": "transfer playback to my ________",
-            "voice": "(tell) spotify (to) (transfer) (send) (move) to *query",
-            "description": "Transfer playback to a device by the name of ..."
-        }
-	},
-    "spotify":{
-        "config":{
-            "title":"Spotify Settings",
-            "refresh cycle":"Default time in seconds to refresh spotify data",
-            "default device":"Default device name to change playback route on request",
-            "clientid":"OAuth 2.0 Client ID",
-            "clientid desc":"You must define an application in your Spotify premium account, these two values will come from that definition you must also configure the autorization callback uri as described below ",
-            "client secret":"Client Secret",
-            "Scope":"Scope",
-            "State":"State",
-            "auth help":"<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4000/spotify_auth_callback'</b> then navigate to <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> from your mirror browser.</p>"
-        }
+  "commands": {
+    "spotify_play": {
+      "text": "jugar ________ en Spotify",
+      "voice": "(tell) spotify (to) play (* query)",
+      "description": "Reanudar / Reproducir canción en Spotify."
+    },
+    "spotify_pause": {
+      "text": "pausa ________ spotify",
+      "voice": "(tell) spotify (to) pause (reproducción)",
+      "description": "Pausa la canción actual en Spotify."
+    },
+    "spotify_forward": {
+      "text": "reproducir la próxima canción en spotify",
+      "voice": "(tell) spotify (to) (skip) (goto) next (song on) (song)",
+      "description": "Reproduce la próxima canción en Spotify."
+    },
+    "spotify_back": {
+      "text": "reproducir canción anterior en spotify",
+      "voice": "(tell) spotify (to) (skip) (goto) previous (canción activada) (canción)",
+      "description": "Reproduce la canción anterior en Spotify."
+    },
+    "spotify_shuffle": {
+      "text": "barajar música",
+      "voice": "(tell) spotify (to) (activar) (desactivar) shuffle (canciones)",
+      "description": "Alternar aleatorio en Spotify."
+    },
+    "spotify_repeat": {
+      "text": "barajar música",
+      "voice": "(decir) spotify (a) (encender) (apagar) repetir (canción)",
+      "description": "Activar repetición en Spotify."
+    },
+    "spotify_transfer": {
+      "text": "transferir reproducción a mi ________",
+      "voice": "(tell) spotify (to) (transfer) (send) (move) to * query",
+      "description": "Transfiera la reproducción a un dispositivo con el nombre de ..."
     }
+  },
+  "spotify": {
+    "config": {
+      "title": "Spotify Settings",
+      "refresh cycle": "Tiempo predeterminado en segundos para actualizar los datos de Spotify",
+      "default device": "Nombre del dispositivo predeterminado para cambiar la ruta de reproducción a pedido",
+      "clientid": "ID de cliente OAuth 2.0",
+      "clientid desc": "Debe definir una aplicación en su cuenta premium de Spotify, estos dos valores provienen de esa definición, también debe configurar la uri de devolución de llamada de autorización como se describe a continuación",
+      "client secret": "Secreto del cliente",
+      "Scope": "Alcance",
+      "State": "Estado",
+      "auth help": "<p> <b>Asegúrese de que la configuración de la API de Spotify permita redireccionamientos desde 'http: // localhost: 4000 / spotify_auth_callback' y</b> luego navegue a <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Autorizar</a> desde su navegador espejo. </p>",
+      "screen_status": "Posición del indicador de estado predeterminado ('arriba' o 'abajo')"
+    }
+  }
 }

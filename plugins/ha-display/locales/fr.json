@@ -5,7 +5,7 @@
       "title desc": "Rendre les états d'assistance à domicile à l'aide de l'API de modèle",
       "password": "Mot de passe API Home-Assistant",
       "refresh cycle": "Intervalle de rafraîchissement (minutes)",
-      "server": "Serveur Home-Assistant http(s)://yoursever:port",
+      "server": "Serveur Home-Assistant http (s): // yoursever: port",
       "Templates": "Modèles",
       "Heading": "Titre",
       "template": "Modèle - voir https://home-assistant.io/docs/configuration/templating/",

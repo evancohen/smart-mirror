@@ -25,7 +25,11 @@
             "expandable": true,
             "order":0,
             "items":[
-              "stock.key",
+              {
+              "key":"stock.key",
+              "title":"{{api key}}",                
+              "description":"{{desc}}"              
+              },
               {
                 "type":"tabarray",
                 "title":"{{Stock Symbols}}",

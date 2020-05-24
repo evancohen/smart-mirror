@@ -2,14 +2,14 @@
   "plugins": {
     "config": {
       "title": "Plugins Settings",
-      "Name": "Name",
-      "Location": "Location",
-      "Order": "Order",
-      "Active": "Active",
-      "Plugin Name": "Plugin Name",
-      "plugin location desc": "Plugin location on smart-mirror screen",
-      "plugin order desc": "if multiple in the same area, what position this plugin should be in, * means any",
-      "plugin active desc": "if false, this plugin will not be loaded"
+      "Name": "Nombre",
+      "Location": "Ubicación",
+      "Order": "Orden",
+      "Active": "Activo",
+      "Plugin Name": "Nombre del complemento",
+      "plugin location desc": "Ubicación del complemento en la pantalla de espejo inteligente",
+      "plugin order desc": "si es múltiple en la misma área, en qué posición debe estar este complemento, * significa cualquier",
+      "plugin active desc": "si es falso, este complemento no se cargará"
     }
   }
 }

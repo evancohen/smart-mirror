@@ -1,16 +1,16 @@
 {
-	"speech":{
-		"config":{
-			"title":"Speech Settings",
-			"dev name":"Select <em><strong>Recording</strong></em> Device",
-			"keyfile":"Google Cloud Speech Keyfile",
-			"hotwords":"Keyword Spotter Hotwords",
-			"Keyword Name":"Keyword Name",
-			"Model Filename":"Model Filename",
-			"mic sensitivity":"Microphone Sensitivity",
-			"form title":"Speech Settings",
-			"speech dev help":"<p>For help please refer to <a href='https://docs.smart-mirror.io'>the docs.</a></BR>Also, we're available on <a href='https://discord.gg/EMb4ynW'>Discord Chat with <img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt='people online'/></a> to help assist you in real time.</p>",
-			"sensitivity help":"<p id='sensitivityHelper'>Move above bar to see value here.</p>"
-		}
-	}
+  "speech": {
+    "config": {
+      "title": "Speech Settings",
+      "dev name": "Seleziona il dispositivo di <em><strong>registrazione</strong></em>",
+      "keyfile": "Keyfile di Google Cloud Speech",
+      "hotwords": "Parole chiave Spotter Hotword",
+      "Keyword Name": "Nome parola chiave",
+      "Model Filename": "Nome file modello",
+      "mic sensitivity": "Sensibilità del microfono",
+      "form title": "Speech Settings",
+      "speech dev help": "<p> Per assistenza, consultare <a href='https://docs.smart-mirror.io'>i documenti.</a> </BR> Inoltre, siamo disponibili su <a href='https://discord.gg/EMb4ynW'>Discord Chat con <img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt=\"persone online\"/></a> per aiutarti in tempo reale. </p>",
+      "sensitivity help": "<p id='sensitivityHelper'> Spostati sopra la barra per vedere il valore qui. </p>"
+    }
+  }
 }

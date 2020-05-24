@@ -3,9 +3,9 @@
     "config": {
       "title": "Home-Assistant Display Settings",
       "title desc": "Rendering degli stati di Assistenza domiciliare mediante l'API modello",
-      "password": "Password API Home-Assistant",
+      "password": "Assistente Home API password",
       "refresh cycle": "Intervallo di aggiornamento (minuti)",
-      "server": "Server dell'assistente domestico http(s)://yoursever:port",
+      "server": "Server dell'assistente domestico http (s): // yoursever: port",
       "Templates": "Modelli",
       "Heading": "Intestazione",
       "template": "Modello - vedi https://home-assistant.io/docs/configuration/templating/",

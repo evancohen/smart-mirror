@@ -2,14 +2,14 @@
   "plugins": {
     "config": {
       "title": "Plugins Settings",
-      "Name": "Name",
-      "Location": "Location",
-      "Order": "Order",
-      "Active": "Active",
-      "Plugin Name": "Plugin Name",
-      "plugin location desc": "Plugin location on smart-mirror screen",
-      "plugin order desc": "if multiple in the same area, what position this plugin should be in, * means any",
-      "plugin active desc": "if false, this plugin will not be loaded"
+      "Name": "이름",
+      "Location": "위치",
+      "Order": "주문",
+      "Active": "유효한",
+      "Plugin Name": "플러그인 이름",
+      "plugin location desc": "스마트 미러 화면의 플러그인 위치",
+      "plugin order desc": "동일한 지역에 여러 개가있는 경우이 플러그인의 위치는 *이며,",
+      "plugin active desc": "false 인 경우이 플러그인이로드되지 않습니다"
     }
   }
 }

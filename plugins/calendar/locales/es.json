@@ -2,7 +2,7 @@
   "calendar": {
     "config": {
       "title": "Calendar Settings",
-      "URLs": "URL de iCal",
+      "URLs": "URL ICal",
       "maxevents": "Número máximo de eventos para todos los iCals",
       "maxdays": "Número máximo de días para mostrar",
       "showCalendarNames": "Marque para mostrar los nombres de calendario"

@@ -1,17 +1,17 @@
 {
-	"traffic" : {
-        "time_to" : "Zeit bis {{name}}: ",
-        "config":{
-        	"title":"Traffic Settings",
-        	"api key":"Bing Traffic API Key",
-        	"refresh cycle":"Refresh Traffic Interval (minutes)",
-        	"Trips":"Trips",
-        	"Mode":"Mode",
-        	"start":"Starting Location",
-        	"end":"Destination Location",
-        	"Trip Name":"Trip Name",
-        	"start display":"Time to start displaying on Smart Mirror",
-        	"end display":"Time to stop displaying on Smart Mirror"        	
-        }        
+  "traffic": {
+    "time_to": "Zeit bis {{name}}: ",
+    "config": {
+      "title": "Traffic Settings",
+      "api key": "Bing Traffic API-Schlüssel",
+      "refresh cycle": "Verkehrsintervall aktualisieren (Minuten)",
+      "Trips": "Reisen",
+      "Mode": "Modus",
+      "start": "Startort",
+      "end": "Zielort",
+      "Trip Name": "Name der Reise",
+      "start display": "Zeit, um mit der Anzeige auf Smart Mirror zu beginnen",
+      "end display": "Zeit, die Anzeige auf dem Smart Mirror zu beenden"
     }
+  }
 }
