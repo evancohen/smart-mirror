@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 //var pos = require('./plugin_positions.js')()
 const cheerio = require('cheerio')
@@ -420,8 +419,8 @@ function writeTranslationFiles(){
 
 			if(debug)
 				console.log(" new base filename="+basefn)
-			// write out the constructed locale file
-			fs.writeFileSync(basefn,JSON.stringify(bdata))
+			// write out the constructed locale file, in readable for for person
+			fs.writeFileSync(basefn,JSON.stringify(bdata, null, 2))
 		}
 	}
 }
