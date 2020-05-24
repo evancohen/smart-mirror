@@ -1,16 +1,16 @@
 {
-	"hadisplay":{
-		"config":{
-			"title":"홈 어시스턴트 디스플레이",
-			"title desc":"템플릿 API를 사용하여 홈 어시 스턴스 상태 렌더링",
-			"password":"홈 어시스턴트 API 비밀번호",
-			"refresh cycle":"새로 고침 간격 (분)",
-			"server":"홈 어시스턴트 서버 http(s)://yoursever:port",
-			"Templates":"템플릿",
-			"Heading":"표제",
-			"template":"템플릿-참조 https://home-assistant.io/docs/configuration/templating/",
-			"helpvalue":"<h6>템플릿 API를 사용하여 홈 어시 스턴스 상태 렌더링</h6>",
-			"tab title":"<h4>템플릿</h4>"
-		}
-	}
+  "hadisplay": {
+    "config": {
+      "title": "Home-Assistant Display Settings",
+      "title desc": "템플릿 API를 사용하여 홈 어시 스턴스 상태 렌더링",
+      "password": "홈 어시스턴트 API 비밀번호",
+      "refresh cycle": "새로 고침 간격 (분)",
+      "server": "홈 어시스턴트 서버 http(s)://yoursever:port",
+      "Templates": "템플릿",
+      "Heading": "표제",
+      "template": "템플릿-참조 https://home-assistant.io/docs/configuration/templating/",
+      "helpvalue": "<h6>템플릿 API를 사용하여 홈 어시 스턴스 상태 렌더링</h6>",
+      "tab title": "<h4>템플릿</h4>"
+    }
+  }
 }

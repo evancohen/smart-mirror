@@ -1,25 +1,25 @@
 {
-	"commands":{
-		"todoist_show": {
-            "text": "Mostrar a (minha) lista ________",
-            "voice": "Mostrar (a) (minha) lista *project",
-            "description": "Apresenta a lista escolhida."
-        },
-        "todoist_add": {
-            "text": "Adiciona ________ (à) (a) (minha) lista ________",
-            "voice": "Adiciona *element (a)(na) (minha) lista *project list",
-            "description": "Adiciona o elemento à lista escolhida."
-        },
-        "todoist_remove": {
-            "text": "Retira ________ da (minha) lista ________",
-            "voice": "Retira *element (da)(na) (minha) lista *project",
-            "description": "Retira o elemento da lista escolhida."
-        }
-	},
-    "todoist":{
-        "config":{
-            "title":"Todoist Definições",
-            "api key":"Todoist Chave API"
-        }
+  "commands": {
+    "todoist_show": {
+      "text": "Mostrar a (minha) lista ________",
+      "voice": "Mostrar (a) (minha) lista *project",
+      "description": "Apresenta a lista escolhida."
+    },
+    "todoist_add": {
+      "text": "Adiciona ________ (à) (a) (minha) lista ________",
+      "voice": "Adiciona *element (a)(na) (minha) lista *project list",
+      "description": "Adiciona o elemento à lista escolhida."
+    },
+    "todoist_remove": {
+      "text": "Retira ________ da (minha) lista ________",
+      "voice": "Retira *element (da)(na) (minha) lista *project",
+      "description": "Retira o elemento da lista escolhida."
     }
+  },
+  "todoist": {
+    "config": {
+      "title": "Todoist Settings",
+      "api key": "Todoist Chave API"
+    }
+  }
 }

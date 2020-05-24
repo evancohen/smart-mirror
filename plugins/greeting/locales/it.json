@@ -1,14 +1,14 @@
 {
-	"greeting":{
-		"config":{
-			"title":"Saluti",
-			"how displayed":"Come desideri visualizzare i saluti?",
-			"morning":"Saluto del mattino dalle 5:00 alle 10:59",
-			"midday":"Saluto di mezzogiorno dalle 11:00 alle 18:59",
-			"evening":"Saluto serale dalle 19:00 alle 22:59",
-			"night":"Saluto di notte dalle 23:00 alle 4:59",			
-			"settings title":"Impostazioni di saluto",
-			"random":"Saluti casuali"
-		}
-	}
+  "greeting": {
+    "config": {
+      "title": "Greeting Settings",
+      "how displayed": "Come desideri visualizzare i saluti?",
+      "morning": "Saluto del mattino dalle 5:00 alle 10:59",
+      "midday": "Saluto di mezzogiorno dalle 11:00 alle 18:59",
+      "evening": "Saluto serale dalle 19:00 alle 22:59",
+      "night": "Saluto di notte dalle 23:00 alle 4:59",
+      "settings title": "Greeting Settings",
+      "random": "Saluti casuali"
+    }
+  }
 }

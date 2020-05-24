@@ -1,20 +1,20 @@
 {
-	"commands":{
-	    "video_search": {
-            "text": "Busca imagen de _______",
-            "voice": "Busca imagen de *term",
-            "description": "Busca una imagen."
-        },
-        "video_stop": {
-            "text": "Detener video",
-            "voice": "Detener video",
-            "description": "Detiene la reproducción de contenido de video."
-        }
-	},
-    "youtube":{
-        "config":{
-            "title":"YouTube Configuraciones",
-            "api key":"YouTube Clave API"
-        }
+  "commands": {
+    "video_search": {
+      "text": "Busca imagen de _______",
+      "voice": "Busca imagen de *term",
+      "description": "Busca una imagen."
+    },
+    "video_stop": {
+      "text": "Detener video",
+      "voice": "Detener video",
+      "description": "Detiene la reproducción de contenido de video."
     }
+  },
+  "youtube": {
+    "config": {
+      "title": "Youtube Settings",
+      "api key": "YouTube Clave API"
+    }
+  }
 }

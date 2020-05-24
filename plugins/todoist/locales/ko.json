@@ -1,25 +1,25 @@
 {
-	"commands":{
-       "todoist_show": {
-            "text": "________리스트 보여줘",
-            "voice": "*project리스트 보여줘",
-            "description": "TODO리스트를 보여줍니다."
-        },
-        "todoist_add": {
-            "text": "________항목________에 추가해줘",
-            "voice": "*element항목*project에 추가해줘",
-            "description": "음성인식된 항목을 TODO리스트에 추가합니다."
-        },
-        "todoist_remove": {
-            "text": "________항목________에서 제거해줘",
-            "voice": "*element항목*project에서 제거해줘",
-            "description": "음성인식된 항목을 TODO리스트에서 제거합니다."
-        }
-	},
-    "todoist":{
-        "config":{
-            "title":"Todoist 설정",
-            "api key":"Todoist API 키"
-        }
+  "commands": {
+    "todoist_show": {
+      "text": "________리스트 보여줘",
+      "voice": "*project리스트 보여줘",
+      "description": "TODO리스트를 보여줍니다."
+    },
+    "todoist_add": {
+      "text": "________항목________에 추가해줘",
+      "voice": "*element항목*project에 추가해줘",
+      "description": "음성인식된 항목을 TODO리스트에 추가합니다."
+    },
+    "todoist_remove": {
+      "text": "________항목________에서 제거해줘",
+      "voice": "*element항목*project에서 제거해줘",
+      "description": "음성인식된 항목을 TODO리스트에서 제거합니다."
     }
+  },
+  "todoist": {
+    "config": {
+      "title": "Todoist Settings",
+      "api key": "Todoist API 키"
+    }
+  }
 }

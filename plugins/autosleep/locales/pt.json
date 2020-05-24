@@ -1,28 +1,28 @@
 {
-	"commands":{
-       "sleep": {
-            "text": "Hibernar",
-            "voice": "Hibernar",
-            "description": "Hiberna o sistema."
-        },
-        "wake_up": {
-            "text": "acorde",
-            "voice": "acorde",
-            "description": "acorde o sistema"
-        }          
-	},
-    "autoTimer":{
-        "config":{
-            "title":"AutoTimer Definições",
-            "Display Mode":"Modo de exibição",
-            "wait time":"Tempo de espera para suspensão automática (minutos)",
-            "Wake up time":"Hora de acordar (formato 24 horas)",
-            "Motion Settings":"Configurações de movimento",
-            "type Motion Detection":"Selecione o tipo Detecção de movimento",
-            "PIR PIN":"PIN para saída no módulo PIR",
-            "wake up":"Comando usado para ativar o Smart Mirror",
-            "sleep":"Comando usado colocou o Smart Mirror para dormir",
-            "motion_title":"Movimento"
-        }   
-    }   	
+  "commands": {
+    "sleep": {
+      "text": "Hibernar",
+      "voice": "Hibernar",
+      "description": "Hiberna o sistema."
+    },
+    "wake_up": {
+      "text": "acorde",
+      "voice": "acorde",
+      "description": "acorde o sistema"
+    }
+  },
+  "autoTimer": {
+    "config": {
+      "title": "AutoTimer Settings",
+      "Display Mode": "Modo de exibição",
+      "wait time": "Tempo de espera para suspensão automática (minutos)",
+      "Wake up time": "Hora de acordar (formato 24 horas)",
+      "Motion Settings": "Configurações de movimento",
+      "type Motion Detection": "Selecione o tipo Detecção de movimento",
+      "PIR PIN": "PIN para saída no módulo PIR",
+      "wake up": "Comando usado para ativar o Smart Mirror",
+      "sleep": "Comando usado colocou o Smart Mirror para dormir",
+      "motion_title": "Movimento"
+    }
+  }
 }

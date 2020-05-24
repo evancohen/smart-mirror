@@ -1,52 +1,52 @@
 {
-   "lights": {
-        "colors": {
-            "red": "rouge",
-            "dark_green": "verre foncé",
-            "green": "verre",
-            "blue": "bleu",
-            "yellow": "jaune",
-            "orange":  "orange",
-            "pink": "rose",
-            "purple": "violet",
-            "white": "blanc",
-            "movie": "cinéma",
-            "colorloop": "couleur",
-            "stop": "stop"
-        },
-        "intensity": {
-            "increase": "augmente",
-            "decrease": "baisse",
-            "max": "maximum",
-            "half": "moitié",
-            "quarter": "quart",
-            "threequarter": "trois-quart"
-        },
-        "action": {
-            "on": "allume",
-            "off": "éteins",
-            "nightmode": "mode nuit",
-            "reset": "réinitialise"
-        },
-        "config":{
-            "title":"Light Settings",
-            "hub ip address":"Hue Light IP Address",
-            "hub user name":"Hue Light Username",
-            "Setup":"Setup",
-            "light name":"Name",
-            "light desc":"Description",
-            "light type":"type",
-            "ip":"ip",
-            "id":"id",
-            "port":"port",
-            "item and index":"Item {{idx}}"
-        }
+  "lights": {
+    "colors": {
+      "red": "rouge",
+      "dark_green": "verre foncé",
+      "green": "verre",
+      "blue": "bleu",
+      "yellow": "jaune",
+      "orange": "orange",
+      "pink": "rose",
+      "purple": "violet",
+      "white": "blanc",
+      "movie": "cinéma",
+      "colorloop": "couleur",
+      "stop": "stop"
     },
-    "commands":{
-        "light_action": {
-            "text": "(Allume) (Éteins) (les) (la) lumières (action)",
-            "voice": ":state (les) (la) lumière(s) (*action)",
-            "description": "Allume/Éteins (les) (la) lumière(s) (*action)."
-        }
+    "intensity": {
+      "increase": "augmente",
+      "decrease": "baisse",
+      "max": "maximum",
+      "half": "moitié",
+      "quarter": "quart",
+      "threequarter": "trois-quart"
+    },
+    "action": {
+      "on": "allume",
+      "off": "éteins",
+      "nightmode": "mode nuit",
+      "reset": "réinitialise"
+    },
+    "config": {
+      "title": "Light Settings",
+      "hub ip address": "Hue Light IP Address",
+      "hub user name": "Hue Light Username",
+      "Setup": "Setup",
+      "light name": "Name",
+      "light desc": "Description",
+      "light type": "type",
+      "ip": "ip",
+      "id": "id",
+      "port": "port",
+      "item and index": "Item {{idx}}"
     }
+  },
+  "commands": {
+    "light_action": {
+      "text": "(Allume) (Éteins) (les) (la) lumières (action)",
+      "voice": ":state (les) (la) lumière(s) (*action)",
+      "description": "Allume/Éteins (les) (la) lumière(s) (*action)."
+    }
+  }
 }

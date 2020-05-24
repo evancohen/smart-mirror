@@ -1,20 +1,20 @@
 {
-	"commands":{
-       "video_search": {
-            "text": "Mostrami ________",
-            "voice": "mostrami (un video)(di)(dei) *query",
-            "description": "Mostrera un video a vostra richiesta"
-        },
-        "video_stop": {
-            "text": "Ferma video",
-            "voice": "ferma (il) video",
-            "description": "Ferma il video playback of video content."
-        }
-	},
-    "youtube":{
-        "config":{
-            "title":"YouTube impostazioni",
-            "api key":"YouTube Chiave API"
-        }
+  "commands": {
+    "video_search": {
+      "text": "Mostrami ________",
+      "voice": "mostrami (un video)(di)(dei) *query",
+      "description": "Mostrera un video a vostra richiesta"
+    },
+    "video_stop": {
+      "text": "Ferma video",
+      "voice": "ferma (il) video",
+      "description": "Ferma il video playback of video content."
     }
+  },
+  "youtube": {
+    "config": {
+      "title": "Youtube Settings",
+      "api key": "YouTube Chiave API"
+    }
+  }
 }

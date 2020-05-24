@@ -1,10 +1,10 @@
 {
-	"lastfm":{
-		"config":{
-			"title":"last.FM Configuraciones",
-			"api key":"last.fm Clave API",
-			"username":"last.fm Nombre de usuario",
-			"refresh cycle":"Intervalo de actualización para last.fm"
-		}
-	}
+  "lastfm": {
+    "config": {
+      "title": "Last.FM Settings",
+      "api key": "last.fm Clave API",
+      "username": "last.fm Nombre de usuario",
+      "refresh cycle": "Intervalo de actualización para last.fm"
+    }
+  }
 }

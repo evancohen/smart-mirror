@@ -1,12 +1,11 @@
 {
-	"geoPosition":{
-		"config":{
-			"title":"Geo-Location-Einstellungen",
-			"apikey":"Google API-Schlüssel, der für Geolokalisierung und Karten verwendet wird",
-			"latitude":"Breite",
-			"longitude":"Längengrad",
-			"help value":"<strong><em>(wird verwendet, wenn die Geoposition nicht genau erkannt wird)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Klicken Sie hier für weitere Informationen</a></br>"
-		}
-	}
-
+  "geoPosition": {
+    "config": {
+      "title": "GeoPosition Settings",
+      "apikey": "Google API-Schlüssel, der für Geolokalisierung und Karten verwendet wird",
+      "latitude": "Breite",
+      "longitude": "Längengrad",
+      "help value": "<strong><em>(wird verwendet, wenn die Geoposition nicht genau erkannt wird)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Klicken Sie hier für weitere Informationen</a></br>"
+    }
+  }
 }

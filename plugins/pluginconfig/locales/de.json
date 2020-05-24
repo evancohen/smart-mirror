@@ -1,15 +1,15 @@
 {
-	"plugins":{
-		"config":{
-			"title":"Plugin Page location configuration",
-			"Name":"Name",
-			"Location":"Location",
-			"Order":"Order",
-			"Active":"Active",
-			"Plugin Name":"Plugin Name",
-			"plugin location desc":"Plugin location on smart-mirror screen",
-			"plugin order desc":"if multiple in the same area, what position this plugin should be in, * means any",
-			"plugin active desc":"if false, this plugin will not be loaded"
-		}
-	}
+  "plugins": {
+    "config": {
+      "title": "Plugins Settings",
+      "Name": "Name",
+      "Location": "Standort",
+      "Order": "Auftrag",
+      "Active": "Aktiv",
+      "Plugin Name": "Plugin Name",
+      "plugin location desc": "Position des Plugins auf dem Smart-Mirror-Bildschirm",
+      "plugin order desc": "Wenn sich mehrere im selben Bereich befinden, in welcher Position sich dieses Plugin befinden soll, bedeutet * any",
+      "plugin active desc": "Wenn false, wird dieses Plugin nicht geladen"
+    }
+  }
 }

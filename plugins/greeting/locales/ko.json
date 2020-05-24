@@ -1,14 +1,14 @@
 {
-	"greeting":{
-		"config":{
-			"title":"인사말",
-			"how displayed":"인사말을 어떻게 표시 하시겠습니까?",
-			"morning":"오전 인사 오전 5 시부 터 오전 10시 59 분",
-			"midday":"정오 인사말 11:00 am-6:59 pm",
-			"evening":"저녁 인사 7:00 pm-10:59 pm",
-			"night":"야간 인사 11:00 pm ~ 4:59 am",			
-			"settings title":"인사말 설정",
-			"random":"무작위 인사말"
-		}
-	}
+  "greeting": {
+    "config": {
+      "title": "Greeting Settings",
+      "how displayed": "인사말을 어떻게 표시 하시겠습니까?",
+      "morning": "오전 인사 오전 5 시부 터 오전 10시 59 분",
+      "midday": "정오 인사말 11:00 am-6:59 pm",
+      "evening": "저녁 인사 7:00 pm-10:59 pm",
+      "night": "야간 인사 11:00 pm ~ 4:59 am",
+      "settings title": "Greeting Settings",
+      "random": "무작위 인사말"
+    }
+  }
 }

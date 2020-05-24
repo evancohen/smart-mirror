@@ -1,15 +1,15 @@
 {
-	"commands":{
-		"image_giphy": {
-            "text": "Busca animacion de _______",
-            "voice": "Busca animacion de *img",
-            "description": "Busca animacion de algún tema."
-        }
-	},
-	"giphy":{
-		"config":{
-			"title":"Configuraciones Giphy",
-			"api key":"Clave API de Giphy"
-		}
-	}
+  "commands": {
+    "image_giphy": {
+      "text": "Busca animacion de _______",
+      "voice": "Busca animacion de *img",
+      "description": "Busca animacion de algún tema."
+    }
+  },
+  "giphy": {
+    "config": {
+      "title": "Giphy Settings",
+      "api key": "Clave API de Giphy"
+    }
+  }
 }

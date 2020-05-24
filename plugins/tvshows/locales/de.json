@@ -1,9 +1,9 @@
 {
-	"tvshows":{
-		"config":{
-			"title":"TV-Show-Einstellungen",
-			"show names":"Namen der Fernsehsendungen",
-			"update cycle":"Aktualisierungsintervall für TV-Sendungen (Minuten)"
-		}
-	}
+  "tvshows": {
+    "config": {
+      "title": "TV Shows Settings",
+      "show names": "Namen der Fernsehsendungen",
+      "update cycle": "Aktualisierungsintervall für TV-Sendungen (Minuten)"
+    }
+  }
 }

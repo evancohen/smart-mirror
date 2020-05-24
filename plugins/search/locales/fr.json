@@ -1,20 +1,20 @@
 {
-	"commands":{
-       "video_search": {
-            "text": "(Montre-moi) (Affiche) une vidéo (de|d') ________",
-            "voice": "(Montre-moi) (Affiche) une vidéo (de|d') *term",
-            "description": "Affiche la vidéo recherchée."
-        },
-        "video_stop": {
-            "text": "Arrête (la lecture de) la vidéo",
-            "voice": "Arrête (la lecture de) la vidéo",
-            "description": "Arrête la lecture de la vidéo."
-        }
-	},
-    "youtube":{
-        "config":{
-            "title":"YouTube Réglages",
-            "api key":"YouTube clé API"
-        }
+  "commands": {
+    "video_search": {
+      "text": "(Montre-moi) (Affiche) une vidéo (de|d') ________",
+      "voice": "(Montre-moi) (Affiche) une vidéo (de|d') *term",
+      "description": "Affiche la vidéo recherchée."
+    },
+    "video_stop": {
+      "text": "Arrête (la lecture de) la vidéo",
+      "voice": "Arrête (la lecture de) la vidéo",
+      "description": "Arrête la lecture de la vidéo."
     }
+  },
+  "youtube": {
+    "config": {
+      "title": "Youtube Settings",
+      "api key": "YouTube clé API"
+    }
+  }
 }

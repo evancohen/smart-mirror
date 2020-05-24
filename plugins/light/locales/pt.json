@@ -1,52 +1,58 @@
 {
-   "lights": {
-        "colors": {
-            "red": "vermelho",
-            "dark_green": "verde escuro",
-            "green": "verde",
-            "blue": "azul",
-            "yellow": "amarelo",
-            "orange":  "laranja",
-            "pink": "rosa",
-            "purple": "roxo",
-            "white": "branco",
-            "movie": "filme",
-            "colorloop": "cores",
-            "stop": "parar"
-        },
-        "intensity": {
-            "increase": "aumentar",
-            "decrease": "diminuir",
-            "max": "máximo",
-            "half": "metade",
-            "quarter": ["um-quarto", "quarto"],
-            "threequarter": ["três-quartos", "três-quartos"]
-        },
-        "action": {
-            "on": "liga",
-            "off": "desliga",
-            "nightmode": "modo noturno",
-            "reset": "reset"
-        },
-        "config":{
-            "title":"Light Settings",
-            "hub ip address":"Hue Light IP Address",
-            "hub user name":"Hue Light Username",
-            "Setup":"Setup",
-            "light name":"Name",
-            "light desc":"Description",
-            "light type":"type",
-            "ip":"ip",
-            "id":"id",
-            "port":"port",
-            "item and index":"Item {{idx}}"
-        }
+  "lights": {
+    "colors": {
+      "red": "vermelho",
+      "dark_green": "verde escuro",
+      "green": "verde",
+      "blue": "azul",
+      "yellow": "amarelo",
+      "orange": "laranja",
+      "pink": "rosa",
+      "purple": "roxo",
+      "white": "branco",
+      "movie": "filme",
+      "colorloop": "cores",
+      "stop": "parar"
     },
-    "commands":{
-       "light_action": {
-            "text": "Altera (liga/desliga) a(s) luz(es) (action)",
-            "voice": "(altera) :state (a) (as) luz(es) *action",
-            "description": "Controla a cor e o brilho das luzes Hue."
-        }
+    "intensity": {
+      "increase": "aumentar",
+      "decrease": "diminuir",
+      "max": "máximo",
+      "half": "metade",
+      "quarter": [
+        "um-quarto",
+        "quarto"
+      ],
+      "threequarter": [
+        "três-quartos",
+        "três-quartos"
+      ]
+    },
+    "action": {
+      "on": "liga",
+      "off": "desliga",
+      "nightmode": "modo noturno",
+      "reset": "reset"
+    },
+    "config": {
+      "title": "Light Settings",
+      "hub ip address": "Hue Light IP Address",
+      "hub user name": "Hue Light Username",
+      "Setup": "Setup",
+      "light name": "Name",
+      "light desc": "Description",
+      "light type": "type",
+      "ip": "ip",
+      "id": "id",
+      "port": "port",
+      "item and index": "Item {{idx}}"
     }
+  },
+  "commands": {
+    "light_action": {
+      "text": "Altera (liga/desliga) a(s) luz(es) (action)",
+      "voice": "(altera) :state (a) (as) luz(es) *action",
+      "description": "Controla a cor e o brilho das luzes Hue."
+    }
+  }
 }

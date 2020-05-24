@@ -3,7 +3,8 @@
 		"config":{
 			"title":"Stock Settings",
 			"api key":"Alpha Vantage API Key",
-			"Stock Symbols":"Stock Symbols"
+			"Stock Symbols":"Stock Symbols",
+			"desc":"get your api key here <a href=\"https://www.alphavantage.co/\" target=\"blank\">Click here for more info</a><br>"
 		}
 	}
 }

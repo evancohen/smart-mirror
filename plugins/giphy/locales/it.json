@@ -1,15 +1,15 @@
 {
-	"commands":{
-       "image_giphy": {
-            "text": "Gif ________",
-            "voice": "gif *img",
-            "description": "Mostra una immagine da Giphy."
-        }
-	},
-	"giphy":{
-		"config":{
-			"title":"Impostazioni Giphy",
-			"api key":"Chiave API Giphy"
-		}
-	}
+  "commands": {
+    "image_giphy": {
+      "text": "Gif ________",
+      "voice": "gif *img",
+      "description": "Mostra una immagine da Giphy."
+    }
+  },
+  "giphy": {
+    "config": {
+      "title": "Giphy Settings",
+      "api key": "Chiave API Giphy"
+    }
+  }
 }
