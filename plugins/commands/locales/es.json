@@ -1,7 +1,7 @@
 {
 	"list":{
 		"action":"Decir",
-		"next":"Próximo",
+		"next":"Siguiente",
 		"previous":"Previo",
 		"page":"Página"
 	}

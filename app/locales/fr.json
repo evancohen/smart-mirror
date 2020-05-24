@@ -1,11 +1,11 @@
 {
     "home" : {
-        "commands" : "Dis: \"Que puis-je dire?\" pour voir une liste de commandes..."
+        "commands" : "Dis: \"Que puis-je dire\" pour voir une liste de commandes..."
     },
     "commands": {
         "title" : "Commandes disponibles",
         "list": {
-            "text": "Que puis-je dire?",
+            "text": "Que puis-je dire",
             "voice": "Que puis-je dire",
             "description": "Affiche une liste des commandes vocales disponibles."
         },
