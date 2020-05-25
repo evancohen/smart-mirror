@@ -1,0 +1,8 @@
+{
+	"list":{
+		"action":"Decir",
+		"next":"Siguiente",
+		"previous":"Previo",
+		"page":"Página"
+	}
+}

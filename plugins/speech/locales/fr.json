@@ -1,0 +1,16 @@
+{
+  "speech": {
+    "config": {
+      "title": "Speech Settings",
+      "dev name": "Sélectionnez le périphérique d' <em><strong>enregistrement</strong></em>",
+      "keyfile": "Fichier clé Google Cloud Speech",
+      "hotwords": "Mots clés Hot Spotter",
+      "Keyword Name": "Nom du mot clé",
+      "Model Filename": "Nom de fichier du modèle",
+      "mic sensitivity": "Sensibilité du microphone",
+      "form title": "Speech Settings",
+      "speech dev help": "<p> Pour obtenir de l'aide, veuillez consulter <a href='https://docs.smart-mirror.io'>la documentation.</a> </BR> De plus, nous sommes disponibles sur <a href='https://discord.gg/EMb4ynW'>Discord Chat avec <img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt=\"personnes en ligne\"/></a> pour vous aider en temps réel. </p>",
+      "sensitivity help": "<p id='sensitivityHelper'> Déplacez-vous au-dessus de la barre pour voir la valeur ici. </p>"
+    }
+  }
+}

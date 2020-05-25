@@ -2,18 +2,18 @@
     "schema": {
         "tvshows": {
             "type": "object",
-            "title": "TV Show Settings",
+            "title": "{{title}}",
             "properties": {
                 "shows": {
                     "type": "tabarray",
-                    "title": "TV Show Names",
+                    "title": "{{show names}}",
                     "items": {
                         "type": "string"
                     }
                 },
                 "refreshInterval": {
                     "type": "integer",
-                    "title": "Refresh Interval for TV Shows (minutes)",
+                    "title": "{{update cycle}}",
                     "default": 1440
                 }
             }
@@ -21,10 +21,32 @@
     },
     "form": [
         {
-            "type": "fieldset",
-            "key": "tvshows",
-            "expandable": true,
-            "order":0
-        }
+        "type": "fieldset",
+        "title": "{{title}}",
+        "expandable": true,
+        "order":0,
+        "items": [
+          {
+            "type":"tabarray",
+            "title":"{{show names}}",
+            "items":[
+              {
+                "type":"section",          
+                "legend":"{{value}}",
+                "items":[
+                  {                   
+                  "key":"tvshows.shows[]",
+                  "title":" ", 
+                  "valueInLegend": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+              "key":"tvshows.refreshInterval"
+          }
+        ]
+      }
     ]
 }

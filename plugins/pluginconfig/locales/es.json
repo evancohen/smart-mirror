@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "config": {
+      "title": "Plugins Settings",
+      "Name": "Nombre",
+      "Location": "Ubicación",
+      "Order": "Orden",
+      "Active": "Activo",
+      "Plugin Name": "Nombre del complemento",
+      "plugin location desc": "Ubicación del complemento en la pantalla de espejo inteligente",
+      "plugin order desc": "si es múltiple en la misma área, en qué posición debe estar este complemento, * significa cualquier",
+      "plugin active desc": "si es falso, este complemento no se cargará"
+    }
+  }
+}

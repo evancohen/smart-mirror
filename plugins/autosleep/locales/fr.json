@@ -1,0 +1,28 @@
+{
+  "commands": {
+    "sleep": {
+      "text": "Bonne nuit",
+      "voice": "Bonne nuit",
+      "description": "Va te coucher."
+    },
+    "wake_up": {
+      "text": "Réveillez-vous",
+      "voice": "Réveillez-vous",
+      "description": "réveiller le système"
+    }
+  },
+  "autoTimer": {
+    "config": {
+      "title": "AutoTimer Settings",
+      "Display Mode": "Mode d'affichage",
+      "wait time": "Temps d'attente de veille automatique (minutes)",
+      "Wake up time": "Heure de réveil (format 24 h)",
+      "Motion Settings": "Paramètres de mouvement",
+      "type Motion Detection": "Sélectionnez le type Détection de mouvement",
+      "PIR PIN": "PIN le pour la sortie sur le module PIR",
+      "wake up": "Commande utilisée pour réveiller Smart Mirror",
+      "sleep": "Commande utilisée pour mettre Smart Mirror en veille",
+      "motion_title": "Mouvement"
+    }
+  }
+}

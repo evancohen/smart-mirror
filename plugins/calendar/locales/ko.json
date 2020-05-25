@@ -1,0 +1,11 @@
+{
+  "calendar": {
+    "config": {
+      "title": "Calendar Settings",
+      "URLs": "iCal URL",
+      "maxevents": "모든 iCals의 최대 이벤트 수",
+      "maxdays": "표시 할 최대 일수",
+      "showCalendarNames": "캘린더 이름 표시를 확인하십시오."
+    }
+  }
+}

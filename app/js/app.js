@@ -3,7 +3,6 @@
 	'use strict';
 
 	var language = (typeof config.general.language != 'undefined') ? config.general.language.substring(0, 2).toLowerCase() : 'en';
-
 	angular.module('SmartMirror', ['ngAnimate', 'tmh.dynamicLocale', 'pascalprecht.translate'])
 		.config(function (tmhDynamicLocaleProvider) {
 			console.log(config)
@@ -15,7 +14,7 @@
 				.uniformLanguageTag('bcp47')
 				.useStaticFilesLoader({
 					prefix: 'app/locales/',
-					suffix: '.json'
+					suffix: 'c.json'
 				});
 			$translateProvider.useSanitizeValueStrategy(null);
 			// Avoiding the duplicity of the locale for the default language, xx-YY -> xx

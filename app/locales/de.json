@@ -2,50 +2,6 @@
     "home" : {
       "commands" : "Sag: \"Was kann ich sagen?\" um eine Liste von Befehlen zu sehen..."
     },
-    "traffic" : {
-        "time_to" : "Zeit bis {{name}}: "
-    },
-    "reminders": {
-        "empty": "Leere Liste"
-    },
-    "weather": {
-        "today": "Heute"
-    },    
-    "timer": {
-      "one": "Eine",
-      "minute": "Minute(n)?",
-      "second": "Sekunde(n)?"
-    },
-    "lights": {
-        "colors": {
-            "red": "rot",
-            "dark_green": "dunkelgrün",
-            "green": "grün",
-            "blue": "blau",
-            "yellow": "gelb",
-            "orange":  "orange",
-            "pink": "rosa",
-            "purple": "lila",
-            "white": "weiß",
-            "movie": "Kino",
-            "colorloop": "Farbe",
-            "stop": "stop"
-        },
-        "intensity": {
-            "increase": "heller",
-            "decrease": "dunkler",
-            "max": "maximal(e Helligkeit)",
-            "half": "halb(e Helligkeit)",
-            "quarter": "viertel( Helligkeit)",
-            "threequarter": "dreiviertel( Helligkeit)"
-        },
-        "action": {
-            "on": "an",
-            "off": "aus",
-            "nightmode": "nachtmodus",
-            "reset": "zurücksetzen"
-        }
-    },
     "commands": {
         "title" : "Verfügbare Befehle",
         "list": {
@@ -72,189 +28,26 @@
             "text": "Zurück",
             "voice": "Zurück",
             "description": "Zurück zum Startbildschirm."
-        },
-        "sleep": {
-            "text": "Ausschalten",
-            "voice": "Ausschalten",
-            "description": "Geht in den Schlafmodus."
-        },
+        }
+    },
+    "commandsend":{
         "debug": {
             "text": "Zeige Fehlerprotokoll",
             "voice": "Zeig(e)(das) Fehlerprotokoll",
             "description": "Zeigt das Fehlerprotokoll."
-        },
-        "map_show": {
-            "text": "Zeige Karte",
-            "voice": "(Zeige )Karte( anzeigen)",
-            "description": "Zeigt eine Karte des aktuellen Ortes."
-        },
-        "map_location": {
-            "text": "(Zeige )Karte von ________",
-            "voice": "(Zeige)(Zeig) (mir eine) Karte von *location( anzeigen)",
-            "description": "Zeigt eine Karte der genannten Position."
-        },
-        "map_zoom_in": {
-            "text": "vergrößern",
-            "voice": "(Karte) vergrößern",
-            "description": "Vergrößert die aktuelle Karte."
-        },
-        "map_zoom_out": {
-            "text": "verkleinern",
-            "voice": "(Karte) verkleinern",
-            "description": "Verkleinert die aktuelle Karte."
-        },
-        "map_zoom_point": {
-            "text": "vergrößere ________",
-            "voice": "vergrößere (Karte) (bei) *value",
-            "description": "Vergrößert einen genannten Punkt auf der Karte"
-        },
-        "map_zoom_reset": {
-            "text": "Normalansicht",
-            "voice": "(Karte) Normalansicht",
-            "description": "Setzt die aktuelle Kartenansicht zurück."
-        },
-        "video_search": {
-            "text": "Zeige mir ________",
-            "voice": "Zeig(e) mir( ein)( Video von) *term",
-            "description": "Zeigt ein Video von dem gewünschten Objekt."
-        },
-        "video_stop": {
-            "text": "Stop video",
-            "voice": "stop (the) video",
-            "description": "Stopt die Video Wiedergabe."
-        },
-        "image_giphy": {
-            "text": "Gif von ________",
-            "voice": "(Zeige )(ein )GIF von *img",
-            "description": "Zeigt ein Giphy Bild."
-        },
-        "image_comic": {
-            "text": "Zeige xkcd",
-            "voice": "Zeig(e) (mir)(ein) xkcd",
-            "description": "Zeigt den aktuellsten xkcd Comic."
-        },
-        "image_comic_dilbert": {
-            "text": "Dilbert Comic",
-            "voice": "Dilbert (comic)",
-            "description": "Zeigt den aktuellsten Dilbert Comic."
-        },
-        "image_comic_commitstrip": {
-          "text": "Zeige Commit Strip",
-          "voice": "(Zeige )commit strip",
-            "description": "Zeige den aktuellen Commit Strip Comic."
-        },
-        "reminder_insert": {
-            "text": "Erinnere mich (an ) ________",
-            "voice": "Erinnere mich (an )*task",
-            "description": "Fügt eine Erinnerung hinzu."
-        },
-        "reminder_clear": {
-            "text": "Erinnerungen löschen",
-            "voice": "Erinnerungen löschen",
-            "description": "Löscht die Einträge der Erinnerungen im Kalender."
-        },
-        "reminder_show": {
-            "text": "Zeig(e) meine Erinnerungen",
-            "voice": "Zeig(e) meine Erinnerungen",
-            "description": "Zeigt die verfügbaren Erinnerungen."
         },
         "time_show": {
             "text": "Wie spät ist es?",
             "voice": "Wie spät ist es",
             "description": "Zeigt die aktuelle Zeit."
         },
-        "timer_start": {
-            "text": "Timer auf ________",
-            "voice": "(stelle einen) timer (auf) *duration",
-            "description": "Startet einen Timer."
-        },
-        "timer_show": {
-            "text": "Timer anzeigen",
-            "voice": "timer (an)zeigen",
-            "description": "Zeigt den Timer."
-        },
-        "timer_stop": {
-            "text": "Timer anhalten",
-            "voice": "timer anhalten",
-            "description": "Hält den Timer an."
-        },
-        "timer_resume": {
-            "text": "Timer fortsetzen",
-            "voice": "timer fortsetzen",
-            "description": "Setzt den Timer fort."
-        },
-        "sc_play": {
-            "text": "SoundCloud play ________",
-            "voice": "SoundCloud play *query",
-            "description": "Spielt einen Song auf SoundCloud."
-        },
-        "sc_pause": {
-            "text": "SoundCloud pause/stop",
-            "voice": "SoundCloud (pause)(post)(stop)(stock)",
-            "description": "Stoppt/Pausiert die SoundCoud Wiedergabe."
-        },
-        "sc_resume": {
-            "text": "SoundCloud play",
-            "voice": "SoundCloud (play)(resume)",
-            "description": "Setzt die Soundcloud Wiedergabe fort."
-        },
-        "sc_replay": {
-            "text": "SoundCloud replay",
-            "voice": "SoundCloud replay",
-            "description": "Spielt den aktuellen Song erneut auf Soundcloud."
-        },
-        "light_action": {
-            "text": "Schalte (das|die) Licht(er) (action)",
-            "voice": "(Schalte)(Mache)(Setze) (das)(die) Licht(er) *action",
-            "description": "Steuert Farbe und Helligkeit von Lichtern."
-        },
         "show_remoteQR":{
           "text": "Zeige Fernbedienung Link/QR-Code",
           "voice": "Zeige Fernbedienung (QR code) (QR) (link)",
           "description": "Zeigt einen QR-Code, um den Spiegel zu konfigurieren"
-        },
-        "todoist_show": {
-            "text": "Zeige (meine) ________ Liste",
-            "voice": "Zeig(e) (meine) *project( )liste",
-            "description": "Zeigt eine Todoist-Liste."
-        },
-        "todoist_add": {
-            "text": "Füge ________ zu (meiner) ________ Liste (hinzu)",
-            "voice": "Füge *element zu (meiner) *project()liste (hinzu)",
-            "description": "Fügt ein Element zu der Todoist-Liste hinzu."
-        },
-        "todoist_remove": {
-            "text": "Entferne ________ von (meiner) ________ Liste",
-            "voice": "Entferne *element von (meiner) *project()liste",
-            "description": "Entfernt ein Element von der Todoist-Liste."
         }
     },
-    "fitbit": {
-        "user": "Benutzer: ",
-        "averageSteps": "Durchschnittliche Schritte: ",
-        "batteryStatus": "Batteriestatus: ",
-        "today": "Heute",
-        "steps": "Schritte",
-        "averageSteps": "Schritte pro Tag",
-        "caloriesBurned": "Kalorien verbrannt",
-        "lastSync": "Letzte Synchronisierung",
-        "average": "Durchschnittlich",
-        "activeMinutes": "Aktive Minuten",
-        "distance": "km",
-        "floors": "Fußböden",
-        "topBadges": "Top Abzeichen",
-        "sleep": "Schlaf",
-        "lastNight": "Letzter Nacht",
-        "awake": "Wach",
-        "restless": "Unruhig",
-        "hours": "std.",
-        "km": "km",
-        "miles": "mi",
-        "minutes": "min",
-        "times": "x",
-        "restingHR": "Ruhepuls",
-        "bpm": "bpm"
-    },
+
     "units": {
       "zero": 0,
       "one": 1,

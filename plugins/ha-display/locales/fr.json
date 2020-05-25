@@ -1,0 +1,16 @@
+{
+  "hadisplay": {
+    "config": {
+      "title": "Home-Assistant Display Settings",
+      "title desc": "Rendre les états d'assistance à domicile à l'aide de l'API de modèle",
+      "password": "Mot de passe API Home-Assistant",
+      "refresh cycle": "Intervalle de rafraîchissement (minutes)",
+      "server": "Serveur Home-Assistant http (s): // yoursever: port",
+      "Templates": "Modèles",
+      "Heading": "Titre",
+      "template": "Modèle - voir https://home-assistant.io/docs/configuration/templating/",
+      "helpvalue": "<h6>Rendre les états d'assistance à domicile à l'aide de l'API de modèle</h6>",
+      "tab title": "<h4>Modèles</h4>"
+    }
+  }
+}

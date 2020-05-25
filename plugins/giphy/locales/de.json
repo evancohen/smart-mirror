@@ -1,0 +1,15 @@
+{
+  "commands": {
+    "image_giphy": {
+      "text": "Gif von ________",
+      "voice": "(Zeige )(ein )GIF von *img",
+      "description": "Zeigt ein Giphy Bild."
+    }
+  },
+  "giphy": {
+    "config": {
+      "title": "Giphy Settings",
+      "api key": "Giphy API-Schlüssel"
+    }
+  }
+}

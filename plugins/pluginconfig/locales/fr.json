@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "config": {
+      "title": "Plugins Settings",
+      "Name": "Nom",
+      "Location": "Emplacement",
+      "Order": "Ordre",
+      "Active": "actif",
+      "Plugin Name": "Nom du plugin",
+      "plugin location desc": "Emplacement du plugin sur l'écran du miroir intelligent",
+      "plugin order desc": "s'il est multiple dans la même zone, quelle position doit avoir ce plugin, * signifie tout",
+      "plugin active desc": "s'il est faux, ce plugin ne sera pas chargé"
+    }
+  }
+}

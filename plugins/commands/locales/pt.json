@@ -1,0 +1,8 @@
+{
+	"list":{
+		"action":"Dizer",
+		"next":"Próximo",
+		"previous":"Anterior",
+		"page":"Página"
+	}
+}

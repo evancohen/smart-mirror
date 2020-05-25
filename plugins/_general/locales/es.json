@@ -1,0 +1,10 @@
+{
+  "general": {
+    "config": {
+      "title": "General Settings",
+      "Language": "Idioma",
+      "Layout": "Diseño",
+      "Commands Per Page": "Comandos por página"
+    }
+  }
+}

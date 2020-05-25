@@ -1,9 +1,10 @@
-
 const fs = require('fs');
 //var pos = require('./plugin_positions.js')()
 const cheerio = require('cheerio')
 
 const debug = false;
+const _ = require('lodash')
+
 // new output html filename
 const new_file = 'main_index.html';
 // plugin folder name
@@ -13,18 +14,22 @@ const controller_name='controller.js'
 const html_name='index.html'
 const service_name='service.js'
 const css_name='plugin.css'
+const locale_name ='.json'
 
 var loader = {};
 var locations={};
 
-var filesList= [html_name,service_name,controller_name,css_name];
+var filesList= [html_name,service_name,controller_name,css_name,locale_name];
 var pluginFiles = {}
+var base_language_files = {}
+base_language_files[locale_name]=[]
 
 if(debug) {console.log(" in plugin loader")}
 function NameinFilter(filters,name){
 	let v=null;
 	for( let n of filters){
-		if(name.endsWith(n)){
+		if( (name.endsWith(n) && !name.endsWith("c"+n)) || ((name.endsWith(n) && !name.endsWith("c"+n)) && n ==locale_name && name.includes('locales/')))
+		{
 			v=n;
 			break;
 		}
@@ -40,16 +45,18 @@ function getFilesMatch (dir,filters, files_){
 		try {
 			if (fs.statSync(name).isDirectory()){
 				// don't scan the plugin node_modules folder
-				if(name.indexOf("node_modules") == -1){
+				if(name.indexOf("node_modules") == -1 && name.indexOf("bower_components")==-1 && name.indexOf("save")==-1){
 					getFilesMatch(name, filters, files_);
 				}
 			} else {
 				// if not a nested node folder
-				if(name.indexOf("node_modules") == -1){
+				if(name.indexOf("node_modules") == -1 && name.indexOf("schema") == -1){
 					// see if this file is one we are interested in
 					let key=NameinFilter(filters,name)
 					// if so
 					if(key){
+						if(debug)
+							console.log("saving file found for key="+key+" name="+name)
 						// save it
 						files_[key].push(name);
 					}
@@ -74,7 +81,7 @@ function loadInfo (){
 	// only go thru drectory tree once
 	pluginFiles = getFilesMatch (plugin_folder_name,filesList,pluginFiles)
 	if(debug) {console.log("plugin files ="+JSON.stringify(pluginFiles));}
-
+	base_language_files = getFilesMatch('app',[locale_name],base_language_files);
 }
 function insert_services($){
 
@@ -102,15 +109,46 @@ function insert_css($){
 }
 // make sure to remove plugin controller, service and css entries too if disabled
 function cleanup(plugin_name){
-	var names= [service_name,controller_name,css_name];
+	var names= [service_name,controller_name,css_name,locale_name];
+	var deletelist=[]
+	// loop thru the differnet sets of files we found
 	for(var name of names){
+		// loop thru all the files of a type (service, controllers, ...)
 		for(var i in pluginFiles[name]){
+			if(debug)
+				console.log("cleanup looking for "+plugin_name+" in "+pluginFiles[name][i])
+			// if the saved info matches the disabled plugin
 			if(pluginFiles[name][i].toLowerCase().includes(plugin_name.toLowerCase())){		
-				pluginFiles[name].splice(i,1)
-				break;
+				// lets remove it from the list
+				// if this is not a locale file				
+				if(name!==locale_name){	
+					if(debug)
+						console.log("removing "+name+" entry for i="+i+" "+pluginFiles[name][i])
+					// we can remove it as we only look at the list once
+					// only 1 file of a type by plugin					
+					pluginFiles[name].splice(i,1)				
+					break;
+				}
+				else{
+					// can't delete from the list while we are searching it
+					// save index, in reverse order for delete later
+					// add new higher number to front of list
+					deletelist.unshift(i)
+				}
 			}
 		}
 	}
+	// if we have stuff to delete, only one plugin at a time
+	if(deletelist.length>0){
+		// do it, depends on changing later in the array before earlier
+		// list is highest index to lowest
+		for(var d of deletelist){
+			if(debug)
+				console.log("deleteing "+ pluginFiles[locale_name][d])
+			pluginFiles[locale_name].splice(d,1)
+		}
+	}
+
 }
 
 // updates the app index.html with discovered plugin info
@@ -138,6 +176,8 @@ loader.loadPluginInfo = function(filename, config){
 	let plugin_hash ={}
 	// convert array to hash for quick lookup
 	config.plugins.forEach((entry)=>{
+		// make sure the lookup key is lowercase  and leading/trailing spaces removed
+		// to avoid user data entry problems
 		plugin_hash[entry.name.trim().toLowerCase()]=entry
 	})
 
@@ -230,6 +270,11 @@ loader.loadPluginInfo = function(filename, config){
 			else{
 				if(debug) {console.log("not yet added, location not found"+id_div)}
 			}
+			// some plugin with index.html file, but not in the config data
+			let lnfile=__dirname+"/app/locales/"+config.general.language.trim().substring(0,2)+'c.json'
+			if(fs.existsSync(lnfile))
+				// remove the language file if it exists, cause rebuild
+				fs.unlinkSync(lnfile)
 		}
 	}
 	// defered adds because jquery caches the elements til this script ends
@@ -268,7 +313,7 @@ loader.loadPluginInfo = function(filename, config){
 	let x = $.html();
 	//if(debug) console.log("new html = "+ x)
 	try {
-		// write it to the new file
+		// write it to the new  index.html file
 		fs.writeFileSync(new_file, x)
 	}
 	catch(error) {
@@ -276,9 +321,108 @@ loader.loadPluginInfo = function(filename, config){
 	}
 	// clear html object storage. no longer needed
 	$=''
+	// build the constructed language files
+	writeTranslationFiles()
+	// clear the data collected about files
 	pluginFiles={};
 	// pass back the new file to load
 	return '/'+ new_file;
+}
+function getfilecontents(file){
+	try {
+		var x = fs.readFileSync(file,"utf8")
+		var y=x.toString()
+		if(y[0]!=='{')
+			return y.substring(1)
+		else
+			return y;
+	}
+	catch(error){
+		return '{}'
+	}
+}
+function writeTranslationFiles(){
+	// loop thru the locale files found in app/locales
+	// used by the angular translation service, setup in app/js/app.js
+	for(var base of base_language_files[locale_name]){		
+		// we will construct the final file from the little parts from all the plugins
+		// this makes plugins in control of their translation data
+		// construct the filename for the constructed locale file (we add a 'c' to the language string)
+		// the config in app/js/app.js is expecting 'enc.json', 'dec.json', etc (c = constructed)
+		var basefn=base.split('/')
+		// get the name and extension of the last filename entry
+		// app/locales/en.json ->  [en][json]
+		var basename = basefn.slice(-1).toString().split('.')
+		// add a 'c' to the lanugage d (en->enc)
+		basename[0]+='c'
+		// join the name and extension back together
+		// reuse the variable
+		basename=basename.join('.')
+		// get rid of old entry in full name split results
+		basefn.pop()
+		// add the new name/ext
+		basefn.push(basename)
+		// reconstruct the filename
+		basefn=basefn.join('/')
+		// if the file doesn't exist, build it
+		// for performance, don't rebuild all the time
+		if(!fs.existsSync(basefn)){
+			// get the base as an object 
+			var bdata = JSON.parse(getfilecontents(base));
+			if(debug)
+				console.log("processing base locale file="+base)
+			// loop thru the plugin locale file segments we found
+			for( var la of pluginFiles[locale_name]){
+				// get the file name  (plugins/geolocation/locales/en.json)
+				// 'en.json'
+				var l = la.split('/').slice(-1).toString()
+				// same for the base translation file 
+				// en.json
+				var r= base.split('/').slice(-1).toString()
+				if(debug)
+					console.log("comparing l='"+l+"' with '"+r+"'=r")
+				// if they match (we are woring on the same language part)
+				// they are all in the same big list, all the files 
+				// for disabled plugins have been remnoved from the list by cleanup()
+				if(l == r ){
+					if(debug)
+						console.log("matching language file="+ la)
+					// get its content, if any
+					var b =  getfilecontents(la)
+					// if the file is curently empty, skip it
+					if(b !=''){ 	
+						try {	// don't let a fragment parsing error kill file creation		
+							// parse the content
+							var x =  JSON.parse(b);
+							// and merge it into combined result
+							// Object.assign overlays existing items of the same name, not merge
+							// use lodash
+							_.merge( bdata, x);
+						}
+						catch(error){
+							console.log(" unable to parse "+la+ " content="+b)
+						}
+					}				
+				}
+			}
+			// check for any commands to add to the end of the list, so they don't pollute the what can I say list
+			if(bdata.commandsend !==undefined){
+				// add then at the end of the commands list
+				for(var f of Object.keys(bdata.commandsend)){
+					bdata.commands[f]=bdata.commandsend[f]
+				}
+				// remove it from the runtime data
+				delete bdata.commandsend 
+			}
+			if(debug)
+				console.log("merged data for file="+base +"="+JSON.stringify(bdata))
+
+			if(debug)
+				console.log(" new base filename="+basefn)
+			// write out the constructed locale file, in readable for for person
+			fs.writeFileSync(basefn,JSON.stringify(bdata, null, 2))
+		}
+	}
 }
 
 module.exports = loader

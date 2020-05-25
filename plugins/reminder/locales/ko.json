@@ -1,0 +1,22 @@
+{
+   "reminders": {
+        "empty": "리스트가 비었습니다."
+    },
+    "commands":{
+        "reminder_insert": {
+            "text": "________상기시켜줘",
+            "voice": "*task 상기시켜줘",
+            "description": "할 일에 등록합니다."
+        },
+        "reminder_clear": {
+            "text": "할 일 지워",
+            "voice": "할 일 지워",
+            "description": "할 일 목록을 지웁니다"
+        },
+        "reminder_show": {
+            "text": "할 일 목록 보여줘",
+            "voice": "할 일 목록 보여줘",
+            "description": "할 일 목록을 보여줍니다."
+        }
+    }
+}
