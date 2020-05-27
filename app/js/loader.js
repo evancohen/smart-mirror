@@ -524,7 +524,7 @@ function writeTranslationFiles() {
 			// check for any commands to add to the end of the list, so they don't pollute the what can I say list
 			if (base_locale_object.commandsend !== undefined) {
 				// add then at the end of the commands list
-				for (var f of Object.keys(bdata.commandsend)) {
+				for (var f of Object.keys(base_locale_object.commandsend)) {
 					base_locale_object.commands[f] =
 						base_locale_object.commandsend[f];
 				}
