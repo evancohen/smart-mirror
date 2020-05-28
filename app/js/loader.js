@@ -472,8 +472,20 @@ function writeTranslationFiles() {
 		// if the file doesn't exist, build it
 		// for performance, don't rebuild all the time
 		if (!fs.existsSync(basefn)) {
-			// get the base as an object
-			var base_locale_object = JSON.parse(getfilecontents(base));
+			var base_locale_object = "";
+			try {
+				if (debug) console.log("processing base locale file=" + base);
+				// get the base as an object
+				base_locale_object = JSON.parse(getfilecontents(base));
+			} catch (error) {
+				console.error(
+					"unable to parse base locale file=" +
+						base +
+						" contents=" +
+						getfilecontents(base)
+				);
+				base_locale_object = {};
+			}
 			if (debug) console.log("processing base locale file=" + base);
 			// loop thru the plugin locale file segments we found
 			for (var la_file of pluginFiles[locale_name]) {
@@ -521,6 +533,7 @@ function writeTranslationFiles() {
 					}
 				}
 			}
+
 			// check for any commands to add to the end of the list, so they don't pollute the what can I say list
 			if (base_locale_object.commandsend !== undefined) {
 				// add then at the end of the commands list
