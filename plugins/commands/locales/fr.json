@@ -4,5 +4,48 @@
 		"next":"suivante",
 		"previous":"précédent",
 		"page":"Page"
-	}
+	},
+	"commands": {
+        "title" : "Commandes disponibles",
+        "list": {
+            "text": "Que puis-je dire",
+            "voice": "Que puis-je dire",
+            "description": "Affiche une liste des commandes vocales disponibles."
+        },
+        "list-next": {
+            "text": "suivante (page)",
+            "voice": "suivante(-page) (commander) (page)",
+            "description": "Affiche la page suivante des commandes vocales à votre disposition. (uniquement disponible lorsque la liste des commandes est affichée)"
+        },
+        "list-prev": {
+            "text": "précédent (page)",
+            "voice": "précédent(-page) (commander) (page)",
+            "description": "Affiche la page précédente des commandes vocales à votre disposition. (uniquement disponible lorsque la liste des commandes est affichée)"
+        },
+        "list-page": {
+            "text": "Aller à page _______",
+            "voice": "aller à (commander) (page)  *pageNum",
+            "description": "Affiche une page spécifique de commandes vocales à votre disposition. (uniquement disponible lorsque la liste des commandes est affichée)"
+        },
+        "home": {
+            "text": "Accueil",
+            "voice": "Accueil",
+            "description": "Vous ramène à l'écran d'accueil."
+        },
+        "debug": {
+            "text": "Débogage",
+            "voice": "Débogage",
+            "description": "Afficher les informations de débogage."
+        },
+        "time_show": {
+            "text": "Quel heure est-il",
+            "voice": "Quel heure est-il",
+            "description": "Quel heure est-il?"
+        },
+        "show_remoteQR":{
+            "text": "(Montre-moi) (Affiche) le lien du serveur",
+            "voice": "(Montre-moi) (Affiche) le lien du serveur",
+            "description": "Affiche le lien de l'application"
+        }
+    }	
 }
