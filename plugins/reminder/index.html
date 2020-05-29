@@ -1,7 +1,9 @@
 <!-- Reminders -->
-<div class="reminders-container animate-grow" ng-show="focus == 'reminders'">
-    <ul ng-controller="Reminder">
-        <li class="reminders animate-grow" ng-repeat="reminder in reminders">
+<div ng-controller="Reminder" class="reminders-container animate-grow"  ng-show="focus == 'reminders'">
+	 <div class="reminders" ng-bind="remind.heading"></div>
+	 <div ng-bind="remind.empty" ng-show="remind.reminders.length == 0"></div>
+     <ul>
+        <li class="reminders animate-grow" ng-repeat="reminder in remind.reminders track by $index">
             <span class="reminder" ng-bind="reminder"></span>
         </li>
     </ul>

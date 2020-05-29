@@ -6,11 +6,12 @@
         "time_to" : "Tempo per arrivare {{name}}: "
     },
     "reminders": {
-        "empty": "Lista vuota."
+        "empty": "Lista vuota.",
+        "heading":"Promemoria attuali"
     },
     "weather": {
         "today": "Oggi"
-    },    
+    },
     "timer": {
       "one": "Uno",
       "minute": "Minuti?",

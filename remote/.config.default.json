@@ -132,6 +132,6 @@
     {"name":"rss","area":"bottom-center", "order":"*", "active":true},   
     {"name":"fitbit","area":"bottom-left", "order":"*", "active":true},
     {"name":"scrobbler","area":"bottom-left", "order":"*", "active":true},  
-		{"name":"spotify","area":"bottom-left", "order":"*", "active":false}
+    {"name":"spotify","area":"bottom-left", "order":"*", "active":true}
   ]
 }
