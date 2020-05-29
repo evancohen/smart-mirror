@@ -238,7 +238,7 @@ ul.calendar {
   //  margin-right: auto;
     display: inline-block;
     text-align: right;
-    width:  12.04vw;
+    width:  230px;
 }
 
 .weather-today .temperature {
@@ -261,12 +261,12 @@ ul.calendar {
 .weather-week .day {
     display: inline-block;
     margin-right:  0.52vw;
-    width:  2.09vw;
+    width:  40px;
 }
 
 .weather-week .temperature {
     display: inline-block;
-    width:  2.61vw;
+    width:  50px;
 }
 
 .weather .weather-today canvas,
