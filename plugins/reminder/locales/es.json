@@ -1,22 +1,23 @@
 {
 	"reminders": {
-        "empty": "No recuerdo."
-    },
-    "commands":{
-        "reminder_insert": {
-            "text": "Recuerdame hacer _______",
-            "voice": "Recuerdame hacer *task",
-            "description": "Recuerdame hacer una tarea."
-        },
-        "reminder_clear": {
-            "text": "Limpia la tareas pendientes",
-            "voice": "Limpia la tareas pendientes",
-            "description": "Limpia la tareas pendientes."
-        },
-        "reminder_show": {
-            "text": "Muéstrame la lista de retiro",
-            "voice": "Muéstrame la lista de retiro",
-            "description": "Muestra la lista de retiro."
-        }
-    }
+		"empty": "No recuerdo.",
+		"heading": "Recordatorios actuales"
+	},
+	"commands": {
+		"reminder_insert": {
+			"text": "Recuerdame hacer _______",
+			"voice": "Recuerdame hacer *task",
+			"description": "Recuerdame hacer una tarea."
+		},
+		"reminder_clear": {
+			"text": "Limpia la tareas pendientes",
+			"voice": "Limpia la tareas pendientes",
+			"description": "Limpia la tareas pendientes."
+		},
+		"reminder_show": {
+			"text": "Muéstrame la lista de retiro",
+			"voice": "Muéstrame la lista de retiro",
+			"description": "Muestra la lista de retiro."
+		}
+	}
 }

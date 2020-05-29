@@ -1,22 +1,23 @@
 {
 	"reminders": {
-        "empty": "Lista vuota."
-    },
-    "commands":{
-        "reminder_insert": {
-            "text": "Ricordami di ________",
-            "voice": "ricorda(mi) (di) (fare) *task",
-            "description": "Aggiungi un appunto alla lista promemoria (note)"
-        },
-        "reminder_clear": {
-            "text": "Pulisci promemoria",
-            "voice": "pulisci promemoria",
-            "description": "Pulisci la lista di promemoria."
-        },
-        "reminder_show": {
-            "text": "Mostrami i promemoria",
-            "voice": "(mostra) (i) (miei) promemoria",
-            "description": "Mostra la lista dei promemoria."
-        }
-    }
+		"empty": "Lista vuota.",
+		"heading": "Promemoria attuali"
+	},
+	"commands": {
+		"reminder_insert": {
+			"text": "Ricordami di ________",
+			"voice": "ricorda(mi) (di) (fare) *task",
+			"description": "Aggiungi un appunto alla lista promemoria (note)"
+		},
+		"reminder_clear": {
+			"text": "Pulisci promemoria",
+			"voice": "pulisci promemoria",
+			"description": "Pulisci la lista di promemoria."
+		},
+		"reminder_show": {
+			"text": "Mostrami i promemoria",
+			"voice": "(mostra) (i) (miei) promemoria",
+			"description": "Mostra la lista dei promemoria."
+		}
+	}
 }
