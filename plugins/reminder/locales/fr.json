@@ -1,22 +1,23 @@
 {
-    "reminders": {
-        "empty": "Aucun élément"
-    },
-    "commands":{
-        "reminder_insert": {
-            "text": "Rappelle(-moi) (de|d') ________",
-            "voice": "Rappelle(-moi) (de|d') *task",
-            "description": "Ajouter quelque chose à la liste des rappels."
-        },
-        "reminder_clear": {
-            "text": "Efface (les) (mes) (la liste de) rappels",
-            "voice": "Efface (les) (mes) (la liste de) rappels",
-            "description": "Supprimer la liste des rappels."
-        },
-        "reminder_show": {
-            "text": "(Montre-moi) (Affiche) (les) (mes) rappels",
-            "voice": "(Montre-moi) (Affiche) (les) (mes) rappels",
-            "description": "Affiche la liste des rappels."
-        }
-    }
+	"reminders": {
+		"empty": "Aucun élément",
+		"heading": "Rappels actuels"
+	},
+	"commands": {
+		"reminder_insert": {
+			"text": "Rappelle(-moi) (de|d') ________",
+			"voice": "Rappelle(-moi) (de|d') *task",
+			"description": "Ajouter quelque chose à la liste des rappels."
+		},
+		"reminder_clear": {
+			"text": "Efface (les) (mes) (la liste de) rappels",
+			"voice": "Efface (les) (mes) (la liste de) rappels",
+			"description": "Supprimer la liste des rappels."
+		},
+		"reminder_show": {
+			"text": "(Montre-moi) (Affiche) (les) (mes) rappels",
+			"voice": "(Montre-moi) (Affiche) (les) (mes) rappels",
+			"description": "Affiche la liste des rappels."
+		}
+	}
 }

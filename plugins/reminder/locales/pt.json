@@ -1,22 +1,23 @@
 {
-   "reminders": {
-        "empty": "Lista vazia."
-    },
-    "commands":{
-        "reminder_insert": {
-            "text": "Lembrar-me de ________",
-            "voice": "(Lembrar) (Lembre) me (de) *task",
-            "description": "Adiciona um lembrete à lista."
-        },
-        "reminder_clear": {
-            "text": "Limpar os lembretes",
-            "voice": "Limpar (os) (meus) lembretes",
-            "description": "Limpa a lista de lembretes."
-        },
-        "reminder_show": {
-            "text": "Mostrar os lembretes",
-            "voice": "Mostrar (os) (meus) lembretes",
-            "description": "Mostra a lista de lembretes."
-        }
-    }
+	"reminders": {
+		"empty": "Lista vazia.",
+		"heading": "Lembretes atuais"
+	},
+	"commands": {
+		"reminder_insert": {
+			"text": "Lembrar-me de ________",
+			"voice": "(Lembrar) (Lembre) me (de) *task",
+			"description": "Adiciona um lembrete à lista."
+		},
+		"reminder_clear": {
+			"text": "Limpar os lembretes",
+			"voice": "Limpar (os) (meus) lembretes",
+			"description": "Limpa a lista de lembretes."
+		},
+		"reminder_show": {
+			"text": "Mostrar os lembretes",
+			"voice": "Mostrar (os) (meus) lembretes",
+			"description": "Mostra a lista de lembretes."
+		}
+	}
 }
