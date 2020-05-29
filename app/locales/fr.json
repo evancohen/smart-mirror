@@ -9,11 +9,12 @@
         "next_departure" : "Prochain départ du {{name}}: "
     },
     "reminders": {
-        "empty": "Aucun élément"
+        "empty": "Aucun élément",
+        "heading":"Rappels actuels"
     },
     "weather": {
         "today": "Aujourd'hui"
-    }    
+    },
     "timer": {
       "one": "Une",
       "minute": "Minute(s)?",
