@@ -14,7 +14,8 @@ keyfile.json
 smart-mirror*.log
 jsonform
 spotify-token.json
-app/locales/??c.json
-package-lock.json
 main_index.html
-motion
+motion 
+package-lock.json
+app/locales/??c.json
+.editorconfig

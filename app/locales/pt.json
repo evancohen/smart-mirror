@@ -6,11 +6,12 @@
         "time_to" : "Tempo para {{name}}: "
     },
     "reminders": {
-        "empty": "Lista vazia."
+        "empty": "Lista vazia.",
+        "heading":"Lembretes atuais"
     },
     "weather": {
         "today": "Hoje"
-    },    
+    },
     "timer": {
       "one": "Um",
       "minute": "Minuto(s)?",
@@ -202,7 +203,7 @@
             "text": "Altera (liga/desliga) a(s) luz(es) (action)",
             "voice": "(altera) :state (a) (as) luz(es) *action",
             "description": "Controla a cor e o brilho das luzes Hue."
-        }, 
+        },
         "show_remoteQR":{
             "text": "Mostra o link remoto",
             "voice": "Mostra (o) (codigo QR) (QR) (link) remoto",
