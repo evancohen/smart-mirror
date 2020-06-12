@@ -3,7 +3,8 @@ let _spotpath = document.currentScript.src.substring(
 	7,
 	document.currentScript.src.lastIndexOf(__sp.sep)
 );
-var fs = require("fs")(function () {
+
+(function () {
 	"use strict";
 
 	function SpotifyService() {
@@ -33,7 +34,6 @@ var fs = require("fs")(function () {
 			},
 		};
 
-		// use the path to the plugin node_modules
 		service.spotifyResponse = null;
 		service.active = null;
 
@@ -42,12 +42,10 @@ var fs = require("fs")(function () {
 			typeof config.spotify.creds.clientSecret !== "undefined" &&
 			config.spotify.creds.clientSecret !== ""
 		) {
-			const express = require("express");
+			var express = require("express");
 			var app = express();
-			const fs = require("fs");
-			const Spotify = require("spotify-web-api-node");
-			const { spawn } = require("child_process");
-			const path = require("path");
+			var fs = require("fs");
+			var Spotify = require("spotify-web-api-node");
 
 			var client_id = config.spotify.creds.clientID;
 			var client_secret = config.spotify.creds.clientSecret;
@@ -66,6 +64,7 @@ var fs = require("fs")(function () {
 				let uri = spotify.createAuthorizeURL(auth_scope, auth_state);
 				// is this coming from the same machine
 				// no, spawn it
+				// issue #862
 				let source = req.ip == "::1" ? "localhost" : req.ip;
 				if (!source.endsWith(req.host)) {
 					spawn(path.resolve(_spotpath, "openauth.sh"), [uri]);
@@ -88,7 +87,7 @@ var fs = require("fs")(function () {
 						persist.write(tokenFile, data.body, function (err) {
 							if (err) return next(err);
 							res.send(
-								"Authorization complete. Please reload your mirror to refresh authentication."
+								"Authorization complete. Please relead your mirror to refresh authentication."
 							);
 						});
 					},
@@ -163,12 +162,8 @@ var fs = require("fs")(function () {
 		service.currentState = function () {
 			return spotify.getMyCurrentPlaybackState().then(
 				function (data) {
-					//if(data.statusCode == 200) {
 					service.spotifyResponse = data.body || null;
 					return service.spotifyResponse;
-					//}
-					//else
-					//	return null;
 				},
 				function (err) {
 					service.active = false;
@@ -181,67 +176,35 @@ var fs = require("fs")(function () {
 			spotify.getMyDevices().then(function (data) {
 				var devices = data.body.devices;
 				var id = null;
-				var regex = /[^a-zA-Z0-9 ]/g;
-				// Check for name kerword of <named_device> or 'this device'<default_device>
 
+				// Check for name kerword of <named_device> or 'this device'<default_device>
 				name =
 					name.toLowerCase() === "this device" && default_device
 						? default_device
 						: name;
-				// remove any special chars, impossible to add via voice
-				name = name.replace(regex, "").toLowerCase();
+
 				devices.forEach(function (device) {
-					// remove any special chars from name
-					// impossible to compare to voice entered name with special chars present
-					// compare lower case
 					if (
-						device.name
-							.toLowerCase()
-							.replace(regex, "")
-							.indexOf(name) >= 0
+						device.name.toLowerCase().indexOf(name.toLowerCase()) >=
+						0
 					) {
 						id = device.id;
 					}
 				});
 				if (id) {
 					console.log(id);
-					//return spotify.pause().then(function() {
 					return spotify
 						.transferMyPlayback({
-							deviceIds: [
-								// nodjs library expected variable name
-								id,
-							],
-							device_ids: [
-								// spotify api spec variable name
-								id,
-							],
-							play: true,
+							device_ids: [id],
 						})
 						.then(
-							() => {
-								// need to sleep
-								/*	service.currentState().then(
-								(c)=>{
-									console.log("waiting to play")
-									setTimeout(()=>{
-									spotify.play(); console.log("requested play") }, 20000)
-							/*	})
-								if(status == 204){
-									console.log("completed transfer request")
-									spotify.play()
-								}
-							*/
-								return null; // spotify.play();
+							function () {
+								return spotify.play();
 							},
 							function (err) {
 								console.log("Something went wrong!", err);
 							}
 						);
-					/*},
-					function(err){
-						console.log('Something went wrong!', err);
-					})	*/
 				} else {
 					return null;
 				}
