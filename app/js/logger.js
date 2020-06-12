@@ -101,6 +101,7 @@ class Logger {
  * Calling this function switches the window.console for a proxied version.
  * The proxy allows us to redirect the call to a logger.
  */
+// eslint-disable-line no-unused-vars
 function switchConsoleToLogger(n) {
 	new Logger({ fn: n });
 } // eslint-disable-line no-unused-vars
