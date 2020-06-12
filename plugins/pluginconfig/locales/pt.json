@@ -1,7 +1,7 @@
 {
   "plugins": {
     "config": {
-      "title": "Plugins Settings",
+      "title": "Configurações de localização do plug-in",
       "Name": "Nome",
       "Location": "Localização",
       "Order": "Ordem",

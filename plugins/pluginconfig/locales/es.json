@@ -1,7 +1,7 @@
 {
   "plugins": {
     "config": {
-      "title": "Plugins Settings",
+      "title": "Configuración de ubicación del complemento",
       "Name": "Nombre",
       "Location": "Ubicación",
       "Order": "Orden",
