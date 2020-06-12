@@ -1,10 +1,9 @@
 const __sp = require("path");
-_spotpath = document.currentScript.src.substring(
+let _spotpath = document.currentScript.src.substring(
 	7,
 	document.currentScript.src.lastIndexOf(__sp.sep)
 );
-
-(function () {
+var fs = require("fs")(function () {
 	"use strict";
 
 	function SpotifyService() {
