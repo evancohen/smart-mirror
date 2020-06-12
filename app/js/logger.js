@@ -1,4 +1,3 @@
-/*global window */
 const winston = require("winston");
 const prettyMs = require("pretty-ms");
 
@@ -106,4 +105,4 @@ function switchConsoleToLogger(n) {
 	// eslint-disable-line no-unused-vars
 	new Logger({ fn: n });
 }
-/* eslint-enable no-unused-vars */ s;
+/* eslint-enable no-unused-vars */
