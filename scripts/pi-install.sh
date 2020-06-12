@@ -85,7 +85,7 @@ cat << "EOF"
 EOF
 
 # Check processor archetecture.
-if [ "$ARCH" == "armv6l" -a "$ARCH" == "x86_64" ]; then
+if [ "$ARCH" == "armv6l" ] && [ "$ARCH" == "x86_64" ]; then
 	printf "%s${red} Unupported device!${end} The smart-mirror only works on the Pi 2, 3 and 4"
 	exit;
 fi
@@ -106,7 +106,7 @@ printf "%s${red}Please do not exit this script until it is complete.${end}\n"
 # Update before first apt-get
 if [ $mac != 'Darwin' ]; then
 	echo -e "\e[96mUpdating packages ...\e[90m" | tee -a $logfile
-	upgrade=$false	
+	upgrade=$false
 	update=$(sudo apt-get update -y 2>&1)
 	echo $update >> $logfile
 	update_rc=$?
@@ -128,11 +128,11 @@ if [ $mac != 'Darwin' ]; then
 		echo "apt-get update  completed ok" >> $logfile
 		upgrade=$true
 	fi
-	if [ $upgrade -eq $true ]; then 
-		upgrade_result=$(sudo apt-get upgrade -y 2>&1) 
+	if [ $upgrade -eq $true ]; then
+		upgrade_result=$(sudo apt-get upgrade -y 2>&1)
 		upgrade_rc=$?
 		echo apt upgrade result ="rc=$upgrade_rc $upgrade_result" >> $logfile
-	fi 
+	fi
 
 	# Installing helper tools
 	echo -e "\e[96mInstalling helper tools ...\e[90m" | tee -a $logfile
@@ -140,7 +140,7 @@ if [ $mac != 'Darwin' ]; then
 fi
 # Install native dependencies
 #printf "%s\n${blu}Installing native dependencies${end}\n"
-#sudo apt-get install -y curl wget git  
+#sudo apt-get install -y curl wget git
 #libatlas-base-dev
 
 # Check if we need to install or upgrade Node.js.
@@ -286,7 +286,7 @@ fi
 printf "%s\n${blu}Installing smart-mirror dependencies...${end}\n"
 printf "%s${yel}This may take a while. Go grab a beer :)${end}\n"
 cd smart-mirror  || exit
-if [ ! -f scripts/pm2_smart_mirror.json ]; then 
+if [ ! -f scripts/pm2_smart_mirror.json ]; then
 echo -e '{
   "apps" : [{
     "name"        : "Smart Mirror",
@@ -294,7 +294,7 @@ echo -e '{
     "watch"       : ["/home/pi/smart-mirror/config.json"]
   }]
 }' >scripts/pm2_smart_mirror.json
-fi 
+fi
 
 if npm install; then
 	printf "%s${grn}Dependency installation complete!${end}\n"
@@ -302,7 +302,7 @@ else
 	printf "%s${red}Unable to install dependencies :( ${end}\n"
 	exit;
 fi
-if [ 0 -eq 1 ]; then 
+if [ 0 -eq 1 ]; then
 	# Apply LXDE unclutter autostart (if we haven't already)
 	if [ -f  /etc/xdg/lxsession/LXDE/autostart ]; then
 	#if ! sudo grep -q '(smart-mirror)' /etc/xdg/lxsession/LXDE/autostart; then
@@ -311,7 +311,7 @@ if [ 0 -eq 1 ]; then
 	#Hide the mouse when inactive (smart-mirror)\
 	unclutter -idle 0.1 -root' /etc/xdg/lxsession/LXDE/autostart
 	fi
-fi 
+fi
 
  #Use pm2 control like a service smart-mirror
 read -p "Do you want use pm2 for auto starting of your smart-mirror (y/N)?" choice <&1
@@ -377,7 +377,7 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 			echo pm2 startup command done >>$logfile
 			# is this is mac
 			# need to fix pm2 startup, only on catalina
-			if [ $mac == 'Darwin' -a $(sw_vers -productVersion | head -c 6) == '10.15.' ]; then
+			if [ $mac == 'Darwin' ] && [ "$(sw_vers -productVersion | head -c 6)." == '10.15..' ]; then
 			  # only do if the faulty tag is present (pm2 may fix this, before the script is fixed)
 				if [ $(grep -m 1 UserName /Users/$USER/Library/LaunchAgents/pm2.$USER.plist | wc -l) -eq 1 ]; then
 					# copy the pm2 startup file config
@@ -393,7 +393,7 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 		echo configure the pm2 config file for smart mirror >>$logfile
 		if [ "$USER"  != "pi" ]; then
 			echo the user is not pi >>$logfile
-			# go to the scripts folder`
+			# go to the scripts folder
 			cd scripts
 			# edit the startup script for the right user
 			echo change bash-start.sh >>$logfile
@@ -534,7 +534,7 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 				export DISPLAY=:0; xset s noblank;xset s off;xset -dpms
 			else
 			  echo lxsession screen saver already disabled >> $logfile
-			fi			
+			fi
 		else
 			echo " "
 			echo -e "unable to disable screen saver, /etc/xdg/lxsession does not exist" | tee -a $logfile
