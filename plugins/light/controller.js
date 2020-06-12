@@ -1,12 +1,7 @@
 // this is our controller to angular
 angular
 	.module("SmartMirror")
-	.controller("lights", function (
-		$scope,
-		SpeechService,
-		LightService,
-		$translate
-	) {
+	.controller("lights", function ($scope, SpeechService, LightService) {
 		// Control light
 		SpeechService.addCommand("light_action", function (
 			state,

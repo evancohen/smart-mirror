@@ -1,4 +1,3 @@
-/*global window */
 const winston = require("winston");
 const prettyMs = require("pretty-ms");
 
