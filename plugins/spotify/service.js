@@ -67,8 +67,8 @@ let _spotpath = document.currentScript.src.substring(
 				// issue #862
 				let source = req.ip == "::1" ? "localhost" : req.ip;
 				if (!source.endsWith(req.host)) {
-					spawn(path.resolve(_spotpath, "openauth.sh"), [uri]);
-
+					let { spawn } = require("child_process");
+					spawn(__sp.resolve(_spotpath, "openauth.sh"), [uri]);
 					return res.send(
 						"Please see the web browser on your mirror for the final autorization steps<br>then you can close this page"
 					);
