@@ -11,7 +11,7 @@ speech/snowboydecoder.pyc
 speech/snowboydetect.pyc
 .vscode
 keyfile.json
-smart-mirror.log
+smart-mirror*.log
 jsonform
 main_index.html
 motion 
@@ -20,4 +20,4 @@ app/locales/??c.json
 .gitignore
 .prettierrc
 .editorconfig
-
+spotify-token.json
