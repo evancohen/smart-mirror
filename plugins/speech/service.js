@@ -120,7 +120,7 @@ const { ipcRenderer } = require("electron");
 		};
 		var reco;
 
-		service.openReco = function () {
+		service.openVoiceRecognition = function () {
 			/* eslint-disable no-unused-vars */
 			return new Promise((resolve, reject) => {
 				// eslint-disable-line no-unused-vars
@@ -144,18 +144,18 @@ const { ipcRenderer } = require("electron");
 			/* eslint-enable no-unused-vars */
 		};
 
-		service.startReco = function () {
+		service.startVoiceRecognition = function () {
 			reco.start();
 			//callbacks.finalResult('')
 			callbacks.listening(true);
 		};
-		service.stop = function () {
+		service.stopVoiceRecognition = function () {
 			reco.stop();
 			//callbacks.finalResult('')
 			callbacks.listening(true);
 		};
 
-		service.displayReco = function (type, text) {
+		service.displayVoiceRecognitionText = function (type, text) {
 			if (type == "final") {
 				callbacks.finalResult(text);
 				callbacks.listening(false);
