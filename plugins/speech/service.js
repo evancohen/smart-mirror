@@ -121,7 +121,9 @@ const { ipcRenderer } = require("electron");
 		var reco;
 
 		service.openReco = function () {
+			/* eslint-disable no-unused-vars */
 			return new Promise((resolve, reject) => {
+				// eslint-disable-line no-unused-vars
 				try {
 					const recoEngine = require("recorder");
 
@@ -133,12 +135,13 @@ const { ipcRenderer } = require("electron");
 							resolve(e);
 						})
 						.catch((error) => {
-							console.log("open error");
+							console.log("open error " + error);
 						});
 				} catch (error) {
 					console.log("recorder error=" + error);
 				}
 			});
+			/* eslint-enable no-unused-vars */
 		};
 
 		service.startReco = function () {
