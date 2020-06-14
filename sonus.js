@@ -78,7 +78,7 @@ if (config.assistant | true) {
 	const server = require("http").createServer(app);
 
 	// Start the server, 1 up from config
-	server.listen(parseInt(config.remote.port) + 1);
+	server.listen(parseInt(config.remote.port) - 1);
 	var control = {};
 	control.io = require("socket.io")(server);
 
