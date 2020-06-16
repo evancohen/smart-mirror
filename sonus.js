@@ -87,7 +87,7 @@ if (config.assistant | true) {
 		socket.emit("connected");
 
 		socket.on("stop", function () {
-			Sonus.stop();
+			Sonus.stop(sonus);
 			socket.emit("stopped");
 		});
 		socket.on("start", function () {
