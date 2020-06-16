@@ -146,13 +146,11 @@ const { ipcRenderer } = require("electron");
 
 		service.startVoiceRecognition = function () {
 			reco.start();
-			//callbacks.finalResult('')
 			callbacks.listening(true);
 		};
-		service.stopVoiceRecognition = function () {
+		service.endVoiceRecognition = function () {
 			reco.stop();
-			//callbacks.finalResult('')
-			callbacks.listening(true);
+			callbacks.listening(false);
 		};
 
 		service.displayVoiceRecognitionText = function (type, text) {
