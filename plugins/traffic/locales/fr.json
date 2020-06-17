@@ -10,7 +10,7 @@
       "start": "Lieu de départ",
       "end": "Lieu de destination",
       "Trip Name": "Nom du voyage",
-      "start display": "Il est temps de commencer à s'afficher sur Smart Mirror",
+      "start display": "Il est temps de commencer l'affichage sur Smart Mirror",
       "end display": "Il est temps d'arrêter l'affichage sur Smart Mirror"
     }
   }
