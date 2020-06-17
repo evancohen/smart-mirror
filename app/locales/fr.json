@@ -1,6 +1,6 @@
 {
 	"home": {
-		"commands": "Dis: \"Que puis-je dire\" pour voir une liste de commandes..."
+		"commands": "Dites: \"Que puis-je dire\" pour voir la liste de commandes..."
 	},
 	"units": {
 		"zero": 0,
