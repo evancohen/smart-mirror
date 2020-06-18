@@ -5,7 +5,7 @@
       "URLs": "URL iCal",
       "maxevents": "Nombre maximum d'événements pour tous les iCals",
       "maxdays": "Nombre maximum de jours à afficher",
-      "showCalendarNames": "Cochez pour afficher les noms de calendrier"
+      "showCalendarNames": "Cochez pour afficher les noms des calendriers"
     }
   }
 }
