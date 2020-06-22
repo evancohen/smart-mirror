@@ -150,7 +150,7 @@ const { ipcRenderer } = require("electron");
 				callbacks.listening(true);
 			}
 		};
-		// eslint-disable-line no-unused-vars
+		/* eslint-disable no-unused-vars */
 		service.endVoiceRecognition = function (handle) {
 			//if(handle)
 			//	handle.stop();
