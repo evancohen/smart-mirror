@@ -13,6 +13,7 @@ speech/snowboydetect.pyc
 keyfile.json
 smart-mirror*.log
 jsonform
+spotify-token.json
 main_index.html
 motion 
 package-lock.json
@@ -20,4 +21,3 @@ app/locales/??c.json
 .gitignore
 .prettierrc
 .editorconfig
-spotify-token.json
