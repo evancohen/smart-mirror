@@ -118,21 +118,21 @@ const { ipcRenderer } = require("electron");
 			}
 			return commandPage;
 		};
-		var reco;
-
-		service.openVoiceRecognition = function () {
+		var recoEngine = null;
+		service.openVoiceRecognition = function (type) {
 			/* eslint-disable no-unused-vars */
 			return new Promise((resolve, reject) => {
 				// eslint-disable-line no-unused-vars
-				try {
-					const recoEngine = require("recorder");
 
-					reco = new recoEngine(config.remote.port);
+				try {
+					if (!recoEngine) recoEngine = require("recorder");
+
+					var reco = new recoEngine(config.remote.port, type);
 					console.log("assistant opening reco engine");
 					reco.open()
 						.then((e) => {
 							console.log("open complete");
-							resolve(e);
+							resolve({ handle: reco, events: e });
 						})
 						.catch((error) => {
 							console.log("open error " + error);
@@ -144,22 +144,25 @@ const { ipcRenderer } = require("electron");
 			/* eslint-enable no-unused-vars */
 		};
 
-		service.startVoiceRecognition = function () {
-			reco.start();
-			callbacks.listening(true);
+		service.startVoiceRecognition = function (handle) {
+			if (handle) {
+				handle.start();
+				callbacks.listening(true);
+			}
 		};
-		service.endVoiceRecognition = function () {
-			reco.stop();
+		service.endVoiceRecognition = function (handle) {
+			//if(handle)
+			//	handle.stop();
 			callbacks.listening(false);
 		};
 
 		service.displayVoiceRecognitionText = function (type, text) {
 			if (type == "final") {
-				callbacks.finalResult(text);
+				if (text) callbacks.finalResult(text);
 				callbacks.listening(false);
 			}
 			if (type == "partial") {
-				callbacks.partialResult(text);
+				if (text) callbacks.partialResult(text);
 			}
 		};
 
