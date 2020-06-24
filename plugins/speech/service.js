@@ -150,11 +150,13 @@ const { ipcRenderer } = require("electron");
 				callbacks.listening(true);
 			}
 		};
+		/* eslint-disable no-unused-vars */
 		service.endVoiceRecognition = function (handle) {
 			//if(handle)
 			//	handle.stop();
 			callbacks.listening(false);
 		};
+		/* eslint-enable no-unused-vars */
 
 		service.displayVoiceRecognitionText = function (type, text) {
 			if (type == "final") {
