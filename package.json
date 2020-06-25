@@ -43,7 +43,7 @@
     "@google-cloud/speech": "^3.3.0",
     "alphavantage": "1.2.6",
     "angular-moment": "^1.0.1",
-    "angular-sanitize": "^1.5.11",
+    "angular-sanitize": "1.5.11",
     "annyang": "^2.6.0",
     "cheerio": "^1.0.0-rc.3",
     "electron-json-storage": "4.1.8",
