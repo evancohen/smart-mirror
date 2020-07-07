@@ -35,7 +35,7 @@
   "devDependencies": {
     "angular-i18n": "^1.5.5",
     "bower": "^1.7.9",
-    "electron": "6.0.12",
+    "electron": "9.1.0",
     "eslint": "^6.4.0",
     "wiredep-cli": "^0.1.0"
   },
