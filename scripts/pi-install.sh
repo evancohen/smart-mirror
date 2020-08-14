@@ -137,10 +137,6 @@ if [ $mac != 'Darwin' ]; then
 	echo -e "\e[96mInstalling helper tools ...\e[90m" | tee -a $logfile
 	sudo apt-get install --assume-yes curl wget git build-essential unzip sox unclutter >>$logfile
 fi
-# Install native dependencies
-#printf "%s\n${blu}Installing native dependencies${end}\n"
-#sudo apt-get install -y curl wget git
-#libatlas-base-dev
 
 # Check if we need to install or upgrade Node.js.
 echo -e "\e[96mCheck current Node installation ...\e[0m" | tee -a $logfile
