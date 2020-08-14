@@ -135,7 +135,7 @@ if [ $mac != 'Darwin' ]; then
 
 	# Installing helper tools
 	echo -e "\e[96mInstalling helper tools ...\e[90m" | tee -a $logfile
-	sudo apt-get --assume-yes install curl wget git build-essential unzip sox unclutter|| exit
+	sudo apt-get --assume-yes install curl wget git build-essential unzip sox unclutter
 fi
 # Install native dependencies
 #printf "%s\n${blu}Installing native dependencies${end}\n"
