@@ -8,16 +8,6 @@
 A voice controlled life automation hub, most commonly powered by the Raspberry Pi.
 </p>
 
-#### Known Issues
-[![#650](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/650.svg)](https://github.com/evancohen/smart-mirror/issues/650)
-
-[![#647](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/647.svg)](https://github.com/evancohen/smart-mirror/issues/647)
-
-[![#642](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/642.svg)](https://github.com/evancohen/smart-mirror/issues/642)
-
-[![#561](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/561.svg)](https://github.com/evancohen/smart-mirror/issues/561)
-
-[![#560](https://img.myrandomwebs.com/github/issues-state/evancohen/smart-mirror/560.svg)](https://github.com/evancohen/smart-mirror/issues/560)
 
 ## Installation
 Quick installation for the Raspberry Pi 2+
@@ -41,6 +31,8 @@ To launch the mirror with a debug window attached use the following command:
 ```
 npm start dev
 ```
+you can also toggle the debug/developers window on/off, with the keyboard ctrl-ahift-i sequence on the smart-mirror screen
+
 For more information see the [Development and Contributing](http://docs.smart-mirror.io/docs/development_and_contributing.html) section of the documentation.
 
 ## Current Feature Requests/Suggestions
