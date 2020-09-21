@@ -1,0 +1,9 @@
+{
+	"commands":{
+          "image_comic_dilbert": {
+            "text": "(Montre-moi) (Affiche) le dernier Dilbert",
+            "voice": "(Montre-moi) (Affiche) le dernier Diblert",
+            "description": "Affiche le dernier comic de Diblert."
+          }
+	}
+}

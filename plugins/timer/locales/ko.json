@@ -1,0 +1,29 @@
+{
+    "timer": {
+      "one": "일",
+      "minute": "분",
+      "second": "초"
+    },
+    "commands":{
+        "timer_start": {
+            "text": "________(으로)타이머 설정",
+            "voice": "*duration(으로)타이머 설정",
+            "description": "음성인식된 시간으로 타이머를 설정합니다."
+        },
+        "timer_show": {
+            "text": "타이머 보여줘",
+            "voice": "타이머 보여줘",
+            "description": "설정된 타이머를 보여줍니다"
+        },
+        "timer_stop": {
+            "text": "타이머 멈춰",
+            "voice": "타이머 멈춰",
+            "description": "설정된 타이머를 멈춥니다."
+        },
+        "timer_resume": {
+            "text": "타이머 다시시작",
+            "voice": "타이머 다시시작",
+            "description": "설정된 타이머를 다시 시작합니다."
+        }
+    }
+}

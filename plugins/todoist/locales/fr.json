@@ -1,0 +1,25 @@
+{
+  "commands": {
+    "todoist_show": {
+      "text": "(Montre-moi) (Affiche) (la) (ma) liste (des) (de) (d') ________",
+      "voice": "(Montre-moi) (Affiche) (la) (ma) liste (des) (de) (d') *project",
+      "description": "Affiche la liste demandée."
+    },
+    "todoist_add": {
+      "text": "Ajoute (du) (de la) (des) ________ à (la) (ma) liste (des) (de) (d') _______",
+      "voice": "Ajoute (du) (de la) (des) *element à (la) (ma) liste (des) (de) (d') *project",
+      "description": "Ajoute l'élément à la liste demandée."
+    },
+    "todoist_remove": {
+      "text": "Supprime (les) (le) (la) ________ de (la) (ma) liste (des) (de) (d') _______",
+      "voice": "Supprime (les) (le) (la) *element de (la) (ma) liste (des) (de) (d') *project",
+      "description": "Supprime l'élément de la liste demandée."
+    }
+  },
+  "todoist": {
+    "config": {
+      "title": "Todoist Settings",
+      "api key": "Todoist clé API"
+    }
+  }
+}

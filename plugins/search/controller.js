@@ -27,6 +27,8 @@ function Search($scope, $http, SpeechService, $rootScope, Focus) {
 			//Set cc_load_policy=1 to force captions
 			$scope.video = 'https://www.youtube.com/embed/' + results.data.items[0].id.videoId + '?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0';
 			Focus.change("video");
+		}).catch((error)=>{
+			console.log("youtucbe search failed error="+JSON.stringify(error))
 		});
 	});
 

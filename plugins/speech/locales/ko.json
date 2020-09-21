@@ -1,0 +1,16 @@
+{
+  "speech": {
+    "config": {
+      "title": "Speech Settings",
+      "dev name": "<em><strong>녹음</strong></em> 장치를 선택하십시오",
+      "keyfile": "Google 클라우드 음성 키 파일",
+      "hotwords": "키워드 Spotter Hotwords",
+      "Keyword Name": "키워드 이름",
+      "Model Filename": "모델 파일 이름",
+      "mic sensitivity": "마이크 감도",
+      "form title": "Speech Settings",
+      "speech dev help": "<p> 도움이 필요 <a href='https://docs.smart-mirror.io'>하면 문서</a> 를 참조하십시오 <a href='https://docs.smart-mirror.io'>.</a> </BR> 또한 <a href='https://discord.gg/EMb4ynW'>Discord Chat에서</a> 사용할 수 있습니다. <a href='https://discord.gg/EMb4ynW'><img src='https://discordapp.com/api/guilds/258802311298547713/widget.png' alt=\"사람들이 온라인\"/></a> 실시간으로 도와드립니다. </p>",
+      "sensitivity help": "<p id='sensitivityHelper'> 값을 보려면 바 위로 이동하십시오. </p>"
+    }
+  }
+}
