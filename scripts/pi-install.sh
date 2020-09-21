@@ -136,7 +136,7 @@ if [ $mac != 'Darwin' ]; then
 
 	# Installing helper tools
 	echo -e "\e[96mInstalling helper tools ...\e[90m" | tee -a $logfile
-	sudo apt-get -y install curl wget git build-essential unzip sox unclutter libatlas-base-dev|| exit
+	sudo apt-get install --assume-yes curl wget git build-essential unzip sox unclutter libatlas-base-dev>>$logfile
 fi
 # Install native dependencies
 #printf "%s\n${blu}Installing native dependencies${end}\n"
