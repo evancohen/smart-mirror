@@ -1,0 +1,8 @@
+{
+  "apps" : [{
+    "name"        : "smart-mirror",
+    "script"      : "/home/sam/sm-new/scripts/run.sh",
+    "watch"       : ["/home/sam/sm-new/config.json"],
+    "autorestart" : true
+  }]
+}

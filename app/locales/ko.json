@@ -6,11 +6,12 @@
         "time_to" : "Time to {{name}}: "
     },
     "reminders": {
-        "empty": "리스트가 비었습니다."
+        "empty": "리스트가 비었습니다.",
+        "heading":"현재 알림"
     },
     "weather": {
         "today": "오늘"
-    },    
+    },
     "timer": {
       "one": "일",
       "minute": "분",

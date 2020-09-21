@@ -6,11 +6,12 @@
         "time_to" : "Zeit bis {{name}}: "
     },
     "reminders": {
-        "empty": "Leere Liste"
+        "empty": "Leere Liste",
+        "heading":"Aktuelle Erinnerungen"
     },
     "weather": {
         "today": "Heute"
-    },    
+    },
     "timer": {
       "one": "Eine",
       "minute": "Minute(n)?",

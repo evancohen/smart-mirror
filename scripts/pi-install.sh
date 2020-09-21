@@ -31,6 +31,7 @@ then
 	echo "Do not run this script with root permissions, try: ./${0##*/} "
 	exit 0
 fi
+ARCH=$(uname -m)
 mac=$(uname -s)
 if [ $mac == 'Darwin' ]; then
   echo this is a mac | tee -a $logfile
@@ -57,9 +58,9 @@ echo install log being saved to $logfile
 
 # Determine which Pi is running.
 date +"install starting  - %a %b %e %H:%M:%S %Z %Y" >>$logfile
-ARCH=$(uname -m)
+
 echo installing on $ARCH processor system >>$logfile
-mac=$(uname -s)
+
 if [ $mac != 'Darwin' ]; then
 	echo the os is $(lsb_release -a 2>/dev/null) >> $logfile
 fi
@@ -84,7 +85,7 @@ cat << "EOF"
 EOF
 
 # Check processor archetecture.
-if [ "$ARCH" == "armv6l" -a "$ARCH" == "x86_64" ]; then
+if [ "$ARCH" == "armv6l" ] && [ "$ARCH" == "x86_64" ]; then
 	printf "%s${red} Unupported device!${end} The smart-mirror only works on the Pi 2, 3 and 4"
 	exit;
 fi
@@ -106,13 +107,13 @@ printf "%s${red}Please do not exit this script until it is complete.${end}\n"
 if [ $mac != 'Darwin' ]; then
 	echo -e "\e[96mUpdating packages ...\e[90m" | tee -a $logfile
 	upgrade=$false
-	update=$(sudo apt-get update 2>&1)
+	update=$(sudo apt-get update -y 2>&1)
 	echo $update >> $logfile
 	update_rc=$?
 	if [ $update_rc -ne 0 ]; then
 	 echo -e "\e[91mUpdate failed, retrying installation ...\e[90m" | tee -a $logfile
 	 if [ $(echo $update | grep "apt-secure" | wc -l) -eq 1 ]; then
-			update=$(sudo apt-get update --allow-releaseinfo-change 2>&1)
+			update=$(sudo apt-get update -y --allow-releaseinfo-change 2>&1)
 			echo $update >> $logfile
 			update_rc=$?
 			if [ $update_rc -ne 0 ]; then
@@ -128,15 +129,19 @@ if [ $mac != 'Darwin' ]; then
 		upgrade=$true
 	fi
 	if [ $upgrade -eq $true ]; then
-		upgrade_result=$(sudo apt-get upgrade 2>&1)
+		upgrade_result=$(sudo apt-get upgrade -y 2>&1)
 		upgrade_rc=$?
 		echo apt upgrade result ="rc=$upgrade_rc $upgrade_result" >> $logfile
 	fi
 
 	# Installing helper tools
 	echo -e "\e[96mInstalling helper tools ...\e[90m" | tee -a $logfile
-	sudo apt-get install --assume-yes curl wget git build-essential unzip sox unclutter >>$logfile
+	sudo apt-get install --assume-yes curl wget git build-essential unzip sox unclutter libatlas-base-dev>>$logfile
 fi
+# Install native dependencies
+#printf "%s\n${blu}Installing native dependencies${end}\n"
+#sudo apt-get install -y curl wget git
+#libatlas-base-dev
 
 # Check if we need to install or upgrade Node.js.
 echo -e "\e[96mCheck current Node installation ...\e[0m" | tee -a $logfile
@@ -372,7 +377,7 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 			echo pm2 startup command done >>$logfile
 			# is this is mac
 			# need to fix pm2 startup, only on catalina
-			if [ $mac == 'Darwin' -a $(sw_vers -productVersion | head -c 6) == '10.15.' ]; then
+			if [ $mac == 'Darwin' ] && [ "$(sw_vers -productVersion | head -c 6)." == '10.15..' ]; then
 			  # only do if the faulty tag is present (pm2 may fix this, before the script is fixed)
 				if [ $(grep -m 1 UserName /Users/$USER/Library/LaunchAgents/pm2.$USER.plist | wc -l) -eq 1 ]; then
 					# copy the pm2 startup file config
@@ -388,7 +393,7 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 		echo configure the pm2 config file for smart mirror >>$logfile
 		if [ "$USER"  != "pi" ]; then
 			echo the user is not pi >>$logfile
-			# go to the scripts folder`
+			# go to the scripts folder
 			cd scripts
 			# edit the startup script for the right user
 			echo change bash-start.sh >>$logfile
@@ -423,6 +428,8 @@ if [[ $choice =~ ^[Yy]$ ]]; then
 			# go back one cd level
 			cd - >/dev/null
 		fi
+		echo add usepm2 parm to npm start in bash-start.sh >> $logfile
+		sed -i 's/npm start/npm start usepm2/' scripts/bash-start.sh
 		echo start smart mirror via pm2 now >>$logfile
 		# tell pm2 to start the app defined in the config file
 		$pm2cmd start $HOME/smart-mirror/scripts/$PM2_FILE
