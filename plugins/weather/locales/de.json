@@ -1,0 +1,12 @@
+{
+  "forecast": {
+    "config": {
+      "title": "Weather Settings",
+      "API Key": "API-Schlüssel",
+      "API Key source": "API-Schlüsselquelle",
+      "Units": "Einheiten",
+      "refresh": "Aktualisierungsintervall (Minuten)"
+    },
+    "today": "Heute"
+  }
+}

@@ -1,242 +1,35 @@
 {
-    "home" : {
-        "commands" : "Dis: \"Que puis-je dire?\" pour voir une liste de commandes..."
-    },
-    "traffic" : {
-        "time_to" : "Temps de {{name}}: "
-    },
-    "star" : {
-        "next_departure" : "Prochain départ du {{name}}: "
-    },
-    "reminders": {
-        "empty": "Aucun élément",
-        "heading":"Rappels actuels"
-    },
-    "weather": {
-        "today": "Aujourd'hui"
-    },
-    "timer": {
-      "one": "Une",
-      "minute": "Minute(s)?",
-      "second": "Seconde(s)?"
-    },
-    "lights": {
-        "colors": {
-            "red": "rouge",
-            "dark_green": "verre foncé",
-            "green": "verre",
-            "blue": "bleu",
-            "yellow": "jaune",
-            "orange":  "orange",
-            "pink": "rose",
-            "purple": "violet",
-            "white": "blanc",
-            "movie": "cinéma",
-            "colorloop": "couleur",
-            "stop": "stop"
-        },
-        "intensity": {
-            "increase": "augmente",
-            "decrease": "baisse",
-            "max": "maximum",
-            "half": "moitié",
-            "quarter": "quart",
-            "threequarter": "trois-quart"
-        },
-        "action": {
-            "on": "allume",
-            "off": "éteins",
-            "nightmode": "mode nuit",
-            "reset": "réinitialise"
-        }
-    },
-    "commands": {
-        "title" : "Commandes disponibles",
-        "list": {
-            "text": "Que puis-je dire?",
-            "voice": "Que puis-je dire",
-            "description": "Affiche une liste des commandes vocales disponibles."
-        },
-        "home": {
-            "text": "Accueil",
-            "voice": "Accueil",
-            "description": "Vous ramène à l'écran d'accueil."
-        },
-        "sleep": {
-            "text": "Bonne nuit",
-            "voice": "Bonne nuit",
-            "description": "Va te coucher."
-        },
-        "debug": {
-            "text": "Débogage",
-            "voice": "Débogage",
-            "description": "Afficher les informations de débogage."
-        },
-        "map_show": {
-            "text": "(Montre-moi) (Affiche) la carte",
-            "voice": "(Montre-moi) (Affiche) la carte",
-            "description": "Affiche la carte de votre ville."
-        },
-        "map_location": {
-            "text": "(Montre-moi) (Affiche) la carte de ________",
-            "voice": "(Montre-moi) (Affiche) la carte (de|d') *location",
-            "description": "Affiche une carte de la position indiquée."
-        },
-        "map_zoom_in": {
-            "text": "Zoom (avant) (sur la carte)",
-            "voice": "Zoom (avant) (sur la carte)",
-            "description": "Zoom avant sur la carte actuelle."
-        },
-        "map_zoom_out": {
-            "text": "Zoom arrière (sur la carte)",
-            "voice": "Zoom arrière (sur la carte)",
-            "description": "Zoom arrière sur la carte actuelle."
-        },
-        "map_zoom_point": {
-            "text": "Zoom (vers) (sur) ________",
-            "voice": "Zoom (vers) (sur) *value",
-            "description": "Zoom vers le point indiqué."
-        },
-        "map_zoom_reset": {
-            "text": "Réinitialise le zoom",
-            "voice": "Réinitialise le zoom",
-            "description": "Réinitilalise la fonction zoom."
-        },
-        "video_search": {
-            "text": "(Montre-moi) (Affiche) une vidéo (de|d') ________",
-            "voice": "(Montre-moi) (Affiche) une vidéo (de|d') *term",
-            "description": "Affiche la vidéo recherchée."
-        },
-        "video_stop": {
-            "text": "Arrête (la lecture de) la vidéo",
-            "voice": "Arrête (la lecture de) la vidéo",
-            "description": "Arrête la lecture de la vidéo."
-        },
-        "image_giphy": {
-            "text": "(Montre-moi) (Affiche) une image animée de ________",
-            "voice": "(Montre-moi) (Affiche) une image animée de *img",
-            "description": "Affiche gif animé."
-        },
-        "image_comic": {
-            "text": "(Montre-moi) (Affiche) le dernier xkcd ",
-            "voice": "(Montre-moi) (Affiche) le dernier xkcd",
-            "description": "Affiche le dernier xkcd."
-        },
-        "image_comic_dilbert": {
-            "text": "(Montre-moi) (Affiche) le dernier Dilbert",
-            "voice": "(Montre-moi) (Affiche) le dernier Gilbert",
-            "description": "Affiche le dernier comic de Diblert."
-        },
-        "reminder_insert": {
-            "text": "Rappelle(-moi) (de|d') ________",
-            "voice": "Rappelle(-moi) (de|d') *task",
-            "description": "Ajouter quelque chose à la liste des rappels."
-        },
-        "reminder_clear": {
-            "text": "Efface (les) (mes) (la liste de) rappels",
-            "voice": "Efface (les) (mes) (la liste de) rappels",
-            "description": "Supprimer la liste des rappels."
-        },
-        "reminder_show": {
-            "text": "(Montre-moi) (Affiche) (les) (mes) rappels",
-            "voice": "(Montre-moi) (Affiche) (les) (mes) rappels",
-            "description": "Affiche la liste des rappels."
-        },
-        "time_show": {
-            "text": "Quel heure est-il",
-            "voice": "Quel heure est-il",
-            "description": "Quel heure est-il?"
-        },
-        "timer_start": {
-            "text": "(Mets le) minuteur (pour) ________",
-            "voice": "(Mets le) minuteur (pour) *duration",
-            "description": "Démarre le minuteur."
-        },
-        "timer_show": {
-            "text": "(Montre-moi) (Affiche) le minuteur",
-            "voice": "(Montre-moi) (Affiche) le minuteur",
-            "description": "Affiche le timer."
-        },
-        "timer_stop": {
-            "text": "Arrête le minuteur",
-            "voice": "Arrête le minuteur",
-            "description": "Arrête le timer."
-        },
-        "timer_resume": {
-            "text": "Reprend le minuteur",
-            "voice": "Reprend le minuteur",
-            "description": "Reprendre le timer."
-        },
-        "sc_play": {
-            "text": "Lance une chanson (de|d') ________",
-            "voice": "Lance une chanson (de|d') *query",
-            "description": "Lance un musique de l'artiste demandé"
-        },
-        "sc_pause": {
-            "text": "Mets (la musique) en pause",
-            "voice": "Mets (la musique) en pause",
-            "description": "Mets en pause la musique."
-        },
-        "sc_resume": {
-            "text": "Lecture",
-            "voice": "Lecture",
-            "description": "Relance la musique en cours."
-        },
-        "sc_replay": {
-            "text": "Rejoue la (même) chanson",
-            "voice": "Rejoue la (même) chanson",
-            "description": "Rejoue la chanson en cours."
-        },
-        "light_action": {
-            "text": "(Allume) (Éteins) (les) (la) lumières (action)",
-            "voice": ":state (les) (la) lumière(s) (*action)",
-            "description": "Allume/Éteins (les) (la) lumière(s) (*action)."
-        },
-        "show_remoteQR":{
-            "text": "(Montre-moi) (Affiche) le lien du serveur",
-            "voice": "(Montre-moi) (Affiche) le lien du serveur",
-            "description": "Affiche le lien de l'application"
-        },
-        "todoist_show": {
-            "text": "(Montre-moi) (Affiche) (la) (ma) liste (des) (de) (d') ________",
-            "voice": "(Montre-moi) (Affiche) (la) (ma) liste (des) (de) (d') *project",
-            "description": "Affiche la liste demandée."
-        },
-        "todoist_add": {
-            "text": "Ajoute (du) (de la) (des) ________ à (la) (ma) liste (des) (de) (d') _______",
-            "voice": "Ajoute (du) (de la) (des) *element à (la) (ma) liste (des) (de) (d') *project",
-            "description": "Ajoute l'élément à la liste demandée."
-        },
-        "todoist_remove": {
-            "text": "Supprime (les) (le) (la) ________ de (la) (ma) liste (des) (de) (d') _______",
-            "voice": "Supprime (les) (le) (la) *element de (la) (ma) liste (des) (de) (d') *project",
-            "description": "Supprime l'élément de la liste demandée."
-        }
-    },
-    "fitbit": {
-        "user": "Utilisateur: ",
-        "averageSteps": "Moyenne des étapes: ",
-        "batteryStatus": "État de la batterie: ",
-        "today": "Aujourd'hui",
-        "steps": "pas",
-        "averageSteps": "Étapes par jour",
-        "caloriesBurned": "Calories brûlées",
-        "lastSync": "Dernière synchronisation",
-        "average": "Moyenne",
-        "activeMinutes": "Minutes actives",
-        "distance": "km",
-        "floors": "Planchers",
-        "topBadges": "Les meilleurs badges",
-        "sleep": "Dormir",
-        "lastNight": "Hier soir",
-        "awake": "Éveillé",
-        "restless": "Agité",
-        "hours": "H",
-        "km": "km",
-        "miles": "mi",
-        "minutes": "min",
-        "times": "x",
-        "restingHR": "fréquence cardiaque au repos",
-        "bpm": "bpm"
-    }
+	"home": {
+		"commands": "Dis: \"Que puis-je dire\" pour voir une liste de commandes..."
+	},
+	"units": {
+		"zero": 0,
+		"one": 1,
+		"two": 2,
+		"three": 3,
+		"four": 4,
+		"five": 5,
+		"six": 6,
+		"seven": 7,
+		"eight": 8,
+		"nine": 9,
+		"ten": 10,
+		"eleven": 11,
+		"twelve": 12,
+		"thirteen": 13,
+		"fourteen": 14,
+		"fifteen": 15,
+		"sixteen": 16,
+		"seventeen": 17,
+		"eighteen": 18,
+		"nineteen": 19,
+		"twenty": 20,
+		"thirty": 30,
+		"forty": 40,
+		"fifty": 50,
+		"sixty": 60,
+		"seventy": 70,
+		"eighty": 80,
+		"ninety": 90
+	}
 }

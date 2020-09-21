@@ -1,0 +1,9 @@
+{
+  "remote": {
+    "config": {
+      "title": "Remote Settings",
+      "server enabled": "Serveur distant activé",
+      "remote port": "Port du serveur distant"
+    }
+  }
+}
