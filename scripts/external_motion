@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/bash 
 # 
 #  use this script to signal external motion events to smart-mirror
 #  an example using a webcam, is the github motion addon 
 #  https://motion-project.github.io/
 #
 #
-#  configure its event start to be extwakeup start 
-#  and its event end to be extwakeup end
+#  configure its event start to be (this file path)/external_motion start 
+#  and its event end to be (this file path)/external_motion end
 #
 #
 #
@@ -30,12 +30,13 @@ if [ "$#" -ne 0 ]; then
 	fi
 fi
 
-# user that started MagicMirror should have access permissions 
-user=`ps aux | grep npm | grep -m 1 -v -- auto | awk '{ print $1}'`
-
 # where is this script located?
 SCRIPT="$($cmd -f "$0")"
 SCRIPTPATH="$(dirname "$SCRIPT")"
+tofind=${SCRIPTPATH%/*}/node_modules
+
+# user that started smart-mirror should have access permissions 
+user=`ps aux | grep $tofind | grep -m 1 -v -- auto | awk '{ print $1}'`
 
 # this script is in the scripts folder, the motion folder is back up the tree 1 level.
 motiondir=${SCRIPTPATH}/../motion

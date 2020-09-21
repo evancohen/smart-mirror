@@ -6,11 +6,12 @@
         "time_to" : "Tiempo al {{name}}: "
     },
     "reminders": {
-        "empty": "No recuerdo."
+        "empty": "No recuerdo.",
+        "heading":"Recordatorios actuales"
     },
     "weather": {
         "today": "Hoy"
-    },    
+    },
     "timer": {
       "one": "Uno",
       "minute": "Minuto(s)?",

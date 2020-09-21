@@ -11,5 +11,11 @@ speech/snowboydecoder.pyc
 speech/snowboydetect.pyc
 .vscode
 keyfile.json
-smart-mirror.log
+smart-mirror*.log
 jsonform
+spotify-token.json
+main_index.html
+motion 
+package-lock.json
+app/locales/??c.json
+.editorconfig
