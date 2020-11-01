@@ -38,7 +38,7 @@
   },
   "spotify": {
     "config": {
-      "title": "Spotify Settings",
+      "title": "Spotify-Einstellungen",
       "refresh cycle": "Standardzeit in Sekunden zum Aktualisieren von Spotify-Daten",
       "default device": "Standardgerätename zum Ändern der Wiedergaberoute auf Anfrage",
       "clientid": "OAuth 2.0-Client-ID",
@@ -46,7 +46,7 @@
       "client secret": "Kundengeheimnis",
       "Scope": "Umfang",
       "State": "Zustand",
-      "auth help": "<p> <b>Stellen Sie sicher, dass die Spotify-API-Einstellungen Weiterleitungen von 'http: // localhost: 4000 / spotify_auth_callback' zulassen,</b> und navigieren Sie dann von Ihrem Spiegelbrowser zu <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Autorisieren</a> . </p>",
+      "auth help": "<p> <b>Stellen Sie sicher, dass die Spotify-API-Einstellungen Weiterleitungen von 'http://localhost:4100/spotify_auth_callback' zulassen,</b> und navigieren Sie dann von Ihrem Spiegelbrowser zu <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Autorisieren</a> . </p>",
       "screen_status": "Standardposition der Statusanzeige ('oben' oder 'unten')"
     }
   }

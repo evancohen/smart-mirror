@@ -38,7 +38,7 @@
   },
   "spotify": {
     "config": {
-      "title": "Spotify Settings",
+      "title": "Configurações do Spotify",
       "refresh cycle": "Tempo padrão em segundos para atualizar dados spotify",
       "default device": "Nome do dispositivo padrão para alterar a rota de reprodução, mediante solicitação",
       "clientid": "ID do cliente OAuth 2.0",
@@ -46,7 +46,7 @@
       "client secret": "Segredo do cliente",
       "Scope": "Escopo",
       "State": "Estado",
-      "auth help": "<p> <b>Certifique-se de que as configurações da API do spotify permitam redirecionamentos de 'http: // localhost: 4000 / spotify_auth_callback' e</b> depois navegue para <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Autorizar</a> no seu navegador de espelho. </p>",
+      "auth help": "<p> <b>Certifique-se de que as configurações da API do spotify permitam redirecionamentos de 'http://localhost:4100/spotify_auth_callback' e</b> depois navegue para <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Autorizar</a> no seu navegador de espelho. </p>",
       "screen_status": "Posição padrão do indicador de status ('superior' ou 'inferior')"
     }
   }

@@ -24,9 +24,9 @@
     "restingHR": "resting heart rate",
     "bpm": "bpm",
     "config": {
-      "title": "Fitbit Settings",
+      "title": "Impostazioni Fitbit",
       "cycle info time": "Tempo predefinito per scorrere tra le statistiche fitbit",
-      "oauth client id": "Client ID OAuth 2.0",
+      "oauth client id": "ID client OAuth 2.0",
       "Client Secret": "Segreto del cliente",
       "auth uri": "URI di autorizzazione",
       "auth path": "Percorso di autorizzazione",
@@ -35,7 +35,8 @@
       "Redirect URI": "URI di reindirizzamento",
       "Response Type": "Tipo di risposta",
       "Scope": "Scopo",
-      "State": "Stato"
+      "State": "Stato",
+      "help_value": "<p><b> Assicurati che le impostazioni dell'API Fitbit consentano i reindirizzamenti da 'http://localhost:4000/fitbit_auth_callback' </b> quindi vai a <a id = 'splink' onclick = \" document.getElementById ('splink ') .href ='http://'+window.location.hostname+ ':4000/fitbit/'; return true; \"target = '_ blank'> Autorizza </a> dal tuo browser mirror. </p>"
     }
   }
 }

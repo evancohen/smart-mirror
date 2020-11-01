@@ -56,10 +56,10 @@ let _spotpath = document.currentScript.src.substring(
 			spotify = new Spotify({
 				clientId: client_id,
 				clientSecret: client_secret,
-				redirectUri: "http://localhost:4000/spotify_auth_callback",
+				redirectUri: "http://localhost:4100/spotify_auth_callback",
 			});
 
-			// In a browser, visit http://localhost:4000/spotify to authorize a user for the first time.
+			// In a browser, visit http://localhost:4100/spotify to authorize a user for the first time.
 			app.get("/authorize_spotify", function (req, res) {
 				let uri = spotify.createAuthorizeURL(auth_scope, auth_state);
 				// is this coming from the same machine
@@ -100,7 +100,7 @@ let _spotpath = document.currentScript.src.substring(
 		}
 
 		service.init = function (cb) {
-			var port = process.env.PORT || 4000;
+			var port = process.env.PORT || 4100;
 			console.debug("Express is listening on port: " + port);
 			app.listen(port);
 

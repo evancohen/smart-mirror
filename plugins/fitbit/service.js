@@ -31,7 +31,7 @@
 		};
 
 		/**
-         * Get today's date in the format YYYY-MM-DD. The date is used to 
+         * Get today's date in the format YYYY-MM-DD. The date is used to
          */
 		service.getToday = function () {
 			var today = new Date();
@@ -59,34 +59,46 @@
 			var fs = require('fs');
 			var Fitbit = require('fitbit-oauth2');
 
-			fitbit = new Fitbit(config.fitbit);
+			fitbit = new Fitbit(config.fitbit
+				 function (err,token) {
+				 	if(!err){
+				 		if(token && 'access_token' in token){
+							// persist the token
+							persist.write(tokenFile, token, function (err) {
+								if (err)
+									console.log("fitbit error writing token file")
+							});
+						}
+					}
+				}
+			);
 			// In a browser, visit http://localhost:4000/fitbit to authorize a user for the first time.
 			app.get('/fitbit', function (req, res) {
 				res.redirect(fitbit.authorizeURL());
 			});
 
 			/*
-                Callback service parsing the authorization token and asking for the access token. 
+                Callback service parsing the authorization token and asking for the access token.
                 This endpoint is refered to in config.fitbit.authorization_uri.redirect_uri.
              */
 			app.get('/fitbit_auth_callback', function (req, res, next) {
 				var code = req.query.code;
-				fitbit.fetchToken(code, function (err, token) {
+				fitbit.fetchToken(code, function (err) {
 					if (err) return next(err);
-
+					res.redirect('/fb-profile');
 					// persist the token
 					persist.write(tokenFile, token, function (err) {
 						if (err) return next(err);
-						res.redirect('/fb-profile');
+
 					});
 				});
 			});
 
 			/*
-                Call an API. fitbit.request() mimics nodejs request() library, 
-                automatically adding the required oauth2 header. The callback 
-                is a bit different, called with (err, body, token). If token is 
-                non-null, this means a refresh has happened and you should 
+                Call an API. fitbit.request() mimics nodejs request() library,
+                automatically adding the required oauth2 header. The callback
+                is a bit different, called with (err, body, token). If token is
+                non-null, this means a refresh has happened and you should
                 persist the new token.
             */
 			app.get('/fb-profile', function (req, res, next) {
@@ -133,7 +145,7 @@
 						cb()
 					});
 				} else if (err.code == 'ENOENT') {
-					console.error('Fitbit authentication required, please visit the following link: http://localhost:4000/fitbit to authenticate your credentials.', err);
+					console.error('Fitbit authentication required, please visit the following link: http://localhost:4100/fitbit to authenticate your credentials.', err);
 				} else {
 					console.error(err);
 				}
