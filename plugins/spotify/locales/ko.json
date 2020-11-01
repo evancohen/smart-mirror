@@ -38,7 +38,7 @@
   },
   "spotify": {
     "config": {
-      "title": "Spotify Settings",
+      "title": "Spotify 설정",
       "refresh cycle": "spotify 데이터를 새로 고치는 기본 시간 (초)",
       "default device": "요청시 재생 경로를 변경하는 기본 장치 이름",
       "clientid": "OAuth 2.0 클라이언트 ID",
@@ -46,7 +46,7 @@
       "client secret": "고객 비밀",
       "Scope": "범위",
       "State": "상태",
-      "auth help": "<p> <b>spotify API 설정이 'http : // localhost : 4000 / spotify_auth_callback'에서 리디렉션을 허용하는지 확인한</b> 다음 미러 브라우저에서 <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> 로 이동하십시오. </p>",
+      "auth help": "<p> <b>spotify API 설정이 'http ://localhost:4100/spotify_auth_callback'에서 리디렉션을 허용하는지 확인한</b> 다음 미러 브라우저에서 <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> 로 이동하십시오. </p>",
       "screen_status": "기본 상태 표시기 위치 ( '위'또는 '아래')"
     }
   }

@@ -38,15 +38,15 @@
   },
   "spotify": {
     "config": {
-      "title": "Spotify Settings",
+      "title": "Configuración de Spotify",
       "refresh cycle": "Tiempo predeterminado en segundos para actualizar los datos de Spotify",
       "default device": "Nombre del dispositivo predeterminado para cambiar la ruta de reproducción a pedido",
-      "clientid": "ID de cliente OAuth 2.0",
+      "clientid": "ID de cliente de OAuth 2.0",
       "clientid desc": "Debe definir una aplicación en su cuenta premium de Spotify, estos dos valores provienen de esa definición, también debe configurar la uri de devolución de llamada de autorización como se describe a continuación",
       "client secret": "Secreto del cliente",
       "Scope": "Alcance",
       "State": "Estado",
-      "auth help": "<p> <b>Asegúrese de que la configuración de la API de Spotify permita redireccionamientos desde 'http: // localhost: 4000 / spotify_auth_callback' y</b> luego navegue a <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Autorizar</a> desde su navegador espejo. </p>",
+      "auth help": "<p> <b>Asegúrese de que la configuración de la API de Spotify permita redireccionamientos desde 'http://localhost:4100/spotify_auth_callback' y</b> luego navegue a <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Autorizar</a> desde su navegador espejo. </p>",
       "screen_status": "Posición del indicador de estado predeterminado ('arriba' o 'abajo')"
     }
   }
