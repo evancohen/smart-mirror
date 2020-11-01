@@ -84,7 +84,7 @@
              */
 			app.get("/fitbit_auth_callback", function (req, res, next) {
 				var code = req.query.code;
-				fitbit.fetchToken(code, function (err, token) {
+				fitbit.fetchToken(code, function (err) {
 					if (err) return next(err);
 					res.redirect("/fb-profile");
 					// persist the token
