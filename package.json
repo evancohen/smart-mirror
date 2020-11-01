@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.28-dev",
+  "version": "0.0.29-develop",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -43,7 +43,6 @@
     "@google-cloud/speech": "^3.3.0",
     "alphavantage": "1.2.6",
     "angular-moment": "^1.0.1",
-    "angular-sanitize": "1.5.11",
     "annyang": "^2.6.0",
     "cheerio": "^1.0.0-rc.3",
     "electron-json-storage": "4.1.8",
@@ -55,10 +54,9 @@
     "jsonform": "git://github.com/jsonform/jsonform.git",
     "moment": "^2.17.1",
     "pretty-ms": "^7.0.0",
-    "recorder": "git+https://git@github.com/sdetweil/recorder.git",
     "rss-parser": "^3.6.3",
     "socket.io": "^2.3.0",
-    "sonus": "git+https://github.com/sdetweil/sonus.git",
+    "sonus": "^1.0.1",
     "spotify-web-api-node": "^4.0.0",
     "winston": "^3.2.1"
   },
