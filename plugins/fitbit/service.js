@@ -87,10 +87,6 @@
 				fitbit.fetchToken(code, function (err) {
 					if (err) return next(err);
 					res.redirect("/fb-profile");
-					// persist the token
-					persist.write(tokenFile, token, function (err) {
-						if (err) return next(err);
-					});
 				});
 			});
 
