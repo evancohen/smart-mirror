@@ -2,18 +2,18 @@
     "schema": {
         "rss": {
             "type": "object",
-            "title": "{{title}}",
+            "title": "RSS Settings",
             "properties": {
                 "feeds": {
                     "type": "tabarray",
-                    "title": "{{feed url}}",
+                    "title": "RSS Feeds URL",
                     "items": {
                         "type": "url"
                     }
                 },
                 "refreshInterval": {
                     "type": "integer",
-                    "title": "{{refresh cycle}}",
+                    "title": "Refresh Interval for RSS Feeds (minutes)",
                     "default": 9
                 }
             }

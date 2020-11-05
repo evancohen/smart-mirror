@@ -2,19 +2,19 @@
     "schema": {
         "lastfm": {
             "type": "object",
-            "title": "{{title}}",
+            "title": "last.FM Settings",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "{{api key}}"
+                    "title": "last.fm API key"
                 },
                 "user": {
                     "type": "string",
-                    "title": "{{username}}"
+                    "title": "last.fm User Name"
                 },
                 "refreshInterval": {
                     "type": "number",
-                    "title": "{{refresh cycle}}",
+                    "title": "Refresh Interval for last.fm",
                     "default": "0.6"
                 }
             }

@@ -4,26 +4,26 @@
        "type": "array",
         "items": {
           "type": "object",
-          "title": "{{title}}",
+          "title": "Plugin",
           "properties": {
             "name": {
               "type": "string",
-              "title": "{{Name}}",
+              "title": "Name",
               "required": true
             },
             "area": {
               "type": "string",
-              "title": "{{Location}}",
+              "title": "Location",
               "enum": [ "middle-center","top-left", "top-right" , "bottom-left","bottom-center","bottom-right", "fullscreen"]
             },
             "order": {
               "type": "string",
-              "title": "{{Order}}",
+              "title": "Order",
               "enum": [ "*", "1" ,"2", "3","4","5"]
             },
 						"active": {						  
 						  "type": "boolean",							
-							"title": "{{Active}}",
+							"title": "Active",
 							"required": true
 						}
 						
@@ -33,7 +33,7 @@
   },
   "form":[
     {      
-      "title":"{{title}}",
+      "title":"Plugin Page location configuration",
       "type":"fieldset",      
       "_comment":"put this content at the bottom of list of config controls",
       "expandable":true,        
@@ -47,21 +47,21 @@
               "legend":"{{value}}",
               "items":[
                 {
-                "description":"{{Plugin Name}}",              
+                "description":"Plugin Name",              
                 "key":"plugins[].name",
                 "valueInLegend": true
                 },
                 {
                 "key":"plugins[].area",
-                "description":"{{plugin location desc}}"
+                "description":"Plugin location on smart-mirror screen"
                 },
                 {
                 "key":"plugins[].order",
-                "description":"{{plugin order desc}}"
+                "description":"if multiple in the same area, what position this plugin should be in, * means any"
                 },
                 {
                 "key":"plugins[].active",
-                "description":"{{plugin active desc}}"
+                "description":"if false, this plugin will not be loaded"
                 }   
               ]
             }

@@ -1,9 +1,9 @@
-<div class="commands animate-grow" ng-if="focus == 'commands'" ng-controller="commands">
+<div class="commands animate-grow" ng-if="focus == 'commands'">
     <h2 ng-bind="'commands.title' | translate"></h2>
     <dl>
         <dt ng-repeat-start="command in commands.commandPage[commands.index]" ng-bind="command['text']"></dt>
         <dd ng-repeat-end ng-bind="command['description']"></dd>
     </dl>
-    <center>{{list.page}} {{commands.index + 1}} of {{commands.totalPages}}</center>
-    <span class="command-prev" ng-if="commands.index > 0">{{list.action}} <strong>{{list.previous}}</strong></span> <span class="command-next" ng-if="commands.index < (commands.totalPages-1)">{{list.action}} <strong>{{list.next}}</strong></span>
+    <center>Page {{commands.index + 1}} of {{commands.totalPages}}</center>
+    <span class="command-prev" ng-if="commands.index > 0">Say <strong>Previous</strong></span> <span class="command-next" ng-if="commands.index < (commands.totalPages-1)">Say <strong>next</strong></span>
 </div>

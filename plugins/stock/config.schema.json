@@ -2,15 +2,15 @@
     "schema": {
         "stock": {
             "type": "object",
-            "title": "{{title}}",
+            "title": "Stock Settings",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "{{api key}}"
+                    "title": "Alpha Vantage API Key"
                 },
                 "names": {
                     "type": "array",
-                    "title": "{{Stock Symbols}}",
+                    "title": "Stock Symbols",
                     "items": {
                         "type": "string"
                     }
@@ -21,18 +21,14 @@
     "form": [
         {
             "type": "fieldset",
-            "title": "{{title}}",
+            "title": "Stock Settings",
             "expandable": true,
             "order":0,
             "items":[
-              {
-              "key":"stock.key",
-              "title":"{{api key}}",                
-              "description":"{{desc}}"              
-              },
+              "stock.key",
               {
                 "type":"tabarray",
-                "title":"{{Stock Symbols}}",
+                "title":"Stock Symbols",
                 "items":[
                     {
                       "type":"section",

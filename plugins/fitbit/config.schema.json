@@ -2,11 +2,11 @@
   "schema": {
     "fitbit": {
       "type": "object",
-      "title": "{{title}}",
+      "title": "Fitbit Settings",
       "properties": {
         "timeout": {
           "type": "number",
-          "title": "{{cycle info time}}",
+          "title": "Default time to cycle between fitbit statistics",
           "default":10000
         },
         "creds": {
@@ -15,12 +15,12 @@
             "clientID": {
               "default": "",
               "type": "string",
-              "title": "{{oauth client id}}"
+              "title": "OAuth 2.0 Client ID"
             },
             "clientSecret": {
               "default": "",
               "type": "string",
-              "title": "{{Client Secret}}"
+              "title": "Client Secret"
             }
           }
         },
@@ -30,22 +30,22 @@
             "authorizationUri": {
               "default": "https://www.fitbit.com",
               "type": "string",
-              "title": "{{auth uri}}"
+              "title": "Authorization URI"
             },
             "authorizationPath": {
               "default": "/oauth2/authorize",
               "type": "string",
-              "title": "{{auth path}}"
+              "title": "Authorization Path"
             },
             "tokenUri": {
               "default": "https://api.fitbit.com",
               "type": "string",
-              "title": "{{Token URI}}"
+              "title": "Token URI"
             },
             "tokenPath": {
               "default": "/oauth2/token",
               "type": "string",
-              "title": "{{Token Path}}"
+              "title": "Token Path"
             }
           }
         },
@@ -55,22 +55,22 @@
             "redirect_uri": {
               "default": "http://localhost:4000/fitbit_auth_callback/",
               "type": "string",
-              "title": "{{Redirect URI}}"
+              "title": "Redirect URI"
             },
             "response_type": {
               "default": "code",
               "type": "string",
-              "title": "{{Response Type}}"
+              "title": "Response Type"
             },
             "scope": {
               "default": "activity nutrition profile settings sleep social weight heartrate",
               "type": "string",
-              "title": "{{Scope}}"
+              "title": "Scope"
             },
             "state": {
               "default": "3(#0/!~",
               "type": "string",
-              "title": "{{State}}"
+              "title": "State"
             }
           }
         }
@@ -80,7 +80,7 @@
   "form":[
     {
       "type":"fieldset",
-      "title":"{{title}}",
+      "title":"Fitbit Settings",
       "expandable":true,
       "order":0,
       "items": [

@@ -1,31 +1,31 @@
 {
     "schema": {
-        "lights": {
+        "light": {
             "type": "object",
-            "title": "{{title}}",
+            "title": "Lights Settings",
             "properties": {
                 "settings": {
                     "type": "object",
                     "properties": {
                         "hueIp": {
                             "type": "string",
-                            "title": "{{hub ip address}}"
+                            "title": "Hue Light IP Address"
                         },
                         "hueUsername": {
                             "type": "string",
-                            "title": "{{hub user name}}"
+                            "title": "Hue Light Username"
                         }
                     }
                 },
                 "setup": {
                     "type": "array",
-                    "title": "{{Setup}}",
+                    "title": "Setup",
                     "items": {
                         "type": "object",
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "title": "{{light name}}"
+                                "title": "name"
                             },
                             "targets": {
                                 "type": "array",
@@ -35,11 +35,11 @@
                                     "properties": {
                                         "desc":{
                                           "type":"string",
-                                          "title":"{{light desc}}"
+                                          "title":"Description"
                                         },
                                         "lightType": {
                                             "type": "string",
-                                            "title": "{{light type}}",
+                                            "title": "type",
                                             "enum": [
                                                 "hyperion",
                                                 "hue"
@@ -47,15 +47,15 @@
                                         },
                                         "ip": {
                                             "type": "string",
-                                            "title": "{{ip}}"
+                                            "title": "ip"
                                         },
                                         "id": {
                                             "type": "integer",
-                                            "title": "{{id}}"
+                                            "title": "id"
                                         },
                                         "port": {
                                             "type": "string",
-                                            "title": "{{port}}"
+                                            "title": "port"
                                         }
                                     }
                                 }
@@ -70,10 +70,10 @@
         {
           "type":"fieldset",
           "expandable":true,
-          "title":"{{title}}",
+          "title":"Light Settings",
           "order":0,
           "items":[
-            "lights.settings",
+            "light.settings",
             {
               "type": "fieldset",
               "title": "Setup",
@@ -86,7 +86,7 @@
                       "legend":"{{value}}",
                       "items":[   
                           {
-                            "key":"lights.setup[].name",
+                            "key":"light.setup[].name",
                             "valueInLegend":true
                           },
                           {
@@ -95,8 +95,8 @@
                             "items":[
                               {
                                     "type": "selectfieldset",
-                                    "key": "lights.setup[].targets[].lightType",
-                                    "legend":"{{item and index}}",
+                                    "key": "light.setup[].targets[].lightType",
+                                    "legend":"Item {{idx}}",
                                     "titleMap":{
                                         "hue":"Hue",
                                         "hyperion":"Hyperion"
@@ -105,14 +105,14 @@
                                       {
                                         "type": "section",
                                         "items":[
-                                          "lights.setup[].targets[].id"
+                                          "light.setup[].targets[].id"
                                         ]
                                       },
                                       {
                                         "type": "section",
                                         "items":[
-                                          "lights.setup[].targets[].ip",
-                                          "lights.setup[].targets[].port"
+                                          "light.setup[].targets[].ip",
+                                          "light.setup[].targets[].port"
                                         ]
                                       }
                                   ]

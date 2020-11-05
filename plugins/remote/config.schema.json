@@ -2,17 +2,17 @@
     "schema": {
         "remote": {
             "type": "object",
-            "title": "{{title}}",
+            "title": "Remote Server Settings",
             "properties": {
                 "enabled": {
                     "default": true,
                     "type": "boolean",
-                    "title": "{{server enabled}}"
+                    "title": "Remote Server Enabled"
                 },
                 "port": {
                     "default": 8080,
                     "type": "integer",
-                    "title": "{{remote port}}",
+                    "title": "Remote Server Port",
                     "required": true
                 }
             }
