@@ -2,11 +2,11 @@
     "schema": {
         "autoTimer": {
             "type": "object",
-            "title": "{{title}}",
+            "title": "AutoTimer Settings",
             "properties": {
                 "mode":{
                     "type":"string",
-                    "title":"{{Display Mode}}",
+                    "title":"Display Mode:",
                     "default":"disabled",
                     "enum":[
                       "monitor",
@@ -17,33 +17,33 @@
                 },
                 "autoSleep": {
                     "type": "number",
-                    "title": "{{wait time}}",
+                    "title": "AutoSleep Wait Time (minutes)",
                     "default":40
                 },
                 "autoWake": {
                     "type": "string",
-                    "title": "{{Wake up time}}",
+                    "title": "Wake up time (24 hr format)",
                     "default": "07:00:00"
                 },
                 "wakeCmd": {
                     "type": "string",
-                    "title": "{{wake up}}",
+                    "title": "Command used to wake up Smart Mirror",
                     "default": "sudo ./scripts/raspi-monitor.sh on > /dev/null 2>&1"
                 },
                 "sleepCmd": {
                     "type": "string",
-                    "title": "{{sleep}}",
+                    "title": "Command used put Smart Mirror to sleep",
                     "default": "sudo ./scripts/raspi-monitor.sh off > /dev/null 2>&1"
                 }
             }
         },
         "motion": {
             "type": "object",
-            "title": "{{Motion Settings}}",
+            "title": "Motion Settings",
             "properties": {
                 "enabled": {
                     "type": "string",
-                    "title": "{{type Motion Detection}}",
+                    "title": "Select type Motion Detection",
                     "default":false,
                     "enum":[
                       "false",
@@ -53,7 +53,7 @@
                 },
                 "pin": {
                     "type": "string",
-                    "title": "{{PIR PIN}}",
+                    "title": "PIN the for output on PIR module.",
                     "description": "based on <a href=\"https://github.com/nebrius/raspi-io/\">raspio-io</a>",
                     "default":"GPIO26"
                 }
@@ -63,7 +63,7 @@
     "form":[
         {
           "type":"fieldset",
-          "title":"{{title}}",
+          "title":"AutoTimer Settings",
           "expandable":true,
           "order":0,
           "items":[

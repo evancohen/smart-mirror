@@ -1,9 +1,0 @@
-{
-  "tvshows": {
-    "config": {
-      "title": "TV Shows Settings",
-      "show names": "Nomi dei programmi TV",
-      "update cycle": "Intervallo di aggiornamento per programmi TV (minuti)"
-    }
-  }
-}

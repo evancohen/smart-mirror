@@ -1,9 +1,0 @@
-{
-	"commands":{
-        "image_comic": {
-            "text": "(Montre-moi) (Affiche) le dernier xkcd ",
-            "voice": "(Montre-moi) (Affiche) le dernier xkcd",
-            "description": "Affiche le dernier xkcd."
-        }
-	}
-}

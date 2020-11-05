@@ -1,9 +1,0 @@
-{
-  "rss": {
-    "config": {
-      "title": "RSS Settings",
-      "feed url": "URL de fuentes RSS",
-      "refresh cycle": "Intervalo de actualización para fuentes RSS (minutos)"
-    }
-  }
-}

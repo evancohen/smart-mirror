@@ -1,9 +1,0 @@
-{
-  "remote": {
-    "config": {
-      "title": "Remote Settings",
-      "server enabled": "Servidor remoto habilitado",
-      "remote port": "Puerto de servidor remoto"
-    }
-  }
-}

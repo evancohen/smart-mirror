@@ -17,10 +17,6 @@ function CommitStrip($scope, $http, Focus, SpeechService) {
 	SpeechService.addCommand('image_comic_commitstrip', function () {
 		Focus.change("commitstrip");
 	});
-	// add  second phase, maybe easier to say
-	SpeechService.addCommand('image_comic_commitstrip1', function () {
-		Focus.change("commitstrip");
-	});	
 }
 
 angular.module('SmartMirror')
