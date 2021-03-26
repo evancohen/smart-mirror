@@ -1,0 +1,10 @@
+{
+  "lastfm": {
+    "config": {
+      "title": "Last.FM Settings",
+      "api key": "last.fm API 키",
+      "username": "last.fm 사용자 이름",
+      "refresh cycle": "에 대한 새로 고침 간격 last.fm"
+    }
+  }
+}

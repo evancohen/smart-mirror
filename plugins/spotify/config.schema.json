@@ -2,21 +2,21 @@
   "schema": {
     "spotify": {
       "type": "object",
-      "title": "Spotify Settings",
+      "title": "{{title}}",
       "properties": {
         "timeout": {
           "type": "number",
-          "title": "Default time in seconds to refresh spotify data",
+          "title": "{{refresh cycle}}",
           "default":10000
         },
         "default_device": {
           "type": "string",
-          "title": "Default device name to change playback route on request",
+          "title": "{{default device}}",
           "default": "raspberry"
         },
         "position": {
           "type": "string",
-          "title": "Default status indicator position ('top' or 'bottom')",
+          "title": "{{screen_status}}",
           "enum": ["bottom","top"]
         },
         "creds": {
@@ -25,13 +25,13 @@
             "clientID": {
               "default": "",
               "type": "string",
-              "title": "OAuth 2.0 Client ID",
-              "description":"You must define an application in your Spotify premium account, these two values will come from that definition you must also configure the autorization callback uri as described below "
+              "title": "{{clientid}}",
+              "description":"{{clientid desc}}"
             },
             "clientSecret": {
               "default": "",
               "type": "string",
-              "title": "Client Secret"
+              "title": "{{client secret}}"
             }
           }
         },
@@ -41,12 +41,12 @@
             "scope": {
               "default": "user-read-private user-read-email streaming user-read-currently-playing user-modify-playback-state user-read-playback-state",
               "type": "string",
-              "title": "Scope"
+              "title": "{{Scope}}"
             },
             "state": {
               "default": "3(#0/!~",
               "type": "string",
-              "title": "State"
+              "title": "{{State}}"
             }
           }
         }
@@ -56,7 +56,7 @@
   "form":[
     {
       "type":"fieldset",
-      "title":"Spotify Settings",
+      "title":"{{title}}",
       "expandable":true,
       "order":0,
       "items": [
@@ -64,7 +64,7 @@
         "spotify.authorization_uri",
         {
             "type": "help",
-            "helpvalue": "<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4100/spotify_auth_callback'</b> then navigate to <a href='http://localhost:4100/authorize_spotify/' target='_blank'>Authorize</a> from your mirror browser.</p>"
+            "helpvalue": "{{auth help}}"
         },
         "spotify.timeout",
         "spotify.default_device",
