@@ -1,3 +1,9 @@
+const __fbp = require("path");
+let _fbpath = document.currentScript.src.substring(
+	7,
+	document.currentScript.src.lastIndexOf(__fbp.sep)
+);
+
 (function () {
 	"use strict";
 
@@ -82,7 +88,7 @@
 				let source = req.ip == "::1" ? "localhost" : req.ip;
 				if (!source.endsWith(req.host)) {
 					let { spawn } = require("child_process");
-					spawn(__sp.resolve(_spotpath, "openauth.sh"), [uri]);
+					spawn(__fbp.resolve(_fbpath, "openauth.sh"), [uri]);
 					return res.send(
 						"Please see the web browser on your mirror for the final autorization steps<br>then you can close this page"
 					);
