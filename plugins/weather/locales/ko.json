@@ -1,0 +1,14 @@
+{
+  "forecast": {
+    "config": {
+      "title": "Weather Settings",
+      "API Key": "API 키",
+      "API Key source": "API 키 소스",
+      "Units": "단위",
+      "refresh": "새로 고침 간격 (분)"
+    },
+    "weather": {
+      "today": "오늘"
+    }
+  }
+}

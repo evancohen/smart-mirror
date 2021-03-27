@@ -18,4 +18,6 @@ main_index.html
 motion 
 package-lock.json
 app/locales/??c.json
+.gitignore
+.prettierrc
 .editorconfig
