@@ -70,7 +70,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			var currently=null
 			// "https://data.climacell.co/v4/timelines?timesteps=1h&units=" + this.config.tempUnits + "&location=" + this.config.lat + "," + this.config.lon + "&fields=temperature,temperatureApparent,precipitationType,humidity,windSpeed,windDirection,weatherCode&apikey=" + this.config.apiKey
 			plist.push(	$http.get(
-/* 'https://api.climacell.co/v3/weather/realtime?lat=' +
+				/* 'https://api.climacell.co/v3/weather/realtime?lat=' +
 				geoposition.coords.latitude.toString().substring(0,10) + '&lon=' + geoposition.coords.longitude.toString().substring(0,11) + '&unit_system=' +
 				config.forecast.units + '&fields=temp%2Cprecipitation%2Cweather_code%2Ccloud_cover%2Csunrise%2Csunset%2Cvisibility%2Cwind_gust%2Cwind_speed&apikey='+config.forecast.key  */
 				"https://data.climacell.co/v4/timelines?timesteps=1h"+
@@ -78,30 +78,30 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 					"&location=" + geoposition.coords.latitude.toString().substring(0,10) + "," + geoposition.coords.longitude.toString().substring(0,11) +
 					"&fields=temperature,temperatureApparent,precipitationType,humidity,windSpeed,windDirection,weatherCode"+
 					"&apikey="+config.forecast.key
-									).then(
-										(response)=>{
-											currently=response.data.data;
-										}
-									).catch((error)=>{
-									console.log("climacell realltime failed ="+JSON.stringify(error))
-									reject();
-								})
+			).then(
+				(response)=>{
+					currently=response.data.data;
+				}
+			).catch((error)=>{
+				console.log("climacell realltime failed ="+JSON.stringify(error))
+				reject();
+			})
 			)
 			// get the 10 day forecast info
 			plist.push($http.get(
 				"https://data.climacell.co/v4/timelines?timesteps=1d"+
-				  '&location=' + geoposition.coords.latitude.toString().substring(0,10) + ',' + geoposition.coords.longitude.toString().substring(0,11) +
-					"&units=" + 'metric' + //	config.forecast.units +
-					'&fields=temperatureMax,temperatureMin,precipitationType,weatherCode'+
-					'&apikey='+config.forecast.key
-									).then(
-										(response)=>{
-											forecast=response.data.data;
-										}
-									).catch( (error)=>{
-										console.log("climacell forecast failed ="+JSON.stringify(error))
-										reject();
-									})
+				'&location=' + geoposition.coords.latitude.toString().substring(0,10) + ',' + geoposition.coords.longitude.toString().substring(0,11) +
+				"&units=" + 'metric' + //	config.forecast.units +
+				'&fields=temperatureMax,temperatureMin,precipitationType,weatherCode'+
+				'&apikey='+config.forecast.key
+			).then(
+				(response)=>{
+					forecast=response.data.data;
+				}
+			).catch( (error)=>{
+				console.log("climacell forecast failed ="+JSON.stringify(error))
+				reject();
+			})
 			)
 
 			// wait for both above apis to complete
@@ -129,9 +129,9 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 	}
 	function cvttof(temp, units){
 		let r= temp
-			if (units == 'us'){
-				r= ((r*9)/5)+32
-			}
+		if (units == 'us'){
+			r= ((r*9)/5)+32
+		}
 		return r
 	}
 	//Returns the current forecast along with high and low tempratures for the current day
@@ -139,6 +139,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 		if (weather.forecast === null) {
 			return null;
 		}
+		let ctemp=0
 		switch(config.forecast.keytype){
 		case 'Darksky':
 			weather.forecast.data.currently.day = moment.unix(weather.forecast.data.currently.time).format('ddd');
@@ -147,7 +148,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			weather.forecast.data.currently.iconAnimation = weather.forecast.data.currently.icon;
 			break;
 		case 'Climacell':
-		  let ctemp=cvttof(weather.forecast.data.currently.data.timelines[0].intervals[0].values.temperature,config.forecast.units)
+			ctemp=cvttof(weather.forecast.data.currently.data.timelines[0].intervals[0].values.temperature,config.forecast.units)
 			weather.forecast.data.currently.day =  moment.utc(weather.forecast.data.currently.data.timelines[0].startTime).format('ddd')
 			weather.forecast.data.currently.temperature = parseFloat(ctemp).toFixed(0);
 			weather.forecast.data.currently.wi = "wi-forecast-io-" + convert_conditions_to_icon( weather.forecast.data.currently.data.timelines[0].intervals[0].values.weatherCode, null, null, 'utc') ;
@@ -184,7 +185,7 @@ function Weather($scope, $interval, $http, $translate,GeolocationService) {
 			break;
 		case 'Climacell':
 			// Add human readable info to info
-			let datalength=min(weather.forecast.timelines[0].intervals.length,8)
+			datalength=min(weather.forecast.timelines[0].intervals.length,8)
 
 			weather.forecast.data.daily={}
 			weather.forecast.data.daily.data=[]
