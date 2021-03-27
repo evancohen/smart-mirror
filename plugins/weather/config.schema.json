@@ -2,27 +2,27 @@
     "schema": {
         "forecast": {
             "type": "object",
-            "title": "Weather Settings",
+            "title": "{{title}}",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "API Key"
+                    "title": "{{API Key}}"
                 },
                 "keytype": {
                     "type": "string",
-                    "title": "API Key source",
+                    "title": "{{API Key source}}",
                     "enum": ["Darksky is no longer giving out keys, and the current ones will expire at the end of 2021, but can still be used if you have one",
                             "Climacell see <a href='https://www.climacell.co/weather-api/t'>climacell.co</a> documentation to obtain the weather API Key",
                             "Openweather see <a href='https://openweathermap.org/api'>openweathermap.org</a> documentation to obtain the weather API Key for One Call API"]
                 },
                 "units": {
                     "type": "string",
-                    "title": "Units",
+                    "title": "{{Units}}",
                     "enum": [ "auto","us", "si" ]
                 },
                 "refreshInterval": {
                     "type": "integer",
-                    "title": "Refresh Interval (minutes)",
+                    "title": "{{refresh}}",
                     "enum":[5,10,15,30,45,60]
                 }
             }

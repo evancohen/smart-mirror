@@ -1,0 +1,9 @@
+{
+  "tvshows": {
+    "config": {
+      "title": "TV Shows Settings",
+      "show names": "TV Show Name",
+      "update cycle": "Refresh Interval for TV Shows (minutes)"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "rss": {
+    "config": {
+      "title": "RSS Settings",
+      "feed url": "RSS 피드 URL",
+      "refresh cycle": "RSS 피드의 새로 고침 간격 (분)"
+    }
+  }
+}

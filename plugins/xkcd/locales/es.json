@@ -1,0 +1,9 @@
+{
+	"commands":{
+        "image_comic": {
+            "text": "Comic",
+            "voice": "Comic (del dia)",
+            "description": "Muestra el comic del día."
+        }
+	}
+}

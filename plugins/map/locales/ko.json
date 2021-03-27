@@ -1,0 +1,34 @@
+{
+	"commands":{
+       "map_show": {
+            "text": "지도 켜",
+            "voice": "지도 켜",
+            "description": "설정에서 지정한 도시를 보여줍니다."
+        },
+        "map_location": {
+            "text": "________ 보여줘",
+            "voice": "*location 보여줘",
+            "description": "음성인식한 지도를 보여줍니다."
+        },
+        "map_zoom_in": {
+            "text": "확대",
+            "voice": "확대",
+            "description": "지도를 확대합니다."
+        },
+        "map_zoom_out": {
+            "text": "축소",
+            "voice": "축소",
+            "description": "지도를 축소합니다."
+        },
+        "map_zoom_point": {
+            "text": "________로 확대",
+            "voice": "*value로 확대",
+            "description": "지정한 지점으로 확대합니다."
+        },
+        "map_zoom_reset": {
+            "text": "줌리셋",
+            "voice": "줌리셋",
+            "description": "줌을 해제합니다."
+        }
+	}
+}
