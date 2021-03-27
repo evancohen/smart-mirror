@@ -2,11 +2,11 @@
     "schema": {
         "soundcloud": {
             "type": "object",
-            "title":"SoundCloud Settings",
+            "title":"{{title}}",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "SoundCloud API Key"
+                    "title": "{{api key}}"
                 }
             }
         }

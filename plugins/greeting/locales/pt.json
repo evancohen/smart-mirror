@@ -1,0 +1,14 @@
+{
+  "greeting": {
+    "config": {
+      "title": "Greeting Settings",
+      "how displayed": "Como você gostaria que os cumprimentos fossem exibidos?",
+      "morning": "Saudação da manhã das 5:00 às 10:59",
+      "midday": "Saudação do meio-dia 11:00 às 18:59",
+      "evening": "Saudação da noite das 19:00 às 22:59",
+      "night": "Saudação noturna 23:00 às 4:59",
+      "settings title": "Greeting Settings",
+      "random": "Saudações aleatórias"
+    }
+  }
+}

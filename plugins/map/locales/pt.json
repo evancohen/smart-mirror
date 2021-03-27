@@ -1,0 +1,34 @@
+{
+	"commands":{
+       "map_show": {
+            "text": "Mostrar o mapa",
+            "voice": "Mostrar o mapa",
+            "description": "Mostra o mapa da sua cidade."
+        },
+        "map_location": {
+            "text": "Mostra o mapa de ________",
+            "voice": "Mostra (o) mapa de *location",
+            "description": "Mostra o mapa de um local."
+        },
+        "map_zoom_in": {
+            "text": "Ampliar",
+            "voice": "Ampliar (o) (mapa)",
+            "description": "Amplia o mapa atual."
+        },
+        "map_zoom_out": {
+            "text": "Diminuir",
+            "voice": "Diminuir (o) (mapa)",
+            "description": "Diminui o mapa atual."
+        },
+        "map_zoom_point": {
+            "text": "Ampliar para ________",
+            "voice": "Ampliar (o) (mapa) (para) *value",
+            "description": "Amplia o mapa para o ponto indicado."
+        },
+        "map_zoom_reset": {
+            "text": "Diminuir o zoom",
+            "voice": "Diminuir (o) zoom (do) (mapa)",
+            "description": "Retorna o zoom."
+        }
+	}
+}

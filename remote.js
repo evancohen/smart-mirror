@@ -2,6 +2,7 @@
  * smart-mirror remote by Evan Cohen
  */
 const stream = require('stream')
+const _ = require('lodash')
 let remote = new stream.Writable()
 remote.start = function () {
 	const express = require('express')
@@ -80,13 +81,14 @@ remote.start = function () {
 				if (err) {
 					console.error(err)
 				} else {
-					remote.emit('relaunch')
+					checkForActiveChanged(config,data)
+					remote.emit('relaunch', data)
 				}
 			})
 		})
 
 		socket.on('getForm', function () {
-			getConfigSchema(function (configSchema) {
+			getConfigSchema(config, function (configSchema) {
 				configSchema.form.sort(function (a, b) { return a.order - b.order })
 				configJSON = configSchema
 				socket.emit("json", { "configJSON": configJSON, "configDefault": configDefault, "config": config })
@@ -95,6 +97,62 @@ remote.start = function () {
 
 	}) // end - connection
 
+	function checkForActiveChanged(oldConfig,newConfig){
+		// if the new plugin config, doesn't match the old
+		let cleanup=false
+		let ok = oldConfig.plugins
+		let nk = newConfig.plugins			
+		// if the old and new language settings are the same , check the plugin settings
+		if(newConfig.general.language.trim().toLowerCase()==oldConfig.general.language.trim().toLowerCase()){
+			// if not the same content, something changed		
+			if(!_.isEqual(ok, nk)){
+				// if same length
+				if(ok.length===nk.length){
+					// make hashs
+					let okh = {}
+					for (let e of ok){
+						okh[e.name]=e
+					}
+					// of both arrays
+					let nkh = {}
+					for(let f of nk){
+						nkh[f.name]=f
+					}  
+					// compare all the items for active the same
+					for(let k of Object.keys(nkh)){
+						if(okh[k].active !== nkh[k].active){
+							// if one is different, done
+							cleanup=true;
+							break;
+						}
+					}
+					// still nothing changed
+					// some key name changed, don't really care about name
+					// check active for all those keys
+					if(cleanup == false){
+						for(let l of Object.keys(okh)){
+							if(okh[l].active !== nkh[l].active){							
+								// if one is different, done
+								cleanup=true;
+								break;
+							}
+						}				
+					}
+				}
+				else {
+					cleanup=true
+				}
+			}
+		}	
+		else {
+			// languages different
+			cleanup=true;
+		}
+		if(cleanup){
+			let langfile=__dirname+"/app/locales/"+newConfig.general.language.trim().substring(0,2)+'c.json'
+			fs.unlinkSync(langfile)		
+		}
+	}
 	/**
    * When a remote disconnects
    */

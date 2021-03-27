@@ -1,0 +1,29 @@
+{
+   "timer": {
+      "one": "Uno",
+      "minute": "Minuto(s)?",
+      "second": "Segundo(s)?"
+    },
+    "commands":{
+        "timer_start": {
+            "text": "Temporizador a _______",
+            "voice": "(ajusta el) temporizador (a) *duration",
+            "description": "Inicia un temporizador."
+        },
+        "timer_show": {
+            "text": "Muestra temporizador",
+            "voice": "muestra (el) temporizador",
+            "description": "Muestra el temporizador."
+        },
+        "timer_stop": {
+            "text": "Para temporizador",
+            "voice": "para (el) temporizador",
+            "description": "Para el temporizador."
+        },
+        "timer_resume": {
+            "text": "Continua temporizador",
+            "voice": "continua (el) temporizador",
+            "description": "Continua el temporizador."
+        }
+    }
+}

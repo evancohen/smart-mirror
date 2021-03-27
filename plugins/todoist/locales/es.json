@@ -1,0 +1,25 @@
+{
+  "commands": {
+    "todoist_show": {
+      "text": "mostrar (mi) ________ lista",
+      "voice": "mostrar (mi) *lista de proyectos",
+      "description": "Show requested list."
+    },
+    "todoist_add": {
+      "text": "Añadir ________ a (mi) ________ lista",
+      "voice": "Añadir *element a (mi) *lista de proyectos",
+      "description": "Agregar elemento a la lista solicitada."
+    },
+    "todoist_remove": {
+      "text": "Eliminar ________ desde (mi) ________ lista",
+      "voice": "Eliminar *element desde (mi) *lista de proyectos",
+      "description": "Eliminar elemento de la lista solicitada."
+    }
+  },
+  "todoist": {
+    "config": {
+      "title": "Todoist Settings",
+      "api key": "Todoist Clave API"
+    }
+  }
+}
