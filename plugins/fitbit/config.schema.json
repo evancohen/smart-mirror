@@ -88,6 +88,10 @@
         "fitbit.creds",
         "fitbit.uris",
         "fitbit.authorization_uri"
+        {
+            "type": "help",
+            "helpvalue": "<p><b>Ensure the Fitbit API settings allow redirects from 'http://localhost:4100/fitbit_auth_callback'</b> then navigate to <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/fitbit/'; return true;\" target='_blank'>Authorize</a> from your mirror browser.</p>"
+        }
       ]
     }
   ],
@@ -101,7 +105,7 @@
         "tokenPath": "/oauth2/token"
       },
       "authorization_uri": {
-        "redirect_uri": "http://localhost:4000/fitbit_auth_callback/",
+        "redirect_uri": "http://localhost:4100/fitbit_auth_callback/",
         "response_type": "code",
         "scope": "activity nutrition profile settings sleep social weight heartrate",
         "state": "3(#0/!~"
