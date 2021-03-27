@@ -75,7 +75,7 @@
 			});
 			// In a browser, visit http://localhost:4100/fitbit to authorize a user for the first time.
 			app.get("/fitbit", function (req, res) {
-				ley uri =  fitbit.authorizeURL()
+				let uri =  fitbit.authorizeURL()
 				// is this coming from the same machine
 				// no, spawn it
 				// issue #862
