@@ -1,0 +1,9 @@
+{
+  "tvshows": {
+    "config": {
+      "title": "TV Shows Settings",
+      "show names": "Noms des émissions de télévision",
+      "update cycle": "Intervalle de rafraîchissement pour les émissions de télévision (minutes)"
+    }
+  }
+}

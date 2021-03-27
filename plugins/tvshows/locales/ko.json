@@ -1,0 +1,9 @@
+{
+  "tvshows": {
+    "config": {
+      "title": "TV Shows Settings",
+      "show names": "TV 쇼 이름",
+      "update cycle": "TV 쇼 새로 고침 간격 (분)"
+    }
+  }
+}
