@@ -172,6 +172,13 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 		}
 		return r
 	}
+	function cvttof(temp, units){
+		let r= temp
+			if (units == 'us'){
+				r= ((r*9)/5)+32
+			}
+		return r
+	}
 	//Returns the current forecast along with high and low tempratures for the current day
 	weather.currentForecast = function () {
 		if (weather.forecast === null) {
