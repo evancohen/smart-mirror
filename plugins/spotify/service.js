@@ -193,18 +193,14 @@ let _spotpath = document.currentScript.src.substring(
 				});
 				if (id) {
 					console.log(id);
-					return spotify
-						.transferMyPlayback({
-							device_ids: [id],
-						})
-						.then(
-							function () {
-								return spotify.play();
-							},
-							function (err) {
-								console.log("Something went wrong!", err);
-							}
-						);
+					return spotify.transferMyPlayback([id]).then(
+						function () {
+							return spotify.play();
+						},
+						function (err) {
+							console.log("Something went wrong!", err);
+						}
+					);
 				} else {
 					return null;
 				}
