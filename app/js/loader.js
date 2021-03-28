@@ -358,7 +358,12 @@ loader.loadPluginInfo = function (filename, config) {
 			let d = $("div." + page_location);
 			// put this module there
 			if (d) {
-				d.append(id_div);
+				if (page_location !== "bottom-center") d.append(id_div);
+				else {
+					if (debug)
+						console.log("id_div=" + stringify(d, 1, null, 2));
+					d.prepend(id_div);
+				}
 			} else {
 				if (debug) {
 					console.log("not yet added, location not found" + id_div);
@@ -389,26 +394,84 @@ loader.loadPluginInfo = function (filename, config) {
 			);
 		}
 		let existing_children = d.children().length;
-		for (let e of locations[v].items) {
+		let bc_counter = 0;
+		for (let e of v.indexOf("bottom") <
+		0 /* && v.indexOf('bottom-center')<0 */
+			? locations[v].items
+			: locations[v].items.reverse()) {
 			if (debug) {
-				console.log("items =" + e);
+				console.log("item =" + e);
 			}
 			if (existing_children >= 1) {
-				d.prepend(e);
+				if (v.indexOf("bottom-center") >= 0) {
+					d.append(e);
+					if (debug) {
+						console.log("appending  bottom-center item =" + e);
+					}
+				} else {
+					d.prepend(e);
+					if (debug) {
+						console.log("prepending  item =" + e);
+					}
+				}
 			} else {
 				d.append(e);
+				if (debug) {
+					console.log("appending  item =" + e);
+				}
 			}
 		}
 		for (let e of locations[v].delayed) {
 			if (debug) {
 				console.log("delayed =" + e);
+				console.log("existing_children=" + existing_children);
 			}
 			if (existing_children > 0) {
-				d.append(e);
+				if (v.indexOf("bottom") < 0) {
+					if (debug) {
+						console.log("appending  item =" + e);
+					}
+					d.append(e);
+				} else {
+					if (debug) {
+						console.log("prepending  item =" + e);
+					}
+					d.prepend(e);
+				}
 			} else {
-				d.append(e);
+				if (v.indexOf("bottom") < 0) {
+					if (debug) {
+						console.log("appending  item =" + e);
+					}
+					d.append(e);
+				} else {
+					if (debug) {
+						console.log("prepending  item =" + e);
+					}
+					d.prepend(e);
+				}
 			}
 		}
+	}
+
+	function stringify(val, depth, replacer, space) {
+		depth = isNaN(+depth) ? 1 : depth;
+		function _build(key, val, depth, o, a) {
+			// (JSON.stringify() has it's own rules, which we respect here by using it for property iteration)
+			return !val || typeof val != "object"
+				? val
+				: ((a = Array.isArray(val)),
+				  JSON.stringify(val, function (k, v) {
+						if (a || depth > 0) {
+							if (replacer) v = replacer(k, v);
+							if (!k) return (a = Array.isArray(v)), (val = v);
+							!o && (o = a ? [] : {});
+							o[k] = _build(k, v, a ? depth : depth - 1);
+						}
+				  }),
+				  o || (a ? [] : {}));
+		}
+		return JSON.stringify(_build("", val, depth), null, space);
 	}
 	// add entries for css to head
 	insert_css($);
