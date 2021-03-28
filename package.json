@@ -55,7 +55,7 @@
     "rss-parser": "^3.6.3",
     "socket.io": "^2.3.0",
     "sonus": "^1.0.1",
-    "spotify-web-api-node": "^4.0.0"
+    "spotify-web-api-node": "^5.0.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
