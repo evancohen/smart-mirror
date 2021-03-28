@@ -1,3 +1,9 @@
+const __fbp = require("path");
+let _fbpath = document.currentScript.src.substring(
+	7,
+	document.currentScript.src.lastIndexOf(__fbp.sep)
+);
+
 (function () {
 	"use strict";
 
@@ -75,7 +81,20 @@
 			});
 			// In a browser, visit http://localhost:4000/fitbit to authorize a user for the first time.
 			app.get("/fitbit", function (req, res) {
-				res.redirect(fitbit.authorizeURL());
+				let uri = fitbit.authorizeURL();
+				// is this coming from the same machine
+				// no, spawn it
+				// issue #862
+				let source = req.ip == "::1" ? "localhost" : req.ip;
+				if (!source.endsWith(req.host)) {
+					let { spawn } = require("child_process");
+					spawn(__fbp.resolve(_fbpath, "openauth.sh"), [uri]);
+					return res.send(
+						"Please see the web browser on your mirror for the final autorization steps<br>then you can close this page"
+					);
+				} else {
+					res.redirect(uri);
+				}
 			});
 
 			/*
@@ -153,7 +172,9 @@
 					});
 				} else if (err.code == "ENOENT") {
 					console.error(
-						"Fitbit authentication required, please visit the following link: http://localhost:4100/fitbit to authenticate your credentials.",
+						"Fitbit authentication required, please visit the following link: http://localhost:" +
+							port +
+							"/fitbit to authenticate your credentials.",
 						err
 					);
 				} else {

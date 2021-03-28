@@ -46,7 +46,7 @@
             "client secret":"Client Secret",
             "Scope":"Scope",
             "State":"State",
-            "auth help":"<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4100/spotify_auth_callback'</b> then navigate to <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> from your mirror browser.</p>",
+            "auth help":"<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4100/spotify_auth_callback'</b> then click <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> to start the authorization process .</p>",
             "screen_status":"Default status indicator position ('top' or 'bottom')"
         }
     }

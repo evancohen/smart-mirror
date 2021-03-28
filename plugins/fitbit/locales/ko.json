@@ -36,7 +36,7 @@
       "Response Type": "응답 유형",
       "Scope": "범위",
       "State": "상태",
-      "help_value": "<p> <b> Fitbit API 설정이 'http://localhost:4000/fitbit_auth_callback'에서 리디렉션을 허용하는지 확인한 다음 </ b> <a id = 'splink'onclick = \"document.getElementById ( 'splink)로 이동합니다. ') .href ='http://'+window.location.hostname+':4000/fitbit/'; return true; \"target = '_ blank'> 미러 브라우저에서 인증 </a>합니다. </ p>"
+      "help_value": "<p> <b> Fitbit API 설정이 'http://localhost:4100/fitbit_auth_callback'에서 리디렉션을 허용하는지 확인한 다음 </ b> <a id = 'splink'onclick = \"document.getElementById ( 'splink)로 이동합니다. ') .href ='http://'+window.location.hostname+':4000/fitbit/'; return true; \"target = '_ blank'> 미러 브라우저에서 인증 </a>합니다. </ p>"
     }
   }
 }
