@@ -1,0 +1,15 @@
+{
+  "maker": {
+    "config": {
+      "title": "Maker Settings",
+      "title desc": "Codeless, custom commands",
+      "requests": "Richieste personalizzate",
+      "Utterance": "Espressione",
+      "Method": "Metodo",
+      "Request URL": "URL richiesta",
+      "JSON Body": "Corpo JSON",
+      "helpvalue": "<h6> Comandi personalizzati senza codice </h6>",
+      "tab title": "<h4>Custom Requests</h4>"
+    }
+  }
+}

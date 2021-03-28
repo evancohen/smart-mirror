@@ -1,0 +1,28 @@
+{
+  "commands": {
+    "sleep": {
+      "text": "잠자러 가",
+      "voice": "잠자러 가",
+      "description": "거울이 잠을 잡니다."
+    },
+    "wake_up": {
+      "text": "일어나",
+      "voice": "일어나",
+      "description": "시스템을 깨우다"
+    }
+  },
+  "autoTimer": {
+    "config": {
+      "title": "AutoTimer Settings",
+      "Display Mode": "디스플레이 모드",
+      "wait time": "자동 수면 대기 시간 (분)",
+      "Wake up time": "웨이크 업 시간 (24 시간 형식)",
+      "Motion Settings": "모션 설정",
+      "type Motion Detection": "유형 선택 모션 감지",
+      "PIR PIN": "PIR 모듈의 출력 PIN",
+      "wake up": "Smart Mirror를 깨우는 데 사용되는 명령",
+      "sleep": "Smart Mirror를 절전 모드로 전환하는 데 사용 된 명령",
+      "motion_title": "운동"
+    }
+  }
+}

@@ -2,11 +2,11 @@
   "schema": {
     "fitbit": {
       "type": "object",
-      "title": "Fitbit Settings",
+      "title": "{{title}}",
       "properties": {
         "timeout": {
           "type": "number",
-          "title": "Default time to cycle between fitbit statistics",
+          "title": "{{cycle info time}}",
           "default":10000
         },
         "creds": {
@@ -15,12 +15,12 @@
             "clientID": {
               "default": "",
               "type": "string",
-              "title": "OAuth 2.0 Client ID"
+              "title": "{{oauth client id}}"
             },
             "clientSecret": {
               "default": "",
               "type": "string",
-              "title": "Client Secret"
+              "title": "{{Client Secret}}"
             }
           }
         },
@@ -30,22 +30,22 @@
             "authorizationUri": {
               "default": "https://www.fitbit.com",
               "type": "string",
-              "title": "Authorization URI"
+              "title": "{{auth uri}}"
             },
             "authorizationPath": {
               "default": "/oauth2/authorize",
               "type": "string",
-              "title": "Authorization Path"
+              "title": "{{auth path}}"
             },
             "tokenUri": {
               "default": "https://api.fitbit.com",
               "type": "string",
-              "title": "Token URI"
+              "title": "{{Token URI}}"
             },
             "tokenPath": {
               "default": "/oauth2/token",
               "type": "string",
-              "title": "Token Path"
+              "title": "{{Token Path}}"
             }
           }
         },
@@ -55,22 +55,22 @@
             "redirect_uri": {
               "default": "http://localhost:4000/fitbit_auth_callback/",
               "type": "string",
-              "title": "Redirect URI"
+              "title": "{{Redirect URI}}"
             },
             "response_type": {
               "default": "code",
               "type": "string",
-              "title": "Response Type"
+              "title": "{{Response Type}}"
             },
             "scope": {
               "default": "activity nutrition profile settings sleep social weight heartrate",
               "type": "string",
-              "title": "Scope"
+              "title": "{{Scope}}"
             },
             "state": {
               "default": "3(#0/!~",
               "type": "string",
-              "title": "State"
+              "title": "{{State}}"
             }
           }
         }
@@ -80,7 +80,7 @@
   "form":[
     {
       "type":"fieldset",
-      "title":"Fitbit Settings",
+      "title":"{{title}}",
       "expandable":true,
       "order":0,
       "items": [
@@ -88,6 +88,10 @@
         "fitbit.creds",
         "fitbit.uris",
         "fitbit.authorization_uri"
+        {
+            "type": "help",
+            "helpvalue": "<p><b>Ensure the Fitbit API settings allow redirects from 'http://localhost:4100/fitbit_auth_callback'</b> then navigate to <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/fitbit/'; return true;\" target='_blank'>Authorize</a> from your mirror browser.</p>"
+        }
       ]
     }
   ],
@@ -101,7 +105,7 @@
         "tokenPath": "/oauth2/token"
       },
       "authorization_uri": {
-        "redirect_uri": "http://localhost:4000/fitbit_auth_callback/",
+        "redirect_uri": "http://localhost:4100/fitbit_auth_callback/",
         "response_type": "code",
         "scope": "activity nutrition profile settings sleep social weight heartrate",
         "state": "3(#0/!~"
