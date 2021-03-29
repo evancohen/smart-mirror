@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "install": "bower install",
-    "start": "electron main.js ",
+    "start": "DISPLAY=\"${DISPLAY:=:0}\" electron main.js ",
     "train-model": "electron scripts/train-model.js",
     "sonus": "node sonus.js",
     "motion": "sudo node motion.js",
@@ -14,7 +14,8 @@
     "wiredep": "wiredep -s index.html",
     "test": "eslint . --ignore-path .gitignore",
     "test-fix": "eslint . --ignore-path .gitignore --fix",
-    "postinstall": "bash scripts/copyjsonform"
+    "postinstall": "bash scripts/copyjsonform",
+    "preinstall":  "bash scripts/installcblas"
   },
   "repository": {
     "type": "git",
