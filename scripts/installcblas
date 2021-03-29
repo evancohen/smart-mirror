@@ -1,0 +1,5 @@
+#!/bin/bash
+ v=$(apt -qq list libatlas-base-dev 2>/dev/null)
+ if [ "$v". == "." ]; then 
+   sudo apt-get install libatlas-base-dev
+ fi
