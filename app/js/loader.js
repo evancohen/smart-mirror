@@ -76,12 +76,7 @@ function getFilesMatch(dir, filters, files_) {
 					// if so
 					if (key) {
 						if (debug)
-							console.log(
-								"saving file found for key=" +
-									key +
-									" name=" +
-									name
-							);
+							console.log("saving file found for key=" + key + " name=" + name);
 						// save it
 						files_[key].push(name);
 					}
@@ -147,16 +142,11 @@ function cleanup(plugin_name) {
 		for (var i in pluginFiles[name]) {
 			if (debug)
 				console.log(
-					"cleanup looking for " +
-						plugin_name +
-						" in " +
-						pluginFiles[name][i]
+					"cleanup looking for " + plugin_name + " in " + pluginFiles[name][i]
 				);
 			// if the saved info matches the disabled plugin
 			if (
-				pluginFiles[name][i]
-					.toLowerCase()
-					.includes(plugin_name.toLowerCase())
+				pluginFiles[name][i].toLowerCase().includes(plugin_name.toLowerCase())
 			) {
 				// lets remove it from the list
 				// if this is not a locale file
@@ -244,9 +234,7 @@ loader.loadPluginInfo = function (filename, config) {
 		id_div += "\n<div ng-include=\"'" + h + "'\"></div>";
 
 		if (debug) {
-			console.log(
-				" plugin info for " + plugin_name + "=" + id_div + "\n"
-			);
+			console.log(" plugin info for " + plugin_name + "=" + id_div + "\n");
 		}
 
 		// default position
@@ -273,9 +261,7 @@ loader.loadPluginInfo = function (filename, config) {
 				}
 				if (debug) {
 					console.log(
-						page_location +
-							" length=" +
-							locations[page_location].items.length
+						page_location + " length=" + locations[page_location].items.length
 					);
 				}
 				// if the position ordering is 'any'
@@ -312,19 +298,13 @@ loader.loadPluginInfo = function (filename, config) {
 						}
 						// splice it in where it belongs
 						let insert_index = parseInt(p.order) - 1;
-						locations[page_location].items.splice(
-							insert_index,
-							0,
-							id_div
-						);
+						locations[page_location].items.splice(insert_index, 0, id_div);
 						if (debug) {
 							console.log(
 								"insert_index=" +
 									insert_index +
 									" list=" +
-									JSON.stringify(
-										locations[page_location].items
-									)
+									JSON.stringify(locations[page_location].items)
 							);
 						}
 					} else {
@@ -339,9 +319,7 @@ loader.loadPluginInfo = function (filename, config) {
 				added = true;
 			} else {
 				if (debug) {
-					console.log(
-						"plugin " + p.name + " is NOT active=" + p.active
-					);
+					console.log("plugin " + p.name + " is NOT active=" + p.active);
 				}
 				// make sure not to load plugin's controller or service
 				cleanup(p.name);
@@ -360,8 +338,7 @@ loader.loadPluginInfo = function (filename, config) {
 			if (d) {
 				if (page_location !== "bottom-center") d.append(id_div);
 				else {
-					if (debug)
-						console.log("id_div=" + stringify(d, 1, null, 2));
+					if (debug) console.log("id_div=" + stringify(d, 1, null, 2));
 					d.prepend(id_div);
 				}
 			} else {
@@ -394,9 +371,7 @@ loader.loadPluginInfo = function (filename, config) {
 			);
 		}
 		let existing_children = d.children().length;
-		let bc_counter = 0;
-		for (let e of v.indexOf("bottom") <
-		0 /* && v.indexOf('bottom-center')<0 */
+		for (let e of v.indexOf("bottom") < 0 /* && v.indexOf('bottom-center')<0 */
 			? locations[v].items
 			: locations[v].items.reverse()) {
 			if (debug) {
@@ -560,11 +535,7 @@ function writeTranslationFiles() {
 				var base_lang = base.split("/").slice(-1).toString();
 				if (debug)
 					console.log(
-						"comparing l='" +
-							plugin_lang +
-							"' with '" +
-							base_lang +
-							"'=r"
+						"comparing l='" + plugin_lang + "' with '" + base_lang + "'=r"
 					);
 				// if they match (we are woring on the same language part)
 				// they are all in the same big list, all the files
@@ -578,9 +549,7 @@ function writeTranslationFiles() {
 						try {
 							// don't let a fragment parsing error kill file creation
 							// parse the content
-							var plugin_locale_object = JSON.parse(
-								plugin_locale_contents
-							);
+							var plugin_locale_object = JSON.parse(plugin_locale_contents);
 							// and merge it into combined result
 							// Object.assign overlays existing items of the same name, not merge
 							// use lodash
@@ -601,8 +570,7 @@ function writeTranslationFiles() {
 			if (base_locale_object.commandsend !== undefined) {
 				// add then at the end of the commands list
 				for (var f of Object.keys(base_locale_object.commandsend)) {
-					base_locale_object.commands[f] =
-						base_locale_object.commandsend[f];
+					base_locale_object.commands[f] = base_locale_object.commandsend[f];
 				}
 				// remove it from the runtime data
 				delete base_locale_object.commandsend;
@@ -617,10 +585,7 @@ function writeTranslationFiles() {
 
 			if (debug) console.log(" new base filename=" + basefn);
 			// write out the constructed locale file, in readable for for person
-			fs.writeFileSync(
-				basefn,
-				JSON.stringify(base_locale_object, null, 2)
-			);
+			fs.writeFileSync(basefn, JSON.stringify(base_locale_object, null, 2));
 		}
 	}
 }

@@ -14,13 +14,9 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 					$http
 						.get(
 							"http://www.datasciencetoolkit.org/coordinates2politics/" +
-								geoposition.coords.latitude
-									.toString()
-									.substring(0, 10) +
+								geoposition.coords.latitude.toString().substring(0, 10) +
 								"," +
-								geoposition.coords.longitude
-									.toString()
-									.substring(0, 11)
+								geoposition.coords.longitude.toString().substring(0, 11)
 						)
 						.then((info) => {
 							if (info.data[0].politics[0].code == "usa")
@@ -48,17 +44,11 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 			$http
 				.get(
 					"https://api.openweathermap.org/data/2.5/onecall?lat=" +
-						geoposition.coords.latitude
-							.toString()
-							.substring(0, 10) +
+						geoposition.coords.latitude.toString().substring(0, 10) +
 						"&lon=" +
-						geoposition.coords.longitude
-							.toString()
-							.substring(0, 11) +
+						geoposition.coords.longitude.toString().substring(0, 11) +
 						"&units=" +
-						(config.forecast.units == "us"
-							? "imperial"
-							: "metric") +
+						(config.forecast.units == "us" ? "imperial" : "metric") +
 						"&appid=" +
 						config.forecast.key
 				)
@@ -114,13 +104,9 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 							"&units=" +
 							"metric" + //config.forecast.units +
 							"&location=" +
-							geoposition.coords.latitude
-								.toString()
-								.substring(0, 10) +
+							geoposition.coords.latitude.toString().substring(0, 10) +
 							"," +
-							geoposition.coords.longitude
-								.toString()
-								.substring(0, 11) +
+							geoposition.coords.longitude.toString().substring(0, 11) +
 							"&fields=temperature,temperatureApparent,precipitationType,humidity,windSpeed,windDirection,weatherCode" +
 							"&apikey=" +
 							config.forecast.key
@@ -129,10 +115,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 						currently = response.data.data;
 					})
 					.catch((error) => {
-						console.log(
-							"climacell realltime failed =" +
-								JSON.stringify(error)
-						);
+						console.log("climacell realltime failed =" + JSON.stringify(error));
 						reject();
 					})
 			);
@@ -142,13 +125,9 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 					.get(
 						"https://data.climacell.co/v4/timelines?timesteps=1d" +
 							"&location=" +
-							geoposition.coords.latitude
-								.toString()
-								.substring(0, 10) +
+							geoposition.coords.latitude.toString().substring(0, 10) +
 							"," +
-							geoposition.coords.longitude
-								.toString()
-								.substring(0, 11) +
+							geoposition.coords.longitude.toString().substring(0, 11) +
 							"&units=" +
 							"metric" + //	config.forecast.units +
 							"&fields=temperatureMax,temperatureMin,precipitationType,weatherCode" +
@@ -159,10 +138,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 						forecast = response.data.data;
 					})
 					.catch((error) => {
-						console.log(
-							"climacell forecast failed =" +
-								JSON.stringify(error)
-						);
+						console.log("climacell forecast failed =" + JSON.stringify(error));
 						reject();
 					})
 			);
@@ -217,24 +193,21 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 				break;
 			case "Climacell":
 				ctemp = cvttof(
-					weather.forecast.data.currently.data.timelines[0]
-						.intervals[0].values.temperature,
+					weather.forecast.data.currently.data.timelines[0].intervals[0].values
+						.temperature,
 					config.forecast.units
 				);
 				weather.forecast.data.currently.day = moment
-					.utc(
-						weather.forecast.data.currently.data.timelines[0]
-							.startTime
-					)
+					.utc(weather.forecast.data.currently.data.timelines[0].startTime)
 					.format("ddd");
-				weather.forecast.data.currently.temperature = parseFloat(
-					ctemp
-				).toFixed(0);
+				weather.forecast.data.currently.temperature = parseFloat(ctemp).toFixed(
+					0
+				);
 				weather.forecast.data.currently.wi =
 					"wi-forecast-io-" +
 					convert_conditions_to_icon(
-						weather.forecast.data.currently.data.timelines[0]
-							.intervals[0].values.weatherCode,
+						weather.forecast.data.currently.data.timelines[0].intervals[0]
+							.values.weatherCode,
 						null,
 						null,
 						"utc"
@@ -276,37 +249,27 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 					weather.forecast.data.daily.data[i].day =
 						i > 0
 							? moment
-									.unix(
-										weather.forecast.data.daily.data[i].time
-									)
+									.unix(weather.forecast.data.daily.data[i].time)
 									.format("ddd")
 							: $translate.instant("forecast.today");
-					weather.forecast.data.daily.data[
-						i
-					].temperatureMin = parseFloat(
+					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(
 						weather.forecast.data.daily.data[i].temperatureMin
 					).toFixed(0);
-					weather.forecast.data.daily.data[
-						i
-					].temperatureMax = parseFloat(
+					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(
 						weather.forecast.data.daily.data[i].temperatureMax
 					).toFixed(0);
 					weather.forecast.data.daily.data[i].wi =
-						"wi-forecast-io-" +
-						weather.forecast.data.daily.data[i].icon;
-					weather.forecast.data.daily.data[
-						i
-					].counter = String.fromCharCode(97 + i);
+						"wi-forecast-io-" + weather.forecast.data.daily.data[i].icon;
+					weather.forecast.data.daily.data[i].counter = String.fromCharCode(
+						97 + i
+					);
 					weather.forecast.data.daily.data[i].iconAnimation =
 						weather.forecast.data.daily.data[i].icon;
 				}
 				break;
 			case "Climacell":
 				// Add human readable info to info
-				datalength = min(
-					weather.forecast.timelines[0].intervals.length,
-					8
-				);
+				datalength = min(weather.forecast.timelines[0].intervals.length, 8);
 
 				weather.forecast.data.daily = {};
 				weather.forecast.data.daily.data = [];
@@ -316,43 +279,34 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 						i > 0
 							? moment
 									.utc(
-										weather.forecast.timelines[0].intervals[
-											i
-										].startTime,
+										weather.forecast.timelines[0].intervals[i].startTime,
 										"YYYY-MM-DD"
 									)
 									.format("ddd")
 							: $translate.instant("forecast.today");
-					weather.forecast.data.daily.data[
-						i
-					].temperatureMin = parseFloat(
+					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(
 						cvttof(
-							weather.forecast.timelines[0].intervals[i].values
-								.temperatureMin,
+							weather.forecast.timelines[0].intervals[i].values.temperatureMin,
 							config.forecast.units
 						)
 					).toFixed(0);
-					weather.forecast.data.daily.data[
-						i
-					].temperatureMax = parseFloat(
+					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(
 						cvttof(
-							weather.forecast.timelines[0].intervals[i].values
-								.temperatureMax,
+							weather.forecast.timelines[0].intervals[i].values.temperatureMax,
 							config.forecast.units
 						)
 					).toFixed(0);
 					weather.forecast.data.daily.data[i].wi =
 						"wi-forecast-io-" +
 						convert_conditions_to_icon(
-							weather.forecast.timelines[0].intervals[i].values
-								.weatherCode,
+							weather.forecast.timelines[0].intervals[i].values.weatherCode,
 							null,
 							null,
 							"utc"
 						);
-					weather.forecast.data.daily.data[
-						i
-					].counter = String.fromCharCode(97 + i);
+					weather.forecast.data.daily.data[i].counter = String.fromCharCode(
+						97 + i
+					);
 					//weather.forecast.data.daily.data[i].iconAnimation = weather.forecast.data.daily.data[i].icon;
 				}
 				break;
@@ -365,32 +319,25 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 					weather.forecast.data.daily.data[i] = {};
 					weather.forecast.data.daily.data[i].day =
 						i > 0
-							? moment
-									.unix(weather.forecast.data.daily[i].dt)
-									.format("ddd")
+							? moment.unix(weather.forecast.data.daily[i].dt).format("ddd")
 							: $translate.instant("forecast.today");
-					weather.forecast.data.daily.data[
-						i
-					].temperatureMin = parseFloat(
+					weather.forecast.data.daily.data[i].temperatureMin = parseFloat(
 						weather.forecast.data.daily[i].temp.min
 					).toFixed(0);
-					weather.forecast.data.daily.data[
-						i
-					].temperatureMax = parseFloat(
+					weather.forecast.data.daily.data[i].temperatureMax = parseFloat(
 						weather.forecast.data.daily[i].temp.max
 					).toFixed(0);
 					weather.forecast.data.daily.data[i].wi =
 						"wi-forecast-io-" +
 						convert_conditions_to_icon(
-							weather.forecast.data.daily[i].weather[0]
-								.description,
+							weather.forecast.data.daily[i].weather[0].description,
 							weather.forecast.data.daily[i].sunrise,
 							weather.forecast.data.daily[i].sunset,
 							"unix"
 						);
-					weather.forecast.data.daily.data[
-						i
-					].counter = String.fromCharCode(97 + i);
+					weather.forecast.data.daily.data[i].counter = String.fromCharCode(
+						97 + i
+					);
 				}
 				break;
 		}
