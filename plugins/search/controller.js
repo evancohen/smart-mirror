@@ -1,6 +1,6 @@
 const Youtube = require("youtube-api");
 function Search($scope, $http, SpeechService, $rootScope, Focus) {
-	searchYouTube = async function (query) {
+	var searchYouTube = async function (query) {
 		var results = await Youtube.search.list({
 			q: query,
 			part: "snippet",
@@ -47,9 +47,7 @@ function Search($scope, $http, SpeechService, $rootScope, Focus) {
 				Focus.change("video");
 			})
 			.catch((error) => {
-				console.log(
-					"youtucbe search failed error=" + JSON.stringify(error)
-				);
+				console.log("youtucbe search failed error=" + JSON.stringify(error));
 			});
 	});
 
