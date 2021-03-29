@@ -2,11 +2,11 @@
     "schema": {
         "youtube": {
             "type": "object",
-            "title":"YouTube Settings",
+            "title":"{{title}}",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "YouTube API Key"
+                    "title": "{{api key}}"
                 }
             }
         }

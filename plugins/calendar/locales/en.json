@@ -1,0 +1,11 @@
+{
+	"calendar":{
+		"config":{
+			"title":"Calendar Settings",
+			"URLs":"iCal URLs",
+			"maxevents":"Max Number of Events for all iCals",
+			"maxdays":"Max Number of Days to display",
+			"showCalendarNames":"Check to display Calendar Names"
+		}
+	}
+}

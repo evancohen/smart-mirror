@@ -1,0 +1,9 @@
+{
+	"commands":{
+       "image_comic_dilbert": {
+            "text": "dilbert 보여줘",
+            "voice": "dilbert 보여줘",
+            "description": "Dilbert를 보여줍니다."
+        }
+	}
+}

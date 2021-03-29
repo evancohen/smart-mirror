@@ -1,0 +1,46 @@
+{
+	"list":{
+		"action":"Decir",
+		"next":"Siguiente",
+		"previous":"Previo",
+		"page":"Página"
+	},
+	"commands": {
+        "title" : "Listado de Órdenes",
+        "list": {
+            "text": "¿Qué digo",
+            "voice": "Que digo",
+            "description": "Lista de los comandos de voz."
+        },
+        "list-next": {
+            "text": "Siguiente página",
+            "voice": "siguiente(-página) (command) (página)",
+            "description": "Muestra la siguiente página de comandos de voz disponibles para usted. (solo disponible cuando se muestra la lista de comandos)"
+        },
+        "list-prev": {
+            "text": "Previo página",
+            "voice": "Previo(-página) (command) (página)",
+            "description": "Muestra la página anterior de comandos de voz disponibles para usted. (solo disponible cuando se muestra la lista de comandos)"
+        },
+        "list-page": {
+            "text": "Salta a página _______",
+            "voice": "(Salta a) (ir) (command) página *pageNum",
+            "description": "Muestra una página específica de comandos de voz disponibles para usted. (solo disponible cuando se muestra la lista de comandos)"
+        },        
+        "home": {
+            "text": "Vuelve",
+            "voice": "Vuelve",
+            "description": "Vuelve al menú principal."
+        },
+        "debug": {
+            "text": "Opciones",
+            "voice": "Opciones",
+            "description": "Muestra información de depuración."
+        },
+        "time_show": {
+            "text": "¿Qué hora es?",
+            "voice": "que hora es",
+            "description": "Muestra la hora actual."
+        }
+    }	
+}

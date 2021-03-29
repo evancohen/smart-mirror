@@ -1,0 +1,10 @@
+{
+  "stock": {
+    "config": {
+      "title": "Stock Settings",
+      "api key": "Clé API Alpha Vantage",
+      "Stock Symbols": "Symboles boursiers",
+      "desc": "obtenez votre clé api ici <a href=\"https://www.alphavantage.co/\" target=\"blank\">Cliquez ici pour plus d'informations</a> <br>"
+    }
+  }
+}

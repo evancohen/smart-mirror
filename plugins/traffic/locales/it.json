@@ -1,0 +1,17 @@
+{
+  "traffic": {
+    "time_to": "Tempo per arrivare {{name}}: ",
+    "config": {
+      "title": "Traffic Settings",
+      "api key": "Chiave API del traffico Bing",
+      "refresh cycle": "Aggiorna intervallo di traffico (minuti)",
+      "Trips": "viaggi",
+      "Mode": "Modalità",
+      "start": "Posizione di partenza",
+      "end": "Posizione di destinazione",
+      "Trip Name": "Nome del viaggio",
+      "start display": "È ora di iniziare la visualizzazione su Smart Mirror",
+      "end display": "È ora di interrompere la visualizzazione su Smart Mirror"
+    }
+  }
+}

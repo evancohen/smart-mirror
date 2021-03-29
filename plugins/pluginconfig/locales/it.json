@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "config": {
+      "title": "Impostazioni posizione plug-in",
+      "Name": "Nome",
+      "Location": "Posizione",
+      "Order": "Ordine",
+      "Active": "Attivo",
+      "Plugin Name": "Nome del plugin",
+      "plugin location desc": "Posizione del plug-in sullo schermo dello smart-mirror",
+      "plugin order desc": "se multipli nella stessa area, in quale posizione dovrebbe trovarsi questo plugin, * significa qualsiasi",
+      "plugin active desc": "se falso, questo plugin non verrà caricato"
+    }
+  }
+}

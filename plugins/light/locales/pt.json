@@ -1,0 +1,58 @@
+{
+  "lights": {
+    "colors": {
+      "red": "vermelho",
+      "dark_green": "verde escuro",
+      "green": "verde",
+      "blue": "azul",
+      "yellow": "amarelo",
+      "orange": "laranja",
+      "pink": "rosa",
+      "purple": "roxo",
+      "white": "branco",
+      "movie": "filme",
+      "colorloop": "cores",
+      "stop": "parar"
+    },
+    "intensity": {
+      "increase": "aumentar",
+      "decrease": "diminuir",
+      "max": "máximo",
+      "half": "metade",
+      "quarter": [
+        "um-quarto",
+        "quarto"
+      ],
+      "threequarter": [
+        "três-quartos",
+        "três-quartos"
+      ]
+    },
+    "action": {
+      "on": "liga",
+      "off": "desliga",
+      "nightmode": "modo noturno",
+      "reset": "reset"
+    },
+    "config": {
+      "title": "Light Settings",
+      "hub ip address": "Endereço IP do Hue Light",
+      "hub user name": "Nome de usuário do Hue Light",
+      "Setup": "Configuração",
+      "light name": "Nome",
+      "light desc": "Descrição",
+      "light type": "tipo",
+      "ip": "ip",
+      "id": "Eu iria",
+      "port": "porta",
+      "item and index": "Item {{idx}}"
+    }
+  },
+  "commands": {
+    "light_action": {
+      "text": "Altera (liga/desliga) a(s) luz(es) (action)",
+      "voice": "(altera) :state (a) (as) luz(es) *action",
+      "description": "Controla a cor e o brilho das luzes Hue."
+    }
+  }
+}
