@@ -265,7 +265,7 @@ let _spotpath = document.currentScript.src.substring(
 
 			if (typeof query === "undefined" || query === "" || query === " ") {
 				return spotify.play().then(
-					(data) => {},
+					() => {},
 					(err) => {
 						if (err.body.error.reason === "NO_ACTIVE_DEVICE") {
 							setTimeout(() => {
@@ -341,7 +341,6 @@ let _spotpath = document.currentScript.src.substring(
 
 					return spotify.play(options).then(
 						function (data) {
-							console.log('current playback: "' + query + '"');
 							console.log(data);
 							service.spotifyResponse = data.body.tracks || null;
 							return service.spotifyResponse;
