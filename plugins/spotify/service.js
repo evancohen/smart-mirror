@@ -265,8 +265,18 @@ let _spotpath = document.currentScript.src.substring(
 
 		service.playTrack = function (query) {
 			console.log(query, typeof query);
+
 			if (typeof query === "undefined" || query === "" || query === " ") {
-				return spotify.play();
+				return spotify.play().then(
+					() => {},
+					(err) => {
+						if (err.body.error.reason === "NO_ACTIVE_DEVICE") {
+							setTimeout(() => {
+								service.retryPlayHere();
+							}, 500);
+						} else console.log("play Something went wrong!", err);
+					}
+				);
 			} else {
 				query = query.charAt(0) === " " ? query.substring(1) : query;
 				return spotify.searchTracks("track:" + query).then(
@@ -280,7 +290,7 @@ let _spotpath = document.currentScript.src.substring(
 						});
 						console.log(tracks);
 
-						return spotify.play({ uris: tracks }).then(
+						spotify.play({ uris: tracks }).then(
 							function (data) {
 								console.log(
 									'current playback: "' + query + '"'
@@ -291,15 +301,62 @@ let _spotpath = document.currentScript.src.substring(
 								return service.spotifyResponse;
 							},
 							function (err) {
-								console.log("Something went wrong!", err);
+								if (
+									err.body.error.reason === "NO_ACTIVE_DEVICE"
+								) {
+									setTimeout(() => {
+										service.retryPlayHere(tracks);
+									}, 500);
+								} else
+									console.log(
+										"play Something went wrong!",
+										err
+									);
 							}
 						);
 					},
 					function (err) {
-						console.log("Something went wrong!", err);
+						console.log("searchTracks Something went wrong!", err);
 					}
 				);
 			}
+		};
+
+		service.retryPlayHere = function (tracks) {
+			spotify.getMyDevices().then(function (data) {
+				var devices = data.body.devices;
+				var id = null;
+
+				let name = default_device;
+
+				devices.forEach(function (device) {
+					if (
+						device.name.toLowerCase().indexOf(name.toLowerCase()) >=
+						0
+					) {
+						id = device.id;
+					}
+				});
+
+				if (id) {
+					let options = { device_id: id };
+					if (typeof tracks !== undefined) options.uris = tracks;
+
+					return spotify.play(options).then(
+						function (data) {
+							console.log(data);
+							service.spotifyResponse = data.body.tracks || null;
+							return service.spotifyResponse;
+						},
+						function (err) {
+							console.log(
+								"retry play Something went wrong!",
+								err
+							);
+						}
+					);
+				}
+			});
 		};
 
 		return service;
