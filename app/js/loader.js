@@ -104,6 +104,8 @@ function loadInfo() {
 		console.log("plugin files =" + JSON.stringify(pluginFiles))
 	}
 	base_language_files = getFilesMatch("app", [locale_name], base_language_files)
+	// add the local.css  file last
+	pluginFiles[css_name].push("app/css/local.css")
 }
 function insert_services($) {
 	$("body").append("\n<!--- Services -->\n")
