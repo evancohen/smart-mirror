@@ -14,15 +14,15 @@ if (config.motion.enabled == "pin" && require.resolve('johnny-five').length > 0 
 
 	// Configure johnny-five
 	var five = require('johnny-five');
-	var Raspi = require("raspi-io");
+	var Raspi = require("raspi-io")..RaspiIO;
 	var board = new five.Board({
 		io: new Raspi()
 	});
 
 	board.on("ready",function() {
-		
+
 		var motion = new five.Motion(config.motion.pin);
-			
+
 		// "calibrated" occurs once, at the beginning of a session,
 		motion.on("calibrated", function() {
 			console.log("!c:","calibrated");
@@ -61,7 +61,7 @@ if (config.motion.enabled == "pin" && require.resolve('johnny-five').length > 0 
 		fs.watch(detectionDir, (eventType, filename) => {
 			if (filename) {
 				// remove the file
-				fs.unlink(path.join(detectionDir,filename), function(error) { 
+				fs.unlink(path.join(detectionDir,filename), function(error) {
 					// consume the enonet error
 					if(error == null){
 						//console.debug('motion detected from external source');
@@ -71,7 +71,7 @@ if (config.motion.enabled == "pin" && require.resolve('johnny-five').length > 0 
 							console.log("!s:","motionstart");
 						}
 						else {
-							// signal motion ended 
+							// signal motion ended
 							console.log("!e:","motionend");
 						}
 					}
@@ -81,7 +81,7 @@ if (config.motion.enabled == "pin" && require.resolve('johnny-five').length > 0 
 			}
 		});
 	});
-}    
+}
 var  rmDir = function(dirPath, removeSelf) {
 	if (removeSelf === undefined)
 	{removeSelf = true;}
