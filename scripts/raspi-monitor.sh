@@ -1,40 +1,52 @@
 #!/bin/bash
 # Script to enable and disable the HDMI signal of the Raspberry PI
-
 CMD="$1"
-type=cec-utils
+CMD=${CMD,,}
+type=vcgencmd
 
 function on {
-    case $type
-    'tvservice')
-        tvservice -p && sudo chvt 6 && sudo chvt 7
+    case $type in
+    "tvservice")
+        (tvservice -p && sudo chvt 6 && sudo chvt 7) >/dev/null
     ;;
-    'dpms')
-        DISPLAY=:0 xset dpms force on
+    "dpms")
+	# this one doesn't work
+	export DISPLAY=:0
+	export LOGIN_USER="$2"
+	su - $LOGIN_USER
+	sudo xhost local:$LOGIN_USER &>/dev/null
+        xset dpms force on >/dev/null
+	exit
     ;;
-    'vcgencmd')
-        /usr/bin/vcgencmd display_power 1
+    "vcgencmd")
+        (/usr/bin/vcgencmd display_power 1) >/dev/null
     ;;
-    'cec-utils')
-        echo 'on 0' | cec-client -s
+    "cec-utils")
+        (echo 'on 0' | cec-client -s) >/dev/null
     ;;
     esac
 }
 
 function off {
-    case $type
-    'tvservice')
-        tvservice -o
+    case $type in
+    "tvservice")
+        (tvservice -o) >/dev/null
     ;;
-    'dpms')
-        DISPLAY=:0 xset dpms force off
+    "dpms")
+        export DISPLAY=:0
+        export LOGIN_USER="$2"
+        su - $LOGIN_USER
+        sudo xhost local:$LOGIN_USER &>/dev/null
+        xset dpms force off >/dev/null
+        exit        
     ;;
-    'vcgencmd')
-        /usr/bin/vcgencmd display_power 0
+    "vcgencmd")
+        (/usr/bin/vcgencmd display_power 0) >/dev/null
     ;;
-    'cec-utils')
-        echo 'standby 0' | cec-client -s
+    "cec-utils")
+        (echo 'standby 0' | cec-client -s) >/dev/null
     ;;
+    esac
 }
 
 
