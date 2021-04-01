@@ -2,18 +2,41 @@
 # Script to enable and disable the HDMI signal of the Raspberry PI
 
 CMD="$1"
+type=cec-utils
 
 function on {
-    /opt/vc/bin/tvservice --preferred
-
-    # Hack to enable virtual terminal nr 7 again:
-    chvt 6
-    chvt 7
+    case $type
+    'tvservice')
+        tvservice -p && sudo chvt 6 && sudo chvt 7
+    ;;
+    'dpms')
+        DISPLAY=:0 xset dpms force on
+    ;;
+    'vcgencmd')
+        /usr/bin/vcgencmd display_power 1
+    ;;
+    'cec-utils')
+        echo 'on 0' | cec-client -s
+    ;;
+    esac
 }
 
 function off {
-    /opt/vc/bin/tvservice --off
+    case $type
+    'tvservice')
+        tvservice -o
+    ;;
+    'dpms')
+        DISPLAY=:0 xset dpms force off
+    ;;
+    'vcgencmd')
+        /usr/bin/vcgencmd display_power 0
+    ;;
+    'cec-utils')
+        echo 'standby 0' | cec-client -s
+    ;;
 }
+
 
 function must_be_root {
     if [ $USER != root ]; then

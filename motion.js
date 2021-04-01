@@ -37,6 +37,7 @@ if (
 		// "calibrated" occurs once, at the beginning of a session,
 		motion.on("calibrated", function () {
 			console.log("!c:", "calibrated")
+			console.log("!e:", "motionend")
 		})
 
 		// "motionstart" events are fired when the "calibrated"

@@ -39,27 +39,31 @@
 		};
 
 		service.wake = function () {
-			if(config.autoTimer.mode!=='disabled'){  
+			if(config.autoTimer.mode!=='disabled'){
 				// only wake up if sleeping
 				if (Focus.get() === 'sleep') {
 					service.woke = true;
-					if (config.autoTimer.mode == "monitor") {
-						service.exec(config.autoTimer.wakeCmd, service.puts);
-						Focus.change('default');
-					} else if (config.autoTimer.mode == "tv") {
-						Focus.change('default');
-					} else if (config.autoTimer.mode == "energy") {
-						Focus.change('default')
-						// if the timer was running
-						if (energyStarTimer != null) {
-							// stop it
-							$interval.cancel(energyStarTimer)
-							energyStarTimer = null;
-						}
-						// if the dummy wake up delay is running, stop it too
-						if (energyStarTimerStop != null) {
-							$interval.cancel(energyStarTimerStop)
-						}
+					switch(config.autoTimer.mode){
+						case "monitor":
+						case "tv":
+							service.exec(config.autoTimer.wakeCmd, service.puts);
+							Focus.change('default');
+						break;
+						case "energy":
+							Focus.change('default')
+							// if the timer was running
+							if (energyStarTimer != null) {
+								// stop it
+								$interval.cancel(energyStarTimer)
+								energyStarTimer = null;
+							}
+							// if the dummy wake up delay is running, stop it too
+							if (energyStarTimerStop != null) {
+								$interval.cancel(energyStarTimerStop)
+							}
+						break;
+						default:
+							Focus.change('default')
 					}
 				}
 			}
@@ -74,7 +78,7 @@
 			$interval.cancel(energyStarTimerStop)
 			// cancel to long timer
 			$interval.cancel(energyStarTimer)
-			// restart it, so we don't drift towards 0 delay 
+			// restart it, so we don't drift towards 0 delay
 			energyStarTimer = $interval(bleep, energyStarDelay);
 			// restart the main sleep timer
 			service.startAutoSleepTimer();
@@ -88,27 +92,26 @@
 		}
 
 		service.sleep = function () {
-			if(config.autoTimer.mode!=='disabled'){        
+			if(config.autoTimer.mode!=='disabled'){
 				service.woke = false;
-				if (config.autoTimer.mode == "monitor") {
-					service.exec(config.autoTimer.sleepCmd, service.puts);
-					Focus.change("sleep")
-				} else if (config.autoTimer.mode == "tv") {
-					Focus.change('sleep')
-				} else if (config.autoTimer.mode == "energy") {
-					Focus.change("sleep");
-					if (energyStarTimer == null) {
-						energyStarTimer = $interval(bleep, energyStarDelay);
-					} else {
-						$interval.cancel(energyStarTimer)
-						energyStarTimer = $interval(bleep, energyStarDelay);
-					}
-				} else {
-					Focus.change("default");
+				switch(config.autoTimer.mode){
+					case  "monitor":
+					case  "tv":
+							service.exec(config.autoTimer.sleepCmd, service.puts);
+							Focus.change("sleep")
+							break;
+					case "energy":
+						Focus.change("sleep");
+						if (energyStarTimer == null) {
+							energyStarTimer = $interval(bleep, energyStarDelay);
+						} else {
+							$interval.cancel(energyStarTimer)
+							energyStarTimer = $interval(bleep, energyStarDelay);
+						}
+						break;
+					default:
+						Focus.change("default");
 				}
-			} else {
-				Focus.change("default");
-			}
 		};
 
 		service.puts = function (error, stdout, stderr) {
