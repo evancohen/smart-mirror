@@ -55,23 +55,27 @@
 				// only wake up if sleeping
 				if (Focus.get() === "sleep") {
 					service.woke = true
-					if (config.autoTimer.mode == "monitor") {
-						service.exec(config.autoTimer.wakeCmd, service.puts)
-						Focus.change("default")
-					} else if (config.autoTimer.mode == "tv") {
-						Focus.change("default")
-					} else if (config.autoTimer.mode == "energy") {
-						Focus.change("default")
-						// if the timer was running
-						if (energyStarTimer != null) {
-							// stop it
-							$interval.cancel(energyStarTimer)
-							energyStarTimer = null
-						}
-						// if the dummy wake up delay is running, stop it too
-						if (energyStarTimerStop != null) {
-							$interval.cancel(energyStarTimerStop)
-						}
+					switch (config.autoTimer.mode) {
+						case "monitor":
+						case "tv":
+							service.exec(config.autoTimer.wakeCmd, service.puts)
+							Focus.change("default")
+							break
+						case "energy":
+							Focus.change("default")
+							// if the timer was running
+							if (energyStarTimer != null) {
+								// stop it
+								$interval.cancel(energyStarTimer)
+								energyStarTimer = null
+							}
+							// if the dummy wake up delay is running, stop it too
+							if (energyStarTimerStop != null) {
+								$interval.cancel(energyStarTimerStop)
+							}
+							break
+						default:
+							Focus.change("default")
 					}
 				}
 			}
@@ -102,21 +106,21 @@
 		service.sleep = function () {
 			if (config.autoTimer.mode !== "disabled") {
 				service.woke = false
-				if (config.autoTimer.mode == "monitor") {
-					service.exec(config.autoTimer.sleepCmd, service.puts)
-					Focus.change("sleep")
-				} else if (config.autoTimer.mode == "tv") {
-					Focus.change("sleep")
-				} else if (config.autoTimer.mode == "energy") {
-					Focus.change("sleep")
-					if (energyStarTimer == null) {
-						energyStarTimer = $interval(bleep, energyStarDelay)
-					} else {
-						$interval.cancel(energyStarTimer)
-						energyStarTimer = $interval(bleep, energyStarDelay)
-					}
-				} else {
-					Focus.change("default")
+				switch (config.autoTimer.mode) {
+					case "monitor":
+					case "tv":
+						break
+					case "energy":
+						Focus.change("sleep")
+						if (energyStarTimer == null) {
+							energyStarTimer = $interval(bleep, energyStarDelay)
+						} else {
+							$interval.cancel(energyStarTimer)
+							energyStarTimer = $interval(bleep, energyStarDelay)
+						}
+						break
+					default:
+						Focus.change("default")
 				}
 			} else {
 				Focus.change("default")
