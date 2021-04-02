@@ -65,8 +65,7 @@ function createWindow() {
 		if (displays[i].bounds.x > 0 || displays[i].bounds.y > 0) {
 			externalDisplay = displays[i];
 			break;
-		}
-	}
+		}	}
 	const { width, height } = atomScreen.getPrimaryDisplay().workAreaSize;
 	var browserWindowOptions = {
 		width: width,
@@ -83,7 +82,7 @@ function createWindow() {
 		},
 	};
 	if (externalDisplay) {
-		browserWindowOptions.x = width + 2; //externalDisplay.bounds.x + 50
+		browserWindowOptions.x = width; //+ 2; //externalDisplay.bounds.x + 50
 		browserWindowOptions.y = height; //externalDisplay.bounds.y + 50
 		console.log(
 			"display size=" + browserWindowOptions.x + "+" + browserWindowOptions.y
