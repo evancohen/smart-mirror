@@ -79,16 +79,14 @@ function createWindow() {
 		webPreferences: {
 			nodeIntegration: true,
 			enableRemoteModule: true,
+			contextIsolation: false,
 		},
 	};
 	if (externalDisplay) {
 		browserWindowOptions.x = width + 2; //externalDisplay.bounds.x + 50
 		browserWindowOptions.y = height; //externalDisplay.bounds.y + 50
 		console.log(
-			"display size=" +
-				browserWindowOptions.x +
-				"+" +
-				browserWindowOptions.y
+			"display size=" + browserWindowOptions.x + "+" + browserWindowOptions.y
 		);
 	}
 
@@ -128,10 +126,7 @@ function startSonus(port) {
 		if (message.startsWith("!h:")) {
 			mainWindow.webContents.send("hotword", true);
 		} else if (message.startsWith("!p:")) {
-			mainWindow.webContents.send(
-				"partial-results",
-				message.substring(4)
-			);
+			mainWindow.webContents.send("partial-results", message.substring(4));
 		} else if (message.startsWith("!f:")) {
 			mainWindow.webContents.send("final-results", message.substring(4));
 		} else {
