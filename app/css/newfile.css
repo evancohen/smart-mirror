@@ -146,6 +146,8 @@ dt {
 
 .top-left {
     float: left;
+    margin-left: calc( 10px * var(--scale-factor));
+    margin-top: calc( 10px * var(--scale-factor));
 }
 
 .date {
@@ -158,6 +160,8 @@ dt {
 
 .top-right {
     float: right;
+    margin-right: calc( 10px * var(--scale-factor));
+    margin-top: calc( 10px * var(--scale-factor));
 }
 
 .middle-center {
@@ -321,6 +325,7 @@ ul.calendar {
 .stock, .tvshows, .hadisplay, .traffic {
     font-family: 'Open Sans', sans-serif;
     font-size:  calc( 25px * var(--scale-factor));
+   /* margin: calc( 10px * var(--scale-factor)); */
 }
 
 .fitbit {
