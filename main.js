@@ -83,7 +83,7 @@ function createWindow() {
 		},
 	};
 	if (externalDisplay) {
-		browserWindowOptions.x = width + 2; //externalDisplay.bounds.x + 50
+		browserWindowOptions.x = width; //+ 2; //externalDisplay.bounds.x + 50
 		browserWindowOptions.y = height; //externalDisplay.bounds.y + 50
 		console.log(
 			"display size=" + browserWindowOptions.x + "+" + browserWindowOptions.y
