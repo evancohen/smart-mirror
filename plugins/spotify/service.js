@@ -286,7 +286,7 @@ let _spotpath = document.currentScript.src.substring(
 			);
 		};
 
-		service.playTrack = function (query, device) {
+		service.playTrack = function (query) {
 			//console.log(query, typeof query)
 
 			if (typeof query === "undefined" || query === "" || query === " ") {
