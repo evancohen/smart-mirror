@@ -166,13 +166,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 	function min(a, b) {
 		return a > b ? b : a
 	}
-	function cvttof(temp, units) {
-		let r = temp
-		if (units == "us") {
-			r = (r * 9) / 5 + 32
-		}
-		return r
-	}
+
 	function cvttof(temp, units){
 		let r= temp
 		if (units == 'us'){
