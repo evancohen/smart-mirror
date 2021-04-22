@@ -2,37 +2,37 @@
 	"commands":{
 		"spotify_play": {
             "text": "play ________ on Spotify",
-            "voice": "(tell) spotify (to) play (*query)",
+            "voice": "(ask) (tell) spotify (to) play (*query)",
             "description": "Resume/Play song on Spotify."
         },
         "spotify_pause": {
             "text": "pause ________ spotify",
-            "voice": "(tell) spotify (to) pause (playback)",
+            "voice": "(ask) (tell) spotify (to) pause (playback)",
             "description": "Pause current song on Spotify."
         },
         "spotify_forward": {
             "text": "play next song on spotify",
-            "voice": "(tell) spotify (to) (skip) (goto) next (song on) (song)",
+            "voice": "(ask| tell) spotify (to) (skip) (goto) next (song on) (song)",
             "description": "Play next song on Spotify."
         },
         "spotify_back": {
             "text": "play previous song on spotify",
-            "voice": "(tell) spotify (to) (skip) (goto) previous (song on) (song)",
+            "voice": "(ask) (tell) spotify (to) (skip) (goto) previous (song on) (song)",
             "description": "Play previous song on Spotify."
         },
         "spotify_shuffle": {
             "text": "shuffle music",
-            "voice": "(tell) spotify (to) (turn on) (turn off) shuffle (songs)",
+            "voice": "(ask) (tell) spotify (to) (turn on) (turn off) shuffle (songs)",
             "description": "Toggle shuffle on Spotify."
         },
         "spotify_repeat": {
             "text": "shuffle music",
-            "voice": "(tell) spotify (to) (turn on) (turn off) repeat (song)",
+            "voice": "(ask) (tell) spotify (to) (turn on) (turn off) repeat (song)",
             "description": "Toggle repeat on Spotify."
         },
         "spotify_transfer": {
             "text": "transfer playback to my ________",
-            "voice": "(tell) spotify (to) (transfer) (send) (move) to *query",
+            "voice": "(ask) (tell) spotify (to) (transfer) (send) (move) to *query",
             "description": "Transfer playback to a device by the name of ..."
         }
 	},
@@ -46,7 +46,7 @@
             "client secret":"Client Secret",
             "Scope":"Scope",
             "State":"State",
-            "auth help":"<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4000/spotify_auth_callback'</b> then navigate to <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> from your mirror browser.</p>",
+            "auth help":"<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4100/spotify_auth_callback'</b> then click <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> to start the authorization process .</p>",
             "screen_status":"Default status indicator position ('top' or 'bottom')"
         }
     }

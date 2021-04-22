@@ -24,18 +24,19 @@
     "restingHR": "Frecuencia cardíaca en reposo",
     "bpm": "bpm",
     "config": {
-      "title": "Fitbit Settings",
+      "title": "Configuración de Fitbit",
       "cycle info time": "Tiempo predeterminado para alternar entre las estadísticas de Fitbit",
-      "oauth client id": "ID de cliente OAuth 2.0",
+      "oauth client id": "ID de cliente de OAuth 2.0",
       "Client Secret": "Secreto del cliente",
       "auth uri": "Autorización URI",
       "auth path": "Ruta de autorización",
-      "Token URI": "Token URI",
-      "Token Path": "Token Path",
+      "Token URI": "URI de token",
+      "Token Path": "Ruta del token",
       "Redirect URI": "Redirigir URI",
       "Response Type": "Tipo de respuesta",
       "Scope": "Alcance",
-      "State": "Estado"
+      "State": "Estado",
+      "help_value": "<p><b> Asegúrese de que la configuración de la API de Fitbit permita redirecciones desde 'http://localhost:4000/fitbit_auth_callback' </b> y luego navegue hasta <a id = 'splink' onclick = \" document.getElementById ('splink ') .href ='http://'+window.location.hostname+':4000/fitbit/'; return true; \"target = '_ blank'> Autorizar </a> desde su navegador espejo. </p>"
     }
   }
 }

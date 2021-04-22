@@ -1,0 +1,702 @@
+:root{
+  --scale-factor: 1;  /* set default scaling in case we have partial window, debug or in vm terminal window */
+}
+
+@media screen  and (width:1920px) and (orientation: landscape) {
+    :root{
+        --scale-factor: 1920/1920;
+     };
+ }
+
+@media screen and (width:3840px)  and (orientation: landscape) {
+    :root{
+    --scale-factor: 3840/1920;
+
+    };
+}
+@media  screen and (width:1080px)   {
+    :root{
+    --scale-factor: 1920/1920;
+    };
+}
+
+
+
+@function set-text-color($color) {
+    @if (lightness( $color ) > 50) {
+      @return $black; // Lighter color, return black
+    }
+    @else {
+      @return $white; // Darker color, return white
+    }
+}
+
+@font-face {
+    font-family: "HelveticaNeue-UltraLight";
+    src: url("../fonts/HelveticaNeue-UltraLight.ttf");
+    /* EOT file for IE */
+}
+
+body {
+    background-color: black;
+    color: #fff;
+    font-family: 'HelveticaNeue-UltraLight', 'Open Sans', sans-serif;
+    font-weight: 300;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 300;
+}
+
+h1 {
+    font-size:  calc( 120px * var(--scale-factor));
+}
+
+dt {
+    font-weight: 600;
+}
+
+/* Colors */
+.light-grey {
+    color: #ccc;
+}
+
+.grey {
+    color: #999;
+}
+
+.first-run h1{
+    font-size:  calc( 48px * var(--scale-factor));
+}
+.below {
+  z-index: -900;
+}
+.above {
+  /* very high, but not above sleep */
+  z-index:900;
+}
+.fullscreen {
+  position: absolute;
+    top:  0px;
+    left:  0px;
+    width:  100%;
+    height:  100%;
+    pointer-events: none;
+    margin:  0px;
+    border: none;
+}
+
+
+/* Displays */
+.sleep-cover {
+    background-color: black;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+}
+
+.container {
+    z-index: -1;
+    /* so things are still selectable */
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    transition: all 0.3s ease;
+    /*background-color: blue; */
+}
+
+.listening {
+
+    -moz-box-shadow:  inset calc( 0px * var(--scale-factor)) calc( -40px * var(--scale-factor)) calc( 40px * var(--scale-factor)) calc( -40px * var(--scale-factor)) #fff;
+    -webkit-box-shadow:  inset calc( 0px * var(--scale-factor)) calc( -40px * var(--scale-factor)) calc( 40px * var(--scale-factor)) calc( -40px * var(--scale-factor)) #fff;
+    box-shadow:  inset calc( 0px * var(--scale-factor)) calc( -40px * var(--scale-factor)) calc( 40px * var(--scale-factor)) calc( -40px * var(--scale-factor)) #fff;
+
+}
+
+.not-listening {
+    -moz-box-shadow:  inset calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) #fff;
+    -webkit-box-shadow:  inset calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) #fff;
+    box-shadow:  inset calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) calc( 0px * var(--scale-factor)) #fff;
+}
+
+.partial-result {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.top-left {
+    float: left;
+    margin-left: calc( 10px * var(--scale-factor));
+    margin-top: calc( 10px * var(--scale-factor));
+}
+
+.date {
+    font-size:  calc( 42px * var(--scale-factor));
+}
+
+.time {
+    font-size:  calc( 80px * var(--scale-factor));
+}
+
+.top-right {
+    float: right;
+    margin-right: calc( 10px * var(--scale-factor));
+    margin-top: calc( 10px * var(--scale-factor));
+}
+
+.middle-center {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    flex-direction: column;
+    width: 50%;
+    top: 10%;
+    max-height: 50%;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+}
+
+.bottom-center {
+    font-family: 'Open Sans', sans-serif;
+    width: 50%;
+    text-align: center;
+    /*top: 75%; */
+    margin-bottom:  calc( 20px * var(--scale-factor));
+    height: 45%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.bottom-left, .bottom-right {
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    margin-bottom:   calc( 50px * var(--scale-factor));
+    top: 50%;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-content: flex-end;
+    flex-direction: column-reverse;
+}
+
+.bottom-left {
+    left:  1.04vw;
+        float: left;
+        text-align: left;
+        margin-right: auto;
+}
+
+.bottom-right {
+    right:  1.04vw;
+        float: right;
+        text-align: right;
+          //  margin-right:auto;
+            margin-left:auto;
+}
+
+.commands {
+    width:  calc( 450px * var(--scale-factor));
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+span.command-prev {
+    float:left;
+}
+
+span.command-next {
+    float:right;
+}
+
+ul.calendar {
+    list-style: none;
+    font-size:  calc( 22px * var(--scale-factor));
+    margin-left:  calc( 10px * var(--scale-factor));
+    padding: 0;
+}
+
+.calendar .event {
+    margin-bottom:  calc( 10px * var(--scale-factor));
+}
+
+.calendar span {
+	display: inline-block;
+}
+
+.calendar .day {
+    display: none;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.calendar span.summary {
+  font-size:  calc( 25px * var(--scale-factor));
+  max-width:  calc( 400px * var(--scale-factor));
+}
+
+.calendar .event-details .details {
+    font-size:  calc( 12px * var(--scale-factor));
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+}
+
+.calendar-name {
+  display: none;
+}
+
+.show-calendar-names .calendar-name {
+  display: block;
+}
+
+.day-marker {
+	margin-top:  calc( 30px * var(--scale-factor));
+}
+
+.day-marker .day {
+	display: block;
+  font-size:  calc( 15px * var(--scale-factor));
+  letter-spacing:  calc( 2px * var(--scale-factor));
+  margin-bottom:  calc( 10px * var(--scale-factor));
+}
+
+.weather {
+    margin-left: auto;
+    display: block;
+    text-align: right;
+    width:  calc( 230px * var(--scale-factor));
+}
+
+.weather-today .temperature {
+    font-size:  calc( 60px * var(--scale-factor));
+}
+
+.weather-week-descriptor {
+    font-family: 'Open Sans', sans-serif;
+    font-size:  calc( 16px * var(--scale-factor));
+    margin-left: auto;
+    margin-bottom:  calc( 10px * var(--scale-factor));
+    text-align: justify;
+    width:  10vw;
+}
+
+.weather-week {
+    margin-right:  calc( 10px * var(--scale-factor));
+    font-size:  calc( 22px * var(--scale-factor));
+}
+
+.weather-week .day {
+    display: inline-block;
+    margin-right:  calc( 10px * var(--scale-factor));
+    width:  calc( 40px * var(--scale-factor));
+}
+
+.weather-week .temperature {
+    display: inline-block;
+    width:  calc( 50px * var(--scale-factor));
+}
+
+.weather .weather-today canvas,
+.weather .weather-week-day canvas {
+    display: none;
+}
+
+.stock, .tvshows, .hadisplay, .traffic {
+    font-family: 'Open Sans', sans-serif;
+    font-size:  calc( 25px * var(--scale-factor));
+   /* margin: calc( 10px * var(--scale-factor)); */
+}
+
+.fitbit {
+    height: 100%;
+}
+
+.fitbit-title {
+    margin-right:  calc( 10px * var(--scale-factor));
+    font-size:  calc( 28px * var(--scale-factor));
+}
+
+.fitbit-subtitle {
+    margin-right:  calc( 10px * var(--scale-factor));
+    font-size:  calc( 20px * var(--scale-factor));
+}
+
+.fitbit-item {
+    color: #ccc;
+    margin-right:  calc( 10px * var(--scale-factor));
+    font-size:  calc( 16px * var(--scale-factor));
+}
+
+.fitbit-badge {
+    width:  calc( 16px * var(--scale-factor));
+    height:  calc( 16px * var(--scale-factor));
+}
+
+.fitbit-main {
+    display: inline-block;
+    margin-right:  calc( 10px * var(--scale-factor));
+    width:  calc( 450px * var(--scale-factor));
+}
+
+.fitbit-goals {
+    float: right;
+    width: 60%;
+}
+
+.fitbit-progress-bar {
+    position: relative;
+    width: 50%;
+    height:  calc( 5px * var(--scale-factor));
+    background-color: grey;
+}
+
+.fitbit-progress {
+    position: absolute;
+    height: 100%;
+}
+
+.playing-track img {
+    float: left;
+    margin-right:  calc( 5px * var(--scale-factor));
+}
+
+.traffic-information, .stock-information, .tv-information {
+    text-align: right;
+    margin-top:  calc( 10px * var(--scale-factor));
+    margin-right:  calc( 10px * var(--scale-factor));
+}
+
+.stock-change-positive {
+    color: green;
+}
+
+.stock-change-negative {
+    color: red;
+}
+
+@keyframes reduce-dashoffset {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes increase-dashoffset {
+    from {
+        stroke-dashoffset: 0;
+    }
+}
+
+.timer {
+    font-size:  calc( 120px * var(--scale-factor));
+    position: relative;
+}
+
+.timer-circle {
+    width: 3.25em;
+    height: 3.25em;
+    transform: rotate(-90deg) scaleY(-1);
+    margin:  calc( 20px * var(--scale-factor)) auto;
+    display: block;
+}
+
+.timer-circle .background,
+.timer-circle .progress {
+    r: 1.525em;
+    cx: 1.625em;
+    cy: 1.625em;
+    stroke-width: 0.1em;
+    fill: none;
+    stroke: #222;
+}
+
+.timer-circle .progress {
+    stroke-dasharray: 10.2101761239em;
+    stroke-dashoffset: 10.2101761239em;
+    stroke-linecap: round;
+    animation-name: increase-dashoffset;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    stroke: white;
+}
+
+.timer-countdown,
+.timer-duration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.timer-duration {
+    top: 75%;
+    font-size: 25%;
+}
+
+.contents {
+    max-width: 100%;
+}
+
+.gif {
+    height: 100%;
+}
+
+.map {
+    height:  calc( 1080px * var(--scale-factor));
+}
+
+.reminders-container, .todoist-container {
+    width:  calc( 250px * var(--scale-factor));
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.todoist {
+    padding:  0.52vh calc( 10px * var(--scale-factor)) 0.52vh calc( 80px * var(--scale-factor));
+}
+
+.contents-box {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.contents-box:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow:  inset 0 0 calc( 10px * var(--scale-factor)) calc( 10px * var(--scale-factor)) #000;
+    -moz-box-shadow:  inset 0 0 calc( 10px * var(--scale-factor)) calc( 10px * var(--scale-factor)) #000;
+    box-shadow:  inset 0 0 calc( 10px * var(--scale-factor)) calc( 10px * var(--scale-factor)) #000;
+    overflow: hidden;
+}
+
+.video {
+    width: 100%;
+    height:  calc( 680px * var(--scale-factor));
+    border: none;
+    /* If you want to make the video black and white
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    */
+}
+
+.truncate {
+  width:  calc( 250px * var(--scale-factor));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-right div div div .spotify-info {
+    float: left;
+    text-align: right;
+    margin-right:  calc( 15px * var(--scale-factor));
+}
+
+.bottom-left div div div .spotify-info {
+    text-align: left;
+    margin-left:  calc( 15px * var(--scale-factor));
+}
+
+.bottom-left div div div {
+    display: flex;
+}
+
+.spotify-container {
+    margin: auto;
+    -webkit-filter: grayscale(70%);
+    filter: grayscale(70%);
+    font-family: bold;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+.spotify-info {
+    margin-top:  calc( -2px * var(--scale-factor));
+    font-family: 'Open Sans', sans-serif;
+}
+
+.spotify-status-indicator i {
+    margin-top:  calc( 5px * var(--scale-factor));
+}
+
+.spotify-info .em-85 {
+    font-size: 0.85em;
+}
+
+.spotify-track, .spotify-artist, .spotify-device {
+    margin: auto;
+}
+
+.spotify-art {
+    border:  calc( 3px * var(--scale-factor)) solid white;
+}
+
+.sc-container {
+    display: flex;
+    padding:  0.52vh;
+    margin: auto;
+    -webkit-filter: grayscale(70%);
+    filter: grayscale(70%);
+    font-family: bold;
+}
+
+.scWaveform {
+    background-color: #000000;
+    width:  calc( 500px * var(--scale-factor));
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+}
+
+.color-block {
+    height:  calc( 200px * var(--scale-factor));
+    width:  calc( 200px * var(--scale-factor));
+    display: inline-block;
+    margin:  calc( 10px * var(--scale-factor));
+    margin-bottom:  calc( 20px * var(--scale-factor));
+}
+
+.debug-info {
+    width:  calc( 500px * var(--scale-factor));
+}
+
+/* Animations */
+.fade.ng-hide {
+    opacity: 0;
+}
+
+.fade.ng-hide-remove,
+.fade.ng-hide-add {
+    display: block !important;
+}
+
+.fade.ng-hide-remove {
+    transition: all ease 1500ms;
+}
+
+.fade.ng-hide-add {
+    transition: all ease 500ms;
+}
+
+.animate-grow {
+    max-height:  calc( 1280px * var(--scale-factor)) !important;
+}
+
+.animate-grow.ng-hide-add,
+.animate-grow.ng-hide-remove {
+    transition: all linear 500ms;
+}
+
+.animate-grow.ng-hide {
+    max-height: 0 !important;
+}
+
+.dimmed {
+    color: #aaa;
+}
+
+.xxsmall,
+.xsmall,
+.small {
+    font-family: "HelveticaNeue-Medium", sans-serif;
+    letter-spacing: 0;
+}
+
+.xxsmall {
+    font-size:  calc( 15px * var(--scale-factor));
+}
+
+.xxsmall .wi {
+    line-height:  calc( 15px * var(--scale-factor));
+}
+
+.xsmall {
+    font-size:  calc( 20px * var(--scale-factor));
+}
+
+.small {
+    font-size:  calc( 50px * var(--scale-factor));
+}
+
+.icon {
+    position: relative;
+    top:  calc( -10px * var(--scale-factor));
+    display: inline-block;
+    font-size:  calc( 45px * var(--scale-factor));
+    padding-right:  calc( 5px * var(--scale-factor));
+    font-weight: 100;
+    margin-right:  calc( 10px * var(--scale-factor));
+}
+
+.icon-small {
+    position: relative;
+    display: inline-block;
+    font-size:  calc( 20px * var(--scale-factor));
+    padding-left:  calc( 0px * var(--scale-factor));
+    padding-right:  calc( -10px * var(--scale-factor));
+    font-weight: 100;
+    width:  calc( 20px * var(--scale-factor));
+}
+
+.xkcd {
+    -webkit-filter: invert(100%);
+    max-width: 100%;
+}
+
+.commit-strip {
+    max-width: 100%;
+}
+
+.qrImage {
+    -webkit-filter: invert(100%);
+    max-width: 100%;
+}
+
+.news {
+    height:  calc( 75px * var(--scale-factor));
+    margin-bottom:  calc( 5px * var(--scale-factor));
+}
+
+.news-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size:  calc( 18px * var(--scale-factor));
+    margin-bottom:  calc( 5px * var(--scale-factor));
+}
+
+.news-content {
+    font-family: 'Open Sans', sans-serif;
+    font-size:  calc( 25px * var(--scale-factor));
+    margin-bottom:  calc( 55px * var(--scale-factor));
+}

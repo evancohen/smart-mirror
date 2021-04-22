@@ -79,9 +79,9 @@ let _fbpath = document.currentScript.src.substring(
 					}
 				}
 			});
-			// In a browser, visit http://localhost:4100/fitbit to authorize a user for the first time.
+			// In a browser, visit http://localhost:4000/fitbit to authorize a user for the first time.
 			app.get("/fitbit", function (req, res) {
-				let uri =  fitbit.authorizeURL()
+				let uri = fitbit.authorizeURL();
 				// is this coming from the same machine
 				// no, spawn it
 				// issue #862
@@ -155,7 +155,7 @@ let _fbpath = document.currentScript.src.substring(
 		 * If the fitbit configuration is present in the config.json, then express along with the fitbit service will be enabled.
 		 */
 		service.init = function (cb) {
-			var port = process.env.PORT || 4100;
+			var port = process.env.PORT || 4000;
 			console.debug("Express is listening on port: " + port);
 			app.listen(port);
 
@@ -172,7 +172,9 @@ let _fbpath = document.currentScript.src.substring(
 					});
 				} else if (err.code == "ENOENT") {
 					console.error(
-						"Fitbit authentication required, please visit the following link: http://localhost:"+port+"/fitbit to authenticate your credentials.",
+						"Fitbit authentication required, please visit the following link: http://localhost:" +
+							port +
+							"/fitbit to authenticate your credentials.",
 						err
 					);
 				} else {

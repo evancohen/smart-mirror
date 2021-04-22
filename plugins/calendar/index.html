@@ -5,7 +5,7 @@
                       <span ng-bind="event.startName"></span>
             <span ng-if="event.startName != event.endName"> - <span ng-bind="event.endName"></span></span>
             </span>
-            <div class="details calendar-name" ng-bind="event.calendarName"></div>
+            <div ng-if="config.calendar.showCalendarNames===true" class="details calendar-name" ng-bind="event.calendarName"></div>
             <span class="summary" ng-bind="event.SUMMARY"></span>
             <div class="details" ng-if="event.start.format('LT') != event.end.format('LT')">
                 <span ng-if="event.startName != event.endName"><span ng-bind="event.start.format('M/D')"></span> <span ng-bind="event.start.format('LT')"></span>                - <span ng-bind="event.end.format('M/D')"></span> <span ng-bind="event.end.format('LT')"></span></span>

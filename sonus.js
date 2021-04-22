@@ -72,13 +72,13 @@ sonus.on("error", (error) => console.error("!e:", error));
 
 // add support for plugins needing conversational voice support
 // need something that contains the plugin schemas
-if (config.assistant | true) {
+if (config.assistant | config.alexa | true) {
 	const express = require("express");
 	const app = express();
 	const server = require("http").createServer(app);
 
 	// Start the server, 1 up from config
-	server.listen(parseInt(config.remote.port) - 1);
+	server.listen(process.argv[2]);
 	var control = {};
 	control.io = require("socket.io")(server);
 
@@ -96,7 +96,11 @@ if (config.assistant | true) {
 		});
 		socket.on("getinfo", function () {
 			//console.log("sending info")
-			socket.emit("info", { language, recordProgram, device });
+			socket.emit("info", {
+				lang: language,
+				reco: recordProgram,
+				device: device,
+			});
 		});
 	});
 }

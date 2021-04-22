@@ -35,7 +35,8 @@
             "Redirect URI":"Redirect URI",
             "Response Type":"Response Type",
             "Scope":"Scope",
-            "State":"State"
+            "State":"State",
+            "help_value": "<p><b>Ensure the Fitbit API settings allow redirects from 'http://localhost:4000/fitbit_auth_callback'</b> then navigate to <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4000/fitbit/'; return true;\" target='_blank'>Authorize</a> from your mirror browser.</p>"
         }
     }
 }
