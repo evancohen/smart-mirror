@@ -9,7 +9,7 @@
         <span ng-bind="hourlyForecast.summary"></span>
         <span ng-bind="weeklyForecast.summary"></span>
     </div>
-    <div class="weather-week" ng-repeat="forecast in weeklyForecast.data" ">
+    <div class="weather-week" ng-repeat="forecast in weeklyForecast.data">
         <div class="weather-week-day">
             <span class="day light-grey" ng-bind="forecast.day"></span>
             <!-- canvas id="icon_weather_{{forecast.counter}}" width="1.71vw" height="2.31vh"></canvas -->

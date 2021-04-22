@@ -2,11 +2,11 @@
     "schema": {
         "todoist": {
             "type": "object",
-            "title": "Todoist Settings",
+            "title": "{{title}}",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "Todoist api key"
+                    "title": "{{api key}}"
                 }
             }
         }

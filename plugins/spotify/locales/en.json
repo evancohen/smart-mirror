@@ -1,0 +1,53 @@
+{
+	"commands":{
+		"spotify_play": {
+            "text": "play ________ on Spotify",
+            "voice": "(ask) (tell) spotify (to) play (*query)",
+            "description": "Resume/Play song on Spotify."
+        },
+        "spotify_pause": {
+            "text": "pause ________ spotify",
+            "voice": "(ask) (tell) spotify (to) pause (playback)",
+            "description": "Pause current song on Spotify."
+        },
+        "spotify_forward": {
+            "text": "play next song on spotify",
+            "voice": "(ask| tell) spotify (to) (skip) (goto) next (song on) (song)",
+            "description": "Play next song on Spotify."
+        },
+        "spotify_back": {
+            "text": "play previous song on spotify",
+            "voice": "(ask) (tell) spotify (to) (skip) (goto) previous (song on) (song)",
+            "description": "Play previous song on Spotify."
+        },
+        "spotify_shuffle": {
+            "text": "shuffle music",
+            "voice": "(ask) (tell) spotify (to) (turn on) (turn off) shuffle (songs)",
+            "description": "Toggle shuffle on Spotify."
+        },
+        "spotify_repeat": {
+            "text": "shuffle music",
+            "voice": "(ask) (tell) spotify (to) (turn on) (turn off) repeat (song)",
+            "description": "Toggle repeat on Spotify."
+        },
+        "spotify_transfer": {
+            "text": "transfer playback to my ________",
+            "voice": "(ask) (tell) spotify (to) (transfer) (send) (move) to *query",
+            "description": "Transfer playback to a device by the name of ..."
+        }
+	},
+    "spotify":{
+        "config":{
+            "title":"Spotify Settings",
+            "refresh cycle":"Default time in seconds to refresh spotify data",
+            "default device":"Default device name to change playback route on request",
+            "clientid":"OAuth 2.0 Client ID",
+            "clientid desc":"You must define an application in your Spotify premium account, these two values will come from that definition you must also configure the autorization callback uri as described below ",
+            "client secret":"Client Secret",
+            "Scope":"Scope",
+            "State":"State",
+            "auth help":"<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4100/spotify_auth_callback'</b> then click <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> to start the authorization process .</p>",
+            "screen_status":"Default status indicator position ('top' or 'bottom')"
+        }
+    }
+}
