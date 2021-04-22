@@ -363,21 +363,7 @@ let _spotpath = document.currentScript.src.substring(
 
 					return spotify.play(options).then(
 						function (data) {
-							/*if(data.statusCode==202) {
-							let handle =setInterval(() => {
-								service.currentState().then(function (response) {
-									if(response.device.name !== undefined){
-										console.log(JSON.stringify(response))
-										clearInterval(handle)
-									}
-								})
-							}, 500)
-
-							}else { */
 							console.log(data);
-							//service.spotifyResponse = data.body.tracks || null
-							//return service.spotifyResponse
-							/*	} */
 						},
 						function (err) {
 							console.log("retry play Something went wrong!", err);

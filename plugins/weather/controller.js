@@ -85,6 +85,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 					reject()
 				})
 		})
+
 	}
 	weather.get.Climacell = function () {
 		// return a promise, so the caller can wait
@@ -169,6 +170,13 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 		let r = temp
 		if (units == "us") {
 			r = (r * 9) / 5 + 32
+		}
+		return r
+	}
+	function cvttof(temp, units){
+		let r= temp
+		if (units == 'us'){
+			r= ((r*9)/5)+32
 		}
 		return r
 	}
