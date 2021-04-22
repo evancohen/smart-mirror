@@ -1,0 +1,42 @@
+{
+  "fitbit": {
+    "user": "Benutzer: ",
+    "averageSteps": "Schritte pro Tag",
+    "batteryStatus": "Batteriestatus: ",
+    "today": "Heute",
+    "steps": "Schritte",
+    "caloriesBurned": "Kalorien verbrannt",
+    "lastSync": "Letzte Synchronisierung",
+    "average": "Durchschnittlich",
+    "activeMinutes": "Aktive Minuten",
+    "distance": "km",
+    "floors": "Fußböden",
+    "topBadges": "Top Abzeichen",
+    "sleep": "Schlaf",
+    "lastNight": "Letzter Nacht",
+    "awake": "Wach",
+    "restless": "Unruhig",
+    "hours": "std.",
+    "km": "km",
+    "miles": "mi",
+    "minutes": "min",
+    "times": "x",
+    "restingHR": "Ruhepuls",
+    "bpm": "bpm",
+    "config": {
+      "title": "Fitbit-Einstellungen",
+      "cycle info time": "Standardzeit für den Zyklus zwischen Fitbit-Statistiken",
+      "oauth client id": "OAuth 2.0-Client-ID",
+      "Client Secret": "Kundengeheimnis",
+      "auth uri": "Autorisierungs SITES",
+      "auth path": "Autorisierungspfad",
+      "Token URI": "Token-URI",
+      "Token Path": "Token-Pfad",
+      "Redirect URI": "URI umleiten",
+      "Response Type": "Antworttyp",
+      "Scope": "Umfang",
+      "State": "Zustand",
+      "help_value": "<p><b> Stellen Sie sicher, dass die Fitbit-API-Einstellungen Weiterleitungen von 'http://localhost:4000/fitbit_auth_callback' </ b> zulassen, und navigieren Sie dann zu <a id = 'splink' onclick = \" document.getElementById ('splink ') .href ='http://'+window.location.hostname+':4000/fitbit/'; return true; \"target = '_ blank'> Autorisieren </a> von Ihrem Spiegelbrowser. </ p>"
+    }
+  }
+}

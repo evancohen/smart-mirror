@@ -1,0 +1,29 @@
+{
+   "timer": {
+      "one": "Une",
+      "minute": "Minute(s)?",
+      "second": "Seconde(s)?"
+    },
+    "commands":{
+        "timer_start": {
+            "text": "(Mets le) minuteur (pour) ________",
+            "voice": "(Mets le) minuteur (pour) *duration",
+            "description": "Démarre le minuteur."
+        },
+        "timer_show": {
+            "text": "(Montre-moi) (Affiche) le minuteur",
+            "voice": "(Montre-moi) (Affiche) le minuteur",
+            "description": "Affiche le minuteur."
+        },
+        "timer_stop": {
+            "text": "Arrête le minuteur",
+            "voice": "Arrête le minuteur",
+            "description": "Arrête le minuteur."
+        },
+        "timer_resume": {
+            "text": "Reprend le minuteur",
+            "voice": "Reprend le minuteur",
+            "description": "Reprendre le minuteur."
+        }
+    }
+}

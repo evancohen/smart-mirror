@@ -118,9 +118,7 @@ let _spotpath = document.currentScript.src.substring(
 							var refresh_token = token["refresh_token"];
 
 							if (!default_device)
-								console.debug(
-									"no default spotify device chosen"
-								);
+								console.debug("no default spotify device chosen");
 
 							spotify.setAccessToken(access_token); // Set the client token
 							spotify.setRefreshToken(refresh_token); // Set the client token
@@ -147,11 +145,7 @@ let _spotpath = document.currentScript.src.substring(
 				var refresh_token = data.body.refresh_token;
 
 				persist.write(tokenFile, data.body, function (err) {
-					if (err)
-						console.error(
-							"authentication renewal write failed.",
-							err
-						);
+					if (err) console.error("authentication renewal write failed.", err);
 
 					spotify.setAccessToken(access_token); // Set the client token
 					spotify.setRefreshToken(refresh_token); // Set the client token
@@ -172,39 +166,71 @@ let _spotpath = document.currentScript.src.substring(
 			);
 		};
 
-		service.sendToDevice = function (name) {
-			spotify.getMyDevices().then(function (data) {
-				var devices = data.body.devices;
-				var id = null;
+		function getDeviceID(name) {
+			return new Promise((resolve) => {
+				spotify.getMyDevices().then(function (data) {
+					var devices = data.body.devices;
+					var id = null;
+					// remove any apostrophes
+					//name = name.replace(/'/g,"")
+					// Check for name kerword of <named_device> or 'this device'<default_device>
+					name =
+						name.toLowerCase() === "this device" && default_device
+							? default_device
+							: name;
 
+					devices.forEach(function (device) {
+						let dev = device.name.toLowerCase().replace(/•/g, " ");
+						if (dev === name.toLowerCase()) {
+							id = device.id;
+							resolve(id);
+							return;
+						}
+					});
+					devices.forEach(function (device) {
+						let dev = device.name.toLowerCase().replace(/•/g, " ");
+						if (dev.includes(name.toLowerCase())) {
+							id = device.id;
+							resolve(id);
+							return;
+						}
+					});
+					resolve(id);
+				});
+			});
+		}
+
+		service.sendToDevice = function (name, tracks) {
+			/*	 spotify.getMyDevices().then(function (data) {
+				var devices = data.body.devices
+				var id = null
+				// remove any apostrophes
+				name = name.replace(/'/g,"")
 				// Check for name kerword of <named_device> or 'this device'<default_device>
 				name =
 					name.toLowerCase() === "this device" && default_device
 						? default_device
-						: name;
+						: name
 
 				devices.forEach(function (device) {
-					if (
-						device.name.toLowerCase().indexOf(name.toLowerCase()) >=
-						0
-					) {
-						id = device.id;
+					let dev = device.name.toLowerCase().replace(/•/g," ")
+					if (dev === name.toLowerCase() || dev.includes(name.toLowerCase())) {
+						id = device.id
 					}
-				});
+				}) */
+			getDeviceID(name).then((id) => {
 				if (id) {
 					console.log(id);
-					return spotify
-						.transferMyPlayback({
-							device_ids: [id],
-						})
-						.then(
-							function () {
-								return spotify.play();
-							},
-							function (err) {
-								console.log("Something went wrong!", err);
-							}
-						);
+					return spotify.transferMyPlayback([id]).then(
+						function () {
+							let options = { device_id: id };
+							if (typeof tracks !== undefined) options.uris = tracks;
+							return spotify.play(options);
+						},
+						function (err) {
+							console.log("Something went wrong!", err);
+						}
+					);
 				} else {
 					return null;
 				}
@@ -261,11 +287,25 @@ let _spotpath = document.currentScript.src.substring(
 		};
 
 		service.playTrack = function (query) {
-			console.log(query, typeof query);
+			//console.log(query, typeof query)
+
 			if (typeof query === "undefined" || query === "" || query === " ") {
-				return spotify.play();
+				return spotify.play().then(
+					() => {},
+					(err) => {
+						if (err.body.error.reason === "NO_ACTIVE_DEVICE") {
+							setTimeout(() => {
+								service.sendToDevice("this device");
+							}, 500);
+						} else console.log("play Something went wrong!", err);
+					}
+				);
 			} else {
+				let devicename = query.includes("on")
+					? query.split("on")[1].trim()
+					: "";
 				query = query.charAt(0) === " " ? query.substring(1) : query;
+				query = query.includes("on") ? query.split("on")[0].trim() : query;
 				return spotify.searchTracks("track:" + query).then(
 					function (data) {
 						console.log('Search tracks matching "' + query + '"');
@@ -277,26 +317,74 @@ let _spotpath = document.currentScript.src.substring(
 						});
 						console.log(tracks);
 
-						return spotify.play({ uris: tracks }).then(
-							function (data) {
-								console.log(
-									'current playback: "' + query + '"'
-								);
-								console.log(data);
-								service.spotifyResponse =
-									data.body.tracks || null;
-								return service.spotifyResponse;
-							},
-							function (err) {
-								console.log("Something went wrong!", err);
-							}
-						);
+						if (devicename !== "") {
+							service.sendToDevice(devicename, tracks);
+						} else {
+							spotify.play({ uris: tracks }).then(
+								function (data) {
+									console.log('current playback: "' + query + '"');
+									console.log(data);
+									service.spotifyResponse = data.body.tracks || null;
+									return service.spotifyResponse;
+								},
+								function (err) {
+									if (err.body.error.reason === "NO_ACTIVE_DEVICE") {
+										setTimeout(() => {
+											service.sendToDevice(devicename, tracks);
+										}, 500);
+									} else console.log("play Something went wrong!", err);
+								}
+							);
+						}
 					},
 					function (err) {
-						console.log("Something went wrong!", err);
+						console.log("searchTracks Something went wrong!", err);
 					}
 				);
 			}
+		};
+
+		service.retryPlayHere = function (tracks) {
+			spotify.getMyDevices().then(function (data) {
+				var devices = data.body.devices;
+				var id = null;
+
+				let name = default_device;
+
+				devices.forEach(function (device) {
+					if (device.name.toLowerCase().indexOf(name.toLowerCase()) >= 0) {
+						id = device.id;
+					}
+				});
+
+				if (id) {
+					let options = { device_id: id };
+					if (typeof tracks !== undefined) options.uris = tracks;
+
+					return spotify.play(options).then(
+						function (data) {
+							/*if(data.statusCode==202) {
+							let handle =setInterval(() => {
+								service.currentState().then(function (response) {
+									if(response.device.name !== undefined){
+										console.log(JSON.stringify(response))
+										clearInterval(handle)
+									}
+								})
+							}, 500)
+
+							}else { */
+							console.log(data);
+							//service.spotifyResponse = data.body.tracks || null
+							//return service.spotifyResponse
+							/*	} */
+						},
+						function (err) {
+							console.log("retry play Something went wrong!", err);
+						}
+					);
+				}
+			});
 		};
 
 		return service;

@@ -1,0 +1,9 @@
+{
+	"commands":{
+       "image_comic": {
+            "text": "Mostrar um cómico do xkcd",
+            "voice": "Mostrar um (comico) (do) xkcd",
+            "description": "Mostra o cómico mais recente do xkcd."
+        }
+	}
+}

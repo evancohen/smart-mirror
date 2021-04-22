@@ -1,0 +1,53 @@
+{
+  "commands": {
+    "spotify_play": {
+      "text": "riproduci ________ su Spotify",
+      "voice": "(chiedere) (dire) spotify (per) giocare (* query)",
+      "description": "Riprendi / Riproduci brano su Spotify."
+    },
+    "spotify_pause": {
+      "text": "pausa ________ spotify",
+      "voice": "(chiedere) (dire) spotify (per) mettere in pausa (riprodurre)",
+      "description": "Metti in pausa il brano corrente su Spotify."
+    },
+    "spotify_forward": {
+      "text": "riproduci il brano successivo su Spotify",
+      "voice": "(chiedere) (dire) spotify (to) (skip) (goto) next (song on) (song)",
+      "description": "Riproduci il brano successivo su Spotify."
+    },
+    "spotify_back": {
+      "text": "riproduci il brano precedente su Spotify",
+      "voice": "(chiedere) (dire) spotify (to) (skip) (goto) previous (song on) (song)",
+      "description": "Riproduci il brano precedente su Spotify."
+    },
+    "spotify_shuffle": {
+      "text": "musica in ordine casuale",
+      "voice": "(chiedere) (dire) spotify (a) (accendere) (spegnere) shuffle (canzoni)",
+      "description": "Attiva la riproduzione casuale su Spotify."
+    },
+    "spotify_repeat": {
+      "text": "musica in ordine casuale",
+      "voice": "(chiedere) (dire) spotify (a) (accendere) (spegnere) ripetere (canzone)",
+      "description": "Attiva / disattiva la ripetizione su Spotify."
+    },
+    "spotify_transfer": {
+      "text": "trasferire la riproduzione al mio ________",
+      "voice": "(chiedere) (dire) spotify (to) (transfer) (send) (move) to * query",
+      "description": "Trasferisci la riproduzione su un dispositivo con il nome di ..."
+    }
+  },
+  "spotify": {
+    "config": {
+      "title": "Spotify Settings",
+      "refresh cycle": "Default time in seconds to refresh spotify data",
+      "default device": "Default device name to change playback route on request",
+      "clientid": "OAuth 2.0 Client ID",
+      "clientid desc": "You must define an application in your Spotify premium account, these two values will come from that definition you must also configure the autorization callback uri as described below ",
+      "client secret": "Client Secret",
+      "Scope": "Scope",
+      "State": "State",
+      "auth help": "<p><b>Ensure the spotify API settings allow redirects from 'http://localhost:4100/spotify_auth_callback'</b> then click <a id='splink' onclick=\"document.getElementById('splink').href='http://'+window.location.hostname+':4100/authorize_spotify/'; return true;\" target='_blank'>Authorize</a> to start the authorization process .</p>",
+      "screen_status": "Default status indicator position ('top' or 'bottom')"
+    }
+  }
+}

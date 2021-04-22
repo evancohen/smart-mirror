@@ -1,0 +1,42 @@
+{
+  "fitbit": {
+    "user": "User: ",
+    "averageSteps": "Average Steps: ",
+    "batteryStatus": "Battery Status: ",
+    "today": "Today",
+    "steps": "steps",
+    "caloriesBurned": "calories burned",
+    "lastSync": "Last Sync",
+    "average": "Average",
+    "activeMinutes": "active minutes",
+    "distance": "km",
+    "floors": "floors",
+    "topBadges": "Top Badges",
+    "sleep": "Sleep",
+    "lastNight": "Last Night",
+    "awake": "Awake",
+    "restless": "Restless",
+    "hours": "hrs",
+    "km": "km",
+    "miles": "mi",
+    "minutes": "min",
+    "times": "x",
+    "restingHR": "resting heart rate",
+    "bpm": "bpm",
+    "config": {
+      "title": "Impostazioni Fitbit",
+      "cycle info time": "Tempo predefinito per scorrere tra le statistiche fitbit",
+      "oauth client id": "ID client OAuth 2.0",
+      "Client Secret": "Segreto del cliente",
+      "auth uri": "URI di autorizzazione",
+      "auth path": "Percorso di autorizzazione",
+      "Token URI": "Token URI",
+      "Token Path": "Percorso token",
+      "Redirect URI": "URI di reindirizzamento",
+      "Response Type": "Tipo di risposta",
+      "Scope": "Scopo",
+      "State": "Stato",
+      "help_value": "<p><b> Assicurati che le impostazioni dell'API Fitbit consentano i reindirizzamenti da 'http://localhost:4000/fitbit_auth_callback' </b> quindi vai a <a id = 'splink' onclick = \" document.getElementById ('splink ') .href ='http://'+window.location.hostname+ ':4000/fitbit/'; return true; \"target = '_ blank'> Autorizza </a> dal tuo browser mirror. </p>"
+    }
+  }
+}

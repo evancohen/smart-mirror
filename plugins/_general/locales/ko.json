@@ -1,0 +1,10 @@
+{
+  "general": {
+    "config": {
+      "title": "General Settings",
+      "Language": "언어",
+      "Layout": "나열한 것",
+      "Commands Per Page": "페이지 당 명령"
+    }
+  }
+}
