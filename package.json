@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.29-dev",
+  "version": "0.0.30",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "test": "eslint . --ignore-path .gitignore",
     "test-fix": "eslint . --ignore-path .gitignore --fix",
     "postinstall": "bash scripts/copyjsonform",
-    "preinstall":  "bash scripts/installcblas"
+    "preinstall": "bash scripts/installcblas"
   },
   "repository": {
     "type": "git",
@@ -76,8 +76,8 @@
     "rules": {
       "no-console": 0
     },
-      "parserOptions": {
-        "ecmaVersion": 2017
+    "parserOptions": {
+      "ecmaVersion": 2017
     },
     "globals": {
       "angular": false,
