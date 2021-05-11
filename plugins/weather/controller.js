@@ -85,7 +85,6 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 					reject()
 				})
 		})
-
 	}
 	weather.get.Climacell = function () {
 		// return a promise, so the caller can wait
@@ -95,53 +94,40 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 			var forecast = null
 			var currently = null
 			// "https://data.climacell.co/v4/timelines?timesteps=1h&units=" + this.config.tempUnits + "&location=" + this.config.lat + "," + this.config.lon + "&fields=temperature,temperatureApparent,precipitationType,humidity,windSpeed,windDirection,weatherCode&apikey=" + this.config.apiKey
-			plist.push(
-				$http
-					.get(
-						/* 'https://api.climacell.co/v3/weather/realtime?lat=' +
+
+			plist.push(	$http.get(
+				/* 'https://api.climacell.co/v3/weather/realtime?lat=' +
 				geoposition.coords.latitude.toString().substring(0,10) + '&lon=' + geoposition.coords.longitude.toString().substring(0,11) + '&unit_system=' +
 				config.forecast.units + '&fields=temp%2Cprecipitation%2Cweather_code%2Ccloud_cover%2Csunrise%2Csunset%2Cvisibility%2Cwind_gust%2Cwind_speed&apikey='+config.forecast.key  */
-						"https://data.climacell.co/v4/timelines?timesteps=1h" +
-							"&units=" +
-							"metric" + //config.forecast.units +
-							"&location=" +
-							geoposition.coords.latitude.toString().substring(0, 10) +
-							"," +
-							geoposition.coords.longitude.toString().substring(0, 11) +
-							"&fields=temperature,temperatureApparent,precipitationType,humidity,windSpeed,windDirection,weatherCode" +
-							"&apikey=" +
-							config.forecast.key
-					)
-					.then((response) => {
-						currently = response.data.data
-					})
-					.catch((error) => {
-						console.log("climacell realltime failed =" + JSON.stringify(error))
-						reject()
-					})
+				"https://data.climacell.co/v4/timelines?timesteps=1h"+
+					"&units=" + 'metric' + //config.forecast.units +
+					"&location=" + geoposition.coords.latitude.toString().substring(0,10) + "," + geoposition.coords.longitude.toString().substring(0,11) +
+					"&fields=temperature,temperatureApparent,precipitationType,humidity,windSpeed,windDirection,weatherCode"+
+					"&apikey="+config.forecast.key
+			).then(
+				(response)=>{
+					currently=response.data.data;
+				}
+			).catch((error)=>{
+				console.log("climacell realltime failed ="+JSON.stringify(error))
+				reject();
+			})
 			)
 			// get the 10 day forecast info
-			plist.push(
-				$http
-					.get(
-						"https://data.climacell.co/v4/timelines?timesteps=1d" +
-							"&location=" +
-							geoposition.coords.latitude.toString().substring(0, 10) +
-							"," +
-							geoposition.coords.longitude.toString().substring(0, 11) +
-							"&units=" +
-							"metric" + //	config.forecast.units +
-							"&fields=temperatureMax,temperatureMin,precipitationType,weatherCode" +
-							"&apikey=" +
-							config.forecast.key
-					)
-					.then((response) => {
-						forecast = response.data.data
-					})
-					.catch((error) => {
-						console.log("climacell forecast failed =" + JSON.stringify(error))
-						reject()
-					})
+			plist.push($http.get(
+				"https://data.climacell.co/v4/timelines?timesteps=1d"+
+				'&location=' + geoposition.coords.latitude.toString().substring(0,10) + ',' + geoposition.coords.longitude.toString().substring(0,11) +
+				"&units=" + 'metric' + //	config.forecast.units +
+				'&fields=temperatureMax,temperatureMin,precipitationType,weatherCode'+
+				'&apikey='+config.forecast.key
+			).then(
+				(response)=>{
+					forecast=response.data.data;
+				}
+			).catch( (error)=>{
+				console.log("climacell forecast failed ="+JSON.stringify(error))
+				reject();
+			})
 			)
 
 			// wait for both above apis to complete
@@ -162,6 +148,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 			return null
 		}
 		return weather.forecast.data.minutely
+
 	}
 	function min(a, b) {
 		return a > b ? b : a
