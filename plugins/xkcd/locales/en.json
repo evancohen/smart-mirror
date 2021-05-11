@@ -1,0 +1,9 @@
+{
+	"commands":{
+		"image_comic": {
+            "text": "Show xkcd",
+            "voice": "Show xkcd",
+            "description": "Shows the most recent xkcd comic."
+        }
+	}
+}

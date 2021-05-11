@@ -1,0 +1,16 @@
+{
+  "hadisplay": {
+    "config": {
+      "title": "Home-Assistant Display Settings",
+      "title desc": "Render Home-Assistance states using the template API",
+      "password": "Home-Assistant API password",
+      "refresh cycle": "Refresh Interval (minutes)",
+      "server": "Home-Assistant Server http(s)://yoursever:port",
+      "Templates": "Templates",
+      "Heading": "Heading",
+      "template": "Template - see https://home-assistant.io/docs/configuration/templating/",
+      "helpvalue": "<h6>Render Home-Assistance states using the template API</h6>",
+      "tab title": "<h4>Templates</h4>"
+    }
+  }
+}

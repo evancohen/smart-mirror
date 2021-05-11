@@ -1,0 +1,9 @@
+{
+	"commands":{
+       "image_comic": {
+            "text": "xkcd 보여줘",
+            "voice": "xkcd 보여줘",
+            "description": "xkcd를 보여줍니다."
+        }
+	}
+}

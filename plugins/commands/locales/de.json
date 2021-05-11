@@ -1,0 +1,51 @@
+{
+	"list":{
+		"action":"Sagen",
+		"next":"Nächster",
+		"previous":"Bisherige",
+		"page":"Seite"
+	},
+ 	"commands": {
+        "title" : "Verfügbare Befehle",
+        "list": {
+            "text": "Was kann ich sagen?",
+            "voice": "Was kann ich sagen",
+            "description": "Zeigt eine Liste der möglichen Befehle"
+        },
+        "list-next": {
+            "text": "Nächste Seite",
+            "voice": "nächste(-seite) (befehl) (seite)",
+            "description": "Zeigt die nächste Seite der verfügbaren Befehle. (Dafür muss die Liste der Befehle geöffnet sein)"
+        },
+        "list-prev": {
+            "text": "Vorherige Seite",
+            "voice": "vorherige(-seite) (befehl) (seite)",
+            "description": "Zeigt die vorherige Seite der verfügbaren Befehle. (Dafür muss die Liste der Befehle geöffnet sein)"
+        },
+        "list-page": {
+            "text": "Jump to Page _______",
+            "voice": "(gehe zu) (springe zu) (command) seite *pageNum",
+            "description": "Zeigt eine bestimmte Seite der verfügbaren Befehle. (Dafür muss die Liste der Befehle geöffnet sein)"
+        },
+        "home": {
+            "text": "Zurück",
+            "voice": "Zurück",
+            "description": "Zurück zum Startbildschirm."
+        },
+        "debug": {
+            "text": "Zeige Fehlerprotokoll",
+            "voice": "Zeig(e)(das) Fehlerprotokoll",
+            "description": "Zeigt das Fehlerprotokoll."
+        },
+        "time_show": {
+            "text": "Wie spät ist es?",
+            "voice": "Wie spät ist es",
+            "description": "Zeigt die aktuelle Zeit."
+        },
+        "show_remoteQR":{
+          "text": "Zeige Fernbedienung Link/QR-Code",
+          "voice": "Zeige Fernbedienung (QR code) (QR) (link)",
+          "description": "Zeigt einen QR-Code, um den Spiegel zu konfigurieren"
+        }
+    }	
+}
