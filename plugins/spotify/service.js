@@ -221,7 +221,6 @@ let _spotpath = document.currentScript.src.substring(
 			getDeviceID(name).then((id) => {
 				if (id) {
 					console.log(id);
-<<<<<<< HEAD
 					return spotify.transferMyPlayback([id]).then(
 						function () {
 							let options = { device_id: id };
@@ -232,23 +231,6 @@ let _spotpath = document.currentScript.src.substring(
 							console.log("Something went wrong!", err);
 						}
 					);
-=======
-					return spotify
-						.transferMyPlayback(
-							[id]
-							/*{
-							device_ids: [id],
-						}*/
-						)
-						.then(
-							function () {
-								return spotify.play();
-							},
-							function (err) {
-								console.log("Something went wrong!", err);
-							}
-						);
->>>>>>> 434c358... fix spotify transfer device api change
 				} else {
 					return null;
 				}
@@ -382,9 +364,6 @@ let _spotpath = document.currentScript.src.substring(
 					return spotify.play(options).then(
 						function (data) {
 							console.log(data);
-							//service.spotifyResponse = data.body.tracks || null
-							//return service.spotifyResponse
-							/*	} */
 						},
 						function (err) {
 							console.log("retry play Something went wrong!", err);

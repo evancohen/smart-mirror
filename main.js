@@ -65,7 +65,8 @@ function createWindow() {
 		if (displays[i].bounds.x > 0 || displays[i].bounds.y > 0) {
 			externalDisplay = displays[i];
 			break;
-		}	}
+		}
+	}
 	const { width, height } = atomScreen.getPrimaryDisplay().workAreaSize;
 	var browserWindowOptions = {
 		width: width,

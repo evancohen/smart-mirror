@@ -94,6 +94,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 			var forecast = null
 			var currently = null
 			// "https://data.climacell.co/v4/timelines?timesteps=1h&units=" + this.config.tempUnits + "&location=" + this.config.lat + "," + this.config.lon + "&fields=temperature,temperatureApparent,precipitationType,humidity,windSpeed,windDirection,weatherCode&apikey=" + this.config.apiKey
+
 			plist.push(	$http.get(
 				/* 'https://api.climacell.co/v3/weather/realtime?lat=' +
 				geoposition.coords.latitude.toString().substring(0,10) + '&lon=' + geoposition.coords.longitude.toString().substring(0,11) + '&unit_system=' +
@@ -147,6 +148,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 			return null
 		}
 		return weather.forecast.data.minutely
+
 	}
 	function min(a, b) {
 		return a > b ? b : a
