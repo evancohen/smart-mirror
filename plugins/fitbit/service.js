@@ -81,11 +81,7 @@ let _fbpath = document.currentScript.src.substring(
 			});
 			// In a browser, visit http://localhost:4000/fitbit to authorize a user for the first time.
 			app.get("/fitbit", function (req, res) {
-<<<<<<< HEAD
 				let uri = fitbit.authorizeURL();
-=======
-				let uri =  fitbit.authorizeURL()
->>>>>>> 6469715... fix typo
 				// is this coming from the same machine
 				// no, spawn it
 				// issue #862
