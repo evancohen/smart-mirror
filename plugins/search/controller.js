@@ -42,7 +42,8 @@ function Search($scope, $http, SpeechService, $rootScope, Focus) {
 				//Set cc_load_policy=1 to force captions
 				$scope.video =
 					"https://www.youtube.com/embed/" +
-					results.data.items[0].id.videoId +
+					// results points to THE response from search above (maxResults: 1)
+					results.id.videoId +
 					"?autoplay=1&controls=0&iv_load_policy=3&enablejsapi=1&showinfo=0";
 				Focus.change("video");
 			})
