@@ -122,15 +122,28 @@ const { ipcRenderer, remote } = require("electron");
 		};
 
 		var recoEngine = null;
-		service.openVoiceRecognition = function (type) {
+		service.openVoiceRecognition = function (speech_output_file) {
 			/* eslint-disable no-unused-vars */
 			return new Promise((resolve, reject) => {
 				// eslint-disable-line no-unused-vars
 
 				try {
 					if (!recoEngine) recoEngine = require("recorder");
-
-					var reco = new recoEngine(config.communications_port, type);
+					// if the speech_output_file is null, then the plugin dialog doesn't require the audio file
+					// it will accept the text
+					// alexa requires the audio of the speech
+					// assistant takes the text
+					//
+					// we need to negotiate use of the mic for voice collection
+					// during dialogs (create a calendar entry add something to my cart, list...)
+					//
+					// the recorder library  asks sm sonus to disconnect from mic, then start up our own version without
+					// hotword (assistant) and maybe reco all together (alexa)
+					// after each recording we have no idea is more prompts are coming
+					// so the library has to disconnect and tell sm sonus.js to reconnect
+					// the plugin needing this service needs to call startVoiceRecognition
+					// to start each sequence
+					var reco = new recoEngine(config.communications_port, speech_output_file);
 					console.log("assistant opening reco engine");
 					reco.open()
 						.then((e) => {
