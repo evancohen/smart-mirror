@@ -90,7 +90,7 @@
         "fitbit.authorization_uri",
         {
             "type": "help",
-            "helpvalue": "{{helpvalue}}"
+            "helpvalue": "{{help_value}}"
         }
       ]
     }
