@@ -384,7 +384,7 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 					}
 				},
 				function (err) {
-					console.error(err)
+					console.log(err)
 				}
 			)
 		})
@@ -449,15 +449,18 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 				//wi-forecast-io-fog: fog
 				icon_name = "fog"
 				break
-			case "cloudy":
-			case "overcast clouds":
-				//wi-forecast-io-cloudy: cloudy
-				icon_name = "cloudy"
+			case 1001:
+				case "cloudy":
+				case "overcast clouds":
+					//wi-forecast-io-cloudy: cloudy
+					icon_name = "cloudy"
 				break
-			case "mostly_cloudy":
-			case "partly_cloudy":
-			case 1101:
+
 			case 1102:
+			case "mostly_cloudy":
+				icon_name = "mostly-cloudy"
+				break;
+			case 1101:
 			case "scattered clouds":
 			case "broken clouds":
 			case "drizzle":
