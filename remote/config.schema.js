@@ -12,7 +12,7 @@ function getConfigSchema(config, cb) {
 	let currentLangInfo=JSON.parse(fs.readFileSync("app/locales/"+config.general.language.substring(0,2)+"c.json"))
 
 	let configSchema = { schema: {}, form: [], value: {} };
-	exec("arecord -l | grep -w 'card'", function (arecerr, stdout) {
+	exec("LC_ALL=c arecord -l | grep -w 'card'", function (arecerr, stdout) {
 		fs.readdir(pluginDir, function (err, files) {
 			let l = files.length;
 			for (var index = 0; index < files.length; ++index) {
