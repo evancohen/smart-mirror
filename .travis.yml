@@ -4,6 +4,7 @@ node_js:
 
 before_install:
   - npm i -g npm
+  - apt install libatlas-base-dev libatlas3-base
 
 # Cache node dependencies
 cache:
