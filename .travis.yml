@@ -9,5 +9,4 @@ before_install:
 # Cache node dependencies
 cache:
   directories:
-    - node_modules
     - bower_components
