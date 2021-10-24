@@ -4,8 +4,9 @@ node_js:
   - "14"
 
 before_install:
-  - sudo apt-get install -y python3
+  - sudo apt-get install -y python3@3.6.0
   - npm i -g npm
+  - npm config set python=/usr/bin/python3
 
 # Cache node dependencies
 cache:
