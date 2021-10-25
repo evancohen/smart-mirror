@@ -12,7 +12,7 @@
     },
     "spotify_forward": {
       "text": "reproducir la siguiente canción en spotify",
-      "voice": "(preguntar | decir) spotify (para) (saltar) (ir) siguiente (canción en) (canción)",
+      "voice": "(preguntar) (decir) spotify (para) (saltar) (ir) siguiente (canción en) (canción)",
       "description": "Reproduce la siguiente canción en Spotify."
     },
     "spotify_back": {

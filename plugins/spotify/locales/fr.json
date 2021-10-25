@@ -12,7 +12,7 @@
     },
     "spotify_forward": {
       "text": "jouer la chanson suivante sur spotify",
-      "voice": "(demander | dire) spotify (to) (skip) (goto) next (song on) (song)",
+      "voice": "(demander) (dire) spotify (to) (skip) (goto) next (song on) (song)",
       "description": "Jouez la chanson suivante sur Spotify."
     },
     "spotify_back": {

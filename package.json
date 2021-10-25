@@ -41,7 +41,6 @@
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
-    "snowboy": "git+https://github.com/leon-ai/snowboy.git",
     "@google-cloud/speech": "^4.2.0",
     "@grpc/grpc-js": "^1.2.11",
     "alphavantage": "1.2.6",
@@ -60,9 +59,11 @@
     "pretty-ms": "^7.0.1",
     "recorder": "git+https://git@github.com/sdetweil/recorder.git",
     "rss-parser": "^3.12.0",
+    "snowboy": "git+https://github.com/leon-ai/snowboy.git",
     "socket.io": "2.3.0",
     "sonus": "git+https://git@github.com/sdetweil/sonus.git",
     "spotify-web-api-node": "^5.0.0",
+    "waitprocess": "git+https://github.com/sdetweil/waitprocess.git",
     "winston": "^3.3.3",
     "youtube-api": "^3.0.1"
   },

@@ -12,7 +12,7 @@
         },
         "spotify_forward": {
             "text": "play next song on spotify",
-            "voice": "(ask| tell) spotify (to) (skip) (goto) next (song on) (song)",
+            "voice": "(ask) (tell) spotify (to) (skip) (goto) next (song on) (song)",
             "description": "Play next song on Spotify."
         },
         "spotify_back": {

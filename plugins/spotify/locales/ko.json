@@ -12,7 +12,7 @@
     },
     "spotify_forward": {
       "text": "Spotify에서 다음 노래 재생",
-      "voice": "(ask | tell) spotify (to) (skip) (goto) next (song on) (song)",
+      "voice": "(질문) (말하다) spotify (to) (skip) (goto) next (song on) (song)",
       "description": "Spotify에서 다음 노래를 재생합니다."
     },
     "spotify_back": {

@@ -12,7 +12,7 @@
     },
     "spotify_forward": {
       "text": "toque a próxima música no spotify",
-      "voice": "(perguntar | dizer) spotify (to) (pular) (ir para) next (song on) (song)",
+      "voice": "(perguntar) (dizer) spotify (to) (pular) (ir para) next (song on) (song)",
       "description": "Toque a próxima música no Spotify."
     },
     "spotify_back": {
