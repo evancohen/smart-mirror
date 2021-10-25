@@ -2,24 +2,24 @@
     "schema": {
         "general": {
             "type": "object",
-            "title": "General Settings",
+            "title": "{{title}}",
             "properties": {
                 "language": {
                     "default": "en-US",
                     "type": "string",
-                    "title": "Language",
+                    "title": "{{Language}}",
                     "required": true
                 },
                 "layout": {
                     "default": "main",
                     "type": "string",
-                    "title": "Layout",
+                    "title": "{{Layout}}",
                     "required": true
                 },
                 "commandsPerPage":{
                     "default":10,
                     "type":"number",
-                    "title": "Commands Per Page",
+                    "title": "{{Commands Per Page}}",
                     "required": true
                 }
             }
@@ -29,7 +29,7 @@
       {
         "key":"general",
         "type":"fieldset",
-        "title":"General Settings",
+        "title":"{{title}}",
         "expandable":false,
         "order":-100
       }

@@ -1,0 +1,30 @@
+{
+  "commands": {
+    "sc_play": {
+      "text": "________(을)(를)사운드클라우드 제생",
+      "voice": "*query(을)(를)사운드클라우드 제생",
+      "description": "음성인식된 곡을 사운드클라우드에서 제생합니다."
+    },
+    "sc_pause": {
+      "text": "사운드클라우드 (멈춰)(정지)",
+      "voice": "사운드클라우드 (멈춰)(정지)",
+      "description": "사운드클라우드를 정지합니다."
+    },
+    "sc_resume": {
+      "text": "사운드클라우드 시작",
+      "voice": "사운드클라우드 시작",
+      "description": "사운드클라우드로 다시 돌아갑니다."
+    },
+    "sc_replay": {
+      "text": "(그 곡)다시 플레이 해줘",
+      "voice": "(그 곡)다시 플레이 해줘",
+      "description": "현재 제생중인 곡은 다시 제생합니다."
+    }
+  },
+  "soundcloud": {
+    "config": {
+      "title": "SoundCloud Settings",
+      "api key": "SoundCloud API 키"
+    }
+  }
+}

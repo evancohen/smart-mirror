@@ -2,25 +2,25 @@
     "schema": {
         "traffic": {
             "type": "object",
-            "title": "Traffic Settings",
+            "title": "{{title}}",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "Bing Traffic API Key"
+                    "title": "{{api key}}"
                 },
                 "refreshInterval": {
                     "type": "string",
-                    "title": "Refresh Traffic Interval (minutes)"
+                    "title": "{{refresh cycle}}"
                 },
                 "trips": {
                     "type": "array",
-                    "title": "Trips",
+                    "title": "{{Trips}}",
                     "items": {
                         "type": "object",
                         "properties": {
                             "mode": {
                                 "type": "string",
-                                "title": "Mode",
+                                "title": "{{Mode}}",
                                 "enum": [
                                     "Driving",
                                     "Transit",
@@ -30,23 +30,23 @@
                             },
                             "origin": {
                                 "type": "string",
-                                "title": "Starting Location"
+                                "title": "{{start}}"
                             },
                             "destination": {
                                 "type": "string",
-                                "title": "Destination Location"
+                                "title": "{{end}}"
                             },
                             "name": {
                                 "type": "string",
-                                "title": "Trip Name"
+                                "title": "{{Trip Name}}"
                             },
                             "startTime": {
                                 "type": "string",
-                                "title": "Time to start displaying on Smart Mirror"
+                                "title": "{{start display}}"
                             },
                             "endTime": {
                                 "type": "string",
-                                "title": "Time to stop displaying on Smart Mirror"
+                                "title": "{{end display}}"
                             }
                         }
                     }
@@ -57,7 +57,7 @@
     "form":[
       {
         "type":"fieldset",
-        "title":"Traffic Settings",
+        "title":"{{title}}",
         "expandable":true,
         "order":0,
         "items": [

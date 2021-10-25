@@ -2,10 +2,11 @@
     "schema": {
         "giphy": {
             "type": "object",
+            "title":"{{title}}",
             "properties": {
                 "key": {
                     "type": "string",
-                    "title": "Giphy API Key",
+                    "title": "{{api key}}",
                     "default": "dc6zaTOxFJmzC"
                 }
             }

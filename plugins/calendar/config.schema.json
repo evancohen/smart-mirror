@@ -2,28 +2,28 @@
     "schema": {
         "calendar": {
             "type": "object",
-            "title": "Calendar Settings",
+            "title": "{{title}}",
             "properties": {
                 "icals": {
                     "type": "array",
-                    "title": "iCal URLs",
+                    "title": "{{URLs}}",
                     "items": {
                         "type": "string"
                     }
                 },
                 "maxResults": {
                     "type": "integer",
-                    "title": "Max Number of Events for all iCals",
+                    "title": "{{maxevents}}",
                     "default": 9
                 },
                 "maxDays": {
                     "type": "integer",
-                    "title": "Max Number of Days to display",
+                    "title": "{{maxdays}}",
                     "default": 9
                 },
                 "showCalendarNames": {
                     "type": "boolean",
-                    "title": "Check to display Calendar Names",
+                    "title": "{{showCalendarNames}}",
                     "default": false
                 }
             }
@@ -31,14 +31,14 @@
     },
     "form":[
       {
-        "title": "Calendar Settings",
+        "title": "{{title}}",
         "type": "fieldset",
         "expandable": true,
         "order":0,
         "items":[
           {
             "type":"tabarray",
-            "title":"iCal URLs",
+            "title":"{{URLs}}",
             "items":[
               {
                 "type":"section",
