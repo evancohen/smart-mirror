@@ -12,7 +12,7 @@
     },
     "spotify_forward": {
       "text": "spiele das nächste Lied auf spotify",
-      "voice": "(fragen | erzählen) spotify (to) (überspringen) (goto) next (song on) (song)",
+      "voice": "(fragen) (erzählen) spotify (to) (überspringen) (goto) next (song on) (song)",
       "description": "Spielen Sie das nächste Lied auf Spotify."
     },
     "spotify_back": {
