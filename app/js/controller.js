@@ -47,9 +47,11 @@
 		//Initialize the speech service
 
 		var resetCommandTimeout;
+		var listeningTimeout;
 		SpeechService.init({
 			listening: function (listening) {
 				$scope.listening = listening;
+				listeningTimeout= $timeout(clearListening,12000)
 				if (listening && !AutoSleepService.woke) {
 					AutoSleepService.wake();
 					$scope.focus = AutoSleepService.scope;
@@ -62,6 +64,7 @@
 			finalResult: function (result) {
 				if (typeof result !== "undefined") {
 					$scope.partialResult = result;
+					$timeout.cancel(listeningTimeout);
 					resetCommandTimeout = $timeout(restCommand, 5000);
 				}
 			},
@@ -91,7 +94,9 @@
 				AutoSleepService.startAutoSleepTimer();
 			}
 		}
-
+		var clearListening = function(){
+			$scope.listening = false;
+		}
 		// Reset the command text
 		var restCommand = function () {
 			$translate("home.commands").then(function (translation) {

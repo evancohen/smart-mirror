@@ -10,7 +10,7 @@
     "average": "Moyenne",
     "activeMinutes": "Minutes actives",
     "distance": "km",
-    "floors": "Planchers",
+    "floors": "Elévation",
     "topBadges": "Les meilleurs badges",
     "sleep": "Dormir",
     "lastNight": "Hier soir",
@@ -24,10 +24,10 @@
     "restingHR": "fréquence cardiaque au repos",
     "bpm": "bpm",
     "config": {
-      "title": "Fitbit Settings",
+      "title": "Paramètres Fitbit",
       "cycle info time": "Temps par défaut pour alterner entre les statistiques fitbit",
       "oauth client id": "ID client OAuth 2.0",
-      "Client Secret": "Secret client",
+      "Client Secret": "Secret du client",
       "auth uri": "URI d'autorisation",
       "auth path": "Chemin d'autorisation",
       "Token URI": "URI du jeton",
@@ -35,7 +35,8 @@
       "Redirect URI": "Rediriger l'URI",
       "Response Type": "Type de réponse",
       "Scope": "Portée",
-      "State": "Etat"
+      "State": "Etat",
+      "help_value": "<p><b> Assurez-vous que les paramètres de l'API Fitbit autorisent les redirections depuis 'http://localhost:4000 /fitbit_auth_callback' </b> puis accédez à <a id = 'splink' onclick = \" document.getElementById ('splink ') .href ='http://'+window.location.hostname+':4000/fitbit/'; return true; \"target = '_ blank'> Autoriser </a> depuis votre navigateur miroir. </p>"
     }
   }
 }

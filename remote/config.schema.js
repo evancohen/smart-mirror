@@ -20,14 +20,14 @@ function getConfigSchema(config, cb) {
 				if (file[0] !== '.') {
 					// if this plugin is active
 					if(isActive(file,config)){
-						// read its schema file 					
+						// read its schema file
 						var filePath = pluginDir + '/' + file + '/config.schema.json';
 						fs.readFile(filePath, 'utf8',  (err, data) => {
-							if (!err) {              
+							if (!err) {
 								try {
 									// get as object
-									let pluginConfigSchema = JSON.parse(data);  
-									let schemaName = ''          
+									let pluginConfigSchema = JSON.parse(data);
+									let schemaName = ''
 									try {
 										// get the schema name from the file, may not match the plugin name (geolocation plugin schema is geoPosition)
 										schemaName = Object.keys(pluginConfigSchema.schema)[0]
@@ -56,21 +56,24 @@ function getConfigSchema(config, cb) {
 									console.log("error ="+ error +" plugin="+file +"\n json ="+data)
 								}
 							}
-							--l;	/* this loop is running async, so many at once, 
+							--l;	/* this loop is running async, so many at once,
 									 decrement the counter to indicate we have processed one loop of plugins */
 							if(!l && tdebug)
-								console.log("completed schema="+JSON.stringify(configSchema))	
+								console.log("completed schema="+JSON.stringify(configSchema))
 							// if the counter has gone to zero invoke the callback
 							!l && cb(configSchema)
 						});
 					}
 					else{
-						--l 	/* this plugin is not active, 
+						--l 	/* this plugin is not active,
 								 but count it as processed so loop control above will finish */
 						if(tdebug)
 							console.log("plugin="+file+" is marked inactive")
-					}	
-				}					
+					}
+				}	else {
+					--l
+					// reduce count for files with leading . as they aren't ours, prevent hang on mac systems with '.DS Store' files
+				}
 			}
 		});
 	});
@@ -80,7 +83,7 @@ function isActive(pluginName,config){
 	// some plugins in folder are not respresented in control data
 	let result=true
 	// loop thru the plugin config data for the plugins
-	// careful some plugins are not listed there, cause they are required 
+	// careful some plugins are not listed there, cause they are required
 	// (general, speech, plugin config, remote (this plugin), etc)
 	// this is controlled by the default plugin config info in remote/.config.default.json
 	// so assumption is we want a module, unless found otherwise
@@ -92,7 +95,7 @@ function isActive(pluginName,config){
 			// end loop
 			break;
 		}
-	}	
+	}
 	if(tdebug)
 		console.log("returning active status for plugin="+pluginName+"="+result)
 	return result
@@ -114,7 +117,7 @@ function getAudioDevices(obj, stdO) {
 				formItm.titleMap = { default: "Default Device" }
 				formItm.titleMap[dataItm.hwID] = dataItm.desc
 				obj.form[0].items[formIdx] = formItm
-			} 
+			}
 		})
 	})
 }
@@ -122,12 +125,12 @@ function translateForm(pn, items, formdata){
 	if(tdebug)
 		console.log("entered="+JSON.stringify(items))
 	for(let [key, value] of Object.entries(items)){
-		if(tdebug) 
+		if(tdebug)
 			console.log("type="+typeof value)
 		// if this is an object m iterate to the actual text strings we can affect
 		if(typeof value == 'object')
 			translateForm(pn, value, formdata)
-		else{ 
+		else{
 			// have a text string of some sort
 			if(tdebug)
 				console.log("checking "+key+" to be translatable")
@@ -141,20 +144,20 @@ function translateForm(pn, items, formdata){
 				// our value field is {{string}}
 				if(value.startsWith("{{") && value.endsWith("}}")) {
 					// extract the translation key string
-					let datakey=value.substring(2,value.length-2)	
-					// oops the legend allows the same string format, 
+					let datakey=value.substring(2,value.length-2)
+					// oops the legend allows the same string format,
 					// don't try to translate that
 					if(key == 'legend' && datakey=="value"){
 						if(tdebug)
 							console.log("NOT translating for legend value plugin"+pn+" item="+key+ " for value="+value)
 					}
-					else{			
+					else{
 
 						if(tdebug)
-							console.log("translating for plugin "+pn+" item="+key+ " for value="+datakey)	
+							console.log("translating for plugin "+pn+" item="+key+ " for value="+datakey)
 						try {
 							if(tdebug)
-								console.log("pn language data ="+JSON.stringify(formdata[pn]['config'][datakey]))			
+								console.log("pn language data ="+JSON.stringify(formdata[pn]['config'][datakey]))
 							// save the translated value over the lookup
 							// if there is data for this translation key
 							if(formdata[pn]['config'][datakey] !== undefined)
@@ -162,18 +165,18 @@ function translateForm(pn, items, formdata){
 								items[key]=formdata[pn]['config'][datakey]
 						}
 						catch(error){
-							console.log(" language file lookup error="+error)
+							console.log(" language file lookup error="+error+" schema="+pn)
 						}
-					}				
-				} 
+					}
+				}
 				else {
 					// had a string value, but no special keyword format found
 					if(tdebug)
 						console.log("NOT translating for plugin"+pn+" item="+key+ " for value="+value)
 				}
 			}
-		}	
-	}	
+		}
+	}
 }
 
 module.exports = getConfigSchema
