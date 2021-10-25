@@ -1,0 +1,14 @@
+{
+	"commands":{
+		"image_comic_commitstrip": {
+            "text": "Mostrar tira de confirmación",
+            "voice": "Mostrar tira de confirmación",
+            "description": "Muestra el cómic más reciente de Commit Strip."
+        },
+        "image_comic_commitstrip1": {
+            "text": "Mostrar tira cómica",
+            "voice": "Mostrar tira cómica",
+            "description": "Muestra el cómic más reciente de Commit Strip."
+        }
+	}
+}

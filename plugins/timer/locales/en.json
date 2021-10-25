@@ -1,0 +1,29 @@
+{
+	"timer": {
+      "one": "One",
+      "minute": "Minute(s)?",
+      "second": "Second(s)?"
+    },
+    "commands":{
+    	"timer_start": {
+            "text": "Timer for ________",
+            "voice": "(set) (a) (start) (a) timer (for) *duration",
+            "description": "Starts a timer."
+        },
+        "timer_show": {
+            "text": "Show timer",
+            "voice": "show (the) timer",
+            "description": "Show the timer."
+        },
+        "timer_stop": {
+            "text": "Stop timer",
+            "voice": "stop (the) timer",
+            "description": "Stop the timer."
+        },
+        "timer_resume": {
+            "text": "Resume timer",
+            "voice": "resume (the) timer",
+            "description": "Resume timer."
+        }
+    }
+}

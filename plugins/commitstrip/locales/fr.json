@@ -1,0 +1,14 @@
+{
+	"commands":{
+		"image_comic_commitstrip": {
+            "text": "Afficher la bande de validation",
+            "voice": "Afficher la bande de validation",
+            "description": "Affiche la bande dessinée Commit Strip la plus récente."
+        },
+        "image_comic_commitstrip1": {
+            "text": "Afficher la bande dessinée",
+            "voice": "Afficher la bande dessinée",
+            "description": "Affiche la bande dessinée Commit Strip la plus récente."
+        }
+	}
+}

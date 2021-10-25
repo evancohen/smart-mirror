@@ -1,0 +1,9 @@
+{
+	"commands":{
+		"image_comic_dilbert": {
+            "text": "Show Dilbert comic",
+            "voice": "Show Dilbert (comic)",
+            "description": "Show the most recent Dilbert comic."
+        }
+	}
+}
