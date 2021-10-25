@@ -1,16 +1,5 @@
-const Youtube = require("youtube-api");
 function Search($scope, $http, SpeechService, $rootScope, Focus) {
-	var searchYouTube = async function (query) {
-		var results = await Youtube.search.list({
-			q: query,
-			part: "snippet",
-			maxResults: 1,
-			type: "video",
-			key: config.youtube.key,
-		});
-		return results.data.items[0];
-
-		/* var searchYouTube = async function (query) {
+	var searchYouTube = function (query) {
 		return $http({
 			url: 'https://www.googleapis.com/youtube/v3/search',
 			method: 'GET',
@@ -21,19 +10,16 @@ function Search($scope, $http, SpeechService, $rootScope, Focus) {
 				'type': 'video',
 				'videoEmbeddable': 'true',
 				'videoSyndicated': 'true',
-				//Sharing this key in the hopes that it wont be abused
+				//Sharing this key in the hopes that it wont be abused 
 				'key': config.youtube.key
 			}
-		});*/
-	};
+		});
+	}
 
-	var stopVideo = function () {
+	var stopVideo = function() {
 		var iframe = document.getElementsByTagName("iframe")[0].contentWindow;
-		iframe.postMessage(
-			'{"event":"command","func":"' + "stopVideo" + '","args":""}',
-			"*"
-		);
-	};
+		iframe.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+	}
 
 	//Search for a video
 	SpeechService.addCommand("video_search", function (query) {
@@ -53,16 +39,18 @@ function Search($scope, $http, SpeechService, $rootScope, Focus) {
 	});
 
 	//Stop video
-	SpeechService.addCommand("video_stop", function () {
+	SpeechService.addCommand('video_stop', function () {
 		Focus.change("default");
 		stopVideo();
 	});
 
-	$rootScope.$on("focus", function (targetScope, newFocus, oldFocus) {
-		if (oldFocus == "video" && newFocus != "video") {
+	$rootScope.$on('focus', function (targetScope, newFocus, oldFocus) {
+		if(oldFocus == "video" && newFocus != "video"){
 			stopVideo();
 		}
-	});
+	})
+
 }
 
-angular.module("SmartMirror").controller("Search", Search);
+angular.module('SmartMirror')
+	.controller('Search', Search);
