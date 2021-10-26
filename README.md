@@ -17,9 +17,9 @@ curl -sL https://raw.githubusercontent.com/evancohen/smart-mirror/master/scripts
 
 ## [Documentation](http://docs.smart-mirror.io)
 Check out the documentation for more information:
-- [Manual installation](https://docs.smart-mirror.io/docs/installation.html)
-- [Configuration](https://docs.smart-mirror.io/docs/configuration.html) 
-- [Troubleshooting](https://docs.smart-mirror.io/docs/troubleshooting.html)
+- [Manual installation](https://docs.smart-mirror.io/installation)
+- [Configuration](https://docs.smart-mirror.io/configuration.html) 
+- [Troubleshooting](https://docs.smart-mirror.io/troubleshooting.html)
 
 ## Discord
 A live chat to get help and discuss mirror related issues: https://discord.gg/EMb4ynW. Usually there are a few folks hanging around in the lobby, but if there arent you are probably better off [filing an issue](https://github.com/evancohen/smart-mirror/issues/new).
@@ -33,7 +33,7 @@ npm start dev
 ```
 you can also toggle the debug/developers window on/off, with the keyboard ctrl-ahift-i sequence on the smart-mirror screen
 
-For more information see the [Development and Contributing](http://docs.smart-mirror.io/docs/development_and_contributing.html) section of the documentation.
+For more information see the [Development and Contributing](http://docs.smart-mirror.io/development_and_contributing.html) section of the documentation.
 
 ## Current Feature Requests/Suggestions
 Please use feathub.com to add Feature Requests and Suggestions. We also recommend looking through the already existing requests to help in ranking the most popular and useful Features to Smart-Mirror users.  
