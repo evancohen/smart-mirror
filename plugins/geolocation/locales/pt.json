@@ -5,7 +5,7 @@
       "apikey": "Chave API do Google, usada para geolocalização e mapas",
       "latitude": "latitude",
       "longitude": "longitude",
-      "help value": "<strong><em>(usado se a posição geográfica não estiver sendo detectada com precisão)</em></strong></br><a href=\"https://docs.smart-mirror.io/docs/configure_the_mirror.html#geolocation\" target=\"_blank\">Clique aqui para mais informaçõeso</a></br>"
+      "help value": "<strong><em>(usado se a posição geográfica não estiver sendo detectada com precisão)</em></strong></br><a href=\"https://docs.smart-mirror.io/configuration/configure_the_mirror#geolocation\" target=\"_blank\">Clique aqui para mais informaçõeso</a></br>"
     }
   }
 }
