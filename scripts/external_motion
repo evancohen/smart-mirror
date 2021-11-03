@@ -33,10 +33,12 @@ fi
 # where is this script located?
 SCRIPT="$($cmd -f "$0")"
 SCRIPTPATH="$(dirname "$SCRIPT")"
-tofind=${SCRIPTPATH%/*}/node_modules
+#tofind=${SCRIPTPATH%/*}/node_modules
+# get the script file permissions, and user ownership
+user=$(ls -laF $SCRIPT | awk {'print $3}')
 
 # user that started smart-mirror should have access permissions 
-user=`ps aux | grep $tofind | grep -m 1 -v -- auto | awk '{ print $1}'`
+#user=`ps aux | grep $tofind | grep -m 1 -v -- auto | awk '{ print $1}'`
 
 # this script is in the scripts folder, the motion folder is back up the tree 1 level.
 motiondir=${SCRIPTPATH}/../motion

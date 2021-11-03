@@ -10,27 +10,50 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 	weather.getCountry = function () {
 		return new Promise((resolve, reject) => {
 			if (config.forecast.keytype != "Darksky") {
-				if (config.forecast.units == "auto") {
-					$http
-						.get(
-							"http://www.datasciencetoolkit.org/coordinates2politics/" +
-								geoposition.coords.latitude.toString().substring(0, 10) +
-								"," +
-								geoposition.coords.longitude.toString().substring(0, 11)
-						)
-						.then((info) => {
-							if (info.data[0].politics[0].code == "usa")
-								config.forecast.units = "us"
-							else config.forecast.units = "si"
-							resolve()
-						})
-						.catch((error) => {
-							console.log(
-								"datasciencetoolkit country from geolocation failed =" +
-									JSON.stringify(error)
+				// forecast untis will be changed from auto to resolved type,
+				// so this api call is ececuted only once per sm execution
+				// if units is auto, try to discover if this is USA or not
+				if (config.forecast.units === "auto") {
+					// if the geoposition api key is set
+					if(config.geoPosition.key){
+						let url= "https://maps.googleapis.com/maps/api/geocode/json?latlng="+
+									geoposition.coords.latitude.toString().substring(0, 10) +
+									"," +
+									geoposition.coords.longitude.toString().substring(0, 11) +
+									"&key="+config.geoPosition.key
+						$http
+							.get(
+								url
 							)
-							reject()
-						})
+							.then((results) => {
+								// point to the first data entry
+								let addresses=results.data.results[0].address_components
+								// get just the country entry
+								let info = addresses.filter((entry) =>{
+										return JSON.stringify(entry.types) === JSON.stringify(['country','political'])
+								})
+								if(info.length){
+									if(info[0].short_name === 'US')
+										config.forecast.units = "us"
+									else config.forecast.units = "si"
+									resolve()
+								} else {
+									console.error("weather unable to determine country from geolocation")
+									reject()
+								}
+							})
+							.catch((error) => {
+								console.error(
+									"weather google geocode country from geolocation failed =" +
+										JSON.stringify(error)
+								)
+								reject()
+							})
+					}
+					else {
+						console.error("geoposition apikey not set, needed by weather");
+						reject()  //
+					}
 				} else resolve()
 			} else {
 				// darksky, nothign to do here
