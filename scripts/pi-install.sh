@@ -6,6 +6,7 @@
 NODE_MINIMUM_VERSION="v14.0.0"
 NODE_STABLE_VERSION="14.x"
 NPM_TESTED="V6.0.0"
+NODE_TESTED="V14.0.0"
 PM2_FILE=pm2_smart_mirror.json
 
 # Compare node versions.
@@ -298,6 +299,8 @@ fi
 
 if npm install; then
 	printf "%s${grn}Dependency installation complete!${end}\n"
+	# create the empty local.css
+	touch app/css/local.css
 else
 	printf "%s${red}Unable to install dependencies :( ${end}\n"
 	exit;
