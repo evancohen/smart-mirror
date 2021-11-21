@@ -2,7 +2,7 @@
 	'use strict';
 	function TodoistService($http, $httpParamSerializer, $q){
 		var service = {};
-
+    const service_endpoint='https://todoist.com/API/v8/sync'
 		service.getItemsFromProject = function(project) {
 			var deferred = $q.defer();
 			service.requestProjectsWithItems().then(function (response) {
@@ -18,7 +18,7 @@
 				var project_id = service.getProjectId(project, response);
 				var req = {
 					method: 'POST',
-					url: 'https://todoist.com/API/v7/sync',
+					url: service_endpoint,
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
@@ -38,7 +38,7 @@
 				var item_ids = service.getItemIds(item, project_id, response);
 				var req = {
 					method: 'POST',
-					url: 'https://todoist.com/API/v7/sync',
+					url: service_endpoint,
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
@@ -55,7 +55,7 @@
 			var deferred = $q.defer();
 			var req = {
 				method: 'POST',
-				url: 'https://todoist.com/API/v7/sync',
+				url: service_endpoint,
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
