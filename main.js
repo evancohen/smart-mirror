@@ -26,7 +26,7 @@ const DevelopmentMode = process.argv.includes("dev");
 let usepm2 = false; // process.argv.includes("usepm2");
 
 //if (debug) console.log("getting pm2 process list");
-        exec("pm2 jlist", (error, stdout, stderr) => {
+        exec("pm2 jlist", (error, stdout) => {
           if (!error) {
             let output = JSON.parse(stdout);
             if (debug)
@@ -34,8 +34,8 @@ let usepm2 = false; // process.argv.includes("usepm2");
                 "processing pm2 jlist output, " + output.length + " entries"
               );
             output.forEach((managed_process) => {
-            	if(debug)
-            		console.log("comparing "+__dirname +" with "+ managed_process.pm2_env.pm_cwd )
+							if(debug)
+								console.log("comparing "+__dirname +" with "+ managed_process.pm2_env.pm_cwd )
               if (managed_process.pm2_env.pm_cwd.startsWith(__dirname)) {
                 if (debug)
                   console.log(
