@@ -374,16 +374,17 @@ function Weather($scope, $interval, $http, $translate, GeolocationService) {
 		return weather.forecast.data.hourly
 	}
 
-	GeolocationService.getLocation({ enableHighAccuracy: true }).then(function (
-		geopo
-	) {
-		geoposition = geopo
-		refreshWeatherData(geoposition)
-		$interval(
-			refreshWeatherData,
-			config.forecast.refreshInterval * 60000 || 7200000
-		)
-	})
+	GeolocationService.getLocation({ enableHighAccuracy: true })
+		.then((geopo)=>
+			{
+				geoposition = geopo
+				refreshWeatherData(geoposition)
+				$interval(
+					refreshWeatherData,
+					config.forecast.refreshInterval * 60000 || 7200000
+				)
+			})
+		.catch((error)=>{if(!geoposition) console.error("Weather, no location configured")})
 
 	function refreshWeatherData() {
 		config.forecast.keytype = (config.forecast.keytype + " ").split(" ")[0]

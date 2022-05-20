@@ -7,6 +7,12 @@ const remote = require("./remote.js");
 const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
+// Replace with:
+const debug = true;
+//const { BrowserWindow } = require('@electron/remote/main')
+
+// In the main process:
+require('@electron/remote/main').initialize()
 // Prevent the monitor from going to sleep.
 const powerSaveBlocker = electron.powerSaveBlocker;
 powerSaveBlocker.start("prevent-display-sleep");
@@ -17,7 +23,29 @@ const getPort = require("get-port");
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev");
-const usepm2 = process.argv.includes("usepm2");
+let usepm2 = false; // process.argv.includes("usepm2");
+
+//if (debug) console.log("getting pm2 process list");
+        exec("pm2 jlist", (error, stdout, stderr) => {
+          if (!error) {
+            let output = JSON.parse(stdout);
+            if (debug)
+              console.log(
+                "processing pm2 jlist output, " + output.length + " entries"
+              );
+            output.forEach((managed_process) => {
+            	if(debug)
+            		console.log("comparing "+__dirname +" with "+ managed_process.pm2_env.pm_cwd )
+              if (managed_process.pm2_env.pm_cwd.startsWith(__dirname)) {
+                if (debug)
+                  console.log(
+                    "found our pm2 entry, id=" + managed_process.pm_id
+                  );
+                usepm2 = true;
+              }
+            });
+          }
+        });
 //var atomScreen = null;
 // Load the smart mirror config
 let config;
@@ -67,6 +95,7 @@ function createWindow() {
 			break;
 		}
 	}
+
 	const { width, height } = atomScreen.getPrimaryDisplay().workAreaSize;
 	var browserWindowOptions = {
 		width: width,
@@ -80,6 +109,7 @@ function createWindow() {
 			nodeIntegration: true,
 			enableRemoteModule: true,
 			contextIsolation: false,
+			additionalArguments:["sonusPort:"+global.sonusSocket]
 		},
 	};
 	if (externalDisplay) {
@@ -148,6 +178,8 @@ function startSonus(port) {
 if (config && config.speech && !firstRun) {
 	// get the sonus communications socket port
 	getPort({ port: getPort.makeRange(9000, 9500) }).then((port) => {
+		console.log("found port="+port)
+		//console.log("global="+JSON.stringify(global,null,2))
 		global.sonusSocket = port;
 		config.communications_port = port;
 		startSonus(config.communications_port);
@@ -216,10 +248,14 @@ if ((config.remote && config.remote.enabled) || firstRun) {
 	remote.on("relaunch", function (newConfig) {
 		console.log("Relaunching...");
 		// rebuild the html file plugin position info, from the NEW config data
+		// if pm2 is not being used for this process control
 		if (!usepm2) {
+			// recalc plugin info since something changed
 			loader.loadPluginInfo(__dirname + "/index.html", newConfig);
+			// force reload
 			app.relaunch();
 		}
+		// else die and pm2 will restart us
 		app.quit();
 	});
 }

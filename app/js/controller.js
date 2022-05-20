@@ -5,7 +5,6 @@
 		Focus,
 		SpeechService,
 		AutoSleepService,
-		//		LightService,
 		$rootScope,
 		$scope,
 		$timeout,
@@ -183,14 +182,6 @@
 				console.debug("It is", moment().format("h:mm:ss a"));
 			});
 
-			// Control light
-			/*	SpeechService.addCommand("light_action", function (
-				state,
-				target,
-				action
-			) {
-				LightService.performUpdate([state, target, action].join(" "));
-			}); */
 		};
 
 		_this.init();
