@@ -8,7 +8,7 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 // Replace with:
-const debug = true;
+const debug =false;
 //const { BrowserWindow } = require('@electron/remote/main')
 
 // In the main process:
@@ -23,29 +23,31 @@ const getPort = require("get-port");
 
 // Launching the mirror in dev mode
 const DevelopmentMode = process.argv.includes("dev");
-let usepm2 = false; // process.argv.includes("usepm2");
+let usepm2 = false;
 
 //if (debug) console.log("getting pm2 process list");
-        exec("pm2 jlist", (error, stdout) => {
-          if (!error) {
-            let output = JSON.parse(stdout);
-            if (debug)
-              console.log(
-                "processing pm2 jlist output, " + output.length + " entries"
-              );
-            output.forEach((managed_process) => {
-							if(debug)
-								console.log("comparing "+__dirname +" with "+ managed_process.pm2_env.pm_cwd )
-              if (managed_process.pm2_env.pm_cwd.startsWith(__dirname)) {
-                if (debug)
-                  console.log(
-                    "found our pm2 entry, id=" + managed_process.pm_id
-                  );
-                usepm2 = true;
-              }
-            });
-          }
-        });
+exec("pm2 jlist", (error, stdout) => {
+  if (!error) {
+    let output = JSON.parse(stdout);
+    if (debug)
+      console.log(
+        "processing pm2 jlist output, " + output.length + " entries"
+      );
+    output.forEach((managed_process) => {
+      if(debug)
+        console.log("comparing "+__dirname +" with "+ managed_process.pm2_env.pm_cwd )
+      // if we find a pm2 process matching our location
+      // and that process is online, then it is us
+      if (managed_process.pm2_env.pm_cwd.startsWith(__dirname) && managed_process.pm2_env.status ==="online") {
+        if (debug)
+          console.log(
+            "found our pm2 entry, id=" + managed_process.pm_id
+          );
+        usepm2 = true;
+      }
+    });
+  }
+});
 //var atomScreen = null;
 // Load the smart mirror config
 let config;
@@ -115,9 +117,10 @@ function createWindow() {
 	if (externalDisplay) {
 		browserWindowOptions.x = width; //+ 2; //externalDisplay.bounds.x + 50
 		browserWindowOptions.y = height; //externalDisplay.bounds.y + 50
-		console.log(
-			"display size=" + browserWindowOptions.x + "+" + browserWindowOptions.y
-		);
+		if(debug)
+			console.log(
+				"display size=" + browserWindowOptions.x + "+" + browserWindowOptions.y
+			);
 	}
 
 	// Create the browser window.
@@ -178,7 +181,8 @@ function startSonus(port) {
 if (config && config.speech && !firstRun) {
 	// get the sonus communications socket port
 	getPort({ port: getPort.makeRange(9000, 9500) }).then((port) => {
-		console.log("found port="+port)
+		if(debug)
+			console.log("found port="+port)
 		//console.log("global="+JSON.stringify(global,null,2))
 		global.sonusSocket = port;
 		config.communications_port = port;
