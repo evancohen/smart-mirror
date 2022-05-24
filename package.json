@@ -1,6 +1,6 @@
 {
   "name": "smart-mirror",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "The fairest of them all",
   "main": "main.js",
   "scripts": {
@@ -36,11 +36,12 @@
   "devDependencies": {
     "angular-i18n": "^1.8.2",
     "bower": "^1.8.12",
-    "electron": "11.3.0",
+    "electron": "17.2.0",
     "eslint": "^6.8.0",
     "wiredep-cli": "^0.1.0"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.8",
     "@google-cloud/speech": "^4.2.0",
     "@grpc/grpc-js": "^1.2.11",
     "alphavantage": "1.2.6",
@@ -54,7 +55,7 @@
     "fitbit-oauth2": "0.0.1",
     "humanize-duration": "^3.25.1",
     "hyperion-client": "1.0.3",
-    "jsonform": "git://github.com/jsonform/jsonform.git",
+    "jsonform": "git+https://git@github.com/jsonform/jsonform.git",
     "moment": "^2.29.1",
     "pretty-ms": "^7.0.1",
     "recorder": "git+https://git@github.com/sdetweil/recorder.git",

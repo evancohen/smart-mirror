@@ -5,7 +5,8 @@ if [ $mac == 'Darwin' ]; then
   brew install o2scl
 else
  v=$(apt -qq list libatlas3-base 2>/dev/null)
- if [ "$v". == "." ]; then
+ d=$(apt -qq list libatlas-base-dev 2>/dev/null)
+ if [ "$v". == "." -o "$d". == "." ]; then
    sudo apt-get install libatlas-base-dev libatlas3-base
  fi
 fi
