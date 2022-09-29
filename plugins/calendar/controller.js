@@ -1,8 +1,9 @@
-function Calendar($scope, $http, $interval, CalendarService) {
+function Calendar($scope, $rootScope, $http, $interval, CalendarService) {
 
 	var getCalendar = function(){
 		CalendarService.getCalendarEvents().then(function () {
-			$scope.calendar = CalendarService.getFutureEvents();
+			$scope.calendar=CalendarService.getFutureEvents()
+			$rootScope.$broadcast('calendar',$scope.calendar );
 		}, function (error) {
 			console.log(error);
 		});

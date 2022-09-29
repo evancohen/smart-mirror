@@ -93,6 +93,7 @@
 				$scope.focus = AutoSleepService.scope;
 				AutoSleepService.startAutoSleepTimer();
 			}
+			$rootScope.$broadcast("clock-tick",$scope.date)
 		}
 		var clearListening = function(){
 			$scope.listening = false;
