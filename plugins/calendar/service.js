@@ -195,10 +195,10 @@
 			return service.events;
 		}
 
-		service.getFutureEvents = function () {
+		service.getFutureEvents = function (days,count) {
 			var future_events = [],
 				current_date = new moment(),
-				end_date = new moment().add(config.calendar.maxDays, 'days');
+				end_date = new moment().add(days || config.calendar.maxDays, 'days');
 
 			service.events.forEach(function (itm) {
 				//If the event started before current time but ends after the current time or
@@ -208,7 +208,7 @@
 				}
 			});
 			future_events = sortAscending(future_events);
-			return future_events.slice(0, config.calendar.maxResults);
+			return future_events.slice(0, count || config.calendar.maxResults);
 		}
 
 		var sortAscending = function (events) {
