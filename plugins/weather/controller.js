@@ -239,7 +239,7 @@ function Weather($scope, $rootScope, $interval, $http, $translate, GeolocationSe
 		config.forecast.keytype = (config.forecast.keytype + " ").split(" ")[0]
 		config.forecast.key = config.forecast.key.trim()
 		// map location to country for auto weather units (if needed)
-		WeatherService.getCountry().then(() => {
+		WeatherService.getCountry(geoposition).then(() => {
 			// get the weather info
 			WeatherService.get[config.forecast.keytype](geoposition).then(
 				(weather_data) => {

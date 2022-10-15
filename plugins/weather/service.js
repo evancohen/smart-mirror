@@ -7,12 +7,11 @@
 			typeof config.general.language !== "undefined"
 				? config.general.language.substr(0, 2)
 				: "en"
-	    var geoposition = {}
 		var service = {};
 
 		service.events = [];
 		service.get= {}
-		service.getCountry = function () {
+		service.getCountry = function (geoposition) {
 			return new Promise((resolve, reject) => {
 				if (config.forecast.keytype != "Darksky") {
 					// forecast untis will be changed from auto to resolved type,
