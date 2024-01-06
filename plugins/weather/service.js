@@ -131,6 +131,36 @@
 					})
 			})
 		}
+		service.get.PirateWeather = function (geoposition) {
+			return new Promise((resolve, reject) => {
+				$http
+					.get( //.jsonp(
+						"https://api.pirateweather.net/forecast/" +
+							config.forecast.key +
+							"/" +
+							geoposition.coords.latitude +
+							"," +
+							geoposition.coords.longitude +
+							"?units=" +
+							config.forecast.units
+						//	+
+						//	"&lang=" +
+						//	language +
+						//	"&callback=JSON_CALLBACK"
+					)
+					.then(function (response) {
+						//console.log("json="+JSON.stringify(response.data));
+						service.weather={}
+						service.weather.forecast={}
+						service.weather.forecast.data = response.data
+						resolve((service.weather))
+					})
+					.catch((error) => {
+						console.log("error="+JSON.stringify(error))
+						reject()
+					})
+			})
+		}
 		service.get.Climacell = function (geoposition) {
 			// return a promise, so the caller can wait
 			return new Promise((resolve, reject) => {

@@ -33,6 +33,7 @@ function Weather($scope, $rootScope, $interval, $http, $translate, GeolocationSe
 		let ctemp = 0
 		switch (config.forecast.keytype) {
 			case "Darksky":
+			case "PirateWeather":
 				weather.forecast.data.currently.day = moment
 					.unix(weather.forecast.data.currently.time)
 					.format("ddd")
@@ -97,6 +98,7 @@ function Weather($scope, $rootScope, $interval, $http, $translate, GeolocationSe
 		var datalength = 0
 		switch (config.forecast.keytype) {
 			case "Darksky":
+			case "PirateWeather":
 				// Add human readable info to info
 				for (i = 0; i < weather.forecast.data.daily.data.length; i++) {
 					weather.forecast.data.daily.data[i].day =
@@ -211,6 +213,7 @@ function Weather($scope, $rootScope, $interval, $http, $translate, GeolocationSe
 		}
 		switch (config.forecast.keytype) {
 			case "Darksky":
+			case "PirateWeather":
 				weather.forecast.data.hourly.day = moment
 					.unix(weather.forecast.data.hourly.data[0].time)
 					.format("ddd")
@@ -353,6 +356,7 @@ function Weather($scope, $rootScope, $interval, $http, $translate, GeolocationSe
 			case "mostly_clear":
 			case 1100:
 			case "clear sky":
+			case "clear day":
 			case "few clouds":
 			case "clear":
 			case 1000:

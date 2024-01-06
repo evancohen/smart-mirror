@@ -281,17 +281,18 @@ if (config.motion && config.motion.enabled) {
 
 	mtnProcess.stdout.on("data", function (data) {
 		var message = data.toString();
+		//console.log("motion message="+message)
 		if (message.startsWith("!s:")) {
-			console.log(message.substring(3));
+			//console.log(message.substring(3));
 			mainWindow.webContents.send("motionstart", true);
 		} else if (message.startsWith("!e:")) {
-			console.log(message.substring(3));
+			//console.log(message.substring(3));
 			mainWindow.webContents.send("motionend", true);
 		} else if (message.startsWith("!c:")) {
-			console.log(message.substring(3));
+			//console.log(message.substring(3));
 			mainWindow.webContents.send("calibrated", true);
 		} else if (message.startsWith("!E:")) {
-			console.log(message.substring(3));
+			//console.log(message.substring(3));
 			mainWindow.webContents.send("Error", message.substring(3));
 			mtnProcess.kill();
 		} else {
