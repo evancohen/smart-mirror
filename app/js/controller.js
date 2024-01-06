@@ -5,7 +5,6 @@
 		Focus,
 		SpeechService,
 		AutoSleepService,
-		//		LightService,
 		$rootScope,
 		$scope,
 		$timeout,
@@ -93,6 +92,7 @@
 				$scope.focus = AutoSleepService.scope;
 				AutoSleepService.startAutoSleepTimer();
 			}
+			$rootScope.$broadcast("clock-tick",$scope.date)
 		}
 		var clearListening = function(){
 			$scope.listening = false;
@@ -183,14 +183,6 @@
 				console.debug("It is", moment().format("h:mm:ss a"));
 			});
 
-			// Control light
-			/*	SpeechService.addCommand("light_action", function (
-				state,
-				target,
-				action
-			) {
-				LightService.performUpdate([state, target, action].join(" "));
-			}); */
 		};
 
 		_this.init();

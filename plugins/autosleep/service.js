@@ -2,7 +2,7 @@
 (function () {
 	"use strict";
 
-	function AutoSleepService($interval, Focus) {
+	function AutoSleepService($interval, $rootScope, Focus) {
 		var service = {};
 		var autoSleepTimer;
 		service.woke = true;
@@ -55,6 +55,7 @@
 				// only wake up if sleeping
 				if (Focus.get() === "sleep") {
 					service.woke = true;
+					$rootScope.$broadcast("userPresence", "true")
 					switch (config.autoTimer.mode) {
 						case "monitor":
 						case "tv":
@@ -106,6 +107,7 @@
 		service.sleep = function () {
 			if (config.autoTimer.mode !== "disabled") {
 				service.woke = false;
+				$rootScope.$broadcast("userPresence", "false")
 				switch (config.autoTimer.mode) {
 					case "monitor":
 					case "tv":
