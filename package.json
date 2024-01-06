@@ -33,14 +33,12 @@
     "url": "https://github.com/evancohen/smart-mirror/issues"
   },
   "homepage": "https://github.com/evancohen/smart-mirror",
-  "devDependencies": {
-    "angular-i18n": "^1.8.2",
-    "bower": "^1.8.12",
-    "electron": "^27.0.2",
-    "eslint": "^6.8.0",
-    "wiredep-cli": "^0.1.0"
+  "devDependencies": {   
+    "eslint": "^6.8.0"
   },
   "dependencies": {
+    "bower": "^1.8.12",
+    "electron": "^27.0.2",
     "@electron/rebuild": "github:electron/rebuild",
     "@electron/remote": "^2.0.12",
     "@fortawesome/fontawesome-free": "^6.2.0",
@@ -49,6 +47,7 @@
     "alphavantage": "^2.5.0",
     "angular-moment": "^1.3.0",
     "angular-sanitize": "1.5.11",
+    "angular-i18n": "^1.8.2",
     "annyang": "^2.6.1",
     "cheerio": "^1.0.0-rc.5",
     "electron-json-storage": "^4.4.0",
@@ -67,6 +66,7 @@
     "spotify-web-api-node": "^5.0.0",
     "waitprocess": "git+https://github.com/sdetweil/waitprocess.git",
     "winston": "^3.3.3",
+    "wiredep-cli": "^0.1.0",
     "youtube-api": "^3.0.1"
   },
   "eslintConfig": {
