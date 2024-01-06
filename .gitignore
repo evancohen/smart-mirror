@@ -22,3 +22,5 @@ app/css/local.css
 .gitignore
 .prettierrc
 .editorconfig
+plugins/
+!.gitkeep
