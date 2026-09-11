@@ -9,6 +9,43 @@ permissions:
   contents: read
 
 jobs:
+  install:
+    name: Install application
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    env:
+      npm_config_python: /usr/bin/python3
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Preserve Travis's runtime for the legacy Electron/Snowboy dependencies.
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '14.21.3'
+          package-manager-cache: false
+
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3 python3-pip python3-setuptools libatlas-base-dev libatlas3-base
+
+      - name: Use HTTPS for public GitHub dependencies
+        run: |
+          git config --global url."https://github.com/".insteadOf git://github.com/
+          git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
+          git config --global --add url."https://github.com/".insteadOf git@github.com:
+
+      # Run all lifecycle scripts, including native builds, Bower and JSONForm.
+      - name: Install application dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run lint checks after installation
+        run: npm test
+
   lint:
     name: ESLint
     runs-on: ubuntu-24.04

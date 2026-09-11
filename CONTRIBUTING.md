@@ -8,8 +8,14 @@ The process is straight-forward.
  - Write the code for your feature/capability.
  - Create a Pull Request against the [**dev**](https://github.com/evancohen/smart-mirror/tree/dev) branch of the Smart Mirror.
 
-GitHub Actions runs `npm test` (ESLint) on pushes and pull requests. CI installs
-only the ESLint version declared in `package.json`, using Node.js 24. It does not
-install or launch the mirror application, so it does not validate Electron,
-native modules, or Raspberry Pi hardware support. After installing the app's
-dependencies locally, run the same check with `npm test`.
+GitHub Actions checks pushes and pull requests with two jobs:
+
+- **Install application** preserves Travis's Node.js 14 runtime, installs the
+  native build prerequisites, and runs the full `npm install` (including native
+  dependency builds, Bower, and JSONForm setup), followed by `npm test`.
+- **ESLint** runs `npm test` independently on Node.js 24, installing only the
+  ESLint version declared in `package.json` so lint feedback is available even
+  if a legacy application dependency fails to install.
+
+CI does not launch the mirror or validate Raspberry Pi hardware support. After
+installing the app's dependencies locally, run the lint check with `npm test`.
