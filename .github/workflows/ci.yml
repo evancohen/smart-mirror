@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: ESLint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      # npm test only needs ESLint. A full app install also runs hardware
+      # setup scripts and installs legacy native modules, Electron and Bower.
+      - name: Install lint dependencies
+        run: |
+          eslint_version=$(node -p "require('./package.json').devDependencies.eslint")
+          npm install --prefix "$RUNNER_TEMP/smart-mirror-lint" --ignore-scripts --no-audit --no-fund --package-lock=false "eslint@$eslint_version"
+          echo "$RUNNER_TEMP/smart-mirror-lint/node_modules/.bin" >> "$GITHUB_PATH"
+
+      - name: Run lint checks
+        run: npm test

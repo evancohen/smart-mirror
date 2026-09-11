@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://discord.gg/EMb4ynW"><img src="https://discordapp.com/api/guilds/258802311298547713/widget.png" alt="Discord Chat"/></a>
-<a href='https://travis-ci.org/evancohen/smart-mirror'><img src='https://travis-ci.org/evancohen/smart-mirror.svg?branch=master' alt='Build Status'/></a>
+<a href='https://github.com/evancohen/smart-mirror/actions/workflows/ci.yml'><img src='https://github.com/evancohen/smart-mirror/actions/workflows/ci.yml/badge.svg?branch=master' alt='CI Status'/></a>
 </p>
 <p align="center">
 A voice controlled life automation hub, most commonly powered by the Raspberry Pi.
