@@ -11,8 +11,12 @@ The process is straight-forward.
 GitHub Actions checks pushes and pull requests with two jobs:
 
 - **Install application** preserves Travis's Node.js 14 runtime, installs the
-  native build prerequisites, and runs the full `npm install` (including native
-  dependency builds, Bower, and JSONForm setup), followed by `npm test`.
+  native build prerequisites, and downloads dependencies with scripts deferred.
+  It removes Sonus's obsolete TypeScript `suppressImplicitAnyIndexErrors` option,
+  then runs all dependency build hooks with `npm rebuild` and the app's
+  preinstall/install/postinstall hooks with `npm run install` (including Bower
+  and JSONForm setup), followed by `npm test`. The npm 6 `--global-style` layout
+  keeps Sonus's build tools in its own `node_modules`, as its scripts expect.
 - **ESLint** runs `npm test` independently on Node.js 24, installing only the
   ESLint version declared in `package.json` so lint feedback is available even
   if a legacy application dependency fails to install.

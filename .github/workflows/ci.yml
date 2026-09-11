@@ -39,10 +39,21 @@ jobs:
           git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
           git config --global --add url."https://github.com/".insteadOf git@github.com:
 
-      # Run all lifecycle scripts, including native builds, Bower and JSONForm.
       # Sonus invokes ./node_modules/.bin tools, so keep its dependencies local.
-      - name: Install application dependencies
-        run: npm install --global-style --no-audit --no-fund
+      # Defer scripts only until its obsolete TypeScript option is patched.
+      - name: Download application dependencies
+        run: npm install --global-style --ignore-scripts --no-audit --no-fund
+
+      - name: Fix Sonus TypeScript compatibility
+        run: node scripts/patch-sonus-config.js
+
+      # npm 6 rebuild runs dependency preinstall/install/postinstall scripts.
+      - name: Build all application dependencies
+        run: npm rebuild
+
+      # npm run install also runs the root preinstall and postinstall hooks.
+      - name: Set up application assets
+        run: npm run install
 
       - name: Run lint checks after installation
         run: npm test
