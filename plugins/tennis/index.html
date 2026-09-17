@@ -1,0 +1,43 @@
+<section ng-controller="Tennis">
+    <div class="tennis-snapshots" ng-if="tennis.enabled">
+        <h2>{{ 'tennis.title' | translate }}</h2>
+        <p class="dimmed" ng-if="tennis.updatedAt">
+            {{ 'tennis.snapshot' | translate }} {{ tennis.updatedAt | date:'MMM d, HH:mm' }}
+        </p>
+        <p class="dimmed" ng-if="!tennis.updatedAt && tennis.loading">{{ 'tennis.loading' | translate }}</p>
+        <p class="dimmed" ng-if="!tennis.updatedAt && !tennis.loading && !tennis.error">
+            {{ 'tennis.waiting' | translate }} {{ tennis.nextRequestAt | date:'HH:mm' }}
+        </p>
+        <p class="dimmed" ng-if="tennis.error">{{ tennis.error | translate }}</p>
+        <p ng-if="tennis.updatedAt && !tennis.matches.length">{{ 'tennis.empty' | translate }}</p>
+        <article ng-repeat="match in tennis.matches | limitTo:tennisLimit track by $index">
+            <div class="dimmed" ng-bind="match.tournament"></div>
+            <div class="dimmed" ng-if="match.status" ng-bind="match.status"></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">{{ 'tennis.player' | translate }}</th>
+                        <th scope="col" ng-repeat="game in match.players[0].games track by $index">
+                            {{ 'tennis.set' | translate }} {{ $index + 1 }}
+                        </th>
+                        <th scope="col" ng-if="match.available">
+                            {{ (match.tiebreak ? 'tennis.tiebreak' : 'tennis.points') | translate }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="player in match.players track by $index">
+                        <th scope="row">
+                            <span ng-bind="player.name"></span>
+                            <span ng-if="player.serving" title="{{ 'tennis.serving' | translate }}" aria-label="{{ 'tennis.serving' | translate }}">●</span>
+                        </th>
+                        <td ng-repeat="game in player.games track by $index" ng-bind="game"></td>
+                        <td ng-if="match.available" ng-bind="player.points"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="dimmed" ng-if="!match.available">{{ 'tennis.unavailable' | translate }}</div>
+        </article>
+        <p class="dimmed" ng-if="tennis.more || tennis.matches.length > tennisLimit">{{ 'tennis.more' | translate }}</p>
+    </div>
+</section>

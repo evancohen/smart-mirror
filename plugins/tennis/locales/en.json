@@ -1,0 +1,26 @@
+{
+    "tennis": {
+        "title": "Tennis snapshots",
+        "snapshot": "Snapshot fetched",
+        "loading": "Fetching tennis snapshot…",
+        "waiting": "Next tennis snapshot after",
+        "empty": "No live matches in this snapshot.",
+        "unavailable": "Score unavailable",
+        "player": "Player",
+        "set": "Set",
+        "points": "Points",
+        "tiebreak": "Tiebreak",
+        "serving": "Serving",
+        "more": "Showing a selection of matches from this snapshot.",
+        "fetchError": "Could not refresh tennis scores. Any snapshot below is from the time shown.",
+        "keyError": "Could not access tennis scores. Check the configured API key.",
+        "storageError": "Could not save the tennis refresh time. Updates are paused.",
+        "config": {
+            "title": "Tennis Settings",
+            "api key": "Live Tennis API key",
+            "refresh interval": "Snapshot interval (minutes, minimum 15)",
+            "match limit": "Maximum matches to display",
+            "description": "Optional. Use a dedicated free key for this mirror. Leave empty to disable tennis snapshots."
+        }
+    }
+}

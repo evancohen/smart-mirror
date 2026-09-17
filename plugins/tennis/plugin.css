@@ -1,0 +1,32 @@
+.tennis-snapshots {
+    max-width: 32em;
+    font-size: 20px;
+}
+
+.tennis-snapshots h2 {
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.tennis-snapshots p, .tennis-snapshots thead {
+    font-size: 0.75em;
+}
+
+.tennis-snapshots article {
+    margin-top: 1em;
+}
+
+.tennis-snapshots table {
+    width: 100%;
+    border-spacing: 0.5em 0;
+}
+
+.tennis-snapshots th {
+    font-weight: normal;
+    text-align: left;
+}
+
+.tennis-snapshots td {
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}

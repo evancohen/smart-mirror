@@ -12,7 +12,7 @@
     "enable-motion": "npm install johnny-five raspi-io",
     "update": "git pull && npm install",
     "wiredep": "wiredep -s index.html",
-    "test": "eslint . --ignore-path .gitignore",
+    "test": "eslint . --ignore-path .gitignore && node scripts/test-tennis.js",
     "test-fix": "eslint . --ignore-path .gitignore --fix",
     "postinstall": "bash scripts/copyjsonform",
     "preinstall": "bash scripts/installcblas"

@@ -1,0 +1,41 @@
+{
+    "schema": {
+        "tennis": {
+            "type": "object",
+            "title": "{{title}}",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "title": "{{api key}}"
+                },
+                "refreshInterval": {
+                    "type": "integer",
+                    "title": "{{refresh interval}}",
+                    "minimum": 15,
+                    "maximum": 1440,
+                    "default": 15
+                },
+                "maxMatches": {
+                    "type": "integer",
+                    "title": "{{match limit}}",
+                    "minimum": 1,
+                    "maximum": 10,
+                    "default": 3
+                }
+            }
+        }
+    },
+    "form": [
+        {
+            "type": "fieldset",
+            "title": "{{title}}",
+            "expandable": true,
+            "order": 0,
+            "items": [
+                { "key": "tennis.key", "type": "password", "description": "{{description}}" },
+                "tennis.refreshInterval",
+                "tennis.maxMatches"
+            ]
+        }
+    ]
+}
