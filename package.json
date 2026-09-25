@@ -49,7 +49,7 @@
     "angular-sanitize": "1.8.3",
     "angular-translate": "2.19.1",
     "angular-translate-loader-static-files": "2.19.1",
-    "annyang": "^2.6.1",
+    "annyang": "3.0.0",
     "cheerio": "1.0.0-rc.12",
     "electron": "^31.7.7",
     "electron-json-storage": "^4.4.0",

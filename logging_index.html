@@ -7,7 +7,8 @@
   <script src="app/js/logger.js"></script>
   <script>switchConsoleToLogger()</script>
   <script>
-    const annyang = require('annyang')
+    // annyang v3 CJS no longer attaches to window; SpeechService expects a global
+    window.annyang = require('annyang')
     const fs = require('fs')
     let config
     try{

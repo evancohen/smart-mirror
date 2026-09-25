@@ -260,7 +260,8 @@ $(function () {
 			$speak.addClass('hidden')
 			$nospeak.removeClass('hidden')
 		}
-		if (annyang) {
+		// v3: annyang is always defined; check SpeechRecognition support instead
+		if (annyang && annyang.isSpeechRecognitionSupported()) {
 			socket.emit('getAnnyAng')
 		}
 	}

@@ -28,11 +28,8 @@ const { ipcRenderer } = require("electron");
 
 		config.communications_port = 5200 || remote.getGlobal("sonusSocket");
 		service.init = function (cb) {
-			// workaround so we can trigger requests at any time
-			annyang.isListening = () => {
-				return true;
-			};
-			// Set lenguage and debug state
+			// Sonus drives recognition; annyang only matches/triggers commands.
+			// v3: trigger() works without SpeechRecognition / isListening — no override needed.
 			annyang.setLanguage(
 				typeof config.general.language != "undefined"
 					? config.general.language

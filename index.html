@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <title>Smart Mirror</title>
   <script>
-    const annyang = require('annyang')
+    // annyang v3 CJS no longer attaches to window; SpeechService expects a global
+    window.annyang = require('annyang')
     const fs = require('fs')
     let config
     try{
