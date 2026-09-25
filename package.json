@@ -77,7 +77,8 @@
     "node": "18.x || 20.x || 22.x || 24.x"
   },
   "overrides": {
-    "undici": "^5.28.4"
+    "undici": "^5.28.4",
+    "nan": "^2.23.0"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
