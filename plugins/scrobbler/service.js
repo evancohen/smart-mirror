@@ -1,40 +1,58 @@
 (function () {
-	'use strict';
+	"use strict";
 
 	function ScrobblerService($http, $q) {
 		var service = {};
 
 		service.getCurrentTrack = function () {
 			var deferred = $q.defer();
-			if (config.lastfm.user && config.lastfm.key) {
-				var url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" + config.lastfm.user + "&api_key=" + config.lastfm.key + "&limit=1&format=json";
+			if (!config.lastfm || !config.lastfm.user || !config.lastfm.key) {
+				deferred.resolve(null);
+				return deferred.promise;
+			}
 
-				$http.get(url).then(function (response) {
+			var url =
+				"http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" +
+				config.lastfm.user +
+				"&api_key=" +
+				config.lastfm.key +
+				"&limit=1&format=json";
+
+			$http
+				.get(url)
+				.then(function (response) {
 					if (response.data.error) {
-						// If there is an error with the request (excluding network errors)
 						console.log("Scrobbler Error: ", response.data.message);
-						deferred.reject(response);
-					} else if (typeof response.data.recenttracks.track[0]["@attr"] == "object") {
-						// If there is a track currently playing
-						var track = response.data.recenttracks.track[0];
+						deferred.reject(response.data.message);
+						return;
+					}
+
+					var track = response.data.recenttracks && response.data.recenttracks.track;
+					track = Array.isArray(track) ? track[0] : track;
+
+					// @attr is only present while a track is currently playing
+					if (track && typeof track["@attr"] === "object") {
 						deferred.resolve({
 							title: track.name,
 							artist: track.artist["#text"] || "Unknown",
 							album: track.album["#text"] || "",
 							cover: track.image[1]["#text"],
+							playing: true,
 						});
 					} else {
-						// Either there was a network error or there is no song currently playing
-						deferred.reject(response);
+						// Nothing playing — resolve empty instead of rejecting (Angular 1.6+)
+						deferred.resolve(null);
 					}
+				})
+				.catch(function (err) {
+					deferred.reject(err);
 				});
-			}
+
 			return deferred.promise;
-		}
+		};
 
 		return service;
 	}
 
-	angular.module('SmartMirror')
-		.factory('ScrobblerService', ScrobblerService);
-} ());
+	angular.module("SmartMirror").factory("ScrobblerService", ScrobblerService);
+})();

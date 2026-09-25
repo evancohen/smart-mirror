@@ -187,8 +187,8 @@
 			}
 
 			$http.put('http://' + config.light.settings.hueIp + '/api/' + config.light.settings.hueUsername + "/groups/" + config.light.setup[index].targets[i].id + "/action", update)
-				.success(function (data, status) {
-					console.log(status, data);
+				.then(function (response) {
+					console.log(response.status, response.data);
 				})
 		}
 
