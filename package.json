@@ -63,7 +63,7 @@
     "mqtt": "^5.16.0",
     "pretty-ms": "^7.0.1",
     "recorder": "git+https://git@github.com/sdetweil/recorder.git",
-    "rrule": "^2.6.8",
+    "rrule": "2.8.1",
     "rss-parser": "^3.12.0",
     "skycons": "git+https://github.com/darkskyapp/skycons.git",
     "socket.io": "^4.8.4",
