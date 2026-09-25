@@ -53,7 +53,7 @@
     "cheerio": "1.0.0-rc.12",
     "electron": "^31.7.7",
     "electron-json-storage": "^4.4.0",
-    "express": "^4.22.3",
+    "express": "^5.2.1",
     "fitbit-oauth2": "0.0.1",
     "humanize-duration": "^3.35.0",
     "hyperion-client": "1.0.3",
