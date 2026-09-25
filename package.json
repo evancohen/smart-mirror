@@ -66,7 +66,7 @@
     "rrule": "^2.6.8",
     "rss-parser": "^3.12.0",
     "skycons": "git+https://github.com/darkskyapp/skycons.git",
-    "socket.io": "2.3.0",
+    "socket.io": "^4.8.4",
     "sonus": "git+https://github.com/sdetweil/sonus.git",
     "spotify-web-api-node": "^5.0.0",
     "waitprocess": "git+https://github.com/sdetweil/waitprocess.git",

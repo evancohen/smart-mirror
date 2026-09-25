@@ -148,7 +148,10 @@ if (config.assistant | config.alexa | true) {
 	// Start the server, 1 up from config
 	server.listen(process.argv[2]);
 	var control = {};
-	control.io = require("socket.io")(server);
+	const { Server } = require("socket.io");
+	control.io = new Server(server, {
+		cors: { origin: true },
+	});
 
 	control.io.on("connection", function (socket) {
 		//console.log("connected")
