@@ -31,7 +31,7 @@ jobs:
           #cache-dependency-path: "./smart-mirror/package-lock.json"
       - name: "Install dependencies"
         run: |
-          npm run install --omit=dev
+          npm install --omit=dev
       - name: "Run tests"
         run: |
           Xvfb :99 -screen 0 1024x768x16 &
