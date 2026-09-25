@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 30
     strategy:
       matrix:
@@ -29,6 +29,18 @@ jobs:
           check-latest: true
           cache: "npm"
           #cache-dependency-path: "./smart-mirror/package-lock.json"
+      # Snowboy links -lcblas; must exist before sonus native build (nested git
+      # prepare skips root preinstall). Stay on 22.04 — atlas packages differ on 24.04.
+      - name: "Install native build dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3 libatlas-base-dev libatlas3-base libmagic-dev sox libsox-fmt-all
+          bash scripts/installcblas
+      - name: "Use HTTPS for public GitHub dependencies"
+        run: |
+          git config --global url."https://github.com/".insteadOf git://github.com/
+          git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
+          git config --global --add url."https://github.com/".insteadOf git@github.com:
       - name: "Install dependencies"
         run: |
           npm install --omit=dev
