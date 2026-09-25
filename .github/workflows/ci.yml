@@ -76,12 +76,12 @@ jobs:
           console.log('sonus load ok from', sonusRoot);
           EOF
 
-      # Bower/wiredep under --global-style cannot resolve nested deps, so use npx.
-      # jsonform is served from node_modules by remote.js (no copy into remote/).
+      # Frontend vendor libs now come from npm (node_modules); jsonform is
+      # served from node_modules by remote.js.
       - name: Set up application assets
         run: |
-          npx --yes bower@1.8.12 install --allow-root --config.interactive=false
-          npx --yes --package=wiredep-cli wiredep -s index.html
+          test -f node_modules/angular/angular.js
+          test -f node_modules/skycons/skycons.js
           test -d node_modules/jsonform
           npm run postinstall
 

@@ -26,8 +26,6 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800,700' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" ng-href="app/css/{{ layoutName }}.css" />
-  <!-- bower:css -->
-  <!-- endbower -->
 
 </head>
 
@@ -58,16 +56,16 @@
   ==========================================================================
   The good stuff. -->
 
-  <!-- bower:js -->
-  <script src="bower_components/moment/min/moment-with-locales.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-dynamic-locale/dist/tmhDynamicLocale.js"></script>
-  <script src="bower_components/angular-translate/angular-translate.js"></script>
-  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-  <script src="bower_components/rrule/lib/rrule.js"></script>
-  <script src="bower_components/skycons/skycons.js"></script>
-  <!-- endbower -->
+  <!-- npm vendor (formerly bower) -->
+  <script src="node_modules/moment/min/moment-with-locales.js"></script>
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="node_modules/angular-animate/angular-animate.js"></script>
+  <script src="node_modules/angular-dynamic-locale/dist/tmhDynamicLocale.js"></script>
+  <script src="node_modules/angular-translate/dist/angular-translate.js"></script>
+  <script src="node_modules/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="node_modules/skycons/skycons.js"></script>
+  <script src="app/js/vendor-globals.js"></script>
+  <!-- end npm vendor -->
 
   <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
 

@@ -61,6 +61,7 @@ function getFilesMatch(dir, filters, files_) {
 				if (
 					name.indexOf("node_modules") == -1 &&
 					name.indexOf("bower_components") == -1 &&
+					name.indexOf("node_modules") == -1 &&
 					name.indexOf("save") == -1
 				) {
 					getFilesMatch(name, filters, files_)
