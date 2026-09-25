@@ -18,7 +18,8 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        node-version: ['18', '20', '22', '24']
+        # Even releases only. Host Node 24 breaks snowboy/nan until sonus is updated.
+        node-version: ['18', '20', '22']
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
@@ -28,9 +29,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           check-latest: true
           cache: "npm"
-          #cache-dependency-path: "./smart-mirror/package-lock.json"
-      # Snowboy links -lcblas; must exist before sonus native build (nested git
-      # prepare skips root preinstall). Stay on 22.04 — atlas packages differ on 24.04.
+      # Snowboy links -lcblas; nested sonus prepare skips root preinstall.
       - name: "Install native build dependencies"
         run: |
           sudo apt-get update
@@ -41,9 +40,11 @@ jobs:
           git config --global url."https://github.com/".insteadOf git://github.com/
           git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
           git config --global --add url."https://github.com/".insteadOf git@github.com:
+      # ignore-scripts so sonus git prepare cannot pin an old nested nan; rebuild after.
       - name: "Install dependencies"
         run: |
-          npm install --omit=dev
+          npm install --omit=dev --ignore-scripts --no-audit --no-fund
+          npm rebuild
       - name: "Run tests"
         run: |
           Xvfb :99 -screen 0 1024x768x16 &

@@ -16,8 +16,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Sonus/snowboy native build needs Node 18+ (C++17).
-        node-version: ['18', '20', '22', '24']
+        # Sonus/snowboy native build: Node 18+ (C++17). Host Node 24 still fails
+        # snowboy/nan (IdleNotificationDeadline); Electron runtime is Node 20 anyway.
+        node-version: ['18', '20', '22']
     env:
       npm_config_python: /usr/bin/python3
     steps:
