@@ -51,7 +51,7 @@
     "angular-translate-loader-static-files": "2.19.1",
     "annyang": "3.0.0",
     "cheerio": "1.0.0-rc.12",
-    "electron": "^31.7.7",
+    "electron": "^44.4.5",
     "electron-json-storage": "^4.4.0",
     "express": "^5.2.1",
     "fitbit-oauth2": "0.0.1",
