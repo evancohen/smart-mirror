@@ -1,4 +1,5 @@
 function Remote($scope, SpeechService, Focus) {
+	let qrCode = null
 
 	function showRemote() {
 		const interfaces = require('os').networkInterfaces()
@@ -12,7 +13,20 @@ function Remote($scope, SpeechService, Focus) {
 			}
 		}
 		$scope.remoteText = addresses[0] + ":" + config.remote.port;
-		$scope.remoteImage = "https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=http://" + $scope.remoteText;
+		const remoteUrl = "http://" + $scope.remoteText
+		if (qrCode) {
+			qrCode.update({ value: remoteUrl })
+		} else {
+			const { createQRCode } = require('qrdx/vanilla')
+			qrCode = createQRCode(document.querySelector('.qrImage'), {
+				value: remoteUrl,
+				size: 400,
+				margin: 4,
+				bodyPattern: 'square',
+				cornerEyePattern: 'square',
+				cornerEyeDotPattern: 'square'
+			})
+		}
 		Focus.change("remote");
 	}
 
