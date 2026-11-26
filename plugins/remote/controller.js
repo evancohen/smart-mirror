@@ -12,7 +12,18 @@ function Remote($scope, SpeechService, Focus) {
 			}
 		}
 		$scope.remoteText = addresses[0] + ":" + config.remote.port;
-		$scope.remoteImage = "https://chart.googleapis.com/chart?cht=qr&chs=400x400&chl=http://" + $scope.remoteText;
+		// draw the QR code here; Google's chart API now returns 404 for it
+		const { toSVGString } = require('qrdx/core')
+		const svg = toSVGString({
+			value: "http://" + $scope.remoteText,
+			size: 400,
+			margin: 4,
+			bodyPattern: "square",
+			cornerEyePattern: "square",
+			cornerEyeDotPattern: "square",
+			shapeRendering: "crispEdges"
+		})
+		$scope.remoteImage = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 		Focus.change("remote");
 	}
 

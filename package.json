@@ -62,6 +62,7 @@
     "moment": "^2.31.0",
     "mqtt": "^5.16.0",
     "pretty-ms": "^7.0.1",
+    "qrdx": "^0.0.66",
     "recorder": "git+https://git@github.com/sdetweil/recorder.git",
     "rrule": "2.8.1",
     "rss-parser": "^3.12.0",
